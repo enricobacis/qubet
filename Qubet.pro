@@ -1,18 +1,16 @@
 #-------------------------------------------------
-#
-# Project created by QtCreator 2011-06-17T15:36:04
-#
+#                  Qubet Project
 #-------------------------------------------------
 
-QT       += core
-
-QT       -= gui
+QT       += core gui
 
 TARGET = Qubet
-CONFIG   += console
-CONFIG   -= app_bundle
-
 TEMPLATE = app
 
 
-SOURCES += main.cpp
+SOURCES += main.cpp\
+        mainwindow.cpp
+
+HEADERS  += mainwindow.h
+
+FORMS    += mainwindow.ui
