@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/skins"/>
+    <qresource prefix="/levels"/>
+    <qresource prefix="/sound/music"/>
+    <qresource prefix="/sound/effects"/>
+    <qresource prefix="/models"/>
+</RCC>

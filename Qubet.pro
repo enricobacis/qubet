@@ -3,14 +3,17 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += opengl
 
 TARGET = Qubet
 TEMPLATE = app
 
-
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainqubet.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainqubet.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainqubet.ui
+
+RESOURCES += \
+    resources.qrc
