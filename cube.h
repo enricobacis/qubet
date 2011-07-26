@@ -4,6 +4,7 @@
 #include <QThread>
 #include <QImage>
 #include <QKeyEvent>
+#include <QTimer>
 
 #include <GL/gl.h>
 

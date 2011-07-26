@@ -3,8 +3,14 @@
 
 #include <QMainWindow>
 #include <QtOpenGL/QGLWidget>
+#include <QTimer>
 
 #include <GL/gl.h>
+
+#include "vector3f.h"
+#include "menu.h"
+#include "game.h"
+#include "audiomanager.h"
 
 namespace Ui {
     class MainQubet;
@@ -22,7 +28,7 @@ private:
     Ui::MainQubet *ui;
     GLint loadingSteps;
     GLint currentView;
-    QMap<QImage, GLint> skinsList;
+    QMap<QImage*, GLint> skinsList;
     QMap<QString, GLint> levelsList;
     QMap<Vector3f, GLint> obstacleModelsList;
     QTimer drawTimer;

@@ -51,8 +51,8 @@ private slots:
     void itemClicked(GLint id);
 
 signals:
-    void pauseGame();
-    void continueGame();
+    void pauseGameSignal();
+    void continueGameSignal();
     void enableAudio(bool enabled);
     void playAmbientMusic(QString filename);
     void pauseAmbientMusic();

@@ -52,25 +52,11 @@ struct Vector3f
         z = a[2];
     }
 
-    inline GLvoid operator=(const GLfloat a[3])
-    {
-        x = a[0];
-        y = a[1];
-        z = a[2];
-    }
-
     inline GLvoid operator+=(const Vector3f a)
     {
         x += a.x;
         y += a.y;
         z += a.z;
-    }
-
-    inline GLvoid copyInto(GLfloat a[3])
-    {
-        x = a[0];
-        y = a[1];
-        z = a[2];
     }
 
     inline GLvoid copyInto(GLfloat a[3])
@@ -267,48 +253,47 @@ struct Vector3f
         ortho->normalize();
         return ortho;
     }
-
-    //operators
-
-    //equality
-    inline bool operator==(const Vector3f &v1, const Vector3f &v2)
-    {
-        if ((v1.x == v2.x) && (v1.y == v2.y) && (v1.z == v2.z))
-            return true;
-        else
-            return false;
-    }
-
-    //vector sum
-    inline Vector3f operator+(const Vector3f &v1, const Vector3f &v2)
-    {
-        return Vector3f(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
-    }
-
-    //vector difference
-    inline Vector3f operator-(const Vector3f &v1, const Vector3f &v2)
-    {
-        return Vector3f(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
-    }
-
-    //vector-scalar product
-    inline Vector3f operator*(const Vector3f &v, const GLfloat &a)
-    {
-        return Vector3f(a*v.x, a*v.y, a*v.z);
-    }
-
-    //scalar-vector product
-    inline Vector3f operator*(const GLfloat &a, const Vector3f &v)
-    {
-        return operator*(v, a);
-    }
-
-    // unary minus
-    inline Vector3f operator-(const Vector3f &v)
-    {
-        return operator*(v, -1);
-    }
-
 };
+
+//operators
+
+//equality
+inline bool operator==(const Vector3f &v1, const Vector3f &v2)
+{
+    if ((v1.x == v2.x) && (v1.y == v2.y) && (v1.z == v2.z))
+        return true;
+    else
+        return false;
+}
+
+//vector sum
+inline Vector3f operator+(const Vector3f &v1, const Vector3f &v2)
+{
+    return Vector3f(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
+}
+
+//vector difference
+inline Vector3f operator-(const Vector3f &v1, const Vector3f &v2)
+{
+    return Vector3f(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
+}
+
+//vector-scalar product
+inline Vector3f operator*(const Vector3f &v, const GLfloat &a)
+{
+    return Vector3f(a*v.x, a*v.y, a*v.z);
+}
+
+//scalar-vector product
+inline Vector3f operator*(const GLfloat &a, const Vector3f &v)
+{
+    return operator*(v, a);
+}
+
+// unary minus
+inline Vector3f operator-(const Vector3f &v)
+{
+    return operator*(v, -1);
+}
 
 #endif // VECTOR3F_H
