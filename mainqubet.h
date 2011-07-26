@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QtOpenGL/QGLWidget>
 
+#include <GL/gl.h>
+
 namespace Ui {
     class MainQubet;
 }
@@ -18,6 +20,30 @@ public:
 
 private:
     Ui::MainQubet *ui;
+    GLint loadingSteps;
+    GLint currentView;
+    QMap<QImage, GLint> skinsList;
+    QMap<QString, GLint> levelsList;
+    QMap<Vector3f, GLint> obstacleModelsList;
+    QTimer drawTimer;
+    Menu *menu;
+    Game *game;
+    AudioManager *audioManager;
+    void loadingStepCompleted();
+    void loadingCompleted();
+    void drawAll();
+
+private slots:
+    void skinsLoaded();
+    void levelsLoaded();
+    void obstacleModelsLoaded();
+    void playStory(GLint skinId);
+    void playArcade(GLint skinId, QString levelFilename);
+    void levelEditor();
+    void showMenu();
+
+private:
+
 };
 
 #endif // MAINQUBET_H
