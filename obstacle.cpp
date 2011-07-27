@@ -45,3 +45,13 @@ GLint Obstacle::getModelId()
 {
 
 }
+
+void Obstacle::setType(GLint _type)
+{
+
+}
+
+GLint Obstacle::getType()
+{
+
+}

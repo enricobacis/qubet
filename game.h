@@ -17,17 +17,16 @@ class Game : public QThread
     Q_OBJECT
 
 public:
-    explicit Game(GLint _gameType, QImage *_skin, QMap<Vector3f, GLint> *_obstacleModelsList, QObject *parent = 0);
+    explicit Game(GLint _gameType, QImage *_skin, QMap<Vector3f*, GLint> &_obstacleModelsList, QObject *parent = 0);
     ~Game();
 
-    void newGameStory(QMap<QString, GLint> &_levelList);
+    void newGameStory(QMap<QString, GLint> &_levelsList);
     void newGameArcade(QString filename);
     void draw();
-    void start();
 
 private:
-    QMap<QString, GLint> *levelList;
-    QMap<Vector3f, GLint> *obstacleModelsList;
+    QMap<QString, GLint> levelsList;
+    QMap<Vector3f*, GLint> obstacleModelsList;
     QImage *skin;
     Cube *cube;
     Level *level;
@@ -42,6 +41,7 @@ private:
     void pauseGame();
     void continueGame();
     void quitGame();
+
     void run();
 
 private slots:
@@ -58,6 +58,7 @@ signals:
     void pauseAmbientMusic();
     void continueAmbientMusic();
     void playEffect(GLint effectId);
+    void gameClosed();
 
 };
 

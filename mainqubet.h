@@ -11,6 +11,9 @@
 #include "menu.h"
 #include "game.h"
 #include "audiomanager.h"
+#include "loader.h"
+#include "leveleditor.h"
+#include "defines.h"
 
 namespace Ui {
     class MainQubet;
@@ -30,23 +33,27 @@ private:
     GLint currentView;
     QMap<QImage*, GLint> skinsList;
     QMap<QString, GLint> levelsList;
-    QMap<Vector3f, GLint> obstacleModelsList;
+    QMap<Vector3f*, GLint> obstacleModelsList;
     QTimer drawTimer;
+    Loader *loader;
     Menu *menu;
     Game *game;
+    LevelEditor *levelEditor;
     AudioManager *audioManager;
     void loadingStepCompleted();
     void loadingCompleted();
-    void drawAll();
 
 private slots:
     void skinsLoaded();
     void levelsLoaded();
     void obstacleModelsLoaded();
+    void draw();
     void playStory(GLint skinId);
     void playArcade(GLint skinId, QString levelFilename);
-    void levelEditor();
+    void showLevelEditor();
     void showMenu();
+    void gameClosed();
+    void levelEditorClosed();
 
 };
 

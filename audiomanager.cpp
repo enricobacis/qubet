@@ -34,3 +34,8 @@ void AudioManager::playEffect(GLint effectId)
 {
 
 }
+
+void AudioManager::run()
+{
+
+}

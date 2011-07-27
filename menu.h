@@ -15,13 +15,15 @@ public:
     explicit Menu(QMap<QImage, GLint> &_skinsList, QMap<QString, QString> &_levelsList, QObject *parent = 0);
     ~Menu();
 
-    void drawMenu();
+    void draw();
 
 private:
     GLint currentSkin;
     QMap<QImage, GLint> skinsList;
     QMap<QString, QString> levelsList;
     GLint itemSelected;
+
+    void run();
 
 private slots:
     void keyPressed(QKeyEvent *e);

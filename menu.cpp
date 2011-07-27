@@ -10,7 +10,7 @@ Menu::~Menu()
 
 }
 
-void Menu::drawMenu()
+void Menu::draw()
 {
 
 }
@@ -21,6 +21,11 @@ void Menu::keyPressed(QKeyEvent *e)
 }
 
 void Menu::itemClicked(GLint id)
+{
+
+}
+
+void Menu::run()
 {
 
 }

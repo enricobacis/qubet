@@ -10,12 +10,12 @@ Cube::~Cube()
 
 }
 
-Vector3f Cube::getPosition()
+Vector3f *Cube::getPosition()
 {
 
 }
 
-void Cube::setPosition(Vector3f _position)
+void Cube::setPosition(Vector3f *_position)
 {
 
 }
@@ -31,11 +31,6 @@ void Cube::draw()
 }
 
 void Cube::updatePosition()
-{
-
-}
-
-void Cube::start()
 {
 
 }

@@ -16,14 +16,19 @@ public:
     explicit Loader(QObject *parent = 0);
     ~Loader();
 
-    void loadSkins(QMap<QImage, GLint> *skinsList);
-    void loadLevels(QMap<QString, GLint> *levelsList);
-    void loadObstacleModels(QMap<Vector3f, GLint> *obstacleModelsList);
+    void setSkins(QMap<QImage*, GLint> &_skinsList);
+    void setLevels(QMap<QString, GLint> &_levelsList);
+    void setObstacleModels(QMap<Vector3f*, GLint> &_obstacleModelsList);
+    void load();
 
 private:
+    QMap<QImage*, GLint> skinsList;
+    QMap<QString, GLint> levelsList;
+    QMap<Vector3f*, GLint> obstacleModelsList;
     void loadCustomSkins();
     void loadCustomLevels();
     void loadCustomObstacles();
+    void run();
 
 signals:
     void skinsLoaded();

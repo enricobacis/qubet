@@ -10,32 +10,37 @@ Loader::~Loader()
 
 }
 
-void Loader::loadSkins(QMap<QImage, GLint> *skinsList)
+void Loader::setSkins(QMap<QImage*, GLint> &_skinsList)
 {
 
 }
 
-void loadLevels(QMap<QString, GLint> *levelsList)
+void Loader::setLevels(QMap<QString, GLint> &_levelsList)
 {
 
 }
 
-void loadObstacleModels(QMap<Vector3f, GLint> *obstacleModelsList)
+void Loader::setObstacleModels(QMap<Vector3f*, GLint> &_obstacleModelsList)
 {
 
 }
 
-void loadCustomSkins()
+void Loader::loadCustomSkins()
 {
 
 }
 
-void loadCustomLevels()
+void Loader::loadCustomLevels()
 {
 
 }
 
-void loadCustomObstacles()
+void Loader::loadCustomObstacles()
+{
+
+}
+
+void Loader::run()
 {
 
 }

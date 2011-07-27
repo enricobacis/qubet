@@ -18,6 +18,8 @@ private:
     QSound *ambientMusic;
     bool audioEnabled;
 
+    void run();
+
 private slots:
     void enableAudio(bool enabled);
     void playAmbientMusic(QString filename);

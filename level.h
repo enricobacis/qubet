@@ -14,7 +14,7 @@ class Level : public QThread
     Q_OBJECT
 
 public:
-    explicit Level(QMap<Vector3f, GLint> *_obstacleModelsList, QObject *parent = 0);
+    explicit Level(QMap<Vector3f*, GLint> *_obstacleModelsList, QObject *parent = 0);
     explicit Level(GLint id, QObject *parent = 0);
     ~Level();
 
@@ -46,6 +46,8 @@ private:
     GLfloat gravity;
     QString ambientMusicFilename;
     QImage *background;
+
+    void run();
 
 };
 

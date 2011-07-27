@@ -19,19 +19,21 @@ public:
     explicit Cube(Level *_level, QImage *_skin, QObject *parent = 0);
     ~Cube();
 
-    Vector3f getPosition();
-    void setPosition(Vector3f _position);
+    Vector3f *getPosition();
+    void setPosition(Vector3f *_position);
     void jump();
     void draw();
     void updatePosition();
-    void start();
 
 private:
     Level *level;
     QImage *skin;
-    Vector3f position;
+    Vector3f *position;
     GLint state;
     GLint moving;
+    GLfloat speed;
+    GLfloat gravity;
+    GLfloat scaleFactor;
     GLfloat jumpStartTime;
     QTimer updatePositionTimer;
 
@@ -43,6 +45,7 @@ private slots:
     void keyPressed(QKeyEvent *e);
     void pauseGame();
     void continueGame();
+
 };
 
 #endif // CUBE_H

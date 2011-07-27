@@ -13,15 +13,13 @@ class PositionController : public QThread
     Q_OBJECT
 
 public:
-    explicit PositionController(Cube *_cube, Level *_level, QMap<Vector3f, GLint> *_obstacleModelsList, QObject *parent = 0);
+    explicit PositionController(Cube *_cube, Level *_level, QMap<Vector3f*, GLint> *_obstacleModelsList, QObject *parent = 0);
     ~PositionController();
-
-    void start();
 
 private:
     Cube *cube;
     Level *level;
-    QMap<Vector3f, GLint> *obstacleModelsList;
+    QMap<Vector3f*, GLint> *obstacleModelsList;
     QTimer checkPositionTimer;
 
     void checkPosition();

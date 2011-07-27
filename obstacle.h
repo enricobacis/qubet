@@ -26,11 +26,15 @@ public:
     void setModelId(GLint _modelId);
     GLint getModelId();
 
+    void setType(GLint _type);
+    GLint getType();
+
 private:
     GLint id;
     Vector3f *position;
     QColor color;
     GLint modelId;
+    GLint type;
 
 };
 

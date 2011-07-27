@@ -1,6 +1,6 @@
 #include "level.h"
 
-Level::Level(QMap<Vector3f, GLint> *_obstacleModelsList, QObject *parent)
+Level::Level(QMap<Vector3f*, GLint> *_obstacleModelsList, QObject *parent)
 {
 
 }
@@ -81,6 +81,11 @@ bool Level::save(QString filename)
 }
 
 void Level::draw()
+{
+
+}
+
+void Level::run()
 {
 
 }

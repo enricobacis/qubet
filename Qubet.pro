@@ -32,7 +32,8 @@ HEADERS  += mainqubet.h \
     audiomanager.h \
     menu.h \
     leveleditor.h \
-    qglqubetwidget.h
+    qglqubetwidget.h \
+    defines.h
 
 FORMS    += mainqubet.ui
 
