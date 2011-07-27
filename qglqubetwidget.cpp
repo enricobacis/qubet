@@ -10,12 +10,12 @@ QGLQubetWidget::~QGLQubetWidget()
 
 }
 
-QGLQubetWidget::mousePressEvent(QMouseEvent *e)
+void QGLQubetWidget::mousePressEvent(QMouseEvent *e)
 {
 
 }
 
-QGLQubetWidget::keyPressEvent(QKeyEvent *e)
+void QGLQubetWidget::keyPressEvent(QKeyEvent *e)
 {
 
 }

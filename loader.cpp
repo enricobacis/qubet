@@ -10,7 +10,7 @@ Loader::~Loader()
 
 }
 
-Loader::loadSkins(QMap<QImage, GLint> *skinsList)
+void Loader::loadSkins(QMap<QImage, GLint> *skinsList)
 {
 
 }

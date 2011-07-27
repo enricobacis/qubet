@@ -15,7 +15,7 @@ public:
     explicit Menu(QMap<QImage, GLint> &_skinsList, QMap<QString, QString> &_levelsList, QObject *parent = 0);
     ~Menu();
 
-    void drawMenu ();
+    void drawMenu();
 
 private:
     GLint currentSkin;
