@@ -46,6 +46,7 @@ private:
     GLfloat gravity;
     QString ambientMusicFilename;
     QImage *background;
+
 };
 
 #endif // LEVEL_H

@@ -11,6 +11,7 @@
 class LevelEditor : public QThread
 {
     Q_OBJECT
+
 public:
     explicit LevelEditor(QMap<Vector3f, GLint> &_obstacleModelsList, QMap<QString, GLint> &_levelsList, QObject *parent = 0);
     ~LevelEditor();

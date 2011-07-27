@@ -48,8 +48,6 @@ private slots:
     void levelEditor();
     void showMenu();
 
-private:
-
 };
 
 #endif // MAINQUBET_H
