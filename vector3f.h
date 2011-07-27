@@ -4,11 +4,19 @@
 #include <math.h>
 #include <GL/gl.h>
 
+/**
+ * @brief
+ *
+ */
 struct Vector3f
 {
-    GLfloat x, y, z;
+    GLfloat x, y, z; /**< TODO */
 
     //Constructors
+/**
+ * @brief
+ *
+ */
     Vector3f()
     {
         x = 0;
@@ -16,6 +24,11 @@ struct Vector3f
         z = 0;
     }
 
+/**
+ * @brief
+ *
+ * @param v
+ */
     Vector3f(const Vector3f &v)
     {
         x = v.x;
@@ -23,6 +36,11 @@ struct Vector3f
         z = v.z;
     }
 
+/**
+ * @brief
+ *
+ * @param v
+ */
     Vector3f(const Vector3f *v)
     {
         x = v->x;
@@ -30,6 +48,13 @@ struct Vector3f
         z = v->z;
     }
 
+/**
+ * @brief
+ *
+ * @param newx
+ * @param newy
+ * @param newz
+ */
     Vector3f(const GLfloat newx, const GLfloat newy, const GLfloat newz)
     {
         x = newx;
@@ -37,6 +62,11 @@ struct Vector3f
         z = newz;
     }
 
+/**
+ * @brief
+ *
+ * @param a[]
+ */
     Vector3f(const GLfloat a[3])
     {
         x = a[0];
@@ -45,6 +75,12 @@ struct Vector3f
     }
 
     //operator overloading
+    /**
+     * @brief
+     *
+     * @param a[]
+     * @return GLvoid operator
+     */
     inline GLvoid operator=(const GLfloat a[3])
     {
         x = a[0];
@@ -52,6 +88,12 @@ struct Vector3f
         z = a[2];
     }
 
+    /**
+     * @brief
+     *
+     * @param a
+     * @return GLvoid operator
+     */
     inline GLvoid operator+=(const Vector3f a)
     {
         x += a.x;
@@ -59,6 +101,12 @@ struct Vector3f
         z += a.z;
     }
 
+    /**
+     * @brief
+     *
+     * @param a[]
+     * @return GLvoid
+     */
     inline GLvoid copyInto(GLfloat a[3])
     {
         x = a[0];
@@ -67,6 +115,12 @@ struct Vector3f
     }
 
     //referencing as array
+    /**
+     * @brief
+     *
+     * @param i
+     * @return GLfloat & operator
+     */
     inline GLfloat &operator[](GLint i)
     {
         switch(i)
@@ -83,6 +137,12 @@ struct Vector3f
 
     }
 
+    /**
+     * @brief
+     *
+     * @param i
+     * @return const GLfloat & operator
+     */
     inline const GLfloat &operator[](GLint i) const
     {
         switch(i)
@@ -99,18 +159,33 @@ struct Vector3f
     }
 
     //vector length square
+    /**
+     * @brief
+     *
+     * @return GLfloat
+     */
     inline GLfloat lengthSq()
     {
         return pow(x,2) + pow(y,2) + pow(z,2);
     }
 
     //vector length
+    /**
+     * @brief
+     *
+     * @return GLfloat
+     */
     inline GLfloat length()
     {
         return sqrt(lengthSq());
     }
 
     //normalization
+    /**
+     * @brief
+     *
+     * @return GLvoid
+     */
     inline GLvoid normalize()
     {
         GLfloat l = length();
@@ -120,6 +195,11 @@ struct Vector3f
     }
 
     //set to zero
+    /**
+     * @brief
+     *
+     * @return GLvoid
+     */
     inline GLvoid zero()
     {
         x = 0;
@@ -128,6 +208,11 @@ struct Vector3f
     }
 
     //check if it is zero
+    /**
+     * @brief
+     *
+     * @return bool
+     */
     inline bool isZero()
     {
         if ((x == 0) && (y == 0) && (z == 0))
@@ -137,6 +222,14 @@ struct Vector3f
     }
 
     //set to argument values
+    /**
+     * @brief
+     *
+     * @param newx
+     * @param newy
+     * @param newz
+     * @return GLvoid
+     */
     inline GLvoid set(const GLfloat newx, const GLfloat newy, const GLfloat newz)
     {
         x = newx;
@@ -145,12 +238,24 @@ struct Vector3f
     }
 
     //dot product
+    /**
+     * @brief
+     *
+     * @param v
+     * @return GLfloat
+     */
     inline GLfloat dot(const Vector3f &v)
     {
         return x*v.x + y*v.y + z*v.z;
     }
 
     //cross product
+    /**
+     * @brief
+     *
+     * @param v
+     * @return Vector3f *
+     */
     inline Vector3f *cross(const Vector3f &v)
     {
         GLfloat newx = y*v.z - z*v.y;
@@ -160,37 +265,73 @@ struct Vector3f
     }
 
     //projections
+    /**
+     * @brief
+     *
+     * @return GLvoid
+     */
     inline GLvoid projectOnXY()
     {
         z = 0;
     }
 
+    /**
+     * @brief
+     *
+     * @return GLvoid
+     */
     inline GLvoid projectOnYX()
     {
         return projectOnXY();
     }
 
+    /**
+     * @brief
+     *
+     * @return GLvoid
+     */
     inline GLvoid projectOnXZ()
     {
         y = 0;
     }
 
+    /**
+     * @brief
+     *
+     * @return GLvoid
+     */
     inline GLvoid projectOnZX()
     {
         return projectOnXZ();
     }
 
+    /**
+     * @brief
+     *
+     * @return GLvoid
+     */
     inline GLvoid projectOnYZ()
     {
         x = 0;
     }
 
+    /**
+     * @brief
+     *
+     * @return GLvoid
+     */
     inline GLvoid projectOnZY()
     {
         return projectOnYZ();
     }
 
     //rotations
+    /**
+     * @brief
+     *
+     * @param angle
+     * @return GLvoid
+     */
     inline GLvoid rotateX(const GLfloat angle)
     {
         GLfloat newy = y*cos(angle) - z*sin(angle);
@@ -198,6 +339,12 @@ struct Vector3f
         y = newy;
     }
 
+    /**
+     * @brief
+     *
+     * @param angle
+     * @return GLvoid
+     */
     inline GLvoid rotateY(const GLfloat angle)
     {
         GLfloat newx = x*cos(angle) + z*sin(angle);
@@ -205,6 +352,12 @@ struct Vector3f
         x = newx;
     }
 
+    /**
+     * @brief
+     *
+     * @param angle
+     * @return GLvoid
+     */
     inline GLvoid rotateZ(const GLfloat angle)
     {
         GLfloat newx = x*cos(angle) - y*sin(angle);
@@ -212,6 +365,13 @@ struct Vector3f
         x = newx;
     }
 
+    /**
+     * @brief
+     *
+     * @param axis
+     * @param angle
+     * @return GLvoid
+     */
     inline GLvoid rotate(const Vector3f &axis, const GLfloat angle)
     {
         // calcolo la phi per portare il sistema di riferimento di axis sul piano YZ
@@ -238,6 +398,11 @@ struct Vector3f
         rotateZ(-phi);
     }
 
+    /**
+     * @brief
+     *
+     * @return Vector3f *
+     */
     inline Vector3f* getOneOrthogonal()
     {
         Vector3f *ortho;
@@ -258,6 +423,13 @@ struct Vector3f
 //operators
 
 //equality
+/**
+ * @brief
+ *
+ * @param v1
+ * @param v2
+ * @return bool operator
+ */
 inline bool operator==(const Vector3f &v1, const Vector3f &v2)
 {
     if ((v1.x == v2.x) && (v1.y == v2.y) && (v1.z == v2.z))
@@ -267,30 +439,64 @@ inline bool operator==(const Vector3f &v1, const Vector3f &v2)
 }
 
 //vector sum
+/**
+ * @brief
+ *
+ * @param v1
+ * @param v2
+ * @return Vector3f operator
+ */
 inline Vector3f operator+(const Vector3f &v1, const Vector3f &v2)
 {
     return Vector3f(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
 }
 
 //vector difference
+/**
+ * @brief
+ *
+ * @param v1
+ * @param v2
+ * @return Vector3f operator
+ */
 inline Vector3f operator-(const Vector3f &v1, const Vector3f &v2)
 {
     return Vector3f(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
 }
 
 //vector-scalar product
+/**
+ * @brief
+ *
+ * @param v
+ * @param a
+ * @return Vector3f operator
+ */
 inline Vector3f operator*(const Vector3f &v, const GLfloat &a)
 {
     return Vector3f(a*v.x, a*v.y, a*v.z);
 }
 
 //scalar-vector product
+/**
+ * @brief
+ *
+ * @param a
+ * @param v
+ * @return Vector3f operator
+ */
 inline Vector3f operator*(const GLfloat &a, const Vector3f &v)
 {
     return operator*(v, a);
 }
 
 // unary minus
+/**
+ * @brief
+ *
+ * @param v
+ * @return Vector3f operator
+ */
 inline Vector3f operator-(const Vector3f &v)
 {
     return operator*(v, -1);
