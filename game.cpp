@@ -1,6 +1,6 @@
 #include "game.h"
 
-Game::Game(GLint _gameType, QImage *_skin, QMap<Vector3f*, GLint> &_obstacleModelsList, QObject *parent)
+Game::Game(GLint _gameType, QImage *_skin, QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *parent)
 {
 
 }
@@ -10,7 +10,7 @@ Game::~Game()
 
 }
 
-void Game::newGameStory(QMap<QString, GLint> &_levelsList)
+void Game::newGameStory(QMap<GLint,QString> &_levelsList)
 {
 
 }

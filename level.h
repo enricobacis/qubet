@@ -3,6 +3,7 @@
 
 #include <QThread>
 #include <QImage>
+#include <QMap>
 
 #include <GL/gl.h>
 
@@ -21,11 +22,11 @@ public:
     /**
      * @brief
      *
-     * @param
      * @param _obstacleModelsList
      * @param parent
      */
-    explicit Level(QMap<Vector3f*, GLint> *_obstacleModelsList, QObject *parent = 0);
+    explicit Level(QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *parent = 0);
+
     /**
      * @brief
      *
@@ -33,6 +34,7 @@ public:
      * @param parent
      */
     explicit Level(GLint id, QObject *parent = 0);
+
     /**
      * @brief
      *
@@ -44,37 +46,44 @@ public:
      *
      */
     GLint getId();
+
     /**
      * @brief
      *
      */
     QString getName();
+
     /**
      * @brief
      *
      * @param _name
      */
     void setName(QString _name);
+
     /**
      * @brief
      *
      */
     bool getIsInStory();
+
     /**
      * @brief
      *
      */
     GLfloat getWidth();
+
     /**
      * @brief
      *
      */
     GLfloat getLength();
+
     /**
      * @brief
      *
      */
     GLfloat getGravity();
+
     /**
      * @brief
      *
@@ -87,12 +96,14 @@ public:
      * @param _obstacle
      */
     void addObstacle(Obstacle *_obstacle);
+
     /**
      * @brief
      *
      * @param id
      */
     void deleteObstacle(GLint id);
+
     /**
      * @brief
      *
@@ -107,12 +118,14 @@ public:
      * @param filename
      */
     bool load(QString filename);
+
     /**
      * @brief
      *
      * @param filename
      */
     bool save(QString filename);
+
     /**
      * @brief
      *
@@ -123,8 +136,8 @@ private:
     GLint id; /**< TODO */
     QString name; /**< TODO */
     bool isInStory; /**< TODO */
-    QMap<Vector3f*, GLint> *obstacleModelsList; /**< TODO */
-    QMap<Obstacle*, GLfloat> *obstaclesList; /**< TODO */
+    QMap<GLint,Vector3f*> obstacleModelsList; /**< TODO */
+    QMap<GLint,Obstacle*> obstaclesList; /**< TODO */
     GLint width; /**< TODO */
     GLint length; /**< TODO */
     GLfloat gravity; /**< TODO */

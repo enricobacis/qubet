@@ -2,6 +2,8 @@
 #define POSITIONCONTROLLER_H
 
 #include <QThread>
+#include <QMap>
+
 #include "cube.h"
 #include "level.h"
 #include "vector3f.h"
@@ -9,7 +11,7 @@
 #include <GL/gl.h>
 
 /**
- * @brief
+ * @brief The PositionController class checks if the Cube collides with obstacles.
  *
  */
 class PositionController : public QThread
@@ -18,17 +20,17 @@ class PositionController : public QThread
 
 public:
     /**
-     * @brief
+     * @brief Constructor for the PositionController objects.
      *
-     * @param _cube
-     * @param _level
-     * @param
-     * @param _obstacleModelsList
-     * @param parent
+     * @param _cube Pointer to the Cube object.
+     * @param _level Pointer to the Level object.
+     * @param _obstacleModelsList The obstacleModelsList loaded from the Loader.
+     * @param parent Pointer to the parent of the object.
      */
-    explicit PositionController(Cube *_cube, Level *_level, QMap<Vector3f*, GLint> *_obstacleModelsList, QObject *parent = 0);
+    explicit PositionController(Cube *_cube, Level *_level, QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *parent = 0);
+
     /**
-     * @brief
+     * @brief Destructor for the PositionController objects.
      *
      */
     ~PositionController();
@@ -36,31 +38,28 @@ public:
 private:
     Cube *cube; /**< TODO */
     Level *level; /**< TODO */
-    QMap<Vector3f*, GLint> *obstacleModelsList; /**< TODO */
+    QMap<GLint,Vector3f*> obstacleModelsList; /**< TODO */
     QTimer checkPositionTimer; /**< TODO */
 
     /**
-     * @brief
+     * @brief Checks if the cube has collided with obstacles.
      *
      */
     void checkPosition();
+
     /**
-     * @brief
+     * @brief Re-implementation of the run() QThread function.
+     *
      *
      */
     void run();
 
 signals:
     /**
-     * @brief
+     * @brief Signal emitted when the cube collides with an obstacle.
      *
      */
     void collision();
-    /**
-     * @brief
-     *
-     */
-    void levelCompleted();
 
 };
 

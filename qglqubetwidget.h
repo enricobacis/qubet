@@ -20,6 +20,7 @@ public:
      * @param parent
      */
     explicit QGLQubetWidget(QObject *parent = 0);
+
     /**
      * @brief
      *
@@ -33,6 +34,7 @@ private:
      * @param e
      */
     void mousePressEvent(QMouseEvent *e);
+
     /**
      * @brief
      *
@@ -47,6 +49,7 @@ signals:
      * @param e
      */
     void keyPressed(QKeyEvent *e);
+
     /**
      * @brief
      *

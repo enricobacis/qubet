@@ -1,6 +1,6 @@
 #include "level.h"
 
-Level::Level(QMap<Vector3f*, GLint> *_obstacleModelsList, QObject *parent)
+Level::Level(QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *parent)
 {
 
 }

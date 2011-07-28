@@ -1,6 +1,6 @@
 #include "menu.h"
 
-Menu::Menu(QMap<QImage, GLint> &_skinsList, QMap<QString, QString> &_levelsList, QObject *parent)
+Menu::Menu(QMap<GLint,QImage*> &_skinsList, QMap<GLint,QString> &_levelsList, QObject *parent)
 {
 
 }

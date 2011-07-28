@@ -3,6 +3,8 @@
 
 #include <QThread>
 #include <QKeyEvent>
+#include <QMap>
+
 #include "vector3f.h"
 #include "level.h"
 
@@ -22,20 +24,26 @@ public:
      *
      * @param
      * @param _obstacleModelsList
-     * @param QMap<QString
      * @param _levelsList
      * @param parent
      */
-    explicit LevelEditor(QMap<Vector3f*, GLint> &_obstacleModelsList, QMap<QString, GLint> &_levelsList, QObject *parent = 0);
+    explicit LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,QString> &_levelsList, QObject *parent = 0);
+
     /**
      * @brief
      *
      */
     ~LevelEditor();
 
+    /**
+     * @brief
+     *
+     */
+    void draw();
+
 private:
-    QMap<QString, GLint> levelsList; /**< TODO */
-    QMap <Vector3f*, GLint> obstacleModelsList; /**< TODO */
+    QMap<GLint,QString> levelsList; /**< TODO */
+    QMap<GLint,Vector3f*> obstacleModelsList; /**< TODO */
     Level *level; /**< TODO */
     GLint state; /**< TODO */
     Vector3f *cameraPosition; /**< TODO */
@@ -45,11 +53,6 @@ private:
      *
      */
     void quitEditor();
-    /**
-     * @brief
-     *
-     */
-    void draw();
 
     /**
      * @brief
@@ -64,6 +67,7 @@ private slots:
      * @param e
      */
     void keyPressed(QKeyEvent *e);
+
     /**
      * @brief
      *
@@ -77,18 +81,21 @@ signals:
      *
      */
     void levelEditorClosed();
+
     /**
      * @brief
      *
      * @param enabled
      */
     void enableAudio(bool enabled);
+
     /**
      * @brief
      *
      * @param filename
      */
     void playAmbientMusic(QString filename);
+
     /**
      * @brief
      *

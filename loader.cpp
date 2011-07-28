@@ -1,46 +1,72 @@
 #include "loader.h"
 
-Loader::Loader(QObject *parent)
+Loader::Loader(QMap<GLint,QImage*> &_skinsList, QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,QString> &_levelsList, QObject *parent) :
+    skinsList(_skinsList),
+    obstacleModelsList(_obstacleModelsList),
+    levelsList(_levelsList)
 {
-
 }
 
 Loader::~Loader()
 {
-
 }
 
-void Loader::setSkins(QMap<QImage*, GLint> &_skinsList)
+void Loader::load()
 {
-
+    start();
 }
 
-void Loader::setLevels(QMap<QString, GLint> &_levelsList)
+void Loader::loadSkins()
 {
+    // TODO
+    loadCustomSkins();
 
-}
-
-void Loader::setObstacleModels(QMap<Vector3f*, GLint> &_obstacleModelsList)
-{
-
+    emit skinsLoaded();
 }
 
 void Loader::loadCustomSkins()
 {
+    // future implementation
+}
 
+void Loader::loadObstacleModels()
+{
+    // TODO
+    loadCustomObstacleModels();
+
+    emit obstacleModelsLoaded();
+}
+
+void Loader::loadCustomObstacleModels()
+{
+    // future implementation
+}
+
+void Loader::loadLevels()
+{
+    // TODO
+    loadCustomLevels();
+
+    emit levelsLoaded();
 }
 
 void Loader::loadCustomLevels()
 {
-
-}
-
-void Loader::loadCustomObstacles()
-{
-
+    // future implementation
 }
 
 void Loader::run()
 {
+    try
+    {
+        loadSkins();
+        loadLevels();
+        loadObstacleModels();
+    }
+    catch (...)
+    {
+        emit errorLoading();
+    }
 
 }
+

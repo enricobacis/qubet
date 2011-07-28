@@ -28,6 +28,7 @@ public:
      * @param parent
      */
     explicit Cube(Level *_level, QImage *_skin, QObject *parent = 0);
+
     /**
      * @brief
      *
@@ -39,22 +40,26 @@ public:
      *
      */
     Vector3f *getPosition();
+
     /**
      * @brief
      *
      * @param _position
      */
     void setPosition(Vector3f *_position);
+
     /**
      * @brief
      *
      */
     void jump();
+
     /**
      * @brief
      *
      */
     void draw();
+
     /**
      * @brief
      *
@@ -85,27 +90,32 @@ private slots:
      *
      */
     void collided();
-    /**
-     * @brief
-     *
-     */
-    void levelCompleted();
+
     /**
      * @brief
      *
      * @param e
      */
     void keyPressed(QKeyEvent *e);
+
     /**
      * @brief
      *
      */
     void pauseGame();
+
     /**
      * @brief
      *
      */
     void continueGame();
+
+signals:
+    /**
+     * @brief
+     *
+     */
+    void levelCompleted();
 
 };
 

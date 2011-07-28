@@ -3,6 +3,7 @@
 
 #include <QThread>
 #include <QImage>
+#include <QMap>
 
 #include <GL/gl.h>
 
@@ -17,12 +18,17 @@ class Loader : public QThread
     Q_OBJECT
 
 public:
+
     /**
      * @brief
      *
+     * @param _skinsList
+     * @param _obstacleModelsList
+     * @param _levelsList
      * @param parent
      */
-    explicit Loader(QObject *parent = 0);
+    explicit Loader(QMap<GLint,QImage*> &_skinsList, QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,QString> &_levelsList, QObject *parent = 0);
+
     /**
      * @brief
      *
@@ -32,49 +38,51 @@ public:
     /**
      * @brief
      *
-     * @param
-     * @param _skinsList
-     */
-    void setSkins(QMap<QImage*, GLint> &_skinsList);
-    /**
-     * @brief
-     *
-     * @param QMap<QString
-     * @param _levelsList
-     */
-    void setLevels(QMap<QString, GLint> &_levelsList);
-    /**
-     * @brief
-     *
-     * @param
-     * @param _obstacleModelsList
-     */
-    void setObstacleModels(QMap<Vector3f*, GLint> &_obstacleModelsList);
-    /**
-     * @brief
-     *
      */
     void load();
 
 private:
-    QMap<QImage*, GLint> skinsList; /**< TODO */
-    QMap<QString, GLint> levelsList; /**< TODO */
-    QMap<Vector3f*, GLint> obstacleModelsList; /**< TODO */
+    QMap<GLint,QImage*> skinsList; /**< TODO */
+    QMap<GLint,Vector3f*> obstacleModelsList; /**< TODO */
+    QMap<GLint,QString> levelsList; /**< TODO */
+
+
+    /**
+     * @brief
+     *
+     */
+    void loadSkins();
+
     /**
      * @brief
      *
      */
     void loadCustomSkins();
+
+    /**
+     * @brief
+     *
+     */
+    void loadObstacleModels();
+
+    /**
+     * @brief
+     *
+     */
+    void loadCustomObstacleModels();
+
+    /**
+     * @brief
+     *
+     */
+    void loadLevels();
+
     /**
      * @brief
      *
      */
     void loadCustomLevels();
-    /**
-     * @brief
-     *
-     */
-    void loadCustomObstacles();
+
     /**
      * @brief
      *
@@ -87,16 +95,24 @@ signals:
      *
      */
     void skinsLoaded();
+
     /**
      * @brief
      *
      */
     void levelsLoaded();
+
     /**
      * @brief
      *
      */
     void obstacleModelsLoaded();
+
+    /**
+     * @brief
+     *
+     */
+    void errorLoading();
 
 };
 

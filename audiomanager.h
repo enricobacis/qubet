@@ -21,6 +21,7 @@ public:
      * @param parent
      */
     explicit AudioManager(QObject *parent = 0);
+
     /**
      * @brief
      *
@@ -44,22 +45,26 @@ private slots:
      * @param enabled
      */
     void enableAudio(bool enabled);
+
     /**
      * @brief
      *
      * @param filename
      */
     void playAmbientMusic(QString filename);
+
     /**
      * @brief
      *
      */
     void pauseAmbientMusic();
+
     /**
      * @brief
      *
      */
     void continueAmbientMusic();
+
     /**
      * @brief
      *

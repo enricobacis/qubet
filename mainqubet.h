@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QtOpenGL/QGLWidget>
 #include <QTimer>
+#include <QMap>
 
 #include <GL/gl.h>
 
@@ -13,6 +14,7 @@
 #include "audiomanager.h"
 #include "loader.h"
 #include "leveleditor.h"
+#include "qglqubetwidget.h"
 #include "defines.h"
 
 namespace Ui {
@@ -34,6 +36,7 @@ public:
      * @param parent
      */
     explicit MainQubet(QWidget *parent = 0);
+
     /**
      * @brief
      *
@@ -44,20 +47,29 @@ private:
     Ui::MainQubet *ui; /**< TODO */
     GLint loadingSteps; /**< TODO */
     GLint currentView; /**< TODO */
-    QMap<QImage*, GLint> skinsList; /**< TODO */
-    QMap<QString, GLint> levelsList; /**< TODO */
-    QMap<Vector3f*, GLint> obstacleModelsList; /**< TODO */
-    QTimer drawTimer; /**< TODO */
+    QMap<GLint,QImage*> skinsList; /**< TODO */
+    QMap<GLint,QString> levelsList; /**< TODO */
+    QMap<GLint,Vector3f*> obstacleModelsList; /**< TODO */
+    QTimer *drawTimer; /**< TODO */
     Loader *loader; /**< TODO */
     Menu *menu; /**< TODO */
     Game *game; /**< TODO */
     LevelEditor *levelEditor; /**< TODO */
     AudioManager *audioManager; /**< TODO */
+
+    /**
+     * @brief
+     *
+     * @param event
+     */
+    void closeEvent(QCloseEvent *event);
+
     /**
      * @brief
      *
      */
     void loadingStepCompleted();
+
     /**
      * @brief
      *
@@ -70,27 +82,38 @@ private slots:
      *
      */
     void skinsLoaded();
+
     /**
      * @brief
      *
      */
     void levelsLoaded();
+
     /**
      * @brief
      *
      */
     void obstacleModelsLoaded();
+
+    /**
+     * @brief
+     *
+     */
+    void errorLoading();
+
     /**
      * @brief
      *
      */
     void draw();
+
     /**
      * @brief
      *
      * @param skinId
      */
     void playStory(GLint skinId);
+
     /**
      * @brief
      *
@@ -98,26 +121,42 @@ private slots:
      * @param levelFilename
      */
     void playArcade(GLint skinId, QString levelFilename);
+
+    /**
+     * @brief
+     *
+     */
+    void connectGame();
+
     /**
      * @brief
      *
      */
     void showLevelEditor();
+
     /**
      * @brief
      *
      */
     void showMenu();
+
     /**
      * @brief
      *
      */
     void gameClosed();
+
     /**
      * @brief
      *
      */
     void levelEditorClosed();
+
+    /**
+     * @brief
+     *
+     */
+    void menuClosed();
 
 };
 

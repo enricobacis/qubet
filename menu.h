@@ -4,6 +4,7 @@
 #include <QThread>
 #include <QImage>
 #include <QKeyEvent>
+#include <QMap>
 
 #include <GL/gl.h>
 
@@ -19,13 +20,11 @@ public:
     /**
      * @brief
      *
-     * @param QMap<QImage
      * @param _skinsList
-     * @param QMap<QString
      * @param _levelsList
      * @param parent
      */
-    explicit Menu(QMap<QImage, GLint> &_skinsList, QMap<QString, QString> &_levelsList, QObject *parent = 0);
+    explicit Menu(QMap<GLint,QImage*> &_skinsList, QMap<GLint,QString> &_levelsList, QObject *parent = 0);
     /**
      * @brief
      *
@@ -40,8 +39,8 @@ public:
 
 private:
     GLint currentSkin; /**< TODO */
-    QMap<QImage, GLint> skinsList; /**< TODO */
-    QMap<QString, QString> levelsList; /**< TODO */
+    QMap<GLint,QImage*> skinsList; /**< TODO */
+    QMap<GLint,QString> levelsList; /**< TODO */
     GLint itemSelected; /**< TODO */
 
     /**
@@ -57,6 +56,7 @@ private slots:
      * @param e
      */
     void keyPressed(QKeyEvent *e);
+
     /**
      * @brief
      *
@@ -71,6 +71,7 @@ signals:
      * @param skinId
      */
     void playStory(GLint skinId);
+
     /**
      * @brief
      *
@@ -78,23 +79,27 @@ signals:
      * @param levelFilename
      */
     void playArcade(GLint skinId, QString levelFilename);
+
     /**
      * @brief
      *
      */
-    void levelEditor();
+    void showLevelEditor();
+
     /**
      * @brief
      *
      * @param enabled
      */
     void enableAudio(bool enabled);
+
     /**
      * @brief
      *
      * @param filename
      */
     void playAmbientMusic(QString filename);
+
     /**
      * @brief
      *

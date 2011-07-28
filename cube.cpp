@@ -45,11 +45,6 @@ void Cube::collided()
 
 }
 
-void Cube::levelCompleted()
-{
-
-}
-
 void Cube::keyPressed(QKeyEvent *e)
 {
 
