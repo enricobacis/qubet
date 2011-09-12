@@ -9,7 +9,6 @@ TARGET = Qubet
 TEMPLATE = app
 
 SOURCES += main.cpp\
-        mainqubet.cpp \
     game.cpp \
     cube.cpp \
     positioncontroller.cpp \
@@ -19,9 +18,10 @@ SOURCES += main.cpp\
     audiomanager.cpp \
     menu.cpp \
     leveleditor.cpp \
-    qglqubetwidget.cpp
+    qubet.cpp \
+    window.cpp
 
-HEADERS  += mainqubet.h \
+HEADERS  += \
     vector3f.h \
     game.h \
     cube.h \
@@ -32,10 +32,9 @@ HEADERS  += mainqubet.h \
     audiomanager.h \
     menu.h \
     leveleditor.h \
-    qglqubetwidget.h \
-    defines.h
-
-FORMS    += mainqubet.ui
+    defines.h \
+    qubet.h \
+    window.h
 
 RESOURCES += \
     resources.qrc

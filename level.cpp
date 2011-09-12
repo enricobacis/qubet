@@ -84,8 +84,3 @@ void Level::draw()
 {
 
 }
-
-void Level::run()
-{
-
-}

@@ -20,11 +20,6 @@ void LevelEditor::draw()
 
 }
 
-void LevelEditor::run()
-{
-
-}
-
 void LevelEditor::keyPressed(QKeyEvent *e)
 {
 

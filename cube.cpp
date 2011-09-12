@@ -1,6 +1,6 @@
 #include "cube.h"
 
-Cube::Cube(Level *_level, QImage *_skin, QObject *parent)
+Cube::Cube(Level *_level, QImage *_skin, QObject *_parent)
 {
 
 }
@@ -27,15 +27,10 @@ void Cube::jump()
 
 void Cube::draw()
 {
-
+    //dynamic_cast<QGLWidget*>(parent)->makeCurrent();
 }
 
 void Cube::updatePosition()
-{
-
-}
-
-void Cube::run()
 {
 
 }
@@ -46,16 +41,6 @@ void Cube::collided()
 }
 
 void Cube::keyPressed(QKeyEvent *e)
-{
-
-}
-
-void Cube::pauseGame()
-{
-
-}
-
-void Cube::continueGame()
 {
 
 }

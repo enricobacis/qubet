@@ -1,7 +1,6 @@
 #ifndef LEVELEDITOR_H
 #define LEVELEDITOR_H
 
-#include <QThread>
 #include <QKeyEvent>
 #include <QMap>
 
@@ -14,7 +13,7 @@
  * @brief
  *
  */
-class LevelEditor : public QThread
+class LevelEditor : public QObject
 {
     Q_OBJECT
 
@@ -53,12 +52,6 @@ private:
      *
      */
     void quitEditor();
-
-    /**
-     * @brief
-     *
-     */
-    void run();
 
 private slots:
     /**

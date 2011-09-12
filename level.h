@@ -1,7 +1,6 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
-#include <QThread>
 #include <QImage>
 #include <QMap>
 
@@ -14,7 +13,7 @@
  * @brief
  *
  */
-class Level : public QThread
+class Level : public QObject
 {
     Q_OBJECT
 
@@ -143,13 +142,6 @@ private:
     GLfloat gravity; /**< TODO */
     QString ambientMusicFilename; /**< TODO */
     QImage *background; /**< TODO */
-
-    /**
-     * @brief
-     *
-     */
-    void run();
-
 };
 
 #endif // LEVEL_H

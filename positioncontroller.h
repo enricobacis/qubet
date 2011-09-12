@@ -11,7 +11,7 @@
 #include <GL/gl.h>
 
 /**
- * @brief The PositionController class checks if the Cube collides with obstacles.
+ * @brief La classe PositionController controlla se il Cubo collide con degli ostacoli.
  *
  */
 class PositionController : public QThread
@@ -20,35 +20,35 @@ class PositionController : public QThread
 
 public:
     /**
-     * @brief Constructor for the PositionController objects.
+     * @brief Costruttore di oggetti di tipo PositionController.
      *
-     * @param _cube Pointer to the Cube object.
-     * @param _level Pointer to the Level object.
-     * @param _obstacleModelsList The obstacleModelsList loaded from the Loader.
-     * @param parent Pointer to the parent of the object.
+     * @param _cube Puntatore all'oggetto Cube
+     * @param _level Puntatore all'oggetto Level
+     * @param _obstacleModelsList La obstacleModelsList caricata dal Loader
+     * @param parent Puntatore all'oggetto parent
      */
     explicit PositionController(Cube *_cube, Level *_level, QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *parent = 0);
 
     /**
-     * @brief Destructor for the PositionController objects.
+     * @brief Distruttore di oggetti di tipo PositionController.
      *
      */
     ~PositionController();
 
 private:
-    Cube *cube; /**< TODO */
-    Level *level; /**< TODO */
-    QMap<GLint,Vector3f*> obstacleModelsList; /**< TODO */
-    QTimer checkPositionTimer; /**< TODO */
+    Cube *cube; /**< Puntatore all'oggetto Cube */
+    Level *level; /**< Puntatore all'oggetto Level */
+    QMap<GLint,Vector3f*> obstacleModelsList; /**< La obstacleModelsList caricata dal Loader */
+    QTimer checkPositionTimer; /**< QTimer che regola ogni quanto viene lanciata la funzione checkCollision() che controlla le collisioni */
 
     /**
-     * @brief Checks if the cube has collided with obstacles.
+     * @brief Controlla se il cubo ha colliso con un ostacolo.
      *
      */
-    void checkPosition();
+    void checkCollision();
 
     /**
-     * @brief Re-implementation of the run() QThread function.
+     * @brief Reimplementazione della funzione run() della classe QThread.
      *
      *
      */
@@ -56,7 +56,7 @@ private:
 
 signals:
     /**
-     * @brief Signal emitted when the cube collides with an obstacle.
+     * @brief Segnale emesso quando il cubo collide con un ostacolo.
      *
      */
     void collision();

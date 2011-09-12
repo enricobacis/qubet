@@ -1,10 +1,10 @@
 #ifndef CUBE_H
 #define CUBE_H
 
-#include <QThread>
 #include <QImage>
 #include <QKeyEvent>
 #include <QTimer>
+#include <QGLWidget>
 
 #include <GL/gl.h>
 
@@ -15,7 +15,7 @@
  * @brief
  *
  */
-class Cube : public QThread
+class Cube : public QObject
 {
     Q_OBJECT
 
@@ -27,7 +27,7 @@ public:
      * @param _skin
      * @param parent
      */
-    explicit Cube(Level *_level, QImage *_skin, QObject *parent = 0);
+    explicit Cube(Level *_level, QImage *_skin, QObject *_parent = 0);
 
     /**
      * @brief
@@ -69,6 +69,7 @@ public:
 private:
     Level *level; /**< TODO */
     QImage *skin; /**< TODO */
+    QObject *parent; /**< TODO */
     Vector3f *position; /**< TODO */
     GLint state; /**< TODO */
     GLint moving; /**< TODO */
@@ -76,13 +77,6 @@ private:
     GLfloat gravity; /**< TODO */
     GLfloat scaleFactor; /**< TODO */
     GLfloat jumpStartTime; /**< TODO */
-    QTimer updatePositionTimer; /**< TODO */
-
-    /**
-     * @brief
-     *
-     */
-    void run();
 
 private slots:
     /**
@@ -97,18 +91,6 @@ private slots:
      * @param e
      */
     void keyPressed(QKeyEvent *e);
-
-    /**
-     * @brief
-     *
-     */
-    void pauseGame();
-
-    /**
-     * @brief
-     *
-     */
-    void continueGame();
 
 signals:
     /**

@@ -1,7 +1,6 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include <QThread>
 #include <QImage>
 #include <QKeyEvent>
 #include <QMap>
@@ -12,7 +11,7 @@
  * @brief
  *
  */
-class Menu : public QThread
+class Menu : public QObject
 {
     Q_OBJECT
 
@@ -42,12 +41,6 @@ private:
     QMap<GLint,QImage*> skinsList; /**< TODO */
     QMap<GLint,QString> levelsList; /**< TODO */
     GLint itemSelected; /**< TODO */
-
-    /**
-     * @brief
-     *
-     */
-    void run();
 
 private slots:
     /**

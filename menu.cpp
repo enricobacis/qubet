@@ -24,8 +24,3 @@ void Menu::itemClicked(GLint id)
 {
 
 }
-
-void Menu::run()
-{
-
-}
