@@ -8,8 +8,14 @@ Qubet::Qubet(QWidget *parent) :
     menu(NULL),
     game(NULL),
     levelEditor(NULL),
-    audioManager(NULL)
+    audioManager(NULL),
+    width(STD_WIDTH),
+    height(STD_HEIGHT)
 {
+    drawTimer = new QTimer(this);
+    connect(drawTimer, SIGNAL(timeout()), this, SLOT(draw()));
+    drawTimer->start(30);
+
     audioManager = new AudioManager(this);
     loader = new Loader(skinsList, obstacleModelsList, levelsList, this);
 
@@ -47,7 +53,6 @@ Qubet::~Qubet()
 
 void Qubet::initializeGL()
 {
-
 }
 
 void Qubet::paintGL()
@@ -57,6 +62,9 @@ void Qubet::paintGL()
     gluLookAt( 0.0,  0.0, -5.0,
                0.0,  0.0,  0.0,
                0.0,  1.0,  0.0);
+
+    if (!currentText.isEmpty())
+        renderText(width/2 - currentText.length()*2.5 , height - 50, currentText);
 
     switch(currentView)
     {
@@ -76,8 +84,11 @@ void Qubet::paintGL()
     swapBuffers();
 }
 
-void Qubet::resizeGL(int width, int height)
+void Qubet::resizeGL(int _width, int _height)
 {
+    width = _width;
+    height = _height;
+
     int side = qMin(width, height);
     glViewport((width - side) / 2, (height - side) / 2, side, side);
 
@@ -115,10 +126,6 @@ void Qubet::loadingStepCompleted()
 void Qubet::loadingCompleted()
 {
     showMenu();
-
-    drawTimer = new QTimer(this);
-    connect(drawTimer, SIGNAL(timeout()), this, SLOT(draw()));
-    drawTimer->start(30);
 }
 
 void Qubet::connectGame()
@@ -160,22 +167,25 @@ void Qubet::draw()
 
 void Qubet::skinsLoaded()
 {
+    currentText = "Skins caricate.";
     loadingStepCompleted();
 }
 
 void Qubet::levelsLoaded()
 {
+    currentText = "Livelli caricati.";
     loadingStepCompleted();
 }
 
 void Qubet::obstacleModelsLoaded()
 {
+    currentText = "Modelli di Ostacoli caricati.";
     loadingStepCompleted();
 }
 
 void Qubet::errorLoading()
 {
-
+    currentText = "Errore di caricamento.";
 }
 
 void Qubet::playStory(GLint skinId)

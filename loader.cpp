@@ -16,6 +16,21 @@ void Loader::load()
     start();
 }
 
+void Loader::run()
+{
+    try
+    {
+        loadSkins();
+        loadLevels();
+        loadObstacleModels();
+    }
+    catch (...)
+    {
+        emit errorLoading();
+    }
+
+}
+
 void Loader::loadSkins()
 {
     // TODO
@@ -54,19 +69,3 @@ void Loader::loadCustomLevels()
 {
     // future implementation
 }
-
-void Loader::run()
-{
-    try
-    {
-        loadSkins();
-        loadLevels();
-        loadObstacleModels();
-    }
-    catch (...)
-    {
-        emit errorLoading();
-    }
-
-}
-

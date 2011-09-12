@@ -104,6 +104,7 @@ private:
 
     GLint loadingSteps; /**< It is used to keep track of he current loading step */
     GLint currentView; /**< It is used to keep track of the current view (menu, game, leveleditor) */
+    QString currentText; /**< It is the current string showed on the screen */
     QMap<GLint,QImage*> skinsList; /**< It is the QMap that contains ids and skin images */
     QMap<GLint,QString> levelsList; /**< It is the QMap that contains ids and the names of level files */
     QMap<GLint,Vector3f*> obstacleModelsList; /**< It is the QMap that contains ids and the dimensions of Obstacles */
@@ -113,6 +114,9 @@ private:
     Game *game; /**< It is the Game pointer */
     LevelEditor *levelEditor; /**< It is the LevelEditor pointer */
     AudioManager *audioManager; /**< It is the AudioManager pointer */
+
+    GLint width; /**< It is the current widget width */
+    GLint height; /**< It is the current widget height */
 
 
     // General Purpose Management

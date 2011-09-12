@@ -3,17 +3,18 @@
 
 #define QUBET_VERSION "0.1-a"
 #define STEPS 3
-
+#define STD_WIDTH 600
+#define STD_HEIGHT 400
+#define STD_MOVE_X 100
+#define STD_MOVE_Y 100
 
 /**
- * @brief
- *
+ * @brief Enum used for currentView
  */
-enum { MENU_VIEW, GAME_VIEW, LEVELEDITOR_VIEW };
+enum { LOADING, MENU_VIEW, GAME_VIEW, LEVELEDITOR_VIEW };
 
 /**
- * @brief
- *
+ * @brief Enum used for gameType
  */
 enum { STORY_MODE, ARCADE_MODE };
 
