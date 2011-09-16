@@ -5,18 +5,21 @@
 #include <GL/gl.h>
 
 /**
- * @brief
+ * @brief Structure that rapresents a Vector of float in a 3-D space.
  *
+ * @version 1.0
+ * @author \#34
  */
 struct Vector3f
 {
-    GLfloat x, y, z; /**< TODO */
+    GLfloat x; /**< It is the x coordinate. */
+    GLfloat y; /**< It is the y coordinate. */
+    GLfloat z; /**< It is the z coordinate. */
 
     //Constructors
-/**
- * @brief
- *
- */
+    /**
+     * @brief Create a new Vector3f in coordinates (0, 0, 0).
+     */
     Vector3f()
     {
         x = 0;
@@ -24,11 +27,11 @@ struct Vector3f
         z = 0;
     }
 
-/**
- * @brief
- *
- * @param v
- */
+    /**
+     * @brief Create a new Vector3f copying the coordinates of v.
+     *
+     * @param v is the other vector to copy coordinates.
+     */
     Vector3f(const Vector3f &v)
     {
         x = v.x;
@@ -36,11 +39,11 @@ struct Vector3f
         z = v.z;
     }
 
-/**
- * @brief
- *
- * @param v
- */
+    /**
+     * @brief Create a new Vector3f copying the coordinates of v.
+     *
+     * @param v is the other vector to copy coordinates.
+     */
     Vector3f(const Vector3f *v)
     {
         x = v->x;
@@ -48,25 +51,25 @@ struct Vector3f
         z = v->z;
     }
 
-/**
- * @brief
- *
- * @param newx
- * @param newy
- * @param newz
- */
-    Vector3f(const GLfloat newx, const GLfloat newy, const GLfloat newz)
+    /**
+     * @brief Create a Vector3f using the coordinates of parameters.
+     *
+     * @param _x is the coordinate of x.
+     * @param _y is the coordinate of y.
+     * @param _z is the coordinate of z.
+     */
+    Vector3f(const GLfloat _x, const GLfloat _y, const GLfloat _z)
     {
-        x = newx;
-        y = newy;
-        z = newz;
+        x = _x;
+        y = _y;
+        z = _z;
     }
 
-/**
- * @brief
- *
- * @param a[]
- */
+    /**
+     * @brief Create a Vector3f using the coordinates of array a[].
+     *
+     * @param a[] is the array to copy coordinates.
+     */
     Vector3f(const GLfloat a[3])
     {
         x = a[0];
@@ -74,12 +77,10 @@ struct Vector3f
         z = a[2];
     }
 
-    //operator overloading
     /**
-     * @brief
+     * @brief Operator = overloading function.
      *
-     * @param a[]
-     * @return GLvoid operator
+     * @param a[] is the array to copy coordinates.
      */
     inline GLvoid operator=(const GLfloat a[3])
     {
@@ -89,10 +90,9 @@ struct Vector3f
     }
 
     /**
-     * @brief
+     * @brief Operator += overloading function.
      *
-     * @param a
-     * @return GLvoid operator
+     * @param a is the vector to sum to the current vector.
      */
     inline GLvoid operator+=(const Vector3f a)
     {
@@ -102,10 +102,9 @@ struct Vector3f
     }
 
     /**
-     * @brief
+     * @brief Copy the array a content in the vector.
      *
-     * @param a[]
-     * @return GLvoid
+     * @param a[] is the array to copy coordinates.
      */
     inline GLvoid copyInto(GLfloat a[3])
     {
@@ -114,12 +113,11 @@ struct Vector3f
         z = a[2];
     }
 
-    //referencing as array
     /**
-     * @brief
+     * @brief Operator [] overloading function.
      *
-     * @param i
-     * @return GLfloat & operator
+     * @param i is the index [1, 3].
+     * @return GLfloat coordinate.
      */
     inline GLfloat &operator[](GLint i)
     {
@@ -138,10 +136,10 @@ struct Vector3f
     }
 
     /**
-     * @brief
+     * @brief Operator [] overloading function.
      *
-     * @param i
-     * @return const GLfloat & operator
+     * @param i is the index [1, 3].
+     * @return const GLfloat coordinate
      */
     inline const GLfloat &operator[](GLint i) const
     {
@@ -158,33 +156,35 @@ struct Vector3f
         }
     }
 
-    //vector length square
     /**
-     * @brief
+     * @brief Compute the lenght^2 of the vector.
      *
-     * @return GLfloat
+     * The lenght^2 is less resource expensive then length().
+     * You can use it for check which vector is longer.
+     *
+     * @return GLfloat lenght^2 of vector.
      */
     inline GLfloat lengthSq()
     {
         return pow(x,2) + pow(y,2) + pow(z,2);
     }
 
-    //vector length
     /**
-     * @brief
+     * @brief Compute the length of the vector.
      *
-     * @return GLfloat
+     * If you have to check only which vector among others
+     * is longer you can use the lengthSq() function that
+     * is less resource expensive.
+     *
+     * @return GLfloat length of the vector.
      */
     inline GLfloat length()
     {
         return sqrt(lengthSq());
     }
 
-    //normalization
     /**
-     * @brief
-     *
-     * @return GLvoid
+     * @brief Normalize a vector.
      */
     inline GLvoid normalize()
     {
@@ -194,11 +194,8 @@ struct Vector3f
         z = z/l;
     }
 
-    //set to zero
     /**
-     * @brief
-     *
-     * @return GLvoid
+     * @brief Set all cordinates of the vector to zero.
      */
     inline GLvoid zero()
     {
@@ -209,11 +206,11 @@ struct Vector3f
 
     //check if it is zero
     /**
-     * @brief
+     * @brief Check if the vector is (0, 0, 0).
      *
-     * @return bool
+     * @return GLboolean true if it is (0, 0, 0), else false.
      */
-    inline bool isZero()
+    inline GLboolean isZero()
     {
         if ((x == 0) && (y == 0) && (z == 0))
             return true;
@@ -221,40 +218,38 @@ struct Vector3f
             return false;
     }
 
-    //set to argument values
     /**
-     * @brief
+     * @brief Set the vector coordinates.
      *
-     * @param newx
-     * @param newy
-     * @param newz
-     * @return GLvoid
+     * @param _x is the coordinate of x.
+     * @param _y is the coordinate of y.
+     * @param _z is the coordinate of z.
      */
-    inline GLvoid set(const GLfloat newx, const GLfloat newy, const GLfloat newz)
+    inline GLvoid set(const GLfloat _x, const GLfloat _y, const GLfloat _z)
     {
-        x = newx;
-        y = newy;
-        z = newz;
+        x = _x;
+        y = _y;
+        z = _z;
     }
 
-    //dot product
+    // Products
+
     /**
-     * @brief
+     * @brief Compute the dot product of the vector with the vector v.
      *
-     * @param v
-     * @return GLfloat
+     * @param v the other vector to compute the dot product.
+     * @return GLfloat the dot product.
      */
     inline GLfloat dot(const Vector3f &v)
     {
         return x*v.x + y*v.y + z*v.z;
     }
 
-    //cross product
     /**
-     * @brief
+     * @brief Compute the cross product of the vector with the vector v.
      *
-     * @param v
-     * @return Vector3f *
+     * @param v the other vector to compute the cross product.
+     * @return Vector3f* the cross product.
      */
     inline Vector3f *cross(const Vector3f &v)
     {
@@ -264,11 +259,10 @@ struct Vector3f
         return new Vector3f(newx, newy, newz);
     }
 
-    //projections
+    // Projections
+
     /**
-     * @brief
-     *
-     * @return GLvoid
+     * @brief Compute the XY plan projection.
      */
     inline GLvoid projectOnXY()
     {
@@ -276,9 +270,7 @@ struct Vector3f
     }
 
     /**
-     * @brief
-     *
-     * @return GLvoid
+     * @brief Compute the YX plan projection.
      */
     inline GLvoid projectOnYX()
     {
@@ -286,9 +278,7 @@ struct Vector3f
     }
 
     /**
-     * @brief
-     *
-     * @return GLvoid
+     * @brief Compute the XZ plan projection.
      */
     inline GLvoid projectOnXZ()
     {
@@ -296,9 +286,7 @@ struct Vector3f
     }
 
     /**
-     * @brief
-     *
-     * @return GLvoid
+     * @brief Compute the ZX plan projection.
      */
     inline GLvoid projectOnZX()
     {
@@ -306,9 +294,7 @@ struct Vector3f
     }
 
     /**
-     * @brief
-     *
-     * @return GLvoid
+     * @brief Compute the YZ plan projection.
      */
     inline GLvoid projectOnYZ()
     {
@@ -316,21 +302,19 @@ struct Vector3f
     }
 
     /**
-     * @brief
-     *
-     * @return GLvoid
+     * @brief Compute the ZY plan projection.
      */
     inline GLvoid projectOnZY()
     {
         return projectOnYZ();
     }
 
-    //rotations
+    // Rotations
+
     /**
-     * @brief
+     * @brief Rotate on the x axis.
      *
-     * @param angle
-     * @return GLvoid
+     * @param angle is the angle of rotation.
      */
     inline GLvoid rotateX(const GLfloat angle)
     {
@@ -340,10 +324,9 @@ struct Vector3f
     }
 
     /**
-     * @brief
+     * @brief Rotate on the y axis.
      *
-     * @param angle
-     * @return GLvoid
+     * @param angle is the angle of rotation.
      */
     inline GLvoid rotateY(const GLfloat angle)
     {
@@ -353,10 +336,9 @@ struct Vector3f
     }
 
     /**
-     * @brief
+     * @brief Rotate on the z axis.
      *
-     * @param angle
-     * @return GLvoid
+     * @param angle is the angle of rotation.
      */
     inline GLvoid rotateZ(const GLfloat angle)
     {
@@ -366,11 +348,10 @@ struct Vector3f
     }
 
     /**
-     * @brief
+     * @brief Rotate on the parameter given axis.
      *
-     * @param axis
-     * @param angle
-     * @return GLvoid
+     * @param axis is the axis on which compute the rotation.
+     * @param angle is the angle of rotation.
      */
     inline GLvoid rotate(const Vector3f &axis, const GLfloat angle)
     {
@@ -399,9 +380,9 @@ struct Vector3f
     }
 
     /**
-     * @brief
+     * @brief Compute one of the orthogonal vectors of the vector.
      *
-     * @return Vector3f *
+     * @return Vector3f* an orthogonal vector.
      */
     inline Vector3f* getOneOrthogonal()
     {
@@ -420,17 +401,17 @@ struct Vector3f
     }
 };
 
-//operators
+// Operators
 
-//equality
 /**
- * @brief
+ * @brief Operator == overloading function.
+ *        It Checks if two vectors are equals.
  *
- * @param v1
- * @param v2
- * @return bool operator
+ * @param v1 the first vector.
+ * @param v2 the second vector.
+ * @return GLboolean true if v1 and v2 are equal, else false.
  */
-inline bool operator==(const Vector3f &v1, const Vector3f &v2)
+inline GLboolean operator==(const Vector3f &v1, const Vector3f &v2)
 {
     if ((v1.x == v2.x) && (v1.y == v2.y) && (v1.z == v2.z))
         return true;
@@ -438,64 +419,64 @@ inline bool operator==(const Vector3f &v1, const Vector3f &v2)
         return false;
 }
 
-//vector sum
 /**
- * @brief
+ * @brief Operator + overloading function.
+ *        Compute the sum of two vectors.
  *
- * @param v1
- * @param v2
- * @return Vector3f operator
+ * @param v1 the first vector.
+ * @param v2 the second vector.
+ * @return Vector3f is the sum of v1 and v2.
  */
 inline Vector3f operator+(const Vector3f &v1, const Vector3f &v2)
 {
     return Vector3f(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
 }
 
-//vector difference
 /**
- * @brief
+ * @brief Operator - overloading function.
+ *        Compute the difference of two vectors.
  *
- * @param v1
- * @param v2
- * @return Vector3f operator
+ * @param v1 the first vector.
+ * @param v2 the second vector.
+ * @return Vector3f is the difference of v1 and v2.
  */
 inline Vector3f operator-(const Vector3f &v1, const Vector3f &v2)
 {
     return Vector3f(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
 }
 
-//vector-scalar product
 /**
- * @brief
+ * @brief Operator * overloading function.
+ *        Compute the scalar product of a scalar and a vector.
  *
- * @param v
- * @param a
- * @return Vector3f operator
+ * @param v is the vector.
+ * @param a is the scalar.
+ * @return Vector3f is the scalar product a*v.
  */
 inline Vector3f operator*(const Vector3f &v, const GLfloat &a)
 {
     return Vector3f(a*v.x, a*v.y, a*v.z);
 }
 
-//scalar-vector product
 /**
- * @brief
+ * @brief Operator * overloading function.
+ *        Compute the scalar product of a scalar and a vector.
  *
- * @param a
- * @param v
- * @return Vector3f operator
+ * @param a is the scalar.
+ * @param v is the vector.
+ * @return Vector3f is the scalar product a*v.
  */
 inline Vector3f operator*(const GLfloat &a, const Vector3f &v)
 {
     return operator*(v, a);
 }
 
-// unary minus
 /**
- * @brief
+ * @brief Operator unary - overloading function.
+ *        Multiply for -1 all vector components.
  *
- * @param v
- * @return Vector3f operator
+ * @param v is the vector.
+ * @return Vector3f is the negated vector.
  */
 inline Vector3f operator-(const Vector3f &v)
 {

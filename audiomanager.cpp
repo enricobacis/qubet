@@ -10,7 +10,7 @@ AudioManager::~AudioManager()
 
 }
 
-void AudioManager::enableAudio(bool enabled)
+void AudioManager::enableAudio(GLboolean enabled)
 {
 
 }

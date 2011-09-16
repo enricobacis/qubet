@@ -12,6 +12,8 @@ Qubet::Qubet(QWidget *parent) :
     width(STD_WIDTH),
     height(STD_HEIGHT)
 {
+    currentText = "Caricamento ...";
+
     drawTimer = new QTimer(this);
     connect(drawTimer, SIGNAL(timeout()), this, SLOT(draw()));
     drawTimer->start(30);
@@ -51,11 +53,12 @@ Qubet::~Qubet()
         menu->deleteLater();
 }
 
-void Qubet::initializeGL()
+GLvoid Qubet::initializeGL()
 {
+
 }
 
-void Qubet::paintGL()
+GLvoid Qubet::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
@@ -84,12 +87,12 @@ void Qubet::paintGL()
     swapBuffers();
 }
 
-void Qubet::resizeGL(int _width, int _height)
+GLvoid Qubet::resizeGL(GLint _width, GLint _height)
 {
     width = _width;
     height = _height;
 
-    int side = qMin(width, height);
+    GLint side = qMin(width, height);
     glViewport((width - side) / 2, (height - side) / 2, side, side);
 
     glMatrixMode(GL_PROJECTION);
@@ -100,22 +103,22 @@ void Qubet::resizeGL(int _width, int _height)
     glMatrixMode(GL_MODELVIEW);
 }
 
-void Qubet::mousePressEvent(QMouseEvent *event)
+GLvoid Qubet::mousePressEvent(QMouseEvent *event)
 {
 
 }
 
-void Qubet::mouseMoveEvent(QMouseEvent *event)
+GLvoid Qubet::mouseMoveEvent(QMouseEvent *event)
 {
 
 }
 
-void Qubet::keyPressEvent(QKeyEvent *event)
+GLvoid Qubet::keyPressEvent(QKeyEvent *event)
 {
 
 }
 
-void Qubet::loadingStepCompleted()
+GLvoid Qubet::loadingStepCompleted()
 {
     --loadingSteps;
 
@@ -123,23 +126,27 @@ void Qubet::loadingStepCompleted()
         loadingCompleted();
 }
 
-void Qubet::loadingCompleted()
+GLvoid Qubet::loadingCompleted()
 {
+    loader->~Loader();
+
+    currentText.clear();
+
     showMenu();
 }
 
-void Qubet::connectGame()
+GLvoid Qubet::connectGame()
 {
     connect(game, SIGNAL(gameClosed()), this, SLOT(gameClosed()));
 
-    connect(game, SIGNAL(enableAudio(bool)), audioManager, SLOT(enableAudio(bool)));
+    connect(game, SIGNAL(enableAudio(GLboolean)), audioManager, SLOT(enableAudio(GLboolean)));
     connect(game, SIGNAL(playAmbientMusic(QString)), audioManager, SLOT(playAmbientMusic(QString)));
     connect(game, SIGNAL(pauseAmbientMusic()), audioManager, SLOT(pauseAmbientMusic()));
     connect(game, SIGNAL(continueAmbientMusic()), audioManager, SLOT(continueAmbientMusic()));
     connect(game, SIGNAL(playEffect(GLint)), audioManager, SLOT(playEffect(GLint)));
 }
 
-void Qubet::showMenu()
+GLvoid Qubet::showMenu()
 {
     menu = new Menu(skinsList, levelsList, this);
 
@@ -147,14 +154,14 @@ void Qubet::showMenu()
     connect(menu, SIGNAL(playArcade(GLint, QString)), this, SLOT(playArcade(GLint, QString)));
     connect(menu, SIGNAL(showLevelEditor()), this, SLOT(showLevelEditor()));
 
-    connect(menu, SIGNAL(enableAudio(bool)), audioManager, SLOT(enableAudio(bool)));
+    connect(menu, SIGNAL(enableAudio(GLboolean)), audioManager, SLOT(enableAudio(GLboolean)));
     connect(menu, SIGNAL(playAmbientMusic(QString)), audioManager, SLOT(playAmbientMusic(QString)));
     connect(menu, SIGNAL(playEffect(GLint)), audioManager, SLOT(playEffect(GLint)));
 
     currentView = MENU_VIEW;
 }
 
-void Qubet::menuClosed()
+GLvoid Qubet::menuClosed()
 {
     menu->deleteLater();
     menu = NULL;
@@ -179,7 +186,7 @@ void Qubet::levelsLoaded()
 
 void Qubet::obstacleModelsLoaded()
 {
-    currentText = "Modelli di Ostacoli caricati.";
+    currentText = "Ostacoli caricati.";
     loadingStepCompleted();
 }
 
@@ -226,7 +233,7 @@ void Qubet::showLevelEditor()
 
     connect(levelEditor, SIGNAL(levelEditorClosed()), this, SLOT(levelEditorClosed()));
 
-    connect(levelEditor, SIGNAL(enableAudio(bool)), audioManager, SLOT(enableAudio(bool)));
+    connect(levelEditor, SIGNAL(enableAudio(GLboolean)), audioManager, SLOT(enableAudio(GLboolean)));
     connect(levelEditor, SIGNAL(playAmbientMusic(QString)), audioManager, SLOT(playAmbientMusic(QString)));
     connect(levelEditor, SIGNAL(playEffect(GLint)), audioManager, SLOT(playEffect(GLint)));
 

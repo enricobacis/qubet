@@ -10,7 +10,7 @@ Menu::~Menu()
 
 }
 
-void Menu::draw()
+GLvoid Menu::draw()
 {
 
 }

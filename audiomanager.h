@@ -44,7 +44,7 @@ private slots:
      *
      * @param enabled
      */
-    void enableAudio(bool enabled);
+    void enableAudio(GLboolean enabled);
 
     /**
      * @brief

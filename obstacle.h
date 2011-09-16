@@ -8,29 +8,32 @@
 #include <GL/gl.h>
 
 /**
- * @brief
+ * @brief This class rapresents an Obstacle.
  *
+ * @version 1.0
+ * @author \#34
  */
 class Obstacle : public QObject
 {
     Q_OBJECT
 
 public:
+
     /**
-     * @brief
+     * @brief Create an Obstacle object.
      *
-     * @param id
-     * @param parent
+     * @param id is the id given to the Obstacle object.
+     * @param parent is the parent whom has generated the Obstacle object.
      */
     explicit Obstacle(GLint id, QObject *parent = 0);
+
     /**
-     * @brief
-     *
+     * @brief Safely destroy an Obstacle object.
      */
     ~Obstacle();
 
     /**
-     * @brief
+     * @brief This method
      *
      */
     GLint getId();
@@ -40,7 +43,8 @@ public:
      *
      * @param _position
      */
-    void setPosition(Vector3f *_position);
+    GLvoid setPosition(Vector3f *_position);
+
     /**
      * @brief
      *
@@ -52,7 +56,8 @@ public:
      *
      * @param _color
      */
-    void setColor(QColor _color);
+    GLvoid setColor(QColor _color);
+
     /**
      * @brief
      *
@@ -64,7 +69,8 @@ public:
      *
      * @param _modelId
      */
-    void setModelId(GLint _modelId);
+    GLvoid setModelId(GLint _modelId);
+
     /**
      * @brief
      *
@@ -76,7 +82,8 @@ public:
      *
      * @param _type
      */
-    void setType(GLint _type);
+    GLvoid setType(GLint _type);
+
     /**
      * @brief
      *
@@ -89,6 +96,7 @@ private:
     QColor color; /**< TODO */
     GLint modelId; /**< TODO */
     GLint type; /**< TODO */
+    GLboolean solid; /**< TODO */
 
 };
 

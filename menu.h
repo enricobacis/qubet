@@ -10,6 +10,8 @@
 /**
  * @brief
  *
+ * @version 1.0
+ * @author \#34
  */
 class Menu : public QObject
 {
@@ -34,7 +36,7 @@ public:
      * @brief
      *
      */
-    void draw();
+    GLvoid draw();
 
 private:
     GLint currentSkin; /**< TODO */
@@ -84,7 +86,7 @@ signals:
      *
      * @param enabled
      */
-    void enableAudio(bool enabled);
+    void enableAudio(GLboolean enabled);
 
     /**
      * @brief
