@@ -8,6 +8,33 @@ QT       += opengl
 TARGET = Qubet
 TEMPLATE = app
 
+unix:!macx {
+    INCLUDEPATH += "/usr/include"
+    LIBS += -L/usr/lib
+    LIBS += -lglut
+    LIBS += -lGL
+    LIBS += -lGLU
+    LIBS += -lIL
+    LIBS += -lGLEW
+}
+
+win32 {
+    INCLUDEPATH += "./include"
+    LIBS += -L$$PWD/lib/GL
+    LIBS += -L$$PWD/lib/IL
+    LIBS += -lfreeglut
+    LIBS += -lglu32
+    LIBS += -lopengl32
+    LIBS += -lDevIL
+    LIBS += -lglew32
+    LIBS += -lILU
+    LIBS += -lILUT
+
+    externals.path = $$OUT_PWD
+    externals.files += $$PWD/externals/win/*
+    INSTALLS += externals
+}
+
 SOURCES += main.cpp\
     game.cpp \
     cube.cpp \

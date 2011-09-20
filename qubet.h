@@ -7,16 +7,16 @@
 #include <QMap>
 #include <QList>
 
-#include <GL/gl.h>
-
+#include "menu.h"
 #include "vector3f.h"
 #include "loader.h"
-#include "menu.h"
 #include "game.h"
 #include "cube.h"
 #include "audiomanager.h"
 #include "leveleditor.h"
 #include "defines.h"
+
+#include <GL/gl.h>
 
 
 /**

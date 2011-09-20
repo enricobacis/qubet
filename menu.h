@@ -8,7 +8,10 @@
 #include <QList>
 #include <QDebug>
 
+#include "utilities.h"
+
 #include <GL/gl.h>
+
 
 /**
  * @brief Menu class used to show and manage the game menu.

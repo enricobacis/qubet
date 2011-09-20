@@ -1,7 +1,7 @@
 #ifndef UTILITIES_H
 #define UTILITIES_H
 
-#include <GL/glew.h>
+#include <GL/gl.h>
 
 /**
  * @brief Draw a XY Square using vertex and texture coordinates.

@@ -1,6 +1,7 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
+#include <QObject>
 #include <QString>
 #include <iostream>
 #include <GL/glew.h>

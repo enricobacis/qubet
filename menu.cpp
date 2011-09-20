@@ -14,7 +14,7 @@ Menu::~Menu()
 
 GLvoid Menu::draw(GLboolean simplifyForPicking)
 {
-
+    drawSquare(3, 3);
 }
 
 void Menu::itemClicked(QList<GLuint> listNames)
