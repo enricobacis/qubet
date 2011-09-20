@@ -1,14 +1,17 @@
 #ifndef MENU_H
 #define MENU_H
 
+#include <QWidget>
 #include <QImage>
 #include <QKeyEvent>
 #include <QMap>
+#include <QList>
+#include <QDebug>
 
 #include <GL/gl.h>
 
 /**
- * @brief
+ * @brief Menu class used to show and manage the game menu.
  *
  * @version 1.0
  * @author \#34
@@ -19,45 +22,68 @@ class Menu : public QObject
 
 public:
     /**
-     * @brief
+     * @brief Create a Menu object used to show and manage the game menu.
      *
-     * @param _skinsList
-     * @param _levelsList
-     * @param parent
+     * @post You have to connect parent's signals to this object's slots.
+     *       For Qubet check the connectInputEvents function.
+     *
+     * @param _skinsList is the reference to Qubet's skinsList.
+     * @param _levelsList is the reference to Qubet's levelsList.
+     * @param _parent is a callback variable to the parent of the widget.
      */
-    explicit Menu(QMap<GLint,QImage*> &_skinsList, QMap<GLint,QString> &_levelsList, QObject *parent = 0);
+    explicit Menu(QMap<GLint,QImage*> &_skinsList, QMap<GLint,QString> &_levelsList, QObject *_parent);
+
     /**
-     * @brief
-     *
+     * @brief Disconnect and Destroy a Menu object.
      */
     ~Menu();
 
     /**
-     * @brief
+     * @brief Method to draw the menu.
      *
+     * @param simplifyForPicking [default = false] is used to draw a simplified scene
+     *        used for the picking function.
      */
-    GLvoid draw();
+    GLvoid draw(GLboolean simplifyForPicking = false);
+
 
 private:
-    GLint currentSkin; /**< TODO */
-    QMap<GLint,QImage*> skinsList; /**< TODO */
-    QMap<GLint,QString> levelsList; /**< TODO */
-    GLint itemSelected; /**< TODO */
+    QObject *parent;  /**<  It is a callback variable to the parent of the widget. */
+    GLint currentSkin; /**< It is the id of the current choosen skin */
+    QMap<GLint,QImage*> skinsList; /**< skinsList provided by Qubet object. */
+    QMap<GLint,QString> levelsList; /**< levelsList provided by Qubet object. */
+    GLint itemSelected; /**< It is the id of the current menu action selected. */
+
 
 private slots:
     /**
-     * @brief
+     * @brief Slot called when the user clicks on a item.
      *
-     * @param e
+     * @param listNames is the QList<GLuint> of item's names.
      */
-    void keyPressed(QKeyEvent *e);
+    void itemClicked(QList<GLuint> listNames);
 
     /**
-     * @brief
+     * @brief Slot called when the user releases the mouse button.
      *
-     * @param id
+     * @param event is the QMouseEvent*.
      */
-    void itemClicked(GLint id);
+    void mouseReleased(QMouseEvent *event);
+
+    /**
+     * @brief Slot called when the user moves the mouse.
+     *
+     * @param event is the QMouseEvent*.
+     */
+    void mouseMoved(QMouseEvent *event);
+
+    /**
+     * @brief Slot called when the user presses a key on the keyboard.
+     *
+     * @param event is the QKeyEvent*.
+     */
+    void keyPressed(QKeyEvent *event);
+
 
 signals:
     /**

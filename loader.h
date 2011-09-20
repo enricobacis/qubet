@@ -24,12 +24,12 @@ public:
      * @param _skinsList is the reference to Qubet's skinsList.
      * @param _obstacleModelsList is the reference to Qubet's obstacleModelsList.
      * @param _levelsList is the reference to Qubet's levelsList.
-     * @param parent is the pointer to Qubet.
+     * @param _parent is a callback variable to the parent of the widget.
      */
-    explicit Loader(QMap<GLint,QImage*> &_skinsList, QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,QString> &_levelsList, QObject *parent = 0);
+    explicit Loader(QMap<GLint,QImage*> &_skinsList, QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,QString> &_levelsList, QObject *_parent = 0);
 
     /**
-     * @brief Destroy a Loader object (for what it worths)
+     * @brief Destroy a Loader object (for what it worths).
      */
     ~Loader();
 
@@ -39,10 +39,10 @@ public:
     void load();
 
 private:
-    QMap<GLint,QImage*> skinsList; /**< skinsList provided by Qubet object */
-    QMap<GLint,Vector3f*> obstacleModelsList; /**< obstacleModelsList provided by Qubet object */
-    QMap<GLint,QString> levelsList; /**< levelsList provided by Qubet object */
-
+    QObject *parent;  /**<  It is a callback variable to the parent of the widget. */
+    QMap<GLint,QImage*> skinsList; /**< skinsList provided by Qubet object. */
+    QMap<GLint,Vector3f*> obstacleModelsList; /**< obstacleModelsList provided by Qubet object. */
+    QMap<GLint,QString> levelsList; /**< levelsList provided by Qubet object. */
 
     /**
      * @brief Load the skins from the resource file.

@@ -35,10 +35,12 @@ public:
     ~LevelEditor();
 
     /**
-     * @brief
+     * @brief Method to draw the levelEditor.
      *
+     * @param simplifyForPicking [default = false] is used to draw a simplified scene
+     *        used for the picking function.
      */
-    void draw();
+    void draw(GLboolean simplifyForPicking = false);
 
 private:
     QMap<GLint,QString> levelsList; /**< TODO */

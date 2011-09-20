@@ -9,9 +9,11 @@ Qubet::Qubet(QWidget *parent) :
     game(NULL),
     levelEditor(NULL),
     audioManager(NULL),
-    width(STD_WIDTH),
-    height(STD_HEIGHT)
+    width(WIDTH),
+    height(HEIGHT)
 {
+    setFocusPolicy(Qt::StrongFocus);
+
     currentText = "Caricamento ...";
 
     drawTimer = new QTimer(this);
@@ -38,19 +40,36 @@ Qubet::~Qubet()
     }
 
     if (audioManager != NULL)
+    {
+        audioManager->~AudioManager();
         audioManager->deleteLater();
+        audioManager->wait();
+    }
 
     if (loader != NULL)
+    {
+        loader->~Loader();
         loader->deleteLater();
+        loader->wait();
+    }
 
     if (game != NULL)
+    {
+        game->~Game();
         game->deleteLater();
+    }
 
     if (levelEditor != NULL)
+    {
+        levelEditor->~LevelEditor();
         levelEditor->deleteLater();
+    }
 
     if (menu != NULL)
+    {
+        menu->~Menu();
         menu->deleteLater();
+    }
 }
 
 GLvoid Qubet::initializeGL()
@@ -60,30 +79,7 @@ GLvoid Qubet::initializeGL()
 
 GLvoid Qubet::paintGL()
 {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glLoadIdentity();
-    gluLookAt( 0.0,  0.0, -5.0,
-               0.0,  0.0,  0.0,
-               0.0,  1.0,  0.0);
-
-    if (!currentText.isEmpty())
-        renderText(width/2 - currentText.length()*2.5 , height - 50, currentText);
-
-    switch(currentView)
-    {
-    case MENU_VIEW:
-        menu->draw();
-        break;
-
-    case GAME_VIEW:
-        game->draw();
-        break;
-
-    case LEVELEDITOR_VIEW:
-        levelEditor->draw();
-        break;
-    }
-
+    drawScene();
     swapBuffers();
 }
 
@@ -105,17 +101,107 @@ GLvoid Qubet::resizeGL(GLint _width, GLint _height)
 
 GLvoid Qubet::mousePressEvent(QMouseEvent *event)
 {
+    emit itemClicked(getPickedName(event->x(), event->y()));
+}
 
+GLvoid Qubet::mouseReleaseEvent(QMouseEvent *event)
+{
+    emit mouseReleased(event);
 }
 
 GLvoid Qubet::mouseMoveEvent(QMouseEvent *event)
 {
-
+    emit mouseMoved(event);
 }
 
 GLvoid Qubet::keyPressEvent(QKeyEvent *event)
 {
+    emit keyPressed(event);
 
+    QWidget::keyPressEvent(event);
+}
+
+GLvoid Qubet::connectInputEvents(const QObject *receiver)
+{
+    connect(this, SIGNAL(itemClicked(QList<GLuint>)), receiver, SLOT(itemClicked(QList<GLuint>)));
+    connect(this, SIGNAL(keyPressed(QKeyEvent*)), receiver, SLOT(keyPressed(QKeyEvent*)));
+    connect(this, SIGNAL(mouseMoved(QMouseEvent*)), receiver, SLOT(mouseMoved(QMouseEvent*)));
+    connect(this, SIGNAL(mouseReleased(QMouseEvent*)), receiver, SLOT(mouseReleased(QMouseEvent*)));
+}
+
+QList<GLuint> Qubet::getPickedName(GLint mouseX, GLint mouseY)
+{
+    QList<GLuint> listNames;
+
+    // Impostiamo il buffer per la selezione
+    GLuint selectBuffer[BUFSIZE];
+    glSelectBuffer(BUFSIZE, selectBuffer);
+
+    // Salviamo nella variabile viewport la viewport corrente [x, y, w, h]
+    GLint viewport[4];
+    glGetIntegerv(GL_VIEWPORT, viewport);
+
+    // Passiamo in modalita' selezione
+    glRenderMode(GL_SELECT);
+
+    // Modifichiamo la proiezione attuale
+    // Vogliamo disegnare solo un piccolo quadrato intorno al mouse
+    glMatrixMode(GL_PROJECTION);
+
+    glPushMatrix();
+        glLoadIdentity();
+        gluPickMatrix(mouseX, viewport[3] - mouseY, 1, 1, viewport);
+        gluPerspective(45, (GLfloat)viewport[2]/(GLfloat)viewport[3], 0.1, 1000);
+
+    glMatrixMode(GL_MODELVIEW);
+
+    // Svuotiamo la lista dei nomi
+    glInitNames();
+
+    // Ridisegniamo la scena semplificata (in selection mode)
+    // (questo avverra' nel back buffer e quindi non si vedra'.
+    drawScene(true);
+
+    // Ripristiniamo le precondizioni
+        glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
+
+    glMatrixMode(GL_MODELVIEW);
+        glFlush();
+
+    // Tornando in modalita' RENDER ci viene detto quanti oggetti sono stati disegnati
+    GLint hits = glRenderMode(GL_RENDER);
+
+    // Algoritmo per cercare l'oggetto disegnato piu' vicino alla camera
+    GLint itemLine = 0;
+    GLuint minZ = 0;
+    GLuint currentZ = 0;
+
+    for (GLint i = 0; i < hits ; i++)
+    {
+        // Aggiorniamo la Z minima
+        currentZ = selectBuffer[itemLine + 1];
+
+        if ((minZ == 0) || (currentZ < minZ))
+        {
+            minZ = currentZ;
+
+            // Svuotiamo la lista dei nomi correnti
+            listNames.clear();
+        }
+
+        // Aggiungo tutti i nomi dell'oggetto alla lista dei nomi
+        // (i nomi iniziano dopo 3 righe)
+        for (GLuint i = 0; i < selectBuffer[itemLine]; i++)
+        {
+            listNames.append(selectBuffer[itemLine + 3 + i]);
+        }
+
+        // sposto la linea corrente al prossimo oggetto.
+        itemLine += (3 + selectBuffer[itemLine]);
+    }
+
+    return listNames;
 }
 
 GLvoid Qubet::loadingStepCompleted()
@@ -129,26 +215,29 @@ GLvoid Qubet::loadingStepCompleted()
 GLvoid Qubet::loadingCompleted()
 {
     loader->~Loader();
-
     currentText.clear();
 
     showMenu();
 }
 
-GLvoid Qubet::connectGame()
+GLvoid Qubet::connectAudio(const QObject *sender)
 {
-    connect(game, SIGNAL(gameClosed()), this, SLOT(gameClosed()));
-
-    connect(game, SIGNAL(enableAudio(GLboolean)), audioManager, SLOT(enableAudio(GLboolean)));
-    connect(game, SIGNAL(playAmbientMusic(QString)), audioManager, SLOT(playAmbientMusic(QString)));
-    connect(game, SIGNAL(pauseAmbientMusic()), audioManager, SLOT(pauseAmbientMusic()));
-    connect(game, SIGNAL(continueAmbientMusic()), audioManager, SLOT(continueAmbientMusic()));
-    connect(game, SIGNAL(playEffect(GLint)), audioManager, SLOT(playEffect(GLint)));
+    connect(sender, SIGNAL(enableAudio(GLboolean)), audioManager, SLOT(enableAudio(GLboolean)));
+    connect(sender, SIGNAL(playAmbientMusic(QString)), audioManager, SLOT(playAmbientMusic(QString)));
+    connect(sender, SIGNAL(pauseAmbientMusic()), audioManager, SLOT(pauseAmbientMusic()));
+    connect(sender, SIGNAL(continueAmbientMusic()), audioManager, SLOT(continueAmbientMusic()));
+    connect(sender, SIGNAL(playEffect(GLint)), audioManager, SLOT(playEffect(GLint)));
 }
 
-GLvoid Qubet::showMenu()
+GLvoid Qubet::connectGame()
 {
-    menu = new Menu(skinsList, levelsList, this);
+    connectAudio(game);
+    connect(game, SIGNAL(gameClosed()), this, SLOT(gameClosed()));
+}
+
+GLvoid Qubet::connectMenu()
+{
+    connectInputEvents(menu);
 
     connect(menu, SIGNAL(playStory(GLint)), this, SLOT(playStory(GLint)));
     connect(menu, SIGNAL(playArcade(GLint, QString)), this, SLOT(playArcade(GLint, QString)));
@@ -157,14 +246,46 @@ GLvoid Qubet::showMenu()
     connect(menu, SIGNAL(enableAudio(GLboolean)), audioManager, SLOT(enableAudio(GLboolean)));
     connect(menu, SIGNAL(playAmbientMusic(QString)), audioManager, SLOT(playAmbientMusic(QString)));
     connect(menu, SIGNAL(playEffect(GLint)), audioManager, SLOT(playEffect(GLint)));
+}
 
+GLvoid Qubet::showMenu()
+{
+    menu = new Menu(skinsList, levelsList, this);
     currentView = MENU_VIEW;
+    connectMenu();
 }
 
 GLvoid Qubet::menuClosed()
 {
     menu->deleteLater();
     menu = NULL;
+}
+
+GLvoid Qubet::drawScene(GLboolean simplifyForPicking)
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glLoadIdentity();
+    gluLookAt( 0.0,  0.0, -5.0,
+               0.0,  0.0,  0.0,
+               0.0,  1.0,  0.0);
+
+    if (!currentText.isEmpty() && !simplifyForPicking)
+        renderText(width/2 - currentText.length()*2.5 , height - 50, currentText);
+
+    switch(currentView)
+    {
+    case MENU_VIEW:
+        menu->draw(simplifyForPicking);
+        break;
+
+    case GAME_VIEW:
+        game->draw(simplifyForPicking);
+        break;
+
+    case LEVELEDITOR_VIEW:
+        levelEditor->draw(simplifyForPicking);
+        break;
+    }
 }
 
 void Qubet::draw()
@@ -197,11 +318,11 @@ void Qubet::errorLoading()
 
 void Qubet::playStory(GLint skinId)
 {
-    game = new Game(STORY_MODE, skinsList.value(skinId), obstacleModelsList, this);
+    game = new Game(STORY_MODE, skinsList.value(skinId), levelsList, obstacleModelsList, this);
 
     connectGame();
 
-    game->newGameStory(levelsList);
+    game->newGameStory();
     currentView = GAME_VIEW;
 
     menuClosed();
@@ -209,7 +330,7 @@ void Qubet::playStory(GLint skinId)
 
 void Qubet::playArcade(GLint skinId, QString levelFilename)
 {
-    game = new Game(ARCADE_MODE, skinsList[skinId], obstacleModelsList, this);
+    game = new Game(ARCADE_MODE, skinsList[skinId], levelsList, obstacleModelsList, this);
 
     connectGame();
 

@@ -8,13 +8,12 @@ Window::Window(QWidget *parent) :
     qubetWidget = new Qubet(this);
     setCentralWidget(qubetWidget);
 
-    move(STD_MOVE_X, STD_MOVE_Y);
-    resize(STD_WIDTH, STD_HEIGHT);
+    move(MOVE_X, MOVE_Y);
+    resize(WIDTH, HEIGHT);
 }
 
 Window::~Window()
 {
-
 }
 
 void Window::closeEvent(QCloseEvent *event)

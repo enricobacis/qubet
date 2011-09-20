@@ -2,13 +2,13 @@
 #define MAINQUBET_H
 
 #include <QMainWindow>
+#include <QDebug>
 
 #include "qubet.h"
 #include "defines.h"
 
 /**
- * @brief
- *
+ * @brief This class is the QMainWindow, it is used to contain Qubet widget.
  */
 class Window : public QMainWindow
 {
@@ -16,26 +16,26 @@ class Window : public QMainWindow
 
 public:
     /**
-     * @brief
+     * @brief Create the QMainWindow.
      *
-     * @param parent
+     * @param parent is a callback variable to the parent of the window.
      */
     explicit Window(QWidget *parent = 0);
 
     /**
-     * @brief
-     *
+     * @brief Destroy the QMainWindow (for what it worths).
      */
     ~Window();
 
 
 private:
-    Qubet *qubetWidget; /**< TODO */
+    Qubet *qubetWidget; /**< This variable refers to the Qubet instance. */
 
     /**
-     * @brief
+     * @brief This function is called when the user closes the Window.
+     *        It is used to perform cleaning operations.
      *
-     * @param event
+     * @param event is the QCloseEvent*.
      */
     void closeEvent(QCloseEvent *event);
 

@@ -72,7 +72,6 @@ private:
     QObject *parent; /**< TODO */
     Vector3f *position; /**< TODO */
     GLint state; /**< TODO */
-    GLint moving; /**< TODO */
     GLfloat speed; /**< TODO */
     GLfloat gravity; /**< TODO */
     GLfloat scaleFactor; /**< TODO */

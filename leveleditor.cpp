@@ -15,7 +15,7 @@ void LevelEditor::quitEditor()
 
 }
 
-void LevelEditor::draw()
+void LevelEditor::draw(GLboolean simplifyForPicking)
 {
 
 }

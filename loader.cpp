@@ -1,6 +1,7 @@
 #include "loader.h"
 
-Loader::Loader(QMap<GLint,QImage*> &_skinsList, QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,QString> &_levelsList, QObject *parent) :
+Loader::Loader(QMap<GLint,QImage*> &_skinsList, QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,QString> &_levelsList, QObject *_parent) :
+    parent(_parent),
     skinsList(_skinsList),
     obstacleModelsList(_obstacleModelsList),
     levelsList(_levelsList)

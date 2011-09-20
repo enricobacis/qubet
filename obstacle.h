@@ -23,7 +23,7 @@ public:
      * @brief Create an Obstacle object.
      *
      * @param id is the id given to the Obstacle object.
-     * @param parent is the parent whom has generated the Obstacle object.
+     * @param parent is a callback variable to the parent of the widget.
      */
     explicit Obstacle(GLint id, QObject *parent = 0);
 

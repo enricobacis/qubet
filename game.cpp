@@ -1,16 +1,21 @@
 #include "game.h"
 
-Game::Game(GLint _gameType, QImage *_skin, QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *parent)
+Game::Game(GLint _gameType, QImage *_skin, QMap<GLint,QString> &_levelsList, QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *_parent) :
+    parent(_parent),
+    levelsList(_levelsList),
+    obstacleModelsList(_obstacleModelsList),
+    skin(_skin),
+    gameType(_gameType)
 {
 
 }
 
 Game::~Game()
 {
-
+    parent->disconnect(this);
 }
 
-void Game::newGameStory(QMap<GLint,QString> &_levelsList)
+void Game::newGameStory()
 {
 
 }
@@ -20,7 +25,7 @@ void Game::newGameArcade(QString filename)
 
 }
 
-void Game::draw()
+void Game::draw(GLboolean simplifyForPicking)
 {
 
 }
@@ -50,7 +55,22 @@ void Game::quitGame()
 
 }
 
-void Game::run()
+void Game::itemClicked(QList<GLuint> listNames)
+{
+
+}
+
+void Game::mouseReleased(QMouseEvent *event)
+{
+
+}
+
+void Game::mouseMoved(QMouseEvent *event)
+{
+
+}
+
+void Game::keyPressed(QKeyEvent *event)
 {
 
 }
@@ -61,16 +81,6 @@ void Game::collided()
 }
 
 void Game::levelCompleted()
-{
-
-}
-
-void Game::keyPressed(QKeyEvent *e)
-{
-
-}
-
-void Game::itemClicked(GLint id)
 {
 
 }

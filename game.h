@@ -1,7 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <QThread>
 #include <QImage>
 #include <QKeyEvent>
 #include <QMap>
@@ -17,7 +16,7 @@
  * @brief
  *
  */
-class Game : public QThread
+class Game : public QObject
 {
     Q_OBJECT
 
@@ -28,9 +27,9 @@ public:
      * @param _gameType
      * @param _skin
      * @param _obstacleModelsList
-     * @param parent
+     * @param _parent
      */
-    explicit Game(GLint _gameType, QImage *_skin, QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *parent = 0);
+    explicit Game(GLint _gameType, QImage *_skin, QMap<GLint,QString> &_levelsList, QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *_parent = 0);
 
     /**
      * @brief
@@ -41,9 +40,8 @@ public:
     /**
      * @brief
      *
-     * @param _levelsList
      */
-    void newGameStory(QMap<GLint,QString> &_levelsList);
+    void newGameStory();
 
     /**
      * @brief
@@ -52,13 +50,18 @@ public:
      */
     void newGameArcade(QString filename);
 
+
     /**
-     * @brief
+     * @brief Method to draw the game.
      *
+     * @param simplifyForPicking [default = false] is used to draw a simplified scene
+     *        used for the picking function.
      */
-    void draw();
+    void draw(GLboolean simplifyForPicking = false);
+
 
 private:
+    QObject *parent; /**< TODO */
     QMap<GLint,QString> levelsList; /**< TODO */
     QMap<GLint,Vector3f*> obstacleModelsList; /**< TODO */
     QImage *skin; /**< TODO */
@@ -102,13 +105,36 @@ private:
      */
     void quitGame();
 
-    /**
-     * @brief
-     *
-     */
-    void run();
 
 private slots:
+    /**
+     * @brief Slot called when the user clicks on a item.
+     *
+     * @param listNames is the QList<GLuint> of item's names.
+     */
+    void itemClicked(QList<GLuint> listNames);
+
+    /**
+     * @brief Slot called when the user releases the mouse button.
+     *
+     * @param event is the QMouseEvent*.
+     */
+    void mouseReleased(QMouseEvent *event);
+
+    /**
+     * @brief Slot called when the user moves the mouse.
+     *
+     * @param event is the QMouseEvent*.
+     */
+    void mouseMoved(QMouseEvent *event);
+
+    /**
+     * @brief Slot called when the user presses a key on the keyboard.
+     *
+     * @param event is the QKeyEvent*.
+     */
+    void keyPressed(QKeyEvent *event);
+
     /**
      * @brief
      *
@@ -121,19 +147,6 @@ private slots:
      */
     void levelCompleted();
 
-    /**
-     * @brief
-     *
-     * @param e
-     */
-    void keyPressed(QKeyEvent *e);
-
-    /**
-     * @brief
-     *
-     * @param id
-     */
-    void itemClicked(GLint id);
 
 signals:
     /**

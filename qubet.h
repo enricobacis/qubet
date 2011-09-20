@@ -5,6 +5,7 @@
 #include <QtOpenGL>
 #include <QTimer>
 #include <QMap>
+#include <QList>
 
 #include <GL/gl.h>
 
@@ -29,6 +30,7 @@ class Qubet : public QGLWidget
 {
     Q_OBJECT
 
+
 public:
     // Object Management
 
@@ -39,7 +41,7 @@ public:
      * used in the game. To start a new instance of Qubet Game you have only to create
      * this object, it does all for you.
      *
-     * @param parent is a callback variable to the parent of the widget
+     * @param parent is a callback variable to the parent of the widget.
      */
     explicit Qubet(QWidget *parent = 0);
 
@@ -82,22 +84,28 @@ protected:
     /**
      * @brief This function is called when the player clicks inside the game window.
      *
-     * @param event is the Qt mouse press event.
+     * @param event is the QMouseEvent*.
      */
     GLvoid mousePressEvent(QMouseEvent *event);
 
     /**
-     * @brief This function is called when the player move the mouse inside the game window.
+     * @brief This function is called when the player releases the mouse click.
      *
-     * @param eventis the Qt mouse move event.
+     * @param event is the QMouseEvent*.
+     */
+    GLvoid mouseReleaseEvent(QMouseEvent *event);
+
+    /**
+     * @brief This function is called when the player moves the mouse inside the game window.
+     *
+     * @param eventis the QMouseEvent*.
      */
     GLvoid mouseMoveEvent(QMouseEvent *event);
 
     /**
-     * @brief This function is called when the player press a key and the
-     *        game window has the focus.
+     * @brief This function is called when the player presses a key.
      *
-     * @param event is the Qt key press event.
+     * @param event is the QKeyEvent*.
      */
     GLvoid keyPressEvent(QKeyEvent *event);
 
@@ -122,6 +130,53 @@ private:
     GLint height; /**< It is the current widget height. */
 
 
+    // Signal <-> Slot Management
+
+    /**
+     * @brief This methos connects mouse and keyboard events to
+     *        the receiver object to forward user's input to
+     *        the current view.
+     *
+     * @pre You have to create the receiver and the receiver have
+     *      to reimplement mouse and keyboard slots.
+     *
+     * @param receiver is the receiver const QObject*.
+     */
+    GLvoid connectInputEvents(const QObject *receiver);
+
+    /**
+     * @brief This method connects audio signals of the sender
+     *        to their slots in AudioManager.
+     *
+     * @param sender is the sender const QObject*.
+     */
+    GLvoid connectAudio(const QObject *sender);
+
+    /**
+     * @brief This function is used to connect all the game slots to their signals.
+     */
+    GLvoid connectGame();
+
+    /**
+     * @brief This function is used to connect all the menu slots to their signals.
+     */
+    GLvoid connectMenu();
+
+
+    // Picking Management
+
+    /**
+     * @brief This method returns a list of the names of the foreground item
+     *        at mouse coordinates (mouseX, mouseY).
+     *
+     * @param mouseX is the mouse coordinate of x.
+     * @param mouseY is the mouse coordinate of y.
+     *
+     * @return QList<GLuint> is a list of the names of the item on (mouseX, mouseY).
+     */
+    QList<GLuint> getPickedName(GLint mouseX, GLint mouseY);
+
+
     // General Purpose Management
 
     /**
@@ -141,12 +196,6 @@ private:
     GLvoid loadingCompleted();
 
     /**
-     * @brief This function (only for convenience) is used to link all the
-     *        game slots to their signals.
-     */
-    GLvoid connectGame();
-
-    /**
      * @brief This function is used to tell the paintGL function to show the Menu.
      */
     GLvoid showMenu();
@@ -159,6 +208,19 @@ private:
      * using the currentView variable before to delete the current Menu instance.
      */
     GLvoid menuClosed();
+
+    /**
+     * @brief This function is used to draw the scene on the QGLWidget.
+     *        It is used by PaintGL that calls this and then do
+     *        the swap of the buffers. You can use this function either to
+     *        draw the scene in the background buffer or to draw the scene
+     *        to use the picking and then not to swap buffers.
+     *
+     * @param simplifyForPicking [default = false] is used to draw a simplified scene
+     *        used for the picking function.
+     */
+    GLvoid drawScene(GLboolean simplifyForPicking = false);
+
 
 private slots:
     // Link to Objects
@@ -227,6 +289,37 @@ private slots:
      *        the player chooses to close the current LevelEditor instance.
      */
     void levelEditorClosed();
+
+
+signals:
+
+    /**
+     * @brief Signal emitted when the user clicks on a item.
+     *
+     * @param listNames is the QList<GLuint> of item's names.
+     */
+    void itemClicked(QList<GLuint> listNames);
+
+    /**
+     * @brief Signal emitted when the user releases the mouse button.
+     *
+     * @param event is the QMouseEvent*.
+     */
+    void mouseReleased(QMouseEvent *event);
+
+    /**
+     * @brief Signal emitted when the user moves the mouse.
+     *
+     * @param event is the QMouseEvent*.
+     */
+    void mouseMoved(QMouseEvent *event);
+
+    /**
+     * @brief Signal emitted when the user presses a key on the keyboard.
+     *
+     * @param event is the QKeyEvent*.
+     */
+    void keyPressed(QKeyEvent *event);
 
 };
 

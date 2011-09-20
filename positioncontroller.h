@@ -45,7 +45,7 @@ private:
      * @brief Controlla se il cubo ha colliso con un ostacolo.
      *
      */
-    void checkCollision();
+    GLvoid checkCollision();
 
     /**
      * @brief Reimplementazione della funzione run() della classe QThread.

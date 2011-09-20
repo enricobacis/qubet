@@ -10,7 +10,7 @@ PositionController::~PositionController()
 
 }
 
-void PositionController::checkCollision()
+GLvoid PositionController::checkCollision()
 {
 
 }
