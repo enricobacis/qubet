@@ -1,6 +1,6 @@
 #include "utilities.h"
 
-GLvoid drawSquare(GLfloat x, GLfloat y)
+GLvoid drawRectangle(GLfloat x, GLfloat y)
 {
     x = x/2;
     y = y/2;

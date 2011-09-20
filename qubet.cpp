@@ -29,6 +29,8 @@ Qubet::Qubet(QWidget *parent) :
     connect(loader, SIGNAL(errorLoading()), this, SLOT(errorLoading()));
 
     loader->load();
+
+    initializeGL();
 }
 
 Qubet::~Qubet()
@@ -79,6 +81,7 @@ GLvoid Qubet::initializeGL()
 
 GLvoid Qubet::paintGL()
 {
+    glMatrixMode(GL_MODELVIEW);
     drawScene();
     swapBuffers();
 }
@@ -87,14 +90,11 @@ GLvoid Qubet::resizeGL(GLint _width, GLint _height)
 {
     width = _width;
     height = _height;
-
-    GLint side = qMin(width, height);
-    glViewport((width - side) / 2, (height - side) / 2, side, side);
-
+    glViewport (0, 0, (GLsizei) width, (GLsizei) height);
     glMatrixMode(GL_PROJECTION);
-
     glLoadIdentity();
-    gluPerspective(45.0f, (GLfloat)width/(GLfloat)height, 0.1f, 100.0f);
+
+    gluPerspective(45.0, (GLfloat) width / (GLfloat) height, 0.1f, 100.0);
 
     glMatrixMode(GL_MODELVIEW);
 }
@@ -154,9 +154,6 @@ QList<GLuint> Qubet::getPickedName(GLint mouseX, GLint mouseY)
         gluPerspective(45, (GLfloat)viewport[2]/(GLfloat)viewport[3], 0.1, 1000);
 
     glMatrixMode(GL_MODELVIEW);
-
-    // Svuotiamo la lista dei nomi
-    glInitNames();
 
     // Ridisegniamo la scena semplificata (in selection mode)
     // (questo avverra' nel back buffer e quindi non si vedra'.
@@ -264,8 +261,11 @@ GLvoid Qubet::menuClosed()
 GLvoid Qubet::drawScene(GLboolean simplifyForPicking)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glInitNames();
+
     glLoadIdentity();
-    gluLookAt( 0.0,  0.0, -5.0,
+    gluLookAt( 0.0,  0.0,  20.0,
                0.0,  0.0,  0.0,
                0.0,  1.0,  0.0);
 

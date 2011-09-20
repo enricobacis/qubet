@@ -14,12 +14,30 @@ Menu::~Menu()
 
 GLvoid Menu::draw(GLboolean simplifyForPicking)
 {
-    drawSquare(3, 3);
+    glPushName(1);
+    glPushMatrix();
+        glTranslatef(0.0, 3.5, 0.0);
+        drawRectangle(10.0, 4.0);
+    glPopMatrix();
+    glPopName();
+
+    glPushName(2);
+    glPushMatrix();
+        glTranslatef(0.0, -3.5, 0.0);
+        drawRectangle(10.0, 4.0);
+    glPopMatrix();
+    glPopName();
 }
 
 void Menu::itemClicked(QList<GLuint> listNames)
 {
-
+    if (!listNames.isEmpty())
+    {
+        if (listNames.at(0) == 1)
+            qDebug() << "Story";
+        else
+            qDebug() << "Arcade";
+    }
 }
 
 void Menu::mouseReleased(QMouseEvent *event)

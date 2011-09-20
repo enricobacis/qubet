@@ -9,7 +9,7 @@
  * @param x is the length of the x side.
  * @param y is the length of the y side.
  */
-GLvoid drawSquare(GLfloat x, GLfloat y);
+GLvoid drawRectangle(GLfloat x, GLfloat y);
 
 /**
  * @brief Draw a XYZ Prism using vertex and texture coordinates.
