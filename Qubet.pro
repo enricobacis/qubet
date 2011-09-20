@@ -19,7 +19,10 @@ SOURCES += main.cpp\
     menu.cpp \
     leveleditor.cpp \
     qubet.cpp \
-    window.cpp
+    window.cpp \
+    utilities.cpp \
+    texture.cpp \
+    shader.cpp
 
 HEADERS  += \
     vector3f.h \
@@ -34,7 +37,10 @@ HEADERS  += \
     leveleditor.h \
     defines.h \
     qubet.h \
-    window.h
+    window.h \
+    utilities.h \
+    texture.h \
+    shader.h
 
 RESOURCES += \
     resources.qrc
