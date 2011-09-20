@@ -1,8 +1,9 @@
 #ifndef VECTOR3F_H
 #define VECTOR3F_H
 
+#include <QtOpenGL>
 #include <math.h>
-#include <GL/gl.h>
+
 
 /**
  * @brief Structure that rapresents a Vector of float in a 3-D space.

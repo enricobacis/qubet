@@ -3,9 +3,10 @@
 
 #include <QObject>
 #include <QColor>
+#include <QtOpenGL>
+
 #include "vector3f.h"
 
-#include <GL/gl.h>
 
 /**
  * @brief This class rapresents an Obstacle.

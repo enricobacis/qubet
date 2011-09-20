@@ -4,10 +4,10 @@
 #include <QThread>
 #include <QImage>
 #include <QMap>
-
-#include <GL/gl.h>
+#include <QtOpenGL>
 
 #include "vector3f.h"
+
 
 /**
  * @brief Loader class used to load skins, levels and obstacles in Qubet.

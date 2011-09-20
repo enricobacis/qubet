@@ -3,11 +3,11 @@
 
 #include <QImage>
 #include <QMap>
-
-#include <GL/gl.h>
+#include <QtOpenGL>
 
 #include "vector3f.h"
 #include "obstacle.h"
+
 
 /**
  * @brief

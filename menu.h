@@ -7,10 +7,12 @@
 #include <QMap>
 #include <QList>
 #include <QDebug>
+#include <QtOpenGL>
 
+#include "menu_names.h"
+#include "defines.h"
 #include "utilities.h"
-
-#include <GL/gl.h>
+#include "vector3f.h"
 
 
 /**
@@ -24,6 +26,7 @@ class Menu : public QObject
     Q_OBJECT
 
 public:
+
     /**
      * @brief Create a Menu object used to show and manage the game menu.
      *
@@ -51,14 +54,22 @@ public:
 
 
 private:
+
     QObject *parent;  /**<  It is a callback variable to the parent of the widget. */
     GLint currentSkin; /**< It is the id of the current choosen skin */
     QMap<GLint,QImage*> skinsList; /**< skinsList provided by Qubet object. */
     QMap<GLint,QString> levelsList; /**< levelsList provided by Qubet object. */
     GLint itemSelected; /**< It is the id of the current menu action selected. */
+    GLboolean isMoving; /**< It is the variable that state if the menu is moving or not. */
+    Vector3f *cameraOffset; /**< It is the camera offset for the menu. */
+    GLint currentStep; /**< It is the current menu step. */
+    GLint gameType; /**< It is the selected gameType. */
+    GLfloat angleRotCube;  /**< It is the current rotation angle of the cube. */
+    GLboolean audioEnabled;  /**< It is the state of the audio. */
 
 
 private slots:
+
     /**
      * @brief Slot called when the user clicks on a item.
      *

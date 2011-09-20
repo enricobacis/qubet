@@ -3,11 +3,12 @@
 
 #include <QKeyEvent>
 #include <QMap>
+#include <QtOpenGL>
 
 #include "vector3f.h"
 #include "level.h"
+#include "leveleditor_names.h"
 
-#include <GL/gl.h>
 
 /**
  * @brief

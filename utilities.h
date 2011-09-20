@@ -1,7 +1,7 @@
 #ifndef UTILITIES_H
 #define UTILITIES_H
 
-#include <GL/gl.h>
+#include <QtOpenGL>
 
 /**
  * @brief Draw a XY Square using vertex and texture coordinates.

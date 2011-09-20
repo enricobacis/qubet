@@ -6,6 +6,7 @@
 #include <QTimer>
 #include <QMap>
 #include <QList>
+#include <QtOpenGL>
 
 #include "menu.h"
 #include "vector3f.h"
@@ -15,8 +16,6 @@
 #include "audiomanager.h"
 #include "leveleditor.h"
 #include "defines.h"
-
-#include <GL/gl.h>
 
 
 /**

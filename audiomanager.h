@@ -3,8 +3,8 @@
 
 #include <QThread>
 #include <QSound>
+#include <QtOpenGL>
 
-#include <GL/gl.h>
 
 /**
  * @brief

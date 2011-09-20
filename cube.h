@@ -5,11 +5,11 @@
 #include <QKeyEvent>
 #include <QTimer>
 #include <QGLWidget>
-
-#include <GL/gl.h>
+#include <QtOpenGL>
 
 #include "vector3f.h"
 #include "level.h"
+
 
 /**
  * @brief

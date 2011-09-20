@@ -3,12 +3,12 @@
 
 #include <QThread>
 #include <QMap>
+#include <QtOpenGL>
 
 #include "cube.h"
 #include "level.h"
 #include "vector3f.h"
 
-#include <GL/gl.h>
 
 /**
  * @brief La classe PositionController controlla se il Cubo collide con degli ostacoli.

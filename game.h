@@ -4,13 +4,14 @@
 #include <QImage>
 #include <QKeyEvent>
 #include <QMap>
-
-#include <GL/gl.h>
+#include <QtOpenGL>
 
 #include "vector3f.h"
 #include "cube.h"
 #include "level.h"
 #include "positioncontroller.h"
+#include "game_names.h"
+
 
 /**
  * @brief

@@ -7,6 +7,7 @@
 #include "qubet.h"
 #include "defines.h"
 
+
 /**
  * @brief This class is the QMainWindow, it is used to contain Qubet widget.
  */
