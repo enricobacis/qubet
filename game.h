@@ -10,7 +10,7 @@
 #include "cube.h"
 #include "level.h"
 #include "positioncontroller.h"
-#include "game_names.h"
+#include "game_defines.h"
 
 
 /**

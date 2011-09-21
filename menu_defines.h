@@ -1,5 +1,5 @@
-#ifndef MENU_NAMES_H
-#define MENU_NAMES_H
+#ifndef MENU_DEFINES_H
+#define MENU_DEFINES_H
 
 // Names used in the Menu View
 // This name will be in the format 1xx
@@ -12,4 +12,5 @@
 #define SKIN_CUBE               105
 #define BUTTON_NEXT_SKIN        106
 
-#endif // MENU_NAMES_H
+
+#endif // MENU_DEFINES_H

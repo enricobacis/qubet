@@ -37,9 +37,9 @@ HEADERS  += \
     qubet.h \
     window.h \
     utilities.h \
-    menu_names.h \
-    game_names.h \
-    leveleditor_names.h
+    game_defines.h \
+    leveleditor_defines.h \
+    menu_defines.h
 
 RESOURCES += \
     resources.qrc

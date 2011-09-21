@@ -44,18 +44,15 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
     case 3:
         cameraOffset->x += 1;
         if (cameraOffset->x == -30)
-        {
             emit showLevelEditor();
-        }
+
         break;
 
     case 4:
         angleRotCube += 2;
+        if (angleRotCube >= 360)
+            angleRotCube = GLint(angleRotCube) % 360;
 
-        if (GLint(angleRotCube) % 360 == 0)
-            angleRotCube = 0;
-
-        qDebug() << QString::number(angleRotCube);
         break;
 
     case 5:

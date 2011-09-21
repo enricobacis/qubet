@@ -9,7 +9,7 @@
 #include <QDebug>
 #include <QtOpenGL>
 
-#include "menu_names.h"
+#include "menu_defines.h"
 #include "defines.h"
 #include "utilities.h"
 #include "vector3f.h"

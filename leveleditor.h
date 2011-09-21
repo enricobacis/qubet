@@ -7,7 +7,7 @@
 
 #include "vector3f.h"
 #include "level.h"
-#include "leveleditor_names.h"
+#include "leveleditor_defines.h"
 
 
 /**

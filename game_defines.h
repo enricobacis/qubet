@@ -1,7 +1,7 @@
-#ifndef GAME_NAMES_H
-#define GAME_NAMES_H
+#ifndef GAME_DEFINES_H
+#define GAME_DEFINES_H
 
 // Names used in the Game View
 // This name will be in the format 2xx
 
-#endif // GAME_NAMES_H
+#endif // GAME_DEFINES_H
