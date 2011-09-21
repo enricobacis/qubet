@@ -8,6 +8,7 @@ Menu::Menu(QMap<GLint,QImage*> &_skinsList, QMap<GLint,QString> &_levelsList, QO
     currentStep(0),
     gameType(0),
     angleRotCube(0),
+    spinCube(0),
     audioEnabled(true)
 {
     cameraOffset = new Vector3f(0.0, 0.0, -10.0);
@@ -50,6 +51,35 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
 
     case 4:
         angleRotCube += 2;
+
+        if (GLint(angleRotCube) % 360 == 0)
+            angleRotCube = 0;
+
+        qDebug() << QString::number(angleRotCube);
+        break;
+
+    case 5:
+    case 6:
+        spinCube++;
+        angleRotCube += 2 + (spinCube <= 20 ? spinCube : 40 - spinCube);
+
+        if (spinCube == 20)
+        {
+            if (currentStep == 5)
+            {
+                // Previous Skin
+            }
+            else
+            {
+                // Next Skin
+            }
+        }
+        else if (spinCube == 40)
+        {
+            spinCube = 0;
+            isMoving = false;
+            currentStep = 4;
+        }
         break;
     }
 
@@ -154,9 +184,13 @@ void Menu::itemClicked(QList<GLuint> listNames)
             break;
 
         case BUTTON_PREVIOUS_SKIN:
+            isMoving = true;
+            currentStep = 5;
             break;
 
         case BUTTON_NEXT_SKIN:
+            isMoving = true;
+            currentStep = 6;
             break;
         }
     }
@@ -174,5 +208,17 @@ void Menu::mouseMoved(QMouseEvent *event)
 
 void Menu::keyPressed(QKeyEvent *event)
 {
-
+    if (currentStep == 4)
+    {
+        if (event->key() == Qt::Key_Left)
+        {
+            isMoving = true;
+            currentStep = 5;
+        }
+        else if (event->key() == Qt::Key_Right)
+        {
+            isMoving = true;
+            currentStep = 6;
+        }
+    }
 }

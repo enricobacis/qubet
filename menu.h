@@ -65,6 +65,7 @@ private:
     GLint currentStep; /**< It is the current menu step. */
     GLint gameType; /**< It is the selected gameType. */
     GLfloat angleRotCube;  /**< It is the current rotation angle of the cube. */
+    GLfloat spinCube;  /**< It is the spin step of the skin selection cube. */
     GLboolean audioEnabled;  /**< It is the state of the audio. */
 
 
