@@ -36,42 +36,22 @@ Qubet::Qubet(QWidget *parent) :
 Qubet::~Qubet()
 {
     if (drawTimer != NULL)
-    {
         drawTimer->stop();
-        drawTimer->deleteLater();
-    }
 
     if (audioManager != NULL)
-    {
         audioManager->~AudioManager();
-        audioManager->deleteLater();
-        audioManager->wait();
-    }
 
     if (loader != NULL)
-    {
         loader->~Loader();
-        loader->deleteLater();
-        loader->wait();
-    }
 
     if (game != NULL)
-    {
         game->~Game();
-        game->deleteLater();
-    }
 
     if (levelEditor != NULL)
-    {
         levelEditor->~LevelEditor();
-        levelEditor->deleteLater();
-    }
 
     if (menu != NULL)
-    {
         menu->~Menu();
-        menu->deleteLater();
-    }
 }
 
 GLvoid Qubet::initializeGL()
@@ -212,6 +192,7 @@ GLvoid Qubet::loadingStepCompleted()
 GLvoid Qubet::loadingCompleted()
 {
     loader->~Loader();
+    loader = NULL;
     currentText.clear();
 
     showMenu();
@@ -254,7 +235,7 @@ GLvoid Qubet::showMenu()
 
 GLvoid Qubet::menuClosed()
 {
-    menu->deleteLater();
+    menu->~Menu();
     menu = NULL;
 }
 
@@ -342,7 +323,7 @@ void Qubet::playArcade(GLint skinId, QString levelFilename)
 
 void Qubet::gameClosed()
 {
-    game->deleteLater();
+    game->~Game();
     game = NULL;
 
     showMenu();
@@ -365,7 +346,7 @@ void Qubet::showLevelEditor()
 
 void Qubet::levelEditorClosed()
 {
-    levelEditor->deleteLater();
+    levelEditor->~LevelEditor();
     levelEditor = NULL;
 
     showMenu();
