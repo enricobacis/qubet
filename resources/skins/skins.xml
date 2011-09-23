@@ -5,7 +5,6 @@
     <skin name="Box"       comment="A box full of happiness"         folder="box"       repeat="box.png" />
     <skin name="Pumpkin"   comment="Because it's orange"             folder="pumpkin"   x_plus="other.png"  x_minus="other.png"  y_plus="y+.png"  y_minus="y-.png"  z_plus="z+.png"  z_minus="z-.png" />
     <skin name="Gradient"  comment="The rainbox in a box"            folder="gradient"  autofind="true"  extension="png" />
-    <skin name="Alpinist"  comment="The path to success is hard"     folder="mountain"  autofind="true"  extension="png" />
     <skin name="Rubik"     comment="Life is colorful"                folder="rubik"     autofind="true"  extension="png" />
     <skin name="Antolini"  comment="Perche' cosi' ci da la lode"     folder="antolini"  autofind="true"  extension="png" />
 </skins>
