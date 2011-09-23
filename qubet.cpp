@@ -14,6 +14,8 @@ Qubet::Qubet(QWidget *parent) :
 
     setFocusPolicy(Qt::StrongFocus);
     audioManager = new AudioManager(this);
+    this->setMouseTracking(TRUE);
+
 }
 
 Qubet::~Qubet()
@@ -103,7 +105,7 @@ GLvoid Qubet::mouseReleaseEvent(QMouseEvent *event)
 
 GLvoid Qubet::mouseMoveEvent(QMouseEvent *event)
 {
-    emit mouseMoved(event);
+    emit mouseMoved(event, getPickedName(event->x(), event->y()));
 }
 
 GLvoid Qubet::keyPressEvent(QKeyEvent *event)
@@ -117,7 +119,7 @@ GLvoid Qubet::connectInputEvents(const QObject *receiver)
 {
     connect(this, SIGNAL(itemClicked(QList<GLuint>)), receiver, SLOT(itemClicked(QList<GLuint>)));
     connect(this, SIGNAL(keyPressed(QKeyEvent*)), receiver, SLOT(keyPressed(QKeyEvent*)));
-    connect(this, SIGNAL(mouseMoved(QMouseEvent*)), receiver, SLOT(mouseMoved(QMouseEvent*)));
+    connect(this, SIGNAL(mouseMoved(QMouseEvent*, QList<GLuint>)), receiver, SLOT(mouseMoved(QMouseEvent*, QList<GLuint>)));
     connect(this, SIGNAL(mouseReleased(QMouseEvent*)), receiver, SLOT(mouseReleased(QMouseEvent*)));
 }
 

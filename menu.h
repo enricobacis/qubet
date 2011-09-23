@@ -69,6 +69,7 @@ private:
     GLfloat angleRotCube;  /**< It is the current rotation angle of the cube. */
     GLfloat spinCube;  /**< It is the spin step of the skin selection cube. */
     GLboolean audioEnabled;  /**< It is the state of the audio. */
+    QVector<QVector<GLint> > buttonsLettersAngles; /**< It is the list that contains the current buttons' rotation angles. */
 
     /**
      * @brief
@@ -82,6 +83,12 @@ private:
      */
     void nextSkin();
 
+    /**
+     * @brief Check if the letter is moving yet, set currentStep if not
+     *
+     * @param Name is the Name of the object pointed by the cursor
+    */
+    GLvoid CheckLetterRotation(GLuint Name);
 
 private slots:
 
@@ -103,8 +110,9 @@ private slots:
      * @brief Slot called when the user moves the mouse.
      *
      * @param event is the QMouseEvent*.
+     * @param listNames is the QList<GLuint> of item's names.
      */
-    void mouseMoved(QMouseEvent *event);
+    void mouseMoved(QMouseEvent *event, QList<GLuint> listNames);
 
     /**
      * @brief Slot called when the user presses a key on the keyboard.

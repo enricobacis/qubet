@@ -103,3 +103,22 @@ GLvoid drawPrism(GLfloat x, GLfloat y, GLfloat z, Skin *skin)
     glBindTexture(GL_TEXTURE_2D, 0);
     glDisable(GL_TEXTURE_2D);
 }
+
+GLvoid drawCubesButton(QString label, QVector<GLint> angles, GLint Name)
+{
+   GLint lettersNumber = label.length();
+   glPushMatrix();
+        glTranslatef(-(lettersNumber -1) * 1.5, 0, 0);
+        for (GLint i = 0; i < lettersNumber; i++)
+        {
+            glPushName(Name);
+            glPushMatrix();
+                glRotatef(angles.at(i), 1, 0, 0);
+                drawPrism(3, 3, 3);
+            glPopMatrix();
+            glPopName();
+            glTranslatef(3, 0, 0);
+            Name++;
+        }
+   glPopMatrix();
+}

@@ -335,8 +335,9 @@ signals:
      * @brief Signal emitted when the user moves the mouse.
      *
      * @param event is the QMouseEvent*.
+     * @param listNames is the QList<GLuint> of item's names.
      */
-    void mouseMoved(QMouseEvent *event);
+    void mouseMoved(QMouseEvent *event, QList<GLuint> listNames);
 
     /**
      * @brief Signal emitted when the user presses a key on the keyboard.
