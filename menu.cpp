@@ -30,61 +30,61 @@ Menu::~Menu()
 
 GLvoid Menu::draw(GLboolean simplifyForPicking)
 {
-    switch (currentStep)
+    if (!simplifyForPicking)
     {
-    case 0:
-        cameraOffset->z += 0.5;
-        if (cameraOffset->z == 0)
+        switch (currentStep)
         {
-            currentStep = 1;
-            isMoving = false;
-        }
-        break;
+        case 0:
+            cameraOffset->z += 0.5;
+            if (cameraOffset->z == 0)
+            {
+                currentStep = 1;
+                isMoving = false;
+            }
+            break;
 
-    case 2:
-        cameraOffset->x -= 1;
-        if (cameraOffset->x == -30)
-        {
-            currentStep = 4;
-            isMoving = false;
-        }
-        break;
+        case 2:
+            cameraOffset->x -= 1;
+            if (cameraOffset->x == -30)
+            {
+                currentStep = 4;
+                isMoving = false;
+            }
+            break;
 
-    case 3:
-        cameraOffset->x += 1;
-        if (cameraOffset->x == -30)
-            emit showLevelEditor();
+        case 3:
+            cameraOffset->x += 1;
+            if (cameraOffset->x == -30)
+                emit showLevelEditor();
 
-        break;
+            break;
 
-    case 4:
-        angleRotCube += 2;
-        if (angleRotCube >= 360)
-            angleRotCube = GLint(angleRotCube) % 360;
-        break;
+        case 4:
+            angleRotCube += 2;
+            if (angleRotCube >= 360)
+                angleRotCube = GLint(angleRotCube) % 360;
+            break;
 
-    case 5:
-    case 6:
-        spinCube += 2;
-        angleRotCube += 2 + (spinCube <= 30 ? spinCube : 60 - spinCube);
+        case 5:
+        case 6:
+            spinCube += 2;
+            angleRotCube += 2 + (spinCube <= 30 ? spinCube : 60 - spinCube);
 
-        if (spinCube == 30)
-        {
-            if (currentStep == 5)
-                previousSkin();
-            else
-                nextSkin();
-        }
-        else if (spinCube == 60)
-        {
-            spinCube = 0;
-            isMoving = false;
-            currentStep = 4;
-        }
-        break;
-    case 7:
-        if (!simplifyForPicking)
-        {
+            if (spinCube == 30)
+            {
+                if (currentStep == 5)
+                    previousSkin();
+                else
+                    nextSkin();
+            }
+            else if (spinCube == 60)
+            {
+                spinCube = 0;
+                isMoving = false;
+                currentStep = 4;
+            }
+            break;
+        case 7:
             int j;
             int i;
             for(i = 0; i < 3; i++)
@@ -99,8 +99,8 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                         buttonsLettersAngles[i][t] += 6;
                 }
             }
+            break;
         }
-        break;
     }
 
     glPushName(BUTTON_VOLUME);
