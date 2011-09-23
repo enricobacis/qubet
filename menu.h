@@ -1,16 +1,18 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include <QWidget>
+#include <QtOpenGL>
+#include <QGLWidget> //remove after
 #include <QImage>
 #include <QKeyEvent>
 #include <QMap>
 #include <QList>
 #include <QDebug>
-#include <QtOpenGL>
 
 #include "menu_defines.h"
 #include "defines.h"
+
+#include "skin.h"
 #include "utilities.h"
 #include "vector3f.h"
 
@@ -37,7 +39,7 @@ public:
      * @param _levelsList is the reference to Qubet's levelsList.
      * @param _parent is a callback variable to the parent of the widget.
      */
-    explicit Menu(QMap<GLint,QImage*> &_skinsList, QMap<GLint,QString> &_levelsList, QObject *_parent);
+    explicit Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,QString> &_levelsList, QObject *_parent);
 
     /**
      * @brief Disconnect and Destroy a Menu object.
@@ -57,7 +59,7 @@ private:
 
     QObject *parent;  /**<  It is a callback variable to the parent of the widget. */
     GLint currentSkin; /**< It is the id of the current choosen skin */
-    QMap<GLint,QImage*> skinsList; /**< skinsList provided by Qubet object. */
+    QMap<GLint,Skin*> skinsList; /**< skinsList provided by Qubet object. */
     QMap<GLint,QString> levelsList; /**< levelsList provided by Qubet object. */
     GLint itemSelected; /**< It is the id of the current menu action selected. */
     GLboolean isMoving; /**< It is the variable that state if the menu is moving or not. */
@@ -67,6 +69,18 @@ private:
     GLfloat angleRotCube;  /**< It is the current rotation angle of the cube. */
     GLfloat spinCube;  /**< It is the spin step of the skin selection cube. */
     GLboolean audioEnabled;  /**< It is the state of the audio. */
+
+    /**
+     * @brief
+     *
+     */
+    void previousSkin();
+
+    /**
+     * @brief
+     *
+     */
+    void nextSkin();
 
 
 private slots:

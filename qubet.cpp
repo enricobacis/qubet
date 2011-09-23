@@ -2,9 +2,7 @@
 
 Qubet::Qubet(QWidget *parent) :
     QGLWidget(QGLFormat(QGL::DoubleBuffer), parent),
-    loadingSteps(STEPS),
     drawTimer(NULL),
-    loader(NULL),
     menu(NULL),
     game(NULL),
     levelEditor(NULL),
@@ -12,25 +10,10 @@ Qubet::Qubet(QWidget *parent) :
     width(WIDTH),
     height(HEIGHT)
 {
+    // OpenGL dependant things will be initialized in InitializeGL function.
+
     setFocusPolicy(Qt::StrongFocus);
-
-    currentText = "Caricamento ...";
-
-    drawTimer = new QTimer(this);
-    connect(drawTimer, SIGNAL(timeout()), this, SLOT(draw()));
-    drawTimer->start(30);
-
     audioManager = new AudioManager(this);
-    loader = new Loader(skinsList, obstacleModelsList, levelsList, this);
-
-    connect(loader, SIGNAL(levelsLoaded()), this, SLOT(levelsLoaded()));
-    connect(loader, SIGNAL(skinsLoaded()), this, SLOT(skinsLoaded()));
-    connect(loader, SIGNAL(obstacleModelsLoaded()), this, SLOT(obstacleModelsLoaded()));
-    connect(loader, SIGNAL(errorLoading()), this, SLOT(errorLoading()));
-
-    loader->load();
-
-    initializeGL();
 }
 
 Qubet::~Qubet()
@@ -40,9 +23,6 @@ Qubet::~Qubet()
 
     if (audioManager != NULL)
         audioManager->~AudioManager();
-
-    if (loader != NULL)
-        loader->~Loader();
 
     if (game != NULL)
         game->~Game();
@@ -56,7 +36,39 @@ Qubet::~Qubet()
 
 GLvoid Qubet::initializeGL()
 {
+    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glClearDepth(1.0);
 
+    glEnable(GL_NORMALIZE);
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+
+    GLfloat lposition[] = {0.0f, 0.0f, 10.0f, 0.0f};
+    glLightfv(GL_LIGHT0, GL_POSITION, lposition);
+    GLfloat ldir[] = {0.0f, 0.0f, -1.0f};
+    glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, ldir);
+
+    GLfloat ambientLight[]  = {1.0f, 1.0f, 1.0f, 1.0f};
+    GLfloat diffuseLight[]  = {1.0f, 1.0f, 1.0f, 1.0f};
+    GLfloat specularLight[] = {0.8f, 0.8f, 0.8f, 1.0f};
+
+    glLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, specularLight);
+
+    glShadeModel(GL_SMOOTH);
+
+    currentText = "Caricamento ...";
+
+    drawTimer = new QTimer(this);
+    connect(drawTimer, SIGNAL(timeout()), this, SLOT(draw()));
+    drawTimer->start(30);
+
+    if (!load())
+        errorLoading();
+    else
+        loadingCompleted();
 }
 
 GLvoid Qubet::paintGL()
@@ -181,21 +193,15 @@ QList<GLuint> Qubet::getPickedName(GLint mouseX, GLint mouseY)
     return listNames;
 }
 
-GLvoid Qubet::loadingStepCompleted()
-{
-    --loadingSteps;
-
-    if (loadingSteps == 0)
-        loadingCompleted();
-}
-
 GLvoid Qubet::loadingCompleted()
 {
-    loader->~Loader();
-    loader = NULL;
     currentText.clear();
-
     showMenu();
+}
+
+GLvoid Qubet::errorLoading()
+{
+    currentText = "Errore di caricamento.";
 }
 
 GLvoid Qubet::connectAudio(const QObject *sender)
@@ -242,10 +248,9 @@ GLvoid Qubet::menuClosed()
 GLvoid Qubet::drawScene(GLboolean simplifyForPicking)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+    glLoadIdentity();
     glInitNames();
 
-    glLoadIdentity();
     gluLookAt( 0.0,  0.0,  20.0,
                0.0,  0.0,  0.0,
                0.0,  1.0,  0.0);
@@ -269,32 +274,132 @@ GLvoid Qubet::drawScene(GLboolean simplifyForPicking)
     }
 }
 
+GLboolean Qubet::load()
+{
+    try
+    {
+        if (!loadSkins())
+            return false;
+
+        if (!loadLevels())
+            return false;
+
+        if (!loadObstacleModels())
+            return false;
+
+        return true;
+    }
+    catch (...)
+    {
+        return false;
+    }
+
+}
+
+GLboolean Qubet::loadSkins()
+{
+    QDomDocument document("skins");
+    QFile file(":/resources/skins/skins.xml");
+    if (!file.open(QIODevice::ReadOnly))
+        return false;
+
+    if (!document.setContent(&file))
+    {
+        file.close();
+        return false;
+    }
+
+    file.close();
+
+    GLint id = 1;
+    QDomElement rootElement = document.documentElement();
+    QDomElement skinElement = rootElement.firstChildElement("skin");
+
+    while(!skinElement.isNull())
+    {
+        QString path = ":/resources/skins/";
+
+        Skin *skin = new Skin(skinElement.attribute("name", "Unknown"));
+        skin->setComment(skinElement.attribute("comment"));
+
+        if (skinElement.hasAttribute("folder"))
+            path = path + skinElement.attribute("folder") + "/";
+
+        if (skinElement.attribute("autofind", "false") == "true")
+        {
+
+            QString extension = skinElement.attribute("extension", "png");
+            skin->setTextureXPlus (bindTexture(QImage(path + "x+." + extension)));
+            skin->setTextureXMinus(bindTexture(QImage(path + "x-." + extension)));
+            skin->setTextureYPlus (bindTexture(QImage(path + "y+." + extension)));
+            skin->setTextureYMinus(bindTexture(QImage(path + "y-." + extension)));
+            skin->setTextureZPlus (bindTexture(QImage(path + "z+." + extension)));
+            skin->setTextureZMinus(bindTexture(QImage(path + "z-." + extension)));
+        }
+        else if (skinElement.hasAttribute("repeat"))
+        {
+            skin->setTextureForAllFaces(bindTexture(QImage(path + skinElement.attribute("repeat"))));
+        }
+        else
+        {
+            skin->setTextureXPlus (bindTexture(QImage(path + skinElement.attribute("x_plus"))));
+            skin->setTextureXMinus(bindTexture(QImage(path + skinElement.attribute("x_minus"))));
+            skin->setTextureYPlus (bindTexture(QImage(path + skinElement.attribute("y_plus"))));
+            skin->setTextureYMinus(bindTexture(QImage(path + skinElement.attribute("x_minus"))));
+            skin->setTextureZPlus (bindTexture(QImage(path + skinElement.attribute("z_plus"))));
+            skin->setTextureZMinus(bindTexture(QImage(path + skinElement.attribute("x_minus"))));
+        }
+
+        skinsList.insert(id++, skin);
+        skinElement = skinElement.nextSiblingElement("skin");
+    }
+
+    if (!loadCustomSkins())
+        return false;
+
+    return true;
+}
+
+GLboolean Qubet::loadCustomSkins()
+{
+    // future implementation
+    return true;
+}
+
+GLboolean Qubet::loadObstacleModels()
+{
+    // TODO
+
+    if (!loadCustomObstacleModels())
+        return false;
+
+    return true;
+}
+
+GLboolean Qubet::loadCustomObstacleModels()
+{
+    // future implementation
+    return true;
+}
+
+GLboolean Qubet::loadLevels()
+{
+    // TODO
+    if (!loadCustomLevels())
+        return false;
+
+    return true;
+}
+
+GLboolean Qubet::loadCustomLevels()
+{
+    // future implementation
+    return true;
+}
+
 void Qubet::draw()
 {
     paintGL();
-}
-
-void Qubet::skinsLoaded()
-{
-    currentText = "Skins caricate.";
-    loadingStepCompleted();
-}
-
-void Qubet::levelsLoaded()
-{
-    currentText = "Livelli caricati.";
-    loadingStepCompleted();
-}
-
-void Qubet::obstacleModelsLoaded()
-{
-    currentText = "Ostacoli caricati.";
-    loadingStepCompleted();
-}
-
-void Qubet::errorLoading()
-{
-    currentText = "Errore di caricamento.";
 }
 
 void Qubet::playStory(GLint skinId)

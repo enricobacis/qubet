@@ -1,6 +1,6 @@
 #include "obstacle.h"
 
-Obstacle::Obstacle(GLint id, QObject *parent)
+Obstacle::Obstacle(GLint id)
 {
 
 }

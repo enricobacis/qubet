@@ -1,16 +1,18 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <QImage>
-#include <QKeyEvent>
-#include <QMap>
 #include <QtOpenGL>
+#include <QMap>
+#include <QKeyEvent>
 
-#include "vector3f.h"
+#include "game_defines.h"
+
 #include "cube.h"
 #include "level.h"
 #include "positioncontroller.h"
-#include "game_defines.h"
+#include "skin.h"
+
+#include "vector3f.h"
 
 
 /**
@@ -30,7 +32,7 @@ public:
      * @param _obstacleModelsList
      * @param _parent
      */
-    explicit Game(GLint _gameType, QImage *_skin, QMap<GLint,QString> &_levelsList, QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *_parent = 0);
+    explicit Game(GLint _gameType, Skin *_skin, QMap<GLint,QString> &_levelsList, QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *_parent = 0);
 
     /**
      * @brief
@@ -65,7 +67,7 @@ private:
     QObject *parent; /**< TODO */
     QMap<GLint,QString> levelsList; /**< TODO */
     QMap<GLint,Vector3f*> obstacleModelsList; /**< TODO */
-    QImage *skin; /**< TODO */
+    Skin *skin; /**< TODO */
     Cube *cube; /**< TODO */
     Level *level; /**< TODO */
     PositionController *positionController; /**< TODO */

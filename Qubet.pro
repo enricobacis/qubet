@@ -1,18 +1,20 @@
-#-------------------------------------------------
-#                  Qubet Project
-#-------------------------------------------------
+###################################################
+#                  Qubet Project                  #
+#                       #34                       #
+###################################################
 
-QT       += core gui
-QT       += opengl
+QT += core gui
+QT += opengl
+QT += xml
 
 TARGET = Qubet
 TEMPLATE = app
 
-SOURCES += main.cpp\
+SOURCES += \
+    main.cpp\
     game.cpp \
     cube.cpp \
     positioncontroller.cpp \
-    loader.cpp \
     obstacle.cpp \
     level.cpp \
     audiomanager.cpp \
@@ -20,14 +22,14 @@ SOURCES += main.cpp\
     leveleditor.cpp \
     qubet.cpp \
     window.cpp \
-    utilities.cpp
+    utilities.cpp \
+    skin.cpp
 
 HEADERS  += \
     vector3f.h \
     game.h \
     cube.h \
     positioncontroller.h \
-    loader.h \
     obstacle.h \
     level.h \
     audiomanager.h \
@@ -39,10 +41,11 @@ HEADERS  += \
     utilities.h \
     game_defines.h \
     leveleditor_defines.h \
-    menu_defines.h
+    menu_defines.h \
+    skin.h
 
 RESOURCES += \
     resources.qrc
 
 OTHER_FILES += \
-    Doxyfile
+    resources/skins/skins.xml

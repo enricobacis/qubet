@@ -1,7 +1,23 @@
 <RCC>
-    <qresource prefix="/skins"/>
-    <qresource prefix="/levels"/>
-    <qresource prefix="/sound/music"/>
-    <qresource prefix="/sound/effects"/>
-    <qresource prefix="/models"/>
+    <qresource prefix="/">
+        <file>resources/skins/skins.xml</file>
+        <file>resources/levels/levels.xml</file>
+        <file>resources/skins/tortoise/x-.png</file>
+        <file>resources/skins/tortoise/x+.png</file>
+        <file>resources/skins/tortoise/y-.png</file>
+        <file>resources/skins/tortoise/y+.png</file>
+        <file>resources/skins/tortoise/z-.png</file>
+        <file>resources/skins/tortoise/z+.png</file>
+        <file>resources/skins/box/box.png</file>
+        <file>resources/skins/pumpkin/other.png</file>
+        <file>resources/skins/pumpkin/y-.png</file>
+        <file>resources/skins/pumpkin/y+.png</file>
+        <file>resources/skins/pumpkin/z+.png</file>
+        <file>resources/skins/antolini/x-.png</file>
+        <file>resources/skins/antolini/x+.png</file>
+        <file>resources/skins/antolini/y-.png</file>
+        <file>resources/skins/antolini/y+.png</file>
+        <file>resources/skins/antolini/z-.png</file>
+        <file>resources/skins/antolini/z+.png</file>
+    </qresource>
 </RCC>

@@ -3,6 +3,8 @@
 
 #include <QGLWidget>
 #include <QtOpenGL>
+#include <QtXml>
+#include <QDomElement>
 #include <QTimer>
 #include <QMap>
 #include <QList>
@@ -10,11 +12,11 @@
 
 #include "menu.h"
 #include "vector3f.h"
-#include "loader.h"
 #include "game.h"
 #include "cube.h"
 #include "audiomanager.h"
 #include "leveleditor.h"
+#include "skin.h"
 #include "defines.h"
 
 
@@ -112,14 +114,12 @@ protected:
 private:
     // Variables
 
-    GLint loadingSteps; /**< It is used to keep track of he current loading step. */
     GLint currentView; /**< It is used to keep track of the current view (menu, game, leveleditor). */
     QString currentText; /**< It is the current string showed on the screen. */
-    QMap<GLint,QImage*> skinsList; /**< It is the QMap that contains ids and skin images. */
+    QMap<GLint,Skin*> skinsList; /**< It is the QMap that contains ids and skin images. */
     QMap<GLint,QString> levelsList; /**< It is the QMap that contains ids and the names of level files. */
     QMap<GLint,Vector3f*> obstacleModelsList; /**< It is the QMap that contains ids and the dimensions of Obstacles. */
     QTimer *drawTimer; /**< It is the QTimer to re-draw the scene. */
-    Loader *loader; /**< It is the Loader pointer. */
     Menu *menu; /**< It is the Menu pointer. */
     Game *game; /**< It is the Game pointer. */
     LevelEditor *levelEditor; /**< It is the LevelEditor pointer. */
@@ -179,20 +179,17 @@ private:
     // General Purpose Management
 
     /**
-     * @brief This function is called when a loading step is completed.
-     *
-     * @post When all loading steps will be completed this function calls the
-     * function loadingCompleted().
-     */
-    GLvoid loadingStepCompleted();
-
-    /**
-     * @brief This function is called automatically from loadingStepCompleted()
-     *        when all loading steps has been completed.
+     * @brief This function has to be called when the loading is finished.
      *
      * @post It will show the menu.
      */
     GLvoid loadingCompleted();
+
+    /**
+     * @brief This function has to be called when something in the loading
+     *        process goes wrong.
+     */
+    GLvoid errorLoading();
 
     /**
      * @brief This function is used to tell the paintGL function to show the Menu.
@@ -221,6 +218,58 @@ private:
     GLvoid drawScene(GLboolean simplifyForPicking = false);
 
 
+    // Loading Functions
+
+    /**
+     * @brief Load skins, levels and obstacles in Qubet.
+     *
+     * @return true if the load is successful, else false.
+     */
+    GLboolean load();
+
+    /**
+     * @brief Load the skins from the resource file.
+     *
+     * @return true if load is successful, false elsewhere.
+     */
+    GLboolean loadSkins();
+
+    /**
+     * @brief Load custom skins from folder.
+     *
+     * @return true if load is successful, false elsewhere.
+     */
+    GLboolean loadCustomSkins();
+
+    /**
+     * @brief Load the obstacleModels from the resource file.
+     *
+     * @return true if load is successful, false elsewhere.
+     */
+    GLboolean loadObstacleModels();
+
+    /**
+     * @brief Load custom obstacleModels from folder.
+     *
+     * @return true if load is successful, false elsewhere.
+     */
+    GLboolean loadCustomObstacleModels();
+
+    /**
+     * @brief Load the levels from the resource file.
+     *
+     * @return true if load is successful, false elsewhere.
+     */
+    GLboolean loadLevels();
+
+    /**
+     * @brief Load custom levels from folder.
+     *
+     * @return true if load is successful, false elsewhere.
+     */
+    GLboolean loadCustomLevels();
+
+
 private slots:
     // Link to Objects
 
@@ -229,30 +278,6 @@ private slots:
      *        be used as a slot.
      */
     void draw();
-
-    /**
-     * @brief This function is a slot linked to the Loader and called when
-     *        the skins has been loaded.
-     */
-    void skinsLoaded();
-
-    /**
-     * @brief This function is a slot linked to the Loader and called when
-     *        the levels has been loaded.
-     */
-    void levelsLoaded();
-
-    /**
-     * @brief This function is a slot linked to the Loader and called when
-     *        the obstacleModels has been loaded.
-     */
-    void obstacleModelsLoaded();
-
-    /**
-     * @brief This function is a slot linked to the Loader and called when
-     *        there is an error in loading files from Loader.
-     */
-    void errorLoading();
 
     /**
      * @brief This function is a slot linked to the Menu and called when

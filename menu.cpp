@@ -1,7 +1,8 @@
 #include "menu.h"
 
-Menu::Menu(QMap<GLint,QImage*> &_skinsList, QMap<GLint,QString> &_levelsList, QObject *_parent) :
+Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,QString> &_levelsList, QObject *_parent) :
     parent(_parent),
+    currentSkin(1),
     skinsList(_skinsList),
     levelsList(_levelsList),
     isMoving(true),
@@ -57,21 +58,17 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
 
     case 5:
     case 6:
-        spinCube++;
-        angleRotCube += 2 + (spinCube <= 20 ? spinCube : 40 - spinCube);
+        spinCube += 2;
+        angleRotCube += 2 + (spinCube <= 30 ? spinCube : 60 - spinCube);
 
-        if (spinCube == 20)
+        if (spinCube == 30)
         {
             if (currentStep == 5)
-            {
-                // Previous Skin
-            }
+                previousSkin();
             else
-            {
-                // Next Skin
-            }
+                nextSkin();
         }
-        else if (spinCube == 40)
+        else if (spinCube == 60)
         {
             spinCube = 0;
             isMoving = false;
@@ -109,12 +106,20 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
         glPopName();
 
         glPushMatrix();
-            glTranslatef(30.0, -4.0, 0.0);
+            glTranslatef(30.0, 0.0, 0.0);
+
+            QString name = skinsList.value(currentSkin)->getName();
+            QString comment = skinsList.value(currentSkin)->getComment();
+
+            dynamic_cast<QGLWidget*>(parent)->renderText(-name.length()*0.1225, 4.0, 0.0, name);
+            dynamic_cast<QGLWidget*>(parent)->renderText(-comment.length()*0.1225, 2.0, 0.0, comment);
+
+            glTranslatef(0.0, -4.0, 0.0);
 
             glPushName(SKIN_CUBE);
             glPushMatrix();
                 glRotatef(angleRotCube, 0.0, -1.0, 0.0);
-                drawPrism(3.0, 3.0, 3.0);
+                drawPrism(3.0, 3.0, 3.0, skinsList.value(currentSkin));
             glPopMatrix();
             glPopName();
 
@@ -195,12 +200,10 @@ void Menu::itemClicked(QList<GLuint> listNames)
 
 void Menu::mouseReleased(QMouseEvent *event)
 {
-
 }
 
 void Menu::mouseMoved(QMouseEvent *event)
 {
-
 }
 
 void Menu::keyPressed(QKeyEvent *event)
@@ -218,4 +221,20 @@ void Menu::keyPressed(QKeyEvent *event)
             currentStep = 6;
         }
     }
+}
+
+void Menu::previousSkin()
+{
+    if (currentSkin == 1)
+        currentSkin = skinsList.count();
+    else
+        currentSkin -= 1;
+}
+
+void Menu::nextSkin()
+{
+    if (skinsList.find(currentSkin + 1) == skinsList.end())
+        currentSkin = 1;
+    else
+        currentSkin += 1;
 }

@@ -1,6 +1,6 @@
 #include "cube.h"
 
-Cube::Cube(Level *_level, QImage *_skin, QObject *_parent)
+Cube::Cube(Level *_level, Skin *_skin, QObject *_parent)
 {
 
 }

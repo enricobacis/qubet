@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<level name="First Level" width="3" length="100" gravity="9.8" ambientMusic="1.mp3" background="1.png">
+<obstacles>
+    <obstacle id="1" solid="true" type="1" modelid="1">
+        <color r="1.0" g="0.0" b="0.0" a="1.0" />
+        <position x="0.0" y="0.0" z="-20.0" />
+    </obstacle>
+</obstacles>
+</level>

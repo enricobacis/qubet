@@ -1,15 +1,13 @@
 #ifndef CUBE_H
 #define CUBE_H
 
-#include <QImage>
-#include <QKeyEvent>
-#include <QTimer>
-#include <QGLWidget>
 #include <QtOpenGL>
+#include <QTimer>
+#include <QKeyEvent>
 
-#include "vector3f.h"
 #include "level.h"
-
+#include "skin.h"
+#include "vector3f.h"
 
 /**
  * @brief
@@ -27,7 +25,7 @@ public:
      * @param _skin
      * @param parent
      */
-    explicit Cube(Level *_level, QImage *_skin, QObject *_parent = 0);
+    explicit Cube(Level *_level, Skin *_skin, QObject *_parent = 0);
 
     /**
      * @brief
@@ -68,7 +66,7 @@ public:
 
 private:
     Level *level; /**< TODO */
-    QImage *skin; /**< TODO */
+    Skin *skin; /**< TODO */
     QObject *parent; /**< TODO */
     Vector3f *position; /**< TODO */
     GLint state; /**< TODO */

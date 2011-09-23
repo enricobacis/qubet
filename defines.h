@@ -3,8 +3,6 @@
 
 #define QUBET_VERSION "0.1-a"
 
-#define STEPS 3
-
 #define WIDTH 600
 #define HEIGHT 400
 #define MOVE_X 100

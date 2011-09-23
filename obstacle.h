@@ -1,9 +1,8 @@
 #ifndef OBSTACLE_H
 #define OBSTACLE_H
 
-#include <QObject>
-#include <QColor>
 #include <QtOpenGL>
+#include <QColor>
 
 #include "vector3f.h"
 
@@ -14,9 +13,8 @@
  * @version 1.0
  * @author \#34
  */
-class Obstacle : public QObject
+class Obstacle
 {
-    Q_OBJECT
 
 public:
 
@@ -24,9 +22,8 @@ public:
      * @brief Create an Obstacle object.
      *
      * @param id is the id given to the Obstacle object.
-     * @param parent is a callback variable to the parent of the widget.
      */
-    explicit Obstacle(GLint id, QObject *parent = 0);
+    explicit Obstacle(GLint id);
 
     /**
      * @brief Safely destroy an Obstacle object.

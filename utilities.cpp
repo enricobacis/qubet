@@ -16,55 +16,90 @@ GLvoid drawRectangle(GLfloat x, GLfloat y)
     glEnd();
 }
 
-GLvoid drawPrism(GLfloat x, GLfloat y, GLfloat z)
+GLvoid drawRectangle(GLfloat x, GLfloat y, GLuint texture)
+{
+    x = x/2;
+    y = y/2;
+
+    glBegin(GL_QUADS);
+
+        glNormal3f(0.0f, 0.0f, 1.0f);
+        glTexCoord2f(0.0f, 0.0f); glVertex3f(-x, -y,  0.0f);
+        glTexCoord2f(1.0f, 0.0f); glVertex3f( x, -y,  0.0f);
+        glTexCoord2f(1.0f, 1.0f); glVertex3f( x,  y,  0.0f);
+        glTexCoord2f(0.0f, 1.0f); glVertex3f(-x,  y,  0.0f);
+
+    glEnd();
+}
+
+GLvoid drawPrism(GLfloat x, GLfloat y, GLfloat z, Skin *skin)
 {
     x = x/2;
     y = y/2;
     z = z/2;
 
+    glEnable(GL_TEXTURE_2D);
+
+    // Front Face (Z+)
+    glBindTexture(GL_TEXTURE_2D, (skin == NULL ? 0 : skin->getTextureZPlus()));
     glBegin(GL_QUADS);
-
-        // Front Face
-        glNormal3f(0.0f, 0.0f, 1.0f);
-        glTexCoord2f(0.0f, 0.0f); glVertex3f(-x, -y,  z);
-        glTexCoord2f(1.0f, 0.0f); glVertex3f( x, -y,  z);
-        glTexCoord2f(1.0f, 1.0f); glVertex3f( x,  y,  z);
-        glTexCoord2f(0.0f, 1.0f); glVertex3f(-x,  y,  z);
-
-        // Back Face
-        glNormal3f(0.0f, 0.0f,-1.0f);
-        glTexCoord2f(1.0f, 0.0f); glVertex3f(-x,  y, -z);
-        glTexCoord2f(1.0f, 1.0f); glVertex3f(-x,  y, -z);
-        glTexCoord2f(0.0f, 1.0f); glVertex3f( x,  y, -z);
-        glTexCoord2f(0.0f, 0.0f); glVertex3f( x, -y, -z);
-
-        // Top Face
-        glNormal3f( 0.0f, 1.0f, 0.0f);
-        glTexCoord2f(0.0f, 1.0f); glVertex3f(-x,  y, -z);
-        glTexCoord2f(0.0f, 0.0f); glVertex3f(-x,  y,  z);
-        glTexCoord2f(1.0f, 0.0f); glVertex3f( x,  y,  z);
-        glTexCoord2f(1.0f, 1.0f); glVertex3f( x,  y, -z);
-
-        // Bottom Face
-        glNormal3f( 0.0f,-1.0f, 0.0f);
-        glTexCoord2f(1.0f, 1.0f); glVertex3f(-x, -y, -z);
-        glTexCoord2f(0.0f, 1.0f); glVertex3f( x, -y, -z);
-        glTexCoord2f(0.0f, 0.0f); glVertex3f( x, -y,  z);
-        glTexCoord2f(1.0f, 0.0f); glVertex3f(-x, -y,  z);
-
-        // Right face
-        glNormal3f( 1.0f, 0.0f, 0.0f);
-        glTexCoord2f(1.0f, 0.0f); glVertex3f( x, -y, -z);
-        glTexCoord2f(1.0f, 1.0f); glVertex3f( x,  y, -z);
-        glTexCoord2f(0.0f, 1.0f); glVertex3f( x,  y,  z);
-        glTexCoord2f(0.0f, 0.0f); glVertex3f( x, -y,  z);
-
-        // Left Face
-        glNormal3f(-1.0f, 0.0f, 0.0f);
-        glTexCoord2f(0.0f, 0.0f); glVertex3f(-x, -y, -z);
-        glTexCoord2f(1.0f, 0.0f); glVertex3f(-x, -y,  z);
-        glTexCoord2f(1.0f, 1.0f); glVertex3f(-x,  y,  z);
-        glTexCoord2f(0.0f, 1.0f); glVertex3f(-x,  y, -z);
-
+    glNormal3f(0.0f, 0.0f, 1.0f);
+    glTexCoord2f(0.0f, 0.0f); glVertex3f(-x, -y,  z);
+    glTexCoord2f(1.0f, 0.0f); glVertex3f( x, -y,  z);
+    glTexCoord2f(1.0f, 1.0f); glVertex3f( x,  y,  z);
+    glTexCoord2f(0.0f, 1.0f); glVertex3f(-x,  y,  z);
     glEnd();
+
+    // Back Face (Z-)
+    glBindTexture(GL_TEXTURE_2D, (skin == NULL ? 0 : skin->getTextureZMinus()));
+    glBegin(GL_QUADS);
+    glNormal3f(0.0f, 0.0f,-1.0f);
+    glTexCoord2f(1.0f, 0.0f); glVertex3f(-x, -y, -z);
+    glTexCoord2f(1.0f, 1.0f); glVertex3f(-x,  y, -z);
+    glTexCoord2f(0.0f, 1.0f); glVertex3f( x,  y, -z);
+    glTexCoord2f(0.0f, 0.0f); glVertex3f( x, -y, -z);
+    glEnd();
+
+    // Top Face (Y+)
+    glBindTexture(GL_TEXTURE_2D, (skin == NULL ? 0 : skin->getTextureYPlus()));
+    glBegin(GL_QUADS);
+    glNormal3f( 0.0f, 1.0f, 0.0f);
+    glTexCoord2f(0.0f, 1.0f); glVertex3f(-x,  y, -z);
+    glTexCoord2f(0.0f, 0.0f); glVertex3f(-x,  y,  z);
+    glTexCoord2f(1.0f, 0.0f); glVertex3f( x,  y,  z);
+    glTexCoord2f(1.0f, 1.0f); glVertex3f( x,  y, -z);
+    glEnd();
+
+    // Bottom Face (Y-)
+    glBindTexture(GL_TEXTURE_2D, (skin == NULL ? 0 : skin->getTextureYMinus()));
+    glBegin(GL_QUADS);
+    glNormal3f( 0.0f,-1.0f, 0.0f);
+    glTexCoord2f(1.0f, 1.0f); glVertex3f(-x, -y, -z);
+    glTexCoord2f(0.0f, 1.0f); glVertex3f( x, -y, -z);
+    glTexCoord2f(0.0f, 0.0f); glVertex3f( x, -y,  z);
+    glTexCoord2f(1.0f, 0.0f); glVertex3f(-x, -y,  z);
+    glEnd();
+
+    // Right face (X+)
+    glBindTexture(GL_TEXTURE_2D, (skin == NULL ? 0 : skin->getTextureXPlus()));
+    glBegin(GL_QUADS);
+    glNormal3f( 1.0f, 0.0f, 0.0f);
+    glTexCoord2f(1.0f, 0.0f); glVertex3f( x, -y, -z);
+    glTexCoord2f(1.0f, 1.0f); glVertex3f( x,  y, -z);
+    glTexCoord2f(0.0f, 1.0f); glVertex3f( x,  y,  z);
+    glTexCoord2f(0.0f, 0.0f); glVertex3f( x, -y,  z);
+    glEnd();
+
+    // Left Face (X-)
+    glBindTexture(GL_TEXTURE_2D, (skin == NULL ? 0 : skin->getTextureXMinus()));
+    glBegin(GL_QUADS);
+    glNormal3f(-1.0f, 0.0f, 0.0f);
+    glTexCoord2f(0.0f, 0.0f); glVertex3f(-x, -y, -z);
+    glTexCoord2f(1.0f, 0.0f); glVertex3f(-x, -y,  z);
+    glTexCoord2f(1.0f, 1.0f); glVertex3f(-x,  y,  z);
+    glTexCoord2f(0.0f, 1.0f); glVertex3f(-x,  y, -z);
+    glEnd();
+
+    glBindTexture(GL_TEXTURE_2D, 0);
+    glDisable(GL_TEXTURE_2D);
 }
