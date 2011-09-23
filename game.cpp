@@ -65,7 +65,7 @@ void Game::mouseReleased(QMouseEvent *event)
 
 }
 
-void Game::mouseMoved(QMouseEvent *event)
+void Game::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
 {
 
 }

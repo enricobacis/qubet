@@ -12,6 +12,14 @@ Menu::Menu(QMap<GLint,QImage*> &_skinsList, QMap<GLint,QString> &_levelsList, QO
     audioEnabled(true)
 {
     cameraOffset = new Vector3f(0.0, 0.0, -10.0);
+
+    //initialize the buttonsLettersAngle vector
+    QVector<GLint> temp;
+    temp << 0 << 0 << 0 << 0 << 0;
+    buttonsLettersAngles << temp;
+    temp << 0;
+    buttonsLettersAngles << temp << temp;
+
 }
 
 Menu::~Menu()
@@ -52,7 +60,6 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
         angleRotCube += 2;
         if (angleRotCube >= 360)
             angleRotCube = GLint(angleRotCube) % 360;
-
         break;
 
     case 5:
@@ -78,6 +85,29 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
             currentStep = 4;
         }
         break;
+    case 7:
+        int j = 0;
+        for(int i = 0; i < 3; i++)
+        {
+            switch(i)
+            {
+            case 0:
+                j = 5;
+                break;
+            case 1:
+            case 2:
+                j = 6;
+                break;
+            }
+            for(int t = 0; t < j; t++)
+            {
+                if( buttonsLettersAngles.at(i).at(t) == 360)
+                    buttonsLettersAngles[i][t] = 0;
+                else if( buttonsLettersAngles.at(i).at(t) != 0)
+                    buttonsLettersAngles[i][t] += 6;
+            }
+        }
+        break;
     }
 
     glPushName(BUTTON_VOLUME);
@@ -93,18 +123,18 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
         glPushName(BUTTON_PLAY_STORY);
         glPushMatrix();
             glTranslatef(0.0, 5.0, 0.0);
-            drawRectangle(8.0, 3.0);
+            drawCubesButton("story", buttonsLettersAngles.at(0), S_OF_BUTTON_PLAY_STORY);
         glPopMatrix();
         glPopName();
 
         glPushName(BUTTON_PLAY_ARCADE);
-        drawRectangle(8.0, 3.0);
+        drawCubesButton("arcade", buttonsLettersAngles.at(1), A_OF_BUTTON_PLAY_ARCADE);
         glPopName();
 
         glPushName(BUTTON_LEVEL_EDITOR);
         glPushMatrix();
             glTranslatef(0.0, -5.0, 0.0);
-            drawRectangle(8.0, 3.0);
+            drawCubesButton("editor", buttonsLettersAngles.at(2), E_OF_BUTTON_LEVEL_EDITOR);
         glPopMatrix();
         glPopName();
 
@@ -198,10 +228,41 @@ void Menu::mouseReleased(QMouseEvent *event)
 
 }
 
-void Menu::mouseMoved(QMouseEvent *event)
-{
-
+void Menu::CheckLetterRotation(GLuint Name){
+    if (Name < A_OF_BUTTON_PLAY_ARCADE)
+    {
+    GLint letterNumber = Name - S_OF_BUTTON_PLAY_STORY;
+    if (buttonsLettersAngles.at(0).at(letterNumber) == 0)
+        buttonsLettersAngles[0][letterNumber] += 6;
+    currentStep = 7;
+    }
+    else if (Name < E_OF_BUTTON_LEVEL_EDITOR)
+    {
+        GLint letterNumber = Name - A_OF_BUTTON_PLAY_ARCADE;
+        if (buttonsLettersAngles.at(1).at(letterNumber) == 0)
+            buttonsLettersAngles[1][letterNumber] += 6;
+        currentStep = 7;
+    }
+    else if (Name < E_OF_BUTTON_LEVEL_EDITOR + 6)
+    {
+        GLint letterNumber = Name - E_OF_BUTTON_LEVEL_EDITOR;
+        if (buttonsLettersAngles.at(2).at(letterNumber) == 0)
+            buttonsLettersAngles[2][letterNumber] += 6;
+    }
 }
+
+void Menu::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
+{
+    if (isMoving)
+        return;
+    if (!listNames.isEmpty())
+    {
+        if(listNames.at(1) >= S_OF_BUTTON_PLAY_STORY)
+            CheckLetterRotation(listNames.at(1));
+    }
+}
+
+
 
 void Menu::keyPressed(QKeyEvent *event)
 {
