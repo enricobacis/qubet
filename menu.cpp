@@ -83,25 +83,21 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
         }
         break;
     case 7:
-        int j = 0;
-        for(int i = 0; i < 3; i++)
+        if (!simplifyForPicking)
         {
-            switch(i)
+            int j;
+            int i;
+            for(i = 0; i < 3; i++)
             {
-            case 0:
-                j = 5;
-                break;
-            case 1:
-            case 2:
-                j = 6;
-                break;
-            }
-            for(int t = 0; t < j; t++)
-            {
-                if( buttonsLettersAngles.at(i).at(t) == 360)
-                    buttonsLettersAngles[i][t] = 0;
-                else if( buttonsLettersAngles.at(i).at(t) != 0)
-                    buttonsLettersAngles[i][t] += 6;
+                if ( i == 0) j = 5;
+                else j = 6;
+                for(int t = 0; t < j; t++)
+                {
+                    if( buttonsLettersAngles.at(i).at(t) == 360)
+                        buttonsLettersAngles[i][t] = 0;
+                    else if( buttonsLettersAngles.at(i).at(t) != 0)
+                        buttonsLettersAngles[i][t] += 6;
+                }
             }
         }
         break;
