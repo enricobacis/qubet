@@ -93,7 +93,7 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                 else j = 6;
                 for(int t = 0; t < j; t++)
                 {
-                    if( buttonsLettersAngles.at(i).at(t) == 360)
+                    if( buttonsLettersAngles.at(i).at(t) == 90)
                         buttonsLettersAngles[i][t] = 0;
                     else if( buttonsLettersAngles.at(i).at(t) != 0)
                         buttonsLettersAngles[i][t] += 6;
