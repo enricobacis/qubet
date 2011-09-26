@@ -45,6 +45,6 @@
         <file>resources/skins/leonardo/z+.png</file>
         <file>resources/icons/volume off.png</file>
         <file>resources/icons/volume on.png</file>
-        <file>resources/sound/music/menu.wav</file>
+        <file>resources/sound/music/menu.mp3</file>
     </qresource>
 </RCC>
