@@ -31,5 +31,17 @@
         <file>resources/skins/rubik/y+.png</file>
         <file>resources/skins/rubik/z-.png</file>
         <file>resources/skins/rubik/z+.png</file>
+        <file>resources/skins/groundblock/groundblock.png</file>
+        <file>resources/skins/krang/x-.png</file>
+        <file>resources/skins/krang/x+.png</file>
+        <file>resources/skins/krang/y-.png</file>
+        <file>resources/skins/krang/y+.png</file>
+        <file>resources/skins/krang/z-.png</file>
+        <file>resources/skins/krang/z+.png</file>
+        <file>resources/skins/leonardo/other.png</file>
+        <file>resources/skins/leonardo/x-.png</file>
+        <file>resources/skins/leonardo/x+.png</file>
+        <file>resources/skins/leonardo/z-.png</file>
+        <file>resources/skins/leonardo/z+.png</file>
     </qresource>
 </RCC>

@@ -192,6 +192,7 @@ void Menu::itemClicked(QList<GLuint> listNames)
         case BUTTON_VOLUME:
             audioEnabled = !audioEnabled;
             emit enableAudio(audioEnabled);
+            emit playAmbientMusic("menu");
             break;
 
         case BUTTON_PLAY_STORY:

@@ -347,9 +347,9 @@ GLboolean Qubet::loadSkins()
             skin->setTextureXPlus (bindTexture(QImage(path + skinElement.attribute("x_plus"))));
             skin->setTextureXMinus(bindTexture(QImage(path + skinElement.attribute("x_minus"))));
             skin->setTextureYPlus (bindTexture(QImage(path + skinElement.attribute("y_plus"))));
-            skin->setTextureYMinus(bindTexture(QImage(path + skinElement.attribute("x_minus"))));
+            skin->setTextureYMinus(bindTexture(QImage(path + skinElement.attribute("y_minus"))));
             skin->setTextureZPlus (bindTexture(QImage(path + skinElement.attribute("z_plus"))));
-            skin->setTextureZMinus(bindTexture(QImage(path + skinElement.attribute("x_minus"))));
+            skin->setTextureZMinus(bindTexture(QImage(path + skinElement.attribute("z_minus"))));
         }
 
         skinsList.insert(id++, skin);

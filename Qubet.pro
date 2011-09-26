@@ -23,7 +23,9 @@ SOURCES += \
     qubet.cpp \
     window.cpp \
     utilities.cpp \
-    skin.cpp
+    skin.cpp \
+    alpfhabet.cpp \
+    letter.cpp
 
 HEADERS  += \
     vector3f.h \
@@ -42,10 +44,13 @@ HEADERS  += \
     game_defines.h \
     leveleditor_defines.h \
     menu_defines.h \
-    skin.h
+    skin.h \
+    alpfhabet.h \
+    letter.h
 
 RESOURCES += \
     resources.qrc
 
 OTHER_FILES += \
-    resources/skins/skins.xml
+    resources/skins/skins.xml \
+    resources/sound/music/menu.wav
