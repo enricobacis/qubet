@@ -33,8 +33,6 @@ void AudioManager::playAmbientMusic(QString filename)
 {
     currentFileName = filename;
     mediaObject->setCurrentSource(Phonon::MediaSource(currentFileName));
-    mediaObject->enqueue(currentFileName);
-    mediaObject->enqueue(currentFileName);
     mediaObject->play();
     qDebug()<<"the ambient music should start";
 }
