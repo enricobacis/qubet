@@ -20,7 +20,6 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,QString> &_levelsList, QObj
     buttonsLettersAngles << temp;
     temp << 0;
     buttonsLettersAngles << temp << temp;
-
 }
 
 Menu::~Menu()
@@ -180,6 +179,11 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
     glPopMatrix();
 }
 
+GLvoid Menu::playAudio()
+{
+    emit playAmbientMusic(":/resources/sound/music/menu.wav");
+}
+
 void Menu::itemClicked(QList<GLuint> listNames)
 {
     if (isMoving)
@@ -192,7 +196,6 @@ void Menu::itemClicked(QList<GLuint> listNames)
         case BUTTON_VOLUME:
             audioEnabled = !audioEnabled;
             emit enableAudio(audioEnabled);
-            emit playAmbientMusic("menu");
             break;
 
         case BUTTON_PLAY_STORY:

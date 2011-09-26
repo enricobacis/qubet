@@ -6,6 +6,7 @@
 QT += core gui
 QT += opengl
 QT += xml
+QT += phonon
 
 TARGET = Qubet
 TEMPLATE = app

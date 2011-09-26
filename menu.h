@@ -54,6 +54,12 @@ public:
      */
     GLvoid draw(GLboolean simplifyForPicking = false);
 
+    /**
+     * @brief launch the signal playAmbientMusic
+     *
+    */
+    GLvoid playAudio();
+
 
 private:
 
