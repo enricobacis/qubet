@@ -75,6 +75,7 @@ private:
     GLfloat angleRotCube;  /**< It is the current rotation angle of the cube. */
     GLfloat spinCube;  /**< It is the spin step of the skin selection cube. */
     GLboolean audioEnabled;  /**< It is the state of the audio. */
+    GLfloat angleRotVolumeCube;  /**< It is the current rotation angle of the volume icon. */
     QVector<QVector<GLint> > buttonsLettersAngles; /**< It is the list that contains the current buttons' rotation angles. */
 
     /**
