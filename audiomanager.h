@@ -4,6 +4,10 @@
 #include <QThread>
 #include <QSound>
 #include <QtOpenGL>
+#include <QDebug>
+
+#include <phonon/audiooutput.h>
+#include <phonon/mediaobject.h>
 
 
 /**
@@ -29,8 +33,11 @@ public:
     ~AudioManager();
 
 private:
+    QString currentFileName;
     QSound *ambientMusic; /**< TODO */
     bool audioEnabled; /**< TODO */
+    Phonon::MediaObject *mediaObject; /**< TODO */
+    Phonon::AudioOutput *audioOutput; /**< TODO */
 
     /**
      * @brief
@@ -40,7 +47,7 @@ private:
 
 private slots:
     /**
-     * @brief
+     * @brief Set audioEnabled and pause or continue the ambientMusic
      *
      * @param enabled
      */
@@ -52,6 +59,12 @@ private slots:
      * @param filename
      */
     void playAmbientMusic(QString filename);
+
+    /**
+     * @brief
+     *
+    */
+    void enqueueMediaObject();
 
     /**
      * @brief

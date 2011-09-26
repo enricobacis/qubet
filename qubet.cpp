@@ -239,6 +239,7 @@ GLvoid Qubet::showMenu()
     menu = new Menu(skinsList, levelsList, this);
     currentView = MENU_VIEW;
     connectMenu();
+    menu->playAudio();
 }
 
 GLvoid Qubet::menuClosed()
