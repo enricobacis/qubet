@@ -10,12 +10,11 @@ Qubet::Qubet(QWidget *parent) :
     width(WIDTH),
     height(HEIGHT)
 {
-    // OpenGL dependant things will be initialized in InitializeGL function.
+    // OpenGL dependencies will be initialized in InitializeGL function.
 
     setFocusPolicy(Qt::StrongFocus);
     audioManager = new AudioManager(this);
-    this->setMouseTracking(TRUE);
-
+    setMouseTracking(true);
 }
 
 Qubet::~Qubet()
@@ -237,8 +236,8 @@ GLvoid Qubet::connectMenu()
 GLvoid Qubet::showMenu()
 {
     menu = new Menu(skinsList, levelsList, this);
-    currentView = MENU_VIEW;
     connectMenu();
+    currentView = MENU_VIEW;
     menu->playAudio();
 }
 

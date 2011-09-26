@@ -25,7 +25,7 @@ SOURCES += \
     window.cpp \
     utilities.cpp \
     skin.cpp \
-    alpfhabet.cpp \
+    alphabet.cpp \
     letter.cpp
 
 HEADERS  += \
@@ -46,7 +46,7 @@ HEADERS  += \
     leveleditor_defines.h \
     menu_defines.h \
     skin.h \
-    alpfhabet.h \
+    alphabet.h \
     letter.h
 
 RESOURCES += \

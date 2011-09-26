@@ -33,6 +33,4 @@ GLvoid drawPrism(GLfloat x, GLfloat y, GLfloat z, Skin *skin = NULL);
  */
 GLvoid drawCubesButton(QString label, QVector<GLint> angles, GLint firstName);
 
-
-
 #endif // UTILITIES_H

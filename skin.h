@@ -5,6 +5,8 @@
 #include <QString>
 #include <QImage>
 
+#include "defines.h"
+
 
 /**
  * @brief
@@ -57,6 +59,21 @@ public:
      *
      */
     QString getComment();
+
+    /**
+     * @brief
+     *
+     * @param face
+     * @param textureID
+     */
+    void setTexture(GLuint face, GLuint textureID);
+
+    /**
+     * @brief
+     *
+     * @param face
+     */
+    GLuint getTexture(GLuint face);
 
     /**
      * @brief

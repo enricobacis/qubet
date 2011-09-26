@@ -2,12 +2,6 @@
 
 AudioManager::AudioManager(QObject *parent)
 {
-    mediaObject = new Phonon::MediaObject(this);
-    audioOutput = new Phonon::AudioOutput(Phonon::MusicCategory, this);
-    //Phonon::Path path =
-    Phonon::createPath(mediaObject, audioOutput);
-
-    connect (mediaObject, SIGNAL(aboutToFinish()), this, SLOT(enqueueMediaObject()));
 }
 
 AudioManager::~AudioManager()
@@ -32,9 +26,8 @@ void AudioManager::enableAudio(GLboolean enabled)
 void AudioManager::playAmbientMusic(QString filename)
 {
     currentFileName = filename;
-    mediaObject->setCurrentSource(Phonon::MediaSource(currentFileName));
-    mediaObject->enqueue(currentFileName);
-    mediaObject->enqueue(currentFileName);
+    mediaObject = Phonon::createPlayer(Phonon::MusicCategory, Phonon::MediaSource(currentFileName));
+    connect (mediaObject, SIGNAL(aboutToFinish()), this, SLOT(enqueueMediaObject()));
     mediaObject->play();
     qDebug()<<"the ambient music should start";
 }

@@ -45,6 +45,70 @@ QString Skin::getComment()
     return comment;
 }
 
+void Skin::setTexture(GLuint face, GLuint textureID)
+{
+    switch (face)
+    {
+    case X_PLUS:
+        setTextureXPlus(textureID);
+        break;
+
+    case X_MINUS:
+        setTextureXMinus(textureID);
+        break;
+
+    case Y_PLUS:
+        setTextureYPlus(textureID);
+        break;
+
+    case Y_MINUS:
+        setTextureYMinus(textureID);
+        break;
+
+    case Z_PLUS:
+        setTextureZPlus(textureID);
+        break;
+
+    case Z_MINUS:
+        setTextureZMinus(textureID);
+        break;
+    }
+}
+
+GLuint Skin::getTexture(GLuint face)
+{
+    GLuint textureID;
+
+    switch (face)
+    {
+    case X_PLUS:
+        textureID = getTextureXPlus();
+        break;
+
+    case X_MINUS:
+        textureID = getTextureXMinus();
+        break;
+
+    case Y_PLUS:
+        textureID = getTextureYPlus();
+        break;
+
+    case Y_MINUS:
+        textureID = getTextureYMinus();
+        break;
+
+    case Z_PLUS:
+        textureID = getTextureZPlus();
+        break;
+
+    case Z_MINUS:
+        textureID = getTextureZMinus();
+        break;
+    }
+
+    return textureID;
+}
+
 void Skin::setTextureXPlus(GLuint _x_plus)
 {
     x_plus = _x_plus;
