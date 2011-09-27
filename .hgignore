@@ -1,4 +1,4 @@
 glob:*.user
-syntax: glob
-*.dia.autosave~
-*.dia~
+glob:*.orig
+glob:*.dia.autosave~
+glob:*.dia~

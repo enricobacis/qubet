@@ -72,10 +72,7 @@ QList<GLuint> Alphabet::getAllLetterTextures(QChar letter)
 GLvoid Alphabet::appendLetterTexture(QChar letter, GLuint textureID)
 {
     if (lettersList.find(letter) == lettersList.end())
-    {
-        // Non c'e' ancora la Letter corrispondente
         lettersList.insert(letter, new Letter(letter));
-    }
 
     lettersList.value(letter)->appendTexture(textureID);
 }
