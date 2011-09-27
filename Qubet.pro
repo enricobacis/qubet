@@ -59,4 +59,5 @@ RESOURCES += \
 OTHER_FILES += \
     resources/skins/skins.xml \
     resources/sound/music/menu.wav \
-    resources/levels/levels.xml
+    resources/levels/levels.xml \
+    resources/icons/icons.xml

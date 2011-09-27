@@ -1,10 +1,11 @@
 #include "menu.h"
 
-Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,QString> &_levelsList, Alphabet *_alphabet, QObject *_parent) :
+Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,QString> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent) :
     parent(_parent),
     currentSkin(1),
     skinsList(_skinsList),
     levelsList(_levelsList),
+    iconsList(_iconsList),
     alphabet(_alphabet),
     isMoving(true),
     gameType(0),
@@ -14,7 +15,8 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,QString> &_levelsList, Alph
     audioEnabled(true),
     storyButton(NULL),
     arcadeButton(NULL),
-    editorButton(NULL)
+    editorButton(NULL),
+    volumeSkin(NULL)
 {
     currentActions = new ActionList(0);
     cameraOffset = new Vector3f(0.0, 0.0, -10.0);
@@ -24,6 +26,10 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,QString> &_levelsList, Alph
     editorButton = new CubeString("editor", 3, BUTTON_LEVEL_EDITOR, alphabet);
 
     skinName = new CubeString(skinsList.value(currentSkin)->getName(), 2, SKIN_NAME, alphabet);
+
+    GLuint volume_on = iconsList.value(VOLUME_ON);
+    GLuint volume_off = iconsList.value(VOLUME_OFF);
+    volumeSkin = new Skin(0, 0, volume_off, volume_off, volume_on, volume_on);
 }
 
 Menu::~Menu()
@@ -37,11 +43,16 @@ Menu::~Menu()
     if (editorButton != NULL)
         editorButton->~CubeString();
 
+    if (volumeSkin != NULL)
+        volumeSkin->~Skin();
+
     parent->disconnect(this);
 }
 
 GLvoid Menu::draw(GLboolean simplifyForPicking)
 {
+    // Calcolo nuovo Frame
+
     if (!simplifyForPicking)
     {
         QList<int> actions = currentActions->getAllActions();
@@ -53,35 +64,43 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
             {
             case 0:
                 cameraOffset->z += 0.5;
+
                 if (cameraOffset->z == 0)
                 {
                     currentActions->setPrimaryAction(1);
                     isMoving = false;
                 }
+
                 break;
 
             case 2:
                 cameraOffset->x -= 1;
+
                 if (cameraOffset->x == -30)
                 {
                     currentActions->setPrimaryAction(4);
                     isMoving = false;
                 }
+
                 break;
 
             case 3:
                 cameraOffset->x += 1;
+
                 if (cameraOffset->x == -30)
                 {
                     emit showLevelEditor();
                     currentActions->setPrimaryAction(-1);
                 }
+
                 break;
 
             case 4:
                 angleRotCube += 2;
+
                 if (angleRotCube >= 360)
                     angleRotCube = GLint(angleRotCube) % 360;
+
                 break;
 
             case 5:
@@ -102,28 +121,33 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                     isMoving = false;
                     currentActions->setPrimaryAction(4);
                 }
+
                 break;
 
             case 8:
-                if (angleRotVolumeCube == 90)
-                {
+                angleRotVolumeCube += 5;
+
+                if ((GLint(angleRotVolumeCube) % 360) == 0)
                     angleRotVolumeCube = 0;
+
+                if ((GLint(angleRotVolumeCube) % 90) == 0)
+                {
+                    isMoving = false;
                     currentActions->removeSecondaryAction(8);
                 }
-                else if (angleRotVolumeCube != 0)
-                {
-                    angleRotVolumeCube += 5;
-                }
+
                 break;
             }
         }
     }
 
+    // Inizio disegno
+
     glPushName(BUTTON_VOLUME);
     glPushMatrix();
         glTranslatef(11.0, 7.0, 0.0);
-        glRotatef(angleRotVolumeCube, -1, 0, 0);
-        drawPrism(1.0, 1.0, 1.0);
+        glRotatef(angleRotVolumeCube, 1.0, 0.0, 0.0);
+        drawPrism(1.0, 1.0, 1.0, volumeSkin, true);
     glPopMatrix();
     glPopName();
 
@@ -227,13 +251,10 @@ void Menu::itemClicked(QList<GLuint> listNames)
         switch (listNames.at(0))
         {
         case BUTTON_VOLUME:
-            if(angleRotVolumeCube == 0 || angleRotVolumeCube == 90)
-            {
-                audioEnabled = !audioEnabled;
-                emit enableAudio(audioEnabled);
-                angleRotVolumeCube += 5;
-                currentActions->appendSecondaryAction(8);
-            }
+            isMoving = true;
+            audioEnabled = !audioEnabled;
+            emit enableAudio(audioEnabled);
+            currentActions->appendSecondaryAction(8);
             break;
 
         case BUTTON_PLAY_STORY:

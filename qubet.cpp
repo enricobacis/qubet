@@ -239,7 +239,7 @@ GLvoid Qubet::connectMenu()
 
 GLvoid Qubet::showMenu()
 {
-    menu = new Menu(skinsList, levelsList, alphabet, this);
+    menu = new Menu(skinsList, levelsList, iconsList, alphabet, this);
     connectMenu();
     currentView = MENU_VIEW;
     menu->playAudio();
@@ -294,6 +294,9 @@ GLboolean Qubet::load()
             return false;
 
         if (!loadAlphabet())
+            return false;
+
+        if (!loadIcons())
             return false;
 
         return true;
@@ -431,6 +434,39 @@ GLboolean Qubet::loadAlphabet()
         for (uint j = 0; j < textures.count(); j++)
             alphabet->appendLetterTexture(letter, bindTexture(QImage(currentPath + "/" + textures[j])));
     }
+    return true;
+}
+
+GLboolean Qubet::loadIcons()
+{
+    QString iconsPath = ":/icons/resources/icons";
+
+    QDomDocument document("icons");
+    QFile file(iconsPath + "/icons.xml");
+    if (!file.open(QIODevice::ReadOnly))
+        return false;
+
+    if (!document.setContent(&file))
+    {
+        file.close();
+        return false;
+    }
+
+    file.close();
+
+    QDomElement rootElement = document.documentElement();
+    QDomElement iconElement = rootElement.firstChildElement("icon");
+
+    while(!iconElement.isNull())
+    {
+        GLint key = iconElement.attribute("name", "0").toInt();
+        GLuint textureID = bindTexture(QImage(iconsPath + "/" + iconElement.attribute("filename")));
+        qDebug() << iconsPath + "/" + iconElement.attribute("filename");
+
+        iconsList.insert(key, textureID);
+        iconElement = iconElement.nextSiblingElement("icon");
+    }
+
     return true;
 }
 

@@ -47,8 +47,9 @@
         <file>resources/levels/levels.xml</file>
     </qresource>
     <qresource prefix="/icons">
-        <file>resources/icons/volumeoff.png</file>
-        <file>resources/icons/volumeon.png</file>
+        <file>resources/icons/icons.xml</file>
+        <file>resources/icons/volume/volumeoff.png</file>
+        <file>resources/icons/volume/volumeon.png</file>
     </qresource>
     <qresource prefix="/letters">
         <file>resources/letters/0/1.jpg</file>

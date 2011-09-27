@@ -31,6 +31,18 @@ public:
     /**
      * @brief
      *
+     * @param _x_plus
+     * @param _x_minus
+     * @param _y_plus
+     * @param _y_minus
+     * @param _z_plus
+     * @param _z_minus
+     */
+    explicit Skin(GLuint _x_plus, GLuint _x_minus, GLuint _y_plus, GLuint _y_minus, GLuint _z_plus, GLuint _z_minus);
+
+    /**
+     * @brief
+     *
      */
     ~Skin();
 

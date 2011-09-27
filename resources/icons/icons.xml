@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+
+<icons>
+    <icon filename="volume/volumeon.png"  name="400" />
+    <icon filename="volume/volumeoff.png"  name="401" />
+</icons>

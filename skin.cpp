@@ -21,6 +21,17 @@ Skin::Skin(QString _name) :
 {
 }
 
+Skin::Skin(GLuint _x_plus, GLuint _x_minus, GLuint _y_plus, GLuint _y_minus, GLuint _z_plus, GLuint _z_minus) :
+    x_plus (_x_plus),
+    x_minus(_x_minus),
+    y_plus (_y_plus),
+    y_minus(_y_minus),
+    z_plus (_z_plus),
+    z_minus(_z_minus)
+{
+
+}
+
 Skin::~Skin()
 {
 }

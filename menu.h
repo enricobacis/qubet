@@ -8,8 +8,8 @@
 #include <QList>
 #include <QDebug>
 
-#include "menu_defines.h"
 #include "defines.h"
+#include "menu_defines.h"
 
 #include "skin.h"
 #include "utilities.h"
@@ -38,10 +38,11 @@ public:
      *
      * @param _skinsList is the reference to Qubet's skinsList.
      * @param _levelsList is the reference to Qubet's levelsList.
+     * @param _iconsList is the reference to Qubet's iconsList.
      * @param _alphabet is the reference to Qubet's alphabet.
      * @param _parent is a callback variable to the parent of the parent.
      */
-    explicit Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,QString> &_levelsList, Alphabet *_alphabet, QObject *_parent);
+    explicit Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,QString> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent);
 
     /**
      * @brief Disconnect and Destroy a Menu object.
@@ -68,6 +69,7 @@ private:
     GLint currentSkin; /**< It is the id of the current choosen skin. */
     QMap<GLint,Skin*> skinsList; /**< It is the skinsList provided by Qubet object. */
     QMap<GLint,QString> levelsList; /**< It is the levelsList provided by Qubet object. */
+    QMap<GLint,GLuint> iconsList;  /**< It is the iconsList provided by Qubet object. */
     Alphabet *alphabet; /**< It is the alphabet provided by Qubet. */
     GLint itemSelected; /**< It is the id of the current menu action selected. */
     GLboolean isMoving; /**< It is the variable that states if the menu is moving or not. */
