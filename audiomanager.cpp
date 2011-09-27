@@ -60,7 +60,7 @@ void AudioManager::continueAmbientMusic()
 
 void AudioManager::playEffect(GLint effectId)
 {
-    effectsList.at(effectId)->play();
+    if(audioEnabled) effectsList.at(effectId)->play();
 }
 
 void AudioManager::run()

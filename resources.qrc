@@ -47,9 +47,8 @@
         <file>resources/levels/levels.xml</file>
     </qresource>
     <qresource prefix="/icons">
-        <file>resources/icons/icons.xml</file>
-        <file>resources/icons/volume/volumeoff.png</file>
-        <file>resources/icons/volume/volumeon.png</file>
+        <file>resources/icons/volumeoff.png</file>
+        <file>resources/icons/volumeon.png</file>
     </qresource>
     <qresource prefix="/letters">
         <file>resources/letters/0/1.jpg</file>
@@ -411,8 +410,14 @@
         <file>resources/music/menu.mp3</file>
     </qresource>
     <qresource prefix="/effects">
-        <file>resources/effects/026.wav</file>
-        <file>resources/effects/027.wav</file>
-        <file>resources/effects/028.wav</file>
+        <file>resources/effects/coin.wav</file>
+        <file>resources/effects/die.wav</file>
+        <file>resources/effects/explosion.wav</file>
+        <file>resources/effects/gameover.wav</file>
+        <file>resources/effects/jump.wav</file>
+        <file>resources/effects/jumpsmall.wav</file>
+        <file>resources/effects/stageclear.wav</file>
+        <file>resources/effects/stomp.wav</file>
+        <file>resources/effects/warning.wav</file>
     </qresource>
 </RCC>
