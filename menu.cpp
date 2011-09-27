@@ -181,7 +181,7 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
 
 GLvoid Menu::playAudio()
 {
-    emit playAmbientMusic(":/resources/sound/music/menu.mp3");
+    emit playAmbientMusic(":/music/resources/sound/music/menu.mp3");
 }
 
 void Menu::itemClicked(QList<GLuint> listNames)

@@ -301,7 +301,7 @@ GLboolean Qubet::load()
 GLboolean Qubet::loadSkins()
 {
     QDomDocument document("skins");
-    QFile file(":/resources/skins/skins.xml");
+    QFile file(":/skins/resources/skins/skins.xml");
     if (!file.open(QIODevice::ReadOnly))
         return false;
 
@@ -319,7 +319,7 @@ GLboolean Qubet::loadSkins()
 
     while(!skinElement.isNull())
     {
-        QString path = ":/resources/skins/";
+        QString path = ":/skins/resources/skins/";
 
         Skin *skin = new Skin(skinElement.attribute("name", "Unknown"));
         skin->setComment(skinElement.attribute("comment"));
@@ -396,6 +396,11 @@ GLboolean Qubet::loadLevels()
 GLboolean Qubet::loadCustomLevels()
 {
     // future implementation
+    return true;
+}
+
+GLboolean Qubet::loadAlphabet()
+{
     return true;
 }
 

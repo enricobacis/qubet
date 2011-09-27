@@ -269,6 +269,13 @@ private:
      */
     GLboolean loadCustomLevels();
 
+    /**
+     * @brief Load the alphabet.
+     *
+     * @return true if load is successful, false elsewhere.
+     */
+    GLboolean loadAlphabet();
+
 
 private slots:
     // Link to Objects
