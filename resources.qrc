@@ -401,10 +401,10 @@
         <file>resources/letters/z/8.jpg</file>
         <file>resources/letters/z/9.jpg</file>
         <file>resources/letters/z/10.jpg</file>
-        <file>resources/letters/others/1.jpg</file>
-        <file>resources/letters/others/2.jpg</file>
-        <file>resources/letters/others/3.jpg</file>
-        <file>resources/letters/others/4.jpg</file>
+        <file>resources/letters/@/1.jpg</file>
+        <file>resources/letters/@/2.jpg</file>
+        <file>resources/letters/@/3.jpg</file>
+        <file>resources/letters/@/4.jpg</file>
     </qresource>
     <qresource prefix="/music">
         <file>resources/music/menu.mp3</file>

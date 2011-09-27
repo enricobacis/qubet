@@ -41,13 +41,11 @@ void AudioManager::playAmbientMusic(QString filename)
     mediaObject = Phonon::createPlayer(Phonon::MusicCategory, Phonon::MediaSource(currentFileName));
     connect (mediaObject, SIGNAL(aboutToFinish()), this, SLOT(enqueueMediaObject()));
     mediaObject->play();
-    qDebug()<<"the ambient music should start";
 }
 
 void AudioManager::enqueueMediaObject()
 {
     mediaObject->enqueue(currentFileName);
-    qDebug()<<"the ambient music should restart soon";
 }
 
 void AudioManager::pauseAmbientMusic()

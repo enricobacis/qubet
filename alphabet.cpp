@@ -14,6 +14,7 @@ Alphabet::~Alphabet()
 
 Skin *Alphabet::getRandomLetterSkin(QChar letter)
 {
+    letter = letter.toLower();
     Skin *skin = new Skin();
     bool empty = true;
 
@@ -41,6 +42,7 @@ Skin *Alphabet::getRandomLetterSkin(QChar letter)
 
 GLuint Alphabet::getRandomLetterTexture(QChar letter)
 {
+    letter = letter.toLower();
     GLuint texture = 0;
 
     if (lettersList.find(letter) != lettersList.end())
@@ -51,6 +53,7 @@ GLuint Alphabet::getRandomLetterTexture(QChar letter)
 
 QList<GLuint> Alphabet::getRandomLetterTextures(QChar letter, GLint numberOfTextures)
 {
+    letter = letter.toLower();
     QList<GLuint> textures;
 
     if ((numberOfTextures > 0) && lettersList.find(letter) != lettersList.end())
@@ -61,6 +64,7 @@ QList<GLuint> Alphabet::getRandomLetterTextures(QChar letter, GLint numberOfText
 
 QList<GLuint> Alphabet::getAllLetterTextures(QChar letter)
 {
+    letter = letter.toLower();
     QList<GLuint> textures;
 
     if (lettersList.find(letter) != lettersList.end())
@@ -71,6 +75,8 @@ QList<GLuint> Alphabet::getAllLetterTextures(QChar letter)
 
 GLvoid Alphabet::appendLetterTexture(QChar letter, GLuint textureID)
 {
+    letter = letter.toLower();
+
     if (lettersList.find(letter) == lettersList.end())
         lettersList.insert(letter, new Letter(letter));
 

@@ -13,6 +13,7 @@
 
 #include "skin.h"
 #include "utilities.h"
+#include "cubestring.h"
 #include "vector3f.h"
 
 
@@ -36,9 +37,10 @@ public:
      *
      * @param _skinsList is the reference to Qubet's skinsList.
      * @param _levelsList is the reference to Qubet's levelsList.
+     * @param _alphabet is the reference to Qubet's alphabet.
      * @param _parent is a callback variable to the parent of the parent.
      */
-    explicit Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,QString> &_levelsList, QObject *_parent);
+    explicit Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,QString> &_levelsList, Alphabet *_alphabet, QObject *_parent);
 
     /**
      * @brief Disconnect and Destroy a Menu object.
@@ -54,20 +56,20 @@ public:
     GLvoid draw(GLboolean simplifyForPicking = false);
 
     /**
-     * @brief launch the signal playAmbientMusic
-     *
-    */
+     * @brief launch the signal playAmbientMusic.
+     */
     GLvoid playAudio();
 
 
 private:
 
     QObject *parent;  /**<  It is a callback variable to the parent of the widget. */
-    GLint currentSkin; /**< It is the id of the current choosen skin */
-    QMap<GLint,Skin*> skinsList; /**< skinsList provided by Qubet object. */
-    QMap<GLint,QString> levelsList; /**< levelsList provided by Qubet object. */
+    GLint currentSkin; /**< It is the id of the current choosen skin. */
+    QMap<GLint,Skin*> skinsList; /**< It is the skinsList provided by Qubet object. */
+    QMap<GLint,QString> levelsList; /**< It is the levelsList provided by Qubet object. */
+    Alphabet *alphabet; /**< It is the alphabet provided by Qubet. */
     GLint itemSelected; /**< It is the id of the current menu action selected. */
-    GLboolean isMoving; /**< It is the variable that state if the menu is moving or not. */
+    GLboolean isMoving; /**< It is the variable that states if the menu is moving or not. */
     Vector3f *cameraOffset; /**< It is the camera offset for the menu. */
     GLint currentStep; /**< It is the current menu step. */
     GLint gameType; /**< It is the selected gameType. */
@@ -76,26 +78,23 @@ private:
     GLfloat angleRotVolumeCube;  /**< It is the current rotation angle of the volume icon. */
     GLboolean audioEnabled;  /**< It is the state of the audio. */
     Skin *volumeSkin; /**< It is the skin of the volume button */
-    QVector<QVector<GLint> > buttonsLettersAngles; /**< It is the list that contains the current buttons' rotation angles. */
+
+    CubeString *storyButton; /**< It is the storyButton CubeString. */
+    CubeString *arcadeButton; /**< It is the arcadeButton CubeString. */
+    CubeString *editorButton; /**< It is the editorButton CubeString. */
+    CubeString *skinName;  /**< It is the skinName CubeString. */
+
 
     /**
-     * @brief
-     *
+     * @brief Change the current skin and select the previous one.
      */
-    void previousSkin();
+    GLvoid previousSkin();
 
     /**
-     * @brief
-     *
+     * @brief Change the current skin and select the next one.
      */
-    void nextSkin();
+    GLvoid nextSkin();
 
-    /**
-     * @brief Check if the letter is moving yet, set currentStep if not
-     *
-     * @param Name is the Name of the object pointed by the cursor
-    */
-    GLvoid CheckLetterRotation(GLuint Name);
 
 private slots:
 

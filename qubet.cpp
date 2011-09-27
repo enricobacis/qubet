@@ -7,6 +7,7 @@ Qubet::Qubet(QWidget *parent) :
     game(NULL),
     levelEditor(NULL),
     audioManager(NULL),
+    alphabet(NULL),
     width(WIDTH),
     height(HEIGHT)
 {
@@ -33,6 +34,9 @@ Qubet::~Qubet()
 
     if (menu != NULL)
         menu->~Menu();
+
+    if (alphabet != NULL)
+        alphabet->~Alphabet();
 }
 
 GLvoid Qubet::initializeGL()
@@ -235,7 +239,7 @@ GLvoid Qubet::connectMenu()
 
 GLvoid Qubet::showMenu()
 {
-    menu = new Menu(skinsList, levelsList, this);
+    menu = new Menu(skinsList, levelsList, alphabet, this);
     connectMenu();
     currentView = MENU_VIEW;
     menu->playAudio();
@@ -287,6 +291,9 @@ GLboolean Qubet::load()
             return false;
 
         if (!loadObstacleModels())
+            return false;
+
+        if (!loadAlphabet())
             return false;
 
         return true;
@@ -401,6 +408,29 @@ GLboolean Qubet::loadCustomLevels()
 
 GLboolean Qubet::loadAlphabet()
 {
+    alphabet = new Alphabet();
+
+    QString lettersPath = ":/letters/resources/letters";
+
+    QDir letters(lettersPath);
+    letters.setFilter(QDir::Dirs);
+    letters.setSorting(QDir::Name);
+
+    QChar letter;
+    QString currentPath;
+
+    for (uint i = 0; i < letters.count(); i++)
+    {
+        letter = letters[i].at(0);
+        currentPath = lettersPath + "/" + letter;
+
+        QDir textures(currentPath);
+        textures.setFilter(QDir::Files);
+        textures.setSorting(QDir::Name);
+
+        for (uint j = 0; j < textures.count(); j++)
+            alphabet->appendLetterTexture(letter, bindTexture(QImage(currentPath + "/" + textures[j])));
+    }
     return true;
 }
 

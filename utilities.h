@@ -3,7 +3,8 @@
 
 #include <QtOpenGL>
 #include <QGLWidget>
-#include "skin.h"
+
+#include "alphabet.h"
 
 /**
  * @brief Draw a XY Square using vertex and texture coordinates.
@@ -24,13 +25,5 @@ GLvoid drawRectangle(GLfloat x, GLfloat y, GLuint texture = 0);
  */
 GLvoid drawPrism(GLfloat x, GLfloat y, GLfloat z, Skin *skin = NULL);
 
-/**
- * @brief Draw a CubesButton using vertex and texture coordinates.
- *
- * @param label is the set of letter to assign at the button.
- * @param rotationAngles is the list that contain the letter's rotation angles.
- * @param name is the name (integer number) to assign to the first letter cube. Following Letters gets following names.
- */
-GLvoid drawCubesButton(QString label, QVector<GLint> angles, GLint firstName);
 
 #endif // UTILITIES_H

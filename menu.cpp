@@ -1,43 +1,42 @@
 #include "menu.h"
 
-Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,QString> &_levelsList, QObject *_parent) :
+Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,QString> &_levelsList, Alphabet *_alphabet, QObject *_parent) :
     parent(_parent),
     currentSkin(1),
     skinsList(_skinsList),
     levelsList(_levelsList),
+    alphabet(_alphabet),
     isMoving(true),
     currentStep(0),
     gameType(0),
     angleRotCube(0),
     spinCube(0),
     angleRotVolumeCube(0),
-    audioEnabled(true)
+    audioEnabled(true),
+    storyButton(NULL),
+    arcadeButton(NULL),
+    editorButton(NULL)
 {
     cameraOffset = new Vector3f(0.0, 0.0, -10.0);
 
-    //initialize the buttonsLettersAngle vector
-    QVector<GLint> temp;
-    temp << 0 << 0 << 0 << 0 << 0;
-    buttonsLettersAngles << temp;
-    temp << 0;
-    buttonsLettersAngles << temp << temp;
+    storyButton = new CubeString("story", 3, BUTTON_PLAY_STORY, alphabet);
+    arcadeButton = new CubeString("arcade", 3, BUTTON_PLAY_ARCADE, alphabet);
+    editorButton = new CubeString("editor", 3, BUTTON_LEVEL_EDITOR, alphabet);
 
-    //initialize the volumeButton skin
-    //GLuint volumeOnTexture = parent->bindTexture(QImage(":/icons/resources/icons/volumeon.png"));
-
-
-    //qDebug() << volumeOnTexture;
-
-
-    //    for (int i=0; i<5; i++)
-    //    {
-    //        volumeSkin->setTexture(i, volumeOnTexture);
-
-    //    }
+    skinName = new CubeString(skinsList.value(currentSkin)->getName(), 2, SKIN_NAME, alphabet);
 }
 
 Menu::~Menu()
 {
+    if (storyButton != NULL)
+        storyButton->~CubeString();
+
+    if (arcadeButton != NULL)
+        arcadeButton->~CubeString();
+
+    if (editorButton != NULL)
+        editorButton->~CubeString();
+
     parent->disconnect(this);
 }
 
@@ -97,22 +96,7 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                 currentStep = 4;
             }
             break;
-        case 7:
-            int j;
-            int i;
-            for(i = 0; i < 3; i++)
-            {
-                if ( i == 0) j = 5;
-                else j = 6;
-                for(int t = 0; t < j; t++)
-                {
-                    if (buttonsLettersAngles.at(i).at(t) == 90)
-                        buttonsLettersAngles[i][t] = 0;
-                    else if (buttonsLettersAngles.at(i).at(t) != 0)
-                        buttonsLettersAngles[i][t] += 6;
-                }
-            }
-            break;
+
         case 8:
             if (angleRotVolumeCube==90)
                 angleRotVolumeCube = 0;
@@ -133,34 +117,27 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
     glPushMatrix();
         glTranslatef(cameraOffset->x, cameraOffset->y, cameraOffset->z);
 
-        glPushName(BUTTON_PLAY_STORY);
         glPushMatrix();
             glTranslatef(0.0, 5.0, 0.0);
-            drawCubesButton("story", buttonsLettersAngles.at(0), S_OF_BUTTON_PLAY_STORY);
+            storyButton->draw(simplifyForPicking);
         glPopMatrix();
-        glPopName();
 
-        glPushName(BUTTON_PLAY_ARCADE);
-        drawCubesButton("arcade", buttonsLettersAngles.at(1), A_OF_BUTTON_PLAY_ARCADE);
-        glPopName();
+        arcadeButton->draw(simplifyForPicking);
 
-        glPushName(BUTTON_LEVEL_EDITOR);
         glPushMatrix();
             glTranslatef(0.0, -5.0, 0.0);
-            drawCubesButton("editor", buttonsLettersAngles.at(2), E_OF_BUTTON_LEVEL_EDITOR);
+            editorButton->draw(simplifyForPicking);
         glPopMatrix();
-        glPopName();
 
         glPushMatrix();
-            glTranslatef(30.0, 0.0, 0.0);
+            glTranslatef(30.0, 4.0, 0.0);
 
-            QString name = skinsList.value(currentSkin)->getName();
+            skinName->draw(simplifyForPicking);
+
             QString comment = skinsList.value(currentSkin)->getComment();
+            dynamic_cast<QGLWidget*>(parent)->renderText(-comment.length()*0.1225, -2.0, 0.0, comment);
 
-            dynamic_cast<QGLWidget*>(parent)->renderText(-name.length()*0.1225, 4.0, 0.0, name);
-            dynamic_cast<QGLWidget*>(parent)->renderText(-comment.length()*0.1225, 2.0, 0.0, comment);
-
-            glTranslatef(0.0, -4.0, 0.0);
+            glTranslatef(0.0, -8.0, 0.0);
 
             glPushName(SKIN_CUBE);
             glPushMatrix();
@@ -203,6 +180,28 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
 GLvoid Menu::playAudio()
 {
     emit playAmbientMusic(":/music/resources/music/menu.mp3");
+}
+
+GLvoid Menu::previousSkin()
+{
+    if (currentSkin == 1)
+        currentSkin = skinsList.count();
+    else
+        currentSkin -= 1;
+
+    skinName->~CubeString();
+    skinName = new CubeString(skinsList.value(currentSkin)->getName(), 2, SKIN_NAME, alphabet);
+}
+
+GLvoid Menu::nextSkin()
+{
+    if (skinsList.find(currentSkin + 1) == skinsList.end())
+        currentSkin = 1;
+    else
+        currentSkin += 1;
+
+    skinName->~CubeString();
+    skinName = new CubeString(skinsList.value(currentSkin)->getName(), 2, SKIN_NAME, alphabet);
 }
 
 void Menu::itemClicked(QList<GLuint> listNames)
@@ -258,46 +257,45 @@ void Menu::mouseReleased(QMouseEvent *event)
 {
 }
 
-void Menu::CheckLetterRotation(GLuint Name)
-{
-    if (Name < A_OF_BUTTON_PLAY_ARCADE)
-    {
-    GLint letterNumber = Name - S_OF_BUTTON_PLAY_STORY;
 
-    if (buttonsLettersAngles.at(0).at(letterNumber) == 0)
-        buttonsLettersAngles[0][letterNumber] += 6;
 
-    currentStep = 7;
-    }
-    else if (Name < E_OF_BUTTON_LEVEL_EDITOR)
-    {
-        GLint letterNumber = Name - A_OF_BUTTON_PLAY_ARCADE;
 
-        if (buttonsLettersAngles.at(1).at(letterNumber) == 0)
-            buttonsLettersAngles[1][letterNumber] += 6;
 
-        currentStep = 7;
-    }
-    else if (Name < E_OF_BUTTON_LEVEL_EDITOR + 6)
-    {
-        GLint letterNumber = Name - E_OF_BUTTON_LEVEL_EDITOR;
 
-        if (buttonsLettersAngles.at(2).at(letterNumber) == 0)
-            buttonsLettersAngles[2][letterNumber] += 6;
-    }
-}
+
 void Menu::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
 {
+    Q_UNUSED(event);
+
     if (isMoving)
         return;
+
     if (!listNames.isEmpty())
     {
-        if(listNames.at(1) >= S_OF_BUTTON_PLAY_STORY)
-            CheckLetterRotation(listNames.at(1));
+        switch (listNames.at(0))
+        {
+        case BUTTON_PLAY_STORY:
+            if (!storyButton->isRotating(listNames.at(1)))
+                storyButton->startLetterRotation(listNames.at(1), 6, 1);
+            break;
+
+        case BUTTON_PLAY_ARCADE:
+            if (!arcadeButton->isRotating(listNames.at(1)))
+                arcadeButton->startLetterRotation(listNames.at(1), 6, 1);
+            break;
+
+        case BUTTON_LEVEL_EDITOR:
+            if (!editorButton->isRotating(listNames.at(1)))
+                editorButton->startLetterRotation(listNames.at(1), 6, 1);
+            break;
+
+        case SKIN_NAME:
+            if (!skinName->isRotating(listNames.at(1)))
+                skinName->startLetterRotation(listNames.at(1), 6, 1);
+            break;
+        }
     }
 }
-
-
 
 void Menu::keyPressed(QKeyEvent *event)
 {
@@ -314,20 +312,4 @@ void Menu::keyPressed(QKeyEvent *event)
             currentStep = 6;
         }
     }
-}
-
-void Menu::previousSkin()
-{
-    if (currentSkin == 1)
-        currentSkin = skinsList.count();
-    else
-        currentSkin -= 1;
-}
-
-void Menu::nextSkin()
-{
-    if (skinsList.find(currentSkin + 1) == skinsList.end())
-        currentSkin = 1;
-    else
-        currentSkin += 1;
 }

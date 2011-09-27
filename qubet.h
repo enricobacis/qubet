@@ -10,14 +10,15 @@
 #include <QList>
 #include <QtOpenGL>
 
+#include "alphabet.h"
 #include "menu.h"
-#include "vector3f.h"
 #include "game.h"
 #include "cube.h"
 #include "audiomanager.h"
 #include "leveleditor.h"
 #include "skin.h"
 #include "defines.h"
+#include "vector3f.h"
 
 
 /**
@@ -124,6 +125,7 @@ private:
     Game *game; /**< It is the Game pointer. */
     LevelEditor *levelEditor; /**< It is the LevelEditor pointer. */
     AudioManager *audioManager; /**< It is the AudioManager pointer. */
+    Alphabet *alphabet; /**< It is the current Alphabet */
 
     GLint width; /**< It is the current widget width. */
     GLint height; /**< It is the current widget height. */
