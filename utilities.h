@@ -22,8 +22,9 @@ GLvoid drawRectangle(GLfloat x, GLfloat y, GLuint texture = 0);
  * @param y is the length of the y side.
  * @param z is the length of the z side.
  * @param skin is the Skin* of textures [default NULL].
+ * @param it is used for the Letter cubes [default false].
  */
-GLvoid drawPrism(GLfloat x, GLfloat y, GLfloat z, Skin *skin = NULL);
+GLvoid drawPrism(GLfloat x, GLfloat y, GLfloat z, Skin *skin = NULL, GLboolean invertBackTexture = false);
 
 
 #endif // UTILITIES_H

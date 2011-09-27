@@ -27,7 +27,8 @@ SOURCES += \
     skin.cpp \
     alphabet.cpp \
     letter.cpp \
-    cubestring.cpp
+    cubestring.cpp \
+    actionlist.cpp
 
 HEADERS  += \
     vector3f.h \
@@ -49,7 +50,8 @@ HEADERS  += \
     skin.h \
     alphabet.h \
     letter.h \
-    cubestring.h
+    cubestring.h \
+    actionlist.h
 
 RESOURCES += \
     resources.qrc

@@ -7,7 +7,6 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,QString> &_levelsList, Alph
     levelsList(_levelsList),
     alphabet(_alphabet),
     isMoving(true),
-    currentStep(0),
     gameType(0),
     angleRotCube(0),
     spinCube(0),
@@ -17,6 +16,7 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,QString> &_levelsList, Alph
     arcadeButton(NULL),
     editorButton(NULL)
 {
+    currentActions = new ActionList(0);
     cameraOffset = new Vector3f(0.0, 0.0, -10.0);
 
     storyButton = new CubeString("story", 3, BUTTON_PLAY_STORY, alphabet);
@@ -44,65 +44,78 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
 {
     if (!simplifyForPicking)
     {
-        switch (currentStep)
+        QList<int> actions = currentActions->getAllActions();
+
+        while (!actions.isEmpty())
         {
-        case 0:
-            cameraOffset->z += 0.5;
-            if (cameraOffset->z == 0)
+            GLint step = actions.takeFirst();
+            switch (step)
             {
-                currentStep = 1;
-                isMoving = false;
+            case 0:
+                cameraOffset->z += 0.5;
+                if (cameraOffset->z == 0)
+                {
+                    currentActions->setPrimaryAction(1);
+                    isMoving = false;
+                }
+                break;
+
+            case 2:
+                cameraOffset->x -= 1;
+                if (cameraOffset->x == -30)
+                {
+                    currentActions->setPrimaryAction(4);
+                    isMoving = false;
+                }
+                break;
+
+            case 3:
+                cameraOffset->x += 1;
+                if (cameraOffset->x == -30)
+                {
+                    emit showLevelEditor();
+                    currentActions->setPrimaryAction(-1);
+                }
+                break;
+
+            case 4:
+                angleRotCube += 2;
+                if (angleRotCube >= 360)
+                    angleRotCube = GLint(angleRotCube) % 360;
+                break;
+
+            case 5:
+            case 6:
+                spinCube += 2;
+                angleRotCube += 2 + (spinCube <= 30 ? spinCube : 60 - spinCube);
+
+                if (spinCube == 30)
+                {
+                    if (step == 5)
+                        previousSkin();
+                    else
+                        nextSkin();
+                }
+                else if (spinCube == 60)
+                {
+                    spinCube = 0;
+                    isMoving = false;
+                    currentActions->setPrimaryAction(4);
+                }
+                break;
+
+            case 8:
+                if (angleRotVolumeCube == 90)
+                {
+                    angleRotVolumeCube = 0;
+                    currentActions->removeSecondaryAction(8);
+                }
+                else if (angleRotVolumeCube != 0)
+                {
+                    angleRotVolumeCube += 5;
+                }
+                break;
             }
-            break;
-
-        case 2:
-            cameraOffset->x -= 1;
-            if (cameraOffset->x == -30)
-            {
-                currentStep = 4;
-                isMoving = false;
-            }
-            break;
-
-        case 3:
-            cameraOffset->x += 1;
-            if (cameraOffset->x == -30)
-                emit showLevelEditor();
-
-            break;
-
-        case 4:
-            angleRotCube += 2;
-            if (angleRotCube >= 360)
-                angleRotCube = GLint(angleRotCube) % 360;
-            break;
-
-        case 5:
-        case 6:
-            spinCube += 2;
-            angleRotCube += 2 + (spinCube <= 30 ? spinCube : 60 - spinCube);
-
-            if (spinCube == 30)
-            {
-                if (currentStep == 5)
-                    previousSkin();
-                else
-                    nextSkin();
-            }
-            else if (spinCube == 60)
-            {
-                spinCube = 0;
-                isMoving = false;
-                currentStep = 4;
-            }
-            break;
-
-        case 8:
-            if (angleRotVolumeCube==90)
-                angleRotVolumeCube = 0;
-            else if (angleRotVolumeCube !=0)
-                angleRotVolumeCube += 5;
-            break;
         }
     }
 
@@ -135,7 +148,7 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
             skinName->draw(simplifyForPicking);
 
             QString comment = skinsList.value(currentSkin)->getComment();
-            dynamic_cast<QGLWidget*>(parent)->renderText(-comment.length()*0.1225, -2.0, 0.0, comment);
+            dynamic_cast<QGLWidget*>(parent)->renderText(-comment.length()*0.1225, -2.5, 0.0, comment);
 
             glTranslatef(0.0, -8.0, 0.0);
 
@@ -219,35 +232,35 @@ void Menu::itemClicked(QList<GLuint> listNames)
                 audioEnabled = !audioEnabled;
                 emit enableAudio(audioEnabled);
                 angleRotVolumeCube += 5;
-                currentStep = 8;
+                currentActions->appendSecondaryAction(8);
             }
             break;
 
         case BUTTON_PLAY_STORY:
             gameType = STORY_MODE;
             isMoving = true;
-            currentStep = 2;
+            currentActions->setPrimaryAction(2);
             break;
 
         case BUTTON_PLAY_ARCADE:
             gameType = ARCADE_MODE;
             isMoving = true;
-            currentStep = 2;
+            currentActions->setPrimaryAction(2);
             break;
 
         case BUTTON_LEVEL_EDITOR:
             isMoving = true;
-            currentStep = 3;
+            currentActions->setPrimaryAction(3);
             break;
 
         case BUTTON_PREVIOUS_SKIN:
             isMoving = true;
-            currentStep = 5;
+            currentActions->setPrimaryAction(5);
             break;
 
         case BUTTON_NEXT_SKIN:
             isMoving = true;
-            currentStep = 6;
+            currentActions->setPrimaryAction(6);
             break;
         }
     }
@@ -256,12 +269,6 @@ void Menu::itemClicked(QList<GLuint> listNames)
 void Menu::mouseReleased(QMouseEvent *event)
 {
 }
-
-
-
-
-
-
 
 void Menu::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
 {
@@ -299,17 +306,17 @@ void Menu::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
 
 void Menu::keyPressed(QKeyEvent *event)
 {
-    if (currentStep == 4)
+    if (currentActions->getAllActions().contains(4))
     {
         if (event->key() == Qt::Key_Left)
         {
             isMoving = true;
-            currentStep = 5;
+            currentActions->setPrimaryAction(5);
         }
         else if (event->key() == Qt::Key_Right)
         {
             isMoving = true;
-            currentStep = 6;
+            currentActions->setPrimaryAction(6);
         }
     }
 }

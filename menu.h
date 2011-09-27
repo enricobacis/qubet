@@ -13,6 +13,7 @@
 
 #include "skin.h"
 #include "utilities.h"
+#include "actionlist.h"
 #include "cubestring.h"
 #include "vector3f.h"
 
@@ -71,7 +72,7 @@ private:
     GLint itemSelected; /**< It is the id of the current menu action selected. */
     GLboolean isMoving; /**< It is the variable that states if the menu is moving or not. */
     Vector3f *cameraOffset; /**< It is the camera offset for the menu. */
-    GLint currentStep; /**< It is the current menu step. */
+    ActionList *currentActions; /**< It is the list of the current menu steps. */
     GLint gameType; /**< It is the selected gameType. */
     GLfloat angleRotCube;  /**< It is the current rotation angle of the cube. */
     GLfloat spinCube;  /**< It is the spin step of the skin selection cube. */

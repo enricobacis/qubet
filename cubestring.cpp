@@ -57,7 +57,7 @@ GLvoid CubeString::draw(GLboolean simplifyForPicking)
                 }
 
                 glRotatef(currentAngles[i], 1.0, 0.0, 0.0);
-                drawPrism(cubeDimension, cubeDimension, cubeDimension, skins[i]);
+                drawPrism(cubeDimension, cubeDimension, cubeDimension, skins[i], true);
             glPopMatrix();
             glPopName();
 
