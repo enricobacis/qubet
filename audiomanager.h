@@ -37,6 +37,7 @@ private:
     QSound *ambientMusic; /**< TODO */
     bool audioEnabled; /**< TODO */
     Phonon::MediaObject *mediaObject; /**< TODO */
+    QList<Phonon::MediaObject*> effectsList; /**< TODO */
     Phonon::AudioOutput *audioOutput; /**< TODO */
 
     /**

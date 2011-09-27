@@ -2,7 +2,6 @@
 #define MENU_H
 
 #include <QtOpenGL>
-#include <QGLWidget> //remove after
 #include <QImage>
 #include <QKeyEvent>
 #include <QMap>
@@ -37,7 +36,7 @@ public:
      *
      * @param _skinsList is the reference to Qubet's skinsList.
      * @param _levelsList is the reference to Qubet's levelsList.
-     * @param _parent is a callback variable to the parent of the widget.
+     * @param _parent is a callback variable to the parent of the parent.
      */
     explicit Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,QString> &_levelsList, QObject *_parent);
 
@@ -74,8 +73,9 @@ private:
     GLint gameType; /**< It is the selected gameType. */
     GLfloat angleRotCube;  /**< It is the current rotation angle of the cube. */
     GLfloat spinCube;  /**< It is the spin step of the skin selection cube. */
-    GLboolean audioEnabled;  /**< It is the state of the audio. */
     GLfloat angleRotVolumeCube;  /**< It is the current rotation angle of the volume icon. */
+    GLboolean audioEnabled;  /**< It is the state of the audio. */
+    Skin *volumeSkin; /**< It is the skin of the volume button */
     QVector<QVector<GLint> > buttonsLettersAngles; /**< It is the list that contains the current buttons' rotation angles. */
 
     /**

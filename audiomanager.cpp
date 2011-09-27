@@ -1,7 +1,19 @@
 #include "audiomanager.h"
 
-AudioManager::AudioManager(QObject *parent)
+AudioManager::AudioManager(QObject *parent) :
+    audioEnabled(true)
 {
+    //Inizialize the effectList
+    Phonon::MediaObject *effect;
+    QString path = ":/effects/resources/effects";
+    QDir dir = QDir(path);
+    QString dirString;
+    for(uint i = 0; i < dir.count(); i++)
+    {
+        dirString = path + "/" + dir[i];
+        effect = Phonon::createPlayer(Phonon::MusicCategory, Phonon::MediaSource(dirString));
+        effectsList.append(effect);
+    }
 }
 
 AudioManager::~AudioManager()
@@ -50,7 +62,7 @@ void AudioManager::continueAmbientMusic()
 
 void AudioManager::playEffect(GLint effectId)
 {
-
+    effectsList.at(effectId)->play();
 }
 
 void AudioManager::run()

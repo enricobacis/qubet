@@ -10,6 +10,7 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,QString> &_levelsList, QObj
     gameType(0),
     angleRotCube(0),
     spinCube(0),
+    angleRotVolumeCube(0),
     audioEnabled(true)
 {
     cameraOffset = new Vector3f(0.0, 0.0, -10.0);
@@ -20,6 +21,19 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,QString> &_levelsList, QObj
     buttonsLettersAngles << temp;
     temp << 0;
     buttonsLettersAngles << temp << temp;
+
+    //initialize the volumeButton skin
+    //GLuint volumeOnTexture = parent->bindTexture(QImage(":/icons/resources/icons/volumeon.png"));
+
+
+    //qDebug() << volumeOnTexture;
+
+
+    //    for (int i=0; i<5; i++)
+    //    {
+    //        volumeSkin->setTexture(i, volumeOnTexture);
+
+    //    }
 }
 
 Menu::~Menu()
@@ -92,12 +106,18 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                 else j = 6;
                 for(int t = 0; t < j; t++)
                 {
-                    if( buttonsLettersAngles.at(i).at(t) == 90)
+                    if (buttonsLettersAngles.at(i).at(t) == 90)
                         buttonsLettersAngles[i][t] = 0;
-                    else if( buttonsLettersAngles.at(i).at(t) != 0)
+                    else if (buttonsLettersAngles.at(i).at(t) != 0)
                         buttonsLettersAngles[i][t] += 6;
                 }
             }
+            break;
+        case 8:
+            if (angleRotVolumeCube==90)
+                angleRotVolumeCube = 0;
+            else if (angleRotVolumeCube !=0)
+                angleRotVolumeCube += 5;
             break;
         }
     }
@@ -105,7 +125,8 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
     glPushName(BUTTON_VOLUME);
     glPushMatrix();
         glTranslatef(11.0, 7.0, 0.0);
-        drawRectangle(1.0, 1.0);
+        glRotatef(angleRotVolumeCube, -1, 0, 0);
+        drawPrism(1.0, 1.0, 1.0);
     glPopMatrix();
     glPopName();
 
@@ -181,7 +202,7 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
 
 GLvoid Menu::playAudio()
 {
-    emit playAmbientMusic(":/music/resources/sound/music/menu.mp3");
+    emit playAmbientMusic(":/music/resources/music/menu.mp3");
 }
 
 void Menu::itemClicked(QList<GLuint> listNames)
@@ -194,8 +215,13 @@ void Menu::itemClicked(QList<GLuint> listNames)
         switch (listNames.at(0))
         {
         case BUTTON_VOLUME:
-            audioEnabled = !audioEnabled;
-            emit enableAudio(audioEnabled);
+            if(angleRotVolumeCube == 0 || angleRotVolumeCube == 90)
+            {
+                audioEnabled = !audioEnabled;
+                emit enableAudio(audioEnabled);
+                angleRotVolumeCube += 5;
+                currentStep = 8;
+            }
             break;
 
         case BUTTON_PLAY_STORY:
@@ -232,24 +258,30 @@ void Menu::mouseReleased(QMouseEvent *event)
 {
 }
 
-void Menu::CheckLetterRotation(GLuint Name){
+void Menu::CheckLetterRotation(GLuint Name)
+{
     if (Name < A_OF_BUTTON_PLAY_ARCADE)
     {
     GLint letterNumber = Name - S_OF_BUTTON_PLAY_STORY;
+
     if (buttonsLettersAngles.at(0).at(letterNumber) == 0)
         buttonsLettersAngles[0][letterNumber] += 6;
+
     currentStep = 7;
     }
     else if (Name < E_OF_BUTTON_LEVEL_EDITOR)
     {
         GLint letterNumber = Name - A_OF_BUTTON_PLAY_ARCADE;
+
         if (buttonsLettersAngles.at(1).at(letterNumber) == 0)
             buttonsLettersAngles[1][letterNumber] += 6;
+
         currentStep = 7;
     }
     else if (Name < E_OF_BUTTON_LEVEL_EDITOR + 6)
     {
         GLint letterNumber = Name - E_OF_BUTTON_LEVEL_EDITOR;
+
         if (buttonsLettersAngles.at(2).at(letterNumber) == 0)
             buttonsLettersAngles[2][letterNumber] += 6;
     }

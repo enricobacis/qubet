@@ -47,8 +47,8 @@
         <file>resources/levels/levels.xml</file>
     </qresource>
     <qresource prefix="/icons">
-        <file>resources/icons/volume_off.png</file>
-        <file>resources/icons/volume_on.png</file>
+        <file>resources/icons/volumeoff.png</file>
+        <file>resources/icons/volumeon.png</file>
     </qresource>
     <qresource prefix="/letters">
         <file>resources/letters/0/1.jpg</file>
@@ -409,5 +409,9 @@
     <qresource prefix="/music">
         <file>resources/music/menu.mp3</file>
     </qresource>
-    <qresource prefix="/effects"/>
+    <qresource prefix="/effects">
+        <file>resources/effects/026.wav</file>
+        <file>resources/effects/027.wav</file>
+        <file>resources/effects/028.wav</file>
+    </qresource>
 </RCC>
