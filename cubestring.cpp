@@ -14,7 +14,10 @@ CubeString::CubeString(QString _label, GLfloat _cubeDimension, GLuint _name, Alp
         currentAngles.append(0);
         finalAngles.append(0);
 
-        letterDisplayLists.append(createLetterDisplayList(label[i]));
+        if (label[i] == ' ')
+            letterDisplayLists.append(0);
+        else
+            letterDisplayLists.append(createLetterDisplayList(label[i]));
     }
 }
 
@@ -75,7 +78,7 @@ QString CubeString::getLabel()
 
 GLvoid CubeString::startLetterRotation(GLuint _letterName, GLint _angleStep, GLint _turns)
 {
-    if ((_letterName < 0) || (_letterName >= length))
+    if ((_letterName < GLuint(0)) || (_letterName >= GLuint(length)))
         return;
 
     angleSteps[_letterName] = _angleStep;
@@ -89,9 +92,26 @@ GLvoid CubeString::startLetterRotation(GLuint _letterName, GLint _angleStep, GLi
     }
 }
 
+GLvoid CubeString::startLettersRotation(GLint _angleStep, GLint _turns)
+{
+    for (int letter = 0; letter < length; letter++)
+    {
+        startLetterRotation(letter, _angleStep, _turns);
+    }
+}
+
 GLboolean CubeString::isRotating(GLuint _letterName)
 {
     return (angleSteps[_letterName] == 0 ? false : true);
+}
+
+GLint CubeString::setCurrentAngle(GLint _firstLetterAngle, GLint _nextLetterDelta)
+{
+    GLint currentAngle = _firstLetterAngle;
+    for (int letter = 0; letter < length; letter++)
+        currentAngles[letter] = currentAngle++;
+
+    return currentAngle;
 }
 
 GLuint CubeString::createLetterDisplayList(QChar letter)

@@ -24,15 +24,16 @@ public:
      * @param _obstacleModelsList
      * @param parent
      */
-    explicit Level(QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *parent = 0);
+    explicit Level(QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *_parent = 0);
 
     /**
      * @brief
      *
-     * @param id
-     * @param parent
+     * @param _id
+     * @param _filename
+     * @param _parent
      */
-    explicit Level(GLint id, QObject *parent = 0);
+    explicit Level(GLint _id, QString _filename, QObject *_parent = 0);
 
     /**
      * @brief
@@ -45,6 +46,19 @@ public:
      *
      */
     GLint getId();
+
+    /**
+     * @brief
+     *
+     */
+    QString getFilename();
+
+    /**
+     * @brief
+     *
+     * @param _filename
+     */
+    void setFilename(QString _filename);
 
     /**
      * @brief
@@ -99,31 +113,31 @@ public:
     /**
      * @brief
      *
-     * @param id
+     * @param _id
      */
-    void deleteObstacle(GLint id);
+    void deleteObstacle(GLint _id);
 
     /**
      * @brief
      *
-     * @param id
+     * @param _id
      * @param newPosition
      */
-    void moveObstacle(GLint id, Vector3f *newPosition);
+    void moveObstacle(GLint _id, Vector3f *newPosition);
 
     /**
      * @brief
      *
      * @param filename
      */
-    bool load(QString filename);
+    bool load();
 
     /**
      * @brief
      *
      * @param filename
      */
-    bool save(QString filename);
+    bool save();
 
     /**
      * @brief
@@ -133,7 +147,10 @@ public:
 
 private:
     GLint id; /**< TODO */
+    QString filename; /**< TODO */
+    QObject *parent; /**< TODO */
     QString name; /**< TODO */
+    bool isLoaded; /**< TODO */
     bool isInStory; /**< TODO */
     QMap<GLint,Vector3f*> obstacleModelsList; /**< TODO */
     QMap<GLint,Obstacle*> obstaclesList; /**< TODO */

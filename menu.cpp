@@ -3,8 +3,8 @@
 Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent) :
     parent(_parent),
     currentSkin(1),
-    skinsList(_skinsList),
     currentLevel(0),
+    skinsList(_skinsList),
     levelsList(_levelsList),
     iconsList(_iconsList),
     alphabet(_alphabet),
@@ -14,17 +14,17 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<
     spinCube(0),
     angleRotVolumeCube(0),
     audioEnabled(true),
-    currentView(0),
+    volumeSkin(NULL),
+    currentView(MAIN_VIEW),
     storyButton(NULL),
     arcadeButton(NULL),
     editorButton(NULL),
     backButton(NULL),
     playButton(NULL),
-    levelsButton(NULL),
-    volumeSkin(NULL)
+    levelsButton(NULL)
 {
-    currentActions = new ActionList(0);
-    cameraOffset = new Vector3f(0.0, 0.0, +10.0);
+    currentActions = new ActionList(INITIAL_MOTION);
+    cameraOffset = new Vector3f(0.0, 0.0, 10.0);
 
     storyButton = new CubeString("story", 3, BUTTON_PLAY_STORY, alphabet);
     arcadeButton = new CubeString("arcade", 3, BUTTON_PLAY_ARCADE, alphabet);
@@ -32,9 +32,10 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<
     backButton = new CubeString("back", 1, BUTTON_BACK, alphabet);
     playButton = new CubeString("play", 1, BUTTON_NEXT, alphabet);
     levelsButton = new CubeString("levels", 1, BUTTON_NEXT, alphabet);
+    editButton = new CubeString("edit", 1, BUTTON_NEXT, alphabet);
 
     skinName = new CubeString(skinsList.value(currentSkin)->getName(), 2, SKIN_NAME, alphabet);
-    levelName = new CubeString("", 2, LEVEL_NAME, alphabet);
+    levelName = new CubeString("new", 2, LEVEL_NAME, alphabet);
 
     GLuint volume_on = iconsList.value(VOLUME_ON);
     GLuint volume_off = iconsList.value(VOLUME_OFF);
@@ -74,12 +75,12 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
             GLint step = actions.takeFirst();
             switch (step)
             {
-            case 0:
+            case INITIAL_MOTION:
                 cameraOffset->z -= 0.5;
 
                 if (cameraOffset->z == 0)
                 {
-                    currentActions->setPrimaryAction(1);
+                    currentActions->setPrimaryAction(DO_NOTHING);
                     currentView = MAIN_VIEW;
                     isMoving = false;
                 }
@@ -90,15 +91,16 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                 if (gameType == EDITOR_MODE)
                 {
                     cameraOffset->x -= 0.5;
-                    cameraOffset->y -= 1;
+                    cameraOffset->y -= 0.7;
                 }
                 else
                 {
                     cameraOffset->x -= 1;
                 }
+
                 if(cameraOffset->x == 0)
                 {
-                    currentActions->setPrimaryAction(1);
+                    currentActions->setPrimaryAction(DO_NOTHING);
                     currentView = MAIN_VIEW;
                     isMoving = false;
                 }
@@ -108,7 +110,7 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                 if (currentView == LEVELS_VIEW)
                 {
                     cameraOffset->x += 0.5;
-                    cameraOffset->y -= 1;
+                    cameraOffset->y -= 0.7;
                 }
                 else
                 {
@@ -116,8 +118,7 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                 }
                 if (cameraOffset->x == 30)
                 {
-                    currentActions->setPrimaryAction(4);
-                    currentView = 4;
+                    currentActions->setPrimaryAction(ROTATE_SKINCUBE);
                     currentView = SKINS_VIEW;
                     isMoving = false;
                 }
@@ -128,22 +129,22 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                 if (currentView == MAIN_VIEW)
                 {
                    cameraOffset->x += 0.5;
-                   cameraOffset->y += 1;
+                   cameraOffset->y += 0.7;
                 }
                 else
                 {
                     cameraOffset->x -= 0.5;
-                    cameraOffset->y += 1;
+                    cameraOffset->y += 0.7;
                 }
                 if (cameraOffset->x == 15)
                 {
-                    currentActions->setPrimaryAction(1);
+                    currentActions->setPrimaryAction(DO_NOTHING);
                     currentView = LEVELS_VIEW;
                     isMoving = false;
                 }
                 break;
 
-            case 4:
+            case ROTATE_SKINCUBE:
                 angleRotCube += 2;
 
                 if (angleRotCube >= 360)
@@ -151,14 +152,14 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
 
                 break;
 
-            case 5:
-            case 6:
+            case PREVIOUS_SKIN:
+            case NEXT_SKIN:
                 spinCube += 2;
                 angleRotCube += 2 + (spinCube <= 30 ? spinCube : 60 - spinCube);
 
                 if (spinCube == 30)
                 {
-                    if (step == 5)
+                    if (step == PREVIOUS_SKIN)
                         previousSkin();
                     else
                         nextSkin();
@@ -167,19 +168,19 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                 {
                     spinCube = 0;
                     isMoving = false;
-                    currentActions->setPrimaryAction(4);
+                    currentActions->setPrimaryAction(ROTATE_SKINCUBE);
                 }
 
                 break;
 
-            case 8:
+            case ROTATE_VOLUMECUBE:
                 angleRotVolumeCube += 5;
 
                 if ((GLint(angleRotVolumeCube) % 360) == 0)
                     angleRotVolumeCube = 0;
 
                 if ((GLint(angleRotVolumeCube) % 90) == 0)
-                    currentActions->removeSecondaryAction(8);
+                    currentActions->removeSecondaryAction(ROTATE_VOLUMECUBE);
 
                 break;
             }
@@ -198,26 +199,27 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
         glPopName();
 
         glPushMatrix();
-            glTranslatef(-cameraOffset->x, -cameraOffset->y, -cameraOffset->z);
-            glPushMatrix();
-                glTranslatef(0.0, 5.0, 0.0);
-                storyButton->draw(simplifyForPicking);
-            glPopMatrix();
 
+            glTranslatef(-cameraOffset->x, -cameraOffset->y, -cameraOffset->z);
+
+            glTranslatef(0.0, 5.0, 0.0);
+            storyButton->draw(simplifyForPicking);
+
+            glTranslatef(0.0, -10.0, 0.0);
+            editorButton->draw(simplifyForPicking);
+
+            glTranslatef(0.0, 5.0, 0.0);
             arcadeButton->draw(simplifyForPicking);
 
             glPushMatrix();
-                glTranslatef(0.0, -5.0, 0.0);
-                editorButton->draw(simplifyForPicking);
-            glPopMatrix();
-
-            glPushMatrix();
                 glTranslatef(30.0, 4.0, 0.0);
+
                 skinName->draw(simplifyForPicking);
                 QString comment = skinsList.value(currentSkin)->getComment();
                 dynamic_cast<QGLWidget*>(parent)->renderText(-comment.length()*0.1225, -2.5, 0.0, comment);
 
                 glTranslatef(0.0, -6.0, 0.0);
+
                 glPushName(SKIN_CUBE);
                 glPushMatrix();
                     glRotatef(angleRotCube, 0.0, -1.0, 0.0);
@@ -226,79 +228,69 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                 glPopName();
 
                 glPushName(BUTTON_PREVIOUS_SKIN);
-                glPushMatrix();
-                    glTranslatef(-5.0, 0.0, 0.0);
-                    glBegin(GL_TRIANGLES);
-                        glVertex3f(-1.0,  0.0,  0.0);
-                        glVertex3f( 1.0,  1.0,  0.0);
-                        glVertex3f( 1.0, -1.0,  0.0);
-                    glEnd();
-                glPopMatrix();
+                glTranslatef(-5.0, 0.0, 0.0);
+                glBegin(GL_TRIANGLES);
+                    glVertex3f(-1.0,  0.0,  0.0);
+                    glVertex3f( 1.0,  1.0,  0.0);
+                    glVertex3f( 1.0, -1.0,  0.0);
+                glEnd();
+                glPopName();
+
+                glTranslatef(-3.0, -4.0, 0.0);
+                backButton->draw(simplifyForPicking);
                 glPopName();
 
                 glPushName(BUTTON_NEXT_SKIN);
-                glPushMatrix();
-                    glTranslatef(5.0, 0.0, 0.0);
-                    glBegin(GL_TRIANGLES);
-                        glVertex3f( 1.0,  0.0,  0.0);
-                        glVertex3f(-1.0,  1.0,  0.0);
-                        glVertex3f(-1.0, -1.0,  0.0);
-                    glEnd();
-                glPopMatrix();
+                glTranslatef(13.0, 4.0, 0.0);
+                glBegin(GL_TRIANGLES);
+                    glVertex3f( 1.0,  0.0,  0.0);
+                    glVertex3f(-1.0,  1.0,  0.0);
+                    glVertex3f(-1.0, -1.0,  0.0);
+                glEnd();
                 glPopName();
 
-                glPushName(BUTTON_BACK);
-                glPushMatrix();
-                    glTranslatef(-8.0, -4.0, 0.0);
-                    backButton->draw(simplifyForPicking);
-                glPopMatrix();
-                glPopName();
-
-                glPushName(BUTTON_NEXT);
-                glPushMatrix();
-                    glTranslatef(+8.0, -4.0, 0.0);
-                    if(gameType == STORY_MODE)
-                        playButton->draw(simplifyForPicking);
-                    else
-                        levelsButton->draw(simplifyForPicking);
-                glPopMatrix();
-                glPopName();
+                glTranslatef(3.0, -4.0, 0.0);
+                if(gameType == STORY_MODE)
+                    playButton->draw(simplifyForPicking);
+                else
+                    levelsButton->draw(simplifyForPicking);
 
             glPopMatrix();
 
             glPushMatrix();
-                glTranslatef(15.0, 30.0, 0.0);
+                glTranslatef(15.0, 21.0, 0.0);
 
+                levelName->draw(simplifyForPicking);
 
                 glPushName(BUTTON_PREVIOUS_LEVEL);
-                glPushMatrix();
-                    glTranslatef(-9.0, 0.0, 0.0);
-                    glBegin(GL_TRIANGLES);
-                        glVertex3f(-1.0,  0.0,  0.0);
-                        glVertex3f( 1.0,  1.0,  0.0);
-                        glVertex3f( 1.0, -1.0,  0.0);
-                    glEnd();
-                glPopMatrix();
+                glTranslatef(-9.0, 0.0, 0.0);
+                glBegin(GL_TRIANGLES);
+                    glVertex3f(-1.0,  0.0,  0.0);
+                    glVertex3f( 1.0,  1.0,  0.0);
+                    glVertex3f( 1.0, -1.0,  0.0);
+                glEnd();
                 glPopName();
+
+                glTranslatef(1.0, -6.0, 0.0);
+                backButton->draw(simplifyForPicking);
 
                 glPushName(BUTTON_NEXT_LEVEL);
-                glPushMatrix();
-                    glTranslatef(9.0, 0.0, 0.0);
-                    glBegin(GL_TRIANGLES);
-                        glVertex3f( 1.0,  0.0,  0.0);
-                        glVertex3f(-1.0,  1.0,  0.0);
-                        glVertex3f(-1.0, -1.0,  0.0);
-                    glEnd();
-                glPopMatrix();
+                glTranslatef(17.0, 6.0, 0.0);
+                glBegin(GL_TRIANGLES);
+                    glVertex3f( 1.0,  0.0,  0.0);
+                    glVertex3f(-1.0,  1.0,  0.0);
+                    glVertex3f(-1.0, -1.0,  0.0);
+                glEnd();
                 glPopName();
 
-                glPushName(BUTTON_BACK);
-                glPushMatrix();
-                    glTranslatef(-8.0, -6.0, 0.0);
-                    backButton->draw(simplifyForPicking);
-                glPopMatrix();
-                glPopName();
+                glTranslatef(-1.0, -6.0, 0.0);
+                if (gameType == ARCADE_MODE)
+                    playButton->draw(simplifyForPicking);
+                else if (gameType == EDITOR_MODE)
+                    editButton->draw(simplifyForPicking);
+
             glPopMatrix();
+
         glPopMatrix();
     }
 }
@@ -332,7 +324,7 @@ GLvoid Menu::nextSkin()
 
 GLvoid Menu::previousLevel()
 {
-    if (gameType == ARCADE_MODE && currentLevel == 1)
+    if ((gameType == ARCADE_MODE) && (currentLevel == 1))
         currentLevel = levelsList.count();
     else if (currentLevel == 0)
         currentLevel = levelsList.count();
@@ -341,7 +333,6 @@ GLvoid Menu::previousLevel()
 
     levelName->~CubeString();
     levelName = new CubeString(levelsList.value(currentLevel)->getName(), 2, SKIN_NAME, alphabet);
-
 }
 
 GLvoid Menu::nextLevel()
@@ -350,8 +341,79 @@ GLvoid Menu::nextLevel()
         currentLevel = ((gameType == ARCADE_MODE) ? 1 : 0) ;
     else
         currentLevel += 1;
+
     levelName->~CubeString();
     levelName = new CubeString(levelsList.value(currentLevel)->getName(), 2, LEVEL_NAME, alphabet);
+}
+
+GLvoid Menu::buttonBackTriggered()
+{
+    if (currentView == SKINS_VIEW)
+    {
+        isMoving = true;
+        currentActions->setPrimaryAction(GO_TO_MAIN_VIEW);
+    }
+    else if (currentView == LEVELS_VIEW)
+    {
+        if (gameType == EDITOR_MODE)
+        {
+            isMoving = true;
+            currentActions->setPrimaryAction(GO_TO_MAIN_VIEW);
+        }
+        else
+        {
+            isMoving = true;
+            currentActions->setPrimaryAction(GO_TO_SKINS_VIEW);
+        }
+    }
+}
+
+GLvoid Menu::buttonNextTriggered()
+{
+    if (currentView == SKINS_VIEW)
+    {
+        if (gameType == STORY_MODE)
+        {
+            //emit playStory(currentSkin);
+        }
+        else if  (gameType == ARCADE_MODE)
+        {
+            isMoving = true;
+            currentActions->setPrimaryAction(GO_TO_LEVELS_VIEW);
+
+            if (currentLevel == 0)
+                nextLevel();
+        }
+    }
+    else if (currentView == LEVELS_VIEW)
+    {
+        if (gameType == ARCADE_MODE)
+        {
+            //emit playArcade(currentSkin, currentLevel);
+        }
+        else if (gameType == EDITOR_MODE)
+        {
+            //emit showLevelEditor();
+        }
+    }
+}
+
+GLvoid Menu::buttonPreviousSkinTriggered()
+{
+    if (currentView == SKINS_VIEW)
+    {
+        isMoving = true;
+        currentActions->setPrimaryAction(PREVIOUS_SKIN);
+    }
+}
+
+GLvoid Menu::buttonNextSkinTriggered()
+{
+    if (currentView == SKINS_VIEW)
+    {
+        isMoving = true;
+        currentActions->setPrimaryAction(NEXT_SKIN);
+    }
 }
 
 void Menu::itemClicked(QList<GLuint> listNames)
@@ -368,61 +430,60 @@ void Menu::itemClicked(QList<GLuint> listNames)
             {
                 audioEnabled = !audioEnabled;
                 emit enableAudio(audioEnabled);
-                currentActions->appendSecondaryAction(8);
+                currentActions->appendSecondaryAction(ROTATE_VOLUMECUBE);
             }
             break;
 
         case BUTTON_PLAY_STORY:
-            gameType = STORY_MODE;
-            isMoving = true;
-            currentActions->setPrimaryAction(GO_TO_SKINS_VIEW);
+            if (currentView == MAIN_VIEW)
+            {
+                gameType = STORY_MODE;
+                isMoving = true;
+                currentActions->setPrimaryAction(GO_TO_SKINS_VIEW);
+            }
             break;
 
         case BUTTON_PLAY_ARCADE:
-            gameType = ARCADE_MODE;
-            isMoving = true;
-            currentActions->setPrimaryAction(GO_TO_SKINS_VIEW);
+            if (currentView == MAIN_VIEW)
+            {
+                gameType = ARCADE_MODE;
+                isMoving = true;
+                currentActions->setPrimaryAction(GO_TO_SKINS_VIEW);
+            }
             break;
 
         case BUTTON_LEVEL_EDITOR:
-            currentLevel = 0;
-            gameType = EDITOR_MODE;
-            isMoving = true;
-            currentActions->setPrimaryAction(GO_TO_LEVELS_VIEW);
-            break;
-
-        case BUTTON_PREVIOUS_SKIN:
-            isMoving = true;
-            currentActions->setPrimaryAction(5);
-            break;
-
-        case BUTTON_NEXT_SKIN:
-            isMoving = true;
-            currentActions->setPrimaryAction(6);
-            break;
-
-        case BUTTON_BACK:
-            isMoving = true;
-            if (gameType == EDITOR_MODE || currentView == SKINS_VIEW)
-                currentActions->setPrimaryAction(GO_TO_MAIN_VIEW);
-            else
-                currentActions->setPrimaryAction(GO_TO_SKINS_VIEW);
-            break;
-
-        case BUTTON_NEXT:
-            if (gameType == STORY_MODE)
+            if (currentView == MAIN_VIEW)
             {
-                //emit playStory(currentSkin);
-            }
-            else
-            {
+                currentLevel = 0;
+                gameType = EDITOR_MODE;
                 isMoving = true;
                 currentActions->setPrimaryAction(GO_TO_LEVELS_VIEW);
             }
             break;
-        case BUTTON_NEXT_LEVEL:
+
+        case BUTTON_PREVIOUS_SKIN:
+            buttonPreviousSkinTriggered();
             break;
+
+        case BUTTON_NEXT_SKIN:
+            buttonNextSkinTriggered();
+            break;
+
+        case BUTTON_BACK:
+            buttonBackTriggered();
+            break;
+
+        case BUTTON_NEXT:
+            buttonNextTriggered();
+            break;
+
         case BUTTON_PREVIOUS_LEVEL:
+            previousLevel();
+            break;
+
+        case BUTTON_NEXT_LEVEL:
+            nextLevel();
             break;
         }
     }
@@ -473,17 +534,28 @@ void Menu::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
 
 void Menu::keyPressed(QKeyEvent *event)
 {
-    if (currentActions->getAllActions().contains(4))
+    int key = event->key();
+
+    if ((key == Qt::Key_Escape) || (key == Qt::Key_Backspace))
     {
-        if (event->key() == Qt::Key_Left)
-        {
-            isMoving = true;
-            currentActions->setPrimaryAction(5);
-        }
-        else if (event->key() == Qt::Key_Right)
-        {
-            isMoving = true;
-            currentActions->setPrimaryAction(6);
-        }
+        buttonBackTriggered();
+    }
+    else if ((key == Qt::Key_Enter) || (key == Qt::Key_Return))
+    {
+        buttonNextTriggered();
+    }
+    else if (key == Qt::Key_Left)
+    {
+        if (currentView == SKINS_VIEW)
+            buttonPreviousSkinTriggered();
+        else if (currentView == LEVELS_VIEW)
+            previousLevel();
+    }
+    else if (key == Qt::Key_Right)
+    {
+        if (currentView == SKINS_VIEW)
+            buttonNextSkinTriggered();
+        else if (currentView == LEVELS_VIEW)
+            nextLevel();
     }
 }

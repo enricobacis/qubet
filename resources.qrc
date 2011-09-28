@@ -143,7 +143,6 @@
         <file>resources/letters/9/8.jpg</file>
         <file>resources/letters/9/9.jpg</file>
         <file>resources/letters/a/1.jpg</file>
-        <file>resources/letters/a/2.jpg</file>
         <file>resources/letters/a/3.jpg</file>
         <file>resources/letters/a/4.jpg</file>
         <file>resources/letters/a/5.jpg</file>
@@ -166,11 +165,9 @@
         <file>resources/letters/c/2.jpg</file>
         <file>resources/letters/c/3.jpg</file>
         <file>resources/letters/c/4.jpg</file>
-        <file>resources/letters/c/5.jpg</file>
         <file>resources/letters/c/6.jpg</file>
         <file>resources/letters/c/7.jpg</file>
         <file>resources/letters/c/8.jpg</file>
-        <file>resources/letters/c/9.jpg</file>
         <file>resources/letters/c/10.jpg</file>
         <file>resources/letters/d/1.jpg</file>
         <file>resources/letters/d/2.jpg</file>
@@ -179,8 +176,6 @@
         <file>resources/letters/d/5.jpg</file>
         <file>resources/letters/d/6.jpg</file>
         <file>resources/letters/d/7.jpg</file>
-        <file>resources/letters/d/8.jpg</file>
-        <file>resources/letters/d/9.jpg</file>
         <file>resources/letters/d/10.jpg</file>
         <file>resources/letters/e/1.jpg</file>
         <file>resources/letters/e/2.jpg</file>
@@ -219,13 +214,11 @@
         <file>resources/letters/h/5.jpg</file>
         <file>resources/letters/h/6.jpg</file>
         <file>resources/letters/h/7.jpg</file>
-        <file>resources/letters/h/8.jpg</file>
         <file>resources/letters/h/9.jpg</file>
         <file>resources/letters/h/10.jpg</file>
         <file>resources/letters/i/1.jpg</file>
         <file>resources/letters/i/2.jpg</file>
         <file>resources/letters/i/3.jpg</file>
-        <file>resources/letters/i/4.jpg</file>
         <file>resources/letters/i/5.jpg</file>
         <file>resources/letters/i/6.jpg</file>
         <file>resources/letters/i/7.jpg</file>
@@ -243,18 +236,15 @@
         <file>resources/letters/j/9.jpg</file>
         <file>resources/letters/j/10.jpg</file>
         <file>resources/letters/k/1.jpg</file>
-        <file>resources/letters/k/2.jpg</file>
         <file>resources/letters/k/3.jpg</file>
         <file>resources/letters/k/4.jpg</file>
         <file>resources/letters/k/5.jpg</file>
         <file>resources/letters/k/6.jpg</file>
         <file>resources/letters/k/7.jpg</file>
-        <file>resources/letters/k/8.jpg</file>
         <file>resources/letters/k/9.jpg</file>
         <file>resources/letters/k/10.jpg</file>
         <file>resources/letters/l/1.jpg</file>
         <file>resources/letters/l/2.jpg</file>
-        <file>resources/letters/l/3.jpg</file>
         <file>resources/letters/l/4.jpg</file>
         <file>resources/letters/l/5.jpg</file>
         <file>resources/letters/l/6.jpg</file>
@@ -334,7 +324,6 @@
         <file>resources/letters/s/10.jpg</file>
         <file>resources/letters/t/1.jpg</file>
         <file>resources/letters/t/2.jpg</file>
-        <file>resources/letters/t/3.jpg</file>
         <file>resources/letters/t/4.jpg</file>
         <file>resources/letters/t/5.jpg</file>
         <file>resources/letters/t/6.jpg</file>

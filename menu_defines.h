@@ -4,7 +4,6 @@
 // Names used in the Menu View
 // This name will be in the format 1xx
 
-
 #define BUTTON_VOLUME               100
 #define BUTTON_PLAY_STORY           101
 #define BUTTON_PLAY_ARCADE          102
@@ -19,15 +18,15 @@
 #define BUTTON_PREVIOUS_LEVEL       111
 #define LEVEL_NAME                  112
 
-//names used in draw method
-#define GO_TO_MAIN_VIEW             9
-#define GO_TO_SKINS_VIEW            3
-#define GO_TO_LEVELS_VIEW           10
+/**
+ * @brief Enum used for Menu's actions
+ */
+enum { DO_NOTHING, INITIAL_MOTION, GO_TO_MAIN_VIEW, GO_TO_SKINS_VIEW, GO_TO_LEVELS_VIEW, ROTATE_SKINCUBE, PREVIOUS_SKIN, NEXT_SKIN, ROTATE_VOLUMECUBE };
 
-//names of the views
-#define MAIN_VIEW                   0
-#define SKINS_VIEW                  1
-#define LEVELS_VIEW                 2
+/**
+ * @brief Enum used for Menu's currentView
+ */
+enum { MAIN_VIEW, SKINS_VIEW, LEVELS_VIEW };
 
 
 #endif // MENU_DEFINES_H

@@ -55,9 +55,26 @@ public:
     /**
      * @brief
      *
+     * @param _angleStep
+     * @param _turns
+     */
+    GLvoid startLettersRotation(GLint _angleStep, GLint _turns);
+
+    /**
+     * @brief
+     *
      * @param _letterName
      */
     GLboolean isRotating(GLuint _letterName);
+
+    /**
+     * @brief Set the current angle for letters in the CubeString.
+     *
+     * @param _nextLetterDelta is the delta you want to apply from letter to letter angle. [default 0]
+     *
+     * @return [GLint] the angle the next letter after this string should have using the :nextLetterDelta.
+     */
+    GLint setCurrentAngle(GLint _firstLetterAngle, GLint _nextLetterDelta = 0);
 
 
 private:

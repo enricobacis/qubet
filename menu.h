@@ -93,6 +93,7 @@ private:
     CubeString *backButton;  /**< It is the backButton CubeString. */
     CubeString *playButton; /**< It is the playButton CubeString. */
     CubeString *levelsButton; /**< It is the levelsButton CubeString. */
+    CubeString *editButton; /**< It is the editButton CubeString. */
 
 
     /**
@@ -108,14 +109,38 @@ private:
     /**
      * @brief
      *
-    */
+     */
     GLvoid previousLevel();
 
     /**
      * @brief
      *
-    */
+     */
     GLvoid nextLevel();
+
+    /**
+     * @brief
+     *
+     */
+    GLvoid buttonBackTriggered();
+
+    /**
+     * @brief
+     *
+     */
+    GLvoid buttonNextTriggered();
+
+    /**
+     * @brief
+     *
+     */
+    GLvoid buttonPreviousSkinTriggered();
+
+    /**
+     * @brief
+     *
+     */
+    GLvoid buttonNextSkinTriggered();
 
 
 private slots:

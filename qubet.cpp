@@ -41,6 +41,8 @@ Qubet::~Qubet()
 
 GLvoid Qubet::initializeGL()
 {
+    currentText = "Caricamento ...";
+
     glClearColor(0.0, 0.0, 0.0, 0.0);
     glClearDepth(1.0);
 
@@ -63,8 +65,6 @@ GLvoid Qubet::initializeGL()
     glLightfv(GL_LIGHT0, GL_SPECULAR, specularLight);
 
     glShadeModel(GL_SMOOTH);
-
-    currentText = "Caricamento ...";
 
     drawTimer = new QTimer(this);
     connect(drawTimer, SIGNAL(timeout()), this, SLOT(draw()));
@@ -396,7 +396,32 @@ GLboolean Qubet::loadCustomObstacleModels()
 
 GLboolean Qubet::loadLevels()
 {
-    // TODO
+    QDomDocument document("levels");
+    QFile file(":/levels/resources/levels/levels.xml");
+    if (!file.open(QIODevice::ReadOnly))
+        return false;
+
+    if (!document.setContent(&file))
+    {
+        file.close();
+        return false;
+    }
+
+    file.close();
+
+    GLint id = 1;
+    QDomElement rootElement = document.documentElement();
+    QDomElement levelElement = rootElement.firstChildElement("level");
+
+    while(!levelElement.isNull())
+    {
+        Level *level = new Level(id, levelElement.attribute("filename", ""), this);
+        level->setName(levelElement.attribute("name", ""));
+
+        levelsList.insert(id++, level);
+        levelElement = levelElement.nextSiblingElement("level");
+    }
+
     if (!loadCustomLevels())
         return false;
 
@@ -439,10 +464,10 @@ GLboolean Qubet::loadAlphabet()
 
 GLboolean Qubet::loadIcons()
 {
-    QString iconsPath = ":/icons/resources/icons";
+    QString iconsPath = ":/icons/resources/icons/";
 
     QDomDocument document("icons");
-    QFile file(iconsPath + "/icons.xml");
+    QFile file(iconsPath + "icons.xml");
     if (!file.open(QIODevice::ReadOnly))
         return false;
 
@@ -460,7 +485,7 @@ GLboolean Qubet::loadIcons()
     while (!iconElement.isNull())
     {
         GLint key = iconElement.attribute("name", "0").toInt();
-        GLuint textureID = bindTexture(QImage(iconsPath + "/" + iconElement.attribute("filename")));
+        GLuint textureID = bindTexture(QImage(iconsPath + iconElement.attribute("filename")));
 
         iconsList.insert(key, textureID);
         iconElement = iconElement.nextSiblingElement("icon");

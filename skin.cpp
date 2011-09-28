@@ -88,7 +88,7 @@ void Skin::setTexture(GLuint face, GLuint textureID)
 
 GLuint Skin::getTexture(GLuint face)
 {
-    GLuint textureID;
+    GLuint textureID = 0;
 
     switch (face)
     {
