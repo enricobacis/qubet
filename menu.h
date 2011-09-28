@@ -81,11 +81,15 @@ private:
     GLfloat angleRotVolumeCube;  /**< It is the current rotation angle of the volume icon. */
     GLboolean audioEnabled;  /**< It is the state of the audio. */
     Skin *volumeSkin; /**< It is the skin of the volume button */
+    GLint currentView;  /**< It is the value of the current view */
 
     CubeString *storyButton; /**< It is the storyButton CubeString. */
     CubeString *arcadeButton; /**< It is the arcadeButton CubeString. */
     CubeString *editorButton; /**< It is the editorButton CubeString. */
     CubeString *skinName;  /**< It is the skinName CubeString. */
+    CubeString *backButton;  /**< It is the backButton CubeString. */
+    CubeString *playButton; /**< It is the playButton CubeString. */
+    CubeString *levelsButton; /**< It is the levelsButton CubeString. */
 
 
     /**

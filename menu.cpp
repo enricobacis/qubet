@@ -13,9 +13,13 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,QString> &_levelsList, QMap
     spinCube(0),
     angleRotVolumeCube(0),
     audioEnabled(true),
+    currentView(0),
     storyButton(NULL),
     arcadeButton(NULL),
     editorButton(NULL),
+    backButton(NULL),
+    playButton(NULL),
+    levelsButton(NULL),
     volumeSkin(NULL)
 {
     currentActions = new ActionList(0);
@@ -24,6 +28,9 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,QString> &_levelsList, QMap
     storyButton = new CubeString("story", 3, BUTTON_PLAY_STORY, alphabet);
     arcadeButton = new CubeString("arcade", 3, BUTTON_PLAY_ARCADE, alphabet);
     editorButton = new CubeString("editor", 3, BUTTON_LEVEL_EDITOR, alphabet);
+    backButton = new CubeString("back", 1, BUTTON_BACK, alphabet);
+    playButton = new CubeString("play", 1, BUTTON_NEXT, alphabet);
+    levelsButton = new CubeString("levels", 1, BUTTON_NEXT, alphabet);
 
     skinName = new CubeString(skinsList.value(currentSkin)->getName(), 2, SKIN_NAME, alphabet);
 
@@ -42,6 +49,9 @@ Menu::~Menu()
 
     if (editorButton != NULL)
         editorButton->~CubeString();
+
+    if (backButton != NULL)
+        backButton->~CubeString();
 
     if (volumeSkin != NULL)
         volumeSkin->~Skin();
@@ -68,31 +78,42 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                 if (cameraOffset->z == 0)
                 {
                     currentActions->setPrimaryAction(1);
+                    currentView = MAIN_VIEW;
                     isMoving = false;
                 }
 
                 break;
 
-            case 2:
-                cameraOffset->x -= 1;
+            case GO_TO_SKINS_VIEW:
+                if (cameraOffset->x > -30)
+                    cameraOffset->x -= 1;
+                else
+                    cameraOffset->x += 1;
 
                 if (cameraOffset->x == -30)
                 {
                     currentActions->setPrimaryAction(4);
+                    currentView = 4;
+                    currentView = SKINS_VIEW;
                     isMoving = false;
                 }
 
                 break;
 
-            case 3:
-                cameraOffset->x += 1;
+            case GO_TO_EDITOR_VIEW:
 
-                if (cameraOffset->x == -30)
+                if (cameraOffset->x < 30)
+                    cameraOffset->x += 1;
+                else
+                    cameraOffset->x -= 1;
+
+                if (cameraOffset->x == +30)
                 {
-                    emit showLevelEditor();
-                    currentActions->setPrimaryAction(-1);
+                    //emit showLevelEditor();
+                    currentActions->setPrimaryAction(1);
+                    currentView = EDITOR_VIEW;
+                    isMoving = false;
                 }
-
                 break;
 
             case 4:
@@ -136,6 +157,32 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                     currentActions->removeSecondaryAction(8);
                 }
 
+                break;
+
+            case GO_TO_MAIN_VIEW:
+
+                if (cameraOffset->x < 0)
+                    cameraOffset->x += 1;
+                else
+                    cameraOffset->x -= 1;
+
+                if (cameraOffset->x == 0)
+                {
+                    currentActions->setPrimaryAction(1);
+                    currentView = MAIN_VIEW;
+                    isMoving = false;
+                }
+                break;
+
+            case GO_TO_LEVELS_VIEW:
+                cameraOffset->x -= 1;
+
+                if (cameraOffset->x == -60)
+                {
+                    currentActions->setPrimaryAction(1);
+                    currentView = LEVELS_VIEW;
+                    isMoving = false;
+                }
                 break;
             }
         }
@@ -209,7 +256,43 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
             glPopMatrix();
             glPopName();
 
+            glPushName(BUTTON_BACK);
+            glPushMatrix();
+                glTranslatef(-8.0, 4.0, 0.0);
+                backButton->draw(simplifyForPicking);
+            glPopMatrix();
+            glPopName();
+
+            glPushName(BUTTON_NEXT);
+            glPushMatrix();
+                glTranslatef(+8.0, 4.0, 0.0);
+                if(gameType == STORY_MODE)
+                    playButton->draw(simplifyForPicking);
+                else
+                    levelsButton->draw(simplifyForPicking);
+            glPopMatrix();
+            glPopName();
+
         glPopMatrix();
+
+        glPushMatrix();
+            glTranslatef(60.0, 0.0, 0.0);
+
+            glPushName(BUTTON_BACK);
+            glPushMatrix();
+                glTranslatef(-8.0, 0.0, 0.0);
+                backButton->draw(simplifyForPicking);
+            glPopMatrix();
+            glPopName();
+        glPopMatrix();
+
+        glPushMatrix();
+            glPushName(BUTTON_BACK);
+            glTranslatef(-22.0, 0.0, 0.0);
+            backButton->draw(simplifyForPicking);
+        glPopMatrix();
+        glPopName();
+
 
     glPopMatrix();
 }
@@ -260,18 +343,18 @@ void Menu::itemClicked(QList<GLuint> listNames)
         case BUTTON_PLAY_STORY:
             gameType = STORY_MODE;
             isMoving = true;
-            currentActions->setPrimaryAction(2);
+            currentActions->setPrimaryAction(GO_TO_SKINS_VIEW);
             break;
 
         case BUTTON_PLAY_ARCADE:
             gameType = ARCADE_MODE;
             isMoving = true;
-            currentActions->setPrimaryAction(2);
+            currentActions->setPrimaryAction(GO_TO_SKINS_VIEW);
             break;
 
         case BUTTON_LEVEL_EDITOR:
             isMoving = true;
-            currentActions->setPrimaryAction(3);
+            currentActions->setPrimaryAction(GO_TO_EDITOR_VIEW);
             break;
 
         case BUTTON_PREVIOUS_SKIN:
@@ -282,6 +365,26 @@ void Menu::itemClicked(QList<GLuint> listNames)
         case BUTTON_NEXT_SKIN:
             isMoving = true;
             currentActions->setPrimaryAction(6);
+            break;
+
+        case BUTTON_BACK:
+            isMoving = true;
+            if (currentView == SKINS_VIEW || currentView == EDITOR_VIEW)
+                currentActions->setPrimaryAction(GO_TO_MAIN_VIEW);
+            else
+                currentActions->setPrimaryAction(GO_TO_SKINS_VIEW);
+            break;
+
+        case BUTTON_NEXT:
+            if (gameType == STORY_MODE)
+            {
+                //emit playStory(currentSkin);
+            }
+            else
+            {
+                isMoving = true;
+                currentActions->setPrimaryAction(GO_TO_LEVELS_VIEW);
+            }
             break;
         }
     }
