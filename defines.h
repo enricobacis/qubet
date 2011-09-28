@@ -28,6 +28,6 @@ enum { LOADING, MENU_VIEW, GAME_VIEW, LEVELEDITOR_VIEW };
 /**
  * @brief Enum used for gameType
  */
-enum { STORY_MODE, ARCADE_MODE };
+enum { STORY_MODE, ARCADE_MODE, EDITOR_MODE };
 
 #endif // DEFINES_H

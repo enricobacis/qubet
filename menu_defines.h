@@ -20,13 +20,11 @@
 #define GO_TO_MAIN_VIEW             9
 #define GO_TO_SKINS_VIEW            3
 #define GO_TO_LEVELS_VIEW           10
-#define GO_TO_EDITOR_VIEW           2
 
 //names of the views
 #define MAIN_VIEW                   0
 #define SKINS_VIEW                  1
 #define LEVELS_VIEW                 2
-#define EDITOR_VIEW                 3
 
 
 #endif // MENU_DEFINES_H

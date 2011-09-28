@@ -84,12 +84,34 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
 
                 break;
 
-            case GO_TO_SKINS_VIEW:
-                if (cameraOffset->x < 30)
-                    cameraOffset->x += 1;
+            case GO_TO_MAIN_VIEW:
+                if (gameType == EDITOR_MODE)
+                {
+                    cameraOffset->x -= 0.5;
+                    cameraOffset->y -= 1;
+                }
                 else
+                {
                     cameraOffset->x -= 1;
+                }
+                if(cameraOffset->x == 0)
+                {
+                    currentActions->setPrimaryAction(1);
+                    currentView = MAIN_VIEW;
+                    isMoving = false;
+                }
+                break;
 
+            case GO_TO_SKINS_VIEW:
+                if (currentView == LEVELS_VIEW)
+                {
+                    cameraOffset->x += 0.5;
+                    cameraOffset->y -= 1;
+                }
+                else
+                {
+                    cameraOffset->x += 1;
+                }
                 if (cameraOffset->x == 30)
                 {
                     currentActions->setPrimaryAction(4);
@@ -100,18 +122,21 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
 
                 break;
 
-            case GO_TO_EDITOR_VIEW:
-
-                if (cameraOffset->x > -30)
-                    cameraOffset->x -= 1;
-                else
-                    cameraOffset->x += 1;
-
-                if (cameraOffset->x == -30)
+            case GO_TO_LEVELS_VIEW:
+                if (currentView == MAIN_VIEW)
                 {
-                    //emit showLevelEditor();
+                   cameraOffset->x += 0.5;
+                   cameraOffset->y += 1;
+                }
+                else
+                {
+                    cameraOffset->x -= 0.5;
+                    cameraOffset->y += 1;
+                }
+                if (cameraOffset->x == 15)
+                {
                     currentActions->setPrimaryAction(1);
-                    currentView = EDITOR_VIEW;
+                    currentView = LEVELS_VIEW;
                     isMoving = false;
                 }
                 break;
@@ -154,32 +179,6 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                 if ((GLint(angleRotVolumeCube) % 90) == 0)
                     currentActions->removeSecondaryAction(8);
 
-                break;
-
-            case GO_TO_MAIN_VIEW:
-
-                if (cameraOffset->x < 0)
-                    cameraOffset->x += 1;
-                else
-                    cameraOffset->x -= 1;
-
-                if (cameraOffset->x == 0)
-                {
-                    currentActions->setPrimaryAction(1);
-                    currentView = MAIN_VIEW;
-                    isMoving = false;
-                }
-                break;
-
-            case GO_TO_LEVELS_VIEW:
-                cameraOffset->x += 1;
-
-                if (cameraOffset->x == 60)
-                {
-                    currentActions->setPrimaryAction(1);
-                    currentView = LEVELS_VIEW;
-                    isMoving = false;
-                }
                 break;
             }
         }
@@ -266,7 +265,7 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
             glPopMatrix();
 
             glPushMatrix();
-                glTranslatef(60.0, 0.0, 0.0);
+                glTranslatef(15.0, 30.0, 0.0);
                 glPushName(BUTTON_BACK);
                 glPushMatrix();
                     glTranslatef(-8.0, -6.0, 0.0);
@@ -274,14 +273,6 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                 glPopMatrix();
                 glPopName();
             glPopMatrix();
-
-            glPushMatrix();
-                glPushName(BUTTON_BACK);
-                glTranslatef(-22.0, -6.0, 0.0);
-                backButton->draw(simplifyForPicking);
-            glPopMatrix();
-            glPopName();
-
         glPopMatrix();
     }
 }
@@ -344,8 +335,9 @@ void Menu::itemClicked(QList<GLuint> listNames)
             break;
 
         case BUTTON_LEVEL_EDITOR:
+            gameType = EDITOR_MODE;
             isMoving = true;
-            currentActions->setPrimaryAction(GO_TO_EDITOR_VIEW);
+            currentActions->setPrimaryAction(GO_TO_LEVELS_VIEW);
             break;
 
         case BUTTON_PREVIOUS_SKIN:
@@ -360,7 +352,7 @@ void Menu::itemClicked(QList<GLuint> listNames)
 
         case BUTTON_BACK:
             isMoving = true;
-            if (currentView == SKINS_VIEW || currentView == EDITOR_VIEW)
+            if (gameType == EDITOR_MODE || currentView == SKINS_VIEW)
                 currentActions->setPrimaryAction(GO_TO_MAIN_VIEW);
             else
                 currentActions->setPrimaryAction(GO_TO_SKINS_VIEW);
