@@ -23,7 +23,7 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,QString> &_levelsList, QMap
     volumeSkin(NULL)
 {
     currentActions = new ActionList(0);
-    cameraOffset = new Vector3f(0.0, 0.0, -10.0);
+    cameraOffset = new Vector3f(0.0, 0.0, +10.0);
 
     storyButton = new CubeString("story", 3, BUTTON_PLAY_STORY, alphabet);
     arcadeButton = new CubeString("arcade", 3, BUTTON_PLAY_ARCADE, alphabet);
@@ -73,7 +73,7 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
             switch (step)
             {
             case 0:
-                cameraOffset->z += 0.5;
+                cameraOffset->z -= 0.5;
 
                 if (cameraOffset->z == 0)
                 {
@@ -85,12 +85,12 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                 break;
 
             case GO_TO_SKINS_VIEW:
-                if (cameraOffset->x > -30)
-                    cameraOffset->x -= 1;
-                else
+                if (cameraOffset->x < 30)
                     cameraOffset->x += 1;
+                else
+                    cameraOffset->x -= 1;
 
-                if (cameraOffset->x == -30)
+                if (cameraOffset->x == 30)
                 {
                     currentActions->setPrimaryAction(4);
                     currentView = 4;
@@ -102,12 +102,12 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
 
             case GO_TO_EDITOR_VIEW:
 
-                if (cameraOffset->x < 30)
-                    cameraOffset->x += 1;
-                else
+                if (cameraOffset->x > -30)
                     cameraOffset->x -= 1;
+                else
+                    cameraOffset->x += 1;
 
-                if (cameraOffset->x == +30)
+                if (cameraOffset->x == -30)
                 {
                     //emit showLevelEditor();
                     currentActions->setPrimaryAction(1);
@@ -172,9 +172,9 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                 break;
 
             case GO_TO_LEVELS_VIEW:
-                cameraOffset->x -= 1;
+                cameraOffset->x += 1;
 
-                if (cameraOffset->x == -60)
+                if (cameraOffset->x == 60)
                 {
                     currentActions->setPrimaryAction(1);
                     currentView = LEVELS_VIEW;
@@ -197,7 +197,7 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
         glPopName();
 
         glPushMatrix();
-            glTranslatef(cameraOffset->x, cameraOffset->y, cameraOffset->z);
+            glTranslatef(-cameraOffset->x, -cameraOffset->y, -cameraOffset->z);
             glPushMatrix();
                 glTranslatef(0.0, 5.0, 0.0);
                 storyButton->draw(simplifyForPicking);
