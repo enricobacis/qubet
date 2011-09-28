@@ -146,7 +146,7 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
     glPushName(BUTTON_VOLUME);
     glPushMatrix();
         glTranslatef(11.0, 7.0, 0.0);
-        glRotatef(angleRotVolumeCube, 1.0, 0.0, 0.0);
+        glRotatef(angleRotVolumeCube, -1.0, 0.0, 0.0);
         drawPrism(1.0, 1.0, 1.0, volumeSkin, true);
     glPopMatrix();
     glPopName();
