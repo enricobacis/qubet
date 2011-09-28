@@ -152,10 +152,7 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                     angleRotVolumeCube = 0;
 
                 if ((GLint(angleRotVolumeCube) % 90) == 0)
-                {
-                    isMoving = false;
                     currentActions->removeSecondaryAction(8);
-                }
 
                 break;
 
@@ -188,113 +185,105 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
         }
     }
 
-    // Inizio disegno
-
-    glPushName(BUTTON_VOLUME);
-    glPushMatrix();
-        glTranslatef(11.0, 7.0, 0.0);
-        glRotatef(angleRotVolumeCube, -1.0, 0.0, 0.0);
-        drawPrism(1.0, 1.0, 1.0, volumeSkin, true);
-    glPopMatrix();
-    glPopName();
-
-    glPushMatrix();
-        glTranslatef(cameraOffset->x, cameraOffset->y, cameraOffset->z);
-
+    // Disegno il menu
+    if (!(isMoving && simplifyForPicking))
+    {
+        glPushName(BUTTON_VOLUME);
         glPushMatrix();
-            glTranslatef(0.0, 5.0, 0.0);
-            storyButton->draw(simplifyForPicking);
-        glPopMatrix();
-
-        arcadeButton->draw(simplifyForPicking);
-
-        glPushMatrix();
-            glTranslatef(0.0, -5.0, 0.0);
-            editorButton->draw(simplifyForPicking);
-        glPopMatrix();
-
-        glPushMatrix();
-            glTranslatef(30.0, 4.0, 0.0);
-
-            skinName->draw(simplifyForPicking);
-
-            QString comment = skinsList.value(currentSkin)->getComment();
-            dynamic_cast<QGLWidget*>(parent)->renderText(-comment.length()*0.1225, -2.5, 0.0, comment);
-
-            glTranslatef(0.0, -8.0, 0.0);
-
-            glPushName(SKIN_CUBE);
-            glPushMatrix();
-                glRotatef(angleRotCube, 0.0, -1.0, 0.0);
-                drawPrism(3.0, 3.0, 3.0, skinsList.value(currentSkin));
-            glPopMatrix();
-            glPopName();
-
-            glPushName(BUTTON_PREVIOUS_SKIN);
-            glPushMatrix();
-                glTranslatef(-5.0, 0.0, 0.0);
-
-                glBegin(GL_TRIANGLES);
-                glVertex3f(-1.0,  0.0,  0.0);
-                glVertex3f( 1.0,  1.0,  0.0);
-                glVertex3f( 1.0, -1.0,  0.0);
-                glEnd();
-
-            glPopMatrix();
-            glPopName();
-
-            glPushName(BUTTON_NEXT_SKIN);
-            glPushMatrix();
-                glTranslatef(5.0, 0.0, 0.0);
-
-                glBegin(GL_TRIANGLES);
-                glVertex3f( 1.0,  0.0,  0.0);
-                glVertex3f(-1.0,  1.0,  0.0);
-                glVertex3f(-1.0, -1.0,  0.0);
-                glEnd();
-
-            glPopMatrix();
-            glPopName();
-
-            glPushName(BUTTON_BACK);
-            glPushMatrix();
-                glTranslatef(-8.0, 4.0, 0.0);
-                backButton->draw(simplifyForPicking);
-            glPopMatrix();
-            glPopName();
-
-            glPushName(BUTTON_NEXT);
-            glPushMatrix();
-                glTranslatef(+8.0, 4.0, 0.0);
-                if(gameType == STORY_MODE)
-                    playButton->draw(simplifyForPicking);
-                else
-                    levelsButton->draw(simplifyForPicking);
-            glPopMatrix();
-            glPopName();
-
-        glPopMatrix();
-
-        glPushMatrix();
-            glTranslatef(60.0, 0.0, 0.0);
-
-            glPushName(BUTTON_BACK);
-            glPushMatrix();
-                glTranslatef(-8.0, 0.0, 0.0);
-                backButton->draw(simplifyForPicking);
-            glPopMatrix();
-            glPopName();
-        glPopMatrix();
-
-        glPushMatrix();
-            glPushName(BUTTON_BACK);
-            glTranslatef(-22.0, 0.0, 0.0);
-            backButton->draw(simplifyForPicking);
+            glTranslatef(11.0, 7.0, 0.0);
+            glRotatef(angleRotVolumeCube, -1.0, 0.0, 0.0);
+            drawPrism(1.0, 1.0, 1.0, volumeSkin, true);
         glPopMatrix();
         glPopName();
 
+        glPushMatrix();
+            glTranslatef(cameraOffset->x, cameraOffset->y, cameraOffset->z);
+            glPushMatrix();
+                glTranslatef(0.0, 5.0, 0.0);
+                storyButton->draw(simplifyForPicking);
+            glPopMatrix();
 
-    glPopMatrix();
+            arcadeButton->draw(simplifyForPicking);
+
+            glPushMatrix();
+                glTranslatef(0.0, -5.0, 0.0);
+                editorButton->draw(simplifyForPicking);
+            glPopMatrix();
+
+            glPushMatrix();
+                glTranslatef(30.0, 4.0, 0.0);
+                skinName->draw(simplifyForPicking);
+                QString comment = skinsList.value(currentSkin)->getComment();
+                dynamic_cast<QGLWidget*>(parent)->renderText(-comment.length()*0.1225, -2.5, 0.0, comment);
+
+                glTranslatef(0.0, -6.0, 0.0);
+                glPushName(SKIN_CUBE);
+                glPushMatrix();
+                    glRotatef(angleRotCube, 0.0, -1.0, 0.0);
+                    drawPrism(3.0, 3.0, 3.0, skinsList.value(currentSkin));
+                glPopMatrix();
+                glPopName();
+
+                glPushName(BUTTON_PREVIOUS_SKIN);
+                glPushMatrix();
+                    glTranslatef(-5.0, 0.0, 0.0);
+                    glBegin(GL_TRIANGLES);
+                        glVertex3f(-1.0,  0.0,  0.0);
+                        glVertex3f( 1.0,  1.0,  0.0);
+                        glVertex3f( 1.0, -1.0,  0.0);
+                    glEnd();
+                glPopMatrix();
+                glPopName();
+
+                glPushName(BUTTON_NEXT_SKIN);
+                glPushMatrix();
+                    glTranslatef(5.0, 0.0, 0.0);
+                    glBegin(GL_TRIANGLES);
+                        glVertex3f( 1.0,  0.0,  0.0);
+                        glVertex3f(-1.0,  1.0,  0.0);
+                        glVertex3f(-1.0, -1.0,  0.0);
+                    glEnd();
+                glPopMatrix();
+                glPopName();
+
+                glPushName(BUTTON_BACK);
+                glPushMatrix();
+                    glTranslatef(-8.0, -4.0, 0.0);
+                    backButton->draw(simplifyForPicking);
+                glPopMatrix();
+                glPopName();
+
+                glPushName(BUTTON_NEXT);
+                glPushMatrix();
+                    glTranslatef(+8.0, -4.0, 0.0);
+                    if(gameType == STORY_MODE)
+                        playButton->draw(simplifyForPicking);
+                    else
+                        levelsButton->draw(simplifyForPicking);
+                glPopMatrix();
+                glPopName();
+
+            glPopMatrix();
+
+            glPushMatrix();
+                glTranslatef(60.0, 0.0, 0.0);
+                glPushName(BUTTON_BACK);
+                glPushMatrix();
+                    glTranslatef(-8.0, -6.0, 0.0);
+                    backButton->draw(simplifyForPicking);
+                glPopMatrix();
+                glPopName();
+            glPopMatrix();
+
+            glPushMatrix();
+                glPushName(BUTTON_BACK);
+                glTranslatef(-22.0, -6.0, 0.0);
+                backButton->draw(simplifyForPicking);
+            glPopMatrix();
+            glPopName();
+
+        glPopMatrix();
+    }
 }
 
 GLvoid Menu::playAudio()
@@ -334,10 +323,12 @@ void Menu::itemClicked(QList<GLuint> listNames)
         switch (listNames.at(0))
         {
         case BUTTON_VOLUME:
-            isMoving = true;
-            audioEnabled = !audioEnabled;
-            emit enableAudio(audioEnabled);
-            currentActions->appendSecondaryAction(8);
+            if ((GLint(angleRotVolumeCube) % 90) == 0)
+            {
+                audioEnabled = !audioEnabled;
+                emit enableAudio(audioEnabled);
+                currentActions->appendSecondaryAction(8);
+            }
             break;
 
         case BUTTON_PLAY_STORY:

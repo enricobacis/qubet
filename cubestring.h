@@ -68,10 +68,24 @@ private:
     GLuint name; /**< TODO */
     Alphabet *alphabet; /**< TODO */
 
-    QList<Skin*> skins; /**< TODO */
     QList<GLint> angleSteps; /**< TODO */
     QList<GLint> currentAngles;  /**< TODO */
     QList<GLint> finalAngles; /**< TODO */
+    QList<GLuint> letterDisplayLists; /**< TODO */
+
+    /**
+     * @brief
+     *
+     * @param _letter
+     */
+    GLuint createLetterDisplayList(QChar _letter);
+
+    /**
+     * @brief
+     *
+     * @param _skin
+     */
+    GLuint createLetterDisplayList(Skin *_skin);
 
 };
 

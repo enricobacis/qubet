@@ -457,11 +457,10 @@ GLboolean Qubet::loadIcons()
     QDomElement rootElement = document.documentElement();
     QDomElement iconElement = rootElement.firstChildElement("icon");
 
-    while(!iconElement.isNull())
+    while (!iconElement.isNull())
     {
         GLint key = iconElement.attribute("name", "0").toInt();
         GLuint textureID = bindTexture(QImage(iconsPath + "/" + iconElement.attribute("filename")));
-        qDebug() << iconsPath + "/" + iconElement.attribute("filename");
 
         iconsList.insert(key, textureID);
         iconElement = iconElement.nextSiblingElement("icon");

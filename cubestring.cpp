@@ -14,16 +14,16 @@ CubeString::CubeString(QString _label, GLfloat _cubeDimension, GLuint _name, Alp
         currentAngles.append(0);
         finalAngles.append(0);
 
-        skins.append(alphabet->getRandomLetterSkin(label[i]));
+        letterDisplayLists.append(createLetterDisplayList(label[i]));
     }
 }
 
 CubeString::~CubeString()
 {
-    for (int i = 0; i < length; i++)
+    for (int i = 0; i < letterDisplayLists.count(); i++)
     {
-        if (skins[0] != NULL)
-            skins[0]->~Skin();
+        if (letterDisplayLists[i] != 0)
+            glDeleteLists(letterDisplayLists[i], 1);
     }
 }
 
@@ -57,7 +57,7 @@ GLvoid CubeString::draw(GLboolean simplifyForPicking)
                 }
 
                 glRotatef(currentAngles[i], 1.0, 0.0, 0.0);
-                drawPrism(cubeDimension, cubeDimension, cubeDimension, skins[i], true);
+                glCallList(letterDisplayLists[i]);
             glPopMatrix();
             glPopName();
 
@@ -92,4 +92,18 @@ GLvoid CubeString::startLetterRotation(GLuint _letterName, GLint _angleStep, GLi
 GLboolean CubeString::isRotating(GLuint _letterName)
 {
     return (angleSteps[_letterName] == 0 ? false : true);
+}
+
+GLuint CubeString::createLetterDisplayList(QChar letter)
+{
+    return createLetterDisplayList(alphabet->getRandomLetterSkin(letter));
+}
+
+GLuint CubeString::createLetterDisplayList(Skin *_skin)
+{
+    GLuint list = glGenLists(1);
+    glNewList(list, GL_COMPILE);
+    drawPrism(cubeDimension, cubeDimension, cubeDimension, _skin, true);
+    glEndList();
+    return list;
 }
