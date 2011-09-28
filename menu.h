@@ -12,6 +12,7 @@
 #include "menu_defines.h"
 
 #include "skin.h"
+#include "level.h"
 #include "utilities.h"
 #include "actionlist.h"
 #include "cubestring.h"
@@ -42,7 +43,7 @@ public:
      * @param _alphabet is the reference to Qubet's alphabet.
      * @param _parent is a callback variable to the parent of the parent.
      */
-    explicit Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,QString> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent);
+    explicit Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent);
 
     /**
      * @brief Disconnect and Destroy a Menu object.
@@ -67,8 +68,9 @@ private:
 
     QObject *parent;  /**<  It is a callback variable to the parent of the widget. */
     GLint currentSkin; /**< It is the id of the current choosen skin. */
+    GLint currentLevel;  /**< It is the id of the current choosen level. */
     QMap<GLint,Skin*> skinsList; /**< It is the skinsList provided by Qubet object. */
-    QMap<GLint,QString> levelsList; /**< It is the levelsList provided by Qubet object. */
+    QMap<GLint,Level*> levelsList; /**< It is the levelsList provided by Qubet object. */
     QMap<GLint,GLuint> iconsList;  /**< It is the iconsList provided by Qubet object. */
     Alphabet *alphabet; /**< It is the alphabet provided by Qubet. */
     GLint itemSelected; /**< It is the id of the current menu action selected. */
@@ -87,6 +89,7 @@ private:
     CubeString *arcadeButton; /**< It is the arcadeButton CubeString. */
     CubeString *editorButton; /**< It is the editorButton CubeString. */
     CubeString *skinName;  /**< It is the skinName CubeString. */
+    CubeString *levelName; /**< It is the levelName CubeString. */
     CubeString *backButton;  /**< It is the backButton CubeString. */
     CubeString *playButton; /**< It is the playButton CubeString. */
     CubeString *levelsButton; /**< It is the levelsButton CubeString. */
@@ -101,6 +104,18 @@ private:
      * @brief Change the current skin and select the next one.
      */
     GLvoid nextSkin();
+
+    /**
+     * @brief
+     *
+    */
+    GLvoid previousLevel();
+
+    /**
+     * @brief
+     *
+    */
+    GLvoid nextLevel();
 
 
 private slots:

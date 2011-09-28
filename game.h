@@ -32,7 +32,7 @@ public:
      * @param _obstacleModelsList
      * @param _parent
      */
-    explicit Game(GLint _gameType, Skin *_skin, QMap<GLint,QString> &_levelsList, QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *_parent = 0);
+    explicit Game(GLint _gameType, Skin *_skin, QMap<GLint,Level*> &_levelsList, QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *_parent = 0);
 
     /**
      * @brief
@@ -65,7 +65,7 @@ public:
 
 private:
     QObject *parent; /**< TODO */
-    QMap<GLint,QString> levelsList; /**< TODO */
+    QMap<GLint,Level*> levelsList; /**< TODO */
     QMap<GLint,Vector3f*> obstacleModelsList; /**< TODO */
     Skin *skin; /**< TODO */
     Cube *cube; /**< TODO */

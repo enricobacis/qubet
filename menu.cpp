@@ -1,9 +1,10 @@
 #include "menu.h"
 
-Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,QString> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent) :
+Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent) :
     parent(_parent),
     currentSkin(1),
     skinsList(_skinsList),
+    currentLevel(0),
     levelsList(_levelsList),
     iconsList(_iconsList),
     alphabet(_alphabet),
@@ -33,6 +34,7 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,QString> &_levelsList, QMap
     levelsButton = new CubeString("levels", 1, BUTTON_NEXT, alphabet);
 
     skinName = new CubeString(skinsList.value(currentSkin)->getName(), 2, SKIN_NAME, alphabet);
+    levelName = new CubeString("", 2, LEVEL_NAME, alphabet);
 
     GLuint volume_on = iconsList.value(VOLUME_ON);
     GLuint volume_off = iconsList.value(VOLUME_OFF);
@@ -266,6 +268,30 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
 
             glPushMatrix();
                 glTranslatef(15.0, 30.0, 0.0);
+
+
+                glPushName(BUTTON_PREVIOUS_LEVEL);
+                glPushMatrix();
+                    glTranslatef(-9.0, 0.0, 0.0);
+                    glBegin(GL_TRIANGLES);
+                        glVertex3f(-1.0,  0.0,  0.0);
+                        glVertex3f( 1.0,  1.0,  0.0);
+                        glVertex3f( 1.0, -1.0,  0.0);
+                    glEnd();
+                glPopMatrix();
+                glPopName();
+
+                glPushName(BUTTON_NEXT_LEVEL);
+                glPushMatrix();
+                    glTranslatef(9.0, 0.0, 0.0);
+                    glBegin(GL_TRIANGLES);
+                        glVertex3f( 1.0,  0.0,  0.0);
+                        glVertex3f(-1.0,  1.0,  0.0);
+                        glVertex3f(-1.0, -1.0,  0.0);
+                    glEnd();
+                glPopMatrix();
+                glPopName();
+
                 glPushName(BUTTON_BACK);
                 glPushMatrix();
                     glTranslatef(-8.0, -6.0, 0.0);
@@ -304,6 +330,30 @@ GLvoid Menu::nextSkin()
     skinName = new CubeString(skinsList.value(currentSkin)->getName(), 2, SKIN_NAME, alphabet);
 }
 
+GLvoid Menu::previousLevel()
+{
+    if (gameType == ARCADE_MODE && currentLevel == 1)
+        currentLevel = levelsList.count();
+    else if (currentLevel == 0)
+        currentLevel = levelsList.count();
+    else
+        currentLevel -= 1;
+
+    levelName->~CubeString();
+    levelName = new CubeString(levelsList.value(currentLevel)->getName(), 2, SKIN_NAME, alphabet);
+
+}
+
+GLvoid Menu::nextLevel()
+{
+    if (levelsList.find(currentLevel + 1) == levelsList.end())
+        currentLevel = ((gameType == ARCADE_MODE) ? 1 : 0) ;
+    else
+        currentLevel += 1;
+    levelName->~CubeString();
+    levelName = new CubeString(levelsList.value(currentLevel)->getName(), 2, LEVEL_NAME, alphabet);
+}
+
 void Menu::itemClicked(QList<GLuint> listNames)
 {
     if (isMoving)
@@ -335,6 +385,7 @@ void Menu::itemClicked(QList<GLuint> listNames)
             break;
 
         case BUTTON_LEVEL_EDITOR:
+            currentLevel = 0;
             gameType = EDITOR_MODE;
             isMoving = true;
             currentActions->setPrimaryAction(GO_TO_LEVELS_VIEW);
@@ -368,6 +419,10 @@ void Menu::itemClicked(QList<GLuint> listNames)
                 isMoving = true;
                 currentActions->setPrimaryAction(GO_TO_LEVELS_VIEW);
             }
+            break;
+        case BUTTON_NEXT_LEVEL:
+            break;
+        case BUTTON_PREVIOUS_LEVEL:
             break;
         }
     }
@@ -406,6 +461,11 @@ void Menu::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
         case SKIN_NAME:
             if (!skinName->isRotating(listNames.at(1)))
                 skinName->startLetterRotation(listNames.at(1), 6, 1);
+            break;
+
+        case LEVEL_NAME:
+            if (!levelName->isRotating(listNames.at(1)))
+                levelName->startLetterRotation(listNames.at(1), 6, 1);
             break;
         }
     }

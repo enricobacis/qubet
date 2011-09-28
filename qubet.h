@@ -118,7 +118,7 @@ private:
     GLint currentView; /**< It is used to keep track of the current view (menu, game, leveleditor). */
     QString currentText; /**< It is the current string showed on the screen. */
     QMap<GLint,Skin*> skinsList; /**< It is the QMap that contains ids and skin images. */
-    QMap<GLint,QString> levelsList; /**< It is the QMap that contains ids and the names of level files. */
+    QMap<GLint,Level*> levelsList; /**< It is the QMap that contains ids and the names of level files. */
     QMap<GLint,Vector3f*> obstacleModelsList; /**< It is the QMap that contains ids and the dimensions of Obstacles. */
     QMap<GLint,GLuint> iconsList; /**< It is the QMap that contains ids of the icons' texture. */
     QTimer *drawTimer; /**< It is the QTimer to re-draw the scene. */

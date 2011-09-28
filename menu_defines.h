@@ -15,6 +15,9 @@
 #define SKIN_CUBE                   107
 #define BUTTON_PREVIOUS_SKIN        108
 #define BUTTON_NEXT_SKIN            109
+#define BUTTON_NEXT_LEVEL           110
+#define BUTTON_PREVIOUS_LEVEL       111
+#define LEVEL_NAME                  112
 
 //names used in draw method
 #define GO_TO_MAIN_VIEW             9

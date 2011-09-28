@@ -1,6 +1,6 @@
 #include "leveleditor.h"
 
-LevelEditor::LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,QString> &_levelsList, QObject *parent)
+LevelEditor::LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,Level*> &_levelsList, QObject *parent)
 {
 
 }

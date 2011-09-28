@@ -27,7 +27,7 @@ public:
      * @param _levelsList
      * @param parent
      */
-    explicit LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,QString> &_levelsList, QObject *parent = 0);
+    explicit LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,Level*> &_levelsList, QObject *parent = 0);
 
     /**
      * @brief
@@ -44,7 +44,7 @@ public:
     void draw(GLboolean simplifyForPicking = false);
 
 private:
-    QMap<GLint,QString> levelsList; /**< TODO */
+    QMap<GLint,Level*> levelsList; /**< TODO */
     QMap<GLint,Vector3f*> obstacleModelsList; /**< TODO */
     Level *level; /**< TODO */
     GLint state; /**< TODO */
