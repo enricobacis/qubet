@@ -1,9 +1,9 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
-#include <QtOpenGL>
-#include <QMap>
-#include <QImage>
+//#include <QtOpenGL>
+//#include <QMap>
+//#include <QImage>
 
 #include "obstacle.h"
 #include "vector3f.h"

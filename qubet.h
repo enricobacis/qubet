@@ -8,7 +8,8 @@
 #include <QTimer>
 #include <QMap>
 #include <QList>
-#include <QtOpenGL>
+#include <QKeyEvent>
+#include <QString>
 
 #include "alphabet.h"
 #include "menu.h"

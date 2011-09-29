@@ -2,9 +2,9 @@
 #define AUDIOMANAGER_H
 
 #include <QThread>
-#include <QSound>
+//#include <QSound>
 #include <QtOpenGL>
-#include <QDebug>
+//#include <QDebug>
 
 #include <phonon/audiooutput.h>
 #include <phonon/mediaobject.h>

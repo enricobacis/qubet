@@ -1,7 +1,7 @@
 #ifndef CUBESTRING_H
 #define CUBESTRING_H
 
-#include <QtOpenGL>
+//#include <QtOpenGL>
 
 #include "utilities.h"
 

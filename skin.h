@@ -2,8 +2,8 @@
 #define SKIN_H
 
 #include <QtOpenGL>
-#include <QString>
-#include <QImage>
+//#include <QString>
+//#include <QImage>
 
 #include "defines.h"
 

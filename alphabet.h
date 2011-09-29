@@ -1,9 +1,9 @@
 #ifndef ALPHABET_H
 #define ALPHABET_H
 
-#include <QtOpenGL>
-#include <QMap>
-#include <QList>
+//#include <QtOpenGL>
+//#include <QMap>
+//#include <QList>
 
 #include "letter.h"
 #include "skin.h"

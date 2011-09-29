@@ -2,7 +2,7 @@
 #define LETTER_H
 
 #include <QtOpenGL>
-#include <QList>
+//#include <QList>
 
 /**
  * @brief

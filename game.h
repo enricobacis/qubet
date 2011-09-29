@@ -1,9 +1,9 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <QtOpenGL>
-#include <QMap>
-#include <QKeyEvent>
+//#include <QtOpenGL>
+//#include <QMap>
+//#include <QKeyEvent>
 
 
 #include "cube.h"

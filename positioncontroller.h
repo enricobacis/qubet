@@ -1,9 +1,9 @@
 #ifndef POSITIONCONTROLLER_H
 #define POSITIONCONTROLLER_H
 
-#include <QThread>
-#include <QMap>
-#include <QtOpenGL>
+//#include <QThread>
+//#include <QMap>
+//#include <QtOpenGL>
 
 #include "cube.h"
 #include "level.h"

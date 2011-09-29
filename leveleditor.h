@@ -1,9 +1,9 @@
 #ifndef LEVELEDITOR_H
 #define LEVELEDITOR_H
 
-#include <QKeyEvent>
-#include <QMap>
-#include <QtOpenGL>
+//#include <QKeyEvent>
+//#include <QMap>
+//#include <QtOpenGL>
 
 #include "vector3f.h"
 #include "level.h"

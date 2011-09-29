@@ -1,9 +1,9 @@
 #ifndef CUBE_H
 #define CUBE_H
 
-#include <QtOpenGL>
-#include <QTimer>
-#include <QKeyEvent>
+//#include <QtOpenGL>
+//#include <QTimer>
+//#include <QKeyEvent>
 
 #include "level.h"
 #include "skin.h"

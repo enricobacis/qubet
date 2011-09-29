@@ -2,7 +2,7 @@
 #define MAINQUBET_H
 
 #include <QMainWindow>
-#include <QDebug>
+//#include <QDebug>
 
 #include "qubet.h"
 #include "defines.h"

@@ -1,12 +1,12 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include <QtOpenGL>
-#include <QImage>
-#include <QKeyEvent>
-#include <QMap>
-#include <QList>
-#include <QDebug>
+//#include <QtOpenGL>
+//#include <QImage>
+//#include <QKeyEvent>
+//#include <QMap>
+//#include <QList>
+//#include <QDebug>
 
 #include "defines.h"
 

@@ -1,7 +1,7 @@
 #ifndef CUBESTRINGLIST_H
 #define CUBESTRINGLIST_H
 
-#include <QtOpenGL>
+//#include <QtOpenGL>
 #include "cubestring.h"
 
 /**
