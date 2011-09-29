@@ -28,7 +28,8 @@ SOURCES += \
     alphabet.cpp \
     letter.cpp \
     cubestring.cpp \
-    actionlist.cpp
+    actionlist.cpp \
+    cubestringlist.cpp
 
 HEADERS  += \
     vector3f.h \
@@ -51,7 +52,8 @@ HEADERS  += \
     alphabet.h \
     letter.h \
     cubestring.h \
-    actionlist.h
+    actionlist.h \
+    cubestringlist.h
 
 RESOURCES += \
     resources.qrc

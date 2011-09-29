@@ -229,7 +229,7 @@ GLvoid Qubet::connectMenu()
     connectInputEvents(menu);
 
     connect(menu, SIGNAL(playStory(GLint)), this, SLOT(playStory(GLint)));
-    connect(menu, SIGNAL(playArcade(GLint, QString)), this, SLOT(playArcade(GLint, QString)));
+    connect(menu, SIGNAL(playArcade(GLint, GLint)), this, SLOT(playArcade(GLint, GLint)));
     connect(menu, SIGNAL(showLevelEditor()), this, SLOT(showLevelEditor()));
 
     connect(menu, SIGNAL(enableAudio(GLboolean)), audioManager, SLOT(enableAudio(GLboolean)));
@@ -501,23 +501,23 @@ void Qubet::draw()
 
 void Qubet::playStory(GLint skinId)
 {
-    game = new Game(STORY_MODE, skinsList.value(skinId), levelsList, obstacleModelsList, this);
+    game = new Game(skinsList.value(skinId), levelsList, obstacleModelsList, this);
 
     connectGame();
 
-    game->newGameStory();
+    game->startGame();
     currentView = GAME_VIEW;
 
     menuClosed();
 }
 
-void Qubet::playArcade(GLint skinId, QString levelFilename)
+void Qubet::playArcade(GLint skinId, GLint levelId)
 {
-    game = new Game(ARCADE_MODE, skinsList[skinId], levelsList, obstacleModelsList, this);
+    game = new Game(skinsList.value(skinId), levelsList.value(levelId), obstacleModelsList, this);
 
     connectGame();
 
-    game->newGameArcade(levelFilename);
+    game->startGame();
     currentView = GAME_VIEW;
 
     menuClosed();

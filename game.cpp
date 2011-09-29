@@ -1,14 +1,22 @@
 #include "game.h"
 #include "game_defines.h"
 
-Game::Game(GLint _gameType, Skin *_skin, QMap<GLint,Level*> &_levelsList, QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *_parent) :
+Game::Game(Skin *_skin, QMap<GLint,Level*> &_levelsList, QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *_parent) :
     parent(_parent),
     levelsList(_levelsList),
     obstacleModelsList(_obstacleModelsList),
     skin(_skin),
-    gameType(_gameType)
+    gameType(STORY_MODE)
 {
+}
 
+Game::Game(Skin *_skin, Level *_level, QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *_parent) :
+    parent(_parent),
+    level(_level),
+    obstacleModelsList(_obstacleModelsList),
+    skin(_skin),
+    gameType(ARCADE_MODE)
+{
 }
 
 Game::~Game()
@@ -16,12 +24,7 @@ Game::~Game()
     parent->disconnect(this);
 }
 
-void Game::newGameStory()
-{
-
-}
-
-void Game::newGameArcade(QString filename)
+void Game::startGame()
 {
 
 }

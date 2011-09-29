@@ -9,7 +9,10 @@ Alphabet::Alphabet()
 Alphabet::~Alphabet()
 {
     for (QMap<QChar,Letter*>::iterator i = lettersList.begin(); i != lettersList.end(); i++)
-        dynamic_cast<Letter*>(i.value())->~Letter();
+    {
+        if (i.value() != NULL)
+            dynamic_cast<Letter*>(i.value())->~Letter();
+    }
 }
 
 Skin *Alphabet::getRandomLetterSkin(QChar letter)

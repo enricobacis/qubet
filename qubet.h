@@ -309,9 +309,9 @@ private slots:
      *        the player chooses to play the Arcade Mode.
      *
      * @param skinId It is the id of the selected skin.
-     * @param levelFilename  It is the filename of the selected level.
+     * @param levelId It is the id of the selected level.
      */
-    void playArcade(GLint skinId, QString levelFilename);
+    void playArcade(GLint skinId, GLint levelId);
 
     /**
      * @brief This function is a slot linked to the Game and called when
