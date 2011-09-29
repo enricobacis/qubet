@@ -95,6 +95,8 @@ private:
     CubeString *levelsButton; /**< It is the levelsButton CubeString. */
     CubeString *editButton; /**< It is the editButton CubeString. */
 
+    CubeStringList *cubeStudioLabel; /**< TODO */
+
 
     /**
      * @brief Change the current skin and select the previous one.

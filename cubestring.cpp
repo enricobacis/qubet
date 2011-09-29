@@ -118,7 +118,7 @@ GLint CubeString::setCurrentAngle(GLint _firstLetterAngle, GLint _nextLetterDelt
     for (int letter = 0; letter < length; letter++)
     {
         currentAngles[letter] = currentAngle;
-        currentAngle = _nextLetterDelta;
+        currentAngle += _nextLetterDelta;
     }
 
     return currentAngle;
