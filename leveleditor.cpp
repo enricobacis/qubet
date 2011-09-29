@@ -15,6 +15,9 @@ LevelEditor::LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,
     lenghtDisplay(NULL),
     widthDisplay(NULL)
 {
+
+    currentActions = new ActionList(INITIAL_ACTION);
+
     currentLenght = 10;
     currentWidth = 3;
     cameraOffset = new Vector3f(0.0, 0.0, 10.0);
@@ -25,6 +28,8 @@ LevelEditor::LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,
     GLuint volume_on = iconsList.value(VOLUME_ON);
     GLuint volume_off = iconsList.value(VOLUME_OFF);
     volumeSkin = new Skin(0, 0, volume_off, volume_off, volume_on, volume_on);
+
+
 }
 
 LevelEditor::~LevelEditor()
@@ -49,7 +54,7 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
 
     if (!simplifyForPicking)
     {
-        QList<int> actions = currentActions->getAllActions();
+       QList<int> actions = currentActions->getAllActions();
 
         while (!actions.isEmpty())
         {
@@ -142,7 +147,7 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
 
 GLvoid LevelEditor::playAudio()
 {
-    emit playAmbientMusic(":/music/resources/music/editor.mp3");
+    emit playAmbientMusic(":/music/resources/music/menu.mp3");
 }
 
 GLvoid LevelEditor::lenghten()

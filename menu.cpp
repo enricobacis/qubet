@@ -90,7 +90,8 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
         {
             // Primary Actions
 
-            GLint step = actions.takeFirst();
+//            GLint step = actions.takeFirst();
+            GLint step = 0;
             switch (step)
             {
             case INITIAL_MOTION:
@@ -98,7 +99,7 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
 
                 if (cameraOffset->z == 0)
                 {
-                    currentActions->setPrimaryAction(DO_NOTHING);
+                    currentActions->setPrimaryAction(0);
                     currentView = MAIN_VIEW;
                     isMoving = false;
                 }
