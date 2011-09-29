@@ -5,7 +5,6 @@
 #include <QMap>
 #include <QKeyEvent>
 
-#include "game_defines.h"
 
 #include "cube.h"
 #include "level.h"

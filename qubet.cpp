@@ -533,7 +533,7 @@ void Qubet::gameClosed()
 
 void Qubet::showLevelEditor()
 {
-    levelEditor = new LevelEditor(obstacleModelsList, levelsList, this);
+    levelEditor = new LevelEditor(obstacleModelsList, levelsList, iconsList, alphabet, this);
 
     connect(levelEditor, SIGNAL(levelEditorClosed()), this, SLOT(levelEditorClosed()));
 

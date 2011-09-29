@@ -398,6 +398,7 @@
     </qresource>
     <qresource prefix="/music">
         <file>resources/music/menu.mp3</file>
+        <file>resources/music/editor.mp3</file>
     </qresource>
     <qresource prefix="/effects">
         <file>resources/effects/coin.wav</file>

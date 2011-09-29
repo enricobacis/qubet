@@ -1,4 +1,5 @@
 #include "menu.h"
+#include "menu_defines.h"
 
 Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent) :
     parent(_parent),
@@ -202,7 +203,7 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                     }
                     else if (gameType == EDITOR_MODE)
                     {
-                        //emit showLevelEditor();
+                        emit showLevelEditor();
                     }
                 }
                 break;
