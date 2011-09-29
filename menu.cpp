@@ -56,6 +56,21 @@ Menu::~Menu()
     if (backButton != NULL)
         backButton->~CubeString();
 
+    if (playButton != NULL)
+        playButton->~CubeString();
+
+    if (levelsButton != NULL)
+        levelsButton->~CubeString();
+
+    if (editButton != NULL)
+        editButton->~CubeString();
+
+    if (skinName != NULL)
+        skinName->~CubeString();
+
+    if (levelName != NULL)
+        levelName->~CubeString();
+
     if (volumeSkin != NULL)
         volumeSkin->~Skin();
 
@@ -72,6 +87,8 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
 
         while (!actions.isEmpty())
         {
+            // Primary Actions
+
             GLint step = actions.takeFirst();
             switch (step)
             {
@@ -91,7 +108,7 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                 if (gameType == EDITOR_MODE)
                 {
                     cameraOffset->x -= 0.5;
-                    cameraOffset->y -= 0.7;
+                    cameraOffset->y -= 1;
                 }
                 else
                 {
@@ -110,7 +127,7 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                 if (currentView == LEVELS_VIEW)
                 {
                     cameraOffset->x += 0.5;
-                    cameraOffset->y -= 0.7;
+                    cameraOffset->y -= 1;
                 }
                 else
                 {
@@ -129,12 +146,12 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                 if (currentView == MAIN_VIEW)
                 {
                    cameraOffset->x += 0.5;
-                   cameraOffset->y += 0.7;
+                   cameraOffset->y += 1;
                 }
                 else
                 {
                     cameraOffset->x -= 0.5;
-                    cameraOffset->y += 0.7;
+                    cameraOffset->y += 1;
                 }
                 if (cameraOffset->x == 15)
                 {
@@ -172,6 +189,35 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                 }
 
                 break;
+
+            case EXIT_FROM_LEVELS:
+                cameraOffset->y += 2;
+                if (cameraOffset->y == 90)
+                {
+                    currentActions->setPrimaryAction(DO_NOTHING);
+
+                    if (gameType == ARCADE_MODE)
+                    {
+                        //emit playArcade(currentSkin, currentLevel);
+                    }
+                    else if (gameType == EDITOR_MODE)
+                    {
+                        //emit showLevelEditor();
+                    }
+                }
+                break;
+
+            case EXIT_FROM_SKINS:
+                cameraOffset->x += 2;
+                if (cameraOffset->x == 90)
+                {
+                    currentActions->setPrimaryAction(DO_NOTHING);
+                    //emit playStory(currentSkin);
+                }
+
+                break;
+
+            // Secondary Actions
 
             case ROTATE_VOLUMECUBE:
                 angleRotVolumeCube += 5;
@@ -258,7 +304,7 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
             glPopMatrix();
 
             glPushMatrix();
-                glTranslatef(15.0, 21.0, 0.0);
+                glTranslatef(15.0, 30.0, 0.0);
 
                 levelName->draw(simplifyForPicking);
 
@@ -332,7 +378,7 @@ GLvoid Menu::previousLevel()
         currentLevel -= 1;
 
     levelName->~CubeString();
-    levelName = new CubeString(levelsList.value(currentLevel)->getName(), 2, SKIN_NAME, alphabet);
+    levelName = new CubeString(((currentLevel == 0) ? "new" : levelsList.value(currentLevel)->getName()), 2, SKIN_NAME, alphabet);
 }
 
 GLvoid Menu::nextLevel()
@@ -343,7 +389,7 @@ GLvoid Menu::nextLevel()
         currentLevel += 1;
 
     levelName->~CubeString();
-    levelName = new CubeString(levelsList.value(currentLevel)->getName(), 2, LEVEL_NAME, alphabet);
+    levelName = new CubeString(((currentLevel == 0) ? "new" : levelsList.value(currentLevel)->getName()), 2, LEVEL_NAME, alphabet);
 }
 
 GLvoid Menu::buttonBackTriggered()
@@ -374,27 +420,23 @@ GLvoid Menu::buttonNextTriggered()
     {
         if (gameType == STORY_MODE)
         {
-            //emit playStory(currentSkin);
+            isMoving = true;
+            currentActions->setPrimaryAction(EXIT_FROM_SKINS);
         }
         else if  (gameType == ARCADE_MODE)
         {
             isMoving = true;
             currentActions->setPrimaryAction(GO_TO_LEVELS_VIEW);
 
+            // Evito di mostrare l'elemento "new" se la modalita' e' ARCADE (e non EDITOR)
             if (currentLevel == 0)
                 nextLevel();
         }
     }
     else if (currentView == LEVELS_VIEW)
     {
-        if (gameType == ARCADE_MODE)
-        {
-            //emit playArcade(currentSkin, currentLevel);
-        }
-        else if (gameType == EDITOR_MODE)
-        {
-            //emit showLevelEditor();
-        }
+        isMoving = true;
+        currentActions->setPrimaryAction(EXIT_FROM_LEVELS);
     }
 }
 
@@ -491,6 +533,7 @@ void Menu::itemClicked(QList<GLuint> listNames)
 
 void Menu::mouseReleased(QMouseEvent *event)
 {
+    Q_UNUSED(event);
 }
 
 void Menu::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
