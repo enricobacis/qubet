@@ -36,7 +36,16 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<
     editButton = new CubeString("edit", 1, BUTTON_NEXT, alphabet);
 
     skinName = new CubeString(skinsList.value(currentSkin)->getName(), 2, SKIN_NAME, alphabet);
-    levelName = new CubeStringList("new level", 12.0, 8.0, LEVEL_NAME, _alphabet);
+    levelName = new CubeStringList("non tirarmi la maglietta", 12.0, 7.0, LEVEL_NAME, alphabet);
+
+    QList< QPair<QString,GLuint> > list;
+    list.append(QPair<QString,GLuint>("The Cube Studio", 150));
+    list.append(QPair<QString,GLuint>("Distribution", 151));
+    list.append(QPair<QString,GLuint>("presents", 152));
+
+    cubeStudioLabel = new CubeStringList(list, 1.5, alphabet);
+    cubeStudioLabel->setCurrentAngle(0, -20);
+    cubeStudioLabel->startStringListRotation(10, 4);
 
     GLuint volume_on = iconsList.value(VOLUME_ON);
     GLuint volume_off = iconsList.value(VOLUME_OFF);
@@ -233,6 +242,7 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
     }
 
     // Disegno il menu
+
     if (!(isMoving && simplifyForPicking))
     {
         glPushName(BUTTON_VOLUME);
@@ -338,6 +348,8 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
 
         glPopMatrix();
     }
+
+    //cubeStudioLabel->draw(simplifyForPicking);
 }
 
 GLvoid Menu::playAudio()
@@ -377,7 +389,7 @@ GLvoid Menu::previousLevel()
         currentLevel -= 1;
 
     levelName->~CubeStringList();
-    levelName = new CubeStringList(((currentLevel == 0) ? "new level" : levelsList.value(currentLevel)->getName()), 12.0, 8.0, LEVEL_NAME, alphabet);
+    levelName = new CubeStringList(((currentLevel == 0) ? "new level" : levelsList.value(currentLevel)->getName()), 12.0, 7.0, LEVEL_NAME, alphabet);
 }
 
 GLvoid Menu::nextLevel()
@@ -388,7 +400,7 @@ GLvoid Menu::nextLevel()
         currentLevel += 1;
 
     levelName->~CubeStringList();
-    levelName = new CubeStringList(((currentLevel == 0) ? "new level" : levelsList.value(currentLevel)->getName()), 12.0, 8.0, LEVEL_NAME, alphabet);
+    levelName = new CubeStringList(((currentLevel == 0) ? "new level" : levelsList.value(currentLevel)->getName()), 12.0, 7.0, LEVEL_NAME, alphabet);
 }
 
 GLvoid Menu::buttonPlayStoryTriggered()
