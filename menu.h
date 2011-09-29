@@ -121,6 +121,24 @@ private:
     /**
      * @brief
      *
+    */
+    GLvoid buttonPlayStoryTriggered();
+
+    /**
+     * @brief
+     *
+    */
+    GLvoid buttonPlayArcadeTriggered();
+
+    /**
+     * @brief
+     *
+    */
+    GLvoid buttonEditorTriggered();
+
+    /**
+     * @brief
+     *
      */
     GLvoid buttonBackTriggered();
 

@@ -346,6 +346,37 @@ GLvoid Menu::nextLevel()
     levelName = new CubeString(levelsList.value(currentLevel)->getName(), 2, LEVEL_NAME, alphabet);
 }
 
+GLvoid Menu::buttonPlayStoryTriggered()
+{
+    if (currentView == MAIN_VIEW)
+    {
+        gameType = STORY_MODE;
+        isMoving = true;
+        currentActions->setPrimaryAction(GO_TO_SKINS_VIEW);
+    }
+}
+
+GLvoid Menu::buttonPlayArcadeTriggered()
+{
+    if (currentView == MAIN_VIEW)
+    {
+        gameType = ARCADE_MODE;
+        isMoving = true;
+        currentActions->setPrimaryAction(GO_TO_SKINS_VIEW);
+    }
+}
+
+GLvoid Menu::buttonEditorTriggered()
+{
+    if (currentView == MAIN_VIEW)
+    {
+        currentLevel = 0;
+        gameType = EDITOR_MODE;
+        isMoving = true;
+        currentActions->setPrimaryAction(GO_TO_LEVELS_VIEW);
+    }
+}
+
 GLvoid Menu::buttonBackTriggered()
 {
     if (currentView == SKINS_VIEW)
@@ -435,31 +466,15 @@ void Menu::itemClicked(QList<GLuint> listNames)
             break;
 
         case BUTTON_PLAY_STORY:
-            if (currentView == MAIN_VIEW)
-            {
-                gameType = STORY_MODE;
-                isMoving = true;
-                currentActions->setPrimaryAction(GO_TO_SKINS_VIEW);
-            }
+            buttonPlayStoryTriggered();
             break;
 
         case BUTTON_PLAY_ARCADE:
-            if (currentView == MAIN_VIEW)
-            {
-                gameType = ARCADE_MODE;
-                isMoving = true;
-                currentActions->setPrimaryAction(GO_TO_SKINS_VIEW);
-            }
+            buttonPlayArcadeTriggered();
             break;
 
         case BUTTON_LEVEL_EDITOR:
-            if (currentView == MAIN_VIEW)
-            {
-                currentLevel = 0;
-                gameType = EDITOR_MODE;
-                isMoving = true;
-                currentActions->setPrimaryAction(GO_TO_LEVELS_VIEW);
-            }
+            buttonEditorTriggered();
             break;
 
         case BUTTON_PREVIOUS_SKIN:
@@ -542,7 +557,10 @@ void Menu::keyPressed(QKeyEvent *event)
     }
     else if ((key == Qt::Key_Enter) || (key == Qt::Key_Return))
     {
-        buttonNextTriggered();
+        if (currentView == MAIN_VIEW)
+            buttonPlayStoryTriggered();
+        else
+            buttonNextTriggered();
     }
     else if (key == Qt::Key_Left)
     {
@@ -558,4 +576,30 @@ void Menu::keyPressed(QKeyEvent *event)
         else if (currentView == LEVELS_VIEW)
             nextLevel();
     }
+    else if (key == Qt::Key_S)
+    {
+        if (currentView == MAIN_VIEW)
+            buttonPlayStoryTriggered();
+    }
+    else if (key == Qt::Key_A)
+    {
+        if (currentView == MAIN_VIEW )
+            buttonPlayArcadeTriggered();
+    }
+    else if (key == Qt::Key_E)
+    {
+        if (currentView == MAIN_VIEW)
+            buttonEditorTriggered();
+    }
+    else if (key == Qt::Key_Shift && key == Qt::Key_Enter)
+    {
+        if (currentView == MAIN_VIEW )
+            buttonPlayArcadeTriggered();
+    }
+    else if (key == Qt::Key_Shift && key == Qt::Key_Enter && key == Qt::Key_Control)
+    {
+        if (currentView == MAIN_VIEW )
+            buttonEditorTriggered();
+    }
+
 }
