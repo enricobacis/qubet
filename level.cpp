@@ -1,8 +1,8 @@
 #include "level.h"
 
 Level::Level(QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *_parent) :
-    obstacleModelsList(_obstacleModelsList),
     parent(_parent),
+    obstacleModelsList(_obstacleModelsList),
     isLoaded(false)
 {
 }
