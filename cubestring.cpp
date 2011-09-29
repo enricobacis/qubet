@@ -6,19 +6,23 @@ CubeString::CubeString(QString _label, GLfloat _cubeDimension, GLuint _name, Alp
     name(_name),
     alphabet(_alphabet)
 {
-    length = label.length();
+    init();
+}
 
-    for (int i = 0; i < length; i++)
+CubeString::CubeString(QString _label, GLfloat _maxWidth, GLfloat _maxHeight, GLuint _name, Alphabet *_alphabet) :
+    label(_label),
+    name(_name),
+    alphabet(_alphabet)
+{
+    // Calcolo della dimensione
+    if (length > 1)
     {
-        angleSteps.append(0);
-        currentAngles.append(0);
-        finalAngles.append(0);
-
-        if (label[i] == ' ')
-            letterDisplayLists.append(0);
-        else
-            letterDisplayLists.append(createLetterDisplayList(label[i]));
+        cubeDimension = _maxWidth/length;
+        if (cubeDimension > _maxHeight)
+            cubeDimension = _maxHeight;
     }
+
+    init();
 }
 
 CubeString::~CubeString()
@@ -76,9 +80,14 @@ QString CubeString::getLabel()
     return label;
 }
 
+GLuint CubeString::getName()
+{
+    return name;
+}
+
 GLvoid CubeString::startLetterRotation(GLuint _letterName, GLint _angleStep, GLint _turns)
 {
-    if ((_letterName < GLuint(0)) || (_letterName >= GLuint(length)))
+    if (_letterName >= GLuint(length))
         return;
 
     angleSteps[_letterName] = _angleStep;
@@ -92,12 +101,10 @@ GLvoid CubeString::startLetterRotation(GLuint _letterName, GLint _angleStep, GLi
     }
 }
 
-GLvoid CubeString::startLettersRotation(GLint _angleStep, GLint _turns)
+GLvoid CubeString::startStringRotation(GLint _angleStep, GLint _turns)
 {
     for (int letter = 0; letter < length; letter++)
-    {
         startLetterRotation(letter, _angleStep, _turns);
-    }
 }
 
 GLboolean CubeString::isRotating(GLuint _letterName)
@@ -109,7 +116,10 @@ GLint CubeString::setCurrentAngle(GLint _firstLetterAngle, GLint _nextLetterDelt
 {
     GLint currentAngle = _firstLetterAngle;
     for (int letter = 0; letter < length; letter++)
-        currentAngles[letter] = currentAngle++;
+    {
+        currentAngles[letter] = currentAngle;
+        currentAngle = _nextLetterDelta;
+    }
 
     return currentAngle;
 }
@@ -126,4 +136,21 @@ GLuint CubeString::createLetterDisplayList(Skin *_skin)
     drawPrism(cubeDimension, cubeDimension, cubeDimension, _skin, true);
     glEndList();
     return list;
+}
+
+GLvoid CubeString::init()
+{
+    length = label.length();
+
+    for (int i = 0; i < length; i++)
+    {
+        angleSteps.append(0);
+        currentAngles.append(0);
+        finalAngles.append(0);
+
+        if (label[i] == ' ')
+            letterDisplayLists.append(0);
+        else
+            letterDisplayLists.append(createLetterDisplayList(label[i]));
+    }
 }

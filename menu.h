@@ -15,7 +15,7 @@
 #include "level.h"
 #include "utilities.h"
 #include "actionlist.h"
-#include "cubestring.h"
+#include "cubestringlist.h"
 #include "vector3f.h"
 
 
@@ -89,7 +89,7 @@ private:
     CubeString *arcadeButton; /**< It is the arcadeButton CubeString. */
     CubeString *editorButton; /**< It is the editorButton CubeString. */
     CubeString *skinName;  /**< It is the skinName CubeString. */
-    CubeString *levelName; /**< It is the levelName CubeString. */
+    CubeStringList *levelName; /**< It is the levelName CubeString. */
     CubeString *backButton;  /**< It is the backButton CubeString. */
     CubeString *playButton; /**< It is the playButton CubeString. */
     CubeString *levelsButton; /**< It is the levelsButton CubeString. */
@@ -205,9 +205,9 @@ signals:
      * @brief
      *
      * @param skinId
-     * @param levelFilename
+     * @param levelId
      */
-    void playArcade(GLint skinId, QString levelFilename);
+    void playArcade(GLint skinId, GLint levelId);
 
     /**
      * @brief

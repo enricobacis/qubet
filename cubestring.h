@@ -22,7 +22,18 @@ public:
      * @param _firstname
      * @param _alphabet
      */
-    explicit CubeString(QString _label, GLfloat _cubeDimension, GLuint _firstname, Alphabet *_alphabet);
+    explicit CubeString(QString _label, GLfloat _cubeDimension, GLuint _name, Alphabet *_alphabet);
+
+    /**
+     * @brief
+     *
+     * @param _label
+     * @param _maxWidth
+     * @param _maxHeight
+     * @param _name
+     * @param _alphabet
+     */
+    explicit CubeString(QString _label, GLfloat _maxWidth, GLfloat _maxHeight, GLuint _name, Alphabet *_alphabet);
 
     /**
      * @brief
@@ -46,6 +57,12 @@ public:
     /**
      * @brief
      *
+     */
+    GLuint getName();
+
+    /**
+     * @brief
+     *
      * @param _letterName
      * @param _angleStep
      * @param _turns
@@ -58,7 +75,7 @@ public:
      * @param _angleStep
      * @param _turns
      */
-    GLvoid startLettersRotation(GLint _angleStep, GLint _turns);
+    GLvoid startStringRotation(GLint _angleStep, GLint _turns);
 
     /**
      * @brief
@@ -90,6 +107,7 @@ private:
     QList<GLint> finalAngles; /**< TODO */
     QList<GLuint> letterDisplayLists; /**< TODO */
 
+
     /**
      * @brief
      *
@@ -103,6 +121,12 @@ private:
      * @param _skin
      */
     GLuint createLetterDisplayList(Skin *_skin);
+
+    /**
+     * @brief
+     *
+     */
+    GLvoid init();
 
 };
 

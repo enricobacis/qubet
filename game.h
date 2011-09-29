@@ -25,14 +25,23 @@ class Game : public QObject
 
 public:
     /**
-     * @brief
+     * @brief Cunstructor fot the Story Mode.
      *
-     * @param _gameType
      * @param _skin
      * @param _obstacleModelsList
      * @param _parent
      */
-    explicit Game(GLint _gameType, Skin *_skin, QMap<GLint,Level*> &_levelsList, QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *_parent = 0);
+    explicit Game(Skin *_skin, QMap<GLint,Level*> &_levelsList, QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *_parent = 0);
+
+    /**
+     * @brief Constructor for the Arcade Mode.
+     *
+     * @param _skin
+     * @param _level
+     * @param _obstacleModelsList
+     * @param _parent
+     */
+    explicit Game(Skin *_skin, Level *_level, QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *_parent = 0);
 
     /**
      * @brief
@@ -44,15 +53,7 @@ public:
      * @brief
      *
      */
-    void newGameStory();
-
-    /**
-     * @brief
-     *
-     * @param filename
-     */
-    void newGameArcade(QString filename);
-
+    void startGame();
 
     /**
      * @brief Method to draw the game.

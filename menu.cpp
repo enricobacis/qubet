@@ -35,7 +35,7 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<
     editButton = new CubeString("edit", 1, BUTTON_NEXT, alphabet);
 
     skinName = new CubeString(skinsList.value(currentSkin)->getName(), 2, SKIN_NAME, alphabet);
-    levelName = new CubeString("new", 2, LEVEL_NAME, alphabet);
+    levelName = new CubeStringList("new level", 12.0, 8.0, LEVEL_NAME, _alphabet);
 
     GLuint volume_on = iconsList.value(VOLUME_ON);
     GLuint volume_off = iconsList.value(VOLUME_OFF);
@@ -69,7 +69,7 @@ Menu::~Menu()
         skinName->~CubeString();
 
     if (levelName != NULL)
-        levelName->~CubeString();
+        levelName->~CubeStringList();
 
     if (volumeSkin != NULL)
         volumeSkin->~Skin();
@@ -197,13 +197,9 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                     currentActions->setPrimaryAction(DO_NOTHING);
 
                     if (gameType == ARCADE_MODE)
-                    {
-                        //emit playArcade(currentSkin, currentLevel);
-                    }
+                        emit playArcade(currentSkin, currentLevel);
                     else if (gameType == EDITOR_MODE)
-                    {
-                        //emit showLevelEditor();
-                    }
+                        emit showLevelEditor();
                 }
                 break;
 
@@ -212,7 +208,7 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                 if (cameraOffset->x == 90)
                 {
                     currentActions->setPrimaryAction(DO_NOTHING);
-                    //emit playStory(currentSkin);
+                    emit playStory(currentSkin);
                 }
 
                 break;
@@ -304,7 +300,7 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
             glPopMatrix();
 
             glPushMatrix();
-                glTranslatef(15.0, 30.0, 0.0);
+                glTranslatef(15.0, 31.0, 0.0);
 
                 levelName->draw(simplifyForPicking);
 
@@ -317,11 +313,11 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                 glEnd();
                 glPopName();
 
-                glTranslatef(1.0, -6.0, 0.0);
+                glTranslatef(1.0, -7.0, 0.0);
                 backButton->draw(simplifyForPicking);
 
                 glPushName(BUTTON_NEXT_LEVEL);
-                glTranslatef(17.0, 6.0, 0.0);
+                glTranslatef(17.0, 7.0, 0.0);
                 glBegin(GL_TRIANGLES);
                     glVertex3f( 1.0,  0.0,  0.0);
                     glVertex3f(-1.0,  1.0,  0.0);
@@ -329,7 +325,7 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                 glEnd();
                 glPopName();
 
-                glTranslatef(-1.0, -6.0, 0.0);
+                glTranslatef(-1.0, -7.0, 0.0);
                 if (gameType == ARCADE_MODE)
                     playButton->draw(simplifyForPicking);
                 else if (gameType == EDITOR_MODE)
@@ -377,8 +373,8 @@ GLvoid Menu::previousLevel()
     else
         currentLevel -= 1;
 
-    levelName->~CubeString();
-    levelName = new CubeString(((currentLevel == 0) ? "new" : levelsList.value(currentLevel)->getName()), 2, SKIN_NAME, alphabet);
+    levelName->~CubeStringList();
+    levelName = new CubeStringList(((currentLevel == 0) ? "new level" : levelsList.value(currentLevel)->getName()), 12.0, 8.0, LEVEL_NAME, alphabet);
 }
 
 GLvoid Menu::nextLevel()
@@ -388,8 +384,8 @@ GLvoid Menu::nextLevel()
     else
         currentLevel += 1;
 
-    levelName->~CubeString();
-    levelName = new CubeString(((currentLevel == 0) ? "new" : levelsList.value(currentLevel)->getName()), 2, LEVEL_NAME, alphabet);
+    levelName->~CubeStringList();
+    levelName = new CubeStringList(((currentLevel == 0) ? "new level" : levelsList.value(currentLevel)->getName()), 12.0, 8.0, LEVEL_NAME, alphabet);
 }
 
 GLvoid Menu::buttonPlayStoryTriggered()
@@ -583,8 +579,8 @@ void Menu::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
             break;
 
         case LEVEL_NAME:
-            if (!levelName->isRotating(listNames.at(1)))
-                levelName->startLetterRotation(listNames.at(1), 6, 1);
+            if (!levelName->isRotating(listNames.at(1), listNames.at(2)))
+                levelName->startLetterRotation(listNames.at(1), listNames.at(2), 6, 1);
             break;
         }
     }
@@ -644,5 +640,4 @@ void Menu::keyPressed(QKeyEvent *event)
         if (currentView == MAIN_VIEW )
             buttonEditorTriggered();
     }
-
 }
