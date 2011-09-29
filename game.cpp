@@ -1,4 +1,5 @@
 #include "game.h"
+#include "game_defines.h"
 
 Game::Game(Skin *_skin, QMap<GLint,Level*> &_levelsList, QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *_parent) :
     parent(_parent),

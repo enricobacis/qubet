@@ -7,7 +7,9 @@
 
 #include "vector3f.h"
 #include "level.h"
-#include "leveleditor_defines.h"
+#include "cubestring.h"
+#include "alphabet.h"
+#include "actionlist.h"
 
 
 /**
@@ -19,6 +21,7 @@ class LevelEditor : public QObject
     Q_OBJECT
 
 public:
+
     /**
      * @brief
      *
@@ -27,7 +30,7 @@ public:
      * @param _levelsList
      * @param parent
      */
-    explicit LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,Level*> &_levelsList, QObject *parent = 0);
+    explicit LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,Level*> &_levelsList,QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *parent = 0);
 
     /**
      * @brief
@@ -43,35 +46,97 @@ public:
      */
     void draw(GLboolean simplifyForPicking = false);
 
+    /**
+     * @brief launch the signal playAmbientMusic.
+     */
+    GLvoid playAudio();
+
 private:
+
+    QObject *parent;  /**<  It is a callback variable to the parent of the widget. */
     QMap<GLint,Level*> levelsList; /**< TODO */
     QMap<GLint,Vector3f*> obstacleModelsList; /**< TODO */
+    QMap<GLint,GLuint> iconsList;  /**< It is the iconsList provided by Qubet object. */
+    GLboolean audioEnabled;  /**< It is the state of the audio. */
+    GLboolean isMoving; /**< It is the variable that states if the menu is moving or not. */
     Level *level; /**< TODO */
     GLint state; /**< TODO */
+    GLint currentView;  /**< It is the value of the current view */
     Vector3f *cameraPosition; /**< TODO */
-
+    GLuint lenght; /**< TODO */
+    GLuint currentLenght; /**< TODO */
+    GLuint width; /**< TODO */
+    GLuint currentWidth; /**< TODO */
+    Alphabet *alphabet; /**< It is the alphabet provided by Qubet. */
+    ActionList *currentActions; /**< It is the list of the current menu steps. */
+    Vector3f *cameraOffset; /**< It is the camera offset for the editor. */
+    Skin *volumeSkin; /**< It is the skin of the volume button */
+    GLfloat angleRotVolumeCube;  /**< It is the current rotation angle of the volume icon. */
+    CubeString *lenghtDisplay; /**< It is the lenght CubeString. */
+    CubeString *widthDisplay; /**< It is the width CubeString. */
     /**
      * @brief
      *
      */
     void quitEditor();
 
-private slots:
     /**
      * @brief
      *
-     * @param e
-     */
-    void keyPressed(QKeyEvent *e);
+    */
+    GLvoid lenghten();
 
     /**
      * @brief
      *
-     * @param id
+    */
+    GLvoid shorten();
+
+    /**
+     * @brief
+     *
+    */
+    GLvoid enlarge();
+
+    /**
+     * @brief
+     *
+    */
+    GLvoid reduce();
+
+
+private slots:
+
+    /**
+     * @brief Slot called when the user clicks on a item.
+     *
+     * @param listNames is the QList<GLuint> of item's names.
      */
-    void itemClicked(GLint id);
+    void itemClicked(QList<GLuint> listNames);
+
+    /**
+     * @brief Slot called when the user releases the mouse button.
+     *
+     * @param event is the QMouseEvent*.
+     */
+    void mouseReleased(QMouseEvent *event);
+    /**
+     * @brief Slot called when the user moves the mouse.
+     *
+     * @param event is the QMouseEvent*.
+     * @param listNames is the QList<GLuint> of item's names.
+     */
+    void mouseMoved(QMouseEvent *event, QList<GLuint> listNames);
+
+    /**
+     * @brief Slot called when the user presses a key on the keyboard.
+     *
+     * @param event is the QKeyEvent*.
+     */
+    void keyPressed(QKeyEvent *event);
 
 signals:
+
     /**
      * @brief
      *
@@ -83,7 +148,7 @@ signals:
      *
      * @param enabled
      */
-    void enableAudio(bool enabled);
+    void enableAudio(GLboolean enabled);
 
     /**
      * @brief

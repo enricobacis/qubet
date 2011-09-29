@@ -1,4 +1,5 @@
 #include "menu.h"
+#include "menu_defines.h"
 
 Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent) :
     parent(_parent),
@@ -206,7 +207,9 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                     currentActions->setPrimaryAction(DO_NOTHING);
 
                     if (gameType == ARCADE_MODE)
-                        emit playArcade(currentSkin, currentLevel);
+                    {
+                        //emit playArcade(currentSkin, currentLevel);
+                    }
                     else if (gameType == EDITOR_MODE)
                         emit showLevelEditor();
                 }
@@ -217,7 +220,7 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                 if (cameraOffset->x == 90)
                 {
                     currentActions->setPrimaryAction(DO_NOTHING);
-                    emit playStory(currentSkin);
+                    //emit playStory(currentSkin);
                 }
 
                 break;
