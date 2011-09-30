@@ -23,6 +23,7 @@
  */
 enum { DO_NOTHING,
        INITIAL_MOTION,
+       CUBE_STUDIO_DISTRIBUTION, TEAM_34_PROJECT, QUBET,
        GO_TO_MAIN_VIEW, GO_TO_SKINS_VIEW, GO_TO_LEVELS_VIEW,
        ROTATE_SKINCUBE,
        PREVIOUS_SKIN, NEXT_SKIN,
@@ -33,7 +34,12 @@ enum { DO_NOTHING,
 /**
  * @brief Enum used for Menu's currentView
  */
-enum { MAIN_VIEW, SKINS_VIEW, LEVELS_VIEW };
+enum { INTRODUCTION, MAIN_VIEW, SKINS_VIEW, LEVELS_VIEW };
+
+/**
+ * @brief Enum used for Menu's currentSection
+ */
+enum { INTRO_SECTION, MENU_SECTION };
 
 
 #endif // MENU_DEFINES_H

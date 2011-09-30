@@ -9,23 +9,28 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<
     levelsList(_levelsList),
     iconsList(_iconsList),
     alphabet(_alphabet),
-    isMoving(true),
+    isMoving(false),
     gameType(0),
     angleRotCube(0),
     spinCube(0),
     angleRotVolumeCube(0),
     audioEnabled(true),
     volumeSkin(NULL),
-    currentView(MAIN_VIEW),
+    currentView(INTRODUCTION),
+    currentSection(INTRO_SECTION),
+    waitCounter(0),
     storyButton(NULL),
     arcadeButton(NULL),
     editorButton(NULL),
     backButton(NULL),
     playButton(NULL),
-    levelsButton(NULL)
+    levelsButton(NULL),
+    cubeStudioLabel(NULL),
+    team34Label(NULL),
+    qubetLabel(NULL)
 {
-    currentActions = new ActionList(INITIAL_MOTION);
-    cameraOffset = new Vector3f(0.0, 0.0, 10.0);
+    currentActions = new ActionList(CUBE_STUDIO_DISTRIBUTION);
+    cameraOffset = new Vector3f(-90.0, -30.0, 20.0);
 
     storyButton = new CubeString("story", 3, BUTTON_PLAY_STORY, alphabet);
     arcadeButton = new CubeString("arcade", 3, BUTTON_PLAY_ARCADE, alphabet);
@@ -36,16 +41,26 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<
     editButton = new CubeString("edit", 1, BUTTON_NEXT, alphabet);
 
     skinName = new CubeString(skinsList.value(currentSkin)->getName(), 2, SKIN_NAME, alphabet);
-    levelName = new CubeStringList("non tirarmi la maglietta", 12.0, 7.0, LEVEL_NAME, alphabet);
+    levelName = new CubeStringList("new level", 12.0, 7.0, LEVEL_NAME, alphabet);
 
-    QList< QPair<QString,GLuint> > list;
-    list.append(QPair<QString,GLuint>("The Cube Studios", 150));
-    list.append(QPair<QString,GLuint>("Distribution", 151));
-    list.append(QPair<QString,GLuint>("presents", 152));
+    QList< QPair<QString,GLuint> > labelsList;
+    labelsList.append(QPair<QString,GLuint>("cube studios", 0));
+    labelsList.append(QPair<QString,GLuint>("distribution", 0));
+    labelsList.append(QPair<QString,GLuint>("presents", 0));
 
     cubeStudiosLabel = new CubeStringList(list, 1.5, alphabet);
     cubeStudiosLabel->setCurrentAngle(0, -20);
     cubeStudiosLabel->startStringListRotation(10, 4);
+
+    labelsList.clear();
+    labelsList.append(QPair<QString,GLuint>("a team 34", 0));
+    labelsList.append(QPair<QString,GLuint>("project", 0));
+
+    team34Label = new CubeStringList(labelsList, 1.5, alphabet);
+    team34Label->setCurrentAngle(0, -20);
+
+    qubetLabel = new CubeString("qubet", 3, 0, alphabet);
+    qubetLabel->setCurrentAngle(0, -20);
 
     GLuint volume_on = iconsList.value(VOLUME_ON);
     GLuint volume_off = iconsList.value(VOLUME_OFF);
@@ -81,10 +96,17 @@ Menu::~Menu()
     if (levelName != NULL)
         levelName->~CubeStringList();
 
+    if (cubeStudioLabel != NULL)
+        cubeStudioLabel->~CubeStringList();
+
+    if (team34Label != NULL)
+        team34Label->~CubeStringList();
+
+    if (qubetLabel != NULL)
+        qubetLabel->~CubeString();
+
     if (volumeSkin != NULL)
         volumeSkin->~Skin();
-
-    //parent->disconnect(this);
 }
 
 GLvoid Menu::draw(GLboolean simplifyForPicking)
@@ -102,34 +124,89 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
             GLint step = actions.takeFirst();
             switch (step)
             {
-            case INITIAL_MOTION:
-                cameraOffset->z -= 0.5;
+            case CUBE_STUDIO_DISTRIBUTION:
+                cameraOffset->z -= 1.0f;
 
-                if (cameraOffset->z == 0)
+                if (cameraOffset->z == 0.0f)
                 {
-                    currentActions->setPrimaryAction(DO_NOTHING);
-                    currentView = MAIN_VIEW;
-                    isMoving = false;
+                    waitCounter = 100;
+                    currentActions->setPrimaryAction(TEAM_34_PROJECT);
+                }
+
+                break;
+
+            case TEAM_34_PROJECT:
+                if (waitCounter != 0)
+                {
+                    waitCounter--;
+
+                    if (waitCounter == 0)
+                        team34Label->startStringListRotation(10, 4);
+                }
+                else
+                {
+                    cameraOffset->x += 1;
+
+                    if (cameraOffset->x == -60)
+                    {
+                        waitCounter = 80;
+                        currentActions->setPrimaryAction(QUBET);
+                    }
+                }
+
+                break;
+
+            case QUBET:
+                if (waitCounter != 0)
+                {
+                    waitCounter--;
+
+                    if (waitCounter == 0)
+                        qubetLabel->startStringRotation(10, 8);
+                }
+                else
+                {
+                    cameraOffset->y += 1;
+
+                    if (cameraOffset->y == 0)
+                    {
+                        waitCounter = 120;
+                        currentActions->setPrimaryAction(GO_TO_MAIN_VIEW);
+                    }
                 }
 
                 break;
 
             case GO_TO_MAIN_VIEW:
-                if (gameType == EDITOR_MODE)
+                if (waitCounter != 0)
                 {
-                    cameraOffset->x -= 0.5;
-                    cameraOffset->y -= 1;
+                    waitCounter--;
                 }
                 else
                 {
-                    cameraOffset->x -= 1;
-                }
+                    if (currentView == INTRODUCTION)
+                    {
+                        cameraOffset->x += 2;
 
-                if(cameraOffset->x == 0)
-                {
-                    currentActions->setPrimaryAction(DO_NOTHING);
-                    currentView = MAIN_VIEW;
-                    isMoving = false;
+                        if (cameraOffset->x == -30)
+                            currentSection = MENU_SECTION;
+                    }
+                    else if (gameType == EDITOR_MODE)
+                    {
+                        cameraOffset->x -= 0.5;
+                        cameraOffset->y -= 1;
+                    }
+                    else
+                    {
+                        cameraOffset->x -= 1;
+                    }
+
+                    if(cameraOffset->x == 0)
+                    {
+                        currentActions->setPrimaryAction(DO_NOTHING);
+                        currentView = MAIN_VIEW;
+                        isMoving = false;
+                    }
                 }
                 break;
 
@@ -257,94 +334,111 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
 
             glTranslatef(-cameraOffset->x, -cameraOffset->y, -cameraOffset->z);
 
-            glTranslatef(0.0, 5.0, 0.0);
-            storyButton->draw(simplifyForPicking);
+            switch (currentSection)
+            {
+            case INTRO_SECTION:
+                glTranslatef(-90.0, -30.0, 0.0);
+                cubeStudioLabel->draw(simplifyForPicking);
 
-            glTranslatef(0.0, -10.0, 0.0);
-            editorButton->draw(simplifyForPicking);
+                glTranslatef(30.0, 0.0, 0.0);
+                team34Label->draw(simplifyForPicking);
 
-            glTranslatef(0.0, 5.0, 0.0);
-            arcadeButton->draw(simplifyForPicking);
+                glTranslatef(0.0, 30.0, 0.0);
+                qubetLabel->draw(simplifyForPicking);
 
-            glPushMatrix();
-                glTranslatef(30.0, 4.0, 0.0);
+                break;
 
-                skinName->draw(simplifyForPicking);
-                QString comment = skinsList.value(currentSkin)->getComment();
-                dynamic_cast<QGLWidget*>(parent)->renderText(-comment.length()*0.1225, -2.5, 0.0, comment);
+            case MENU_SECTION:
+                glTranslatef(0.0, 5.0, 0.0);
+                storyButton->draw(simplifyForPicking);
 
-                glTranslatef(0.0, -6.0, 0.0);
+                glTranslatef(0.0, -10.0, 0.0);
+                editorButton->draw(simplifyForPicking);
 
-                glPushName(SKIN_CUBE);
+                glTranslatef(0.0, 5.0, 0.0);
+                arcadeButton->draw(simplifyForPicking);
+
                 glPushMatrix();
-                    glRotatef(angleRotCube, 0.0, -1.0, 0.0);
-                    drawPrism(3.0, 3.0, 3.0, skinsList.value(currentSkin));
+                    glTranslatef(30.0, 4.0, 0.0);
+
+                    skinName->draw(simplifyForPicking);
+                    QString comment = skinsList.value(currentSkin)->getComment();
+                    dynamic_cast<QGLWidget*>(parent)->renderText(-comment.length()*0.1225, -2.5, 0.0, comment);
+
+                    glTranslatef(0.0, -6.0, 0.0);
+
+                    glPushName(SKIN_CUBE);
+                    glPushMatrix();
+                        glRotatef(angleRotCube, 0.0, -1.0, 0.0);
+                        drawPrism(3.0, 3.0, 3.0, skinsList.value(currentSkin));
+                    glPopMatrix();
+                    glPopName();
+
+                    glPushName(BUTTON_PREVIOUS_SKIN);
+                    glTranslatef(-5.0, 0.0, 0.0);
+                    glBegin(GL_TRIANGLES);
+                        glVertex3f(-1.0,  0.0,  0.0);
+                        glVertex3f( 1.0,  1.0,  0.0);
+                        glVertex3f( 1.0, -1.0,  0.0);
+                    glEnd();
+                    glPopName();
+
+                    glTranslatef(-3.0, -4.0, 0.0);
+                    backButton->draw(simplifyForPicking);
+                    glPopName();
+
+                    glPushName(BUTTON_NEXT_SKIN);
+                    glTranslatef(13.0, 4.0, 0.0);
+                    glBegin(GL_TRIANGLES);
+                        glVertex3f( 1.0,  0.0,  0.0);
+                        glVertex3f(-1.0,  1.0,  0.0);
+                        glVertex3f(-1.0, -1.0,  0.0);
+                    glEnd();
+                    glPopName();
+
+                    glTranslatef(3.0, -4.0, 0.0);
+                    if(gameType == STORY_MODE)
+                        playButton->draw(simplifyForPicking);
+                    else
+                        levelsButton->draw(simplifyForPicking);
+
                 glPopMatrix();
-                glPopName();
 
-                glPushName(BUTTON_PREVIOUS_SKIN);
-                glTranslatef(-5.0, 0.0, 0.0);
-                glBegin(GL_TRIANGLES);
-                    glVertex3f(-1.0,  0.0,  0.0);
-                    glVertex3f( 1.0,  1.0,  0.0);
-                    glVertex3f( 1.0, -1.0,  0.0);
-                glEnd();
-                glPopName();
+                glPushMatrix();
+                    glTranslatef(15.0, 31.0, 0.0);
 
-                glTranslatef(-3.0, -4.0, 0.0);
-                backButton->draw(simplifyForPicking);
-                glPopName();
+                    levelName->draw(simplifyForPicking);
 
-                glPushName(BUTTON_NEXT_SKIN);
-                glTranslatef(13.0, 4.0, 0.0);
-                glBegin(GL_TRIANGLES);
-                    glVertex3f( 1.0,  0.0,  0.0);
-                    glVertex3f(-1.0,  1.0,  0.0);
-                    glVertex3f(-1.0, -1.0,  0.0);
-                glEnd();
-                glPopName();
+                    glPushName(BUTTON_PREVIOUS_LEVEL);
+                    glTranslatef(-9.0, 0.0, 0.0);
+                    glBegin(GL_TRIANGLES);
+                        glVertex3f(-1.0,  0.0,  0.0);
+                        glVertex3f( 1.0,  1.0,  0.0);
+                        glVertex3f( 1.0, -1.0,  0.0);
+                    glEnd();
+                    glPopName();
 
-                glTranslatef(3.0, -4.0, 0.0);
-                if(gameType == STORY_MODE)
-                    playButton->draw(simplifyForPicking);
-                else
-                    levelsButton->draw(simplifyForPicking);
+                    glTranslatef(1.0, -7.0, 0.0);
+                    backButton->draw(simplifyForPicking);
 
-            glPopMatrix();
+                    glPushName(BUTTON_NEXT_LEVEL);
+                    glTranslatef(17.0, 7.0, 0.0);
+                    glBegin(GL_TRIANGLES);
+                        glVertex3f( 1.0,  0.0,  0.0);
+                        glVertex3f(-1.0,  1.0,  0.0);
+                        glVertex3f(-1.0, -1.0,  0.0);
+                    glEnd();
+                    glPopName();
 
-            glPushMatrix();
-                glTranslatef(15.0, 31.0, 0.0);
+                    glTranslatef(-1.0, -7.0, 0.0);
+                    if (gameType == ARCADE_MODE)
+                        playButton->draw(simplifyForPicking);
+                    else if (gameType == EDITOR_MODE)
+                        editButton->draw(simplifyForPicking);
 
-                levelName->draw(simplifyForPicking);
-
-                glPushName(BUTTON_PREVIOUS_LEVEL);
-                glTranslatef(-9.0, 0.0, 0.0);
-                glBegin(GL_TRIANGLES);
-                    glVertex3f(-1.0,  0.0,  0.0);
-                    glVertex3f( 1.0,  1.0,  0.0);
-                    glVertex3f( 1.0, -1.0,  0.0);
-                glEnd();
-                glPopName();
-
-                glTranslatef(1.0, -7.0, 0.0);
-                backButton->draw(simplifyForPicking);
-
-                glPushName(BUTTON_NEXT_LEVEL);
-                glTranslatef(17.0, 7.0, 0.0);
-                glBegin(GL_TRIANGLES);
-                    glVertex3f( 1.0,  0.0,  0.0);
-                    glVertex3f(-1.0,  1.0,  0.0);
-                    glVertex3f(-1.0, -1.0,  0.0);
-                glEnd();
-                glPopName();
-
-                glTranslatef(-1.0, -7.0, 0.0);
-                if (gameType == ARCADE_MODE)
-                    playButton->draw(simplifyForPicking);
-                else if (gameType == EDITOR_MODE)
-                    editButton->draw(simplifyForPicking);
-
-            glPopMatrix();
+                glPopMatrix();
+                break;
+            }
 
         glPopMatrix();
     }

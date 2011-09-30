@@ -1,13 +1,6 @@
 #ifndef MENU_H
 #define MENU_H
 
-//#include <QtOpenGL>
-//#include <QImage>
-//#include <QKeyEvent>
-//#include <QMap>
-//#include <QList>
-//#include <QDebug>
-
 #include "defines.h"
 
 #include "skin.h"
@@ -65,7 +58,7 @@ public:
 
 private:
 
-    QObject *parent;  /**<  It is a callback variable to the parent of the widget. */
+    Qubet *parent;  /**<  It is a callback variable to the parent of the widget. */
     GLint currentSkin; /**< It is the id of the current choosen skin. */
     GLint currentLevel;  /**< It is the id of the current choosen level. */
     QMap<GLint,Skin*> skinsList; /**< It is the skinsList provided by Qubet object. */
@@ -83,6 +76,8 @@ private:
     GLboolean audioEnabled;  /**< It is the state of the audio. */
     Skin *volumeSkin; /**< It is the skin of the volume button */
     GLint currentView;  /**< It is the value of the current view */
+    GLint currentSection; /**< It is used to tell the menu to draw the introduction or the menu.*/
+    GLint waitCounter; /**< It is an incremental variable to wait from intro screens. */
 
     CubeString *storyButton; /**< It is the storyButton CubeString. */
     CubeString *arcadeButton; /**< It is the arcadeButton CubeString. */
@@ -94,7 +89,9 @@ private:
     CubeString *levelsButton; /**< It is the levelsButton CubeString. */
     CubeString *editButton; /**< It is the editButton CubeString. */
 
-    CubeStringList *cubeStudiosLabel; /**< TODO */
+    CubeStringList *cubeStudiosLabel; /**< It is the Cube studios distribution CubeStringList. */
+    CubeStringList *team34Label; /**< It is the team 34 CubeStringList. */
+    CubeString *qubetLabel; /**< It is the Qubet CubeString. */
 
 
     /**

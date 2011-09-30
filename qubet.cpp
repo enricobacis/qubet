@@ -9,13 +9,13 @@ Qubet::Qubet(QWidget *parent) :
     audioManager(NULL),
     alphabet(NULL),
     width(WIDTH),
-    height(HEIGHT)
+    height(HEIGHT),
+    mouseMovedMode(1)
 {
     // OpenGL dependencies will be initialized in InitializeGL function.
 
     setFocusPolicy(Qt::StrongFocus);
     audioManager = new AudioManager(this);
-    setMouseTracking(true);
 }
 
 Qubet::~Qubet()
@@ -108,7 +108,8 @@ GLvoid Qubet::mouseReleaseEvent(QMouseEvent *event)
 
 GLvoid Qubet::mouseMoveEvent(QMouseEvent *event)
 {
-    emit mouseMoved(event, getPickedName(event->x(), event->y()));
+    if (mouseMovedMode != 0)
+        emit mouseMoved(event, getPickedName(event->x(), event->y()));
 }
 
 GLvoid Qubet::keyPressEvent(QKeyEvent *event)
@@ -124,6 +125,7 @@ GLvoid Qubet::connectInputEvents(const QObject *receiver)
     connect(this, SIGNAL(keyPressed(QKeyEvent*)), receiver, SLOT(keyPressed(QKeyEvent*)));
     connect(this, SIGNAL(mouseMoved(QMouseEvent*, QList<GLuint>)), receiver, SLOT(mouseMoved(QMouseEvent*, QList<GLuint>)));
     connect(this, SIGNAL(mouseReleased(QMouseEvent*)), receiver, SLOT(mouseReleased(QMouseEvent*)));
+    connect(receiver, SIGNAL(setMouseMovementTracking(int)), this, SLOT(setMouseMovementTracking(int)));
 }
 
 QList<GLuint> Qubet::getPickedName(GLint mouseX, GLint mouseY)
@@ -229,7 +231,7 @@ GLvoid Qubet::connectGame()
 
 GLvoid Qubet::connectMenu()
 {
-    connectInputEvents(menu);
+    //connectInputEvents(menu);
 
     connect(menu, SIGNAL(playStory(GLint)), this, SLOT(playStory(GLint)));
     connect(menu, SIGNAL(playArcade(GLint, GLint)), this, SLOT(playArcade(GLint, GLint)));
@@ -549,4 +551,21 @@ void Qubet::levelEditorClosed()
     levelEditor = NULL;
 
     showMenu();
+}
+
+void Qubet::setMouseMovementTracking(int mode)
+{
+    mouseMovedMode = mode;
+
+    switch (mode)
+    {
+    case 0:
+    case 1:
+        setMouseTracking(false);
+        break;
+
+    case 2:
+        setMouseTracking(true);
+        break;
+    }
 }
