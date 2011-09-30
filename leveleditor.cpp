@@ -111,9 +111,6 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
 
             //SET NAME VIEW DRAWING
             glPushMatrix();
-
-
-
             glPopMatrix();
 
             //SET PARAM VIEW DRAWING
@@ -129,47 +126,51 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
             glTranslatef(-5.0, -4.5, 0.0); //return to (0.0, 0.0, 0.0)
 
             glPushName(BUTTON_LENGHTEN);
-            glTranslatef(-6.0, 2, 0.0);
+            glTranslatef(-7.0, 2, 1.5);
             glBegin(GL_TRIANGLES);
                 glVertex3f(0.0, 1.0,  0.0);
                 glVertex3f(1.0, -1.0,  0.0);
                 glVertex3f(-1.0, -1.0,  0.0);
             glEnd();
+            glTranslatef(0.0, 0.0, -1.5);
             glPopName();
 
             glTranslatef(0.0, -3.5, 0.0);
             lenghtDisplay->draw(simplifyForPicking);
 
-            glTranslatef(7.0, 0.0, 0.0);
             glPushName(BUTTON_REDUCE);
+            glTranslatef(7, 0.0, 1.5);
             glBegin(GL_TRIANGLES);
                 glVertex3f(-1.0,  0.0,  0.0);
                 glVertex3f( 1.0,  1.0,  0.0);
                 glVertex3f( 1.0, -1.0,  0.0);
             glEnd();
+            glTranslatef(0.0, 0.0, -1.5);
             glPopName();
 
-            glTranslatef(5.0, 0.0, 0.0);
+            glTranslatef(4.5, 0.0, 0.0);
             widthDisplay->draw(simplifyForPicking);
 
-            glTranslatef(5.0, 0.0, 0.0);
             glPushName(BUTTON_ENLARGE);
+            glTranslatef(4.5, 0.0, 1.5);
             glBegin(GL_TRIANGLES);
                 glVertex3f( 1.0,  0.0,  0.0);
                 glVertex3f(-1.0,  1.0,  0.0);
                 glVertex3f(-1.0, -1.0,  0.0);
             glEnd();
+            glTranslatef(0.0, 0.0, -1.5);
             glPopName();
 
-            glTranslatef(-16.0, 0.0, 0.0);//return to (-6.0,0.0,0.0)
+            glTranslatef(-16, 0.0, 0.0);//return to (-6.0,0.0,0.0)
 
             glPushName(BUTTON_SHORTEN);
-            glTranslatef(0.0, -3.5, 0.0);
+            glTranslatef(0.0, -3.5, 1.5);
             glBegin(GL_TRIANGLES);
                 glVertex3f(-1.0,  1.0,  0.0);
                 glVertex3f( 1.0,  1.0,  0.0);
                 glVertex3f( 0.0, -1.0,  0.0);
             glEnd();
+            glTranslatef(0.0, 0.0, -1.5);
             glPopName();
         glPopMatrix();
         //end of set param view
