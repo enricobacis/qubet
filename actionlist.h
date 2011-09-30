@@ -57,7 +57,7 @@ public:
      *
      * @param _secondaryAction
      */
-    int removeSecondaryAction(int _secondaryAction);
+    void removeSecondaryAction(int _secondaryAction);
 
     /**
      * @brief

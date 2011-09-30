@@ -48,9 +48,9 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<
     labelsList.append(QPair<QString,GLuint>("distribution", 0));
     labelsList.append(QPair<QString,GLuint>("presents", 0));
 
-    cubeStudioLabel = new CubeStringList(labelsList, 1.5, alphabet);
-    cubeStudioLabel->setCurrentAngle(0, -20);
-    cubeStudioLabel->startStringListRotation(10, 4);
+    cubeStudiosLabel = new CubeStringList(list, 1.5, alphabet);
+    cubeStudiosLabel->setCurrentAngle(0, -20);
+    cubeStudiosLabel->startStringListRotation(10, 4);
 
     labelsList.clear();
     labelsList.append(QPair<QString,GLuint>("a team 34", 0));
@@ -443,7 +443,7 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
         glPopMatrix();
     }
 
-    //cubeStudioLabel->draw(simplifyForPicking);
+    //cubeStudiosLabel->draw(simplifyForPicking);
 }
 
 GLvoid Menu::playAudio()

@@ -215,9 +215,12 @@ GLvoid Qubet::connectAudio(const QObject *sender)
 {
     connect(sender, SIGNAL(enableAudio(GLboolean)), audioManager, SLOT(enableAudio(GLboolean)));
     connect(sender, SIGNAL(playAmbientMusic(QString)), audioManager, SLOT(playAmbientMusic(QString)));
-    connect(sender, SIGNAL(pauseAmbientMusic()), audioManager, SLOT(pauseAmbientMusic()));
-    connect(sender, SIGNAL(continueAmbientMusic()), audioManager, SLOT(continueAmbientMusic()));
     connect(sender, SIGNAL(playEffect(GLint)), audioManager, SLOT(playEffect(GLint)));
+    if(sender == game)
+    {
+        connect(sender, SIGNAL(pauseAmbientMusic()), audioManager, SLOT(pauseAmbientMusic()));
+        connect(sender, SIGNAL(continueAmbientMusic()), audioManager, SLOT(continueAmbientMusic()));
+    }
 }
 
 GLvoid Qubet::connectGame()
@@ -234,9 +237,7 @@ GLvoid Qubet::connectMenu()
     connect(menu, SIGNAL(playArcade(GLint, GLint)), this, SLOT(playArcade(GLint, GLint)));
     connect(menu, SIGNAL(showLevelEditor()), this, SLOT(showLevelEditor()));
 
-    connect(menu, SIGNAL(enableAudio(GLboolean)), audioManager, SLOT(enableAudio(GLboolean)));
-    connect(menu, SIGNAL(playAmbientMusic(QString)), audioManager, SLOT(playAmbientMusic(QString)));
-    connect(menu, SIGNAL(playEffect(GLint)), audioManager, SLOT(playEffect(GLint)));
+    connectAudio(menu);
 }
 
 GLvoid Qubet::showMenu()
@@ -249,6 +250,7 @@ GLvoid Qubet::showMenu()
 
 GLvoid Qubet::menuClosed()
 {
+    menu->disconnect();
     menu->~Menu();
     menu = NULL;
 }
@@ -535,17 +537,12 @@ void Qubet::gameClosed()
 
 void Qubet::showLevelEditor()
 {
-    levelEditor = new LevelEditor(obstacleModelsList, levelsList, iconsList, alphabet, this);
-
-    connect(levelEditor, SIGNAL(levelEditorClosed()), this, SLOT(levelEditorClosed()));
-
-    connect(levelEditor, SIGNAL(enableAudio(GLboolean)), audioManager, SLOT(enableAudio(GLboolean)));
-    connect(levelEditor, SIGNAL(playAmbientMusic(QString)), audioManager, SLOT(playAmbientMusic(QString)));
-    connect(levelEditor, SIGNAL(playEffect(GLint)), audioManager, SLOT(playEffect(GLint)));
-
+    //menuClosed();
     currentView = LEVELEDITOR_VIEW;
-
-    menuClosed();
+    levelEditor = new LevelEditor(obstacleModelsList, levelsList, iconsList, alphabet, this);
+    connectInputEvents(levelEditor);
+    connect(levelEditor, SIGNAL(levelEditorClosed()), this, SLOT(levelEditorClosed()));
+    connectAudio(levelEditor);
 }
 
 void Qubet::levelEditorClosed()

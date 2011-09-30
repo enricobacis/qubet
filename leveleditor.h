@@ -60,7 +60,6 @@ private:
     GLboolean audioEnabled;  /**< It is the state of the audio. */
     GLboolean isMoving; /**< It is the variable that states if the menu is moving or not. */
     Level *level; /**< TODO */
-    GLint state; /**< TODO */
     GLint currentView;  /**< It is the value of the current view */
     Vector3f *cameraPosition; /**< TODO */
     GLuint lenght; /**< TODO */
@@ -74,6 +73,10 @@ private:
     GLfloat angleRotVolumeCube;  /**< It is the current rotation angle of the volume icon. */
     CubeString *lenghtDisplay; /**< It is the lenght CubeString. */
     CubeString *widthDisplay; /**< It is the width CubeString. */
+    CubeString *lenghtLabel;  /**< It is the lenghtLabel CubeString.*/
+    CubeString *widthLabel;  /**< It is the widthLabel CubeString */
+    CubeString *create; /**< It is the create button CubeString */
+
     /**
      * @brief
      *
