@@ -1,26 +1,12 @@
 #ifndef QUBET_H
 #define QUBET_H
 
-#include <QGLWidget>
-#include <QtOpenGL>
-#include <QtXml>
 #include <QDomElement>
-#include <QTimer>
-#include <QMap>
-#include <QList>
-#include <QKeyEvent>
-#include <QString>
 
-#include "alphabet.h"
 #include "menu.h"
 #include "game.h"
-#include "cube.h"
 #include "audiomanager.h"
 #include "leveleditor.h"
-#include "skin.h"
-#include "defines.h"
-#include "vector3f.h"
-
 
 /**
  * @brief This class rapresents an instance of the QGLWidget Qubet.
@@ -383,7 +369,7 @@ signals:
      *
      * @param enabled is the variable that states if the audio is to enable or not.
      */
-    void enableAudio(GLboolean enabled);
+    void enableAudio(bool enabled);
 
     /**
      * @brief Signal emitted to play the ambient music.
@@ -397,7 +383,7 @@ signals:
      *
      * @param effectId is the id of the effect to play.
      */
-    void playEffect(GLint effectId);
+    void playEffect(int effectId);
 
 };
 

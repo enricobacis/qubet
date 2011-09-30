@@ -214,9 +214,9 @@ GLvoid Qubet::errorLoading()
 
 GLvoid Qubet::connectAudio(const QObject *sender)
 {
-    connect(sender, SIGNAL(enableAudio(GLboolean)), audioManager, SLOT(enableAudio(GLboolean)));
+    connect(sender, SIGNAL(enableAudio(bool)), audioManager, SLOT(enableAudio(bool)));
     connect(sender, SIGNAL(playAmbientMusic(QString)), audioManager, SLOT(playAmbientMusic(QString)));
-    connect(sender, SIGNAL(playEffect(GLint)), audioManager, SLOT(playEffect(GLint)));
+    connect(sender, SIGNAL(playEffect(int)), audioManager, SLOT(playEffect(int)));
 }
 
 GLvoid Qubet::connectGame()

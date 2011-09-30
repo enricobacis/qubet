@@ -2,14 +2,14 @@
 #define SKIN_H
 
 #include <QtOpenGL>
-//#include <QString>
-//#include <QImage>
 
 #include "defines.h"
 
-
 /**
  * @brief
+ *
+ * @version 1.0
+ * @author \#34
  */
 class Skin
 {

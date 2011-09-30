@@ -1,15 +1,10 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include "defines.h"
-
 #include "skin.h"
 #include "level.h"
-#include "utilities.h"
 #include "actionlist.h"
 #include "cubestringlist.h"
-#include "vector3f.h"
-
 
 /**
  * @brief Menu class used to show and manage the game menu.
@@ -226,7 +221,7 @@ signals:
      *
      * @param enabled is the variable that states if the audio is to enable or not.
      */
-    void enableAudio(GLboolean enabled);
+    void enableAudio(bool enabled);
 
     /**
      * @brief Signal emitted to play the ambient music.
@@ -240,7 +235,7 @@ signals:
      *
      * @param effectId is the id of the effect to play.
      */
-    void playEffect(GLint effectId);
+    void playEffect(int effectId);
 
 };
 

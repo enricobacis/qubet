@@ -1,11 +1,7 @@
 #ifndef OBSTACLE_H
 #define OBSTACLE_H
 
-//#include <QtOpenGL>
-//#include <QColor>
-
 #include "vector3f.h"
-
 
 /**
  * @brief This class rapresents an Obstacle.

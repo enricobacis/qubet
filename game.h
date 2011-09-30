@@ -1,22 +1,13 @@
 #ifndef GAME_H
 #define GAME_H
 
-//#include <QtOpenGL>
-//#include <QMap>
-//#include <QKeyEvent>
-
-
-#include "cube.h"
-#include "level.h"
 #include "positioncontroller.h"
-#include "skin.h"
-
-#include "vector3f.h"
-
 
 /**
  * @brief
  *
+ * @version 1.0
+ * @author \#34
  */
 class Game : public QObject
 {
@@ -65,11 +56,11 @@ public:
 
 private:
     QObject *parent; /**< TODO */
+    Skin *skin; /**< TODO */
+    Level *level; /**< TODO */
     QMap<GLint,Level*> levelsList; /**< TODO */
     QMap<GLint,Vector3f*> obstacleModelsList; /**< TODO */
-    Skin *skin; /**< TODO */
     Cube *cube; /**< TODO */
-    Level *level; /**< TODO */
     PositionController *positionController; /**< TODO */
     GLint state; /**< TODO */
     GLint gameType; /**< TODO */
@@ -191,7 +182,7 @@ signals:
      *
      * @param enabled is the variable that states if the audio is to enable or not.
      */
-    void enableAudio(GLboolean enabled);
+    void enableAudio(bool enabled);
 
     /**
      * @brief Signal emitted to play the ambient music.
@@ -205,7 +196,7 @@ signals:
      *
      * @param effectId is the id of the effect to play.
      */
-    void playEffect(GLint effectId);
+    void playEffect(int effectId);
 
 };
 

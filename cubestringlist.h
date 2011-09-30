@@ -1,12 +1,13 @@
 #ifndef CUBESTRINGLIST_H
 #define CUBESTRINGLIST_H
 
-//#include <QtOpenGL>
 #include "cubestring.h"
 
 /**
  * @brief
  *
+ * @version 1.0
+ * @author \#34
  */
 class CubeStringList
 {
