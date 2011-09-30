@@ -114,7 +114,7 @@ public:
      * @param _firstLetterAngle
      * @param _nextLetterDelta
      */
-    GLint setCurrentAngle(GLint _firstLetterAngle, GLint _nextLetterDelta = 0);
+    GLfloat setCurrentAngle(GLfloat _firstLetterAngle, GLfloat _nextLetterDelta = 0);
 
 
 private:
