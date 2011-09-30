@@ -83,6 +83,8 @@ private:
     GLboolean audioEnabled;  /**< It is the state of the audio. */
     Skin *volumeSkin; /**< It is the skin of the volume button */
     GLint currentView;  /**< It is the value of the current view */
+    GLint currentSection; /**< It is used to tell the menu to draw the introduction or the menu.*/
+    GLint waitCounter; /**< It is an incremental variable to wait from intro screens. */
 
     CubeString *storyButton; /**< It is the storyButton CubeString. */
     CubeString *arcadeButton; /**< It is the arcadeButton CubeString. */
@@ -94,7 +96,9 @@ private:
     CubeString *levelsButton; /**< It is the levelsButton CubeString. */
     CubeString *editButton; /**< It is the editButton CubeString. */
 
-    CubeStringList *cubeStudioLabel; /**< TODO */
+    CubeStringList *cubeStudioLabel; /**< It is the Cube studios distribution CubeStringList. */
+    CubeStringList *team34Label; /**< It is the team 34 CubeStringList. */
+    CubeString *qubetLabel; /**< It is the Qubet CubeString. */
 
 
     /**
