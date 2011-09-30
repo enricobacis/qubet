@@ -1,13 +1,6 @@
 #ifndef MENU_H
 #define MENU_H
 
-//#include <QtOpenGL>
-//#include <QImage>
-//#include <QKeyEvent>
-//#include <QMap>
-//#include <QList>
-//#include <QDebug>
-
 #include "defines.h"
 
 #include "skin.h"
@@ -65,7 +58,7 @@ public:
 
 private:
 
-    QObject *parent;  /**<  It is a callback variable to the parent of the widget. */
+    Qubet *parent;  /**<  It is a callback variable to the parent of the widget. */
     GLint currentSkin; /**< It is the id of the current choosen skin. */
     GLint currentLevel;  /**< It is the id of the current choosen level. */
     QMap<GLint,Skin*> skinsList; /**< It is the skinsList provided by Qubet object. */

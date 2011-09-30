@@ -131,6 +131,7 @@ private:
 
     GLint width; /**< It is the current widget width. */
     GLint height; /**< It is the current widget height. */
+    GLint mouseMovedMode; /**< It is the variable that tells which mouse mode is enabled. See the documentation of setMouseMovementTracking(int mode) for the available modes.*/
 
 
     // Signal <-> Slot Management
@@ -331,6 +332,19 @@ private slots:
      *        the player chooses to close the current LevelEditor instance.
      */
     void levelEditorClosed();
+
+    /**
+     * @brief This slot is to set the Mouse Move Tracking sensibility.
+     *        The modes are:
+     *          0 - no signal emitted.
+     *          1 - the signal mouseMoved is emitted only when the mouse is moved
+     *              and one of the mouse buttons are clicked.
+     *          2 - the signal mouseMoved is emitted always when the mouse is
+     *              moved.
+     *
+     * @param mode It is the selected mode.
+     */
+    void setMouseMovementTracking(int mode);
 
 
 signals:

@@ -107,8 +107,6 @@ Menu::~Menu()
 
     if (volumeSkin != NULL)
         volumeSkin->~Skin();
-
-    parent->disconnect(this);
 }
 
 GLvoid Menu::draw(GLboolean simplifyForPicking)
