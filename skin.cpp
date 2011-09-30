@@ -35,6 +35,13 @@ Skin::Skin(GLuint _x_plus, GLuint _x_minus, GLuint _y_plus, GLuint _y_minus, GLu
 
 Skin::~Skin()
 {
+    for (int i = 0; i < 6; i++)
+    {
+        GLuint textureID = getTexture(i);
+
+        if (textureID != 0)
+            glDeleteTextures(1, &textureID);
+    }
 }
 
 void Skin::setName(QString _name)
