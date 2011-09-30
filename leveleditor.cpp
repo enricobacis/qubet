@@ -20,15 +20,19 @@ LevelEditor::LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,
 
     currentLenght = 50;
     currentWidth = 3;
+    cameraOffset = new Vector3f(-30.0, 0.0, 0.0);
 
     lenghtDisplay = new CubeString(QString::number(currentLenght), 3, LENGHT_DISPLAY, alphabet);
     widthDisplay = new CubeString(QString::number(currentWidth), 3, WIDTH_DISPLAY, alphabet);
 
-    lenghtLabel = new CubeString("lenght", 1.5, LENGHT_LABEL, alphabet);
-    widthLabel = new CubeString("width", 1.5, WIDTH_LABEL, alphabet);
+    labelLenght = new CubeString("lenght", 1.5, LABEL_LENGHT, alphabet);
+    labelWidth = new CubeString("width", 1.5, LABEL_WIDTH, alphabet);
 
-    create = new CubeString("create", 1, CREATE_BUTTON, alphabet);
+    create = new CubeString("create", 1, BUTTON_NEXT, alphabet);
+    next = new CubeString("next", 1, BUTTON_NEXT, alphabet);
+    setLevelNameLabel = new CubeString("set level name", 1.5, SET_LEVEL_NAME_LABEL, alphabet);
 
+    setLevelNameForm = new CubeStringList("set level name", 12, 7, 0, alphabet);
     GLuint volume_on = iconsList.value(VOLUME_ON);
     GLuint volume_off = iconsList.value(VOLUME_OFF);
     volumeSkin = new Skin(0, 0, volume_off, volume_off, volume_on, volume_on);
@@ -47,11 +51,20 @@ LevelEditor::~LevelEditor()
     if (widthDisplay != NULL)
         widthDisplay->~CubeString();
 
-    if (lenghtLabel != NULL)
-        lenghtLabel->~CubeString();
+    if (labelLenght != NULL)
+        labelLenght->~CubeString();
 
-    if (widthLabel != NULL)
-        widthLabel->~CubeString();
+    if (labelWidth != NULL)
+        labelWidth->~CubeString();
+
+    if (setLevelNameLabel != NULL)
+        setLevelNameLabel->~CubeString();
+
+    if (setLevelNameForm != NULL)
+        setLevelNameForm->~CubeStringList();
+
+    if (next != NULL)
+        next->~CubeString();
 }
 
 void LevelEditor::quitEditor()
@@ -99,8 +112,7 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
             }
         }
     }
-
-    // Disegno l'editor
+    // Disegno l' editor
     if (!(isMoving && simplifyForPicking))
     {
         glPushName(BUTTON_VOLUME);
@@ -117,6 +129,13 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
 
             // Set Name View
             glPushMatrix();
+                glTranslatef(-30.0f, 6.0f, 0.0f);
+                setLevelNameLabel->draw(simplifyForPicking);
+                glTranslatef(8.5f, -13.0f, 0.0f);
+                next->draw(simplifyForPicking);
+                glTranslatef(-8.5f, 6.0f, 0.0f);
+                setLevelNameForm->draw(simplifyForPicking);
+
             glPopMatrix();
 
             // Set Parameters View
@@ -125,10 +144,10 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
             glTranslatef(-8.5, 7.0, 0.0);
 
             glTranslatef(-6.0, 4.5, 0.0);
-            lenghtLabel->draw(simplifyForPicking);
+            labelLenght->draw(simplifyForPicking);
 
             glTranslatef(12.0, 0.0, 0.0);
-            widthLabel->draw(simplifyForPicking);
+            labelWidth->draw(simplifyForPicking);
 
             // Return to (0.0, 0.0, 0.0)
             glTranslatef(-5.0, -4.5, 0.0);
@@ -264,7 +283,7 @@ void LevelEditor::itemClicked(QList<GLuint> listNames)
              enlarge();
              break;
 
-         case CREATE_BUTTON:
+         case BUTTON_NEXT:
              //newLevel(currentLenght,currentWidth);
              //editLevel(newLevel);
              break;
@@ -296,13 +315,13 @@ void LevelEditor::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
                 lenghtDisplay->startLetterRotation(listNames.at(1), 6, 1);
             break;
 
-        case LENGHT_LABEL:
-            if (!lenghtLabel->isRotating(listNames.at(1)))
+        case LABEL_LENGHT:
+            if (!labelLenght->isRotating(listNames.at(1)))
             {
                 if (listNames.at(1) % 2 == 0)
-                    lenghtLabel->startLetterRotation(listNames.at(1),6,2);
+                    labelLenght->startLetterRotation(listNames.at(1),6,2);
                 else
-                    lenghtLabel->startLetterRotation(listNames.at(1),12,4);
+                    labelLenght->startLetterRotation(listNames.at(1),12,4);
             }
             break;
 
@@ -311,13 +330,13 @@ void LevelEditor::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
                 widthDisplay->startLetterRotation(listNames.at(1), 6, 1);
             break;
 
-        case WIDTH_LABEL:
-            if (!widthLabel->isRotating(listNames.at(1)))
+        case LABEL_WIDTH:
+            if (!labelWidth->isRotating(listNames.at(1)))
             {
                 if (listNames.at(1) % 2 == 0)
-                    widthLabel->startLetterRotation(listNames.at(1),6,2);
+                    labelWidth->startLetterRotation(listNames.at(1),6,2);
                 else
-                    widthLabel->startLetterRotation(listNames.at(1),12,4);
+                    labelWidth->startLetterRotation(listNames.at(1),12,4);
             }
         }
     }

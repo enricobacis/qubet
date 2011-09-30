@@ -3,7 +3,7 @@
 
 #include "vector3f.h"
 #include "level.h"
-#include "cubestring.h"
+#include "cubestringlist.h"
 #include "alphabet.h"
 #include "actionlist.h"
 
@@ -69,9 +69,12 @@ private:
     GLfloat angleRotVolumeCube;  /**< It is the current rotation angle of the volume icon. */
     CubeString *lenghtDisplay; /**< It is the lenght CubeString. */
     CubeString *widthDisplay; /**< It is the width CubeString. */
-    CubeString *lenghtLabel;  /**< It is the lenghtLabel CubeString.*/
-    CubeString *widthLabel;  /**< It is the widthLabel CubeString */
-    CubeString *create; /**< It is the create button CubeString */
+    CubeString *labelLenght;  /**< It is the labelLenght CubeString.*/
+    CubeString *labelWidth;  /**< It is the labelWidth CubeString. */
+    CubeString *create; /**< It is the create button CubeString. */
+    CubeString *setLevelNameLabel;  /**< It is the setLevelName CubeString. */
+    CubeString *next;  /**< It is the next button CubeString. */
+    CubeStringList *setLevelNameForm;  /**< It is the setLevelNameForm cubeStringList  */
 
     /**
      * @brief

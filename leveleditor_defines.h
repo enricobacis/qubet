@@ -12,9 +12,11 @@
 #define BUTTON_REDUCE               304
 #define BUTTON_LENGHTEN             305
 #define BUTTON_SHORTEN              306
-#define LENGHT_LABEL                307
-#define WIDTH_LABEL                 308
-#define CREATE_BUTTON               309
+#define LABEL_LENGHT                307
+#define LABEL_WIDTH                 308
+#define BUTTON_NEXT                 309
+#define SET_LEVEL_NAME_LABEL        310
+#define SET_LEVEL_NAME_FORM         311
 
 #define MIN_LEVEL_LENGHT            10
 #define MAX_LEVEL_LENGHT            300
