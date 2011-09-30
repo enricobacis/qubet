@@ -25,7 +25,7 @@ AudioManager::~AudioManager()
     parent->disconnect(this);
 }
 
-void AudioManager::enableAudio(GLboolean enabled)
+void AudioManager::enableAudio(bool enabled)
 {
     if (audioEnabled && !enabled)
     {
@@ -52,7 +52,7 @@ void AudioManager::enqueueMediaObject()
     mediaObject->enqueue(currentFileName);
 }
 
-void AudioManager::playEffect(GLint effectId)
+void AudioManager::playEffect(int effectId)
 {
     if(audioEnabled)
         effectsList.at(effectId)->play();

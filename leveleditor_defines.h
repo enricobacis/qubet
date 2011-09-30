@@ -4,7 +4,6 @@
 // Names used in the LevelEditor View
 // This name will be in the format 3xx
 
-
 #define BUTTON_VOLUME               300
 #define LENGHT_DISPLAY              301
 #define WIDTH_DISPLAY               302

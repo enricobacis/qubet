@@ -1,17 +1,13 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
-//#include <QtOpenGL>
-//#include <QMap>
-//#include <QImage>
-
 #include "obstacle.h"
-#include "vector3f.h"
-
 
 /**
  * @brief
  *
+ * @version 1.0
+ * @author \#34
  */
 class Level : public QObject
 {

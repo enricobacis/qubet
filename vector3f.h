@@ -4,7 +4,6 @@
 #include <QtOpenGL>
 #include <math.h>
 
-
 /**
  * @brief Structure that rapresents a Vector of float in a 3-D space.
  *

@@ -27,7 +27,7 @@ void Cube::jump()
 
 void Cube::draw()
 {
-    //dynamic_cast<QGLWidget*>(parent)->makeCurrent();
+
 }
 
 void Cube::updatePosition()

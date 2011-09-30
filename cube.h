@@ -1,23 +1,21 @@
 #ifndef CUBE_H
 #define CUBE_H
 
-//#include <QtOpenGL>
-//#include <QTimer>
-//#include <QKeyEvent>
-
 #include "level.h"
 #include "skin.h"
-#include "vector3f.h"
 
 /**
  * @brief
  *
+ * @version 1.0
+ * @author \#34
  */
 class Cube : public QObject
 {
     Q_OBJECT
 
 public:
+
     /**
      * @brief
      *
@@ -64,6 +62,7 @@ public:
      */
     void updatePosition();
 
+
 private:
     Level *level; /**< TODO */
     Skin *skin; /**< TODO */
@@ -75,7 +74,9 @@ private:
     GLfloat scaleFactor; /**< TODO */
     GLfloat jumpStartTime; /**< TODO */
 
+
 private slots:
+
     /**
      * @brief
      *
@@ -89,7 +90,9 @@ private slots:
      */
     void keyPressed(QKeyEvent *e);
 
+
 signals:
+
     /**
      * @brief
      *

@@ -1,9 +1,6 @@
 #ifndef UTILITIES_H
 #define UTILITIES_H
 
-//#include <QtOpenGL>
-//#include <QGLWidget>
-
 #include "alphabet.h"
 
 /**

@@ -2,7 +2,7 @@
 #define AUDIOMANAGER_H
 
 #include <QThread>
-#include <QtOpenGL>
+#include <QDir>
 
 #include <phonon/audiooutput.h>
 #include <phonon/mediaobject.h>
@@ -10,6 +10,8 @@
 /**
  * @brief
  *
+ * @version 1.0
+ * @author \#34
  */
 class AudioManager : public QThread
 {
@@ -33,7 +35,7 @@ public:
 private:
     QObject *parent;
     QString currentFileName; /**< TODO */
-    QSound *ambientMusic; /**< TODO */
+    //QSound *ambientMusic; /**< TODO */
     bool audioEnabled; /**< TODO */
     Phonon::MediaObject *mediaObject; /**< TODO */
     QList<Phonon::MediaObject*> effectsList; /**< TODO */
@@ -52,7 +54,7 @@ private slots:
      *
      * @param enabled
      */
-    void enableAudio(GLboolean enabled);
+    void enableAudio(bool enabled);
 
     /**
      * @brief
@@ -72,7 +74,7 @@ private slots:
      *
      * @param effectId
      */
-    void playEffect(GLint effectId);
+    void playEffect(int effectId);
 
 };
 

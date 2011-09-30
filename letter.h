@@ -2,11 +2,12 @@
 #define LETTER_H
 
 #include <QtOpenGL>
-//#include <QList>
 
 /**
  * @brief
  *
+ * @version 1.0
+ * @author \#34
  */
 class Letter
 {

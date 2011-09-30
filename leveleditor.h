@@ -1,16 +1,15 @@
 #ifndef LEVELEDITOR_H
 #define LEVELEDITOR_H
 
-#include "vector3f.h"
 #include "level.h"
 #include "cubestring.h"
-#include "alphabet.h"
 #include "actionlist.h"
-
 
 /**
  * @brief
  *
+ * @version 1.0
+ * @author \#34
  */
 class LevelEditor : public QObject
 {
@@ -160,7 +159,7 @@ signals:
      *
      * @param enabled is the variable that states if the audio is to enable or not.
      */
-    void enableAudio(GLboolean enabled);
+    void enableAudio(bool enabled);
 
     /**
      * @brief Signal emitted to play the ambient music.
@@ -174,7 +173,7 @@ signals:
      *
      * @param effectId is the id of the effect to play.
      */
-    void playEffect(GLint effectId);
+    void playEffect(int effectId);
 
 };
 
