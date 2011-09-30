@@ -12,11 +12,7 @@ Qubet::Qubet(QWidget *parent) :
     height(HEIGHT),
     mouseMovedMode(1)
 {
-    // OpenGL dependencies will be initialized in InitializeGL function.
-
-    setFocusPolicy(Qt::StrongFocus);
-    audioManager = new AudioManager(this);
-    connectAudio(this);
+    // Inizialization is done in the initializeGL() function.
 }
 
 Qubet::~Qubet()
@@ -66,15 +62,6 @@ GLvoid Qubet::initializeGL()
     glLightfv(GL_LIGHT0, GL_SPECULAR, specularLight);
 
     glShadeModel(GL_SMOOTH);
-
-    drawTimer = new QTimer(this);
-    connect(drawTimer, SIGNAL(timeout()), this, SLOT(draw()));
-    drawTimer->start(30);
-
-    if (!load())
-        errorLoading();
-    else
-        loadingCompleted();
 }
 
 GLvoid Qubet::paintGL()
@@ -82,6 +69,9 @@ GLvoid Qubet::paintGL()
     glMatrixMode(GL_MODELVIEW);
     drawScene();
     swapBuffers();
+
+    if (!loadDone)
+        initQubet();
 }
 
 GLvoid Qubet::resizeGL(GLint _width, GLint _height)
@@ -118,6 +108,23 @@ GLvoid Qubet::keyPressEvent(QKeyEvent *event)
     emit keyPressed(event);
 
     QWidget::keyPressEvent(event);
+}
+
+GLvoid Qubet::initQubet()
+{
+    loadDone = true;
+    setFocusPolicy(Qt::StrongFocus);
+    audioManager = new AudioManager(this);
+    connectAudio(this);
+
+    if (!load())
+        errorLoading();
+    else
+        loadingCompleted();
+
+    drawTimer = new QTimer(this);
+    connect(drawTimer, SIGNAL(timeout()), this, SLOT(draw()));
+    drawTimer->start(30);
 }
 
 GLvoid Qubet::connectInputEvents(const QObject *receiver)
