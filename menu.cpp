@@ -1,4 +1,5 @@
 #include "menu.h"
+#include "defines.h"
 #include "menu_defines.h"
 
 Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent) :
@@ -30,7 +31,7 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<
     qubetLabel(NULL)
 {
     currentActions = new ActionList(CUBE_STUDIO_DISTRIBUTION);
-    cameraOffset = new Vector3f(-90.0f, -30.0f, 20.0f);
+    cameraOffset = new Vector3f(-90.0f, -30.0f, 18.0f);
 
     storyButton = new CubeString("story", 3.0f, BUTTON_PLAY_STORY, alphabet);
     arcadeButton = new CubeString("arcade", 3.0f, BUTTON_PLAY_ARCADE, alphabet);

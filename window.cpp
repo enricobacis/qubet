@@ -1,4 +1,5 @@
 #include "window.h"
+#include "defines.h"
 
 Window::Window(QWidget *parent) :
     QMainWindow(parent)

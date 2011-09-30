@@ -3,8 +3,6 @@
 
 #include <QtOpenGL>
 
-#include "defines.h"
-
 /**
  * @brief
  *

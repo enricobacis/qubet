@@ -1,4 +1,5 @@
 #include "qubet.h"
+#include "defines.h"
 
 Qubet::Qubet(QWidget *parent) :
     QGLWidget(QGLFormat(QGL::DoubleBuffer), parent),
@@ -10,9 +11,10 @@ Qubet::Qubet(QWidget *parent) :
     alphabet(NULL),
     width(WIDTH),
     height(HEIGHT),
-    mouseMovedMode(1)
+    mouseMovedMode(1),
+    loadDone(false)
 {
-    // Inizialization is done in the initializeGL() function.
+    // Inizialization is done in the initializeGL() and paintGL() functions.
 }
 
 Qubet::~Qubet()

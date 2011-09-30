@@ -1,4 +1,5 @@
 #include "skin.h"
+#include "defines.h"
 
 Skin::Skin() :
     x_plus (NULL),
