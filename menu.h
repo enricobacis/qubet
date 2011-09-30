@@ -50,15 +50,10 @@ public:
      */
     GLvoid draw(GLboolean simplifyForPicking = false);
 
-    /**
-     * @brief launch the signal playAmbientMusic.
-     */
-    GLvoid playAudio();
-
 
 private:
 
-    Qubet *parent;  /**<  It is a callback variable to the parent of the widget. */
+    QObject *parent;  /**<  It is a callback variable to the parent of the widget. */
     GLint currentSkin; /**< It is the id of the current choosen skin. */
     GLint currentLevel;  /**< It is the id of the current choosen level. */
     QMap<GLint,Skin*> skinsList; /**< It is the skinsList provided by Qubet object. */
@@ -214,23 +209,36 @@ signals:
     void showLevelEditor();
 
     /**
-     * @brief
+     * @brief This signal is emitted to set the Qubet's Mouse Move Tracking sensibility.
+     *        The modes are:
+     *          0 - no signal emitted.
+     *          1 - the signal mouseMoved is emitted only when the mouse is moved
+     *              and one of the mouse buttons are clicked.
+     *          2 - the signal mouseMoved is emitted always when the mouse is
+     *              moved.
      *
-     * @param enabled
+     * @param mode It is the selected mode.
+     */
+    void setMouseMovementTracking(int mode);
+
+    /**
+     * @brief Signal emitted to enable or disable the audio.
+     *
+     * @param enabled is the variable that states if the audio is to enable or not.
      */
     void enableAudio(GLboolean enabled);
 
     /**
-     * @brief
+     * @brief Signal emitted to play the ambient music.
      *
-     * @param filename
+     * @param filename is the filename to play.
      */
     void playAmbientMusic(QString filename);
 
     /**
-     * @brief
+     * @brief Signal emitted to play an effect.
      *
-     * @param effectId
+     * @param effectId is the id of the effect to play.
      */
     void playEffect(GLint effectId);
 

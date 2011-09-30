@@ -378,6 +378,27 @@ signals:
      */
     void keyPressed(QKeyEvent *event);
 
+    /**
+     * @brief Signal emitted to enable or disable the audio.
+     *
+     * @param enabled is the variable that states if the audio is to enable or not.
+     */
+    void enableAudio(GLboolean enabled);
+
+    /**
+     * @brief Signal emitted to play the ambient music.
+     *
+     * @param filename is the filename to play.
+     */
+    void playAmbientMusic(QString filename);
+
+    /**
+     * @brief Signal emitted to play an effect.
+     *
+     * @param effectId is the id of the effect to play.
+     */
+    void playEffect(GLint effectId);
+
 };
 
 #endif // QUBET_H

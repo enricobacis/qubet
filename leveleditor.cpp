@@ -29,18 +29,18 @@ LevelEditor::LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,
 
     create = new CubeString("create", 1, CREATE_BUTTON, alphabet);
 
-
-
     GLuint volume_on = iconsList.value(VOLUME_ON);
     GLuint volume_off = iconsList.value(VOLUME_OFF);
     volumeSkin = new Skin(0, 0, volume_off, volume_off, volume_on, volume_on);
-
 
     currentView = SET_PARAM_VIEW;
 }
 
 LevelEditor::~LevelEditor()
 {
+    this->disconnect(parent);
+    parent->disconnect(this);
+
     if (lenghtDisplay != NULL)
         lenghtDisplay->~CubeString();
 
@@ -52,13 +52,10 @@ LevelEditor::~LevelEditor()
 
     if (widthLabel != NULL)
         widthLabel->~CubeString();
-
-    parent->disconnect(this);
 }
 
 void LevelEditor::quitEditor()
 {
-
 }
 
 void LevelEditor::draw(GLboolean simplifyForPicking)
@@ -94,7 +91,8 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
             }
         }
     }
-    // Disegno l' editor
+
+    // Disegno l'editor
     if (!(isMoving && simplifyForPicking))
     {
         glPushName(BUTTON_VOLUME);
@@ -109,14 +107,14 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
 
             glTranslatef(-cameraOffset->x, -cameraOffset->y, -cameraOffset->z);
 
-            //SET NAME VIEW DRAWING
+            // Set Name View
             glPushMatrix();
 
 
 
             glPopMatrix();
 
-            //SET PARAM VIEW DRAWING
+            // Set Parameters View
             glTranslatef(8.5, -7.0, 0.0);
             create->draw(simplifyForPicking);
             glTranslatef(-8.5, 7.0, 0.0);
@@ -126,7 +124,9 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
 
             glTranslatef(12.0, 0.0, 0.0);
             widthLabel->draw(simplifyForPicking);
-            glTranslatef(-5.0, -4.5, 0.0); //return to (0.0, 0.0, 0.0)
+
+            // Return to (0.0, 0.0, 0.0)
+            glTranslatef(-5.0, -4.5, 0.0);
 
             glPushName(BUTTON_LENGHTEN);
             glTranslatef(-6.0, 2, 0.0);
@@ -161,7 +161,8 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
             glEnd();
             glPopName();
 
-            glTranslatef(-16.0, 0.0, 0.0);//return to (-6.0,0.0,0.0)
+            // Return to (-6.0,0.0,0.0)
+            glTranslatef(-16.0, 0.0, 0.0);
 
             glPushName(BUTTON_SHORTEN);
             glTranslatef(0.0, -3.5, 0.0);
@@ -172,7 +173,6 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
             glEnd();
             glPopName();
         glPopMatrix();
-        //end of set param view
     }
 }
 

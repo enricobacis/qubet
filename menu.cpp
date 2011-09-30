@@ -25,7 +25,7 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<
     backButton(NULL),
     playButton(NULL),
     levelsButton(NULL),
-    cubeStudioLabel(NULL),
+    cubeStudiosLabel(NULL),
     team34Label(NULL),
     qubetLabel(NULL)
 {
@@ -48,7 +48,7 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<
     labelsList.append(QPair<QString,GLuint>("distribution", 0));
     labelsList.append(QPair<QString,GLuint>("presents", 0));
 
-    cubeStudiosLabel = new CubeStringList(list, 1.5, alphabet);
+    cubeStudiosLabel = new CubeStringList(labelsList, 1.5, alphabet);
     cubeStudiosLabel->setCurrentAngle(0, -20);
     cubeStudiosLabel->startStringListRotation(10, 4);
 
@@ -69,6 +69,9 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<
 
 Menu::~Menu()
 {
+    this->disconnect(parent);
+    parent->disconnect(this);
+
     if (storyButton != NULL)
         storyButton->~CubeString();
 
@@ -96,8 +99,8 @@ Menu::~Menu()
     if (levelName != NULL)
         levelName->~CubeStringList();
 
-    if (cubeStudioLabel != NULL)
-        cubeStudioLabel->~CubeStringList();
+    if (cubeStudiosLabel != NULL)
+        cubeStudiosLabel->~CubeStringList();
 
     if (team34Label != NULL)
         team34Label->~CubeStringList();
@@ -189,7 +192,10 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                         cameraOffset->x += 2;
 
                         if (cameraOffset->x == -30)
+                        {
                             currentSection = MENU_SECTION;
+                            emit setMouseMovementTracking(MOUSE_MOVED_FULL);
+                        }
                     }
                     else if (gameType == EDITOR_MODE)
                     {
@@ -338,7 +344,7 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
             {
             case INTRO_SECTION:
                 glTranslatef(-90.0, -30.0, 0.0);
-                cubeStudioLabel->draw(simplifyForPicking);
+                cubeStudiosLabel->draw(simplifyForPicking);
 
                 glTranslatef(30.0, 0.0, 0.0);
                 team34Label->draw(simplifyForPicking);
@@ -442,13 +448,6 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
 
         glPopMatrix();
     }
-
-    //cubeStudiosLabel->draw(simplifyForPicking);
-}
-
-GLvoid Menu::playAudio()
-{
-    emit playAmbientMusic(":/music/resources/music/menu.mp3");
 }
 
 GLvoid Menu::previousSkin()

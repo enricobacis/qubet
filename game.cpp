@@ -21,6 +21,7 @@ Game::Game(Skin *_skin, Level *_level, QMap<GLint,Vector3f*> &_obstacleModelsLis
 
 Game::~Game()
 {
+    this->disconnect(parent);
     parent->disconnect(this);
 }
 

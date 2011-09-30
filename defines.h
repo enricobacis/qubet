@@ -20,6 +20,10 @@
 #define VOLUME_ON           400
 #define VOLUME_OFF          401
 
+#define MOUSE_MOVED_NONE    0
+#define MOUSE_MOVED_DOWN    1
+#define MOUSE_MOVED_FULL    2
+
 /**
  * @brief Enum used for currentView
  */

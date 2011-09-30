@@ -2,13 +2,10 @@
 #define AUDIOMANAGER_H
 
 #include <QThread>
-//#include <QSound>
 #include <QtOpenGL>
-//#include <QDebug>
 
 #include <phonon/audiooutput.h>
 #include <phonon/mediaobject.h>
-
 
 /**
  * @brief
@@ -19,12 +16,13 @@ class AudioManager : public QThread
     Q_OBJECT
 
 public:
+
     /**
      * @brief
      *
      * @param parent
      */
-    explicit AudioManager(QObject *parent = 0);
+    explicit AudioManager(QObject *_parent = 0);
 
     /**
      * @brief
@@ -33,7 +31,8 @@ public:
     ~AudioManager();
 
 private:
-    QString currentFileName;
+    QObject *parent;
+    QString currentFileName; /**< TODO */
     QSound *ambientMusic; /**< TODO */
     bool audioEnabled; /**< TODO */
     Phonon::MediaObject *mediaObject; /**< TODO */
@@ -45,6 +44,7 @@ private:
      *
      */
     void run();
+
 
 private slots:
     /**
@@ -66,18 +66,6 @@ private slots:
      *
     */
     void enqueueMediaObject();
-
-    /**
-     * @brief
-     *
-     */
-    void pauseAmbientMusic();
-
-    /**
-     * @brief
-     *
-     */
-    void continueAmbientMusic();
 
     /**
      * @brief

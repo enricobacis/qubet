@@ -16,6 +16,7 @@ Qubet::Qubet(QWidget *parent) :
 
     setFocusPolicy(Qt::StrongFocus);
     audioManager = new AudioManager(this);
+    connectAudio(this);
 }
 
 Qubet::~Qubet()
@@ -216,11 +217,6 @@ GLvoid Qubet::connectAudio(const QObject *sender)
     connect(sender, SIGNAL(enableAudio(GLboolean)), audioManager, SLOT(enableAudio(GLboolean)));
     connect(sender, SIGNAL(playAmbientMusic(QString)), audioManager, SLOT(playAmbientMusic(QString)));
     connect(sender, SIGNAL(playEffect(GLint)), audioManager, SLOT(playEffect(GLint)));
-    if(sender == game)
-    {
-        connect(sender, SIGNAL(pauseAmbientMusic()), audioManager, SLOT(pauseAmbientMusic()));
-        connect(sender, SIGNAL(continueAmbientMusic()), audioManager, SLOT(continueAmbientMusic()));
-    }
 }
 
 GLvoid Qubet::connectGame()
@@ -231,7 +227,7 @@ GLvoid Qubet::connectGame()
 
 GLvoid Qubet::connectMenu()
 {
-    //connectInputEvents(menu);
+    connectInputEvents(menu);
 
     connect(menu, SIGNAL(playStory(GLint)), this, SLOT(playStory(GLint)));
     connect(menu, SIGNAL(playArcade(GLint, GLint)), this, SLOT(playArcade(GLint, GLint)));
@@ -242,15 +238,15 @@ GLvoid Qubet::connectMenu()
 
 GLvoid Qubet::showMenu()
 {
+    setMouseMovementTracking(MOUSE_MOVED_NONE);
     menu = new Menu(skinsList, levelsList, iconsList, alphabet, this);
     connectMenu();
+    emit playAmbientMusic(":/music/resources/music/menu.mp3");
     currentView = MENU_VIEW;
-    menu->playAudio();
 }
 
 GLvoid Qubet::menuClosed()
 {
-    menu->disconnect();
     menu->~Menu();
     menu = NULL;
 }
