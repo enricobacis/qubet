@@ -9,27 +9,34 @@ LevelEditor::LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,
     audioEnabled(true),
     isMoving(false),
     currentView(0),
+    currentLenght(0),
+    currentWidth(0),
     alphabet(_alphabet),
     volumeSkin(NULL),
-    angleRotVolumeCube(0),
-    lenghtDisplay(NULL),
-    widthDisplay(NULL)
+    angleRotVolumeCube(0)
 {
+    currentActions = new ActionList(DO_NOTHING);
 
-    currentActions = new ActionList(INITIAL_ACTION);
-
-    currentLenght = 10;
+    currentLenght = 50;
     currentWidth = 3;
-    cameraOffset = new Vector3f(0.0, 0.0, 10.0);
+    cameraOffset = new Vector3f(0.0, 0.0, 0.0);
 
-    lenghtDisplay = new CubeString(QString(currentLenght), 3, LENGHT_DISPLAY, alphabet);
-    widthDisplay = new CubeString(QString(currentWidth), 3, WIDTH_DISPLAY, alphabet);
+    lenghtDisplay = new CubeString(QString::number(currentLenght), 3, LENGHT_DISPLAY, alphabet);
+    widthDisplay = new CubeString(QString::number(currentWidth), 3, WIDTH_DISPLAY, alphabet);
+
+    lenghtLabel = new CubeString("lenght", 1.5, LENGHT_LABEL, alphabet);
+    widthLabel = new CubeString("width", 1.5, WIDTH_LABEL, alphabet);
+
+    create = new CubeString("create", 1, CREATE_BUTTON, alphabet);
+
+
 
     GLuint volume_on = iconsList.value(VOLUME_ON);
     GLuint volume_off = iconsList.value(VOLUME_OFF);
     volumeSkin = new Skin(0, 0, volume_off, volume_off, volume_on, volume_on);
 
 
+    currentView = SET_PARAM_VIEW;
 }
 
 LevelEditor::~LevelEditor()
@@ -39,6 +46,12 @@ LevelEditor::~LevelEditor()
 
     if (widthDisplay != NULL)
         widthDisplay->~CubeString();
+
+    if (lenghtLabel != NULL)
+        lenghtLabel->~CubeString();
+
+    if (widthLabel != NULL)
+        widthLabel->~CubeString();
 
     parent->disconnect(this);
 }
@@ -64,11 +77,8 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
             switch (step)
             {
             case INITIAL_ACTION:
-
-                currentActions->setPrimaryAction(NOTHING);
-                currentView = SET_PARAM_VIEW;
+                currentActions->setPrimaryAction(0);
                 isMoving = false;
-
                 break;
 
             case ROTATE_VOLUMECUBE:
@@ -99,29 +109,39 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
 
             glTranslatef(-cameraOffset->x, -cameraOffset->y, -cameraOffset->z);
 
-            glPushName(BUTTON_SHORTEN);
-            glTranslatef(-9.0, 5.0, 0.0);
+            //SET NAME VIEW DRAWING
+            glPushMatrix();
+
+
+
+            glPopMatrix();
+
+            //SET PARAM VIEW DRAWING
+            glTranslatef(8.5, -7.0, 0.0);
+            create->draw(simplifyForPicking);
+            glTranslatef(-8.5, 7.0, 0.0);
+
+            glTranslatef(-6.0, 4.5, 0.0);
+            lenghtLabel->draw(simplifyForPicking);
+
+            glTranslatef(12.0, 0.0, 0.0);
+            widthLabel->draw(simplifyForPicking);
+            glTranslatef(-5.0, -4.5, 0.0); //return to (0.0, 0.0, 0.0)
+
+            glPushName(BUTTON_LENGHTEN);
+            glTranslatef(-6.0, 2, 0.0);
             glBegin(GL_TRIANGLES);
-                glVertex3f(-1.0,  0.0,  0.0);
-                glVertex3f( 1.0,  1.0,  0.0);
-                glVertex3f( 1.0, -1.0,  0.0);
+                glVertex3f(0.0, 1.0,  0.0);
+                glVertex3f(1.0, -1.0,  0.0);
+                glVertex3f(-1.0, -1.0,  0.0);
             glEnd();
             glPopName();
 
-            glTranslatef(9.0, 0.0, 0.0);
+            glTranslatef(0.0, -3.5, 0.0);
             lenghtDisplay->draw(simplifyForPicking);
 
-            glPushName(BUTTON_LENGHTEN);
-            glTranslatef(9.0, 0.0, 0.0);
-            glBegin(GL_TRIANGLES);
-                glVertex3f(-1.0,  0.0,  0.0);
-                glVertex3f( 1.0,  1.0,  0.0);
-                glVertex3f( 1.0, -1.0,  0.0);
-            glEnd();
-            glPopName();
-
+            glTranslatef(7.0, 0.0, 0.0);
             glPushName(BUTTON_REDUCE);
-            glTranslatef(-18.0, -10.0, 0.0);
             glBegin(GL_TRIANGLES);
                 glVertex3f(-1.0,  0.0,  0.0);
                 glVertex3f( 1.0,  1.0,  0.0);
@@ -129,19 +149,30 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
             glEnd();
             glPopName();
 
-            glTranslatef(9.0, 0.0, 0.0);
+            glTranslatef(5.0, 0.0, 0.0);
             widthDisplay->draw(simplifyForPicking);
 
-            glPushName(BUTTON_LENGHTEN);
-            glTranslatef(9.0, 0.0, 0.0);
+            glTranslatef(5.0, 0.0, 0.0);
+            glPushName(BUTTON_ENLARGE);
             glBegin(GL_TRIANGLES);
-                glVertex3f(-1.0,  0.0,  0.0);
-                glVertex3f( 1.0,  1.0,  0.0);
-                glVertex3f( 1.0, -1.0,  0.0);
+                glVertex3f( 1.0,  0.0,  0.0);
+                glVertex3f(-1.0,  1.0,  0.0);
+                glVertex3f(-1.0, -1.0,  0.0);
             glEnd();
             glPopName();
 
+            glTranslatef(-16.0, 0.0, 0.0);//return to (-6.0,0.0,0.0)
+
+            glPushName(BUTTON_SHORTEN);
+            glTranslatef(0.0, -3.5, 0.0);
+            glBegin(GL_TRIANGLES);
+                glVertex3f(-1.0,  1.0,  0.0);
+                glVertex3f( 1.0,  1.0,  0.0);
+                glVertex3f( 0.0, -1.0,  0.0);
+            glEnd();
+            glPopName();
         glPopMatrix();
+        //end of set param view
     }
 }
 
@@ -152,28 +183,42 @@ GLvoid LevelEditor::playAudio()
 
 GLvoid LevelEditor::lenghten()
 {
-    if (currentLenght != MAX_LEVEL_LENGHT)
-        lenghtDisplay = new CubeString(QString(++currentLenght), 3, LENGHT_DISPLAY, alphabet);
+    if (currentLenght < MAX_LEVEL_LENGHT)
+    {
+        lenghtDisplay->~CubeString();
+        currentLenght++;
+        lenghtDisplay = new CubeString(QString::number(currentLenght), 3, LENGHT_DISPLAY, alphabet);
+   }
 }
 
 GLvoid LevelEditor::shorten()
 {
-    if (currentLenght != MIN_LEVEL_LENGHT)
-        lenghtDisplay = new CubeString(QString(--currentLenght), 3, LENGHT_DISPLAY, alphabet);
+    if (currentLenght > MIN_LEVEL_LENGHT)
+    {
+        lenghtDisplay->~CubeString();
+        currentLenght--;
+        lenghtDisplay = new CubeString(QString::number(currentLenght), 3, LENGHT_DISPLAY, alphabet);
+    }
 }
 
 GLvoid LevelEditor::enlarge()
 {
-    if (currentLenght != MAX_LEVEL_WIDTH)
-        widthDisplay = new CubeString(QString(++currentWidth), 3, LENGHT_DISPLAY, alphabet);
-
+    if (currentWidth < MAX_LEVEL_WIDTH)
+    {
+        widthDisplay->~CubeString();
+        currentWidth++;
+        widthDisplay = new CubeString(QString::number(currentWidth), 3, WIDTH_DISPLAY, alphabet);
+    }
 }
 
 GLvoid LevelEditor::reduce()
 {
-    if (currentLenght != MIN_LEVEL_WIDTH)
-        lenghtDisplay = new CubeString(QString(--currentWidth), 3, LENGHT_DISPLAY, alphabet);
-
+    if (currentWidth > MIN_LEVEL_WIDTH)
+    {
+        widthDisplay->~CubeString();
+        currentWidth--;
+        widthDisplay = new CubeString(QString::number(currentWidth), 3, WIDTH_DISPLAY, alphabet);
+    }
 }
 
 void LevelEditor::itemClicked(QList<GLuint> listNames)
@@ -209,6 +254,11 @@ void LevelEditor::itemClicked(QList<GLuint> listNames)
          case BUTTON_ENLARGE:
              enlarge();
              break;
+
+         case CREATE_BUTTON:
+             //newLevel(currentLenght,currentWidth);
+             //editLevel(newLevel);
+             break;
          }
      }
 }
@@ -237,10 +287,29 @@ void LevelEditor::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
                 lenghtDisplay->startLetterRotation(listNames.at(1), 6, 1);
             break;
 
+        case LENGHT_LABEL:
+            if (!lenghtLabel->isRotating(listNames.at(1)))
+            {
+                if (listNames.at(1) % 2 == 0)
+                    lenghtLabel->startLetterRotation(listNames.at(1),6,2);
+                else
+                    lenghtLabel->startLetterRotation(listNames.at(1),12,4);
+            }
+            break;
+
         case WIDTH_DISPLAY:
             if (!widthDisplay->isRotating(listNames.at(1)))
                 widthDisplay->startLetterRotation(listNames.at(1), 6, 1);
             break;
+
+        case WIDTH_LABEL:
+            if (!widthLabel->isRotating(listNames.at(1)))
+            {
+                if (listNames.at(1) % 2 == 0)
+                    widthLabel->startLetterRotation(listNames.at(1),6,2);
+                else
+                    widthLabel->startLetterRotation(listNames.at(1),12,4);
+            }
         }
     }
 }

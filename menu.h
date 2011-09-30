@@ -94,7 +94,7 @@ private:
     CubeString *levelsButton; /**< It is the levelsButton CubeString. */
     CubeString *editButton; /**< It is the editButton CubeString. */
 
-    CubeStringList *cubeStudioLabel; /**< TODO */
+    CubeStringList *cubeStudiosLabel; /**< TODO */
 
 
     /**

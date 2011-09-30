@@ -39,13 +39,13 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<
     levelName = new CubeStringList("non tirarmi la maglietta", 12.0, 7.0, LEVEL_NAME, alphabet);
 
     QList< QPair<QString,GLuint> > list;
-    list.append(QPair<QString,GLuint>("The Cube Studio", 150));
+    list.append(QPair<QString,GLuint>("The Cube Studios", 150));
     list.append(QPair<QString,GLuint>("Distribution", 151));
     list.append(QPair<QString,GLuint>("presents", 152));
 
-    cubeStudioLabel = new CubeStringList(list, 1.5, alphabet);
-    cubeStudioLabel->setCurrentAngle(0, -20);
-    cubeStudioLabel->startStringListRotation(10, 4);
+    cubeStudiosLabel = new CubeStringList(list, 1.5, alphabet);
+    cubeStudiosLabel->setCurrentAngle(0, -20);
+    cubeStudiosLabel->startStringListRotation(10, 4);
 
     GLuint volume_on = iconsList.value(VOLUME_ON);
     GLuint volume_off = iconsList.value(VOLUME_OFF);
@@ -84,7 +84,7 @@ Menu::~Menu()
     if (volumeSkin != NULL)
         volumeSkin->~Skin();
 
-    parent->disconnect(this);
+    //parent->disconnect(this);
 }
 
 GLvoid Menu::draw(GLboolean simplifyForPicking)
@@ -349,7 +349,7 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
         glPopMatrix();
     }
 
-    //cubeStudioLabel->draw(simplifyForPicking);
+    //cubeStudiosLabel->draw(simplifyForPicking);
 }
 
 GLvoid Menu::playAudio()

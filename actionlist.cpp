@@ -30,7 +30,7 @@ void ActionList::appendSecondaryAction(int _secondaryAction)
     secondaryActions.append(_secondaryAction);
 }
 
-int ActionList::removeSecondaryAction(int _secondaryAction)
+void ActionList::removeSecondaryAction(int _secondaryAction)
 {
     secondaryActions.removeOne(_secondaryAction);
 }
