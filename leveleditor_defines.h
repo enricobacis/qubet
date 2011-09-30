@@ -26,7 +26,7 @@
  * @brief Enum used for Editor's actions
  */
 enum { DO_NOTHING,
-       INITIAL_ACTION,
+       INITIAL_MOVEMENT,
        ROTATE_VOLUMECUBE
      };
 

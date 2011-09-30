@@ -115,6 +115,7 @@ GLboolean CubeString::isRotating(GLuint _letterName)
 GLfloat CubeString::setCurrentAngle(GLfloat _firstLetterAngle, GLfloat _nextLetterDelta)
 {
     GLfloat currentAngle = _firstLetterAngle;
+
     for (int letter = 0; letter < length; letter++)
     {
         currentAngles[letter] = currentAngle;

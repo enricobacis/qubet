@@ -15,11 +15,11 @@ LevelEditor::LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,
     volumeSkin(NULL),
     angleRotVolumeCube(0)
 {
-    currentActions = new ActionList(DO_NOTHING);
+    currentActions = new ActionList(INITIAL_MOVEMENT);
+    cameraOffset = new Vector3f(0.0, -30.0, 0.0);
 
     currentLenght = 50;
     currentWidth = 3;
-    cameraOffset = new Vector3f(0.0, 0.0, 0.0);
 
     lenghtDisplay = new CubeString(QString::number(currentLenght), 3, LENGHT_DISPLAY, alphabet);
     widthDisplay = new CubeString(QString::number(currentWidth), 3, WIDTH_DISPLAY, alphabet);
@@ -73,9 +73,17 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
             GLint step = actions.takeFirst();
             switch (step)
             {
-            case INITIAL_ACTION:
-                currentActions->setPrimaryAction(0);
-                isMoving = false;
+            case INITIAL_MOVEMENT:
+                if (cameraOffset->y < 0)
+                {
+                    cameraOffset->y += 2;
+                }
+                else
+                {
+                    currentActions->setPrimaryAction(DO_NOTHING);
+                    isMoving = false;
+                }
+
                 break;
 
             case ROTATE_VOLUMECUBE:
