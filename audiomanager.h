@@ -4,8 +4,8 @@
 #include <QThread>
 #include <QDir>
 
-#include <phonon/audiooutput.h>
-#include <phonon/mediaobject.h>
+#include <phonon/MediaObject>
+#include <phonon/AudioOutput>
 
 /**
  * @brief
@@ -35,11 +35,10 @@ public:
 private:
     QObject *parent;
     QString currentFileName; /**< TODO */
-    //QSound *ambientMusic; /**< TODO */
     bool audioEnabled; /**< TODO */
-    Phonon::MediaObject *mediaObject; /**< TODO */
-    QList<Phonon::MediaObject*> effectsList; /**< TODO */
     Phonon::AudioOutput *audioOutput; /**< TODO */
+    Phonon::MediaObject *ambientMusic; /**< TODO */
+    QList<Phonon::MediaObject*> effectsList; /**< TODO */
 
     /**
      * @brief

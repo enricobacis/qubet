@@ -7,6 +7,9 @@
 
 /**
  * @brief This class is the QMainWindow, it is used to contain Qubet widget.
+ *
+ * @version 1.0
+ * @author \#34
  */
 class Window : public QMainWindow
 {

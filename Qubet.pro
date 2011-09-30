@@ -55,9 +55,6 @@ HEADERS  += \
     actionlist.h \
     cubestringlist.h
 
-RESOURCES += \
-    resources.qrc
-
 OTHER_FILES += \
     resources/skins/skins.xml \
     resources/sound/music/menu.wav \

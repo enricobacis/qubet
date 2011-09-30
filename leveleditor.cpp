@@ -206,7 +206,7 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
 
 GLvoid LevelEditor::playAudio()
 {
-    emit playAmbientMusic(":/music/resources/music/menu.mp3");
+    emit playAmbientMusic("resources/music/menu.mp3");
 }
 
 GLvoid LevelEditor::lenghten()

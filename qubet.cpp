@@ -241,7 +241,7 @@ GLvoid Qubet::showMenu()
     setMouseMovementTracking(MOUSE_MOVED_NONE);
     menu = new Menu(skinsList, levelsList, iconsList, alphabet, this);
     connectMenu();
-    emit playAmbientMusic(":/music/resources/music/menu.mp3");
+    emit playAmbientMusic("resources/music/menu.mp3");
     currentView = MENU_VIEW;
 }
 
@@ -311,7 +311,7 @@ GLboolean Qubet::load()
 GLboolean Qubet::loadSkins()
 {
     QDomDocument document("skins");
-    QFile file(":/skins/resources/skins/skins.xml");
+    QFile file("resources/skins/skins.xml");
     if (!file.open(QIODevice::ReadOnly))
         return false;
 
@@ -329,7 +329,7 @@ GLboolean Qubet::loadSkins()
 
     while(!skinElement.isNull())
     {
-        QString path = ":/skins/resources/skins/";
+        QString path = "resources/skins/";
 
         Skin *skin = new Skin(skinElement.attribute("name", "Unknown"));
         skin->setComment(skinElement.attribute("comment"));
@@ -397,7 +397,7 @@ GLboolean Qubet::loadCustomObstacleModels()
 GLboolean Qubet::loadLevels()
 {
     QDomDocument document("levels");
-    QFile file(":/levels/resources/levels/levels.xml");
+    QFile file("resources/levels/levels.xml");
     if (!file.open(QIODevice::ReadOnly))
         return false;
 
@@ -438,7 +438,7 @@ GLboolean Qubet::loadAlphabet()
 {
     alphabet = new Alphabet();
 
-    QString lettersPath = ":/letters/resources/letters";
+    QString lettersPath = "resources/letters";
 
     QDir letters(lettersPath);
     letters.setFilter(QDir::Dirs);
@@ -464,7 +464,7 @@ GLboolean Qubet::loadAlphabet()
 
 GLboolean Qubet::loadIcons()
 {
-    QString iconsPath = ":/icons/resources/icons/";
+    QString iconsPath = "resources/icons/";
 
     QDomDocument document("icons");
     QFile file(iconsPath + "icons.xml");

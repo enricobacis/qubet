@@ -7,7 +7,7 @@ AudioManager::AudioManager(QObject *_parent) :
     //Inizialize the effectList
     Phonon::MediaObject *effect;
 
-    QString path = ":/effects/resources/effects";
+    QString path = "resources/effects";
     QDir dir = QDir(path);
     QString dirString;
 
@@ -30,26 +30,26 @@ void AudioManager::enableAudio(bool enabled)
     if (audioEnabled && !enabled)
     {
         audioEnabled = false;
-        mediaObject->pause();
+        ambientMusic->pause();
     }
     else if (!audioEnabled && enabled)
     {
         audioEnabled = true;
-        mediaObject->play();
+        ambientMusic->play();
     }
 }
 
 void AudioManager::playAmbientMusic(QString filename)
 {
     currentFileName = filename;
-    mediaObject = Phonon::createPlayer(Phonon::MusicCategory, Phonon::MediaSource(currentFileName));
-    connect (mediaObject, SIGNAL(aboutToFinish()), this, SLOT(enqueueMediaObject()));
-    mediaObject->play();
+    ambientMusic = Phonon::createPlayer(Phonon::MusicCategory, Phonon::MediaSource(currentFileName));
+    connect (ambientMusic, SIGNAL(aboutToFinish()), this, SLOT(enqueueMediaObject()));
+    ambientMusic->play();
 }
 
 void AudioManager::enqueueMediaObject()
 {
-    mediaObject->enqueue(currentFileName);
+    ambientMusic->enqueue(currentFileName);
 }
 
 void AudioManager::playEffect(int effectId)

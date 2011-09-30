@@ -6,6 +6,8 @@
 /**
  * @brief La classe PositionController controlla se il Cubo collide con degli ostacoli.
  *
+ * @version 1.0
+ * @author \#34
  */
 class PositionController : public QThread
 {
