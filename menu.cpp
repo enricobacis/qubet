@@ -34,16 +34,16 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<
     currentActions = new ActionList(CUBE_STUDIO_DISTRIBUTION);
     cameraOffset = new Vector3f(-90.0f, -30.0f, 18.0f);
 
-    storyButton = new CubeString("story", 3.0f, BUTTON_PLAY_STORY, alphabet);
-    arcadeButton = new CubeString("arcade", 3.0f, BUTTON_PLAY_ARCADE, alphabet);
-    editorButton = new CubeString("editor", 3.0f, BUTTON_LEVEL_EDITOR, alphabet);
-    backButton = new CubeString("back", 1.0f, BUTTON_BACK, alphabet);
-    playButton = new CubeString("play", 1.0f, BUTTON_NEXT, alphabet);
-    levelsButton = new CubeString("levels", 1.0f, BUTTON_NEXT, alphabet);
-    editButton = new CubeString("edit", 1.0f, BUTTON_NEXT, alphabet);
+    storyButton = new CubeString("story", 3.0f, alphabet, BUTTON_PLAY_STORY);
+    arcadeButton = new CubeString("arcade", 3.0f, alphabet, BUTTON_PLAY_ARCADE);
+    editorButton = new CubeString("editor", 3.0f, alphabet, BUTTON_LEVEL_EDITOR);
+    backButton = new CubeString("back", 1.0f, alphabet, BUTTON_BACK);
+    playButton = new CubeString("play", 1.0f, alphabet, BUTTON_NEXT);
+    levelsButton = new CubeString("levels", 1.0f, alphabet, BUTTON_NEXT);
+    editButton = new CubeString("edit", 1.0f, alphabet, BUTTON_NEXT);
 
-    skinName = new CubeString(skinsList.value(currentSkin)->getName(), 2.0f, SKIN_NAME, alphabet);
-    levelName = new CubeStringList("new level", 12.0f, 7.0f, LEVEL_NAME, alphabet);
+    skinName = new CubeString(skinsList.value(currentSkin)->getName(), 2.0f, alphabet, SKIN_NAME);
+    levelName = new CubeStringList("new level", 12.0f, 7.0f, alphabet, LEVEL_NAME);
 
     QList< QPair<QString,GLuint> > labelsList;
     labelsList.append(QPair<QString,GLuint>("cube studios", 0));
@@ -61,7 +61,7 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<
     team34Label = new CubeStringList(labelsList, 1.5f, alphabet);
     team34Label->setCurrentAngle(0.0f, -20.0f);
 
-    qubetLabel = new CubeString("qubet", 3.0f, 0.0f, alphabet);
+    qubetLabel = new CubeString("qubet", 3.0f, alphabet);
     qubetLabel->setCurrentAngle(0.0f, -20.0f);
 
     GLuint volume_on = iconsList.value(VOLUME_ON);
@@ -465,7 +465,7 @@ GLvoid Menu::previousSkin()
         currentSkin -= 1;
 
     skinName->~CubeString();
-    skinName = new CubeString(skinsList.value(currentSkin)->getName(), 2.0f, SKIN_NAME, alphabet);
+    skinName = new CubeString(skinsList.value(currentSkin)->getName(), 2.0f, alphabet, SKIN_NAME);
     emit playEffect(EFFECT_JUMPSMALL);
 }
 
@@ -477,7 +477,7 @@ GLvoid Menu::nextSkin()
         currentSkin += 1;
 
     skinName->~CubeString();
-    skinName = new CubeString(skinsList.value(currentSkin)->getName(), 2.0f, SKIN_NAME, alphabet);
+    skinName = new CubeString(skinsList.value(currentSkin)->getName(), 2.0f, alphabet, SKIN_NAME);
     emit playEffect(EFFECT_JUMPSMALL);
 }
 
@@ -491,7 +491,7 @@ GLvoid Menu::previousLevel()
         currentLevel -= 1;
 
     levelName->~CubeStringList();
-    levelName = new CubeStringList(((currentLevel == 0) ? "new level" : levelsList.value(currentLevel)->getName()), 12.0f, 7.0f, LEVEL_NAME, alphabet);
+    levelName = new CubeStringList(((currentLevel == 0) ? "new level" : levelsList.value(currentLevel)->getName()), 12.0f, 7.0f, alphabet, LEVEL_NAME);
     emit playEffect(EFFECT_JUMPSMALL);
 }
 
@@ -503,7 +503,7 @@ GLvoid Menu::nextLevel()
         currentLevel += 1;
 
     levelName->~CubeStringList();
-    levelName = new CubeStringList(((currentLevel == 0) ? "new level" : levelsList.value(currentLevel)->getName()), 12.0f, 7.0f, LEVEL_NAME, alphabet);
+    levelName = new CubeStringList(((currentLevel == 0) ? "new level" : levelsList.value(currentLevel)->getName()), 12.0f, 7.0f, alphabet, LEVEL_NAME);
     emit playEffect(EFFECT_JUMPSMALL);
 }
 

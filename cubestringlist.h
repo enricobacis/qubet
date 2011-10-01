@@ -38,10 +38,10 @@ public:
      *
      * @param _labels
      * @param _cubeDimension
-     * @param _name
      * @param _alphabet
+     * @param _name
      */
-    explicit CubeStringList(QString _labels, GLfloat _cubeDimension, GLuint _name, Alphabet *_alphabet);
+    explicit CubeStringList(QString _labels, GLfloat _cubeDimension, Alphabet *_alphabet, GLuint _name = 0);
 
     /**
      * @brief
@@ -49,10 +49,10 @@ public:
      * @param _labels
      * @param _maxWidth
      * @param _maxHeight
-     * @param _name
      * @param _alphabet
+     * @param _name
      */
-    explicit CubeStringList(QString _labels, GLfloat _maxWidth, GLfloat _maxHeight, GLuint _name, Alphabet *_alphabet);
+    explicit CubeStringList(QString _labels, GLfloat _maxWidth, GLfloat _maxHeight, Alphabet *_alphabet, GLuint _name = 0);
 
     /**
      * @brief

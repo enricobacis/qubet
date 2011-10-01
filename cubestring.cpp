@@ -1,6 +1,6 @@
 #include "cubestring.h"
 
-CubeString::CubeString(QString _label, GLfloat _cubeDimension, GLuint _name, Alphabet *_alphabet) :
+CubeString::CubeString(QString _label, GLfloat _cubeDimension, Alphabet *_alphabet, GLuint _name) :
     label(_label),
     cubeDimension(_cubeDimension),
     name(_name),
@@ -9,12 +9,14 @@ CubeString::CubeString(QString _label, GLfloat _cubeDimension, GLuint _name, Alp
     init();
 }
 
-CubeString::CubeString(QString _label, GLfloat _maxWidth, GLfloat _maxHeight, GLuint _name, Alphabet *_alphabet) :
+CubeString::CubeString(QString _label, GLfloat _maxWidth, GLfloat _maxHeight, Alphabet *_alphabet, GLuint _name) :
     label(_label),
     name(_name),
     alphabet(_alphabet)
 {
     // Calcolo della dimensione
+    int length = label.length();
+
     if (length > 1)
     {
         cubeDimension = _maxWidth/length;
@@ -37,6 +39,7 @@ CubeString::~CubeString()
 GLvoid CubeString::draw(GLboolean simplifyForPicking)
 {
     GLuint currentName = 0;
+    int length = label.length();
 
     glPushName(name);
     glPushMatrix();
@@ -87,23 +90,37 @@ GLuint CubeString::getName()
 
 GLvoid CubeString::startLetterRotation(GLuint _letterName, GLint _angleStep, GLint _turns)
 {
-    if (_letterName >= GLuint(length))
+    // Check Parameters Validity
+    if (_letterName >= GLuint(label.length()))
         return;
 
-    angleSteps[_letterName] = _angleStep;
-    finalAngles[_letterName] += _turns * 90;
+    if (_angleStep == 0)
+        return;
 
-    if ((finalAngles[_letterName] - currentAngles[_letterName]) * angleSteps[_letterName] < 0)
+    GLint turnDegrees = _turns * 90;
+
+    // Check Rotation Validity
+    if (angleSteps[_letterName] != 0)
     {
-        // Rotazione corrente e Rotazione richiesta incompatibili
-        finalAngles[_letterName] = -finalAngles[_letterName];
-        currentAngles[_letterName] = -currentAngles[_letterName];
+        // Already Rotating
+        finalAngles[_letterName] += turnDegrees;
+        if ((angleSteps[_letterName] % _angleStep) == 0)
+            angleSteps[_letterName] = _angleStep;
+    }
+    else
+    {
+        // Not Already Rotating
+        if ((turnDegrees % _angleStep) == 0)
+        {
+            angleSteps[_letterName] = _angleStep;
+            finalAngles[_letterName] += turnDegrees;
+        }
     }
 }
 
 GLvoid CubeString::startStringRotation(GLint _angleStep, GLint _turns)
 {
-    for (int letter = 0; letter < length; letter++)
+    for (int letter = 0; letter < label.length(); letter++)
         startLetterRotation(letter, _angleStep, _turns);
 }
 
@@ -116,7 +133,7 @@ GLfloat CubeString::setCurrentAngle(GLfloat _firstLetterAngle, GLfloat _nextLett
 {
     GLfloat currentAngle = _firstLetterAngle;
 
-    for (int letter = 0; letter < length; letter++)
+    for (int letter = 0; letter < label.length(); letter++)
     {
         currentAngles[letter] = currentAngle;
         currentAngle += _nextLetterDelta;
@@ -141,9 +158,7 @@ GLuint CubeString::createLetterDisplayList(Skin *_skin)
 
 GLvoid CubeString::init()
 {
-    length = label.length();
-
-    for (int i = 0; i < length; i++)
+    for (int i = 0; i < label.length(); i++)
     {
         angleSteps.append(0);
         currentAngles.append(0);

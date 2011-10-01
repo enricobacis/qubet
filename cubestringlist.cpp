@@ -16,7 +16,7 @@ CubeStringList::CubeStringList(QList< QPair<QString,GLuint> > _labels, GLfloat _
     init(_labels, _maxWidth, _maxHeight, _alphabet);
 }
 
-CubeStringList::CubeStringList(QString _labels, GLfloat _cubeDimension, GLuint _name, Alphabet *_alphabet) :
+CubeStringList::CubeStringList(QString _labels, GLfloat _cubeDimension, Alphabet *_alphabet, GLuint _name) :
     name(_name),
     firstStringHeight(0),
     stringsHeightDelta(0)
@@ -24,7 +24,7 @@ CubeStringList::CubeStringList(QString _labels, GLfloat _cubeDimension, GLuint _
     init(splitLabels(_labels), _cubeDimension, _alphabet);
 }
 
-CubeStringList::CubeStringList(QString _labels, GLfloat _maxWidth, GLfloat _maxHeight, GLuint _name, Alphabet *_alphabet) :
+CubeStringList::CubeStringList(QString _labels, GLfloat _maxWidth, GLfloat _maxHeight, Alphabet *_alphabet, GLuint _name) :
     name(_name),
     firstStringHeight(0),
     stringsHeightDelta(0)
@@ -206,7 +206,7 @@ GLvoid CubeStringList::init(QList< QPair<QString,GLuint> > _labels, GLfloat _cub
 
     for (int i = 0; i < strings; i++)
     {
-        CubeString *cubeString = new CubeString(_labels.at(i).first, _cubeDimension, _labels.at(i).second, _alphabet);
+        CubeString *cubeString = new CubeString(_labels.at(i).first, _cubeDimension, _alphabet, _labels.at(i).second);
         cubeStrings.append(cubeString);
     }
 

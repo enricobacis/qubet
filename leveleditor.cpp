@@ -15,26 +15,26 @@ LevelEditor::LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,
     currentWidth(0),
     alphabet(_alphabet),
     volumeSkin(NULL),
-    angleRotVolumeCube(0)
+    angleRotVolumeCube(0.0f)
 {
     currentActions = new ActionList(INITIAL_MOVEMENT);
-    cameraOffset = new Vector3f(0.0, -30.0, 0.0);
+    cameraOffset = new Vector3f(0.0f, -30.0f, 0.0f);
 
     currentLenght = 50;
     currentWidth = 3;
-    cameraOffset = new Vector3f(-30.0, 0.0, 0.0);
+    cameraOffset = new Vector3f(-30.0f, 0.0f, 0.0f);
 
-    lenghtDisplay = new CubeString(QString::number(currentLenght), 3, LENGHT_DISPLAY, alphabet);
-    widthDisplay = new CubeString(QString::number(currentWidth), 3, WIDTH_DISPLAY, alphabet);
+    lenghtDisplay = new CubeString(QString::number(currentLenght), 3.0f, alphabet, LENGHT_DISPLAY);
+    widthDisplay = new CubeString(QString::number(currentWidth), 3.0f, alphabet, WIDTH_DISPLAY);
 
-    labelLenght = new CubeString("lenght", 1.5, LABEL_LENGHT, alphabet);
-    labelWidth = new CubeString("width", 1.5, LABEL_WIDTH, alphabet);
+    labelLenght = new CubeString("lenght", 1.5f, alphabet, LABEL_LENGHT);
+    labelWidth = new CubeString("width", 1.5f, alphabet, LABEL_WIDTH);
 
-    create = new CubeString("create", 1, BUTTON_NEXT, alphabet);
-    next = new CubeString("next", 1, BUTTON_NEXT, alphabet);
-    setLevelNameLabel = new CubeString("set level name", 1.5, SET_LEVEL_NAME_LABEL, alphabet);
+    create = new CubeString("create", 1.0f, alphabet, BUTTON_NEXT);
+    next = new CubeString("next", 1.0f, alphabet, BUTTON_NEXT);
+    setLevelNameLabel = new CubeString("set level name", 1.5f, alphabet, SET_LEVEL_NAME_LABEL);
 
-    setLevelNameForm = new CubeStringList("set level name", 12, 7, 0, alphabet);
+    setLevelNameForm = new CubeStringList("set level name", 12.0f, 7.0f, alphabet);
     GLuint volume_on = iconsList.value(VOLUME_ON);
     GLuint volume_off = iconsList.value(VOLUME_OFF);
     volumeSkin = new Skin(0, 0, volume_off, volume_off, volume_on, volume_on);
@@ -89,9 +89,9 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
             switch (step)
             {
             case INITIAL_MOVEMENT:
-                if (cameraOffset->y < 0)
+                if (cameraOffset->y < 0.0f)
                 {
-                    cameraOffset->y += 2;
+                    cameraOffset->y += 2.0f;
                 }
                 else
                 {
@@ -102,10 +102,10 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
                 break;
 
             case ROTATE_VOLUMECUBE:
-                angleRotVolumeCube += 5;
+                angleRotVolumeCube += 5.0f;
 
                 if ((GLint(angleRotVolumeCube) % 360) == 0)
-                    angleRotVolumeCube = 0;
+                    angleRotVolumeCube = 0.0f;
 
                 if ((GLint(angleRotVolumeCube) % 90) == 0)
                     currentActions->removeSecondaryAction(ROTATE_VOLUMECUBE);
@@ -114,14 +114,15 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
             }
         }
     }
+
     // Disegno l' editor
     if (!(isMoving && simplifyForPicking))
     {
         glPushName(BUTTON_VOLUME);
         glPushMatrix();
-            glTranslatef(9.5, 6.0, 3.0);
-            glRotatef(angleRotVolumeCube, -1.0, 0.0, 0.0);
-            drawPrism(0.8, 0.8, 0.8, volumeSkin, true);
+            glTranslatef(9.5f, 6.0f, 3.0f);
+            glRotatef(angleRotVolumeCube, -1.0f, 0.0f, 0.0f);
+            drawPrism(0.8f, 0.8f, 0.8f, volumeSkin, true);
         glPopMatrix();
         glPopName();
 
@@ -141,67 +142,72 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
             glPopMatrix();
 
             // Set Parameters View
-            glTranslatef(8.5, -7.0, 0.0);
+            glTranslatef(8.5f, -7.0f, 0.0f);
             create->draw(simplifyForPicking);
-            glTranslatef(-8.5, 7.0, 0.0);
+            glTranslatef(-8.5f, 7.0f, 0.0f);
 
-            glTranslatef(-6.0, 4.5, 0.0);
+            glTranslatef(-6.0f, 4.5f, 0.0f);
             labelLenght->draw(simplifyForPicking);
 
-            glTranslatef(12.0, 0.0, 0.0);
+            glTranslatef(12.0f, 0.0f, 0.0f);
             labelWidth->draw(simplifyForPicking);
 
-            // Return to (0.0, 0.0, 0.0)
-            glTranslatef(-5.0, -4.5, 0.0);
+            // Return to (0.0f, 0.0f, 0.0f)
+            glTranslatef(-5.0f, -4.5f, 0.0f);
 
             glPushName(BUTTON_LENGHTEN);
-            glTranslatef(-7.0, 2, 1.5);
+
+            glTranslatef(-7.0f, 2.0f, 1.5f);
             glBegin(GL_TRIANGLES);
-                glVertex3f(0.0, 1.0,  0.0);
-                glVertex3f(1.0, -1.0,  0.0);
-                glVertex3f(-1.0, -1.0,  0.0);
+                glVertex3f( 0.0f,  1.0f,  0.0f);
+                glVertex3f( 1.0f, -1.0f,  0.0f);
+                glVertex3f(-1.0f, -1.0f,  0.0f);
             glEnd();
-            glTranslatef(0.0, 0.0, -1.5);
             glPopName();
 
-            glTranslatef(0.0, -3.5, 0.0);
+            glTranslatef(0.0f, 0.0f, -1.5f);
+
+            glTranslatef(0.0f, -3.5f, 0.0f);
             lenghtDisplay->draw(simplifyForPicking);
 
             glPushName(BUTTON_REDUCE);
-            glTranslatef(7, 0.0, 1.5);
+            glTranslatef(7.0f, 0.0f, 1.5f);
             glBegin(GL_TRIANGLES);
-                glVertex3f(-1.0,  0.0,  0.0);
-                glVertex3f( 1.0,  1.0,  0.0);
-                glVertex3f( 1.0, -1.0,  0.0);
+                glVertex3f(-1.0f,  0.0f,  0.0f);
+                glVertex3f( 1.0f,  1.0f,  0.0f);
+                glVertex3f( 1.0f, -1.0f,  0.0f);
             glEnd();
-            glTranslatef(0.0, 0.0, -1.5);
+            glTranslatef(0.0f, 0.0f, -1.5f);
             glPopName();
 
-            glTranslatef(4.5, 0.0, 0.0);
+            glTranslatef(4.5f, 0.0f, 0.0f);
             widthDisplay->draw(simplifyForPicking);
 
             glPushName(BUTTON_ENLARGE);
-            glTranslatef(4.5, 0.0, 1.5);
+            glTranslatef(4.5f, 0.0f, 1.5f);
             glBegin(GL_TRIANGLES);
-                glVertex3f( 1.0,  0.0,  0.0);
-                glVertex3f(-1.0,  1.0,  0.0);
-                glVertex3f(-1.0, -1.0,  0.0);
+                glVertex3f( 1.0f,  0.0f,  0.0f);
+                glVertex3f(-1.0f,  1.0f,  0.0f);
+                glVertex3f(-1.0f, -1.0f,  0.0f);
             glEnd();
-            glTranslatef(0.0, 0.0, -1.5);
             glPopName();
 
-            // Return to (-6.0, 0.0, 0.0)
-            glTranslatef(-16.0, 0.0, 0.0);
+            glTranslatef(0.0f, 0.0f, -1.5f);
+
+            // Return to (-6.0f, 0.0f, 0.0f)
+            glTranslatef(-16.0f, 0.0f, 0.0f);
+
+            glTranslatef(0.0f, -3.5f, 1.5f);
 
             glPushName(BUTTON_SHORTEN);
-            glTranslatef(0.0, -3.5, 1.5);
             glBegin(GL_TRIANGLES);
-                glVertex3f(-1.0,  1.0,  0.0);
-                glVertex3f( 1.0,  1.0,  0.0);
-                glVertex3f( 0.0, -1.0,  0.0);
+                glVertex3f(-1.0f,  1.0f,  0.0f);
+                glVertex3f( 1.0f,  1.0f,  0.0f);
+                glVertex3f( 0.0f, -1.0f,  0.0f);
             glEnd();
-            glTranslatef(0.0, 0.0, -1.5);
             glPopName();
+
+            glTranslatef(0.0f, 0.0f, -1.5f);
         glPopMatrix();
     }
 }
@@ -217,7 +223,7 @@ GLvoid LevelEditor::lenghten()
     {
         lenghtDisplay->~CubeString();
         currentLenght++;
-        lenghtDisplay = new CubeString(QString::number(currentLenght), 3, LENGHT_DISPLAY, alphabet);
+        lenghtDisplay = new CubeString(QString::number(currentLenght), 3, alphabet, LENGHT_DISPLAY);
    }
 }
 
@@ -227,7 +233,7 @@ GLvoid LevelEditor::shorten()
     {
         lenghtDisplay->~CubeString();
         currentLenght--;
-        lenghtDisplay = new CubeString(QString::number(currentLenght), 3, LENGHT_DISPLAY, alphabet);
+        lenghtDisplay = new CubeString(QString::number(currentLenght), 3, alphabet, LENGHT_DISPLAY);
     }
 }
 
@@ -237,7 +243,7 @@ GLvoid LevelEditor::enlarge()
     {
         widthDisplay->~CubeString();
         currentWidth++;
-        widthDisplay = new CubeString(QString::number(currentWidth), 3, WIDTH_DISPLAY, alphabet);
+        widthDisplay = new CubeString(QString::number(currentWidth), 3, alphabet, WIDTH_DISPLAY);
     }
 }
 
@@ -247,7 +253,7 @@ GLvoid LevelEditor::reduce()
     {
         widthDisplay->~CubeString();
         currentWidth--;
-        widthDisplay = new CubeString(QString::number(currentWidth), 3, WIDTH_DISPLAY, alphabet);
+        widthDisplay = new CubeString(QString::number(currentWidth), 3, alphabet, WIDTH_DISPLAY);
     }
 }
 
@@ -293,9 +299,6 @@ void LevelEditor::itemClicked(QList<GLuint> listNames)
      }
 }
 
-
-
-
 void LevelEditor::mouseReleased(QMouseEvent *event)
 {
     Q_UNUSED(event);
@@ -320,10 +323,10 @@ void LevelEditor::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
         case LABEL_LENGHT:
             if (!labelLenght->isRotating(listNames.at(1)))
             {
-                if (listNames.at(1) % 2 == 0)
-                    labelLenght->startLetterRotation(listNames.at(1),6,2);
+                if ((listNames.at(1) % 2) == 0)
+                    labelLenght->startLetterRotation(listNames.at(1), 6, 2);
                 else
-                    labelLenght->startLetterRotation(listNames.at(1),12,4);
+                    labelLenght->startLetterRotation(listNames.at(1), 12, 4);
             }
             break;
 
@@ -335,10 +338,10 @@ void LevelEditor::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
         case LABEL_WIDTH:
             if (!labelWidth->isRotating(listNames.at(1)))
             {
-                if (listNames.at(1) % 2 == 0)
-                    labelWidth->startLetterRotation(listNames.at(1),6,2);
+                if ((listNames.at(1) % 2) == 0)
+                    labelWidth->startLetterRotation(listNames.at(1), 6, 2);
                 else
-                    labelWidth->startLetterRotation(listNames.at(1),12,4);
+                    labelWidth->startLetterRotation(listNames.at(1), 12, 4);
             }
         }
     }
@@ -346,6 +349,9 @@ void LevelEditor::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
 
 void LevelEditor::keyPressed(QKeyEvent *event)
 {
+    if (isMoving)
+        return;
+
     int key = event->key();
 
     if ((key == Qt::Key_Enter) || (key == Qt::Key_Return))
@@ -372,4 +378,3 @@ void LevelEditor::keyPressed(QKeyEvent *event)
             enlarge();
     }
 }
-
