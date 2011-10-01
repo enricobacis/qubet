@@ -13,6 +13,8 @@ Alphabet::~Alphabet()
         if (i.value() != NULL)
             dynamic_cast<Letter*>(i.value())->~Letter();
     }
+
+    lettersList.~QMap();
 }
 
 Skin *Alphabet::getRandomLetterSkin(QChar letter)

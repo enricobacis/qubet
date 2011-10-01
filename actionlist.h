@@ -35,12 +35,12 @@ class ActionList
 public:
 
     /**
-     * @brief Create a new ActionList with no secondaryActions and 0 as primaryAction.
+     * @brief Creates a new ActionList with no secondaryActions and 0 as primaryAction.
      */
     explicit ActionList();
 
     /**
-     * @brief Create a new ActionList with no secondaryActions and primaryAction
+     * @brief Creates a new ActionList with no secondaryActions and primaryAction
               given as parameter.
      *
      * @param _primaryAction is the primary action to set to the actionList.
@@ -48,7 +48,7 @@ public:
     explicit ActionList(int _primaryAction);
 
     /**
-     * @brief Create a new ActionList as a copy of another ActionList.
+     * @brief Creates a new ActionList as a copy of another ActionList.
      *
      * @param other is the actionList to copy.
      */
@@ -69,7 +69,7 @@ public:
     /**
      * @brief Returns the current primaryAction.
      *
-     * @return [int] The current primaryAction.
+     * @return The current primaryAction.
      */
     int getPrimaryAction();
 
@@ -90,7 +90,7 @@ public:
     /**
      * @brief Returns the secondaryActions list.
      *
-     * @return [QList<int>] the secondaryActions list.
+     * @return the secondaryActions list.
      */
     QList<int> getSecondaryActions();
 
@@ -99,7 +99,7 @@ public:
      *
      *        It is the current secondaryActions list, prepending the primaryAction.
      *
-     * @return [QList<int>] a list of primary and secondary actions.
+     * @return a list of primary and secondary actions.
      */
     QList<int> getAllActions();
 
