@@ -1,9 +1,12 @@
 #include "actionlist.h"
 
+ActionList::ActionList() :
+    primaryAction(0)
+{ }
+
 ActionList::ActionList(int _primaryAction) :
     primaryAction(_primaryAction)
-{
-}
+{ }
 
 ActionList::ActionList(ActionList *other)
 {
@@ -13,6 +16,7 @@ ActionList::ActionList(ActionList *other)
 
 ActionList::~ActionList()
 {
+    secondaryActions.~QList();
 }
 
 void ActionList::setPrimaryAction(int _primaryAction)
