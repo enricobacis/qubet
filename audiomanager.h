@@ -24,7 +24,7 @@ public:
     /**
      * @brief Creates a new AudioManager loading all the effects in the folder resources/effects.
      *
-     * @param parent is a callback variable to the parent of AudioManager.
+     * @param _parent is a callback variable to the parent of AudioManager.
      */
     explicit AudioManager(QObject *_parent = 0);
 
