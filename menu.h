@@ -69,9 +69,7 @@ private:
     GLint currentSection; /**< It is used to tell the menu to draw the introduction or the menu.*/
     GLint waitCounter; /**< It is an incremental variable to wait from intro screens. */
 
-    CubeString *storyButton; /**< It is the storyButton CubeString. */
-    CubeString *arcadeButton; /**< It is the arcadeButton CubeString. */
-    CubeString *editorButton; /**< It is the editorButton CubeString. */
+    CubeStringList *mainMenuButtons; /**< TODO */
     CubeString *skinName;  /**< It is the skinName CubeString. */
     CubeStringList *levelName; /**< It is the levelName CubeString. */
     CubeString *backButton;  /**< It is the backButton CubeString. */

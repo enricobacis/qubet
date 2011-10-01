@@ -21,9 +21,7 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<
     currentView(INTRODUCTION),
     currentSection(INTRO_SECTION),
     waitCounter(0),
-    storyButton(NULL),
-    arcadeButton(NULL),
-    editorButton(NULL),
+    mainMenuButtons(NULL),
     backButton(NULL),
     playButton(NULL),
     levelsButton(NULL),
@@ -34,9 +32,13 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<
     currentActions = new ActionList(CUBE_STUDIO_DISTRIBUTION);
     cameraOffset = new Vector3f(-90.0f, -30.0f, 18.0f);
 
-    storyButton = new CubeString("story", 3.0f, alphabet, BUTTON_PLAY_STORY);
-    arcadeButton = new CubeString("arcade", 3.0f, alphabet, BUTTON_PLAY_ARCADE);
-    editorButton = new CubeString("editor", 3.0f, alphabet, BUTTON_LEVEL_EDITOR);
+    QList< QPair<QString,GLuint> > labelsList;
+    labelsList.append(QPair<QString,GLuint>("story", BUTTON_PLAY_STORY));
+    labelsList.append(QPair<QString,GLuint>("arcade", BUTTON_PLAY_ARCADE));
+    labelsList.append(QPair<QString,GLuint>("editor", BUTTON_LEVEL_EDITOR));
+
+    mainMenuButtons = new CubeStringList(labelsList, 18.0, 12.0, alphabet);
+
     backButton = new CubeString("back", 1.0f, alphabet, BUTTON_BACK);
     playButton = new CubeString("play", 1.0f, alphabet, BUTTON_NEXT);
     levelsButton = new CubeString("levels", 1.0f, alphabet, BUTTON_NEXT);
@@ -45,7 +47,7 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<
     skinName = new CubeString(skinsList.value(currentSkin)->getName(), 2.0f, alphabet, SKIN_NAME);
     levelName = new CubeStringList("new level", 12.0f, 7.0f, alphabet, LEVEL_NAME);
 
-    QList< QPair<QString,GLuint> > labelsList;
+    labelsList.clear();
     labelsList.append(QPair<QString,GLuint>("cube studios", 0));
     labelsList.append(QPair<QString,GLuint>("distribution", 0));
     labelsList.append(QPair<QString,GLuint>("presents", 0));
@@ -74,14 +76,8 @@ Menu::~Menu()
     this->disconnect(parent);
     parent->disconnect(this);
 
-    if (storyButton != NULL)
-        storyButton->~CubeString();
-
-    if (arcadeButton != NULL)
-        arcadeButton->~CubeString();
-
-    if (editorButton != NULL)
-        editorButton->~CubeString();
+    if (mainMenuButtons != NULL)
+        mainMenuButtons->~CubeStringList();
 
     if (backButton != NULL)
         backButton->~CubeString();
@@ -362,14 +358,8 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                 break;
 
             case MENU_SECTION:
-                glTranslatef(0.0f, 5.0f, 0.0f);
-                storyButton->draw(simplifyForPicking);
 
-                glTranslatef(0.0f, -10.0f, 0.0f);
-                editorButton->draw(simplifyForPicking);
-
-                glTranslatef(0.0f, 5.0f, 0.0f);
-                arcadeButton->draw(simplifyForPicking);
+                mainMenuButtons->draw(simplifyForPicking);
 
                 glPushMatrix();
                     glTranslatef(30.0f, 4.0f, 0.0f);
@@ -694,18 +684,10 @@ void Menu::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
         switch (listNames.at(0))
         {
         case BUTTON_PLAY_STORY:
-            if (!storyButton->isRotating(listNames.at(1)))
-                storyButton->startLetterRotation(listNames.at(1), 6.0f, 1.0f);
-            break;
-
         case BUTTON_PLAY_ARCADE:
-            if (!arcadeButton->isRotating(listNames.at(1)))
-                arcadeButton->startLetterRotation(listNames.at(1), 6.0f, 1.0f);
-            break;
-
         case BUTTON_LEVEL_EDITOR:
-            if (!editorButton->isRotating(listNames.at(1)))
-                editorButton->startLetterRotation(listNames.at(1), 6.0f, 1.0f);
+            if (!mainMenuButtons->isRotating(listNames.at(0), listNames.at(1)))
+                mainMenuButtons->startLetterRotation(listNames.at(0), listNames.at(1), 6.0f, 1.0f);
             break;
 
         case SKIN_NAME:
