@@ -231,11 +231,16 @@ signals:
     void playAmbientMusic(QString filename);
 
     /**
+     * @brief Signal emitted to stop the current ambient music.
+     */
+    void stopAmbientMusic();
+
+    /**
      * @brief Signal emitted to play an effect.
      *
-     * @param effectId is the id of the effect to play.
+     * @param effectName is the name of the effect to play.
      */
-    void playEffect(int effectId);
+    void playEffect(QString effectName);
 
 };
 

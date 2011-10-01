@@ -53,7 +53,8 @@ HEADERS  += \
     letter.h \
     cubestring.h \
     actionlist.h \
-    cubestringlist.h
+    cubestringlist.h \
+    effects_defines.h
 
 OTHER_FILES += \
     resources/skins/skins.xml \

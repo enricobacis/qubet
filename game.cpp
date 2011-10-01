@@ -1,6 +1,7 @@
 #include "game.h"
 #include "defines.h"
 #include "game_defines.h"
+#include "effects_defines.h"
 
 Game::Game(Skin *_skin, QMap<GLint,Level*> &_levelsList, QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *_parent) :
     parent(_parent),

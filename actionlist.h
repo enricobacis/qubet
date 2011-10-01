@@ -103,6 +103,7 @@ public:
      */
     QList<int> getAllActions();
 
+
 private:
 
     int primaryAction; /**< It is the current primary action of the ActionList. */

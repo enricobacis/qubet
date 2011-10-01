@@ -1,5 +1,6 @@
 #include "qubet.h"
 #include "defines.h"
+#include <QDomElement>
 
 Qubet::Qubet(QWidget *parent) :
     QGLWidget(QGLFormat(QGL::DoubleBuffer), parent),
@@ -36,6 +37,34 @@ Qubet::~Qubet()
 
     if (alphabet != NULL)
         alphabet->~Alphabet();
+
+    GLuint textureID;
+    for (QMap<GLint,Skin*>::iterator i = skinsList.begin(); i != skinsList.end(); i++)
+    {
+        if (i.value() != NULL)
+        {
+            for (int j = 0; j < 6; j++)
+            {
+                textureID = dynamic_cast<Skin*>(i.value())->getTexture(j);
+                glDeleteTextures(1, &textureID);
+            }
+        }
+    }
+    skinsList.~QMap();
+
+    for (QMap<GLint,Level*>::iterator i = levelsList.begin(); i != levelsList.end(); i++)
+    {
+        if (i.value() != NULL)
+            dynamic_cast<Level*>(i.value())->~Level();
+    }
+    levelsList.~QMap();
+
+    for (QMap<GLint,GLuint>::iterator i = iconsList.begin(); i != iconsList.end(); i++)
+    {
+        if (i.value() != 0)
+            glDeleteTextures(1, &i.value());
+    }
+    iconsList.~QMap();
 }
 
 GLvoid Qubet::initializeGL()
@@ -225,13 +254,8 @@ GLvoid Qubet::connectAudio(const QObject *sender)
 {
     connect(sender, SIGNAL(enableAudio(bool)), audioManager, SLOT(enableAudio(bool)));
     connect(sender, SIGNAL(playAmbientMusic(QString)), audioManager, SLOT(playAmbientMusic(QString)));
-    connect(sender, SIGNAL(playEffect(int)), audioManager, SLOT(playEffect(int)));
-}
-
-GLvoid Qubet::connectGame()
-{
-    connectAudio(game);
-    connect(game, SIGNAL(gameClosed()), this, SLOT(gameClosed()));
+    connect(sender, SIGNAL(stopAmbientMusic()), audioManager, SLOT(stopAmbientMusic()));
+    connect(sender, SIGNAL(playEffect(QString)), audioManager, SLOT(playEffect(QString)));
 }
 
 GLvoid Qubet::connectMenu()
@@ -245,6 +269,24 @@ GLvoid Qubet::connectMenu()
     connectAudio(menu);
 }
 
+GLvoid Qubet::connectLevelEditor()
+{
+    connectInputEvents(levelEditor);
+
+    connect(levelEditor, SIGNAL(levelEditorClosed()), this, SLOT(levelEditorClosed()));
+
+    connectAudio(levelEditor);
+}
+
+GLvoid Qubet::connectGame()
+{
+    connectInputEvents(game);
+
+    connect(game, SIGNAL(gameClosedSignal()), this, SLOT(gameClosed()));
+
+    connectAudio(game);
+}
+
 GLvoid Qubet::showMenu()
 {
     setMouseMovementTracking(MOUSE_MOVED_NONE);
@@ -254,7 +296,7 @@ GLvoid Qubet::showMenu()
     currentView = MENU_VIEW;
 }
 
-GLvoid Qubet::menuClosed()
+GLvoid Qubet::closeMenu()
 {
     menu->~Menu();
     menu = NULL;
@@ -517,7 +559,7 @@ void Qubet::playStory(GLint skinId)
     game->startGame();
     currentView = GAME_VIEW;
 
-    menuClosed();
+    closeMenu();
 }
 
 void Qubet::playArcade(GLint skinId, GLint levelId)
@@ -529,7 +571,7 @@ void Qubet::playArcade(GLint skinId, GLint levelId)
     game->startGame();
     currentView = GAME_VIEW;
 
-    menuClosed();
+    closeMenu();
 }
 
 void Qubet::gameClosed()
@@ -542,12 +584,15 @@ void Qubet::gameClosed()
 
 void Qubet::showLevelEditor()
 {
-    //menuClosed();
-    currentView = LEVELEDITOR_VIEW;
+    setMouseMovementTracking(MOUSE_MOVED_FULL);
     levelEditor = new LevelEditor(obstacleModelsList, levelsList, iconsList, alphabet, this);
-    connectInputEvents(levelEditor);
-    connect(levelEditor, SIGNAL(levelEditorClosed()), this, SLOT(levelEditorClosed()));
-    connectAudio(levelEditor);
+    connectLevelEditor();
+
+    currentView = LEVELEDITOR_VIEW;
+
+    emit playAmbientMusic("resources/music/editor.mp3");
+
+    closeMenu();
 }
 
 void Qubet::levelEditorClosed()

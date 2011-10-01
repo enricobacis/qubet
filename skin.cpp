@@ -2,25 +2,23 @@
 #include "defines.h"
 
 Skin::Skin() :
-    x_plus (NULL),
-    x_minus(NULL),
-    y_plus (NULL),
-    y_minus(NULL),
-    z_plus (NULL),
-    z_minus(NULL)
-{
-}
+    x_plus (0),
+    x_minus(0),
+    y_plus (0),
+    y_minus(0),
+    z_plus (0),
+    z_minus(0)
+{ }
 
 Skin::Skin(QString _name) :
     name(_name),
-    x_plus (NULL),
-    x_minus(NULL),
-    y_plus (NULL),
-    y_minus(NULL),
-    z_plus (NULL),
-    z_minus(NULL)
-{
-}
+    x_plus (0),
+    x_minus(0),
+    y_plus (0),
+    y_minus(0),
+    z_plus (0),
+    z_minus(0)
+{ }
 
 Skin::Skin(GLuint _x_plus, GLuint _x_minus, GLuint _y_plus, GLuint _y_minus, GLuint _z_plus, GLuint _z_minus) :
     x_plus (_x_plus),
@@ -29,19 +27,16 @@ Skin::Skin(GLuint _x_plus, GLuint _x_minus, GLuint _y_plus, GLuint _y_minus, GLu
     y_minus(_y_minus),
     z_plus (_z_plus),
     z_minus(_z_minus)
-{
-
-}
+{ }
 
 Skin::~Skin()
 {
-    for (int i = 0; i < 6; i++)
-    {
-        GLuint textureID = getTexture(i);
-
-        if (textureID != 0)
-            glDeleteTextures(1, &textureID);
-    }
+    x_plus = 0;
+    x_minus= 0;
+    y_plus = 0;
+    y_minus= 0;
+    z_plus = 0;
+    z_minus= 0;
 }
 
 void Skin::setName(QString _name)

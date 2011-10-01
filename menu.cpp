@@ -1,6 +1,7 @@
 #include "menu.h"
 #include "defines.h"
 #include "menu_defines.h"
+#include "effects_defines.h"
 
 Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent) :
     parent(_parent),
@@ -293,9 +294,13 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                     if (gameType == ARCADE_MODE)
                     {
                         emit playArcade(currentSkin, currentLevel);
+                        return;
                     }
                     else if (gameType == EDITOR_MODE)
+                    {
                         emit showLevelEditor();
+                        return;
+                    }
                 }
                 break;
 
@@ -305,6 +310,7 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                 {
                     currentActions->setPrimaryAction(DO_NOTHING);
                     emit playStory(currentSkin);
+                    return;
                 }
 
                 break;
@@ -460,6 +466,7 @@ GLvoid Menu::previousSkin()
 
     skinName->~CubeString();
     skinName = new CubeString(skinsList.value(currentSkin)->getName(), 2.0f, SKIN_NAME, alphabet);
+    emit playEffect(EFFECT_JUMPSMALL);
 }
 
 GLvoid Menu::nextSkin()
@@ -471,6 +478,7 @@ GLvoid Menu::nextSkin()
 
     skinName->~CubeString();
     skinName = new CubeString(skinsList.value(currentSkin)->getName(), 2.0f, SKIN_NAME, alphabet);
+    emit playEffect(EFFECT_JUMPSMALL);
 }
 
 GLvoid Menu::previousLevel()
@@ -484,6 +492,7 @@ GLvoid Menu::previousLevel()
 
     levelName->~CubeStringList();
     levelName = new CubeStringList(((currentLevel == 0) ? "new level" : levelsList.value(currentLevel)->getName()), 12.0f, 7.0f, LEVEL_NAME, alphabet);
+    emit playEffect(EFFECT_JUMPSMALL);
 }
 
 GLvoid Menu::nextLevel()
@@ -495,6 +504,7 @@ GLvoid Menu::nextLevel()
 
     levelName->~CubeStringList();
     levelName = new CubeStringList(((currentLevel == 0) ? "new level" : levelsList.value(currentLevel)->getName()), 12.0f, 7.0f, LEVEL_NAME, alphabet);
+    emit playEffect(EFFECT_JUMPSMALL);
 }
 
 GLvoid Menu::buttonPlayStoryTriggered()
@@ -503,6 +513,7 @@ GLvoid Menu::buttonPlayStoryTriggered()
     {
         gameType = STORY_MODE;
         isMoving = true;
+        emit playEffect(EFFECT_JUMP);
         currentActions->setPrimaryAction(GO_TO_SKINS_VIEW);
     }
 }
@@ -513,6 +524,7 @@ GLvoid Menu::buttonPlayArcadeTriggered()
     {
         gameType = ARCADE_MODE;
         isMoving = true;
+        emit playEffect(EFFECT_JUMP);
         currentActions->setPrimaryAction(GO_TO_SKINS_VIEW);
     }
 }
@@ -524,6 +536,7 @@ GLvoid Menu::buttonEditorTriggered()
         currentLevel = 0;
         gameType = EDITOR_MODE;
         isMoving = true;
+        emit playEffect(EFFECT_JUMP);
         currentActions->setPrimaryAction(GO_TO_LEVELS_VIEW);
     }
 }
@@ -533,10 +546,13 @@ GLvoid Menu::buttonBackTriggered()
     if (currentView == SKINS_VIEW)
     {
         isMoving = true;
+        emit playEffect(EFFECT_JUMP);
         currentActions->setPrimaryAction(GO_TO_MAIN_VIEW);
     }
     else if (currentView == LEVELS_VIEW)
     {
+        emit playEffect(EFFECT_JUMP);
+
         if (gameType == EDITOR_MODE)
         {
             isMoving = true;
@@ -557,11 +573,14 @@ GLvoid Menu::buttonNextTriggered()
         if (gameType == STORY_MODE)
         {
             isMoving = true;
+            emit playEffect(EFFECT_COIN);
+            emit stopAmbientMusic();
             currentActions->setPrimaryAction(EXIT_FROM_SKINS);
         }
         else if  (gameType == ARCADE_MODE)
         {
             isMoving = true;
+            emit playEffect(EFFECT_JUMP);
             currentActions->setPrimaryAction(GO_TO_LEVELS_VIEW);
 
             // Evito di mostrare l'elemento "new" se la modalita' e' ARCADE (e non EDITOR)
@@ -572,6 +591,13 @@ GLvoid Menu::buttonNextTriggered()
     else if (currentView == LEVELS_VIEW)
     {
         isMoving = true;
+
+        if (gameType == ARCADE_MODE)
+            emit playEffect(EFFECT_COIN);
+        else
+            emit playEffect(EFFECT_STOMP);
+
+        emit stopAmbientMusic();
         currentActions->setPrimaryAction(EXIT_FROM_LEVELS);
     }
 }
@@ -697,6 +723,9 @@ void Menu::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
 
 void Menu::keyPressed(QKeyEvent *event)
 {
+    if (isMoving)
+        return;
+
     int key = event->key();
 
     if ((key == Qt::Key_Escape) || (key == Qt::Key_Backspace))

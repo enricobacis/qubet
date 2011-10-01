@@ -1,26 +1,45 @@
 #include "audiomanager.h"
+#include <QDir>
 
 AudioManager::AudioManager(QObject *_parent) :
     parent(_parent),
-    audioEnabled(true)
+    currentFileName(""),
+    audioEnabled(true),
+    ambientMusic(NULL)
 {
-    //Inizialize the effectList
-    Phonon::MediaObject *effect;
+    //Inizialize the effectsList
 
     QString path = "resources/effects";
     QDir dir = QDir(path);
-    QString dirString;
+    Phonon::MediaObject *effect;
 
     for (uint i = 0; i < dir.count(); i++)
     {
-        dirString = path + "/" + dir[i];
-        effect = Phonon::createPlayer(Phonon::MusicCategory, Phonon::MediaSource(dirString));
-        effectsList.append(effect);
+        effect = Phonon::createPlayer(Phonon::MusicCategory, Phonon::MediaSource(path + "/" + dir[i]));
+        connect(effect, SIGNAL(finished()), effect, SLOT(stop()));
+        effectsList.insert(dir[i], effect);
     }
 }
 
 AudioManager::~AudioManager()
 {
+    ambientMusic->clear();
+    ambientMusic->~MediaObject();
+
+    Phonon::MediaObject *effect;
+
+    for (QMap<QString,Phonon::MediaObject*>::iterator i = effectsList.begin(); i != effectsList.end(); i++)
+    {
+        if (i.value() != NULL)
+        {
+            effect = dynamic_cast<Phonon::MediaObject*>(i.value());
+            effect->clear();
+            effect->~MediaObject();
+        }
+    }
+
+    effectsList.~QMap();
+
     this->disconnect(parent);
     parent->disconnect(this);
 }
@@ -31,6 +50,12 @@ void AudioManager::enableAudio(bool enabled)
     {
         audioEnabled = false;
         ambientMusic->pause();
+
+        for (QMap<QString,Phonon::MediaObject*>::iterator i = effectsList.begin(); i != effectsList.end(); i++)
+        {
+            if (i.value() != NULL)
+                dynamic_cast<Phonon::MediaObject*>(i.value())->stop();
+        }
     }
     else if (!audioEnabled && enabled)
     {
@@ -41,10 +66,19 @@ void AudioManager::enableAudio(bool enabled)
 
 void AudioManager::playAmbientMusic(QString filename)
 {
+    if (ambientMusic != NULL)
+        ambientMusic->clear();
+
     currentFileName = filename;
     ambientMusic = Phonon::createPlayer(Phonon::MusicCategory, Phonon::MediaSource(currentFileName));
     connect (ambientMusic, SIGNAL(aboutToFinish()), this, SLOT(enqueueMediaObject()));
     ambientMusic->play();
+}
+
+void AudioManager::stopAmbientMusic()
+{
+    if (ambientMusic != NULL)
+        ambientMusic->clear();
 }
 
 void AudioManager::enqueueMediaObject()
@@ -52,12 +86,21 @@ void AudioManager::enqueueMediaObject()
     ambientMusic->enqueue(currentFileName);
 }
 
-void AudioManager::playEffect(int effectId)
+void AudioManager::playEffect(QString effectName)
 {
     if(audioEnabled)
-        effectsList.at(effectId)->play();
+    {
+        Phonon::MediaObject *effect = effectsList.value(effectName, NULL);
+
+        if (effect != NULL)
+        {
+            if (effect->state() == Phonon::PlayingState)
+                effect->seek(0);
+            else
+                effect->play();
+        }
+    }
 }
 
 void AudioManager::run()
-{
-}
+{ }

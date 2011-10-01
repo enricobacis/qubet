@@ -141,10 +141,12 @@ public:
      */
     void draw();
 
+
 private:
+
+    QObject *parent; /**< TODO */
     GLint id; /**< TODO */
     QString filename; /**< TODO */
-    QObject *parent; /**< TODO */
     QString name; /**< TODO */
     bool isLoaded; /**< TODO */
     bool isInStory; /**< TODO */

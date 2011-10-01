@@ -1,8 +1,6 @@
 #ifndef QUBET_H
 #define QUBET_H
 
-#include <QDomElement>
-
 #include "menu.h"
 #include "game.h"
 #include "audiomanager.h"
@@ -151,14 +149,19 @@ private:
     GLvoid connectAudio(const QObject *sender);
 
     /**
-     * @brief This function is used to connect all the game slots to their signals.
-     */
-    GLvoid connectGame();
-
-    /**
      * @brief This function is used to connect all the menu slots to their signals.
      */
     GLvoid connectMenu();
+
+    /**
+     * @brief This function is used to connect all the levelEditor slots to their signals.
+     */
+    GLvoid connectLevelEditor();
+
+    /**
+     * @brief This function is used to connect all the game slots to their signals.
+     */
+    GLvoid connectGame();
 
 
     // Picking Management
@@ -202,7 +205,7 @@ private:
      * @pre Keep in mind that you have to show something else to show on the screen
      * using the currentView variable before to delete the current Menu instance.
      */
-    GLvoid menuClosed();
+    GLvoid closeMenu();
 
     /**
      * @brief This function is used to draw the scene on the QGLWidget.
@@ -387,11 +390,16 @@ signals:
     void playAmbientMusic(QString filename);
 
     /**
+     * @brief Signal emitted to stop the current ambient music.
+     */
+    void stopAmbientMusic();
+
+    /**
      * @brief Signal emitted to play an effect.
      *
-     * @param effectId is the id of the effect to play.
+     * @param effectName is the name of the effect to play.
      */
-    void playEffect(int effectId);
+    void playEffect(QString effectName);
 
 };
 

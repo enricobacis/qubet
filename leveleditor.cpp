@@ -1,6 +1,7 @@
 #include "leveleditor.h"
 #include "defines.h"
 #include "leveleditor_defines.h"
+#include "effects_defines.h"
 
 LevelEditor::LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,Level*> &_levelsList,QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent):
     parent(_parent),

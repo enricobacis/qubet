@@ -2,15 +2,15 @@
 
 Level::Level(QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *_parent) :
     parent(_parent),
-    obstacleModelsList(_obstacleModelsList),
-    isLoaded(false)
+    isLoaded(false),
+    obstacleModelsList(_obstacleModelsList)
 {
 }
 
 Level::Level(GLint _id, QString _filename, QObject *_parent) :
+    parent(_parent),
     id(_id),
     filename(_filename),
-    parent(_parent),
     isLoaded(false)
 {
 }
