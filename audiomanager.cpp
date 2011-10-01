@@ -102,5 +102,11 @@ void AudioManager::playEffect(QString effectName)
     }
 }
 
+void AudioManager::stopMusic()
+{
+    ambientMusic->stop();
+    ambientMusic = new Phonon::MediaObject();
+}
+
 void AudioManager::run()
 { }

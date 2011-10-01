@@ -88,6 +88,13 @@ private slots:
      */
     void playEffect(QString effectName);
 
+    /**
+     * @brief
+     *
+     * @param
+     */
+    void stopMusic();
+
 };
 
 #endif // AUDIOMANAGER_H

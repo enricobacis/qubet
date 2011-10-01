@@ -15,7 +15,10 @@ LevelEditor::LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,
     currentWidth(0),
     alphabet(_alphabet),
     volumeSkin(NULL),
-    angleRotVolumeCube(0.0f)
+    angleRotVolumeCube(0.0f),
+    visible(true),
+    visibleTime(0),
+    currentName("")
 {
     currentActions = new ActionList(INITIAL_MOVEMENT);
     cameraOffset = new Vector3f(0.0f, -30.0f, 0.0f);
@@ -34,12 +37,12 @@ LevelEditor::LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,
     next = new CubeString("next", 1.0f, alphabet, BUTTON_NEXT);
     setLevelNameLabel = new CubeString("set level name", 1.5f, alphabet, SET_LEVEL_NAME_LABEL);
 
-    setLevelNameForm = new CubeStringList("set level name", 12.0f, 7.0f, alphabet);
+    setLevelNameForm = new CubeStringList("", 2.0f, alphabet);
     GLuint volume_on = iconsList.value(VOLUME_ON);
     GLuint volume_off = iconsList.value(VOLUME_OFF);
     volumeSkin = new Skin(0, 0, volume_off, volume_off, volume_on, volume_on);
 
-    currentView = SET_PARAM_VIEW;
+    currentView = SET_NAME_VIEW;
 }
 
 LevelEditor::~LevelEditor()
@@ -137,8 +140,26 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
                 glTranslatef(8.5f, -13.0f, 0.0f);
                 next->draw(simplifyForPicking);
                 glTranslatef(-8.5f, 6.0f, 0.0f);
-                setLevelNameForm->draw(simplifyForPicking);
-
+                if (setLevelNameForm->getLabel(0) == "" && visible)
+                {
+                    visibleTime++;
+                    drawPrism(2.0f, 2.0f, 2.0f);
+                    if(visibleTime == 20)
+                        visible = false;
+                }
+                else if (setLevelNameForm->getLabel(0) == "" && !visible)
+                {
+                    visibleTime++;
+                    if(visibleTime == 33)
+                    {
+                        visibleTime = 0;
+                        visible = true;
+                    }
+                }
+                else
+                {
+                    setLevelNameForm->draw(simplifyForPicking);
+                }
             glPopMatrix();
 
             // Set Parameters View
@@ -210,11 +231,6 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
             glTranslatef(0.0f, 0.0f, -1.5f);
         glPopMatrix();
     }
-}
-
-GLvoid LevelEditor::playAudio()
-{
-    emit playAmbientMusic("resources/music/menu.mp3");
 }
 
 GLvoid LevelEditor::lenghten()
@@ -376,5 +392,26 @@ void LevelEditor::keyPressed(QKeyEvent *event)
     {
         if (currentView == SET_PARAM_VIEW)
             enlarge();
+    }
+    else if ((key >= 0x41 && key <= 0x5a) || (key >= 0x31 && key <= 0x39) || key == Qt::Key_Space)
+    {
+        if (currentView == SET_NAME_VIEW)
+        {
+            if(key!= Qt::Key_Space)
+                currentName+=key;
+            else
+                currentName.append(" ");
+            setLevelNameForm->~CubeStringList();
+            setLevelNameForm = new CubeStringList(currentName, 2.0f, alphabet);
+        }
+    }
+    else if (key == Qt::Key_Backspace)
+    {
+        if (currentView == SET_NAME_VIEW)
+        {
+            currentName = currentName.left(currentName.length()-1);
+            setLevelNameForm->~CubeStringList();
+            setLevelNameForm = new CubeStringList(currentName, 2.0f, alphabet);
+        }
     }
 }

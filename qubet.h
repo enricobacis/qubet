@@ -401,6 +401,13 @@ signals:
      */
     void playEffect(QString effectName);
 
+    /**
+     * @brief
+     *
+     * @param
+     */
+    void stopMusic();
+
 };
 
 #endif // QUBET_H

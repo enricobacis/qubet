@@ -298,8 +298,10 @@ GLvoid Qubet::showMenu()
 
 GLvoid Qubet::closeMenu()
 {
+    emit stopMusic();
     menu->~Menu();
     menu = NULL;
+    emit
 }
 
 GLvoid Qubet::drawScene(GLboolean simplifyForPicking)
