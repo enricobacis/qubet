@@ -218,16 +218,21 @@ GLvoid CubeStringList::init(QList< QPair<QString,GLuint> > _labels, GLfloat _max
 {
     int strings = _labels.count();
 
-    // Trovo la dimensione massima
-    int maxLength = 0;
+    GLfloat cubeDimension = 0;
 
-    for (int i = 0; i < strings; i++)
-        maxLength = qMax(maxLength, _labels.at(i).first.length());
+    if (strings > 0)
+    {
+        // Trovo la dimensione massima
+        int maxLength = 0;
 
-    GLfloat cubeWidth = _maxWidth / maxLength;
-    GLfloat cubeHeight = (_maxHeight - (strings - 1)*interline) / strings;
+        for (int i = 0; i < strings; i++)
+            maxLength = qMax(maxLength, _labels.at(i).first.length());
 
-    GLfloat cubeDimension = qMin(cubeWidth, cubeHeight);
+        GLfloat cubeWidth = _maxWidth / maxLength;
+        GLfloat cubeHeight = (_maxHeight - (strings - 1)*interline) / strings;
+
+        cubeDimension = qMin(cubeWidth, cubeHeight);
+    }
 
     init(_labels, cubeDimension, _alphabet);
 }
