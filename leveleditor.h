@@ -74,6 +74,9 @@ private:
     CubeString *setLevelNameLabel;  /**< It is the setLevelName CubeString. */
     CubeString *next;  /**< It is the next button CubeString. */
     CubeStringList *setLevelNameForm;  /**< It is the setLevelNameForm cubeStringList  */
+    GLboolean visible; /**< It is the boolean value that if the type block is visible */
+    GLint visibleTime;  /**< It is the visible time counter of the type block */
+    QString currentName;  /**< TODO */
 
     /**
      * @brief

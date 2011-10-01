@@ -34,7 +34,7 @@ enum { DO_NOTHING,
 /**
  * @brief Enum used for Editor's currentView
  */
-enum { SET_PARAM_VIEW, OTHER_VIEW};
+enum { SET_NAME_VIEW, SET_PARAM_VIEW, OTHER_VIEW};
 
 
 #endif // LEVELEDITOR_DEFINES_H
