@@ -45,7 +45,7 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<
     editButton = new CubeString("edit", 1.0f, alphabet, BUTTON_NEXT);
 
     skinName = new CubeString(skinsList.value(currentSkin)->getName(), 2.0f, alphabet, SKIN_NAME);
-    levelName = new CubeStringList("new level", 12.0f, 7.0f, alphabet, LEVEL_NAME);
+    levelName = new CubeStringList("new level", 12.0f, 7.0f, alphabet, 2.0f, LEVEL_NAME);
 
     labelsList.clear();
     labelsList.append(QPair<QString,GLuint>("cube studios", 0));
@@ -481,7 +481,7 @@ GLvoid Menu::previousLevel()
         currentLevel -= 1;
 
     levelName->~CubeStringList();
-    levelName = new CubeStringList(((currentLevel == 0) ? "new level" : levelsList.value(currentLevel)->getName()), 12.0f, 7.0f, alphabet, LEVEL_NAME);
+    levelName = new CubeStringList(((currentLevel == 0) ? "new level" : levelsList.value(currentLevel)->getName()), 12.0f, 7.0f, alphabet, 2.0f, LEVEL_NAME);
     emit playEffect(EFFECT_JUMPSMALL);
 }
 
@@ -493,7 +493,7 @@ GLvoid Menu::nextLevel()
         currentLevel += 1;
 
     levelName->~CubeStringList();
-    levelName = new CubeStringList(((currentLevel == 0) ? "new level" : levelsList.value(currentLevel)->getName()), 12.0f, 7.0f, alphabet, LEVEL_NAME);
+    levelName = new CubeStringList(((currentLevel == 0) ? "new level" : levelsList.value(currentLevel)->getName()), 12.0f, 7.0f, alphabet, 2.0f, LEVEL_NAME);
     emit playEffect(EFFECT_JUMPSMALL);
 }
 
