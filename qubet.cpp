@@ -274,6 +274,7 @@ GLvoid Qubet::connectLevelEditor()
     connectInputEvents(levelEditor);
 
     connect(levelEditor, SIGNAL(levelEditorClosed()), this, SLOT(levelEditorClosed()));
+    //connect(levelEditor, SIGNAL(showMenu()), this, SLOT(showMenu()));
 
     connectAudio(levelEditor);
 }

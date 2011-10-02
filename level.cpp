@@ -14,6 +14,11 @@ Level::Level(GLint _id, QString _filename, QObject *_parent) :
     isLoaded(false)
 {
 }
+Level::Level(GLint _id, QString _levelName, GLfloat _lenght, GLfloat _width)
+{
+    lenght = _lenght;
+    width = _width;
+}
 
 Level::~Level()
 {
@@ -57,7 +62,7 @@ GLfloat Level::getWidth()
 
 GLfloat Level::getLength()
 {
-    return length;
+    return lenght;
 }
 
 GLfloat Level::getGravity()

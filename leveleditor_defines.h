@@ -13,9 +13,10 @@
 #define BUTTON_SHORTEN              306
 #define LABEL_LENGHT                307
 #define LABEL_WIDTH                 308
-#define BUTTON_NEXT                 309
-#define SET_LEVEL_NAME_LABEL        310
-#define SET_LEVEL_NAME_FORM         311
+#define LABEL_SET_LEVEL_NAME        309
+#define BUTTON_BACK                 310
+#define BUTTON_NEXT                 311
+#define FORM_SET_LEVEL_NAME         312
 
 #define MIN_LEVEL_LENGHT            10
 #define MAX_LEVEL_LENGHT            300
@@ -28,7 +29,9 @@
  */
 enum { DO_NOTHING,
        INITIAL_MOVEMENT,
-       ROTATE_VOLUMECUBE
+       ROTATE_VOLUMECUBE,
+       GO_TO_SET_NAME_VIEW,
+       GO_TO_SET_PARAM_VIEW
      };
 
 /**

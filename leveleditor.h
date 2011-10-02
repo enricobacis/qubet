@@ -26,7 +26,6 @@ public:
      * @param parent
      */
     explicit LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,Level*> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *parent = 0);
-
     /**
      * @brief
      *
@@ -64,6 +63,7 @@ private:
     Alphabet *alphabet; /**< It is the alphabet provided by Qubet. */
     ActionList *currentActions; /**< It is the list of the current menu steps. */
     Vector3f *cameraOffset; /**< It is the camera offset for the editor. */
+    GLfloat cameraAngle; /**< It is the camera angle for the editor */
     Skin *volumeSkin; /**< It is the skin of the volume button */
     GLfloat angleRotVolumeCube;  /**< It is the current rotation angle of the volume icon. */
     CubeString *lenghtDisplay; /**< It is the lenght CubeString. */
@@ -71,9 +71,11 @@ private:
     CubeString *labelLenght;  /**< It is the labelLenght CubeString.*/
     CubeString *labelWidth;  /**< It is the labelWidth CubeString. */
     CubeString *create; /**< It is the create button CubeString. */
-    CubeString *setLevelNameLabel;  /**< It is the setLevelName CubeString. */
+    CubeString *labelSetLevelName;  /**< It is the setLevelName CubeString. */
+    CubeString *back;  /**<It is the back CubeString. */
+    CubeString *menu;  /**< It is the menu CubeString. */
     CubeString *next;  /**< It is the next button CubeString. */
-    CubeStringList *setLevelNameForm;  /**< It is the setLevelNameForm cubeStringList  */
+    CubeStringList *formSetLevelName;  /**< It is the formSetLevelName cubeStringList  */
     GLboolean visible; /**< It is the boolean value that if the type block is visible */
     GLint visibleTime;  /**< It is the visible time counter of the type block */
     QString currentName;  /**< TODO */
@@ -107,6 +109,18 @@ private:
      *
     */
     GLvoid reduce();
+
+    /**
+     * @brief
+     *
+    */
+    GLvoid buttonBackTriggered();
+
+    /**
+     * @brief
+     *
+    */
+    GLvoid buttonNextTriggered();
 
 
 private slots:

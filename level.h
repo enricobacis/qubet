@@ -26,6 +26,16 @@ public:
      * @brief
      *
      * @param _id
+     * @param _levelName
+     * @param lenght
+     * @param width
+    */
+    explicit Level(GLint _id, QString _levelName, GLfloat lenght, GLfloat width);
+
+    /**
+     * @brief
+     *
+     * @param _id
      * @param _filename
      * @param _parent
      */
@@ -153,7 +163,7 @@ private:
     QMap<GLint,Vector3f*> obstacleModelsList; /**< TODO */
     QMap<GLint,Obstacle*> obstaclesList; /**< TODO */
     GLint width; /**< TODO */
-    GLint length; /**< TODO */
+    GLint lenght; /**< TODO */
     GLfloat gravity; /**< TODO */
     QString ambientMusicFilename; /**< TODO */
     QImage *background; /**< TODO */
