@@ -2,6 +2,7 @@
 #define OBSTACLE_H
 
 #include "vector3f.h"
+#include "utilities.h"
 
 /**
  * @brief This class rapresents an Obstacle.
@@ -25,6 +26,13 @@ public:
      * @brief Safely destroy an Obstacle object.
      */
     ~Obstacle();
+
+    /**
+     * @brief
+     *
+     * @param simplifyForPicking
+    */
+    GLvoid draw(GLboolean simplifyForPicking);
 
     /**
      * @brief This method

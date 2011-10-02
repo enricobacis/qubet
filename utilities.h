@@ -24,4 +24,11 @@ GLvoid drawRectangle(GLfloat x, GLfloat y, GLuint texture = 0);
 GLvoid drawPrism(GLfloat x, GLfloat y, GLfloat z, Skin *skin = NULL, GLboolean invertBackTexture = false);
 
 
+/**
+ * @brief draw in (0,0,0) an obstacle with id id.
+ *
+ * @param id is the obstacle id.
+*/
+GLvoid drawObstacle(GLuint id);
+
 #endif // UTILITIES_H
