@@ -17,6 +17,7 @@
 #define BUTTON_BACK                 310
 #define BUTTON_NEXT                 311
 #define FORM_SET_LEVEL_NAME         312
+#define TOOLBAR                     313
 
 #define MIN_LEVEL_LENGHT            10
 #define MAX_LEVEL_LENGHT            300

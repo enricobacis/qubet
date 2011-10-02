@@ -188,6 +188,16 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
 
         glPushMatrix();
 
+        if(currentView == EDITING_LEVEL_VIEW)
+         {
+             glPushName(TOOLBAR);
+             glPushMatrix();
+                 glTranslatef(0.0f, -6.0f, 4.0f);
+                 drawRectangle(19.0f, 3.0f, 0.0f);
+             glPopMatrix();
+             glPopName();
+         }
+
             glTranslatef(-cameraOffset->x, -cameraOffset->y, -cameraOffset->z);
             glRotatef(cameraAngle, 0.0f, 0.0f, 1.0f);
             glRotatef(sceneAngleX, 1.0f, 0.0f, 0.0f);
