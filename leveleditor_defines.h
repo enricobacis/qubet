@@ -31,13 +31,14 @@ enum { DO_NOTHING,
        INITIAL_MOVEMENT,
        ROTATE_VOLUMECUBE,
        GO_TO_SET_NAME_VIEW,
-       GO_TO_SET_PARAM_VIEW
+       GO_TO_SET_PARAM_VIEW,
+       GO_TO_EDITING_LEVEL_VIEW
      };
 
 /**
  * @brief Enum used for Editor's currentView
  */
-enum { SET_NAME_VIEW, SET_PARAM_VIEW, OTHER_VIEW};
+enum { SET_NAME_VIEW, SET_PARAM_VIEW, OTHER_VIEW, EDITING_LEVEL_VIEW};
 
 
 #endif // LEVELEDITOR_DEFINES_H

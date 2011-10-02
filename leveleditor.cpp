@@ -138,17 +138,28 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
                 break;
 
             case GO_TO_SET_PARAM_VIEW:
-                if(currentView == SET_NAME_VIEW)
+                if (currentView == SET_NAME_VIEW)
                 {
                     cameraOffset->x ++;
                     cameraAngle+=12;
-                    if(cameraOffset->x == 0)
+                    if (cameraOffset->x == 0)
                     {
                         currentView = SET_PARAM_VIEW;
                         currentActions->setPrimaryAction(DO_NOTHING);
                         isMoving = false;
                     }
                 }
+                break;
+             case GO_TO_EDITING_LEVEL_VIEW:
+                cameraOffset->z ++;
+                cameraAngle += 12;
+                if (cameraOffset->z == 30)
+                {
+                    currentView = EDITING_LEVEL_VIEW;
+                    currentActions->setPrimaryAction(DO_NOTHING);
+                    isMoving = false;
+                }
+                break;
             }
         }
     }
@@ -170,18 +181,20 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
             glTranslatef(-cameraOffset->x, -cameraOffset->y, -cameraOffset->z);
             glRotatef(cameraAngle, 0.0f, 0.0f, 1.0f);
 
-            // Set Name View
+            if(currentView == SET_NAME_VIEW || currentView == SET_PARAM_VIEW)
+            {
+                // Set Name View
 
-            glPushMatrix();
+                glPushMatrix();
 
                 glTranslatef(-30.0f, 6.0f, 0.0f);
-                labelSetLevelName->draw(simplifyForPicking);
+                    labelSetLevelName->draw(simplifyForPicking);
 
                 glTranslatef(8.5f, -13.0f, 0.0f);
-                next->draw(simplifyForPicking);
+                    next->draw(simplifyForPicking);
 
-                glTranslatef(-17.0f, 0.0f, 0.0f);
-                menu->draw(simplifyForPicking);
+                    glTranslatef(-17.0f, 0.0f, 0.0f);
+                    menu->draw(simplifyForPicking);
 
                 glTranslatef(8.5f, 6.5f, 0.0f);
 
@@ -209,65 +222,72 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
                     }
                 }
 
-            glPopMatrix();
+                glPopMatrix();
 
-            // Set Parameters View
+                // Set Parameters View
 
-            glTranslatef(8.5f, -7.0f, 0.0f);
-            create->draw(simplifyForPicking);
+                glTranslatef(8.5f, -7.0f, 0.0f);
+                create->draw(simplifyForPicking);
 
-            glTranslatef(-18.0f, 0.0f, 0.0f);
-            back->draw(simplifyForPicking);
+                glTranslatef(-18.0f, 0.0f, 0.0f);
+                back->draw(simplifyForPicking);
 
             glTranslatef(3.5f, 11.5f, 0.0f);
-            labelLenght->draw(simplifyForPicking);
+                labelLenght->draw(simplifyForPicking);
 
-            glTranslatef(12.0f, 0.0f, 0.0f);
-            labelWidth->draw(simplifyForPicking);
+                glTranslatef(12.0f, 0.0f, 0.0f);
+                labelWidth->draw(simplifyForPicking);
 
             glTranslatef(-12.0f, -2.5f, 1.5f);
-            glPushName(BUTTON_LENGHTEN);
-            glBegin(GL_TRIANGLES);
+                glPushName(BUTTON_LENGHTEN);
+                glBegin(GL_TRIANGLES);
                 glVertex3f( 0.0f,  1.0f,  0.0f);
                 glVertex3f( 1.0f, -1.0f,  0.0f);
                 glVertex3f(-1.0f, -1.0f,  0.0f);
-            glEnd();
-            glPopName();
+                glEnd();
+                glPopName();
 
             glTranslatef(0.0f, -3.5f, -1.5f);
-            lenghtDisplay->draw(simplifyForPicking);
+                lenghtDisplay->draw(simplifyForPicking);
 
-            glTranslatef(7.0f, 0.0f, 1.5f);
+                glTranslatef(7.0f, 0.0f, 1.5f);
             glPushName(BUTTON_REDUCE);
-            glBegin(GL_TRIANGLES);
+                glBegin(GL_TRIANGLES);
                 glVertex3f(-1.0f,  0.0f,  0.0f);
                 glVertex3f( 1.0f,  1.0f,  0.0f);
                 glVertex3f( 1.0f, -1.0f,  0.0f);
-            glEnd();
-            glPopName();
+                glEnd();
+                glPopName();
 
             glTranslatef(4.5f, 0.0f, -1.5f);
-            widthDisplay->draw(simplifyForPicking);
+                widthDisplay->draw(simplifyForPicking);
 
-            glTranslatef(4.5f, 0.0f, 1.5f);
+                glTranslatef(4.5f, 0.0f, 1.5f);
             glPushName(BUTTON_ENLARGE);
-            glBegin(GL_TRIANGLES);
+                glBegin(GL_TRIANGLES);
                 glVertex3f( 1.0f,  0.0f,  0.0f);
                 glVertex3f(-1.0f,  1.0f,  0.0f);
                 glVertex3f(-1.0f, -1.0f,  0.0f);
-            glEnd();
-            glPopName();
+                glEnd();
+                glPopName();
 
             glTranslatef(-16.0f, -3.5f, 0.0f);
-            glPushName(BUTTON_SHORTEN);
-            glBegin(GL_TRIANGLES);
+                glPushName(BUTTON_SHORTEN);
+                glBegin(GL_TRIANGLES);
                 glVertex3f(-1.0f,  1.0f,  0.0f);
                 glVertex3f( 1.0f,  1.0f,  0.0f);
                 glVertex3f( 0.0f, -1.0f,  0.0f);
-            glEnd();
-            glPopName();
+                glEnd();
+                glPopName();
 
-        glPopMatrix();
+            }
+            else if(currentView == EDITING_LEVEL_VIEW)
+            {
+                level->draw(simplifyForPicking);
+                //tool bar draw
+            }
+            glPopMatrix();
+
     }
 }
 
@@ -320,7 +340,7 @@ GLvoid LevelEditor::buttonBackTriggered()
     if (currentView == SET_PARAM_VIEW)
     {
         isMoving = true;
-        emit playEffect(EFFECT_JUMP);
+        emit playEffect(EFFECT_JUMPSMALL);
         currentActions->setPrimaryAction(GO_TO_SET_NAME_VIEW);
     }
 }
@@ -335,13 +355,16 @@ GLvoid LevelEditor::buttonNextTriggered()
                 currentName.chop(1);
 
             isMoving = true;
-            emit playEffect(EFFECT_JUMP);
+            emit playEffect(EFFECT_JUMPSMALL);
             currentActions->setPrimaryAction(GO_TO_SET_PARAM_VIEW);
         }
     }
     else if (currentView == SET_PARAM_VIEW)
     {
-        emit playEffect(EFFECT_JUMP);
+        emit playEffect(EFFECT_JUMPSMALL);
+        isMoving = true;
+        level = new Level(0, currentName, currentLenght, currentWidth);
+        currentActions->setPrimaryAction(GO_TO_EDITING_LEVEL_VIEW);
     }
 }
 
