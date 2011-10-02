@@ -350,7 +350,7 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
         glPopMatrix();
         glPopName();
 
-        if (skybox != NULL)
+        if (!simplifyForPicking && (skybox != NULL))
         {
             glPushMatrix();
                 glRotatef(skyboxAngle, 0.0f, 1.0f, 0.0f);
