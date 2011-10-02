@@ -64,6 +64,7 @@ private:
     ActionList *currentActions; /**< It is the list of the current menu steps. */
     Vector3f *cameraOffset; /**< It is the camera offset for the editor. */
     GLfloat cameraAngle; /**< It is the camera angle for the editor */
+    GLfloat sceneAngle;  /**< It is the scene angle for the editor */
     Skin *volumeSkin; /**< It is the skin of the volume button */
     GLfloat angleRotVolumeCube;  /**< It is the current rotation angle of the volume icon. */
     CubeString *lenghtDisplay; /**< It is the lenght CubeString. */

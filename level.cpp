@@ -106,7 +106,7 @@ bool Level::save()
 
 GLvoid Level::draw(GLboolean simplifyForPicking)
 {
-    drawPrism(width, 1, lenght);
+    drawPrism(lenght, 1, width);
     for(int i = 0; i < obstaclesList.count(); i++)
     {
         obstaclesList[i][2].draw(simplifyForPicking);

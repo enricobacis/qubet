@@ -133,6 +133,7 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
                         currentView = SET_NAME_VIEW;
                         currentActions->setPrimaryAction(DO_NOTHING);
                         isMoving = false;
+                        cameraAngle = 0;
                     }
                 }
                 break;
@@ -147,17 +148,20 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
                         currentView = SET_PARAM_VIEW;
                         currentActions->setPrimaryAction(DO_NOTHING);
                         isMoving = false;
+                        cameraAngle = 0;
                     }
                 }
                 break;
              case GO_TO_EDITING_LEVEL_VIEW:
                 cameraOffset->z ++;
                 cameraAngle += 12;
+                sceneAngle ++;
                 if (cameraOffset->z == 30)
                 {
                     currentView = EDITING_LEVEL_VIEW;
                     currentActions->setPrimaryAction(DO_NOTHING);
                     isMoving = false;
+                    cameraAngle = 0;
                 }
                 break;
             }
@@ -180,6 +184,7 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
 
             glTranslatef(-cameraOffset->x, -cameraOffset->y, -cameraOffset->z);
             glRotatef(cameraAngle, 0.0f, 0.0f, 1.0f);
+            glRotatef(sceneAngle, 1.0f, 0.0f, 0.0f);
 
             if(currentView == SET_NAME_VIEW || currentView == SET_PARAM_VIEW)
             {
