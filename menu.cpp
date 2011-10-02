@@ -687,17 +687,17 @@ void Menu::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
         case BUTTON_PLAY_ARCADE:
         case BUTTON_LEVEL_EDITOR:
             if (!mainMenuButtons->isRotating(listNames.at(0), listNames.at(1)))
-                mainMenuButtons->startLetterRotation(listNames.at(0), listNames.at(1), 6.0f, 1.0f);
+                mainMenuButtons->startLetterRotation(listNames.at(0), listNames.at(1), 6, 1);
             break;
 
         case SKIN_NAME:
             if (!skinName->isRotating(listNames.at(1)))
-                skinName->startLetterRotation(listNames.at(1), 6.0f, 1.0f);
+                skinName->startLetterRotation(listNames.at(1), 6, 1);
             break;
 
         case LEVEL_NAME:
             if (!levelName->isRotating(listNames.at(1), listNames.at(2)))
-                levelName->startLetterRotation(listNames.at(1), listNames.at(2), 6.0f, 1.0f);
+                levelName->startLetterRotation(listNames.at(1), listNames.at(2), 6, 1);
             break;
         }
     }

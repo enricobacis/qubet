@@ -9,7 +9,7 @@ CubeString::CubeString(QString _label, GLfloat _cubeDimension, Alphabet *_alphab
     init();
 }
 
-CubeString::CubeString(QString _label, GLfloat _maxWidth, GLfloat _maxHeight, Alphabet *_alphabet, GLuint _name) :
+CubeString::CubeString(QString _label, GLfloat _maxWidth, GLfloat _maxHeight, Alphabet *_alphabet, GLfloat _maxCubeDimension, GLuint _name) :
     label(_label),
     name(_name),
     alphabet(_alphabet)
@@ -19,9 +19,10 @@ CubeString::CubeString(QString _label, GLfloat _maxWidth, GLfloat _maxHeight, Al
 
     if (length > 1)
     {
-        cubeDimension = _maxWidth/length;
-        if (cubeDimension > _maxHeight)
-            cubeDimension = _maxHeight;
+        cubeDimension = qMin((_maxWidth / length), _maxHeight);
+
+        if (_maxCubeDimension > 0)
+            cubeDimension = qMin(cubeDimension, _maxCubeDimension);
     }
 
     init();

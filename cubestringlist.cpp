@@ -8,12 +8,12 @@ CubeStringList::CubeStringList(QList< QPair<QString,GLuint> > _labels, GLfloat _
     init(_labels, _cubeDimension, _alphabet);
 }
 
-CubeStringList::CubeStringList(QList< QPair<QString,GLuint> > _labels, GLfloat _maxWidth, GLfloat _maxHeight, Alphabet *_alphabet) :
+CubeStringList::CubeStringList(QList< QPair<QString,GLuint> > _labels, GLfloat _maxWidth, GLfloat _maxHeight, Alphabet *_alphabet, GLfloat _maxCubeDimension) :
     name(0),
     firstStringHeight(0),
     stringsHeightDelta(0)
 {
-    init(_labels, _maxWidth, _maxHeight, _alphabet);
+    init(_labels, _maxWidth, _maxHeight, _alphabet, _maxCubeDimension);
 }
 
 CubeStringList::CubeStringList(QString _labels, GLfloat _cubeDimension, Alphabet *_alphabet, GLuint _name) :
@@ -24,12 +24,12 @@ CubeStringList::CubeStringList(QString _labels, GLfloat _cubeDimension, Alphabet
     init(splitLabels(_labels), _cubeDimension, _alphabet);
 }
 
-CubeStringList::CubeStringList(QString _labels, GLfloat _maxWidth, GLfloat _maxHeight, Alphabet *_alphabet, GLuint _name) :
+CubeStringList::CubeStringList(QString _labels, GLfloat _maxWidth, GLfloat _maxHeight, Alphabet *_alphabet, GLfloat _maxCubeDimension, GLuint _name) :
     name(_name),
     firstStringHeight(0),
     stringsHeightDelta(0)
 {
-    init(splitLabels(_labels), _maxWidth, _maxHeight, _alphabet);
+    init(splitLabels(_labels), _maxWidth, _maxHeight, _alphabet, _maxCubeDimension);
 }
 
 CubeStringList::~CubeStringList()
@@ -68,6 +68,11 @@ GLvoid CubeStringList::draw(GLboolean simplifyForPicking)
 
     if (name != 0)
         glPopName();
+}
+
+GLint CubeStringList::getLabelCount()
+{
+    return cubeStrings.count();
 }
 
 QString CubeStringList::getLabel(GLuint _stringName)
@@ -214,7 +219,7 @@ GLvoid CubeStringList::init(QList< QPair<QString,GLuint> > _labels, GLfloat _cub
     computeHeights(_cubeDimension);
 }
 
-GLvoid CubeStringList::init(QList< QPair<QString,GLuint> > _labels, GLfloat _maxWidth, GLfloat _maxHeight, Alphabet *_alphabet)
+GLvoid CubeStringList::init(QList< QPair<QString,GLuint> > _labels, GLfloat _maxWidth, GLfloat _maxHeight, Alphabet *_alphabet, GLfloat _maxCubeDimension)
 {
     int strings = _labels.count();
 
@@ -232,6 +237,9 @@ GLvoid CubeStringList::init(QList< QPair<QString,GLuint> > _labels, GLfloat _max
         GLfloat cubeHeight = (_maxHeight - (strings - 1)*interline) / strings;
 
         cubeDimension = qMin(cubeWidth, cubeHeight);
+
+        if (_maxCubeDimension > 0)
+            cubeDimension = qMin(cubeDimension, _maxCubeDimension);
     }
 
     init(_labels, cubeDimension, _alphabet);

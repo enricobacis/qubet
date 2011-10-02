@@ -37,9 +37,9 @@ LevelEditor::LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,
     menu = new CubeString("menu", 1.0f, alphabet, BUTTON_BACK);
     create = new CubeString("create", 1.0f, alphabet, BUTTON_NEXT);
     next = new CubeString("next", 1.0f, alphabet, BUTTON_NEXT);
-    labelSetLevelName = new CubeString("set level name", 1.5f, alphabet, LABEL_SET_LEVEL_NAME);
+    labelSetLevelName = new CubeString("set level name", 1.3f, alphabet, LABEL_SET_LEVEL_NAME);
 
-    formSetLevelName = new CubeStringList("", 2.0f, alphabet, FORM_SET_LEVEL_NAME);
+    formSetLevelName = new CubeStringList("", 14.0f, 6.0f, alphabet, 2.0f, FORM_SET_LEVEL_NAME);
     GLuint volume_on = iconsList.value(VOLUME_ON);
     GLuint volume_off = iconsList.value(VOLUME_OFF);
     volumeSkin = new Skin(0, 0, volume_off, volume_off, volume_on, volume_on);
@@ -149,12 +149,12 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
                         isMoving = false;
                     }
                 }
-
             }
         }
     }
 
     // Disegno l' editor
+
     if (!(isMoving && simplifyForPicking))
     {
         glPushName(BUTTON_VOLUME);
@@ -171,56 +171,62 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
             glRotatef(cameraAngle, 0.0f, 0.0f, 1.0f);
 
             // Set Name View
+
             glPushMatrix();
-                glTranslatef(-30.0f, 5.0f, 0.0f);
+
+                glTranslatef(-30.0f, 6.0f, 0.0f);
                 labelSetLevelName->draw(simplifyForPicking);
-                glTranslatef(8.5f, -12.0f, 0.0f);
+
+                glTranslatef(8.5f, -13.0f, 0.0f);
                 next->draw(simplifyForPicking);
+
                 glTranslatef(-17.0f, 0.0f, 0.0f);
                 menu->draw(simplifyForPicking);
-                glTranslatef(8.5f, 6.0f, 0.0f);
 
-                if (formSetLevelName->getLabel(0) == "" && visible)
+                glTranslatef(8.5f, 6.5f, 0.0f);
+
+                if (!simplifyForPicking)
                 {
-                    visibleTime++;
-                    drawPrism(2.0f, 2.0f, 2.0f);
-                    if(visibleTime == 20)
-                        visible = false;
-                }
-                else if (formSetLevelName->getLabel(0) == "" && !visible)
-                {
-                    visibleTime++;
-                    if(visibleTime == 33)
+                    if (formSetLevelName->getLabel(0) == "" && visible)
                     {
-                        visibleTime = 0;
-                        visible = true;
+                        visibleTime++;
+                        drawPrism(2.0f, 2.0f, 2.0f);
+                        if(visibleTime == 20)
+                            visible = false;
+                    }
+                    else if (formSetLevelName->getLabel(0) == "" && !visible)
+                    {
+                        visibleTime++;
+                        if(visibleTime == 33)
+                        {
+                            visibleTime = 0;
+                            visible = true;
+                        }
+                    }
+                    else
+                    {
+                        formSetLevelName->draw(simplifyForPicking);
                     }
                 }
-                else
-                {
-                    formSetLevelName->draw(simplifyForPicking);
-                }
+
             glPopMatrix();
 
             // Set Parameters View
+
             glTranslatef(8.5f, -7.0f, 0.0f);
             create->draw(simplifyForPicking);
+
             glTranslatef(-18.0f, 0.0f, 0.0f);
             back->draw(simplifyForPicking);
-            glTranslatef(9.5f, 7.0f, 0.0f);
 
-            glTranslatef(-6.0f, 4.5f, 0.0f);
+            glTranslatef(3.5f, 11.5f, 0.0f);
             labelLenght->draw(simplifyForPicking);
 
             glTranslatef(12.0f, 0.0f, 0.0f);
             labelWidth->draw(simplifyForPicking);
 
-            // Return to (0.0f, 0.0f, 0.0f)
-            glTranslatef(-5.0f, -4.5f, 0.0f);
-
+            glTranslatef(-12.0f, -2.5f, 1.5f);
             glPushName(BUTTON_LENGHTEN);
-
-            glTranslatef(-7.0f, 2.0f, 1.5f);
             glBegin(GL_TRIANGLES);
                 glVertex3f( 0.0f,  1.0f,  0.0f);
                 glVertex3f( 1.0f, -1.0f,  0.0f);
@@ -228,26 +234,23 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
             glEnd();
             glPopName();
 
-            glTranslatef(0.0f, 0.0f, -1.5f);
-
-            glTranslatef(0.0f, -3.5f, 0.0f);
+            glTranslatef(0.0f, -3.5f, -1.5f);
             lenghtDisplay->draw(simplifyForPicking);
 
-            glPushName(BUTTON_REDUCE);
             glTranslatef(7.0f, 0.0f, 1.5f);
+            glPushName(BUTTON_REDUCE);
             glBegin(GL_TRIANGLES);
                 glVertex3f(-1.0f,  0.0f,  0.0f);
                 glVertex3f( 1.0f,  1.0f,  0.0f);
                 glVertex3f( 1.0f, -1.0f,  0.0f);
             glEnd();
-            glTranslatef(0.0f, 0.0f, -1.5f);
             glPopName();
 
-            glTranslatef(4.5f, 0.0f, 0.0f);
+            glTranslatef(4.5f, 0.0f, -1.5f);
             widthDisplay->draw(simplifyForPicking);
 
-            glPushName(BUTTON_ENLARGE);
             glTranslatef(4.5f, 0.0f, 1.5f);
+            glPushName(BUTTON_ENLARGE);
             glBegin(GL_TRIANGLES);
                 glVertex3f( 1.0f,  0.0f,  0.0f);
                 glVertex3f(-1.0f,  1.0f,  0.0f);
@@ -255,13 +258,7 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
             glEnd();
             glPopName();
 
-            glTranslatef(0.0f, 0.0f, -1.5f);
-
-            // Return to (-6.0f, 0.0f, 0.0f)
-            glTranslatef(-16.0f, 0.0f, 0.0f);
-
-            glTranslatef(0.0f, -3.5f, 1.5f);
-
+            glTranslatef(-16.0f, -3.5f, 0.0f);
             glPushName(BUTTON_SHORTEN);
             glBegin(GL_TRIANGLES);
                 glVertex3f(-1.0f,  1.0f,  0.0f);
@@ -270,7 +267,6 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
             glEnd();
             glPopName();
 
-            glTranslatef(0.0f, 0.0f, -1.5f);
         glPopMatrix();
     }
 }
@@ -335,6 +331,9 @@ GLvoid LevelEditor::buttonNextTriggered()
     {
         if(currentName != "")
         {
+            if (currentName.endsWith(' '))
+                currentName.chop(1);
+
             isMoving = true;
             emit playEffect(EFFECT_JUMP);
             currentActions->setPrimaryAction(GO_TO_SET_PARAM_VIEW);
@@ -457,10 +456,11 @@ void LevelEditor::keyPressed(QKeyEvent *event)
     {
         if (key == Qt::Key_Backspace && currentView == SET_NAME_VIEW)
         {
-            emit playEffect(EFFECT_COIN);
-            currentName = currentName.left(currentName.length()-1);
+            emit playEffect(EFFECT_JUMP);
+            currentName = currentName.left(currentName.length() - 1);
+
             formSetLevelName->~CubeStringList();
-            formSetLevelName = new CubeStringList(currentName, 2.0f, alphabet);
+            formSetLevelName = new CubeStringList(currentName, 14.0f, 6.0f, alphabet, 2.0f, FORM_SET_LEVEL_NAME);
         }
         else
         {
@@ -491,22 +491,38 @@ void LevelEditor::keyPressed(QKeyEvent *event)
         if (currentView == SET_PARAM_VIEW)
             enlarge();
     }
-    else if ((key >= 0x41 && key <= 0x5a) || (key >= 0x31 && key <= 0x39) || key == Qt::Key_Space)
+    else if ((key >= Qt::Key_A && key <= Qt::Key_Z) || (key >= Qt::Key_0 && key <= Qt::Key_9) || key == Qt::Key_Space)
     {
         if (currentView == SET_NAME_VIEW)
         {
-            emit playEffect(EFFECT_COIN);
-            if(key!= Qt::Key_Space)
-                currentName+=key;
-            else
-                currentName.append(" ");
-            formSetLevelName->~CubeStringList();
-            formSetLevelName = new CubeStringList(currentName, 2.0f, alphabet, FORM_SET_LEVEL_NAME);
+            bool isSpace = false;
 
-            GLuint stringName = currentName.split(" ", QString::SkipEmptyParts).count() -1;
-            GLuint letterName = currentName.count() -1;
-            if (!formSetLevelName->isRotating(stringName, letterName))
+            if (key != Qt::Key_Space)
+            {
+                currentName += key;
+            }
+            else
+            {
+                if (currentName.endsWith(' '))
+                    return;
+
+                isSpace = true;
+                currentName.append(" ");
+            }
+
+            emit playEffect(EFFECT_COIN);
+
+            if (!isSpace)
+            {
+                formSetLevelName->~CubeStringList();
+                formSetLevelName = new CubeStringList(currentName, 14.0f, 6.0f, alphabet, 2.0f, FORM_SET_LEVEL_NAME);
+
+                GLuint stringName = formSetLevelName->getLabelCount() - 1;
+                GLuint letterName = formSetLevelName->getLabel(stringName).size() - 1;
+
+                if (!formSetLevelName->isRotating(stringName, letterName))
                     formSetLevelName->startLetterRotation(stringName, letterName, 30, 4);
+            }
         }
     }
 }

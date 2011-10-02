@@ -47,9 +47,11 @@ public:
      * @param _maxWidth is the maximum width the CubeString can grow up to.
      * @param _maxHeight is the maximum height the CubeString can grow up to.
      * @param _alphabet is the reference to the Alphabet you want to use.
+     * @param _maxCubeDimension is the maximum cubeDimension. If set to a number <= 0 it
+     *        will not be computated. [default = 0]
      * @param _name is the name given to the entire string (for picking purposes). [default = 0]
      */
-    explicit CubeString(QString _label, GLfloat _maxWidth, GLfloat _maxHeight, Alphabet *_alphabet, GLuint _name = 0);
+    explicit CubeString(QString _label, GLfloat _maxWidth, GLfloat _maxHeight, Alphabet *_alphabet, GLfloat _maxCubeDimension = 0, GLuint _name = 0);
 
     /**
      * @brief Safely destroys a CubeString.

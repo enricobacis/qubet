@@ -299,10 +299,11 @@ GLvoid Qubet::showMenu()
 
 GLvoid Qubet::closeMenu()
 {
-    emit stopMusic();
-    menu->~Menu();
-    menu = NULL;
-    emit
+    if (menu != NULL)
+    {
+        menu->~Menu();
+        menu = NULL;
+    }
 }
 
 GLvoid Qubet::drawScene(GLboolean simplifyForPicking)
