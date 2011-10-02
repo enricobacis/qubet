@@ -123,6 +123,13 @@ private:
     GLvoid buttonNextTriggered();
 
 
+    /**
+     * @brief
+     *
+     * @param key
+    */
+    GLvoid letterTyped(int key);
+
 private slots:
 
     /**

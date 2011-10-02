@@ -346,6 +346,26 @@ GLvoid LevelEditor::buttonNextTriggered()
     }
 }
 
+GLvoid LevelEditor::letterTyped(int key)
+{
+
+    if (currentView == SET_NAME_VIEW)
+    {
+        emit playEffect(EFFECT_COIN);
+        if(key!= Qt::Key_Space)
+            currentName+=key;
+        else
+            currentName.append(" ");
+        formSetLevelName->~CubeStringList();
+        formSetLevelName = new CubeStringList(currentName, 2.0f, alphabet, FORM_SET_LEVEL_NAME);
+
+        GLuint stringName = currentName.split(" ", QString::SkipEmptyParts).count() -1;
+        GLuint letterName = currentName.count() -1;
+        if (!formSetLevelName->isRotating(stringName, letterName))
+                formSetLevelName->startLetterRotation(stringName, letterName, 30, 4);
+    }
+}
+
 void LevelEditor::itemClicked(QList<GLuint> listNames)
 {
     if (isMoving)
@@ -493,20 +513,6 @@ void LevelEditor::keyPressed(QKeyEvent *event)
     }
     else if ((key >= 0x41 && key <= 0x5a) || (key >= 0x31 && key <= 0x39) || key == Qt::Key_Space)
     {
-        if (currentView == SET_NAME_VIEW)
-        {
-            emit playEffect(EFFECT_COIN);
-            if(key!= Qt::Key_Space)
-                currentName+=key;
-            else
-                currentName.append(" ");
-            formSetLevelName->~CubeStringList();
-            formSetLevelName = new CubeStringList(currentName, 2.0f, alphabet, FORM_SET_LEVEL_NAME);
-
-            GLuint stringName = currentName.split(" ", QString::SkipEmptyParts).count() -1;
-            GLuint letterName = currentName.count() -1;
-            if (!formSetLevelName->isRotating(stringName, letterName))
-                    formSetLevelName->startLetterRotation(stringName, letterName, 30, 4);
-        }
+        letterTyped(key);
     }
 }
