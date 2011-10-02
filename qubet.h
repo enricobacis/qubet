@@ -106,6 +106,7 @@ private:
     QMap<GLint,Level*> levelsList; /**< It is the QMap that contains ids and the names of level files. */
     QMap<GLint,Vector3f*> obstacleModelsList; /**< It is the QMap that contains ids and the dimensions of Obstacles. */
     QMap<GLint,GLuint> iconsList; /**< It is the QMap that contains ids of the icons' texture. */
+    QMap<QString,Skin*> skyboxesList; /**< It is the Qmap that contains the available skyboxes. */
     QTimer *drawTimer; /**< It is the QTimer to re-draw the scene. */
     Menu *menu; /**< It is the Menu pointer. */
     Game *game; /**< It is the Game pointer. */
@@ -284,6 +285,13 @@ private:
      * @return true if load is successful, false elsewhere.
      */
     GLboolean loadIcons();
+
+    /**
+     * @brief Load the skyboxes.
+     *
+     * @return true if load is successful, false elsewhere.
+     */
+    GLboolean loadSkyboxes();
 
 
 private slots:

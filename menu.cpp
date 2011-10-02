@@ -3,13 +3,14 @@
 #include "menu_defines.h"
 #include "effects_defines.h"
 
-Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent) :
+Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, Skin *_skybox) :
     parent(_parent),
     currentSkin(1),
     currentLevel(0),
     skinsList(_skinsList),
     levelsList(_levelsList),
     iconsList(_iconsList),
+    skybox(_skybox),
     alphabet(_alphabet),
     isMoving(false),
     gameType(0),
@@ -30,6 +31,8 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<
     qubetLabel(NULL)
 {
     currentActions = new ActionList(CUBE_STUDIO_DISTRIBUTION);
+    currentActions->appendSecondaryAction(ROTATE_SKYBOX);
+
     cameraOffset = new Vector3f(-90.0f, -30.0f, 18.0f);
 
     QList< QPair<QString,GLuint> > labelsList;
@@ -323,6 +326,14 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                     currentActions->removeSecondaryAction(ROTATE_VOLUMECUBE);
 
                 break;
+
+            case ROTATE_SKYBOX:
+                skyboxAngle += 0.1f;
+
+                if (skyboxAngle >= 360.0f)
+                    skyboxAngle -= 360.0f;
+
+                break;
             }
         }
     }
@@ -338,6 +349,14 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
             drawPrism(0.8f, 0.8f, 0.8f, volumeSkin, true);
         glPopMatrix();
         glPopName();
+
+        if (skybox != NULL)
+        {
+            glPushMatrix();
+                glRotatef(skyboxAngle, 0.0f, 1.0f, 0.0f);
+                drawPrism(50.0f, 50.0f, 50.0f, skybox);
+            glPopMatrix();
+        }
 
         glPushMatrix();
 
