@@ -64,7 +64,8 @@ private:
     ActionList *currentActions; /**< It is the list of the current menu steps. */
     Vector3f *cameraOffset; /**< It is the camera offset for the editor. */
     GLfloat cameraAngle; /**< It is the camera angle for the editor */
-    GLfloat sceneAngle;  /**< It is the scene angle for the editor */
+    GLfloat sceneAngleX;  /**< It is the scene angle on the X axis for the editor */
+    GLfloat sceneAngleY;  /**< It is the scene angle on the Y axis for the editor */
     Skin *volumeSkin; /**< It is the skin of the volume button */
     GLfloat angleRotVolumeCube;  /**< It is the current rotation angle of the volume icon. */
     CubeString *lenghtDisplay; /**< It is the lenght CubeString. */
@@ -79,7 +80,8 @@ private:
     CubeStringList *formSetLevelName;  /**< It is the formSetLevelName cubeStringList  */
     GLboolean visible; /**< It is the boolean value that if the type block is visible */
     GLint visibleTime;  /**< It is the visible time counter of the type block */
-    QString currentName;  /**< TODO */
+    QString currentName;  /**< It is the current name for the level. */
+    GLboolean audioEnabledEntry;  /**< This check if the audio is enabled at the entry. */
 
     /**
      * @brief

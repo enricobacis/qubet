@@ -8,7 +8,6 @@ LevelEditor::LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,
     levelsList(_levelsList),
     obstacleModelsList(_obstacleModelsList),
     iconsList(_iconsList),
-    audioEnabled(true),
     isMoving(false),
     currentView(0),
     currentLenght(0),
@@ -45,6 +44,8 @@ LevelEditor::LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,
     volumeSkin = new Skin(0, 0, volume_off, volume_off, volume_on, volume_on);
 
     currentView = SET_NAME_VIEW;
+
+    audioEnabledEntry = audioEnabled;
 }
 
 LevelEditor::~LevelEditor()
@@ -155,7 +156,7 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
              case GO_TO_EDITING_LEVEL_VIEW:
                 cameraOffset->z ++;
                 cameraAngle += 12;
-                sceneAngle ++;
+                sceneAngleX ++;
                 if (cameraOffset->z == 30)
                 {
                     currentView = EDITING_LEVEL_VIEW;
@@ -175,6 +176,11 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
         glPushName(BUTTON_VOLUME);
         glPushMatrix();
             glTranslatef(9.5f, 6.0f, 3.0f);
+            if(!audioEnabledEntry)
+            {
+
+                glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
+            }
             glRotatef(angleRotVolumeCube, -1.0f, 0.0f, 0.0f);
             drawPrism(0.8f, 0.8f, 0.8f, volumeSkin, true);
         glPopMatrix();
@@ -184,7 +190,8 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
 
             glTranslatef(-cameraOffset->x, -cameraOffset->y, -cameraOffset->z);
             glRotatef(cameraAngle, 0.0f, 0.0f, 1.0f);
-            glRotatef(sceneAngle, 1.0f, 0.0f, 0.0f);
+            glRotatef(sceneAngleX, 1.0f, 0.0f, 0.0f);
+            glRotatef(sceneAngleY, 0.0f, 1.0f, 0.0f);
 
             if(currentView == SET_NAME_VIEW || currentView == SET_PARAM_VIEW)
             {
@@ -537,22 +544,46 @@ void LevelEditor::keyPressed(QKeyEvent *event)
     else if (key == Qt::Key_Up)
     {
         if (currentView == SET_PARAM_VIEW)
+        {
             lenghten();
+        }
+        else if (currentView == EDITING_LEVEL_VIEW)
+        {
+            cameraOffset->z -=2;
+        }
     }
     else if (key == Qt::Key_Down)
     {
         if (currentView == SET_PARAM_VIEW)
+        {
             shorten();
+        }
+        else if (currentView == EDITING_LEVEL_VIEW)
+        {
+            cameraOffset->z +=2;
+        }
     }
     else if (key == Qt::Key_Left)
     {
         if (currentView == SET_PARAM_VIEW)
+        {
             reduce();
+        }
+        else if (currentView == EDITING_LEVEL_VIEW)
+        {
+            sceneAngleY +=2;
+        }
     }
     else if (key == Qt::Key_Right)
     {
         if (currentView == SET_PARAM_VIEW)
+        {
             enlarge();
+        }
+        else if (currentView == EDITING_LEVEL_VIEW)
+        {
+            sceneAngleY -=2;
+        }
     }
     else if ((key >= Qt::Key_A && key <= Qt::Key_Z) || (key >= Qt::Key_0 && key <= Qt::Key_9) || key == Qt::Key_Space)
     {

@@ -72,7 +72,8 @@ void AudioManager::playAmbientMusic(QString filename)
     currentFileName = filename;
     ambientMusic = Phonon::createPlayer(Phonon::MusicCategory, Phonon::MediaSource(currentFileName));
     connect (ambientMusic, SIGNAL(aboutToFinish()), this, SLOT(enqueueMediaObject()));
-    ambientMusic->play();
+    if(audioEnabled)
+        ambientMusic->play();
 }
 
 void AudioManager::stopAmbientMusic()
