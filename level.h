@@ -149,7 +149,7 @@ public:
      * @brief
      *
      */
-    void draw();
+    GLvoid draw(GLboolean simplifyForPicking);
 
 
 private:

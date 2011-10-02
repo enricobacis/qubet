@@ -104,7 +104,11 @@ bool Level::save()
     // TODO
 }
 
-void Level::draw()
+GLvoid Level::draw(GLboolean simplifyForPicking)
 {
-    // TODO
+    drawPrism(width, 1, lenght);
+    for(int i = 0; i < obstaclesList.count(); i++)
+    {
+        obstaclesList[i][2].draw(simplifyForPicking);
+    }
 }

@@ -345,6 +345,41 @@ GLvoid LevelEditor::buttonNextTriggered()
     }
 }
 
+GLvoid LevelEditor::letterTyped(int key)
+{
+    if (currentView == SET_NAME_VIEW)
+    {
+        bool isSpace = false;
+
+        if (key != Qt::Key_Space)
+        {
+            currentName += key;
+        }
+        else
+        {
+            if (currentName.endsWith(' '))
+                return;
+
+            isSpace = true;
+            currentName.append(" ");
+        }
+
+        emit playEffect(EFFECT_COIN);
+
+        if (!isSpace)
+        {
+            formSetLevelName->~CubeStringList();
+            formSetLevelName = new CubeStringList(currentName, 14.0f, 6.0f, alphabet, 2.0f, FORM_SET_LEVEL_NAME);
+
+            GLuint stringName = formSetLevelName->getLabelCount() - 1;
+            GLuint letterName = formSetLevelName->getLabel(stringName).size() - 1;
+
+            if (!formSetLevelName->isRotating(stringName, letterName))
+                formSetLevelName->startLetterRotation(stringName, letterName, 30, 4);
+        }
+    }
+}
+
 void LevelEditor::itemClicked(QList<GLuint> listNames)
 {
     if (isMoving)
@@ -493,36 +528,6 @@ void LevelEditor::keyPressed(QKeyEvent *event)
     }
     else if ((key >= Qt::Key_A && key <= Qt::Key_Z) || (key >= Qt::Key_0 && key <= Qt::Key_9) || key == Qt::Key_Space)
     {
-        if (currentView == SET_NAME_VIEW)
-        {
-            bool isSpace = false;
-
-            if (key != Qt::Key_Space)
-            {
-                currentName += key;
-            }
-            else
-            {
-                if (currentName.endsWith(' '))
-                    return;
-
-                isSpace = true;
-                currentName.append(" ");
-            }
-
-            emit playEffect(EFFECT_COIN);
-
-            if (!isSpace)
-            {
-                formSetLevelName->~CubeStringList();
-                formSetLevelName = new CubeStringList(currentName, 14.0f, 6.0f, alphabet, 2.0f, FORM_SET_LEVEL_NAME);
-
-                GLuint stringName = formSetLevelName->getLabelCount() - 1;
-                GLuint letterName = formSetLevelName->getLabel(stringName).size() - 1;
-
-                if (!formSetLevelName->isRotating(stringName, letterName))
-                    formSetLevelName->startLetterRotation(stringName, letterName, 30, 4);
-            }
-        }
+        letterTyped(key);
     }
 }
