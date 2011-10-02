@@ -355,11 +355,8 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
             glPushMatrix();
                 glRotatef(skyboxAngle, 0.0f, 1.0f, 0.0f);
                 drawPrism(50.0f, 50.0f, 50.0f, skybox);
-                mainMenuButtons->draw(simplifyForPicking);
             glPopMatrix();
         }
-
-
 
         glPushMatrix();
 
