@@ -65,6 +65,13 @@ Qubet::~Qubet()
             glDeleteTextures(1, &i.value());
     }
     iconsList.~QMap();
+
+    for (QMap<QString,Skin*>::iterator i = skyboxesList.begin(); i != skyboxesList.end(); i++)
+    {
+        if (i.value() != NULL)
+            dynamic_cast<Skin*>(i.value())->~Skin();
+    }
+    skyboxesList.~QMap();
 }
 
 GLvoid Qubet::initializeGL()
@@ -291,7 +298,7 @@ GLvoid Qubet::connectGame()
 GLvoid Qubet::showMenu()
 {
     setMouseMovementTracking(MOUSE_MOVED_NONE);
-    menu = new Menu(skinsList, levelsList, iconsList, alphabet, this);
+    menu = new Menu(skinsList, levelsList, iconsList, alphabet, this, skyboxesList.value("galaxy"));
     connectMenu();
     emit playAmbientMusic("resources/music/menu.mp3");
     currentView = MENU_VIEW;
@@ -337,30 +344,26 @@ GLvoid Qubet::drawScene(GLboolean simplifyForPicking)
 
 GLboolean Qubet::load()
 {
-    try
-    {
-        if (!loadSkins())
-            return false;
 
-        if (!loadLevels())
-            return false;
-
-        if (!loadObstacleModels())
-            return false;
-
-        if (!loadAlphabet())
-            return false;
-
-        if (!loadIcons())
-            return false;
-
-        return true;
-    }
-    catch (...)
-    {
+    if (!loadSkins())
         return false;
-    }
 
+    if (!loadLevels())
+        return false;
+
+    if (!loadObstacleModels())
+        return false;
+
+    if (!loadAlphabet())
+        return false;
+
+    if (!loadIcons())
+        return false;
+
+    if (!loadSkyboxes())
+        return false;
+
+    return true;
 }
 
 GLboolean Qubet::loadSkins()
@@ -468,7 +471,7 @@ GLboolean Qubet::loadAlphabet()
     QString lettersPath = "resources/letters";
 
     QDir letters(lettersPath);
-    letters.setFilter(QDir::Dirs);
+    letters.setFilter(QDir::Dirs | QDir::NoDotAndDotDot);
     letters.setSorting(QDir::Name);
 
     QChar letter;
@@ -516,6 +519,39 @@ GLboolean Qubet::loadIcons()
 
         iconsList.insert(key, textureID);
         iconElement = iconElement.nextSiblingElement("icon");
+    }
+
+    return true;
+}
+
+GLboolean Qubet::loadSkyboxes()
+{
+    QString skyboxesPath = "resources/skyboxes";
+
+    QDir skyboxes(skyboxesPath);
+    skyboxes.setFilter(QDir::Dirs | QDir::NoDotAndDotDot);
+    skyboxes.setSorting(QDir::Name);
+
+    QString skybox;
+    Skin *skyboxSkin;
+    QString currentPath;
+
+    for (uint i = 0; i < skyboxes.count(); i++)
+    {
+        skybox = skyboxes[i];
+        currentPath = skyboxesPath + "/" + skybox + "/";
+
+        skyboxSkin = new Skin(skybox);
+        skyboxSkin->setComment("The " + skybox + " skybox.");
+
+        skyboxSkin->setTextureXPlus (bindTexture(QImage(currentPath + "x+.jpg")));
+        skyboxSkin->setTextureXMinus(bindTexture(QImage(currentPath + "x-.jpg")));
+        skyboxSkin->setTextureYPlus (bindTexture(QImage(currentPath + "y+.jpg")));
+        skyboxSkin->setTextureYMinus(bindTexture(QImage(currentPath + "y-.jpg")));
+        skyboxSkin->setTextureZPlus (bindTexture(QImage(currentPath + "z+.jpg")));
+        skyboxSkin->setTextureZMinus(bindTexture(QImage(currentPath + "z-.jpg")));
+
+        skyboxesList.insert(skybox, skyboxSkin);
     }
 
     return true;

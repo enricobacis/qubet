@@ -21,14 +21,17 @@
 /**
  * @brief Enum used for Menu's actions
  */
-enum { DO_NOTHING,
+enum { // Primary Actions
+       DO_NOTHING,
        INITIAL_MOTION,
        CUBE_STUDIO_DISTRIBUTION, TEAM_34_PROJECT, QUBET,
        GO_TO_MAIN_VIEW, GO_TO_SKINS_VIEW, GO_TO_LEVELS_VIEW,
        ROTATE_SKINCUBE,
        PREVIOUS_SKIN, NEXT_SKIN,
        EXIT_FROM_LEVELS, EXIT_FROM_SKINS,
-       ROTATE_VOLUMECUBE
+
+       // Secondary Actions
+       ROTATE_VOLUMECUBE, ROTATE_SKYBOX
      };
 
 /**
