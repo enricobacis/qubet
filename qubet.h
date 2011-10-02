@@ -237,13 +237,6 @@ private:
     GLboolean loadSkins();
 
     /**
-     * @brief Load custom skins from folder.
-     *
-     * @return true if load is successful, false elsewhere.
-     */
-    GLboolean loadCustomSkins();
-
-    /**
      * @brief Load the obstacleModels from the resource file.
      *
      * @return true if load is successful, false elsewhere.
@@ -251,25 +244,11 @@ private:
     GLboolean loadObstacleModels();
 
     /**
-     * @brief Load custom obstacleModels from folder.
-     *
-     * @return true if load is successful, false elsewhere.
-     */
-    GLboolean loadCustomObstacleModels();
-
-    /**
      * @brief Load the levels from the resource file.
      *
      * @return true if load is successful, false elsewhere.
      */
     GLboolean loadLevels();
-
-    /**
-     * @brief Load custom levels from folder.
-     *
-     * @return true if load is successful, false elsewhere.
-     */
-    GLboolean loadCustomLevels();
 
     /**
      * @brief Load the alphabet.

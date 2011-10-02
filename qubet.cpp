@@ -421,31 +421,12 @@ GLboolean Qubet::loadSkins()
         skinElement = skinElement.nextSiblingElement("skin");
     }
 
-    if (!loadCustomSkins())
-        return false;
-
-    return true;
-}
-
-GLboolean Qubet::loadCustomSkins()
-{
-    // future implementation
     return true;
 }
 
 GLboolean Qubet::loadObstacleModels()
 {
     // TODO
-
-    if (!loadCustomObstacleModels())
-        return false;
-
-    return true;
-}
-
-GLboolean Qubet::loadCustomObstacleModels()
-{
-    // future implementation
     return true;
 }
 
@@ -477,15 +458,6 @@ GLboolean Qubet::loadLevels()
         levelElement = levelElement.nextSiblingElement("level");
     }
 
-    if (!loadCustomLevels())
-        return false;
-
-    return true;
-}
-
-GLboolean Qubet::loadCustomLevels()
-{
-    // future implementation
     return true;
 }
 
