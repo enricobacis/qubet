@@ -18,6 +18,10 @@
 #define BUTTON_NEXT                 311
 #define FORM_SET_LEVEL_NAME         312
 #define TOOLBAR                     313
+#define OBSTACLE_0                  314
+#define OBSTACLE_1                  315
+#define OBSTACLE_2                  316
+#define OBSTACLE_3                  317
 
 #define MIN_LEVEL_LENGHT            10
 #define MAX_LEVEL_LENGHT            300
