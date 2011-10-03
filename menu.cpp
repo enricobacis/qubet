@@ -299,7 +299,7 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                     }
                     else if (gameType == EDITOR_MODE)
                     {
-                        emit showLevelEditor();
+                        emit showLevelEditor(currentLevel);
                         return;
                     }
                 }

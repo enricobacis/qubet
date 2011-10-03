@@ -1,9 +1,8 @@
 #include "level.h"
 
-Level::Level(QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *_parent) :
+Level::Level(QObject *_parent) :
     parent(_parent),
-    isLoaded(false),
-    obstacleModelsList(_obstacleModelsList)
+    isLoaded(false)
 {
 }
 
@@ -16,7 +15,7 @@ Level::Level(GLint _id, QString _filename, QObject *_parent) :
 }
 Level::Level(GLint _id, QString _levelName, GLfloat _lenght, GLfloat _width)
 {
-    lenght = _lenght;
+    length = _lenght;
     width = _width;
 }
 
@@ -62,7 +61,7 @@ GLfloat Level::getWidth()
 
 GLfloat Level::getLength()
 {
-    return lenght;
+    return length;
 }
 
 GLfloat Level::getGravity()
@@ -106,7 +105,8 @@ bool Level::save()
 
 GLvoid Level::draw(GLboolean simplifyForPicking)
 {
-    drawPrism(lenght, 1, width);
+    drawPrism(width, 1, length);
+
     for(int i = 0; i < obstaclesList.count(); i++)
     {
         obstaclesList[i][2].draw(simplifyForPicking);

@@ -17,10 +17,9 @@ public:
     /**
      * @brief
      *
-     * @param _obstacleModelsList
      * @param parent
      */
-    explicit Level(QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *_parent = 0);
+    explicit Level(QObject *_parent = 0);
 
     /**
      * @brief
@@ -30,7 +29,7 @@ public:
      * @param lenght
      * @param width
     */
-    explicit Level(GLint _id, QString _levelName, GLfloat lenght, GLfloat width);
+    explicit Level(GLint _id, QString _levelName, GLfloat length, GLfloat width);
 
     /**
      * @brief
@@ -160,10 +159,9 @@ private:
     QString name; /**< TODO */
     bool isLoaded; /**< TODO */
     bool isInStory; /**< TODO */
-    QMap<GLint,Vector3f*> obstacleModelsList; /**< TODO */
     QMap<GLint,Obstacle*> obstaclesList; /**< TODO */
     GLint width; /**< TODO */
-    GLint lenght; /**< TODO */
+    GLint length; /**< TODO */
     GLfloat gravity; /**< TODO */
     QString ambientMusicFilename; /**< TODO */
     QImage *background; /**< TODO */

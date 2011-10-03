@@ -249,8 +249,8 @@ QList<GLuint> Qubet::getPickedName(GLint mouseX, GLint mouseY)
 GLvoid Qubet::loadingCompleted()
 {
     currentText.clear();
-    showMenu();
-    // showLevelEditor();
+    // showMenu();
+    showLevelEditor(0);
 }
 
 GLvoid Qubet::errorLoading()
@@ -272,7 +272,7 @@ GLvoid Qubet::connectMenu()
 
     connect(menu, SIGNAL(playStory(GLint)), this, SLOT(playStory(GLint)));
     connect(menu, SIGNAL(playArcade(GLint, GLint)), this, SLOT(playArcade(GLint, GLint)));
-    connect(menu, SIGNAL(showLevelEditor()), this, SLOT(showLevelEditor()));
+    connect(menu, SIGNAL(showLevelEditor(GLint)), this, SLOT(showLevelEditor(GLint)));
 
     connectAudio(menu);
 }
@@ -352,9 +352,6 @@ GLboolean Qubet::load()
     if (!loadLevels())
         return false;
 
-    if (!loadObstacleModels())
-        return false;
-
     if (!loadAlphabet())
         return false;
 
@@ -425,12 +422,6 @@ GLboolean Qubet::loadSkins()
         skinElement = skinElement.nextSiblingElement("skin");
     }
 
-    return true;
-}
-
-GLboolean Qubet::loadObstacleModels()
-{
-    // TODO
     return true;
 }
 
@@ -568,7 +559,7 @@ void Qubet::draw()
 
 void Qubet::playStory(GLint skinId)
 {
-    game = new Game(skinsList.value(skinId), levelsList, obstacleModelsList, this);
+    game = new Game(skyboxesList, skinsList.value(skinId), levelsList, this, audioManager->isAudioEnabled());
 
     connectGame();
 
@@ -580,7 +571,7 @@ void Qubet::playStory(GLint skinId)
 
 void Qubet::playArcade(GLint skinId, GLint levelId)
 {
-    game = new Game(skinsList.value(skinId), levelsList.value(levelId), obstacleModelsList, this);
+    game = new Game(skyboxesList, skinsList.value(skinId), levelsList.value(levelId), this);
 
     connectGame();
 
@@ -601,10 +592,18 @@ void Qubet::gameClosed()
     showMenu();
 }
 
-void Qubet::showLevelEditor()
+void Qubet::showLevelEditor(GLint _levelId)
 {
     setMouseMovementTracking(MOUSE_MOVED_FULL);
-    levelEditor = new LevelEditor(obstacleModelsList, levelsList, iconsList, alphabet, this, audioManager->isAudioEnabled(), skyboxesList.value("stars"));
+
+    Level *level;
+
+    if (_levelId == 0)
+        level = NULL;
+    else
+        level = levelsList.value(_levelId);
+
+    levelEditor = new LevelEditor(iconsList, alphabet, this, level, audioManager->isAudioEnabled(), skyboxesList.value("stars"));
     connectLevelEditor();
 
     currentView = LEVELEDITOR_VIEW;

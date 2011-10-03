@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include "positioncontroller.h"
+#include "skybox.h"
 
 /**
  * @brief
@@ -14,24 +15,30 @@ class Game : public QObject
     Q_OBJECT
 
 public:
+
     /**
      * @brief Cunstructor fot the Story Mode.
      *
+     * @param _skyboxesList
      * @param _skin
-     * @param _obstacleModelsList
+     * @param _levelsList
      * @param _parent
+     * @param _audioEnabled
+     * @param _skybox
      */
-    explicit Game(Skin *_skin, QMap<GLint,Level*> &_levelsList, QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *_parent = 0);
+    explicit Game(QMap<QString,Skybox*> _skyboxesList, Skin *_skin, QMap<GLint,Level*> &_levelsList, QObject *_parent = 0, bool _audioEnabled = true, Skybox *_skybox = NULL);
 
     /**
-     * @brief Constructor for the Arcade Mode.
+     * @brief
      *
+     * @param _skyboxesList
      * @param _skin
      * @param _level
-     * @param _obstacleModelsList
      * @param _parent
+     * @param _audioEnabled
+     * @param _skybox
      */
-    explicit Game(Skin *_skin, Level *_level, QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *_parent = 0);
+    explicit Game(QMap<QString,Skybox*> _skyboxesList, Skin *_skin, Level *_level, QObject *_parent = 0, bool _audioEnabled = true, Skybox *_skybox = NULL);
 
     /**
      * @brief
@@ -56,10 +63,12 @@ public:
 
 private:
     QObject *parent; /**< TODO */
+    QMap<QString,Skybox*> skyboxesList; /**< TODO */
     Skin *skin; /**< TODO */
     Level *level; /**< TODO */
     QMap<GLint,Level*> levelsList; /**< TODO */
-    QMap<GLint,Vector3f*> obstacleModelsList; /**< TODO */
+    bool audioEnabled; /**< TODO */
+    Skybox *skybox; /**< TODO */
     Cube *cube; /**< TODO */
     PositionController *positionController; /**< TODO */
     GLint state; /**< TODO */

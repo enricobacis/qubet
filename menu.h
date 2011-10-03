@@ -204,7 +204,7 @@ signals:
      * @brief
      *
      */
-    void showLevelEditor();
+    void showLevelEditor(GLint levelId);
 
     /**
      * @brief This signal is emitted to set the Qubet's Mouse Move Tracking sensibility.

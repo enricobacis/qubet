@@ -3,20 +3,24 @@
 #include "game_defines.h"
 #include "effects_defines.h"
 
-Game::Game(Skin *_skin, QMap<GLint,Level*> &_levelsList, QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *_parent) :
+Game::Game(QMap<QString,Skybox*> _skyboxesList, Skin *_skin, QMap<GLint,Level*> &_levelsList, QObject *_parent, bool _audioEnabled, Skybox *_skybox) :
     parent(_parent),
+    skyboxesList(_skyboxesList),
     skin(_skin),
     levelsList(_levelsList),
-    obstacleModelsList(_obstacleModelsList),
+    audioEnabled(_audioEnabled),
+    skybox(_skybox),
     gameType(STORY_MODE)
 {
 }
 
-Game::Game(Skin *_skin, Level *_level, QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *_parent) :
+Game::Game(QMap<QString,Skybox*> _skyboxesList, Skin *_skin, Level *_level, QObject *_parent, bool _audioEnabled, Skybox *_skybox) :
     parent(_parent),
+    skyboxesList(_skyboxesList),
     skin(_skin),
     level(_level),
-    obstacleModelsList(_obstacleModelsList),
+    audioEnabled(_audioEnabled),
+    skybox(_skybox),
     gameType(ARCADE_MODE)
 {
 }

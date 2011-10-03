@@ -17,7 +17,6 @@ class Qubet : public QGLWidget
 {
     Q_OBJECT
 
-
 public:
     // Object Management
 
@@ -104,7 +103,6 @@ private:
     QString currentText; /**< It is the current string showed on the screen. */
     QMap<GLint,Skin*> skinsList; /**< It is the QMap that contains ids and skin images. */
     QMap<GLint,Level*> levelsList; /**< It is the QMap that contains ids and the names of level files. */
-    QMap<GLint,Vector3f*> obstacleModelsList; /**< It is the QMap that contains ids and the dimensions of Obstacles. */
     QMap<GLint,GLuint> iconsList; /**< It is the QMap that contains ids of the icons' texture. */
     QMap<QString,Skybox*> skyboxesList; /**< It is the Qmap that contains the available skyboxes. */
     QTimer *drawTimer; /**< It is the QTimer to re-draw the scene. */
@@ -238,13 +236,6 @@ private:
     GLboolean loadSkins();
 
     /**
-     * @brief Load the obstacleModels from the resource file.
-     *
-     * @return true if load is successful, false elsewhere.
-     */
-    GLboolean loadObstacleModels();
-
-    /**
      * @brief Load the levels from the resource file.
      *
      * @return true if load is successful, false elsewhere.
@@ -308,8 +299,10 @@ private slots:
     /**
      * @brief This function is a slot linked to the Menu and called when
      *        the player chooses to enter the Level Editor.
+     *
+     * @param _levelId is the levelId you want to edit.
      */
-    void showLevelEditor();
+    void showLevelEditor(GLint _levelId);
 
     /**
      * @brief This function is a slot linked to the LevelEditor and called when

@@ -3,15 +3,14 @@
 #include "leveleditor_defines.h"
 #include "effects_defines.h"
 
-LevelEditor::LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,Level*> &_levelsList,QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, bool _audioEnabled, Skybox *_skybox):
+LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, Level *_level, bool _audioEnabled, Skybox *_skybox):
     parent(_parent),
-    levelsList(_levelsList),
-    obstacleModelsList(_obstacleModelsList),
     iconsList(_iconsList),
     skybox(_skybox),
     skyboxAngle(0.0f),
     audioEnabled(_audioEnabled),
     isMoving(false),
+    level(_level),
     currentView(0),
     currentLenght(0),
     currentWidth(0),
@@ -22,11 +21,15 @@ LevelEditor::LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,
     currentName("")
 {
     cameraOffset = new Vector3f(-30.0f, -30.0f, 0.0f);
+    levelOffset  = new Vector3f(  0.0f,  -3.0f, 8.0f);
 
     currentActions = new ActionList(INITIAL_MOVEMENT);
     currentActions->appendSecondaryAction(ROTATE_SKYBOX);
 
     angleRotVolumeCube = (audioEnabled ? 0.0f : 90.0f);
+
+    disabledVector.fill(0.0f, 3);
+    disabledVector.append(1.0f);
 
     currentLenght = 50;
     currentWidth = 3;
@@ -49,16 +52,6 @@ LevelEditor::LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,
     volumeSkin = new Skin(0, 0, volume_off, volume_off, volume_on, volume_on);
 
     currentView = SET_NAME_VIEW;
-
-    mat_emission[0] = 1.0f;
-    mat_emission[1] = 0.0f;
-    mat_emission[2] = 0.0f;
-    mat_emission[3] = 1.0f;
-
-    mat_noemission[0] = 0.0f;
-    mat_noemission[1] = 0.0f;
-    mat_noemission[2] = 0.0f;
-    mat_noemission[3] = 1.0f;
 }
 
 LevelEditor::~LevelEditor()
@@ -129,7 +122,7 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
             case GO_TO_SET_NAME_VIEW:
                 if(currentView == SET_PARAM_VIEW)
                 {
-                    cameraOffset->x --;
+                    cameraOffset->x--;
                     cameraAngle -= 12.0f;
                     if(cameraOffset->x == -30.0f)
                     {
@@ -145,7 +138,7 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
             case GO_TO_SET_PARAM_VIEW:
                 if (currentView == SET_NAME_VIEW)
                 {
-                    cameraOffset->x ++;
+                    cameraOffset->x++;
                     cameraAngle += 12.0f;
                     if (cameraOffset->x == 0.0f)
                     {
@@ -159,9 +152,8 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
                 break;
 
              case GO_TO_EDITING_LEVEL_VIEW:
-                cameraOffset->z ++;
+                cameraOffset->z++;
                 cameraAngle += 12.0f;
-                sceneAngleX ++;
 
                 if (cameraOffset->z == 30.0f)
                 {
@@ -221,42 +213,45 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
 
         if(currentView == EDITING_LEVEL_VIEW)
          {
-             glPushName(TOOLBAR);
              glPushMatrix();
-                 glTranslatef(-9.5f, 0.0f, 4.0f);
-                 //drawRectangle(3.0f, 18.0f, 0.0f);
-                 glTranslatef(1.0f, 5.5f, -1.0f);
+
+                glPushMatrix();
+
+                    glTranslatef(levelOffset->x, levelOffset->y, levelOffset->z);
+                    level->draw(simplifyForPicking);
+
+                glPopMatrix();
+
+                 glTranslatef(-8.5f, 5.5f, 3.0f);
                  glScalef(0.4f, 0.4f, 0.4f);
-                 glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, mat_emission);
-                 glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat_noemission);
-                 glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat_noemission);
-                 glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_noemission);
-                 glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0);
-                 glRotatef(90.0f, 0.0f, 1.0f ,0.0f);
+
                  glPushName(OBSTACLE_0);
                  drawObstacle(0);
                  glPopName();
+
                  glTranslatef(0.0f, -7.0f, 0.0f);
+
                  glPushName(OBSTACLE_1);
                  drawObstacle(1);
                  glPopName();
+
                  glTranslatef(0.0f, -7.0f, 0.0f);
+
                  glPushName(OBSTACLE_2);
                  drawObstacle(2);
                  glPopName();
+
                  glTranslatef(0.0f, -7.0f, 0.0f);
+
                  glPushName(OBSTACLE_3);
                  drawObstacle(3);
                  glPopName();
-                 glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, mat_noemission);
+
              glPopMatrix();
-             glPopName();
          }
 
             glTranslatef(-cameraOffset->x, -cameraOffset->y, -cameraOffset->z);
             glRotatef(cameraAngle, 0.0f, 0.0f, 1.0f);
-            glRotatef(sceneAngleX, 1.0f, 0.0f, 0.0f);
-            glRotatef(sceneAngleY, 0.0f, 1.0f, 0.0f);
 
             if(currentView == SET_NAME_VIEW || currentView == SET_PARAM_VIEW)
             {
@@ -358,11 +353,7 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
                 glPopName();
 
             }
-            else if(currentView == EDITING_LEVEL_VIEW)
-            {
-                level->draw(simplifyForPicking);
-                //tool bar draw
-            }
+
             glPopMatrix();
 
     }
@@ -441,6 +432,7 @@ GLvoid LevelEditor::buttonNextTriggered()
         emit playEffect(EFFECT_JUMPSMALL);
         isMoving = true;
         level = new Level(0, currentName, currentLenght, currentWidth);
+        levelOffset->z -= GLfloat(currentLenght) / 2;
         currentActions->setPrimaryAction(GO_TO_EDITING_LEVEL_VIEW);
     }
 }
@@ -614,7 +606,7 @@ void LevelEditor::keyPressed(QKeyEvent *event)
         }
         else if (currentView == EDITING_LEVEL_VIEW)
         {
-            cameraOffset->z -=2;
+            levelOffset->z += 1.0f;
         }
     }
     else if (key == Qt::Key_Down)
@@ -625,7 +617,7 @@ void LevelEditor::keyPressed(QKeyEvent *event)
         }
         else if (currentView == EDITING_LEVEL_VIEW)
         {
-            cameraOffset->z +=2;
+            levelOffset->z -= 1.0f;
         }
     }
     else if (key == Qt::Key_Left)
@@ -636,7 +628,7 @@ void LevelEditor::keyPressed(QKeyEvent *event)
         }
         else if (currentView == EDITING_LEVEL_VIEW)
         {
-            sceneAngleY +=2;
+            levelOffset->x += 0.5f;
         }
     }
     else if (key == Qt::Key_Right)
@@ -647,7 +639,7 @@ void LevelEditor::keyPressed(QKeyEvent *event)
         }
         else if (currentView == EDITING_LEVEL_VIEW)
         {
-            sceneAngleY -=2;
+            levelOffset->x -= 0.5f;
         }
     }
     else if ((key >= Qt::Key_A && key <= Qt::Key_Z) || (key >= Qt::Key_0 && key <= Qt::Key_9) || key == Qt::Key_Space)

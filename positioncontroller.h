@@ -19,10 +19,9 @@ public:
      *
      * @param _cube Puntatore all'oggetto Cube
      * @param _level Puntatore all'oggetto Level
-     * @param _obstacleModelsList La obstacleModelsList
-     * @param parent Puntatore all'oggetto parent
+     * @param _parent Puntatore all'oggetto parent
      */
-    explicit PositionController(Cube *_cube, Level *_level, QMap<GLint,Vector3f*> &_obstacleModelsList, QObject *parent = 0);
+    explicit PositionController(Cube *_cube, Level *_level, QObject *_parent = 0);
 
     /**
      * @brief Distruttore di oggetti di tipo PositionController.
@@ -33,7 +32,6 @@ public:
 private:
     Cube *cube; /**< Puntatore all'oggetto Cube */
     Level *level; /**< Puntatore all'oggetto Level */
-    QMap<GLint,Vector3f*> obstacleModelsList; /**< La obstacleModelsList */
     QTimer checkPositionTimer; /**< QTimer che regola ogni quanto viene lanciata la funzione checkCollision() che controlla le collisioni */
 
     /**
