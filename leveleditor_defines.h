@@ -28,12 +28,15 @@
 /**
  * @brief Enum used for Editor's actions
  */
-enum { DO_NOTHING,
+enum { // Primary Actions
+       DO_NOTHING,
        INITIAL_MOVEMENT,
-       ROTATE_VOLUMECUBE,
        GO_TO_SET_NAME_VIEW,
        GO_TO_SET_PARAM_VIEW,
-       GO_TO_EDITING_LEVEL_VIEW
+       GO_TO_EDITING_LEVEL_VIEW,
+
+      // Secondary Actions
+      ROTATE_VOLUMECUBE, ROTATE_SKYBOX
      };
 
 /**

@@ -5,7 +5,6 @@
 #include "game.h"
 #include "audiomanager.h"
 #include "leveleditor.h"
-#include "skybox.h"
 
 /**
  * @brief This class rapresents an instance of the QGLWidget Qubet.

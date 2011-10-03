@@ -56,8 +56,8 @@ private:
     QMap<GLint,Skin*> skinsList; /**< It is the skinsList provided by Qubet object. */
     QMap<GLint,Level*> levelsList; /**< It is the levelsList provided by Qubet object. */
     QMap<GLint,GLuint> iconsList;  /**< It is the iconsList provided by Qubet object. */
-    Skybox *skybox; /**< It is the skybox to use in the Menu. */
-    GLfloat skyboxAngle; /**< It is the skybox rotation angle. */
+    Skybox *skybox; /**< It is the Skybox to use in the Menu. */
+    GLfloat skyboxAngle; /**< It is the Skybox rotation angle. */
     Alphabet *alphabet; /**< It is the alphabet provided by Qubet. */
     GLint itemSelected; /**< It is the id of the current menu action selected. */
     GLboolean isMoving; /**< It is the variable that states if the menu is moving or not. */

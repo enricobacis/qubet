@@ -11,6 +11,7 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<
     levelsList(_levelsList),
     iconsList(_iconsList),
     skybox(_skybox),
+    skyboxAngle(0.0f),
     alphabet(_alphabet),
     isMoving(false),
     gameType(0),

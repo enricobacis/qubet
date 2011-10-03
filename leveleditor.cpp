@@ -3,11 +3,13 @@
 #include "leveleditor_defines.h"
 #include "effects_defines.h"
 
-LevelEditor::LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,Level*> &_levelsList,QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent):
+LevelEditor::LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,Level*> &_levelsList,QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, Skybox *_skybox):
     parent(_parent),
     levelsList(_levelsList),
     obstacleModelsList(_obstacleModelsList),
     iconsList(_iconsList),
+    skybox(_skybox),
+    skyboxAngle(0.0f),
     isMoving(false),
     currentView(0),
     currentLenght(0),
@@ -19,8 +21,10 @@ LevelEditor::LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,
     visibleTime(0),
     currentName("")
 {
-    currentActions = new ActionList(DO_NOTHING);
     cameraOffset = new Vector3f(0.0f, -30.0f, 0.0f);
+
+    currentActions = new ActionList(DO_NOTHING);
+    currentActions->appendSecondaryAction(ROTATE_SKYBOX);
 
     currentLenght = 50;
     currentWidth = 3;
@@ -113,6 +117,55 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
 
                 break;
 
+            case GO_TO_SET_NAME_VIEW:
+                if(currentView == SET_PARAM_VIEW)
+                {
+                    cameraOffset->x --;
+                    cameraAngle -= 12.0f;
+                    if(cameraOffset->x == -30.0f)
+                    {
+                        currentView = SET_NAME_VIEW;
+                        currentActions->setPrimaryAction(DO_NOTHING);
+                        isMoving = false;
+                        cameraAngle = 0.0f;
+                    }
+                }
+
+                break;
+
+            case GO_TO_SET_PARAM_VIEW:
+                if (currentView == SET_NAME_VIEW)
+                {
+                    cameraOffset->x ++;
+                    cameraAngle += 12.0f;
+                    if (cameraOffset->x == 0.0f)
+                    {
+                        currentView = SET_PARAM_VIEW;
+                        currentActions->setPrimaryAction(DO_NOTHING);
+                        isMoving = false;
+                        cameraAngle = 0.0f;
+                    }
+                }
+
+                break;
+
+             case GO_TO_EDITING_LEVEL_VIEW:
+                cameraOffset->z ++;
+                cameraAngle += 12.0f;
+                sceneAngleX ++;
+
+                if (cameraOffset->z == 30.0f)
+                {
+                    currentView = EDITING_LEVEL_VIEW;
+                    currentActions->setPrimaryAction(DO_NOTHING);
+                    isMoving = false;
+                    cameraAngle = 0.0f;
+                }
+
+                break;
+
+            // Secondary Actions
+
             case ROTATE_VOLUMECUBE:
                 angleRotVolumeCube += 5.0f;
 
@@ -124,46 +177,12 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
 
                 break;
 
-            case GO_TO_SET_NAME_VIEW:
-                if(currentView == SET_PARAM_VIEW)
-                {
-                    cameraOffset->x --;
-                    cameraAngle -= 12;
-                    if(cameraOffset->x == -30)
-                    {
-                        currentView = SET_NAME_VIEW;
-                        currentActions->setPrimaryAction(DO_NOTHING);
-                        isMoving = false;
-                        cameraAngle = 0;
-                    }
-                }
-                break;
+            case ROTATE_SKYBOX:
+                skyboxAngle += 0.1f;
 
-            case GO_TO_SET_PARAM_VIEW:
-                if (currentView == SET_NAME_VIEW)
-                {
-                    cameraOffset->x ++;
-                    cameraAngle+=12;
-                    if (cameraOffset->x == 0)
-                    {
-                        currentView = SET_PARAM_VIEW;
-                        currentActions->setPrimaryAction(DO_NOTHING);
-                        isMoving = false;
-                        cameraAngle = 0;
-                    }
-                }
-                break;
-             case GO_TO_EDITING_LEVEL_VIEW:
-                cameraOffset->z ++;
-                cameraAngle += 12;
-                sceneAngleX ++;
-                if (cameraOffset->z == 30)
-                {
-                    currentView = EDITING_LEVEL_VIEW;
-                    currentActions->setPrimaryAction(DO_NOTHING);
-                    isMoving = false;
-                    cameraAngle = 0;
-                }
+                if (skyboxAngle >= 360.0f)
+                    skyboxAngle -= 360.0f;
+
                 break;
             }
         }
@@ -185,6 +204,14 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
             drawPrism(0.8f, 0.8f, 0.8f, volumeSkin, true);
         glPopMatrix();
         glPopName();
+
+        if (!simplifyForPicking && (skybox != NULL))
+        {
+            glPushMatrix();
+                glRotatef(skyboxAngle, 0.0f, 1.0f, 0.0f);
+                skybox->draw();
+            glPopMatrix();
+        }
 
         glPushMatrix();
 

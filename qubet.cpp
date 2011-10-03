@@ -600,7 +600,7 @@ void Qubet::gameClosed()
 void Qubet::showLevelEditor()
 {
     setMouseMovementTracking(MOUSE_MOVED_FULL);
-    levelEditor = new LevelEditor(obstacleModelsList, levelsList, iconsList, alphabet, this);
+    levelEditor = new LevelEditor(obstacleModelsList, levelsList, iconsList, alphabet, this, skyboxesList.value("stars"));
     connectLevelEditor();
 
     currentView = LEVELEDITOR_VIEW;
