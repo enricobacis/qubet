@@ -40,7 +40,7 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<
     labelsList.append(QPair<QString,GLuint>("arcade", BUTTON_PLAY_ARCADE));
     labelsList.append(QPair<QString,GLuint>("editor", BUTTON_LEVEL_EDITOR));
 
-    mainMenuButtons = new CubeStringList(labelsList, 18.0f, 12.0f, alphabet, 0.0f);
+    mainMenuButtons = new CubeStringList(labelsList, 18.0f, 12.0f, alphabet, 2.0f);
 
     backButton = new CubeString("back", 1.0f, alphabet, BUTTON_BACK);
     playButton = new CubeString("play", 1.0f, alphabet, BUTTON_NEXT);
@@ -381,7 +381,6 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                 glPushMatrix();
 
                     mainMenuButtons->draw(simplifyForPicking);
-
                     glTranslatef(30.0f, 4.0f, 0.0f);
 
                     skinName->draw(simplifyForPicking);

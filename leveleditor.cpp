@@ -192,8 +192,25 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
          {
              glPushName(TOOLBAR);
              glPushMatrix();
-                 glTranslatef(0.0f, -6.0f, 4.0f);
-                 drawRectangle(19.0f, 3.0f, 0.0f);
+                 glTranslatef(-9.5f, 0.0f, 4.0f);
+                 //drawRectangle(19.0f, 3.0f, 0.0f);
+                 glTranslatef(1.0f, 5.5f, -1.0f);
+                 glScalef(0.4f, 0.4f, 0.4f);
+                 glPushName(OBSTACLE_0);
+                    drawObstacle(0);
+                 glPopName();
+                 glPushName(OBSTACLE_1);
+                 glTranslatef(0.0f, -7.0f, 0.0f);
+                 drawObstacle(1);
+                 glPopName();
+                 glPushName(OBSTACLE_2);
+                 glTranslatef(0.0f, -7.0f, 0.0f);
+                 drawObstacle(2);
+                 glPopName();
+                 glPushName(OBSTACLE_3);
+                 glTranslatef(0.0f, -7.0f, 0.0f);
+                 drawObstacle(3);
+                 glPopName();
              glPopMatrix();
              glPopName();
          }

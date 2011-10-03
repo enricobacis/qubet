@@ -249,7 +249,8 @@ QList<GLuint> Qubet::getPickedName(GLint mouseX, GLint mouseY)
 GLvoid Qubet::loadingCompleted()
 {
     currentText.clear();
-    showMenu();
+    //showMenu();
+    showLevelEditor();
 }
 
 GLvoid Qubet::errorLoading()
@@ -526,7 +527,7 @@ GLboolean Qubet::loadIcons()
 
 GLboolean Qubet::loadSkyboxes()
 {
-    QString skyboxesPath = "resources/skyboxes";
+    QString skyboxesPath = "resources/skyboxes/";
 
     QDir skyboxes(skyboxesPath);
     skyboxes.setFilter(QDir::Dirs | QDir::NoDotAndDotDot);

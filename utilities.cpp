@@ -120,163 +120,107 @@ GLvoid drawPrism(GLfloat x, GLfloat y, GLfloat z, Skin *skin, GLboolean invertBa
 
 GLvoid drawObstacle(GLuint id)
 {
-    if (id == 1)
-    {
+    switch (id){
+    case 0:
         drawPrism(3.0f, 3.0f, 3.0f);
-    }
-    else if (id == 2)
-    {
+        break;
+    case 1:
         //glEnable(GL_TEXTURE_2D);
 
         // Front Face (Z+)
         //glBindTexture();
-        glBegin(GL_QUADS);
-        glNormal3f(0.0f,  0.0f,  1.0f);
-        glVertex3f(-3.0f, 0.0f,  1.5f);
-        glVertex3f( 0.0f, 0.0f,  1.5f);
-        glVertex3f( 0.0f, 3.0f,  1.5f);
-        glVertex3f(3.0f,  3.0f,  1.5f);
-        glVertex3f(-3.0f, 0.0f,  1.5f);
-        glVertex3f( 0.0f, 0.0f,  1.5f);
-        glVertex3f( 0.0f, 3.0f,  1.5f);
-        glVertex3f(3.0f,  3.0f,  1.5f);
-        glVertex3f(3.0f,  -3.0f, 1.5);
-        glVertex3f(-3.0f, -3.0f, 1.5f);
-        glVertex3f(-3.0f, -3.0f, 1.5f);
 
-        glEnd();
+        // Turn on wireframe mode
 
-        // Back Face (Z-)
-        //glBindTexture(GL_TEXTURE_2D, (skin == NULL ? 0 : skin->getTextureZMinus()));
-        glBegin(GL_QUADS);
-        glNormal3f(0.0f,  0.0f,  -1.0f);
-        glVertex3f(-3.0f, 0.0f,  -1.5f);
-        glVertex3f( 0.0f, 0.0f,  -1.5f);
-        glVertex3f( 0.0f, 3.0f,  -1.5f);
-        glVertex3f(3.0f,  3.0f,  -1.5f);
-        glVertex3f(-3.0f, 0.0f,  -1.5f);
-        glVertex3f( 0.0f, 0.0f,  -1.5f);
-        glVertex3f( 0.0f, 3.0f,  -1.5f);
-        glVertex3f(3.0f,  3.0f,  -1.5f);
-        glVertex3f(3.0f,  -3.0f, -1.5f);
-        glVertex3f(-3.0f, -3.0f, -1.5f);
-        glVertex3f(-3.0f, -3.0f, -1.5f);
-
-        glEnd();
-
-        // Top Face (Y+)
-        //glBindTexture(GL_TEXTURE_2D, (skin == NULL ? 0 : skin->getTextureYPlus()));
-        glBegin(GL_QUADS);
-        glNormal3f(0.0f,  1.0f,  0.0f);
-        glVertex3f(0.0f, 3.0f,  -1.5f);
-        glVertex3f(0.0f,  3.0f,  1.5f);
-        glVertex3f(3.0f, 3.0f,  1.5f);
-        glVertex3f(3.0f, 3.0f,  -1.5f);
-        glEnd();
-        glBegin(GL_QUADS);
-        glNormal3f(0.0f,  1.0f,  0.0f);
-        glVertex3f(0.0f, 0.0f,  -1.5f);
-        glVertex3f(0.0f,  0.0f,  1.5f);
-        glVertex3f(-3.0f, 0.0f,  1.5f);
-        glVertex3f(-3.0f, 0.0f,  -1.5f);
-        glEnd();
-
-
-        // Bottom Face (Y-)
-        //glBindTexture(GL_TEXTURE_2D, (skin == NULL ? 0 : skin->getTextureYMinus()));
-        glBegin(GL_QUADS);
-        glNormal3f(0.0f,  -1.0f,  0.0f);
-        glVertex3f(-3.0f, -3.0f,  1.5f);
-        glVertex3f(3.0f, -3.0f,  1.5f);
-        glVertex3f(3.0f, -3.0f,  -1.5f);
-        glVertex3f(-3.0f, -3.0f,  -1.5f);
-        glEnd();
-
-        // Right face (X+)
-        //glBindTexture(GL_TEXTURE_2D, (skin == NULL ? 0 : skin->getTextureXPlus()));
-        glBegin(GL_QUADS);
-        glNormal3f(1.0f,  0.0f,  0.0f);
-        glVertex3f(3.0f, 3.0f,  1.5f);
-        glVertex3f(3.0f,  -3.0f,  1.5f);
-        glVertex3f(3.0f, -3.0f,  -1.5f);
-        glVertex3f(3.0f, 3.0f,  -1.5f);
-        glEnd();
-
-        // Left Face (X-)
-        //glBindTexture(GL_TEXTURE_2D, (skin == NULL ? 0 : skin->getTextureXMinus()));
-        glBegin(GL_QUADS);
-        glNormal3f(-1.0f,  0.0f,  0.0f);
-        glVertex3f(0.0f, 3.0f,  1.5f);
-        glVertex3f(0.0f,  3.0f,  -1.5f);
-        glVertex3f(0.0f, 0.0f,  -1.5f);
-        glVertex3f(0.0f, 0.0f,  1.5f);
-        glEnd();
-        glBegin(GL_QUADS);
-        glNormal3f(-1.0f,  0.0f,  0.0f);
-        glVertex3f(-3.0f, 0.0f,  -1.5f);
-        glVertex3f(-3.0f,  0.0f,  1.5f);
-        glVertex3f(-3.0f, -3.0f,  1.5f);
-        glVertex3f(-3.0f, -3.0f,  -1.5f);
-        glEnd();
-
-        //glBindTexture(GL_TEXTURE_2D, 0);
-        //glDisable(GL_TEXTURE_2D);
-    }
-    else if (id == 2)
-    {
-        //Front Face Z+
-        glBegin(GL_QUADS);
-        glNormal3f(0.0f,  0.0f,  1.0f);
-        glVertex3f(1.5f, 3.0f,  1.5f);
-        glVertex3f(-1.5f,  3.0f,  1.5f);
-        glVertex3f(-1.5f, -3.0f,  1.5f);
-        glVertex3f(1.5f, -3.0f,  1.5f);
-        glEnd();
-
-        //Front Face Z-
-        glBegin(GL_QUADS);
-        glNormal3f(0.0f, 0.0f, -1.0f);
-        glVertex3f(1.5f, 3.0f, -1.5f);
-        glVertex3f(-1.5f, 3.0f, -1.5f);
-        glVertex3f(-1.5f, -3.0f, -1.5f);
-        glVertex3f(1.5f, -3.0f, -1.5f);
-        glEnd();
-
-        //Top Face Y+
-        glBegin(GL_QUADS);
+        glBegin(GL_TRIANGLE_STRIP);
         glNormal3f(0.0f, 1.0f, 0.0f);
-        glVertex3f(1.5f, 3.0f, 1.5f);
-        glVertex3f(1.5f, 3.0f, -1.5f);
-        glVertex3f(-1.5f, 3.0f, -1.5f);
-        glVertex3f(-1.5f, 3.0f, 1.5f);
+        glVertex3f(-3.0f, 0.0f, 1.5f);
+        glVertex3f(-3.0f, 0.0f, -1.5f);
+        glVertex3f(0.0f, 0.0f, 1.5f);
+        glVertex3f(0.0f, 0.0f, -1.5f);
+        glVertex3f(0.0f, 3.0f, 1.5f);
+        glVertex3f(0.0f, 3.0f, -1.5f);
+        glVertex3f(3.0f, 3.0f, 1.5f);
+        glVertex3f(3.0f, 3.0f, -1.5f);
+        glVertex3f(3.0f, -3.0f, 1.5f);
+        glVertex3f(3.0f, -3.0f, -1.5f);
+        glVertex3f(-3.0f, -3.0f, 1.5f);
+        glVertex3f(-3.0f, -3.0f, -1.5f);
         glEnd();
-
-        //Bottom Face Y-
-        glBegin(GL_QUADS);
-        glNormal3f(0.0f,  -1.0f,  0.0f);
-        glVertex3f(1.5f, -3.0f, 1.5f);
-        glVertex3f(1.5f, -3.0f, -1.5f);
-        glVertex3f(-1.5f, -3.0f, -1.5f);
-        glVertex3f(-1.5f, -3.0f, 1.5f);
+        glBegin (GL_TRIANGLE_STRIP);
+        glNormal3f(0.0f, 0.0f, -1.0f);
+        glVertex3f(-3.0f, -3.0f, -1.5f);
+        glVertex3f(-3.0f, 0.0f, -1.5f);
+        glVertex3f(3.0f, -3.0f, -1.5f);
+        glVertex3f(0.0f, 0.0f, -1.5f);
+        glVertex3f(3.0f,  3.0f, -1.5f);
+        glVertex3f(0.0f, 3.0f, -1.5f);
         glEnd();
-
-        //Left Face X-
-        glBegin(GL_QUADS);
-        glNormal3f(-1.0f,  0.0f,  0.0f);
-        glVertex3f(-1.5f, 3.0f,  1.5f);
-        glVertex3f(-1.5f,  3.0f, -1.5f);
-        glVertex3f(-1.5f, -3.0f, -1.5f);
-        glVertex3f(-1.5f, -3.0f, 1.5f);
+        glBegin (GL_TRIANGLE_STRIP);
+        glNormal3f(0.0f, 0.0f, 1.0f);
+        glVertex3f(-3.0f, -3.0f, 1.5f);
+        glVertex3f(-3.0f, 0.0f, 1.5f);
+        glVertex3f(3.0f, -3.0f, 1.5f);
+        glVertex3f(0.0f, 0.0f, 1.5f);
+        glVertex3f(3.0f, 3.0f, 1.5f);
+        glVertex3f(0.0f, 3.0f, 1.5f);
         glEnd();
-
-        //Left Face X+
-        glBegin(GL_QUADS);
-        glNormal3f(1.0f,  0.0f,  0.0f);
+        break;
+    case 2:
+        glBegin(GL_TRIANGLE_STRIP);
+        glNormal3f(0.0f,  1.0f,  0.0f);
         glVertex3f(1.5f, 3.0f,  1.5f);
-        glVertex3f(1.5f,  3.0f, -1.5f);
+        glVertex3f(1.5f, 3.0f, -1.5f);
+        glVertex3f(-1.5f,  3.0f,  1.5f);
+        glVertex3f(-1.5f, 3.0f, -1.5f);
+        glVertex3f(-1.5f, -3.0f,  1.5f);
+        glVertex3f(-1.5f, -3.0f, -1.5f);
+        glVertex3f(1.5f, -3.0f,  1.5f);
         glVertex3f(1.5f, -3.0f, -1.5f);
+        glEnd();
+        glBegin(GL_TRIANGLE_STRIP);
+        glNormal3f(0.0f,  0.0f,  1.0f);
+        glVertex3f(-1.5f, 3.0f,  1.5f);
+        glVertex3f(1.5f,  3.0f, 1.5f);
+        glVertex3f(-1.5f, -3.0f, 1.5f);
         glVertex3f(1.5f, -3.0f, 1.5f);
         glEnd();
-
+        glBegin(GL_TRIANGLE_STRIP);
+        glNormal3f(0.0f,  0.0f,  -1.0f);
+        glVertex3f(-1.5f, 3.0f, -1.5f);
+        glVertex3f(1.5f,  3.0f, -1.5f);
+        glVertex3f(-1.5f, -3.0f, -1.5f);
+        glVertex3f(1.5f, -3.0f, -1.5f);
+        glEnd();
+        break;
+    case 3:
+        glBegin(GL_TRIANGLE_STRIP);
+        glNormal3f(0.0f,  1.0f,  0.0f);
+        glVertex3f(-3.0f, 3.0f, -1.5f);
+        glVertex3f(-3.0f, 3.0f, 1.5f);
+        glVertex3f(3.0f, 3.0f, -1.5f);
+        glVertex3f(3.0f, 3.0f, 1.5f);
+        glVertex3f(3.0f, -3.0f, -1.5f);
+        glVertex3f(3.0f, -3.0f, 1.5f);
+        glVertex3f(-3.0f, -3.0f, -1.5f);
+        glVertex3f(-3.0f, -3.0f, 1.5f);
+        glEnd();
+        glBegin(GL_TRIANGLE_STRIP);
+        glNormal3f(0.0f,  0.0f, 1.0f);
+        glVertex3f(-3.0f, -3.0f, 1.5f);
+        glVertex3f(-3.0f, 3.0f, 1.5f);
+        glVertex3f(3.0f, 3.0f, 1.5f);
+        glVertex3f(3.0f, -3.0f, 1.5f);
+        glVertex3f(-3.0f, -3.0f, 1.5f);
+        glEnd();
+        glBegin(GL_TRIANGLE_STRIP);
+        glNormal3f(0.0f,  0.0f,  -1.0f);
+        glVertex3f(-3.0f, -3.0f, -1.5f);
+        glVertex3f(-3.0f, 3.0f, -1.5f);
+        glVertex3f(3.0f, 3.0f, -1.5f);
+        glVertex3f(3.0f, -3.0f, -1.5f);
+        glVertex3f(-3.0f, -3.0f, -1.5f);
+        glEnd();
+        break;
     }
 }
