@@ -25,9 +25,10 @@ public:
      * @param _obstacleModelsList
      * @param _levelsList
      * @param _parent
+     * @param _audioEnabled
      * @param _skybox
      */
-    explicit LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,Level*> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, Skybox *_skybox = NULL);
+    explicit LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,Level*> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, bool _audioEnabled = true, Skybox *_skybox = NULL);
 
     /**
      * @brief
@@ -86,7 +87,6 @@ private:
     GLboolean visible; /**< It is the boolean value that if the type block is visible */
     GLint visibleTime;  /**< It is the visible time counter of the type block */
     QString currentName;  /**< It is the current name for the level. */
-    GLboolean audioEnabledEntry;  /**< This check if the audio is enabled at the entry. */
     GLfloat mat_emission[4];  /**< TODO */
     GLfloat mat_noemission[4]; /**< TODO */
 

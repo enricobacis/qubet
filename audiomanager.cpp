@@ -44,6 +44,11 @@ AudioManager::~AudioManager()
     parent->disconnect(this);
 }
 
+bool AudioManager::isAudioEnabled()
+{
+    return audioEnabled;
+}
+
 void AudioManager::enableAudio(bool enabled)
 {
     if (audioEnabled && !enabled)

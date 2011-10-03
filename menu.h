@@ -30,9 +30,10 @@ public:
      * @param _iconsList is the reference to Qubet's iconsList.
      * @param _alphabet is the reference to Qubet's alphabet.
      * @param _parent is a callback variable to the parent of the parent.
+     * @param _audioEnabled is a variable to tell if the audio is enabled or not.
      * @param _skybox is the reference to the Skybox to use.
      */
-    explicit Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, Skybox *_skybox = NULL);
+    explicit Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, bool _audioEnabled = true, Skybox *_skybox = NULL);
 
     /**
      * @brief Disconnect and Destroy a Menu object.

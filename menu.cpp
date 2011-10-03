@@ -3,7 +3,7 @@
 #include "menu_defines.h"
 #include "effects_defines.h"
 
-Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, Skybox *_skybox) :
+Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, bool _audioEnabled, Skybox *_skybox) :
     parent(_parent),
     currentSkin(1),
     currentLevel(0),
@@ -17,8 +17,7 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<
     gameType(0),
     angleRotCube(0.0f),
     spinCube(0.0f),
-    angleRotVolumeCube(0.0f),
-    audioEnabled(true),
+    audioEnabled(_audioEnabled),
     volumeSkin(NULL),
     currentView(INTRODUCTION),
     currentSection(INTRO_SECTION),
@@ -36,12 +35,14 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<
 
     cameraOffset = new Vector3f(-90.0f, -30.0f, 18.0f);
 
+    angleRotVolumeCube = (audioEnabled ? 0.0f : 90.0f);
+
     QList< QPair<QString,GLuint> > labelsList;
     labelsList.append(QPair<QString,GLuint>("story", BUTTON_PLAY_STORY));
     labelsList.append(QPair<QString,GLuint>("arcade", BUTTON_PLAY_ARCADE));
     labelsList.append(QPair<QString,GLuint>("editor", BUTTON_LEVEL_EDITOR));
 
-    mainMenuButtons = new CubeStringList(labelsList, 18.0f, 12.0f, alphabet, 2.0f);
+    mainMenuButtons = new CubeStringList(labelsList, 18.0f, 12.0f, alphabet, 3.0f);
 
     backButton = new CubeString("back", 1.0f, alphabet, BUTTON_BACK);
     playButton = new CubeString("play", 1.0f, alphabet, BUTTON_NEXT);

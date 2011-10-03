@@ -75,7 +75,8 @@ public:
 private:
 
     Skin *skin; /**< TODO */
-    GLfloat emissionFactor; /**< TODO */
+    QVector<GLfloat> emissionVector; /**< TODO */
+    QVector<GLfloat> noEmissionVector; /**< TODO */
     GLfloat cubeSide; /**< TODO */
 };
 

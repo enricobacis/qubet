@@ -34,6 +34,13 @@ public:
      */
     ~AudioManager();
 
+    /**
+     * @brief Returns the state of the audio.
+     *
+     * @return true if audio is enabled, false elsewhere.
+     */
+    bool isAudioEnabled();
+
 private:
     QObject *parent; /**< It is a callback variable to the parent of AudioManager. */
     QString currentFileName; /**< It is the current ambientMusic filename. */

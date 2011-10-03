@@ -3,20 +3,20 @@
 #include "leveleditor_defines.h"
 #include "effects_defines.h"
 
-LevelEditor::LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,Level*> &_levelsList,QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, Skybox *_skybox):
+LevelEditor::LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,Level*> &_levelsList,QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, bool _audioEnabled, Skybox *_skybox):
     parent(_parent),
     levelsList(_levelsList),
     obstacleModelsList(_obstacleModelsList),
     iconsList(_iconsList),
     skybox(_skybox),
     skyboxAngle(0.0f),
+    audioEnabled(_audioEnabled),
     isMoving(false),
     currentView(0),
     currentLenght(0),
     currentWidth(0),
     alphabet(_alphabet),
     volumeSkin(NULL),
-    angleRotVolumeCube(0.0f),
     visible(true),
     visibleTime(0),
     currentName("")
@@ -25,6 +25,8 @@ LevelEditor::LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,
 
     currentActions = new ActionList(INITIAL_MOVEMENT);
     currentActions->appendSecondaryAction(ROTATE_SKYBOX);
+
+    angleRotVolumeCube = (audioEnabled ? 0.0f : 90.0f);
 
     currentLenght = 50;
     currentWidth = 3;
@@ -47,8 +49,6 @@ LevelEditor::LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,
     volumeSkin = new Skin(0, 0, volume_off, volume_off, volume_on, volume_on);
 
     currentView = SET_NAME_VIEW;
-
-    audioEnabledEntry = audioEnabled;
 
     mat_emission[0] = 1.0f;
     mat_emission[1] = 0.0f;
@@ -204,11 +204,6 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
         glPushName(BUTTON_VOLUME);
         glPushMatrix();
             glTranslatef(9.5f, 6.0f, 3.0f);
-            if(!audioEnabledEntry)
-            {
-
-                glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
-            }
             glRotatef(angleRotVolumeCube, -1.0f, 0.0f, 0.0f);
             drawPrism(0.8f, 0.8f, 0.8f, volumeSkin, true);
         glPopMatrix();

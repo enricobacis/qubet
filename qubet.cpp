@@ -249,8 +249,8 @@ QList<GLuint> Qubet::getPickedName(GLint mouseX, GLint mouseY)
 GLvoid Qubet::loadingCompleted()
 {
     currentText.clear();
-    //showMenu();
-    showLevelEditor();
+    showMenu();
+    // showLevelEditor();
 }
 
 GLvoid Qubet::errorLoading()
@@ -299,7 +299,7 @@ GLvoid Qubet::connectGame()
 GLvoid Qubet::showMenu()
 {
     setMouseMovementTracking(MOUSE_MOVED_NONE);
-    menu = new Menu(skinsList, levelsList, iconsList, alphabet, this, skyboxesList.value("galaxy"));
+    menu = new Menu(skinsList, levelsList, iconsList, alphabet, this, audioManager->isAudioEnabled(), skyboxesList.value("galaxy"));
     connectMenu();
     emit playAmbientMusic("resources/music/menu.mp3");
     currentView = MENU_VIEW;
@@ -592,8 +592,11 @@ void Qubet::playArcade(GLint skinId, GLint levelId)
 
 void Qubet::gameClosed()
 {
-    game->~Game();
-    game = NULL;
+    if (game != NULL)
+    {
+        game->~Game();
+        game = NULL;
+    }
 
     showMenu();
 }
@@ -601,7 +604,7 @@ void Qubet::gameClosed()
 void Qubet::showLevelEditor()
 {
     setMouseMovementTracking(MOUSE_MOVED_FULL);
-    levelEditor = new LevelEditor(obstacleModelsList, levelsList, iconsList, alphabet, this, skyboxesList.value("stars"));
+    levelEditor = new LevelEditor(obstacleModelsList, levelsList, iconsList, alphabet, this, audioManager->isAudioEnabled(), skyboxesList.value("stars"));
     connectLevelEditor();
 
     currentView = LEVELEDITOR_VIEW;

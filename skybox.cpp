@@ -2,14 +2,21 @@
 
 Skybox::Skybox(Skin *_skin, GLfloat _emissionFactor, GLfloat _cubeSide) :
     skin(_skin),
+    emissionVector(QVector<GLfloat>(4)),
+    noEmissionVector(QVector<GLfloat>(4)),
     cubeSide(_cubeSide)
 {
     if (_emissionFactor < 0.0f)
-        emissionFactor = 0.0f;
+        emissionVector.fill(0.0f, 3);
     else if (_emissionFactor > 1.0f)
-        emissionFactor = 1.0f;
+        emissionVector.fill(1.0f, 3);
     else
-        emissionFactor = _emissionFactor;
+        emissionVector.fill(_emissionFactor, 3);
+
+    emissionVector.append(1.0f);
+
+    noEmissionVector.fill(0.0f, 3);
+    noEmissionVector.append(1.0f);
 }
 
 Skybox::~Skybox()
@@ -31,16 +38,18 @@ Skin *Skybox::getSkin()
 GLvoid Skybox::setEmissionFactor(GLfloat _emissionFactor)
 {
     if (_emissionFactor < 0.0f)
-        emissionFactor = 0.0f;
+        emissionVector.fill(0.0f, 3);
     else if (_emissionFactor > 1.0f)
-        emissionFactor = 1.0f;
+        emissionVector.fill(1.0f, 3);
     else
-        emissionFactor = _emissionFactor;
+        emissionVector.fill(_emissionFactor, 3);
+
+    emissionVector.append(1.0f);
 }
 
 GLfloat Skybox::getEmssionFactor()
 {
-    return emissionFactor;
+    return emissionVector.at(1);
 }
 
 GLvoid Skybox::setCubeSide(GLfloat _cubeSide)
@@ -55,11 +64,7 @@ GLfloat Skybox::getCubeSide()
 
 GLvoid Skybox::draw()
 {
-    GLfloat mat_emission[] = {emissionFactor, emissionFactor, emissionFactor, 1.0f};
-    glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, mat_emission);
-
+    glMaterialfv(GL_FRONT, GL_EMISSION, emissionVector.data());
     drawPrism(cubeSide, cubeSide, cubeSide, skin);
-
-    GLfloat mat_noemission[] = {0.0f, 0.0f, 0.0f, 1.0f};
-    glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, mat_noemission);
+    glMaterialfv(GL_FRONT, GL_EMISSION, noEmissionVector.data());
 }
