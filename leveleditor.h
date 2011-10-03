@@ -80,12 +80,12 @@ private:
     CubeString *labelWidth;  /**< It is the labelWidth CubeString. */
     CubeString *create; /**< It is the create button CubeString. */
     CubeString *labelSetLevelName;  /**< It is the setLevelName CubeString. */
-    CubeString *back;  /**<It is the back CubeString. */
+    CubeString *back;  /**< It is the back CubeString. */
     CubeString *menu;  /**< It is the menu CubeString. */
     CubeString *next;  /**< It is the next button CubeString. */
-    CubeStringList *formSetLevelName;  /**< It is the formSetLevelName cubeStringList  */
-    GLboolean visible; /**< It is the boolean value that if the type block is visible */
-    GLint visibleTime;  /**< It is the visible time counter of the type block */
+    CubeStringList *formSetLevelName;  /**< It is the formSetLevelName cubeStringList.  */
+    GLboolean visible; /**< It is the boolean value that if the type block is visible. */
+    GLint visibleTime;  /**< It is the visible time counter of the type block. */
     QString currentName;  /**< It is the current name for the level. */
     GLfloat mat_emission[4];  /**< TODO */
     GLfloat mat_noemission[4]; /**< TODO */

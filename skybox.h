@@ -76,7 +76,7 @@ private:
 
     Skin *skin; /**< TODO */
     QVector<GLfloat> emissionVector; /**< TODO */
-    QVector<GLfloat> noEmissionVector; /**< TODO */
+    QVector<GLfloat> disabledVector; /**< TODO */
     GLfloat cubeSide; /**< TODO */
 };
 
