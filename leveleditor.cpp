@@ -21,14 +21,13 @@ LevelEditor::LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,
     visibleTime(0),
     currentName("")
 {
-    cameraOffset = new Vector3f(0.0f, -30.0f, 0.0f);
+    cameraOffset = new Vector3f(-30.0f, -30.0f, 0.0f);
 
-    currentActions = new ActionList(DO_NOTHING);
+    currentActions = new ActionList(INITIAL_MOVEMENT);
     currentActions->appendSecondaryAction(ROTATE_SKYBOX);
 
     currentLenght = 50;
     currentWidth = 3;
-    cameraOffset = new Vector3f(-30.0f, 0.0f, 0.0f);
 
     lenghtDisplay = new CubeString(QString::number(currentLenght), 3.0f, alphabet, LENGHT_DISPLAY);
     widthDisplay = new CubeString(QString::number(currentWidth), 3.0f, alphabet, WIDTH_DISPLAY);
@@ -50,13 +49,20 @@ LevelEditor::LevelEditor(QMap<GLint,Vector3f*> &_obstacleModelsList, QMap<GLint,
     currentView = SET_NAME_VIEW;
 
     audioEnabledEntry = audioEnabled;
+
+    mat_emission[0] = 1.0f;
+    mat_emission[1] = 0.0f;
+    mat_emission[2] = 0.0f;
+    mat_emission[3] = 1.0f;
+
+    mat_noemission[0] = 0.0f;
+    mat_noemission[1] = 0.0f;
+    mat_noemission[2] = 0.0f;
+    mat_noemission[3] = 1.0f;
 }
 
 LevelEditor::~LevelEditor()
 {
-    this->disconnect(parent);
-    parent->disconnect(this);
-
     if (lenghtDisplay != NULL)
         lenghtDisplay->~CubeString();
 
@@ -83,6 +89,9 @@ LevelEditor::~LevelEditor()
 
     if (menu != NULL)
         menu->~CubeString();
+
+    this->disconnect(parent);
+    parent->disconnect(this);
 }
 
 void LevelEditor::quitEditor()
@@ -220,24 +229,31 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
              glPushName(TOOLBAR);
              glPushMatrix();
                  glTranslatef(-9.5f, 0.0f, 4.0f);
-                 //drawRectangle(19.0f, 3.0f, 0.0f);
+                 //drawRectangle(3.0f, 18.0f, 0.0f);
                  glTranslatef(1.0f, 5.5f, -1.0f);
                  glScalef(0.4f, 0.4f, 0.4f);
+                 glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, mat_emission);
+                 glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat_noemission);
+                 glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat_noemission);
+                 glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_noemission);
+                 glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0);
+                 glRotatef(90.0f, 0.0f, 1.0f ,0.0f);
                  glPushName(OBSTACLE_0);
-                    drawObstacle(0);
+                 drawObstacle(0);
                  glPopName();
-                 glPushName(OBSTACLE_1);
                  glTranslatef(0.0f, -7.0f, 0.0f);
+                 glPushName(OBSTACLE_1);
                  drawObstacle(1);
                  glPopName();
-                 glPushName(OBSTACLE_2);
                  glTranslatef(0.0f, -7.0f, 0.0f);
+                 glPushName(OBSTACLE_2);
                  drawObstacle(2);
                  glPopName();
-                 glPushName(OBSTACLE_3);
                  glTranslatef(0.0f, -7.0f, 0.0f);
+                 glPushName(OBSTACLE_3);
                  drawObstacle(3);
                  glPopName();
+                 glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, mat_noemission);
              glPopMatrix();
              glPopName();
          }

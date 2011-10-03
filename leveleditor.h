@@ -87,6 +87,8 @@ private:
     GLint visibleTime;  /**< It is the visible time counter of the type block */
     QString currentName;  /**< It is the current name for the level. */
     GLboolean audioEnabledEntry;  /**< This check if the audio is enabled at the entry. */
+    GLfloat mat_emission[4];  /**< TODO */
+    GLfloat mat_noemission[4]; /**< TODO */
 
     /**
      * @brief
