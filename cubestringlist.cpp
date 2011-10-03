@@ -53,7 +53,7 @@ GLvoid CubeStringList::draw(GLboolean simplifyForPicking)
 
     glPushMatrix();
 
-        glTranslatef(0.0, firstStringHeight, 0.0);
+        glTranslatef(0.0f, firstStringHeight, 0.0f);
 
         for (int i = 0; i < cubeStrings.count(); i++)
         {
@@ -61,7 +61,7 @@ GLvoid CubeStringList::draw(GLboolean simplifyForPicking)
             if (cubeString != NULL)
                 cubeString->draw(simplifyForPicking);
 
-            glTranslatef(0.0, -stringsHeightDelta, 0.0);
+            glTranslatef(0.0f, -stringsHeightDelta, 0.0f);
         }
 
     glPopMatrix();
@@ -134,8 +134,8 @@ GLvoid CubeStringList::computeHeights(GLfloat _cubeDimension)
 
     if (strings < 2)
     {
-        firstStringHeight = 0;
-        stringsHeightDelta = 0;
+        firstStringHeight = 0.0f;
+        stringsHeightDelta = 0.0f;
     }
     else
     {
@@ -215,7 +215,7 @@ GLvoid CubeStringList::init(QList< QPair<QString,GLuint> > _labels, GLfloat _cub
         cubeStrings.append(cubeString);
     }
 
-    interline = _cubeDimension * 0.66;
+    interline = _cubeDimension * 0.66f;
     computeHeights(_cubeDimension);
 }
 
@@ -223,22 +223,22 @@ GLvoid CubeStringList::init(QList< QPair<QString,GLuint> > _labels, GLfloat _max
 {
     int strings = _labels.count();
 
-    GLfloat cubeDimension = 0;
+    GLfloat cubeDimension = 0.0f;
 
     if (strings > 0)
     {
         // Trovo la dimensione massima
-        int maxLength = 0;
+        int maxLength = 1;
 
         for (int i = 0; i < strings; i++)
             maxLength = qMax(maxLength, _labels.at(i).first.length());
 
         GLfloat cubeWidth = _maxWidth / maxLength;
-        GLfloat cubeHeight = (_maxHeight - (strings - 1)*interline) / strings;
+        GLfloat cubeHeight = _maxHeight / ((strings * 1.66f) - 0.66f);
 
         cubeDimension = qMin(cubeWidth, cubeHeight);
 
-        if (_maxCubeDimension > 0)
+        if (_maxCubeDimension > 0.0f)
             cubeDimension = qMin(cubeDimension, _maxCubeDimension);
     }
 

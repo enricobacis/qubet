@@ -11,6 +11,8 @@ QT += phonon
 TARGET = Qubet
 TEMPLATE = app
 
+DEFINES += USE_DISPLAY_LISTS_FOR_LETTERS
+
 SOURCES += \
     main.cpp\
     game.cpp \
@@ -29,7 +31,8 @@ SOURCES += \
     letter.cpp \
     cubestring.cpp \
     actionlist.cpp \
-    cubestringlist.cpp
+    cubestringlist.cpp \
+    skybox.cpp
 
 HEADERS  += \
     vector3f.h \
@@ -54,7 +57,8 @@ HEADERS  += \
     cubestring.h \
     actionlist.h \
     cubestringlist.h \
-    effects_defines.h
+    effects_defines.h \
+    skybox.h
 
 OTHER_FILES += \
     resources/skins/skins.xml \

@@ -3,7 +3,7 @@
 #include "menu_defines.h"
 #include "effects_defines.h"
 
-Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, Skin *_skybox) :
+Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, Skybox *_skybox) :
     parent(_parent),
     currentSkin(1),
     currentLevel(0),
@@ -40,7 +40,7 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<
     labelsList.append(QPair<QString,GLuint>("arcade", BUTTON_PLAY_ARCADE));
     labelsList.append(QPair<QString,GLuint>("editor", BUTTON_LEVEL_EDITOR));
 
-    mainMenuButtons = new CubeStringList(labelsList, 18.0, 12.0, alphabet);
+    mainMenuButtons = new CubeStringList(labelsList, 18.0f, 12.0f, alphabet, 0.0f);
 
     backButton = new CubeString("back", 1.0f, alphabet, BUTTON_BACK);
     playButton = new CubeString("play", 1.0f, alphabet, BUTTON_NEXT);
@@ -354,7 +354,7 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
         {
             glPushMatrix();
                 glRotatef(skyboxAngle, 0.0f, 1.0f, 0.0f);
-                drawPrism(50.0f, 50.0f, 50.0f, skybox);
+                skybox->draw();
             glPopMatrix();
         }
 

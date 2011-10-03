@@ -48,10 +48,10 @@ public:
      * @param _maxHeight is the maximum height the CubeString can grow up to.
      * @param _alphabet is the reference to the Alphabet you want to use.
      * @param _maxCubeDimension is the maximum cubeDimension. If set to a number <= 0 it
-     *        will not be computated. [default = 0]
+     *        will not be computated. [default = 0.0f]
      * @param _name is the name given to the entire string (for picking purposes). [default = 0]
      */
-    explicit CubeString(QString _label, GLfloat _maxWidth, GLfloat _maxHeight, Alphabet *_alphabet, GLfloat _maxCubeDimension = 0, GLuint _name = 0);
+    explicit CubeString(QString _label, GLfloat _maxWidth, GLfloat _maxHeight, Alphabet *_alphabet, GLfloat _maxCubeDimension = 0.0f, GLuint _name = 0);
 
     /**
      * @brief Safely destroys a CubeString.
@@ -162,8 +162,16 @@ private:
     QList<GLint> angleSteps; /**< It is a list to save the angle step of each letter. */
     QList<GLint> currentAngles;  /**< It is a list to save the current angle of each letter. */
     QList<GLint> finalAngles; /**< It is a list to save the final angle of each letter. */
-    QList<GLuint> letterDisplayLists; /**< It is a list to save the displayList ID of each letter. */
 
+#ifdef USE_DISPLAY_LISTS_FOR_LETTERS
+
+    QList<GLuint> letterDisplayLists;  /**< It is a list to save the Display List ID of each letter. */
+
+#else
+
+    QList<Skin*> letterSkins; /**< It is a list to save the skin of each letter. */
+
+#endif
 
     /**
      * @brief It is an internal function to create the OpenGL displayList of a letter.

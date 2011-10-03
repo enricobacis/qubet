@@ -66,10 +66,10 @@ Qubet::~Qubet()
     }
     iconsList.~QMap();
 
-    for (QMap<QString,Skin*>::iterator i = skyboxesList.begin(); i != skyboxesList.end(); i++)
+    for (QMap<QString,Skybox*>::iterator i = skyboxesList.begin(); i != skyboxesList.end(); i++)
     {
         if (i.value() != NULL)
-            dynamic_cast<Skin*>(i.value())->~Skin();
+            dynamic_cast<Skybox*>(i.value())->~Skybox();
     }
     skyboxesList.~QMap();
 }
@@ -532,17 +532,18 @@ GLboolean Qubet::loadSkyboxes()
     skyboxes.setFilter(QDir::Dirs | QDir::NoDotAndDotDot);
     skyboxes.setSorting(QDir::Name);
 
-    QString skybox;
+    QString skyboxName;
     Skin *skyboxSkin;
+    Skybox *skybox;
     QString currentPath;
 
     for (uint i = 0; i < skyboxes.count(); i++)
     {
-        skybox = skyboxes[i];
-        currentPath = skyboxesPath + "/" + skybox + "/";
+        skyboxName = skyboxes[i];
+        currentPath = skyboxesPath + "/" + skyboxName + "/";
 
-        skyboxSkin = new Skin(skybox);
-        skyboxSkin->setComment("The " + skybox + " skybox.");
+        skyboxSkin = new Skin(skyboxName);
+        skyboxSkin->setComment("The " + skyboxName + " skybox.");
 
         skyboxSkin->setTextureXPlus (bindTexture(QImage(currentPath + "x+.jpg")));
         skyboxSkin->setTextureXMinus(bindTexture(QImage(currentPath + "x-.jpg")));
@@ -551,7 +552,9 @@ GLboolean Qubet::loadSkyboxes()
         skyboxSkin->setTextureZPlus (bindTexture(QImage(currentPath + "z+.jpg")));
         skyboxSkin->setTextureZMinus(bindTexture(QImage(currentPath + "z-.jpg")));
 
-        skyboxesList.insert(skybox, skyboxSkin);
+        skybox = new Skybox(skyboxSkin);
+
+        skyboxesList.insert(skyboxName, skybox);
     }
 
     return true;

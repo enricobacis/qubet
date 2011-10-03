@@ -30,11 +30,19 @@ CubeString::CubeString(QString _label, GLfloat _maxWidth, GLfloat _maxHeight, Al
 
 CubeString::~CubeString()
 {
+#ifdef USE_DISPLAY_LISTS_FOR_LETTERS
+
     for (int i = 0; i < letterDisplayLists.count(); i++)
-    {
-        if (letterDisplayLists[i] != 0)
-            glDeleteLists(letterDisplayLists[i], 1);
-    }
+        if (letterDisplayLists.at(i) != 0)
+            glDeleteLists(letterDisplayLists.at(i), 1);
+
+#else
+
+    for (int i = 0; i < letterSkins.count(); i++)
+        if (letterSkins.at(i) != NULL)
+            letterSkins.at(i)->~Skin();
+
+#endif
 }
 
 GLvoid CubeString::draw(GLboolean simplifyForPicking)
@@ -68,7 +76,19 @@ GLvoid CubeString::draw(GLboolean simplifyForPicking)
                 }
 
                 glRotatef(currentAngles[i], 1.0, 0.0, 0.0);
-                glCallList(letterDisplayLists[i]);
+
+#ifdef USE_DISPLAY_LISTS_FOR_LETTERS
+
+                if (letterDisplayLists[i] != 0)
+                    glCallList(letterDisplayLists[i]);
+
+#else
+
+                if (letterSkins[i] != NULL)
+                    drawPrism(cubeDimension, cubeDimension, cubeDimension, letterSkins[i], true);
+
+#endif
+
             glPopMatrix();
             glPopName();
 
@@ -152,7 +172,7 @@ GLuint CubeString::createLetterDisplayList(Skin *_skin)
 {
     GLuint list = glGenLists(1);
     glNewList(list, GL_COMPILE);
-    drawPrism(cubeDimension, cubeDimension, cubeDimension, _skin, true);
+        drawPrism(cubeDimension, cubeDimension, cubeDimension, _skin, true);
     glEndList();
     return list;
 }
@@ -165,9 +185,21 @@ GLvoid CubeString::init()
         currentAngles.append(0);
         finalAngles.append(0);
 
+#ifdef USE_DISPLAY_LISTS_FOR_LETTERS
+
         if (label[i] == ' ')
             letterDisplayLists.append(0);
         else
             letterDisplayLists.append(createLetterDisplayList(label[i]));
+
+#else
+
+        if (label[i] == ' ')
+            letterSkins.append(NULL);
+        else
+            letterSkins.append(alphabet->getRandomLetterSkin(label[i]));
+
+#endif
+
     }
 }

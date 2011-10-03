@@ -30,10 +30,10 @@ public:
      * @param _maxWidth
      * @param _maxHeight
      * @param _alphabet
-     * @param _maxCubeDimension is the maximum cubeDimension. If set to a number <= 0 it
-     *        will not be computated. [default = 0]
+     * @param _maxCubeDimension is the maximum cubeDimension. If set to a number <= 0.0f it
+     *        will not be computated. [default = 0.0f]
      */
-    explicit CubeStringList(QList< QPair<QString,GLuint> > _labels, GLfloat _maxWidth, GLfloat _maxHeight, Alphabet *_alphabet, GLfloat _maxCubeDimension = 0);
+    explicit CubeStringList(QList< QPair<QString,GLuint> > _labels, GLfloat _maxWidth, GLfloat _maxHeight, Alphabet *_alphabet, GLfloat _maxCubeDimension = 0.0f);
 
     /**
      * @brief
@@ -52,11 +52,11 @@ public:
      * @param _maxWidth
      * @param _maxHeight
      * @param _alphabet
-     * @param _maxCubeDimension is the maximum cubeDimension. If set to a number <= 0 it
-     *        will not be computated. [default = 0]
+     * @param _maxCubeDimension is the maximum cubeDimension. If set to a number <= 0.0f it
+     *        will not be computated. [default = 0.0f]
      * @param _name
      */
-    explicit CubeStringList(QString _labels, GLfloat _maxWidth, GLfloat _maxHeight, Alphabet *_alphabet, GLfloat _maxCubeDimension = 0, GLuint _name = 0);
+    explicit CubeStringList(QString _labels, GLfloat _maxWidth, GLfloat _maxHeight, Alphabet *_alphabet, GLfloat _maxCubeDimension = 0.0f, GLuint _name = 0);
 
     /**
      * @brief
@@ -125,7 +125,7 @@ public:
      * @param _firstLetterAngle
      * @param _nextLetterDelta
      */
-    GLfloat setCurrentAngle(GLfloat _firstLetterAngle, GLfloat _nextLetterDelta = 0);
+    GLfloat setCurrentAngle(GLfloat _firstLetterAngle, GLfloat _nextLetterDelta = 0.0f);
 
 
 private:
@@ -180,10 +180,10 @@ private:
      * @param _maxWidth
      * @param _maxHeight
      * @param _alphabet
-     * @param _maxCubeDimension is the maximum cubeDimension. If set to a number <= 0 it
-     *        will not be computated. [default = 0]
+     * @param _maxCubeDimension is the maximum cubeDimension. If set to a number <= 0.0f it
+     *        will not be computated. [default = 0.0f]
      */
-    GLvoid init(QList< QPair<QString,GLuint> > _labels, GLfloat _maxWidth, GLfloat _maxHeight, Alphabet *_alphabet, GLfloat _maxCubeDimension = 0);
+    GLvoid init(QList< QPair<QString,GLuint> > _labels, GLfloat _maxWidth, GLfloat _maxHeight, Alphabet *_alphabet, GLfloat _maxCubeDimension = 0.0f);
 
 };
 

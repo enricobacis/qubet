@@ -5,6 +5,7 @@
 #include "level.h"
 #include "actionlist.h"
 #include "cubestringlist.h"
+#include "skybox.h"
 
 /**
  * @brief Menu class used to show and manage the game menu.
@@ -29,9 +30,9 @@ public:
      * @param _iconsList is the reference to Qubet's iconsList.
      * @param _alphabet is the reference to Qubet's alphabet.
      * @param _parent is a callback variable to the parent of the parent.
-     * @param _skybox is the reference to the skybox Skin to use.
+     * @param _skybox is the reference to the Skybox to use.
      */
-    explicit Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, Skin *_skybox = NULL);
+    explicit Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, Skybox *_skybox = NULL);
 
     /**
      * @brief Disconnect and Destroy a Menu object.
@@ -55,7 +56,7 @@ private:
     QMap<GLint,Skin*> skinsList; /**< It is the skinsList provided by Qubet object. */
     QMap<GLint,Level*> levelsList; /**< It is the levelsList provided by Qubet object. */
     QMap<GLint,GLuint> iconsList;  /**< It is the iconsList provided by Qubet object. */
-    Skin *skybox; /**< It is the skybox to use in the Menu. */
+    Skybox *skybox; /**< It is the skybox to use in the Menu. */
     GLfloat skyboxAngle; /**< It is the skybox rotation angle. */
     Alphabet *alphabet; /**< It is the alphabet provided by Qubet. */
     GLint itemSelected; /**< It is the id of the current menu action selected. */

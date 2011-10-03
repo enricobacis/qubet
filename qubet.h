@@ -5,6 +5,7 @@
 #include "game.h"
 #include "audiomanager.h"
 #include "leveleditor.h"
+#include "skybox.h"
 
 /**
  * @brief This class rapresents an instance of the QGLWidget Qubet.
@@ -106,7 +107,7 @@ private:
     QMap<GLint,Level*> levelsList; /**< It is the QMap that contains ids and the names of level files. */
     QMap<GLint,Vector3f*> obstacleModelsList; /**< It is the QMap that contains ids and the dimensions of Obstacles. */
     QMap<GLint,GLuint> iconsList; /**< It is the QMap that contains ids of the icons' texture. */
-    QMap<QString,Skin*> skyboxesList; /**< It is the Qmap that contains the available skyboxes. */
+    QMap<QString,Skybox*> skyboxesList; /**< It is the Qmap that contains the available skyboxes. */
     QTimer *drawTimer; /**< It is the QTimer to re-draw the scene. */
     Menu *menu; /**< It is the Menu pointer. */
     Game *game; /**< It is the Game pointer. */
