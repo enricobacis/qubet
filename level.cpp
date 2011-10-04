@@ -13,9 +13,9 @@ Level::Level(GLint _id, QString _filename, QObject *_parent) :
     isLoaded(false)
 {
 }
-Level::Level(GLint _id, QString _levelName, GLfloat _lenght, GLfloat _width)
+Level::Level(GLint _id, QString _levelName, GLfloat _length, GLfloat _width)
 {
-    length = _lenght;
+    length = _length;
     width = _width;
 }
 
@@ -105,7 +105,7 @@ bool Level::save()
 
 GLvoid Level::draw(GLboolean simplifyForPicking)
 {
-    drawPrism(width, 1, length);
+    drawPrism(width * 3.0f, 0.2f, length * 3.0f);
 
     for(int i = 0; i < obstaclesList.count(); i++)
     {

@@ -26,7 +26,7 @@ public:
      *
      * @param _id
      * @param _levelName
-     * @param lenght
+     * @param length
      * @param width
     */
     explicit Level(GLint _id, QString _levelName, GLfloat length, GLfloat width);

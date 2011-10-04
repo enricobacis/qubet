@@ -157,12 +157,12 @@ struct Vector3f
     }
 
     /**
-     * @brief Compute the lenght^2 of the vector.
+     * @brief Compute the length^2 of the vector.
      *
-     * The lenght^2 is less resource expensive then length().
+     * The length^2 is less resource expensive then length().
      * You can use it for check which vector is longer.
      *
-     * @return GLfloat lenght^2 of vector.
+     * @return GLfloat length^2 of vector.
      */
     inline GLfloat lengthSq()
     {

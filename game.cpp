@@ -66,7 +66,7 @@ void Game::quitGame()
 
 }
 
-void Game::itemClicked(QList<GLuint> listNames)
+void Game::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
 {
 
 }

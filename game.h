@@ -114,9 +114,10 @@ private slots:
     /**
      * @brief Slot called when the user clicks on a item.
      *
+     * @param event is the QMouseEvent.
      * @param listNames is the QList<GLuint> of item's names.
      */
-    void itemClicked(QList<GLuint> listNames);
+    void itemClicked(QMouseEvent *event, QList<GLuint> listNames);
 
     /**
      * @brief Slot called when the user releases the mouse button.

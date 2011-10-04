@@ -54,26 +54,31 @@ private:
     GLfloat skyboxAngle; /**< It is the Skybox rotation angle. */
     GLboolean audioEnabled;  /**< It is the state of the audio. */
     GLboolean isMoving; /**< It is the variable that states if the menu is moving or not. */
-    Level *level; /**< TODO */
+    Level *level; /**< It is the current editing Level. */
     GLint currentView;  /**< It is the value of the current view */
-    GLuint currentLenght; /**< TODO */
-    GLuint currentWidth; /**< TODO */
+    GLuint currentLength; /**< It is the current length. */
+    GLuint currentWidth; /**< It is the current width. */
+    GLuint currentGravity; /**< It is the current gravity. */
     Alphabet *alphabet; /**< It is the alphabet provided by Qubet. */
     ActionList *currentActions; /**< It is the list of the current menu steps. */
     Vector3f *cameraOffset; /**< It is the camera offset for the editor. */
     GLfloat cameraAngle; /**< It is the camera angle for the editor */
-    Vector3f *levelOffset; /**< TODO */
+    Vector3f *levelOffset; /**< It is the offset of the Level */
     Skin *volumeSkin; /**< It is the skin of the volume button */
     GLfloat angleRotVolumeCube;  /**< It is the current rotation angle of the volume icon. */
-    CubeString *lenghtDisplay; /**< It is the lenght CubeString. */
-    CubeString *widthDisplay; /**< It is the width CubeString. */
-    CubeString *labelLenght;  /**< It is the labelLenght CubeString.*/
-    CubeString *labelWidth;  /**< It is the labelWidth CubeString. */
+    CubeString *lengthLabel; /**< It is the "length" CubeString. */
+    CubeString *widthLabel; /**< It is the "width" CubeString. */
+    CubeString *gravityLabel; /**< It is the "gravity" CubeString. */
+    CubeString *lengthString;  /**< It is the length CubeString.*/
+    CubeString *widthString;  /**< It is the width CubeString. */
+    CubeString *gravityString; /**< It is the gravity CubeString. */
     CubeString *create; /**< It is the create button CubeString. */
     CubeString *labelSetLevelName;  /**< It is the setLevelName CubeString. */
     CubeString *back;  /**< It is the back CubeString. */
     CubeString *menu;  /**< It is the menu CubeString. */
-    CubeString *next;  /**< It is the next button CubeString. */
+    CubeString *next;  /**< It is the next CubeString. */
+    CubeString *save;  /**< It is the save CubeString. */
+    CubeString *cancel; /**< It is the cancel CubeString. */
     CubeStringList *formSetLevelName;  /**< It is the formSetLevelName cubeStringList.  */
     GLboolean visible; /**< It is the boolean value that if the type block is visible. */
     GLint visibleTime;  /**< It is the visible time counter of the type block. */
@@ -90,7 +95,7 @@ private:
      * @brief
      *
     */
-    GLvoid lenghten();
+    GLvoid lengthen();
 
     /**
      * @brief
@@ -109,6 +114,18 @@ private:
      *
     */
     GLvoid reduce();
+
+    /**
+     * @brief
+     *
+     */
+    GLvoid gravityMinus();
+
+    /**
+     * @brief
+     *
+     */
+    GLvoid gravityPlus();
 
     /**
      * @brief
@@ -135,9 +152,10 @@ private slots:
     /**
      * @brief Slot called when the user clicks on a item.
      *
+     * @param event is the QMouseEvent.
      * @param listNames is the QList<GLuint> of item's names.
      */
-    void itemClicked(QList<GLuint> listNames);
+    void itemClicked(QMouseEvent *event, QList<GLuint> listNames);
 
     /**
      * @brief Slot called when the user releases the mouse button.

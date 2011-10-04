@@ -127,7 +127,7 @@ GLvoid Qubet::resizeGL(GLint _width, GLint _height)
 
 GLvoid Qubet::mousePressEvent(QMouseEvent *event)
 {
-    emit itemClicked(getPickedName(event->x(), event->y()));
+    emit itemClicked(event, getPickedName(event->x(), event->y()));
 }
 
 GLvoid Qubet::mouseReleaseEvent(QMouseEvent *event)
@@ -167,7 +167,7 @@ GLvoid Qubet::initQubet()
 
 GLvoid Qubet::connectInputEvents(const QObject *receiver)
 {
-    connect(this, SIGNAL(itemClicked(QList<GLuint>)), receiver, SLOT(itemClicked(QList<GLuint>)));
+    connect(this, SIGNAL(itemClicked(QMouseEvent*, QList<GLuint>)), receiver, SLOT(itemClicked(QMouseEvent*, QList<GLuint>)));
     connect(this, SIGNAL(keyPressed(QKeyEvent*)), receiver, SLOT(keyPressed(QKeyEvent*)));
     connect(this, SIGNAL(mouseMoved(QMouseEvent*, QList<GLuint>)), receiver, SLOT(mouseMoved(QMouseEvent*, QList<GLuint>)));
     connect(this, SIGNAL(mouseReleased(QMouseEvent*)), receiver, SLOT(mouseReleased(QMouseEvent*)));
@@ -249,8 +249,8 @@ QList<GLuint> Qubet::getPickedName(GLint mouseX, GLint mouseY)
 GLvoid Qubet::loadingCompleted()
 {
     currentText.clear();
-    // showMenu();
-    showLevelEditor(0);
+    showMenu();
+    // showLevelEditor(0);
 }
 
 GLvoid Qubet::errorLoading()

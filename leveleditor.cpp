@@ -11,9 +11,10 @@ LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QO
     audioEnabled(_audioEnabled),
     isMoving(false),
     level(_level),
-    currentView(0),
-    currentLenght(0),
-    currentWidth(0),
+    currentView(SET_NAME_VIEW),
+    currentLength(50),
+    currentWidth(3),
+    currentGravity(10),
     alphabet(_alphabet),
     volumeSkin(NULL),
     visible(true),
@@ -21,7 +22,14 @@ LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QO
     currentName("")
 {
     cameraOffset = new Vector3f(-30.0f, -30.0f, 0.0f);
-    levelOffset  = new Vector3f(  0.0f,  -3.0f, 8.0f);
+
+    if (level += NULL)
+    {
+        cameraOffset->x = 30.0f;
+        currentView = SET_GRAVITY_VIEW;
+    }
+
+    levelOffset  = new Vector3f(  0.0f,  -3.0f, 12.0f);
 
     currentActions = new ActionList(INITIAL_MOVEMENT);
     currentActions->appendSecondaryAction(ROTATE_SKYBOX);
@@ -31,42 +39,45 @@ LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QO
     disabledVector.fill(0.0f, 3);
     disabledVector.append(1.0f);
 
-    currentLenght = 50;
-    currentWidth = 3;
+    if (level != NULL)
+        currentGravity = level->getGravity();
 
-    lenghtDisplay = new CubeString(QString::number(currentLenght), 3.0f, alphabet, LENGHT_DISPLAY);
-    widthDisplay = new CubeString(QString::number(currentWidth), 3.0f, alphabet, WIDTH_DISPLAY);
+    lengthLabel = new CubeString(QString::number(currentLength), 3.0f, alphabet, LENGTH_LABEL);
+    widthLabel = new CubeString(QString::number(currentWidth), 3.0f, alphabet, WIDTH_LABEL);
+    gravityLabel = new CubeString(QString::number(currentGravity), 3.0f, alphabet, GRAVITY_LABEL);
 
-    labelLenght = new CubeString("lenght", 1.5f, alphabet, LABEL_LENGHT);
-    labelWidth = new CubeString("width", 1.5f, alphabet, LABEL_WIDTH);
+    lengthString = new CubeString("length", 1.5f, alphabet, LENGTH_STRING);
+    widthString = new CubeString("width", 1.5f, alphabet, WIDTH_STRING);
+    gravityString = new CubeString("gravity", 1.5f, alphabet, GRAVITY_STRING);
 
     back = new CubeString("back", 1.0f, alphabet, BUTTON_BACK);
     menu = new CubeString("menu", 1.0f, alphabet, BUTTON_BACK);
     create = new CubeString("create", 1.0f, alphabet, BUTTON_NEXT);
     next = new CubeString("next", 1.0f, alphabet, BUTTON_NEXT);
+    save = new CubeString("save", 1.0f, alphabet, BUTTON_SAVE);
+    cancel = new CubeString("cancel", 1.0f, alphabet, BUTTON_CANCEL);
+
     labelSetLevelName = new CubeString("set level name", 1.3f, alphabet, LABEL_SET_LEVEL_NAME);
 
     formSetLevelName = new CubeStringList("", 14.0f, 6.0f, alphabet, 2.0f, FORM_SET_LEVEL_NAME);
     GLuint volume_on = iconsList.value(VOLUME_ON);
     GLuint volume_off = iconsList.value(VOLUME_OFF);
     volumeSkin = new Skin(0, 0, volume_off, volume_off, volume_on, volume_on);
-
-    currentView = SET_NAME_VIEW;
 }
 
 LevelEditor::~LevelEditor()
 {
-    if (lenghtDisplay != NULL)
-        lenghtDisplay->~CubeString();
+    if (lengthLabel != NULL)
+        lengthLabel->~CubeString();
 
-    if (widthDisplay != NULL)
-        widthDisplay->~CubeString();
+    if (widthLabel != NULL)
+        widthLabel->~CubeString();
 
-    if (labelLenght != NULL)
-        labelLenght->~CubeString();
+    if (lengthString != NULL)
+        lengthString->~CubeString();
 
-    if (labelWidth != NULL)
-        labelWidth->~CubeString();
+    if (widthString != NULL)
+        widthString->~CubeString();
 
     if (labelSetLevelName != NULL)
         labelSetLevelName->~CubeString();
@@ -122,8 +133,8 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
             case GO_TO_SET_NAME_VIEW:
                 if(currentView == SET_PARAM_VIEW)
                 {
-                    cameraOffset->x--;
-                    cameraAngle -= 12.0f;
+                    cameraOffset->x -= 0.5f;
+                    cameraAngle -= 6.0f;
                     if(cameraOffset->x == -30.0f)
                     {
                         currentView = SET_NAME_VIEW;
@@ -138,8 +149,22 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
             case GO_TO_SET_PARAM_VIEW:
                 if (currentView == SET_NAME_VIEW)
                 {
-                    cameraOffset->x++;
-                    cameraAngle += 12.0f;
+                    cameraOffset->x += 0.5f;
+                    cameraAngle += 6.0f;
+
+                    if (cameraOffset->x == 0.0f)
+                    {
+                        currentView = SET_PARAM_VIEW;
+                        currentActions->setPrimaryAction(DO_NOTHING);
+                        isMoving = false;
+                        cameraAngle = 0.0f;
+                    }
+                }
+                else if (currentView == SET_GRAVITY_VIEW)
+                {
+                    cameraOffset->x -= 0.5f;
+                    cameraAngle -= 6.0f;
+
                     if (cameraOffset->x == 0.0f)
                     {
                         currentView = SET_PARAM_VIEW;
@@ -151,16 +176,32 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
 
                 break;
 
-             case GO_TO_EDITING_LEVEL_VIEW:
-                cameraOffset->z++;
-                cameraAngle += 12.0f;
+            case GO_TO_SET_GRAVITY_VIEW:
+                cameraOffset->x += 0.5f;
+                cameraAngle += 6.0f;
 
-                if (cameraOffset->z == 30.0f)
+                if (cameraOffset->x == 30.0f)
                 {
-                    currentView = EDITING_LEVEL_VIEW;
+                    currentView = SET_GRAVITY_VIEW;
                     currentActions->setPrimaryAction(DO_NOTHING);
                     isMoving = false;
                     cameraAngle = 0.0f;
+                }
+
+                break;
+
+             case GO_TO_EDITING_LEVEL_VIEW:
+                cameraOffset->x += 2.0f;
+
+                if (cameraOffset->x == 60.0f)
+                {
+                    currentView = EDITING_LEVEL_VIEW;
+                    emit setMouseMovementTracking(MOUSE_MOVED_DOWN);
+                }
+                else if (cameraOffset->x == 90.0f)
+                {
+                    currentActions->setPrimaryAction(DO_NOTHING);
+                    isMoving = false;
                 }
 
                 break;
@@ -209,11 +250,16 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
             glPopMatrix();
         }
 
+        glTranslatef(-cameraOffset->x, -cameraOffset->y, -cameraOffset->z);
+        glRotatef(cameraAngle, 0.0f, 0.0f, 1.0f);
+
         glPushMatrix();
 
         if(currentView == EDITING_LEVEL_VIEW)
-         {
-             glPushMatrix();
+        {
+            glPushMatrix();
+
+                glTranslatef(90.0f, 0.0f, 0.0f);
 
                 glPushMatrix();
 
@@ -222,51 +268,46 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
 
                 glPopMatrix();
 
-                 glTranslatef(-8.5f, 5.5f, 3.0f);
-                 glScalef(0.4f, 0.4f, 0.4f);
+                glTranslatef(-10.0f, 6.0f, 0.0f);
+                glScalef(0.4f, 0.4f, 0.4f);
 
-                 glPushName(OBSTACLE_0);
-                 drawObstacle(0);
-                 glPopName();
+                glPushName(OBSTACLE_0);
+                drawObstacle(0);
+                glPopName();
 
-                 glTranslatef(0.0f, -7.0f, 0.0f);
+                glTranslatef(0.0f, -7.0f, 0.0f);
 
-                 glPushName(OBSTACLE_1);
-                 drawObstacle(1);
-                 glPopName();
+                glPushName(OBSTACLE_1);
+                drawObstacle(1);
+                glPopName();
 
-                 glTranslatef(0.0f, -7.0f, 0.0f);
+                glTranslatef(0.0f, -7.0f, 0.0f);
 
-                 glPushName(OBSTACLE_2);
-                 drawObstacle(2);
-                 glPopName();
+                glPushName(OBSTACLE_2);
+                drawObstacle(2);
+                glPopName();
 
-                 glTranslatef(0.0f, -7.0f, 0.0f);
+                glTranslatef(0.0f, -7.0f, 0.0f);
 
-                 glPushName(OBSTACLE_3);
-                 drawObstacle(3);
-                 glPopName();
+                glPushName(OBSTACLE_3);
+                drawObstacle(3);
+                glPopName();
 
-             glPopMatrix();
-         }
-
-            glTranslatef(-cameraOffset->x, -cameraOffset->y, -cameraOffset->z);
-            glRotatef(cameraAngle, 0.0f, 0.0f, 1.0f);
-
-            if(currentView == SET_NAME_VIEW || currentView == SET_PARAM_VIEW)
-            {
-                // Set Name View
-
-                glPushMatrix();
+            glPopMatrix();
+        }
+        else
+        {
+            // Set Name View
+            glPushMatrix();
 
                 glTranslatef(-30.0f, 6.0f, 0.0f);
-                    labelSetLevelName->draw(simplifyForPicking);
+                labelSetLevelName->draw(simplifyForPicking);
 
                 glTranslatef(8.5f, -13.0f, 0.0f);
-                    next->draw(simplifyForPicking);
+                next->draw(simplifyForPicking);
 
-                    glTranslatef(-17.0f, 0.0f, 0.0f);
-                    menu->draw(simplifyForPicking);
+                glTranslatef(-17.0f, 0.0f, 0.0f);
+                menu->draw(simplifyForPicking);
 
                 glTranslatef(8.5f, 6.5f, 0.0f);
 
@@ -294,90 +335,130 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
                     }
                 }
 
-                glPopMatrix();
+            glPopMatrix();
 
-                // Set Parameters View
+            // Set Parameters View
 
-                glTranslatef(8.5f, -7.0f, 0.0f);
-                create->draw(simplifyForPicking);
+            glPushMatrix();
 
-                glTranslatef(-18.0f, 0.0f, 0.0f);
+                glTranslatef(9.0f, -7.0f, 0.0f);
+                next->draw(simplifyForPicking);
+
+                glTranslatef(-18.5f, 0.0f, 0.0f);
                 back->draw(simplifyForPicking);
 
-            glTranslatef(3.5f, 11.5f, 0.0f);
-                labelLenght->draw(simplifyForPicking);
+                glTranslatef(3.5f, 11.5f, 0.0f);
+                lengthString->draw(simplifyForPicking);
 
                 glTranslatef(12.0f, 0.0f, 0.0f);
-                labelWidth->draw(simplifyForPicking);
+                widthString->draw(simplifyForPicking);
 
-            glTranslatef(-12.0f, -2.5f, 1.5f);
-                glPushName(BUTTON_LENGHTEN);
+                glTranslatef(-12.0f, -2.5f, 1.5f);
+                glPushName(BUTTON_LENGTHEN);
                 glBegin(GL_TRIANGLES);
-                glVertex3f( 0.0f,  1.0f,  0.0f);
-                glVertex3f( 1.0f, -1.0f,  0.0f);
-                glVertex3f(-1.0f, -1.0f,  0.0f);
+                    glVertex3f( 0.0f,  1.0f,  0.0f);
+                    glVertex3f( 1.0f, -1.0f,  0.0f);
+                    glVertex3f(-1.0f, -1.0f,  0.0f);
                 glEnd();
                 glPopName();
 
-            glTranslatef(0.0f, -3.5f, -1.5f);
-                lenghtDisplay->draw(simplifyForPicking);
+                glTranslatef(0.0f, -3.5f, -1.5f);
+                lengthLabel->draw(simplifyForPicking);
 
                 glTranslatef(7.0f, 0.0f, 1.5f);
-            glPushName(BUTTON_REDUCE);
+                glPushName(BUTTON_REDUCE);
                 glBegin(GL_TRIANGLES);
-                glVertex3f(-1.0f,  0.0f,  0.0f);
-                glVertex3f( 1.0f,  1.0f,  0.0f);
-                glVertex3f( 1.0f, -1.0f,  0.0f);
+                    glVertex3f(-1.0f,  0.0f,  0.0f);
+                    glVertex3f( 1.0f,  1.0f,  0.0f);
+                    glVertex3f( 1.0f, -1.0f,  0.0f);
                 glEnd();
                 glPopName();
 
-            glTranslatef(4.5f, 0.0f, -1.5f);
-                widthDisplay->draw(simplifyForPicking);
+                glTranslatef(4.5f, 0.0f, -1.5f);
+                widthLabel->draw(simplifyForPicking);
 
                 glTranslatef(4.5f, 0.0f, 1.5f);
-            glPushName(BUTTON_ENLARGE);
+                glPushName(BUTTON_ENLARGE);
                 glBegin(GL_TRIANGLES);
-                glVertex3f( 1.0f,  0.0f,  0.0f);
-                glVertex3f(-1.0f,  1.0f,  0.0f);
-                glVertex3f(-1.0f, -1.0f,  0.0f);
+                    glVertex3f( 1.0f,  0.0f,  0.0f);
+                    glVertex3f(-1.0f,  1.0f,  0.0f);
+                    glVertex3f(-1.0f, -1.0f,  0.0f);
                 glEnd();
                 glPopName();
 
-            glTranslatef(-16.0f, -3.5f, 0.0f);
+                glTranslatef(-16.0f, -3.5f, 0.0f);
                 glPushName(BUTTON_SHORTEN);
                 glBegin(GL_TRIANGLES);
-                glVertex3f(-1.0f,  1.0f,  0.0f);
-                glVertex3f( 1.0f,  1.0f,  0.0f);
-                glVertex3f( 0.0f, -1.0f,  0.0f);
+                    glVertex3f(-1.0f,  1.0f,  0.0f);
+                    glVertex3f( 1.0f,  1.0f,  0.0f);
+                    glVertex3f( 0.0f, -1.0f,  0.0f);
                 glEnd();
                 glPopName();
-
-            }
 
             glPopMatrix();
 
+            // Set Gravity
+
+            glPushMatrix();
+
+                glTranslatef(30.0f, 4.0f, 0.0f);
+                gravityString->draw(simplifyForPicking);
+
+                glTranslatef(0.0f, -4.0f, 0.0f);
+                gravityLabel->draw(simplifyForPicking);
+
+                glTranslatef(+6.0f, 0.0f, 0.0f);
+                glPushName(BUTTON_GRAVITY_PLUS);
+                glBegin(GL_TRIANGLES);
+                    glVertex3f( 1.0f,  0.0f,  0.0f);
+                    glVertex3f(-1.0f,  1.0f,  0.0f);
+                    glVertex3f(-1.0f, -1.0f,  0.0f);
+                glEnd();
+                glPopName();
+
+                glTranslatef(-12.0f, 0.0f, 0.0f);
+                glPushName(BUTTON_GRAVITY_MINUS);
+                glBegin(GL_TRIANGLES);
+                    glVertex3f(-1.0f,  0.0f,  0.0f);
+                    glVertex3f( 1.0f,  1.0f,  0.0f);
+                    glVertex3f( 1.0f, -1.0f,  0.0f);
+                glEnd();
+                glPopName();
+
+                glTranslatef(-2.0f, -7.0f, 0.0f);
+
+                if (level == NULL)
+                    back->draw(simplifyForPicking);
+
+                glTranslatef(15.0f, -0.0f, 0.0f);
+                create->draw(simplifyForPicking);
+
+            glPopMatrix();
+
+        }
+        glPopMatrix();
     }
 }
 
-GLvoid LevelEditor::lenghten()
+GLvoid LevelEditor::lengthen()
 {
-    if (currentLenght < MAX_LEVEL_LENGHT)
+    if (currentLength < MAX_LEVEL_LENGTH)
     {
         emit playEffect(EFFECT_COIN);
-        lenghtDisplay->~CubeString();
-        currentLenght++;
-        lenghtDisplay = new CubeString(QString::number(currentLenght), 3, alphabet, LENGHT_DISPLAY);
+        lengthLabel->~CubeString();
+        currentLength++;
+        lengthLabel = new CubeString(QString::number(currentLength), 3, alphabet, LENGTH_LABEL);
    }
 }
 
 GLvoid LevelEditor::shorten()
 {
-    if (currentLenght > MIN_LEVEL_LENGHT)
+    if (currentLength > MIN_LEVEL_LENGTH)
     {
         emit playEffect(EFFECT_COIN);
-        lenghtDisplay->~CubeString();
-        currentLenght--;
-        lenghtDisplay = new CubeString(QString::number(currentLenght), 3, alphabet, LENGHT_DISPLAY);
+        lengthLabel->~CubeString();
+        currentLength--;
+        lengthLabel = new CubeString(QString::number(currentLength), 3, alphabet, LENGTH_LABEL);
     }
 }
 
@@ -386,9 +467,9 @@ GLvoid LevelEditor::enlarge()
     if (currentWidth < MAX_LEVEL_WIDTH)
     {
         emit playEffect(EFFECT_COIN);
-        widthDisplay->~CubeString();
+        widthLabel->~CubeString();
         currentWidth++;
-        widthDisplay = new CubeString(QString::number(currentWidth), 3, alphabet, WIDTH_DISPLAY);
+        widthLabel = new CubeString(QString::number(currentWidth), 3, alphabet, WIDTH_LABEL);
     }
 }
 
@@ -397,9 +478,31 @@ GLvoid LevelEditor::reduce()
     if (currentWidth > MIN_LEVEL_WIDTH)
     {
         emit playEffect(EFFECT_COIN);
-        widthDisplay->~CubeString();
+        widthLabel->~CubeString();
         currentWidth--;
-        widthDisplay = new CubeString(QString::number(currentWidth), 3, alphabet, WIDTH_DISPLAY);
+        widthLabel = new CubeString(QString::number(currentWidth), 3, alphabet, WIDTH_LABEL);
+    }
+}
+
+GLvoid LevelEditor::gravityMinus()
+{
+    if (currentGravity > MIN_GRAVITY)
+    {
+        emit playEffect(EFFECT_COIN);
+        gravityLabel->~CubeString();
+        currentGravity--;
+        gravityLabel = new CubeString(QString::number(currentGravity), 3, alphabet, GRAVITY_LABEL);
+    }
+}
+
+GLvoid LevelEditor::gravityPlus()
+{
+    if (currentGravity < MAX_GRAVITY)
+    {
+        emit playEffect(EFFECT_COIN);
+        gravityLabel->~CubeString();
+        currentGravity++;
+        gravityLabel = new CubeString(QString::number(currentGravity), 3, alphabet, GRAVITY_LABEL);
     }
 }
 
@@ -410,6 +513,15 @@ GLvoid LevelEditor::buttonBackTriggered()
         isMoving = true;
         emit playEffect(EFFECT_JUMPSMALL);
         currentActions->setPrimaryAction(GO_TO_SET_NAME_VIEW);
+    }
+    else if (currentView == SET_GRAVITY_VIEW)
+    {
+        if (level == NULL)
+        {
+            isMoving = true;
+            emit playEffect(EFFECT_JUMPSMALL);
+            currentActions->setPrimaryAction(GO_TO_SET_PARAM_VIEW);
+        }
     }
 }
 
@@ -429,10 +541,16 @@ GLvoid LevelEditor::buttonNextTriggered()
     }
     else if (currentView == SET_PARAM_VIEW)
     {
+        isMoving = true;
+        emit playEffect(EFFECT_JUMPSMALL);
+        currentActions->setPrimaryAction(GO_TO_SET_GRAVITY_VIEW);
+    }
+    else if (currentView == SET_GRAVITY_VIEW)
+    {
         emit playEffect(EFFECT_JUMPSMALL);
         isMoving = true;
-        level = new Level(0, currentName, currentLenght, currentWidth);
-        levelOffset->z -= GLfloat(currentLenght) / 2;
+        level = new Level(0, currentName, currentLength, currentWidth);
+        levelOffset->z -= (currentLength * 3.0f) / 2.0f;
         currentActions->setPrimaryAction(GO_TO_EDITING_LEVEL_VIEW);
     }
 }
@@ -472,7 +590,7 @@ GLvoid LevelEditor::letterTyped(int key)
     }
 }
 
-void LevelEditor::itemClicked(QList<GLuint> listNames)
+void LevelEditor::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
 {
     if (isMoving)
          return;
@@ -494,8 +612,8 @@ void LevelEditor::itemClicked(QList<GLuint> listNames)
              shorten();
              break;
 
-         case BUTTON_LENGHTEN:
-             lenghten();
+         case BUTTON_LENGTHEN:
+             lengthen();
              break;
 
          case BUTTON_REDUCE:
@@ -506,12 +624,33 @@ void LevelEditor::itemClicked(QList<GLuint> listNames)
              enlarge();
              break;
 
+         case BUTTON_GRAVITY_MINUS:
+             gravityMinus();
+             break;
+
+         case BUTTON_GRAVITY_PLUS:
+             gravityPlus();
+             break;
+
          case BUTTON_BACK:
              buttonBackTriggered();
              break;
 
          case BUTTON_NEXT:
              buttonNextTriggered();
+             break;
+
+         case OBSTACLE_0:
+
+             break;
+
+         case OBSTACLE_1:
+             break;
+
+         case OBSTACLE_2:
+             break;
+
+         case OBSTACLE_3:
              break;
          }
      }
@@ -533,33 +672,33 @@ void LevelEditor::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
     {
         switch (listNames.at(0))
         {
-        case LENGHT_DISPLAY:
-            if (!lenghtDisplay->isRotating(listNames.at(1)))
-                lenghtDisplay->startLetterRotation(listNames.at(1), 6, 1);
+        case LENGTH_LABEL:
+            if (!lengthLabel->isRotating(listNames.at(1)))
+                lengthLabel->startLetterRotation(listNames.at(1), 6, 1);
             break;
 
-        case LABEL_LENGHT:
-            if (!labelLenght->isRotating(listNames.at(1)))
+        case LENGTH_STRING:
+            if (!lengthString->isRotating(listNames.at(1)))
             {
                 if ((listNames.at(1) % 2) == 0)
-                    labelLenght->startLetterRotation(listNames.at(1), 6, 2);
+                    lengthString->startLetterRotation(listNames.at(1), 6, 2);
                 else
-                    labelLenght->startLetterRotation(listNames.at(1), 12, 4);
+                    lengthString->startLetterRotation(listNames.at(1), 12, 4);
             }
             break;
 
-        case WIDTH_DISPLAY:
-            if (!widthDisplay->isRotating(listNames.at(1)))
-                widthDisplay->startLetterRotation(listNames.at(1), 6, 1);
+        case WIDTH_LABEL:
+            if (!widthLabel->isRotating(listNames.at(1)))
+                widthLabel->startLetterRotation(listNames.at(1), 6, 1);
             break;
 
-        case LABEL_WIDTH:
-            if (!labelWidth->isRotating(listNames.at(1)))
+        case WIDTH_STRING:
+            if (!widthString->isRotating(listNames.at(1)))
             {
                 if ((listNames.at(1) % 2) == 0)
-                    labelWidth->startLetterRotation(listNames.at(1), 6, 2);
+                    widthString->startLetterRotation(listNames.at(1), 6, 2);
                 else
-                    labelWidth->startLetterRotation(listNames.at(1), 12, 4);
+                    widthString->startLetterRotation(listNames.at(1), 12, 4);
             }
             break;
 
@@ -601,46 +740,30 @@ void LevelEditor::keyPressed(QKeyEvent *event)
     else if (key == Qt::Key_Up)
     {
         if (currentView == SET_PARAM_VIEW)
-        {
-            lenghten();
-        }
+            lengthen();
         else if (currentView == EDITING_LEVEL_VIEW)
-        {
             levelOffset->z += 1.0f;
-        }
     }
     else if (key == Qt::Key_Down)
     {
         if (currentView == SET_PARAM_VIEW)
-        {
             shorten();
-        }
         else if (currentView == EDITING_LEVEL_VIEW)
-        {
             levelOffset->z -= 1.0f;
-        }
     }
     else if (key == Qt::Key_Left)
     {
         if (currentView == SET_PARAM_VIEW)
-        {
             reduce();
-        }
-        else if (currentView == EDITING_LEVEL_VIEW)
-        {
-            levelOffset->x += 0.5f;
-        }
+        else if (currentView == SET_GRAVITY_VIEW)
+            gravityMinus();
     }
     else if (key == Qt::Key_Right)
     {
         if (currentView == SET_PARAM_VIEW)
-        {
             enlarge();
-        }
-        else if (currentView == EDITING_LEVEL_VIEW)
-        {
-            levelOffset->x -= 0.5f;
-        }
+        else if (currentView == SET_GRAVITY_VIEW)
+            gravityPlus();
     }
     else if ((key >= Qt::Key_A && key <= Qt::Key_Z) || (key >= Qt::Key_0 && key <= Qt::Key_9) || key == Qt::Key_Space)
     {

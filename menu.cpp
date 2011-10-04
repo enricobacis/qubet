@@ -632,7 +632,7 @@ GLvoid Menu::buttonNextSkinTriggered()
     }
 }
 
-void Menu::itemClicked(QList<GLuint> listNames)
+void Menu::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
 {
     if (isMoving)
         return;

@@ -329,9 +329,10 @@ signals:
     /**
      * @brief Signal emitted when the user clicks on a item.
      *
+     * @param event is the QMouseEvent.
      * @param listNames is the QList<GLuint> of item's names.
      */
-    void itemClicked(QList<GLuint> listNames);
+    void itemClicked(QMouseEvent*, QList<GLuint> listNames);
 
     /**
      * @brief Signal emitted when the user releases the mouse button.
