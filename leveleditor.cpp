@@ -29,7 +29,7 @@ LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QO
         currentView = SET_GRAVITY_VIEW;
     }
 
-    levelOffset  = new Vector3f(  0.0f,  -3.0f, 12.0f);
+    levelOffset  = new Vector3f(0.0f, -3.0f, 10.0f);
 
     currentActions = new ActionList(INITIAL_MOVEMENT);
     currentActions->appendSecondaryAction(ROTATE_SKYBOX);
@@ -63,6 +63,11 @@ LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QO
     GLuint volume_on = iconsList.value(VOLUME_ON);
     GLuint volume_off = iconsList.value(VOLUME_OFF);
     volumeSkin = new Skin(0, 0, volume_off, volume_off, volume_on, volume_on);
+
+    toolbarObstacleCentres.append(new Vector3f(80.0f,  6.0f, 0.0f));
+    toolbarObstacleCentres.append(new Vector3f(80.0f,  3.2f, 0.0f));
+    toolbarObstacleCentres.append(new Vector3f(80.0f,  0.4f, 0.0f));
+    toolbarObstacleCentres.append(new Vector3f(80.0f, -2.5f, 0.0f));
 }
 
 LevelEditor::~LevelEditor()
@@ -268,30 +273,47 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
 
                 glPopMatrix();
 
-                glTranslatef(-10.0f, 6.0f, 0.0f);
                 glScalef(0.4f, 0.4f, 0.4f);
+                glTranslatef(-25.0f, 15.0f, 0.0f);
+
+                glPushMatrix();
+                if (movingObject == 0)
+                    glTranslatef(currentDelta->x, currentDelta->y, currentDelta->z);
 
                 glPushName(OBSTACLE_0);
                 drawObstacle(0);
                 glPopName();
+                glPopMatrix();
 
                 glTranslatef(0.0f, -7.0f, 0.0f);
 
+                glPushMatrix();
+                if (movingObject == 1)
+                    glTranslatef(currentDelta->x, currentDelta->y, currentDelta->z);
                 glPushName(OBSTACLE_1);
                 drawObstacle(1);
                 glPopName();
+                glPopMatrix();
 
                 glTranslatef(0.0f, -7.0f, 0.0f);
 
+                glPushMatrix();
+                if (movingObject == 2)
+                    glTranslatef(currentDelta->x, currentDelta->y, currentDelta->z);
                 glPushName(OBSTACLE_2);
                 drawObstacle(2);
                 glPopName();
+                glPopMatrix();
 
                 glTranslatef(0.0f, -7.0f, 0.0f);
 
+                glPushMatrix();
+                if (movingObject == 3)
+                    glTranslatef(currentDelta->x, currentDelta->y, currentDelta->z);
                 glPushName(OBSTACLE_3);
                 drawObstacle(3);
                 glPopName();
+                glPopMatrix();
 
             glPopMatrix();
         }
@@ -550,7 +572,7 @@ GLvoid LevelEditor::buttonNextTriggered()
         emit playEffect(EFFECT_JUMPSMALL);
         isMoving = true;
         level = new Level(0, currentName, currentLength, currentWidth);
-        levelOffset->z -= (currentLength * 3.0f) / 2.0f;
+        levelOffset->z -= (currentLength * 3.0f / 0.4f) / 2.0f;
         currentActions->setPrimaryAction(GO_TO_EDITING_LEVEL_VIEW);
     }
 }
@@ -641,16 +663,32 @@ void LevelEditor::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
             break;
 
         case OBSTACLE_0:
-
+            lastCentre = toolbarObstacleCentres.at(0);
+            currentDelta = new Vector3f();
+            deltaFromCentre = getOGLPosition(event->x(), event->y()) - &lastCentre;
+            movingObject = 0;
             break;
 
         case OBSTACLE_1:
+            lastCentre = toolbarObstacleCentres.at(1);
+            currentDelta = new Vector3f();
+            deltaFromCentre = getOGLPosition(event->x(), event->y()) - lastCentre;
+            movingObject = 1;
+
             break;
 
         case OBSTACLE_2:
+            lastCentre = toolbarObstacleCentres.at(2);
+            currentDelta = new Vector3f();
+            deltaFromCentre = getOGLPosition(event->x(), event->y()) - lastCentre;
+            movingObject = 2;
             break;
 
         case OBSTACLE_3:
+            lastCentre = toolbarObstacleCentres.at(3);
+            currentDelta = new Vector3f();
+            deltaFromCentre = getOGLPosition(event->x(), event->y()) - lastCentre;
+            movingObject = 3;
             break;
         }
     }
@@ -658,7 +696,8 @@ void LevelEditor::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
 
 void LevelEditor::mouseReleased(QMouseEvent *event)
 {
-    Q_UNUSED(event);
+    movingObject = -1;
+    currentDelta = new Vector3f();
 }
 
 void LevelEditor::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
@@ -667,6 +706,17 @@ void LevelEditor::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
 
     if (isMoving)
         return;
+
+    if (currentView == EDITING_LEVEL_VIEW)
+    {
+        if (movingObject != -1)
+        {
+            Vector3f *position = getOGLPosition(event->x(), event->y(), 0);
+            position->z = lastCentre->z + deltaFromCentre->z;
+
+            currentDelta = position - lastCentre - deltaFromCentre;
+        }
+    }
 
     if (!listNames.isEmpty())
     {

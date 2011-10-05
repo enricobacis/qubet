@@ -84,6 +84,11 @@ private:
     GLint visibleTime;  /**< It is the visible time counter of the type block. */
     QString currentName;  /**< It is the current name for the level. */
     QVector<GLfloat> disabledVector; /**< It is the vector to disable materials. */
+    Vector3f *lastCentre; /**< It is the previous position of the centre of the moving object. */
+    Vector3f *currentDelta; /**< It is the vector to manage the obstacle movement. */
+    Vector3f *deltaFromCentre; /**< It is the vector to manage the distance from the centre of the obstacle. */
+    QList<Vector3f*> toolbarObstacleCentres; /**< It is the list to keep the centre of the toolbar's obstacles. */
+    GLint movingObject; /**< TODO */
 
     /**
      * @brief

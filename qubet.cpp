@@ -249,8 +249,8 @@ QList<GLuint> Qubet::getPickedName(GLint mouseX, GLint mouseY)
 GLvoid Qubet::loadingCompleted()
 {
     currentText.clear();
-    showMenu();
-    // showLevelEditor(0);
+    // showMenu();
+    showLevelEditor(0);
 }
 
 GLvoid Qubet::errorLoading()
