@@ -2,6 +2,7 @@
 #define UTILITIES_H
 
 #include "alphabet.h"
+#include "vector3f.h"
 
 /**
  * @brief Draw a XY Square using vertex and texture coordinates.
@@ -30,5 +31,28 @@ GLvoid drawPrism(GLfloat x, GLfloat y, GLfloat z, Skin *skin = NULL, GLboolean i
  * @param id is the obstacle id.
 */
 GLvoid drawObstacle(GLuint id);
+
+/**
+ * @brief Returns the position of the point in the ModelView system from the
+ *        window coordinates.
+ *
+ * @param x is the x coordinate of the window.
+ * @param y is the y coordinate of the window.
+ * @param z is the z for which you want to compute the point.
+ *
+ * @return the vector that rapresents the point in the ModelView System.
+ */
+Vector3f *getOGLPosition(GLfloat x, GLfloat y, GLfloat z);
+
+/**
+ * @brief Returns the position of the point in the ModelView system from the
+ *        window coordinates. It uses the z of the foreground object.
+ *
+ * @param x is the x coordinate of the window.
+ * @param y is the y coordinate of the window.
+ *
+ * @return the vector that rapresents the point in the ModelView System.
+ */
+Vector3f *getOGLPosition(GLfloat x, GLfloat y);
 
 #endif // UTILITIES_H

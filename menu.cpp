@@ -634,6 +634,8 @@ GLvoid Menu::buttonNextSkinTriggered()
 
 void Menu::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
 {
+    Q_UNUSED(event);
+
     if (isMoving)
         return;
 

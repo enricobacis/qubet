@@ -1,7 +1,6 @@
 #ifndef OBSTACLE_H
 #define OBSTACLE_H
 
-#include "vector3f.h"
 #include "utilities.h"
 
 /**

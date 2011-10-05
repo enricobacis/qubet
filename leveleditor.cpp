@@ -593,67 +593,67 @@ GLvoid LevelEditor::letterTyped(int key)
 void LevelEditor::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
 {
     if (isMoving)
-         return;
+        return;
 
-     if (!listNames.isEmpty())
-     {
-         switch (listNames.at(0))
-         {
-         case BUTTON_VOLUME:
-             if ((GLint(angleRotVolumeCube) % 90) == 0)
-             {
-                 audioEnabled = !audioEnabled;
-                 emit enableAudio(audioEnabled);
-                 currentActions->appendSecondaryAction(ROTATE_VOLUMECUBE);
-             }
-             break;
+    if (!listNames.isEmpty())
+    {
+        switch (listNames.at(0))
+        {
+        case BUTTON_VOLUME:
+            if ((GLint(angleRotVolumeCube) % 90) == 0)
+            {
+                audioEnabled = !audioEnabled;
+                emit enableAudio(audioEnabled);
+                currentActions->appendSecondaryAction(ROTATE_VOLUMECUBE);
+            }
+            break;
 
-         case BUTTON_SHORTEN:
-             shorten();
-             break;
+        case BUTTON_SHORTEN:
+            shorten();
+            break;
 
-         case BUTTON_LENGTHEN:
-             lengthen();
-             break;
+        case BUTTON_LENGTHEN:
+            lengthen();
+            break;
 
-         case BUTTON_REDUCE:
-             reduce();
-             break;
+        case BUTTON_REDUCE:
+            reduce();
+            break;
 
-         case BUTTON_ENLARGE:
-             enlarge();
-             break;
+        case BUTTON_ENLARGE:
+            enlarge();
+            break;
 
-         case BUTTON_GRAVITY_MINUS:
-             gravityMinus();
-             break;
+        case BUTTON_GRAVITY_MINUS:
+            gravityMinus();
+            break;
 
-         case BUTTON_GRAVITY_PLUS:
-             gravityPlus();
-             break;
+        case BUTTON_GRAVITY_PLUS:
+            gravityPlus();
+            break;
 
-         case BUTTON_BACK:
-             buttonBackTriggered();
-             break;
+        case BUTTON_BACK:
+            buttonBackTriggered();
+            break;
 
-         case BUTTON_NEXT:
-             buttonNextTriggered();
-             break;
+        case BUTTON_NEXT:
+            buttonNextTriggered();
+            break;
 
-         case OBSTACLE_0:
+        case OBSTACLE_0:
 
-             break;
+            break;
 
-         case OBSTACLE_1:
-             break;
+        case OBSTACLE_1:
+            break;
 
-         case OBSTACLE_2:
-             break;
+        case OBSTACLE_2:
+            break;
 
-         case OBSTACLE_3:
-             break;
-         }
-     }
+        case OBSTACLE_3:
+            break;
+        }
+    }
 }
 
 void LevelEditor::mouseReleased(QMouseEvent *event)

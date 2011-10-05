@@ -212,3 +212,30 @@ GLvoid drawObstacle(GLuint id)
         break;
     }
 }
+
+Vector3f *getOGLPosition(GLfloat x, GLfloat y, GLfloat z)
+{
+    GLint viewport[4];
+    GLdouble modelview[16];
+    GLdouble projection[16];
+
+    GLdouble posX, posY, posZ;
+
+    glGetDoublev(GL_MODELVIEW_MATRIX, modelview);
+    glGetDoublev(GL_PROJECTION_MATRIX, projection);
+    glGetIntegerv(GL_VIEWPORT, viewport);
+
+    //winY = (float)viewport[3] - (float)y;
+
+    gluUnProject(x, y, z, modelview, projection, viewport, &posX, &posY, &posZ);
+
+    return new Vector3f(posX, posY, posZ);
+}
+
+Vector3f *getOGLPosition(GLfloat x, GLfloat y)
+{
+    GLfloat z;
+    glReadPixels(x, GLint(y), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &z);
+
+    return getOGLPosition(x, y, z);
+}
