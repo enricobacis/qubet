@@ -225,8 +225,7 @@ Vector3f *getOGLPosition(GLfloat x, GLfloat y, GLfloat z)
     glGetDoublev(GL_PROJECTION_MATRIX, projection);
     glGetIntegerv(GL_VIEWPORT, viewport);
 
-    //winY = (float)viewport[3] - (float)y;
-
+    y = (GLfloat)viewport[3] - (GLfloat)y;
     gluUnProject(x, y, z, modelview, projection, viewport, &posX, &posY, &posZ);
 
     return new Vector3f(posX, posY, posZ);
