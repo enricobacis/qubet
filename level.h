@@ -150,6 +150,12 @@ public:
      */
     GLvoid draw(GLboolean simplifyForPicking);
 
+    /**
+     * @brief
+     *
+    */
+    GLint getObstacleListCount();
+
 
 private:
 
