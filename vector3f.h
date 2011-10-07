@@ -399,6 +399,16 @@ struct Vector3f
         ortho->normalize();
         return ortho;
     }
+
+    /**
+     * @brief Return the QString of coordinates.
+     *
+     * @return QString are the coordinates.
+     */
+    inline QString toString()
+    {
+        return QString("x=" + QString::number(x) + " y=" + QString::number(y) + " z=" + QString::number(z));
+    }
 };
 
 // Operators

@@ -33,26 +33,27 @@ GLvoid drawPrism(GLfloat x, GLfloat y, GLfloat z, Skin *skin = NULL, GLboolean i
 GLvoid drawObstacle(GLuint id);
 
 /**
- * @brief Returns the position of the point in the ModelView system from the
- *        window coordinates.
+ * @brief
  *
- * @param x is the x coordinate of the window.
- * @param y is the y coordinate of the window.
- * @param z is the z for which you want to compute the point.
- *
- * @return the vector that rapresents the point in the ModelView System.
+ * @param vect
+ * @param computeZDepth
  */
-Vector3f *getOGLPosition(GLfloat x, GLfloat y, GLfloat z);
+Vector3f* getModelViewPos(Vector3f *vect, bool computeZDepth = false);
 
 /**
- * @brief Returns the position of the point in the ModelView system from the
- *        window coordinates. It uses the z of the foreground object.
+ * @brief
  *
- * @param x is the x coordinate of the window.
- * @param y is the y coordinate of the window.
- *
- * @return the vector that rapresents the point in the ModelView System.
+ * @param vect
  */
-Vector3f *getOGLPosition(GLfloat x, GLfloat y);
+Vector3f* getProjectionPos(Vector3f *vect);
+
+/**
+ * @brief
+ *
+ * @param p0
+ * @param p1
+ * @param t
+ */
+Vector3f* getPointFromParametricLine(Vector3f* p0, Vector3f* p1, GLfloat t);
 
 #endif // UTILITIES_H

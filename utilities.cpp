@@ -213,28 +213,59 @@ GLvoid drawObstacle(GLuint id)
     }
 }
 
-Vector3f *getOGLPosition(GLfloat x, GLfloat y, GLfloat z)
+Vector3f* getModelViewPos(Vector3f *vect, bool computeZDepth)
 {
     GLint viewport[4];
-    GLdouble modelview[16];
-    GLdouble projection[16];
-
+    GLdouble modelview[16], projection[16];
+    GLfloat winX, winY, winZ;
     GLdouble posX, posY, posZ;
 
     glGetDoublev(GL_MODELVIEW_MATRIX, modelview);
     glGetDoublev(GL_PROJECTION_MATRIX, projection);
     glGetIntegerv(GL_VIEWPORT, viewport);
 
-    y = (GLfloat)viewport[3] - (GLfloat)y;
-    gluUnProject(x, y, z, modelview, projection, viewport, &posX, &posY, &posZ);
+    winX = (GLfloat)vect->x;
+    winY = (GLfloat)viewport[3] - vect->y;
+
+    if (computeZDepth)
+        glReadPixels(GLint(winX), GLint(winY), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &winZ);
+    else
+        winZ = vect->z;
+
+    gluUnProject(winX, winY, winZ, modelview, projection, viewport, &posX, &posY, &posZ);
 
     return new Vector3f(posX, posY, posZ);
 }
 
-Vector3f *getOGLPosition(GLfloat x, GLfloat y)
+Vector3f* getProjectionPos(Vector3f *vect)
 {
-    GLfloat z;
-    glReadPixels(x, GLint(y), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &z);
+    GLint viewport[4];
+    GLdouble modelview[16], projection[16];
+    GLfloat objX, objY, objZ;
+    GLdouble posX, posY, posZ;
 
-    return getOGLPosition(x, y, z);
+    glGetDoublev(GL_MODELVIEW_MATRIX, modelview);
+    glGetDoublev(GL_PROJECTION_MATRIX, projection);
+    glGetIntegerv(GL_VIEWPORT, viewport);
+
+    objX = (GLfloat)vect->x;
+    objY = (GLfloat)vect->y;
+    objZ = (GLfloat)vect->z;
+
+    gluProject(objX, objY, objZ, modelview, projection, viewport, &posX, &posY, &posZ);
+
+    return new Vector3f(posX, posY, posZ);
+
+    // c'e' da sistemare le coordinate per OpenGL se si vuole fare una funzione generale.
+}
+
+Vector3f* getPointFromParametricLine(Vector3f* p0, Vector3f* p1, GLfloat t)
+{
+    GLfloat xr, yr, zr;
+
+    xr = p0->x + t*(p1->x - p0->x);
+    yr = p0->y + t*(p1->y - p0->y);
+    zr = p0->z + t*(p1->z - p0->z);
+
+    return new Vector3f(xr, yr, zr);
 }

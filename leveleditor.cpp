@@ -278,7 +278,7 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
 
                 glPushMatrix();
                 if (movingObject == 0)
-                    glTranslatef(currentDelta->x, currentDelta->y, currentDelta->z);
+                    glTranslatef(currentDelta.x, currentDelta.y, currentDelta.z);
 
                 glPushName(OBSTACLE_0);
                 drawObstacle(0);
@@ -289,7 +289,7 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
 
                 glPushMatrix();
                 if (movingObject == 1)
-                    glTranslatef(currentDelta->x, currentDelta->y, currentDelta->z);
+                    glTranslatef(currentDelta.x, currentDelta.y, currentDelta.z);
                 glPushName(OBSTACLE_1);
                 drawObstacle(1);
                 glPopName();
@@ -299,7 +299,7 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
 
                 glPushMatrix();
                 if (movingObject == 2)
-                    glTranslatef(currentDelta->x, currentDelta->y, currentDelta->z);
+                    glTranslatef(currentDelta.x, currentDelta.y, currentDelta.z);
                 glPushName(OBSTACLE_2);
                 drawObstacle(2);
                 glPopName();
@@ -309,7 +309,7 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
 
                 glPushMatrix();
                 if (movingObject == 3)
-                    glTranslatef(currentDelta->x, currentDelta->y, currentDelta->z);
+                    glTranslatef(currentDelta.x, currentDelta.y, currentDelta.z);
                 glPushName(OBSTACLE_3);
                 drawObstacle(3);
                 glPopName();
@@ -617,6 +617,8 @@ void LevelEditor::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
     if (isMoving)
         return;
 
+    Vector3f *pos = NULL;
+
     if (!listNames.isEmpty())
     {
         switch (listNames.at(0))
@@ -664,30 +666,34 @@ void LevelEditor::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
 
         case OBSTACLE_0:
             lastCentre = toolbarObstacleCentres.at(0);
-            currentDelta = new Vector3f();
-            deltaFromCentre = getOGLPosition(event->x(), event->y()) - &lastCentre;
+            pos = getModelViewPos(new Vector3f(event->x(), event->y(), 0.0f), true);
+            currentDelta = Vector3f();
+            deltaFromCentre = *pos - lastCentre;
             movingObject = 0;
             break;
 
         case OBSTACLE_1:
             lastCentre = toolbarObstacleCentres.at(1);
-            currentDelta = new Vector3f();
-            deltaFromCentre = getOGLPosition(event->x(), event->y()) - lastCentre;
+            pos = getModelViewPos(new Vector3f(event->x(), event->y(), 0.0f), true);
+            currentDelta = Vector3f();
+            deltaFromCentre = *pos - lastCentre;
             movingObject = 1;
 
             break;
 
         case OBSTACLE_2:
             lastCentre = toolbarObstacleCentres.at(2);
-            currentDelta = new Vector3f();
-            deltaFromCentre = getOGLPosition(event->x(), event->y()) - lastCentre;
+            pos = getModelViewPos(new Vector3f(event->x(), event->y(), 0.0f), true);
+            currentDelta = Vector3f();
+            deltaFromCentre = *pos - lastCentre;
             movingObject = 2;
             break;
 
         case OBSTACLE_3:
             lastCentre = toolbarObstacleCentres.at(3);
-            currentDelta = new Vector3f();
-            deltaFromCentre = getOGLPosition(event->x(), event->y()) - lastCentre;
+            pos = getModelViewPos(new Vector3f(event->x(), event->y(), 0.0f), true);
+            currentDelta = Vector3f();
+            deltaFromCentre = *pos - lastCentre;
             movingObject = 3;
             break;
         }
@@ -711,10 +717,18 @@ void LevelEditor::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
     {
         if (movingObject != -1)
         {
-            Vector3f *position = getOGLPosition(event->x(), event->y(), 0);
-            position->z = lastCentre->z + deltaFromCentre->z;
+            Vector3f* P0 = new Vector3f(event->x(), event->y(), 0);
+            Vector3f* P1 = new Vector3f(event->x(), event->y(), 1);
 
-            currentDelta = position - lastCentre - deltaFromCentre;
+            Vector3f* M0 = getModelViewPos(P0, false);
+            Vector3f* M1 = getModelViewPos(P1, false);
+
+            GLfloat t = (-3 + 0.2/2 -M0->y)/(M1->y - M0->y);
+            //GLfloat t = (lastCentre.z + deltaFromCentre.z -M0->z)/(M1->z - M0->z);
+            Vector3f *newPos = getPointFromParametricLine(M0, M1, t);
+
+            currentDelta = *newPos - lastCentre - deltaFromCentre;
+            currentDelta = currentDelta * 2.5;
         }
     }
 

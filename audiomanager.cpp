@@ -23,8 +23,11 @@ AudioManager::AudioManager(QObject *_parent) :
 
 AudioManager::~AudioManager()
 {
-    ambientMusic->clear();
-    ambientMusic->~MediaObject();
+    if (ambientMusic != NULL)
+    {
+        ambientMusic->clear();
+        ambientMusic->~MediaObject();
+    }
 
     Phonon::MediaObject *effect;
 

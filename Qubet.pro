@@ -13,6 +13,8 @@ TEMPLATE = app
 
 DEFINES += USE_DISPLAY_LISTS_FOR_LETTERS
 
+CONFIG(debug, debug|release) { DEFINES += _DEBUG }
+
 SOURCES += \
     main.cpp\
     game.cpp \

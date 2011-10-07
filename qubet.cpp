@@ -15,6 +15,8 @@ Qubet::Qubet(QWidget *parent) :
     mouseMovedMode(1),
     loadDone(false)
 {
+    alphabet = new Alphabet();
+
     // Inizialization is done in the initializeGL() and paintGL() functions.
 }
 
@@ -345,11 +347,12 @@ GLvoid Qubet::drawScene(GLboolean simplifyForPicking)
 
 GLboolean Qubet::load()
 {
-
-    if (!loadSkins())
+    if (!loadLevels())
         return false;
 
-    if (!loadLevels())
+#ifndef _DEBUG
+
+    if (!loadSkins())
         return false;
 
     if (!loadAlphabet())
@@ -360,6 +363,8 @@ GLboolean Qubet::load()
 
     if (!loadSkyboxes())
         return false;
+
+#endif
 
     return true;
 }
@@ -458,8 +463,6 @@ GLboolean Qubet::loadLevels()
 
 GLboolean Qubet::loadAlphabet()
 {
-    alphabet = new Alphabet();
-
     QString lettersPath = "resources/letters";
 
     QDir letters(lettersPath);

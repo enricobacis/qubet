@@ -62,7 +62,14 @@ QList<GLuint> Alphabet::getRandomLetterTextures(QChar letter, GLint numberOfText
     QList<GLuint> textures;
 
     if ((numberOfTextures > 0) && lettersList.find(letter) != lettersList.end())
+    {
         textures = lettersList.value(letter)->getRandomTextures(numberOfTextures);
+    }
+    else
+    {
+        for (int i = 0; i < 6; i++)
+            textures.append(0);
+    }
 
     return textures;
 }
