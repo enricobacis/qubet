@@ -69,6 +69,8 @@ LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QO
     toolbarObstacleCentres.append(new Vector3f(80.0f,  3.2f, 0.0f));
     toolbarObstacleCentres.append(new Vector3f(80.0f,  0.4f, 0.0f));
     toolbarObstacleCentres.append(new Vector3f(80.0f, -2.5f, 0.0f));
+
+    obstaclePosition = new Vector3f(0.0f, 0.0f, 0.0f);
 }
 
 LevelEditor::~LevelEditor()
@@ -704,8 +706,14 @@ void LevelEditor::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
 
 void LevelEditor::mouseReleased(QMouseEvent *event)
 {
-    movingObject = -1;
-    currentDelta = new Vector3f();
+    if(currentView == EDITING_LEVEL_VIEW)
+    {
+        level->addObstacle(new Obstacle(movingObject, obstaclePosition));
+        qDebug()<<level->getObstacleListCount();
+        movingObject = -1;
+        currentDelta = new Vector3f();
+    }
+
 }
 
 void LevelEditor::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)

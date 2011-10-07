@@ -1,7 +1,8 @@
 #include "obstacle.h"
 
-Obstacle::Obstacle(GLint _id):
-    id(_id)
+Obstacle::Obstacle(GLint _id, Vector3f *_position):
+    id(_id),
+    position(_position)
 {
 
 }

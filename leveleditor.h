@@ -88,6 +88,7 @@ private:
     Vector3f currentDelta; /**< It is the vector to manage the obstacle movement. */
     Vector3f deltaFromCentre; /**< It is the vector to manage the distance from the centre of the obstacle. */
     QList<Vector3f> toolbarObstacleCentres; /**< It is the list to keep the centre of the toolbar's obstacles. */
+    Vector3f *obstaclePosition; /**< It is  the position of the currentObstacle relative to the current level. */
     GLint movingObject; /**< TODO */
 
     /**
@@ -150,7 +151,6 @@ private:
      * @param key
     */
     GLvoid letterTyped(int key);
-
 
 private slots:
 
