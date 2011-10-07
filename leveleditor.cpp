@@ -12,8 +12,8 @@ LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QO
     isMoving(false),
     level(_level),
     currentView(SET_NAME_VIEW),
-    currentLength(50),
-    currentWidth(3),
+    currentLength(150),
+    currentWidth(10),
     currentGravity(10),
     alphabet(_alphabet),
     volumeSkin(NULL),
@@ -23,13 +23,17 @@ LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QO
 {
     cameraOffset = new Vector3f(-30.0f, -30.0f, 0.0f);
 
-    if (level += NULL)
+    if (level != NULL)
     {
         cameraOffset->x = 30.0f;
+        currentGravity = level->getGravity();
+        currentLength = level->getLength();
+        currentWidth = level->getWidth();
+
         currentView = SET_GRAVITY_VIEW;
     }
 
-    levelOffset  = new Vector3f(0.0f, -3.0f, 10.0f);
+    levelOffset  = new Vector3f(0.0f, -3.0f, 0.0f);
 
     currentActions = new ActionList(INITIAL_MOVEMENT);
     currentActions->appendSecondaryAction(ROTATE_SKYBOX);
@@ -38,9 +42,6 @@ LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QO
 
     disabledVector.fill(0.0f, 3);
     disabledVector.append(1.0f);
-
-    if (level != NULL)
-        currentGravity = level->getGravity();
 
     lengthLabel = new CubeString(QString::number(currentLength), 3.0f, alphabet, LENGTH_LABEL);
     widthLabel = new CubeString(QString::number(currentWidth), 3.0f, alphabet, WIDTH_LABEL);
@@ -269,6 +270,7 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
                 glPushMatrix();
 
                     glTranslatef(levelOffset->x, levelOffset->y, levelOffset->z);
+                    glScalef(0.4f, 0.4f, 0.4f);
                     level->draw(simplifyForPicking);
 
                 glPopMatrix();
@@ -572,7 +574,7 @@ GLvoid LevelEditor::buttonNextTriggered()
         emit playEffect(EFFECT_JUMPSMALL);
         isMoving = true;
         level = new Level(0, currentName, currentLength, currentWidth);
-        levelOffset->z -= (currentLength * 3.0f / 0.4f) / 2.0f;
+        levelOffset->z -= currentLength / 2.0f;
         currentActions->setPrimaryAction(GO_TO_EDITING_LEVEL_VIEW);
     }
 }
@@ -723,9 +725,18 @@ void LevelEditor::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
             Vector3f* M0 = getModelViewPos(P0, false);
             Vector3f* M1 = getModelViewPos(P1, false);
 
+            // Calcolo del punto sul piano
             GLfloat t = (-3 + 0.2/2 -M0->y)/(M1->y - M0->y);
-            //GLfloat t = (lastCentre.z + deltaFromCentre.z -M0->z)/(M1->z - M0->z);
             Vector3f *newPos = getPointFromParametricLine(M0, M1, t);
+
+            // Se non e' sul piano uso l'altra parametrizzazione
+            if (  (newPos->x < (90.0f - currentWidth/2.0f))
+               || (newPos->x > (90.0f + currentWidth/2.0f))
+               || (newPos->z > 20.0f))
+            {
+                GLfloat t = (lastCentre.z + deltaFromCentre.z -M0->z)/(M1->z - M0->z);
+                newPos = getPointFromParametricLine(M0, M1, t);
+            }
 
             currentDelta = *newPos - lastCentre - deltaFromCentre;
             currentDelta = currentDelta * 2.5;
