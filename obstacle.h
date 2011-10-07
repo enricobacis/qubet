@@ -19,7 +19,7 @@ public:
      *
      * @param id is the id given to the Obstacle object.
      */
-    explicit Obstacle(GLint id);
+    explicit Obstacle(GLint _id, Vector3f *_position);
 
     /**
      * @brief Safely destroy an Obstacle object.

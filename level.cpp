@@ -77,17 +77,17 @@ QString Level::getAmbientMusicFilename()
 
 void Level::addObstacle(Obstacle *_obstacle)
 {
-    // TODO
+    obstaclesList.insert(obstaclesList.count(), _obstacle);
 }
 
 void Level::deleteObstacle(GLint _id)
 {
-    // TODO
+    obstaclesList.remove(_id);
 }
 
 void Level::moveObstacle(GLint _id, Vector3f *newPosition)
 {
-    // TODO
+    obstaclesList[_id][1].setPosition(newPosition);
 }
 
 bool Level::load()
@@ -108,8 +108,15 @@ GLvoid Level::draw(GLboolean simplifyForPicking)
 {
     drawPrism(width, LEVEL_HEIGHT, length);
 
-    for(int i = 0; i < obstaclesList.count(); i++)
-    {
-        obstaclesList[i][2].draw(simplifyForPicking);
+    QMap<GLint,Obstacle*>::const_iterator i = obstaclesList.constBegin();
+     while (i != obstaclesList.constEnd())
+     {
+        i.value()->draw(simplifyForPicking);
+        i++;
     }
+}
+
+GLint Level::getObstacleListCount()
+{
+    return obstaclesList.count();
 }
