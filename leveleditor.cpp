@@ -13,7 +13,7 @@ LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QO
     level(_level),
     currentView(SET_NAME_VIEW),
     currentLength(150),
-    currentWidth(10),
+    currentWidth(9),
     currentGravity(10),
     alphabet(_alphabet),
     volumeSkin(NULL),
@@ -71,8 +71,8 @@ LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QO
     menu = new CubeString("menu", 1.0f, alphabet, BUTTON_BACK);
     create = new CubeString("create", 1.0f, alphabet, BUTTON_NEXT);
     next = new CubeString("next", 1.0f, alphabet, BUTTON_NEXT);
-    save = new CubeString("save", 1.0f, alphabet, BUTTON_SAVE);
-    cancel = new CubeString("cancel", 1.0f, alphabet, BUTTON_CANCEL);
+    save = new CubeString("save", 0.8f, alphabet, BUTTON_SAVE);
+    cancel = new CubeString("cancel", 0.8f, alphabet, BUTTON_CANCEL);
 
     labelSetLevelName = new CubeString("set level name", 1.3f, alphabet, LABEL_SET_LEVEL_NAME);
 
@@ -282,6 +282,13 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
             glPushMatrix();
 
                 glTranslatef(90.0f, 0.0f, 0.0f);
+
+                glPushMatrix();
+                    glTranslatef(7.0f, 4.0f, 3.0f);
+                    save->draw(simplifyForPicking);
+                    glTranslatef(0.0f, -1.5f, 0.0f);
+                    cancel->draw(simplifyForPicking);
+                glPopMatrix();
 
                 glPushMatrix();
 
@@ -536,22 +543,22 @@ GLvoid LevelEditor::shorten()
 
 GLvoid LevelEditor::enlarge()
 {
-    if (currentWidth < MAX_LEVEL_WIDTH)
+    if (currentWidth + 3 <= MAX_LEVEL_WIDTH)
     {
         emit playEffect(EFFECT_COIN);
         widthLabel->~CubeString();
-        currentWidth++;
+        currentWidth += 3;
         widthLabel = new CubeString(QString::number(currentWidth), 3, alphabet, WIDTH_LABEL);
     }
 }
 
 GLvoid LevelEditor::reduce()
 {
-    if (currentWidth > MIN_LEVEL_WIDTH)
+    if (currentWidth - 3 >= MIN_LEVEL_WIDTH)
     {
         emit playEffect(EFFECT_COIN);
         widthLabel->~CubeString();
-        currentWidth--;
+        currentWidth -= 3;
         widthLabel = new CubeString(QString::number(currentWidth), 3, alphabet, WIDTH_LABEL);
     }
 }

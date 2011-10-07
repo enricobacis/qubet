@@ -137,6 +137,10 @@ GLvoid drawObstacle(GLuint id)
         break;
 
     case 1:
+        drawPrism(3.0f, 6.0f, 3.0f);
+        break;
+
+    case 2:
         glBegin(GL_QUADS);
 
             glNormal3f(-1.0f,  0.0f,  0.0f);
@@ -200,11 +204,6 @@ GLvoid drawObstacle(GLuint id)
             glVertex3f( 0.0f,  3.0f, -1.5f);
 
         glEnd();
-
-        break;
-
-    case 2:
-        drawPrism(3.0f, 6.0f, 3.0f);
         break;
 
     case 3:
@@ -279,11 +278,11 @@ Vector3f *getObstacleBoundingBox(GLuint id)
         break;
 
     case 1:
-        return new Vector3f(6.0f, 6.0f, 3.0f);
+        return new Vector3f(3.0f, 6.0f, 3.0f);
         break;
 
     case 2:
-        return new Vector3f(3.0f, 6.0f, 3.0f);
+        return new Vector3f(6.0f, 6.0f, 3.0f);
         break;
 
     case 3:
