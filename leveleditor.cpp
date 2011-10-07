@@ -785,9 +785,11 @@ void LevelEditor::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
             positionValid = true;
 
             // Se non e' sul piano uso l'altra parametrizzazione
-            if (  (newPos->x < (90.0f - (currentWidth * 0.4)/2.0f))
-               || (newPos->x > (90.0f + (currentWidth * 0.4)/2.0f))
-               || (newPos->z >  20.0f))
+            if (  (newPos->x < (90.0f - (currentWidth * 0.4f)/2.0f))
+               || (newPos->x > (90.0f + (currentWidth * 0.4f)/2.0f))
+               || (newPos->z >  20.0f)
+               || (newPos->z > levelOffset->z + (currentLength * 0.4f)/2.0f)
+               || (newPos->z < levelOffset->z - (currentLength * 0.4f)/2.0f))
             {
                 t = (lastCentre.z + deltaFromCentre.z - M0->z)/(M1->z - M0->z);
                 newPos = getPointFromParametricLine(M0, M1, t);
