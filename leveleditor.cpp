@@ -728,7 +728,6 @@ void LevelEditor::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
             currentDelta = Vector3f();
             deltaFromCentre = *pos - lastCentre;
             movingObject = 1;
-
             break;
 
         case OBSTACLE_2:
@@ -774,16 +773,16 @@ void LevelEditor::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
             Vector3f* M1 = getModelViewPos(P1, false);
 
             // Calcolo del punto sul piano
-            GLfloat t = (-levelOffset->y + (LEVEL_HEIGHT/2.0f) - M0->y)/(M1->y - M0->y);
+            GLfloat t = (levelOffset->y + (LEVEL_HEIGHT/2.0f) - M0->y)/(M1->y - M0->y);
             Vector3f *newPos = getPointFromParametricLine(M0, M1, t);
             positionValid = true;
 
             // Se non e' sul piano uso l'altra parametrizzazione
             if (  (newPos->x < (90.0f - (currentWidth * 0.4)/2.0f))
                || (newPos->x > (90.0f + (currentWidth * 0.4)/2.0f))
-               || (newPos->z > 20.0f))
+               || (newPos->z >  20.0f))
             {
-                t = (lastCentre.z + deltaFromCentre.z -M0->z)/(M1->z - M0->z);
+                t = (lastCentre.z + deltaFromCentre.z - M0->z)/(M1->z - M0->z);
                 newPos = getPointFromParametricLine(M0, M1, t);
                 positionValid = false;
             }
@@ -898,28 +897,24 @@ void LevelEditor::keyPressed(QKeyEvent *event)
 
 GLvoid LevelEditor::setColorEmissive(int color)
 {
-    //GLfloat mat_ambient[] = {0.2f, 0.2f, 0.2f, 1.0f};
     switch (color)
     {
-
-
     case COLOR_DISABLED:
-        //glMaterialfv(GL_FRONT, GL_AMBIENT,             mat_ambient);
-        glMaterialfv(GL_FRONT, GL_DIFFUSE,             enableVector.data());
-        glMaterialfv(GL_FRONT, GL_SPECULAR,            enableVector.data());
-        glMaterialfv(GL_FRONT, GL_EMISSION,            disableVector.data());
+        glMaterialfv(GL_FRONT, GL_DIFFUSE,  enableVector.data());
+        glMaterialfv(GL_FRONT, GL_SPECULAR, enableVector.data());
+        glMaterialfv(GL_FRONT, GL_EMISSION, disableVector.data());
         break;
 
     case COLOR_RED:
-        glMaterialfv(GL_FRONT, GL_DIFFUSE, redEmission.data());
-        glMaterialfv(GL_FRONT, GL_SPECULAR,            redEmission.data());
-        glMaterialfv(GL_FRONT, GL_EMISSION,            redEmission.data());
+        glMaterialfv(GL_FRONT, GL_DIFFUSE,  redEmission.data());
+        glMaterialfv(GL_FRONT, GL_SPECULAR, redEmission.data());
+        glMaterialfv(GL_FRONT, GL_EMISSION, redEmission.data());
         break;
 
     case COLOR_GREEN:
-        glMaterialfv(GL_FRONT, GL_DIFFUSE, greenEmission.data());
-        glMaterialfv(GL_FRONT, GL_SPECULAR,            greenEmission.data());
-        glMaterialfv(GL_FRONT, GL_EMISSION,            greenEmission.data());
+        glMaterialfv(GL_FRONT, GL_DIFFUSE,  greenEmission.data());
+        glMaterialfv(GL_FRONT, GL_SPECULAR, greenEmission.data());
+        glMaterialfv(GL_FRONT, GL_EMISSION, greenEmission.data());
         break;
     }
 }
