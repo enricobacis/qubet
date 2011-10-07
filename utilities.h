@@ -38,14 +38,14 @@ GLvoid drawObstacle(GLuint id);
  * @param vect
  * @param computeZDepth
  */
-Vector3f* getModelViewPos(Vector3f *vect, bool computeZDepth = false);
+Vector3f *getModelViewPos(Vector3f *vect, bool computeZDepth = false);
 
 /**
  * @brief
  *
  * @param vect
  */
-Vector3f* getProjectionPos(Vector3f *vect);
+Vector3f *getProjectionPos(Vector3f *vect);
 
 /**
  * @brief
@@ -54,6 +54,8 @@ Vector3f* getProjectionPos(Vector3f *vect);
  * @param p1
  * @param t
  */
-Vector3f* getPointFromParametricLine(Vector3f* p0, Vector3f* p1, GLfloat t);
+Vector3f *getPointFromParametricLine(Vector3f* p0, Vector3f* p1, GLfloat t);
+
+Vector3f *getObstacleBoundingBox(GLuint id);
 
 #endif // UTILITIES_H

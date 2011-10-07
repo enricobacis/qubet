@@ -24,6 +24,8 @@
 #define MOUSE_MOVED_DOWN    1
 #define MOUSE_MOVED_FULL    2
 
+#define LEVEL_HEIGHT        0.2f
+
 /**
  * @brief Enum used for currentView
  */

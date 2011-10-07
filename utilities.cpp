@@ -208,12 +208,12 @@ GLvoid drawObstacle(GLuint id)
         break;
 
     case 3:
-        drawPrism(6.0f, 6.0f, 6.0f);
+        drawPrism(6.0f, 6.0f, 3.0f);
         break;
     }
 }
 
-Vector3f* getModelViewPos(Vector3f *vect, bool computeZDepth)
+Vector3f *getModelViewPos(Vector3f *vect, bool computeZDepth)
 {
     GLint viewport[4];
     GLdouble modelview[16], projection[16];
@@ -237,7 +237,7 @@ Vector3f* getModelViewPos(Vector3f *vect, bool computeZDepth)
     return new Vector3f(posX, posY, posZ);
 }
 
-Vector3f* getProjectionPos(Vector3f *vect)
+Vector3f *getProjectionPos(Vector3f *vect)
 {
     GLint viewport[4];
     GLdouble modelview[16], projection[16];
@@ -259,7 +259,7 @@ Vector3f* getProjectionPos(Vector3f *vect)
     // c'e' da sistemare le coordinate per OpenGL se si vuole fare una funzione generale.
 }
 
-Vector3f* getPointFromParametricLine(Vector3f* p0, Vector3f* p1, GLfloat t)
+Vector3f *getPointFromParametricLine(Vector3f* p0, Vector3f* p1, GLfloat t)
 {
     GLfloat xr, yr, zr;
 
@@ -268,4 +268,26 @@ Vector3f* getPointFromParametricLine(Vector3f* p0, Vector3f* p1, GLfloat t)
     zr = p0->z + t*(p1->z - p0->z);
 
     return new Vector3f(xr, yr, zr);
+}
+
+Vector3f *getObstacleBoundingBox(GLuint id)
+{
+    switch (id)
+    {
+    case 0:
+        return new Vector3f(3.0f, 3.0f, 3.0f);
+        break;
+
+    case 1:
+        return new Vector3f(6.0f, 6.0f, 3.0f);
+        break;
+
+    case 2:
+        return new Vector3f(3.0f, 6.0f, 3.0f);
+        break;
+
+    case 3:
+        return new Vector3f(6.0f, 6.0f, 3.0f);
+        break;
+    }
 }

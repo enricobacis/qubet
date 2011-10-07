@@ -19,9 +19,18 @@ LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QO
     volumeSkin(NULL),
     visible(true),
     visibleTime(0),
-    currentName("")
+    currentName(""),
+    disableVector(QVector<GLfloat>(4)),
+    enableVector(QVector<GLfloat>(4)),
+    redEmission(QVector<GLfloat>(4)),
+    greenEmission(QVector<GLfloat>(4)),
+    positionValid(false)
 {
+    currentActions = new ActionList(INITIAL_MOVEMENT);
+    currentActions->appendSecondaryAction(ROTATE_SKYBOX);
+
     cameraOffset = new Vector3f(-30.0f, -30.0f, 0.0f);
+    levelOffset  = new Vector3f(0.0f, -3.0f, 0.0f);
 
     if (level != NULL)
     {
@@ -33,15 +42,22 @@ LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QO
         currentView = SET_GRAVITY_VIEW;
     }
 
-    levelOffset  = new Vector3f(0.0f, -3.0f, 0.0f);
-
-    currentActions = new ActionList(INITIAL_MOVEMENT);
-    currentActions->appendSecondaryAction(ROTATE_SKYBOX);
-
     angleRotVolumeCube = (audioEnabled ? 0.0f : 90.0f);
 
-    disabledVector.fill(0.0f, 3);
-    disabledVector.append(1.0f);
+    disableVector.fill(0.0f, 3);
+    disableVector.append(1.0f);
+
+    enableVector.fill(1.0f, 4);
+
+    redEmission[0] = 1.0f;
+    redEmission[1] = 0.0f;
+    redEmission[2] = 0.0f;
+    redEmission[3] = 1.0f;
+
+    greenEmission[0] = 0.0f;
+    greenEmission[1] = 1.0f;
+    greenEmission[2] = 0.0f;
+    greenEmission[3] = 1.0f;
 
     lengthLabel = new CubeString(QString::number(currentLength), 3.0f, alphabet, LENGTH_LABEL);
     widthLabel = new CubeString(QString::number(currentWidth), 3.0f, alphabet, WIDTH_LABEL);
@@ -280,7 +296,14 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
 
                 glPushMatrix();
                 if (movingObject == 0)
+                {
                     glTranslatef(currentDelta.x, currentDelta.y, currentDelta.z);
+                    setColorEmissive(positionValid ? COLOR_GREEN : COLOR_RED);
+                }
+                else
+                {
+                    setColorEmissive(COLOR_DISABLED);
+                }
 
                 glPushName(OBSTACLE_0);
                 drawObstacle(0);
@@ -291,7 +314,15 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
 
                 glPushMatrix();
                 if (movingObject == 1)
+                {
                     glTranslatef(currentDelta.x, currentDelta.y, currentDelta.z);
+                    setColorEmissive(positionValid ? COLOR_GREEN : COLOR_RED);
+                }
+                else
+                {
+                    setColorEmissive(COLOR_DISABLED);
+                }
+
                 glPushName(OBSTACLE_1);
                 drawObstacle(1);
                 glPopName();
@@ -301,7 +332,15 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
 
                 glPushMatrix();
                 if (movingObject == 2)
+                {
                     glTranslatef(currentDelta.x, currentDelta.y, currentDelta.z);
+                    setColorEmissive(positionValid ? COLOR_GREEN : COLOR_RED);
+                }
+                else
+                {
+                    setColorEmissive(COLOR_DISABLED);
+                }
+
                 glPushName(OBSTACLE_2);
                 drawObstacle(2);
                 glPopName();
@@ -311,13 +350,22 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
 
                 glPushMatrix();
                 if (movingObject == 3)
+                {
                     glTranslatef(currentDelta.x, currentDelta.y, currentDelta.z);
+                    setColorEmissive(positionValid ? COLOR_GREEN : COLOR_RED);
+                }
+                else
+                {
+                    setColorEmissive(COLOR_DISABLED);
+                }
+
                 glPushName(OBSTACLE_3);
                 drawObstacle(3);
                 glPopName();
                 glPopMatrix();
 
             glPopMatrix();
+            setColorEmissive(COLOR_DISABLED);
         }
         else
         {
@@ -574,7 +622,7 @@ GLvoid LevelEditor::buttonNextTriggered()
         emit playEffect(EFFECT_JUMPSMALL);
         isMoving = true;
         level = new Level(0, currentName, currentLength, currentWidth);
-        levelOffset->z -= currentLength / 2.0f;
+        levelOffset->z -= ((currentLength * 0.4f) / 2.0f) - 10.0f;
         currentActions->setPrimaryAction(GO_TO_EDITING_LEVEL_VIEW);
     }
 }
@@ -726,16 +774,18 @@ void LevelEditor::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
             Vector3f* M1 = getModelViewPos(P1, false);
 
             // Calcolo del punto sul piano
-            GLfloat t = (-3 + 0.2/2 -M0->y)/(M1->y - M0->y);
+            GLfloat t = (-levelOffset->y + (LEVEL_HEIGHT/2.0f) - M0->y)/(M1->y - M0->y);
             Vector3f *newPos = getPointFromParametricLine(M0, M1, t);
+            positionValid = true;
 
             // Se non e' sul piano uso l'altra parametrizzazione
-            if (  (newPos->x < (90.0f - currentWidth/2.0f))
-               || (newPos->x > (90.0f + currentWidth/2.0f))
+            if (  (newPos->x < (90.0f - (currentWidth * 0.4)/2.0f))
+               || (newPos->x > (90.0f + (currentWidth * 0.4)/2.0f))
                || (newPos->z > 20.0f))
             {
-                GLfloat t = (lastCentre.z + deltaFromCentre.z -M0->z)/(M1->z - M0->z);
+                t = (lastCentre.z + deltaFromCentre.z -M0->z)/(M1->z - M0->z);
                 newPos = getPointFromParametricLine(M0, M1, t);
+                positionValid = false;
             }
 
             currentDelta = *newPos - lastCentre - deltaFromCentre;
@@ -843,5 +893,33 @@ void LevelEditor::keyPressed(QKeyEvent *event)
     else if ((key >= Qt::Key_A && key <= Qt::Key_Z) || (key >= Qt::Key_0 && key <= Qt::Key_9) || key == Qt::Key_Space)
     {
         letterTyped(key);
+    }
+}
+
+GLvoid LevelEditor::setColorEmissive(int color)
+{
+    //GLfloat mat_ambient[] = {0.2f, 0.2f, 0.2f, 1.0f};
+    switch (color)
+    {
+
+
+    case COLOR_DISABLED:
+        //glMaterialfv(GL_FRONT, GL_AMBIENT,             mat_ambient);
+        glMaterialfv(GL_FRONT, GL_DIFFUSE,             enableVector.data());
+        glMaterialfv(GL_FRONT, GL_SPECULAR,            enableVector.data());
+        glMaterialfv(GL_FRONT, GL_EMISSION,            disableVector.data());
+        break;
+
+    case COLOR_RED:
+        glMaterialfv(GL_FRONT, GL_DIFFUSE, redEmission.data());
+        glMaterialfv(GL_FRONT, GL_SPECULAR,            redEmission.data());
+        glMaterialfv(GL_FRONT, GL_EMISSION,            redEmission.data());
+        break;
+
+    case COLOR_GREEN:
+        glMaterialfv(GL_FRONT, GL_DIFFUSE, greenEmission.data());
+        glMaterialfv(GL_FRONT, GL_SPECULAR,            greenEmission.data());
+        glMaterialfv(GL_FRONT, GL_EMISSION,            greenEmission.data());
+        break;
     }
 }

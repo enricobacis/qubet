@@ -1,4 +1,5 @@
 #include "level.h"
+#include "defines.h"
 
 Level::Level(QObject *_parent) :
     parent(_parent),
@@ -105,7 +106,7 @@ bool Level::save()
 
 GLvoid Level::draw(GLboolean simplifyForPicking)
 {
-    drawPrism(width, 0.2f, length);
+    drawPrism(width, LEVEL_HEIGHT, length);
 
     for(int i = 0; i < obstaclesList.count(); i++)
     {
