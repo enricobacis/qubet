@@ -15,11 +15,12 @@ class Obstacle
 public:
 
     /**
-     * @brief Create an Obstacle object.
+     * @brief
      *
-     * @param id is the id given to the Obstacle object.
+     * @param _modeld
+     * @param _position
      */
-    explicit Obstacle(GLint _id, Vector3f *_position);
+    explicit Obstacle(GLint _modelId, Vector3f *_position);
 
     /**
      * @brief Safely destroy an Obstacle object.

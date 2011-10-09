@@ -22,9 +22,15 @@ LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QO
     currentName(""),
     disableVector(QVector<GLfloat>(4)),
     enableVector(QVector<GLfloat>(4)),
+    movingObject(-1),
     redEmission(QVector<GLfloat>(4)),
     greenEmission(QVector<GLfloat>(4)),
-    positionValid(false)
+    positionValid(false),
+    xCell(0),
+    yCell(0),
+    zCell(0),
+    lastMouseX(0),
+    lastMouseY(0)
 {
     currentActions = new ActionList(INITIAL_MOVEMENT);
     currentActions->appendSecondaryAction(ROTATE_SKYBOX);
@@ -84,9 +90,7 @@ LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QO
     toolbarObstacleCentres.append(new Vector3f(80.0f,  6.0f, 0.0f));
     toolbarObstacleCentres.append(new Vector3f(80.0f,  3.2f, 0.0f));
     toolbarObstacleCentres.append(new Vector3f(80.0f,  0.4f, 0.0f));
-    toolbarObstacleCentres.append(new Vector3f(80.0f, -2.5f, 0.0f));
-
-    obstaclePosition = new Vector3f(0.0f, 0.0f, 0.0f);
+    toolbarObstacleCentres.append(new Vector3f(80.0f, -2.4f, 0.0f));
 }
 
 LevelEditor::~LevelEditor()
@@ -523,22 +527,22 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
 
 GLvoid LevelEditor::lengthen()
 {
-    if (currentLength < MAX_LEVEL_LENGTH)
+    if (currentLength + 3 <= MAX_LEVEL_LENGTH)
     {
         emit playEffect(EFFECT_COIN);
         lengthLabel->~CubeString();
-        currentLength++;
+        currentLength += 3;
         lengthLabel = new CubeString(QString::number(currentLength), 3, alphabet, LENGTH_LABEL);
    }
 }
 
 GLvoid LevelEditor::shorten()
 {
-    if (currentLength > MIN_LEVEL_LENGTH)
+    if (currentLength - 3 >= MIN_LEVEL_LENGTH)
     {
         emit playEffect(EFFECT_COIN);
         lengthLabel->~CubeString();
-        currentLength--;
+        currentLength -= 3;
         lengthLabel = new CubeString(QString::number(currentLength), 3, alphabet, LENGTH_LABEL);
     }
 }
@@ -630,7 +634,7 @@ GLvoid LevelEditor::buttonNextTriggered()
     {
         emit playEffect(EFFECT_JUMPSMALL);
         isMoving = true;
-        level = new Level(0, currentName, currentLength, currentWidth);
+        level = new Level(currentName, currentLength, currentWidth, this);
         levelOffset->z -= ((currentLength * 0.4f) / 2.0f) - 10.0f;
         currentActions->setPrimaryAction(GO_TO_EDITING_LEVEL_VIEW);
     }
@@ -762,51 +766,27 @@ void LevelEditor::mouseReleased(QMouseEvent *event)
 {
     if(currentView == EDITING_LEVEL_VIEW)
     {
-        level->addObstacle(new Obstacle(movingObject, obstaclePosition));
-        qDebug()<<level->getObstacleListCount();
-        movingObject = -1;
-        currentDelta = new Vector3f();
-    }
+        if ((movingObject != -1) && (positionValid == true))
+            level->addObstacle(new Obstacle(movingObject, new Vector3f(GLfloat(xCell), GLfloat(yCell), GLfloat(zCell))));
 
+        currentDelta = new Vector3f();
+        lastMouseX = 0;
+        lastMouseY = 0;
+        movingObject = -1;
+    }
 }
 
 void LevelEditor::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
 {
-    Q_UNUSED(event);
-
     if (isMoving)
         return;
 
     if (currentView == EDITING_LEVEL_VIEW)
     {
-        if (movingObject != -1)
-        {
-            Vector3f* P0 = new Vector3f(event->x(), event->y(), 0);
-            Vector3f* P1 = new Vector3f(event->x(), event->y(), 1);
+        lastMouseX = event->x();
+        lastMouseY = event->y();
 
-            Vector3f* M0 = getModelViewPos(P0, false);
-            Vector3f* M1 = getModelViewPos(P1, false);
-
-            // Calcolo del punto sul piano
-            GLfloat t = (levelOffset->y + (LEVEL_HEIGHT/2.0f) - M0->y)/(M1->y - M0->y);
-            Vector3f *newPos = getPointFromParametricLine(M0, M1, t);
-            positionValid = true;
-
-            // Se non e' sul piano uso l'altra parametrizzazione
-            if (  (newPos->x < (90.0f - (currentWidth * 0.4f)/2.0f))
-               || (newPos->x > (90.0f + (currentWidth * 0.4f)/2.0f))
-               || (newPos->z >  20.0f)
-               || (newPos->z > levelOffset->z + (currentLength * 0.4f)/2.0f)
-               || (newPos->z < levelOffset->z - (currentLength * 0.4f)/2.0f))
-            {
-                t = (lastCentre.z + deltaFromCentre.z - M0->z)/(M1->z - M0->z);
-                newPos = getPointFromParametricLine(M0, M1, t);
-                positionValid = false;
-            }
-
-            currentDelta = *newPos - lastCentre - deltaFromCentre;
-            currentDelta = currentDelta * 2.5;
-        }
+        checkMousePosition(event->x(), event->y());
     }
 
     if (!listNames.isEmpty())
@@ -881,16 +861,26 @@ void LevelEditor::keyPressed(QKeyEvent *event)
     else if (key == Qt::Key_Up)
     {
         if (currentView == SET_PARAM_VIEW)
+        {
             lengthen();
+        }
         else if (currentView == EDITING_LEVEL_VIEW)
+        {
             levelOffset->z += 1.0f;
+            checkMousePosition(lastMouseX, lastMouseY);
+        }
     }
     else if (key == Qt::Key_Down)
     {
         if (currentView == SET_PARAM_VIEW)
+        {
             shorten();
+        }
         else if (currentView == EDITING_LEVEL_VIEW)
+        {
             levelOffset->z -= 1.0f;
+            checkMousePosition(lastMouseX, lastMouseY);
+        }
     }
     else if (key == Qt::Key_Left)
     {
@@ -933,5 +923,55 @@ GLvoid LevelEditor::setColorEmissive(int color)
         glMaterialfv(GL_FRONT, GL_SPECULAR, greenEmission.data());
         glMaterialfv(GL_FRONT, GL_EMISSION, greenEmission.data());
         break;
+    }
+}
+
+GLvoid LevelEditor::checkMousePosition(GLint x, GLint y)
+{
+    if (movingObject != -1)
+    {
+        Vector3f* P0 = new Vector3f(x, y, 0);
+        Vector3f* P1 = new Vector3f(x, y, 1);
+
+        Vector3f* M0 = getModelViewPos(P0, false);
+        Vector3f* M1 = getModelViewPos(P1, false);
+
+        // Calcolo del punto sul piano
+        GLfloat t = (levelOffset->y + (LEVEL_HEIGHT/2.0f) - M0->y)/(M1->y - M0->y);
+        Vector3f *newPos = getPointFromParametricLine(M0, M1, t);
+
+        // Se non e' sul piano uso l'altra parametrizzazione
+        if (  (newPos->x < (90.0f - (currentWidth * 0.4f)/2.0f))
+           || (newPos->x > (90.0f + (currentWidth * 0.4f)/2.0f))
+           || (newPos->z >  20.0f)
+           || (newPos->z > levelOffset->z + (currentLength * 0.4f)/2.0f)
+           || (newPos->z < levelOffset->z - (currentLength * 0.4f)/2.0f))
+        {
+            t = (lastCentre.z + deltaFromCentre.z - M0->z)/(M1->z - M0->z);
+            newPos = getPointFromParametricLine(M0, M1, t);
+            currentDelta = *newPos - lastCentre - deltaFromCentre;
+            currentDelta = currentDelta * 2.5f;
+            positionValid = false;
+        }
+        else
+        {
+            xCell = floor((((newPos->x - 90.f) / 0.4f) + currentWidth / 2.0f) / 3.0f);
+            zCell = floor((-(newPos->z - levelOffset->z) / 0.4f + currentLength / 2.0f) / 3.0f);
+
+            int x_cellMax = floor(currentWidth / 3.0f) - ((movingObject == 0) || (movingObject == 1) ? 1 : 2);
+            xCell = qMin(xCell, x_cellMax);
+
+            Vector3f *bounding = getObstacleBoundingBox(movingObject);
+
+            Vector3f *newCentre = new Vector3f();
+            newCentre->x = ((bounding->x / 2.0f) + (xCell * 3.0f) - (currentWidth / 2.0f)) * 0.4f + 90.0f;
+            newCentre->y = ((bounding->y / 2.0f) + (LEVEL_HEIGHT / 2.0f)) * 0.4f + levelOffset->y;
+            newCentre->z = -((bounding->z / 2.0f) + (zCell * 3.0f) - (currentLength / 2.0f)) * 0.4f + levelOffset->z;
+
+            currentDelta = *newCentre - lastCentre;
+            currentDelta = currentDelta * 2.5f;
+
+            positionValid = true;
+        }
     }
 }

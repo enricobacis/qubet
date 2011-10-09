@@ -451,10 +451,10 @@ GLboolean Qubet::loadLevels()
 
     while(!levelElement.isNull())
     {
-        Level *level = new Level(id, levelElement.attribute("filename", ""), this);
+        Level *level = new Level(levelElement.attribute("filename", ""), this);
         level->setName(levelElement.attribute("name", ""));
 
-        levelsList.insert(id++, level);
+        levelsList.insert(level->getId(), level);
         levelElement = levelElement.nextSiblingElement("level");
     }
 

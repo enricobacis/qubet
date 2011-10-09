@@ -1,22 +1,22 @@
 #include "obstacle.h"
 
-Obstacle::Obstacle(GLint _id, Vector3f *_position):
-    id(_id),
-    position(_position)
+Obstacle::Obstacle(GLint _modelId, Vector3f *_position) :
+    modelId(_modelId)
 {
-
+    position = new Vector3f(*_position);
 }
 
 Obstacle::~Obstacle()
-{
-
-}
+{ }
 
 GLvoid Obstacle::draw(GLboolean simplifyForPicking)
 {
-    glTranslatef(position->x, position->y, position->z);
-    drawObstacle(id);
-    glTranslatef(-position->x, -position->y, -position->z);
+    Q_UNUSED(simplifyForPicking);
+
+    glPushMatrix();
+        glTranslatef(position->x, position->y, position->z);
+        drawObstacle(modelId);
+    glPopMatrix();
 }
 
 GLint Obstacle::getId()
@@ -26,9 +26,7 @@ GLint Obstacle::getId()
 
 GLvoid Obstacle::setPosition(Vector3f *_position)
 {
-    position->x = _position->x;
-    position->y = _position->y;
-    position->z = _position->z;
+    position = new Vector3f(*_position);
 }
 
 Vector3f *Obstacle::getPosition()

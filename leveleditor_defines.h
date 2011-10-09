@@ -30,7 +30,7 @@
 #define OBSTACLE_2                  332
 #define OBSTACLE_3                  333
 
-#define MIN_LEVEL_LENGTH            100
+#define MIN_LEVEL_LENGTH            90
 #define MAX_LEVEL_LENGTH            300
 
 #define MIN_LEVEL_WIDTH             3

@@ -25,6 +25,8 @@
 #define MOUSE_MOVED_FULL    2
 
 #define LEVEL_HEIGHT        0.2f
+#define LEVEL               500
+#define OBSTACLES           510
 
 /**
  * @brief Enum used for currentView

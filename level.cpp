@@ -7,22 +7,31 @@ Level::Level(QObject *_parent) :
 {
 }
 
-Level::Level(GLint _id, QString _filename, QObject *_parent) :
+Level::Level(QString _filename, QObject *_parent) :
     parent(_parent),
-    id(_id),
     filename(_filename),
     isLoaded(false)
 {
 }
-Level::Level(GLint _id, QString _levelName, GLfloat _length, GLfloat _width)
+
+Level::Level(QString _name, GLfloat _length, GLfloat _width, QObject *_parent) :
+    parent(_parent),
+    name(_name),
+    length(_length),
+    width(_width)
 {
-    length = _length;
-    width = _width;
+    // TODO: generate an id.
 }
 
 Level::~Level()
 {
+    for (QMultiMap<GLint,Obstacle*>::iterator i = obstaclesList.begin(); i != obstaclesList.end(); i++)
+    {
+        if (i.value() != NULL)
+            dynamic_cast<Obstacle*>(i.value())->~Obstacle();
+    }
 
+    obstaclesList.~QMultiMap();
 }
 
 GLint Level::getId()
@@ -77,17 +86,46 @@ QString Level::getAmbientMusicFilename()
 
 void Level::addObstacle(Obstacle *_obstacle)
 {
-    obstaclesList.insert(obstaclesList.count(), _obstacle);
+    Vector3f *cells = _obstacle->getPosition();
+
+    Vector3f *bounding = getObstacleBoundingBox(_obstacle->getModelId());
+
+    Vector3f *position = new Vector3f();
+    position->x =  (bounding->x / 2.0f) + (cells->x * 3.0f) - (width / 2.0f);
+    position->y =  (bounding->y / 2.0f) + (cells->y * 3.0f) + (LEVEL_HEIGHT / 2.0f);
+    position->z = -(bounding->z / 2.0f) - (cells->z * 3.0f) + (length / 2.0f);
+
+    _obstacle->setPosition(position);
+    obstaclesList.insert(cells->z, _obstacle);
 }
 
 void Level::deleteObstacle(GLint _id)
 {
-    obstaclesList.remove(_id);
+    Obstacle *obstacle;
+    for (QMultiMap<GLint,Obstacle*>::iterator i = obstaclesList.begin(); i != obstaclesList.end(); i++)
+    {
+        obstacle = dynamic_cast<Obstacle*>(i.value());
+        if (obstacle->getId() == _id)
+        {
+            obstacle->~Obstacle();
+            obstaclesList.erase(i);
+            break;
+        }
+    }
 }
 
 void Level::moveObstacle(GLint _id, Vector3f *newPosition)
 {
-    obstaclesList[_id][1].setPosition(newPosition);
+    Obstacle *obstacle;
+    for (QMultiMap<GLint,Obstacle*>::iterator i = obstaclesList.begin(); i != obstaclesList.end(); i++)
+    {
+        obstacle = dynamic_cast<Obstacle*>(i.value());
+        if (obstacle->getId() == _id)
+        {
+            obstacle->setPosition(newPosition);
+            break;
+        }
+    }
 }
 
 bool Level::load()
@@ -102,18 +140,19 @@ bool Level::load()
 bool Level::save()
 {
     // TODO
+    return true;
 }
 
 GLvoid Level::draw(GLboolean simplifyForPicking)
 {
+    glPushName(LEVEL);
     drawPrism(width, LEVEL_HEIGHT, length);
+    glPopName();
 
-    QMap<GLint,Obstacle*>::const_iterator i = obstaclesList.constBegin();
-     while (i != obstaclesList.constEnd())
-     {
-        i.value()->draw(simplifyForPicking);
-        i++;
-    }
+    glPushName(OBSTACLES);
+    for (QMultiMap<GLint,Obstacle*>::iterator i = obstaclesList.begin(); i != obstaclesList.end(); i++)
+        dynamic_cast<Obstacle*>(i.value())->draw(simplifyForPicking);
+    glPopName();
 }
 
 GLint Level::getObstacleListCount()
