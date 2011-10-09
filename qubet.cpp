@@ -445,7 +445,6 @@ GLboolean Qubet::loadLevels()
 
     file.close();
 
-    GLint id = 1;
     QDomElement rootElement = document.documentElement();
     QDomElement levelElement = rootElement.firstChildElement("level");
 

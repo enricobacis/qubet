@@ -778,6 +778,8 @@ void LevelEditor::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
 
 void LevelEditor::mouseReleased(QMouseEvent *event)
 {
+    Q_UNUSED(event);
+
     if(currentView == EDITING_LEVEL_VIEW)
     {
         if ((movingObject != -1) && (positionValid == true))
