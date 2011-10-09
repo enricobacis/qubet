@@ -96,7 +96,7 @@ void Level::addObstacle(Obstacle *_obstacle)
     position->z = -(bounding->z / 2.0f) - (cells->z * 3.0f) + (length / 2.0f);
 
     _obstacle->setPosition(position);
-    obstaclesList.insert(cells->z, _obstacle);
+    tempObstaclesList.insert(cells->z, _obstacle);
 }
 
 void Level::deleteObstacle(GLint _id)
@@ -139,7 +139,9 @@ bool Level::load()
 
 bool Level::save()
 {
-    // TODO
+    for (QMultiMap<GLint,Obstacle*>::iterator i = tempObstaclesList.begin(); i != tempObstaclesList.end(); i++)
+        obstaclesList.insert(i.key(),i.value());
+    tempObstaclesList.clear();
     return true;
 }
 
@@ -152,6 +154,8 @@ GLvoid Level::draw(GLboolean simplifyForPicking)
     glPushName(OBSTACLES);
     for (QMultiMap<GLint,Obstacle*>::iterator i = obstaclesList.begin(); i != obstaclesList.end(); i++)
         dynamic_cast<Obstacle*>(i.value())->draw(simplifyForPicking);
+    for (QMultiMap<GLint,Obstacle*>::iterator i = tempObstaclesList.begin(); i != tempObstaclesList.end(); i++)
+        dynamic_cast<Obstacle*>(i.value())->draw(simplifyForPicking);
     glPopName();
 }
 
@@ -163,4 +167,9 @@ GLint Level::getObstacleListCount()
 GLvoid Level::clearObstaclesList()
 {
     obstaclesList.clear();
+}
+
+GLvoid Level::clearTempObstaclesList()
+{
+    tempObstaclesList.clear();
 }

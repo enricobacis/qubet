@@ -169,9 +169,14 @@ public:
     /**
      * @brief Returns the number of obstacles in the level.
      *
-     * @return the number of obstacles in the level.
     */
     GLvoid clearObstaclesList();
+
+    /**
+     * @brief
+     *
+    */
+    GLvoid clearTempObstaclesList();
 
 
 private:
@@ -183,6 +188,7 @@ private:
     bool isLoaded; /**< Is is the variable that states if the Level is fully loaded. */
     bool isInStory; /**< It is the variable that states if the Level is in the story. */
     QMultiMap<GLint,Obstacle*> obstaclesList; /**< It is the Level multiMap of obstacles. */
+    QMultiMap<GLint,Obstacle*> tempObstaclesList; /**< It is the Level multiMap of obstacles. */
     GLint length; /**< It is the Level length. */
     GLint width; /**< It is the Level width. */
     GLfloat gravity; /**< It is the Level gravity. */

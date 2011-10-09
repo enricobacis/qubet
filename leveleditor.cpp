@@ -762,11 +762,11 @@ void LevelEditor::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
             movingObject = 3;
             break;
         case BUTTON_SAVE:
-
+            level->save();
             break;
 
         case BUTTON_CANCEL:
-            //level = new
+            level->clearTempObstaclesList();
             break;
 
         case BUTTON_CLEAR:
