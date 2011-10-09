@@ -23,6 +23,7 @@
 #define BUTTON_GRAVITY_MINUS        316
 #define BUTTON_SAVE                 317
 #define BUTTON_CANCEL               318
+#define BUTTON_CLEAR                319
 
 #define TOOLBAR                     320
 #define OBSTACLE_0                  330

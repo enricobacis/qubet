@@ -159,3 +159,8 @@ GLint Level::getObstacleListCount()
 {
     return obstaclesList.count();
 }
+
+GLvoid Level::clearObstaclesList()
+{
+    obstaclesList.clear();
+}

@@ -79,6 +79,7 @@ private:
     CubeString *next;  /**< It is the next CubeString. */
     CubeString *save;  /**< It is the save CubeString. */
     CubeString *cancel; /**< It is the cancel CubeString. */
+    CubeString *clear; /**< It is the clear CubeString. */
     CubeStringList *formSetLevelName;  /**< It is the formSetLevelName cubeStringList.  */
     GLboolean visible; /**< It is the boolean value that if the type block is visible. */
     GLint visibleTime;  /**< It is the visible time counter of the type block. */

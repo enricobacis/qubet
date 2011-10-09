@@ -166,6 +166,13 @@ public:
     */
     GLint getObstacleListCount();
 
+    /**
+     * @brief Returns the number of obstacles in the level.
+     *
+     * @return the number of obstacles in the level.
+    */
+    GLvoid clearObstaclesList();
+
 
 private:
 

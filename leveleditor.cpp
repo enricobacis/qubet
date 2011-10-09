@@ -79,6 +79,7 @@ LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QO
     next = new CubeString("next", 1.0f, alphabet, BUTTON_NEXT);
     save = new CubeString("save", 0.8f, alphabet, BUTTON_SAVE);
     cancel = new CubeString("cancel", 0.8f, alphabet, BUTTON_CANCEL);
+    clear = new CubeString("clear", 0.8f, alphabet, BUTTON_CLEAR);
 
     labelSetLevelName = new CubeString("set level name", 1.3f, alphabet, LABEL_SET_LEVEL_NAME);
 
@@ -294,6 +295,8 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
                     save->draw(simplifyForPicking);
                     glTranslatef(0.0f, -1.5f, 0.0f);
                     cancel->draw(simplifyForPicking);
+                    glTranslatef(0.0f, -1.5f, 0.0f);
+                    clear->draw(simplifyForPicking);
                 glPopMatrix();
 
                 glPushMatrix();
@@ -757,6 +760,17 @@ void LevelEditor::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
             currentDelta = Vector3f();
             deltaFromCentre = *pos - lastCentre;
             movingObject = 3;
+            break;
+        case BUTTON_SAVE:
+
+            break;
+
+        case BUTTON_CANCEL:
+            //level = new
+            break;
+
+        case BUTTON_CLEAR:
+            level->clearObstaclesList();
             break;
         }
     }
