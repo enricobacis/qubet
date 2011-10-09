@@ -763,6 +763,7 @@ void LevelEditor::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
             break;
         case BUTTON_SAVE:
             level->save();
+            //levelsList.insert(level);
             break;
 
         case BUTTON_CANCEL:
