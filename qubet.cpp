@@ -12,7 +12,7 @@ Qubet::Qubet(QWidget *parent) :
     alphabet(NULL),
     width(WIDTH),
     height(HEIGHT),
-    mouseMovedMode(1),
+    mouseMovedMode(MOUSE_MOVED_DOWN),
     loadDone(false)
 {
     alphabet = new Alphabet();
