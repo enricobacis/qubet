@@ -69,10 +69,15 @@ private:
     QObject *parent; /**< TODO */
     Vector3f *position; /**< TODO */
     GLint state; /**< TODO */
+    GLuint sideLength;  /**< TODO */
     GLfloat speed; /**< TODO */
     GLfloat gravity; /**< TODO */
     GLfloat scaleFactor; /**< TODO */
     GLfloat jumpStartTime; /**< TODO */
+    GLint explosionFactor;  /**< TODO */
+    GLuint t;  /**< TODO */
+    QVector<QVector<QVector<Vector3f*>>> normsMatrices;  /**< TODO */
+
 
 
 private slots:
