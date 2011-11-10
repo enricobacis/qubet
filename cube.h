@@ -62,6 +62,8 @@ public:
      */
     void updatePosition();
 
+    void createNormsMatrix();
+
 
 private:
     Level *level; /**< TODO */
@@ -75,7 +77,7 @@ private:
     GLfloat scaleFactor; /**< TODO */
     GLfloat jumpStartTime; /**< TODO */
     GLuint t;  /**< It is the parametric variable to put in the parametric functions */
-    QVector<QVector<QVector<Vector3f*>>> normsMatrices;  /**< It is the 3-dimensional matrix that contain the nomrs vector of each sub-cube in case of explosion */
+    QVector<QVector<QVector<Vector3f*> > > normsMatrix;  /**< It is the 3-dimensional matrix that contain the nomrs vector of each sub-cube in case of explosion */
 
 
 

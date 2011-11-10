@@ -1,14 +1,14 @@
 #include "cube.h"
 
 Cube::Cube(Level *_level, Skin *_skin, QObject *_parent):
-    normsMatrices(),
+    sideLength(),
+    normsMatrix(),
     t(0)
 {
-    sideLength(3);
-    createNormsMatrices();
+    createNormsMatrix();
 }
 
-void createNormsMatrices()
+void Cube::createNormsMatrix()
 {
     GLfloat gap = sideLength/8.0f;
     Vector3f *tempNorm = new Vector3f(0.0f, 0.0f, -3.0f*gap);
@@ -22,7 +22,7 @@ void createNormsMatrices()
 
                 for(int i = 0; i < 8; i++)
                 {
-                    normsMatrices[i][j][k] = tempNorm;
+                    normsMatrix[i][j][k] = tempNorm;
                     tempNorm->x += gap;
                 }
                 tempNorm->x -= 3.0f*gap;
