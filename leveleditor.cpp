@@ -149,19 +149,6 @@ LevelEditor::~LevelEditor()
 
     if (exit != NULL)
         exit->~CubeString();
-
-    toolbarObstacleCentres.~QList();
-
-    if (level != NULL)
-        level->~Level();
-
-    if (currentActions != NULL)
-        currentActions->~ActionList();
-
-    disableVector.~QVector();
-    enableVector.~QVector();
-    redEmission.~QVector();
-    greenEmission.~QVector();
 }
 
 void LevelEditor::draw(GLboolean simplifyForPicking)
