@@ -71,12 +71,11 @@ private:
     GLint state; /**< TODO */
     GLuint sideLength;  /**< TODO */
     GLfloat speed; /**< TODO */
-    GLfloat gravity; /**< TODO */
+    GLfloat gravity; /**< It is the gravity variable */
     GLfloat scaleFactor; /**< TODO */
     GLfloat jumpStartTime; /**< TODO */
-    GLint explosionFactor;  /**< TODO */
-    GLuint t;  /**< TODO */
-    QVector<QVector<QVector<Vector3f*>>> normsMatrices;  /**< TODO */
+    GLuint t;  /**< It is the parametric variable to put in the parametric functions */
+    QVector<QVector<QVector<Vector3f*>>> normsMatrices;  /**< It is the 3-dimensional matrix that contain the nomrs vector of each sub-cube in case of explosion */
 
 
 

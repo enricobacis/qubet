@@ -75,8 +75,10 @@ void Cube::draw()
                 }
             }
         }
-    }
+    }else{
     **/
+
+    //}
 }
 
 void Cube::updatePosition()
