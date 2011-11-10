@@ -89,19 +89,33 @@ GLvoid Qubet::initializeGL()
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
+    glEnable(GL_LIGHT1);
 
-    GLfloat lposition[] = {0.0f, 0.0f, 10.0f, 0.0f};
-    glLightfv(GL_LIGHT0, GL_POSITION, lposition);
-    GLfloat ldir[] = {0.0f, 0.0f, -1.0f};
-    glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, ldir);
+    GLfloat lposition0[] = {0.0f, 0.0f, 10.0f, 0.0f};
+    glLightfv(GL_LIGHT0, GL_POSITION, lposition0);
+    GLfloat ldir0[] = {0.0f, 0.0f, -1.0f};
+    glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, ldir0);
 
-    GLfloat ambientLight[]  = {1.0f, 1.0f, 1.0f, 1.0f};
-    GLfloat diffuseLight[]  = {1.0f, 1.0f, 1.0f, 1.0f};
-    GLfloat specularLight[] = {0.8f, 0.8f, 0.8f, 1.0f};
+    GLfloat lposition1[] = {-8.0f, 8.0f, 8.0f, 1.0f};
+    glLightfv(GL_LIGHT1, GL_POSITION, lposition1);
+    GLfloat ldir1[] = {1.0f, -1.0f, -1.0f};
+    glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, ldir1);
 
-    glLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight);
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight);
-    glLightfv(GL_LIGHT0, GL_SPECULAR, specularLight);
+    GLfloat ambientLight0[]  = {1.0f, 1.0f, 1.0f, 1.0f};
+    GLfloat diffuseLight0[]  = {1.0f, 1.0f, 1.0f, 1.0f};
+    GLfloat specularLight0[] = {0.8f, 0.8f, 0.8f, 1.0f};
+
+    glLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight0);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight0);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, specularLight0);
+
+    GLfloat ambientLight1[]  = {0.5f, 0.5f, 0.5f, 1.0f};
+    GLfloat diffuseLight1[]  = {0.5f, 0.5f, 0.5f, 1.0f};
+    GLfloat specularLight1[] = {0.4f, 0.4f, 0.4f, 1.0f};
+
+    glLightfv(GL_LIGHT1, GL_AMBIENT, ambientLight1);
+    glLightfv(GL_LIGHT1, GL_DIFFUSE, diffuseLight1);
+    glLightfv(GL_LIGHT1, GL_SPECULAR, specularLight1);
 
     glShadeModel(GL_SMOOTH);
 }
@@ -311,6 +325,9 @@ GLvoid Qubet::showMenu(bool showIntro)
     menu = new Menu(skinsList, levelsList, iconsList, alphabet, this, audioManager->isAudioEnabled(), skyboxesList.value("galaxy"), showIntro);
     connectMenu();
     emit playAmbientMusic("resources/music/menu.mp3");
+
+    glEnable(GL_LIGHT0);
+    glDisable(GL_LIGHT1);
     currentView = MENU_VIEW;
 }
 
@@ -586,6 +603,9 @@ void Qubet::playStory(GLint skinId)
     connectGame();
 
     game->startGame();
+
+    glEnable(GL_LIGHT0);
+    glEnable(GL_LIGHT1);
     currentView = GAME_VIEW;
 
     closeMenu();
@@ -598,6 +618,9 @@ void Qubet::playArcade(GLint skinId, GLint levelId)
     connectGame();
 
     game->startGame();
+
+    glEnable(GL_LIGHT0);
+    glEnable(GL_LIGHT1);
     currentView = GAME_VIEW;
 
     closeMenu();
@@ -628,6 +651,8 @@ void Qubet::showLevelEditor(GLint _levelId)
     levelEditor = new LevelEditor(iconsList, alphabet, this, level, audioManager->isAudioEnabled(), skyboxesList.value("stars"));
     connectLevelEditor();
 
+    glEnable(GL_LIGHT0);
+    glEnable(GL_LIGHT1);
     currentView = LEVELEDITOR_VIEW;
 
     emit playAmbientMusic("resources/music/editor.mp3");

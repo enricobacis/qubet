@@ -653,9 +653,9 @@ GLvoid LevelEditor::buttonBackTriggered()
 
 GLvoid LevelEditor::buttonNextTriggered()
 {
-    if(currentView == SET_NAME_VIEW)
+    if (currentView == SET_NAME_VIEW)
     {
-        if(currentName != "")
+        if (currentName != "")
         {
             if (currentName.endsWith(' '))
                 currentName.chop(1);
