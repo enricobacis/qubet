@@ -54,7 +54,7 @@ Vector3f *getProjectionPos(Vector3f *vect);
  * @param p1
  * @param t
  */
-Vector3f *getPointFromParametricLine(Vector3f* p0, Vector3f* p1, GLfloat t);
+Vector3f *getPointFromParametricLine(Vector3f *p0, Vector3f *p1, GLfloat t);
 
 Vector3f *getObstacleBoundingBox(GLuint id);
 

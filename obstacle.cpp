@@ -24,6 +24,11 @@ GLint Obstacle::getId()
     return id;
 }
 
+GLvoid Obstacle::setId(GLint _id)
+{
+    id = _id;
+}
+
 GLvoid Obstacle::setPosition(Vector3f *_position)
 {
     position = new Vector3f(*_position);

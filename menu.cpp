@@ -510,7 +510,7 @@ GLvoid Menu::previousLevel()
 GLvoid Menu::nextLevel()
 {
     if (levelsList.find(currentLevel + 1) == levelsList.end())
-        currentLevel = ((gameType == ARCADE_MODE) ? 1 : 0) ;
+        currentLevel = ((gameType == ARCADE_MODE) ? 1 : 0);
     else
         currentLevel += 1;
 
@@ -725,6 +725,11 @@ void Menu::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
             break;
         }
     }
+}
+
+void Menu::wheelScrolled(QWheelEvent *event)
+{
+
 }
 
 void Menu::keyPressed(QKeyEvent *event)

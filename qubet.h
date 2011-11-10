@@ -84,9 +84,16 @@ protected:
     /**
      * @brief This function is called when the player moves the mouse inside the game window.
      *
-     * @param eventis the QMouseEvent*.
+     * @param event is the QMouseEvent*.
      */
     GLvoid mouseMoveEvent(QMouseEvent *event);
+
+    /**
+     * @brief This function is called when the player scrolls the wheel of the mouse inside the game window.
+     *
+     * @param event is the QWheelEvent*.
+     */
+    GLvoid wheelEvent(QWheelEvent *event);
 
     /**
      * @brief This function is called when the player presses a key.
@@ -116,6 +123,7 @@ private:
     GLint height; /**< It is the current widget height. */
     GLint mouseMovedMode; /**< It is the variable that tells which mouse mode is enabled. See the documentation of setMouseMovementTracking(int mode) for the available modes.*/
     bool loadDone; /**< It is the variable that states if the load has already be done. */
+    GLint currentNewLevelNumber;
 
 
     // Initialization
@@ -304,6 +312,8 @@ private slots:
      */
     void showLevelEditor(GLint _levelId);
 
+    void addLevelToLevelsList(Level *_level);
+
     /**
      * @brief This function is a slot linked to the LevelEditor and called when
      *        the player chooses to close the current LevelEditor instance.
@@ -348,6 +358,13 @@ signals:
      * @param listNames is the QList<GLuint> of item's names.
      */
     void mouseMoved(QMouseEvent *event, QList<GLuint> listNames);
+
+    /**
+     * @brief Signal emitted when the user scrolls the wheel of the mouse.
+     *
+     * @param event is the QWheelEvent*.
+     */
+    void wheelScrolled(QWheelEvent *event);
 
     /**
      * @brief Signal emitted when the user presses a key on the keyboard.

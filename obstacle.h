@@ -41,6 +41,11 @@ public:
     GLint getId();
 
     /**
+     *
+     */
+    GLvoid setId(GLint _id);
+
+    /**
      * @brief
      *
      * @param _position

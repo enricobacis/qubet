@@ -1,4 +1,3 @@
-glob:*.user
+glob:*.user*
 glob:*.orig
-glob:*.dia.autosave~
-glob:*.dia~
+glob:*~

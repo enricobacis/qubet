@@ -1,5 +1,3 @@
-<?xml version="1.0"?>
-
-<storylevels>
-    <level name="First" filename="first.xml" />
-</storylevels>
+<levels>
+    <level story_number="1" name="first" filename="first.xml"/>
+</levels>

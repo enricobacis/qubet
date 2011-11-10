@@ -13,7 +13,8 @@ Qubet::Qubet(QWidget *parent) :
     width(WIDTH),
     height(HEIGHT),
     mouseMovedMode(MOUSE_MOVED_DOWN),
-    loadDone(false)
+    loadDone(false),
+    currentNewLevelNumber(0)
 {
     alphabet = new Alphabet();
 
@@ -143,6 +144,11 @@ GLvoid Qubet::mouseMoveEvent(QMouseEvent *event)
         emit mouseMoved(event, getPickedName(event->x(), event->y()));
 }
 
+GLvoid Qubet::wheelEvent(QWheelEvent *event)
+{
+    emit wheelScrolled(event);
+}
+
 GLvoid Qubet::keyPressEvent(QKeyEvent *event)
 {
     emit keyPressed(event);
@@ -173,6 +179,7 @@ GLvoid Qubet::connectInputEvents(const QObject *receiver)
     connect(this, SIGNAL(keyPressed(QKeyEvent*)), receiver, SLOT(keyPressed(QKeyEvent*)));
     connect(this, SIGNAL(mouseMoved(QMouseEvent*, QList<GLuint>)), receiver, SLOT(mouseMoved(QMouseEvent*, QList<GLuint>)));
     connect(this, SIGNAL(mouseReleased(QMouseEvent*)), receiver, SLOT(mouseReleased(QMouseEvent*)));
+    connect(this, SIGNAL(wheelScrolled(QWheelEvent*)), receiver, SLOT(wheelScrolled(QWheelEvent*)));
     connect(receiver, SIGNAL(setMouseMovementTracking(int)), this, SLOT(setMouseMovementTracking(int)));
 }
 
@@ -251,8 +258,7 @@ QList<GLuint> Qubet::getPickedName(GLint mouseX, GLint mouseY)
 GLvoid Qubet::loadingCompleted()
 {
     currentText.clear();
-    // showMenu();
-    showLevelEditor(0);
+    showMenu();
 }
 
 GLvoid Qubet::errorLoading()
@@ -283,8 +289,8 @@ GLvoid Qubet::connectLevelEditor()
 {
     connectInputEvents(levelEditor);
 
+    connect(levelEditor, SIGNAL(addLevelToLevelsList(Level*)), this, SLOT(addLevelToLevelsList(Level*)));
     connect(levelEditor, SIGNAL(levelEditorClosed()), this, SLOT(levelEditorClosed()));
-    //connect(levelEditor, SIGNAL(showMenu()), this, SLOT(showMenu()));
 
     connectAudio(levelEditor);
 }
@@ -451,9 +457,22 @@ GLboolean Qubet::loadLevels()
     while(!levelElement.isNull())
     {
         Level *level = new Level(levelElement.attribute("filename", ""), this);
-        level->setName(levelElement.attribute("name", ""));
+        level->setName(levelElement.attribute("name", "no name"));
 
-        levelsList.insert(level->getId(), level);
+        ++currentNewLevelNumber;
+        GLint levelNumber = levelElement.attribute("story_number", "-1").toInt();
+
+        if (levelNumber == -1)
+        {
+            levelNumber = currentNewLevelNumber;
+            level->setIsInStory(false);
+        }
+        else
+        {
+            level->setIsInStory(true);
+        }
+
+        levelsList.insert(levelNumber, level);
         levelElement = levelElement.nextSiblingElement("level");
     }
 
@@ -613,6 +632,11 @@ void Qubet::showLevelEditor(GLint _levelId)
     emit playAmbientMusic("resources/music/editor.mp3");
 
     closeMenu();
+}
+
+void Qubet::addLevelToLevelsList(Level *_level)
+{
+    levelsList.insert(++currentNewLevelNumber, _level);
 }
 
 void Qubet::levelEditorClosed()

@@ -12,9 +12,9 @@ LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QO
     isMoving(false),
     level(_level),
     currentView(SET_NAME_VIEW),
-    currentLength(150),
-    currentWidth(9),
-    currentGravity(10),
+    currentLength(LEVEL_LENGTH_DEFAULT),
+    currentWidth(LEVEL_WIDTH_DEFAULT),
+    currentGravity(LEVEL_GRAVITY_DEFAULT),
     alphabet(_alphabet),
     volumeSkin(NULL),
     visible(true),
@@ -40,11 +40,13 @@ LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QO
 
     if (level != NULL)
     {
-        cameraOffset->x = 30.0f;
+        // Carica il livello
+        level->load();
         currentGravity = level->getGravity();
         currentLength = level->getLength();
         currentWidth = level->getWidth();
 
+        cameraOffset->x = 30.0f;
         currentView = SET_GRAVITY_VIEW;
     }
 
@@ -65,8 +67,8 @@ LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QO
     greenEmission[2] = 0.0f;
     greenEmission[3] = 1.0f;
 
-    lengthLabel = new CubeString(QString::number(currentLength), 3.0f, alphabet, LENGTH_LABEL);
-    widthLabel = new CubeString(QString::number(currentWidth), 3.0f, alphabet, WIDTH_LABEL);
+    lengthLabel = new CubeString(QString::number(currentLength / 3), 3.0f, alphabet, LENGTH_LABEL);
+    widthLabel = new CubeString(QString::number(currentWidth / 3), 3.0f, alphabet, WIDTH_LABEL);
     gravityLabel = new CubeString(QString::number(currentGravity), 3.0f, alphabet, GRAVITY_LABEL);
 
     lengthString = new CubeString("length", 1.5f, alphabet, LENGTH_STRING);
@@ -344,41 +346,44 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
                 glPopName();
                 glPopMatrix();
 
-                glTranslatef(0.0f, -7.0f, 0.0f);
-
-                glPushMatrix();
-                if (movingObject == 2)
+                if (currentWidth >= 6)
                 {
-                    glTranslatef(currentDelta.x, currentDelta.y, currentDelta.z);
-                    setColorEmissive(positionValid ? COLOR_GREEN : COLOR_RED);
-                }
-                else
-                {
-                    setColorEmissive(COLOR_DISABLED);
-                }
+                    glTranslatef(0.0f, -7.0f, 0.0f);
 
-                glPushName(OBSTACLE_2);
-                drawObstacle(2);
-                glPopName();
-                glPopMatrix();
+                    glPushMatrix();
+                    if (movingObject == 2)
+                    {
+                        glTranslatef(currentDelta.x, currentDelta.y, currentDelta.z);
+                        setColorEmissive(positionValid ? COLOR_GREEN : COLOR_RED);
+                    }
+                    else
+                    {
+                        setColorEmissive(COLOR_DISABLED);
+                    }
 
-                glTranslatef(0.0f, -7.0f, 0.0f);
+                    glPushName(OBSTACLE_2);
+                    drawObstacle(2);
+                    glPopName();
+                    glPopMatrix();
 
-                glPushMatrix();
-                if (movingObject == 3)
-                {
-                    glTranslatef(currentDelta.x, currentDelta.y, currentDelta.z);
-                    setColorEmissive(positionValid ? COLOR_GREEN : COLOR_RED);
+                    glTranslatef(0.0f, -7.0f, 0.0f);
+
+                    glPushMatrix();
+                    if (movingObject == 3)
+                    {
+                        glTranslatef(currentDelta.x, currentDelta.y, currentDelta.z);
+                        setColorEmissive(positionValid ? COLOR_GREEN : COLOR_RED);
+                    }
+                    else
+                    {
+                        setColorEmissive(COLOR_DISABLED);
+                    }
+
+                    glPushName(OBSTACLE_3);
+                    drawObstacle(3);
+                    glPopName();
+                    glPopMatrix();
                 }
-                else
-                {
-                    setColorEmissive(COLOR_DISABLED);
-                }
-
-                glPushName(OBSTACLE_3);
-                drawObstacle(3);
-                glPopName();
-                glPopMatrix();
 
             glPopMatrix();
             setColorEmissive(COLOR_DISABLED);
@@ -535,7 +540,7 @@ GLvoid LevelEditor::lengthen()
         emit playEffect(EFFECT_COIN);
         lengthLabel->~CubeString();
         currentLength += 3;
-        lengthLabel = new CubeString(QString::number(currentLength), 3, alphabet, LENGTH_LABEL);
+        lengthLabel = new CubeString(QString::number(currentLength / 3), 3, alphabet, LENGTH_LABEL);
    }
 }
 
@@ -546,7 +551,7 @@ GLvoid LevelEditor::shorten()
         emit playEffect(EFFECT_COIN);
         lengthLabel->~CubeString();
         currentLength -= 3;
-        lengthLabel = new CubeString(QString::number(currentLength), 3, alphabet, LENGTH_LABEL);
+        lengthLabel = new CubeString(QString::number(currentLength / 3), 3, alphabet, LENGTH_LABEL);
     }
 }
 
@@ -557,7 +562,7 @@ GLvoid LevelEditor::enlarge()
         emit playEffect(EFFECT_COIN);
         widthLabel->~CubeString();
         currentWidth += 3;
-        widthLabel = new CubeString(QString::number(currentWidth), 3, alphabet, WIDTH_LABEL);
+        widthLabel = new CubeString(QString::number(currentWidth / 3), 3, alphabet, WIDTH_LABEL);
     }
 }
 
@@ -568,7 +573,7 @@ GLvoid LevelEditor::reduce()
         emit playEffect(EFFECT_COIN);
         widthLabel->~CubeString();
         currentWidth -= 3;
-        widthLabel = new CubeString(QString::number(currentWidth), 3, alphabet, WIDTH_LABEL);
+        widthLabel = new CubeString(QString::number(currentWidth / 3), 3, alphabet, WIDTH_LABEL);
     }
 }
 
@@ -622,6 +627,8 @@ GLvoid LevelEditor::buttonNextTriggered()
             if (currentName.endsWith(' '))
                 currentName.chop(1);
 
+            currentName = currentName.toLower();
+
             isMoving = true;
             emit playEffect(EFFECT_JUMPSMALL);
             currentActions->setPrimaryAction(GO_TO_SET_PARAM_VIEW);
@@ -637,9 +644,18 @@ GLvoid LevelEditor::buttonNextTriggered()
     {
         emit playEffect(EFFECT_JUMPSMALL);
         isMoving = true;
-        level = new Level(currentName, currentLength, currentWidth, this);
+
+        if (level == NULL)
+            level = new Level(currentName, currentLength, currentWidth, this);
+
+        level->setGravity(currentGravity);
+
         levelOffset->z -= ((currentLength * 0.4f) / 2.0f) - 10.0f;
         currentActions->setPrimaryAction(GO_TO_EDITING_LEVEL_VIEW);
+    }
+    else
+    {
+        saveLevel();
     }
 }
 
@@ -676,6 +692,101 @@ GLvoid LevelEditor::letterTyped(int key)
                 formSetLevelName->startLetterRotation(stringName, letterName, 30, 4);
         }
     }
+}
+
+GLvoid LevelEditor::setColorEmissive(int color)
+{
+    switch (color)
+    {
+    case COLOR_DISABLED:
+        glMaterialfv(GL_FRONT, GL_DIFFUSE,  enableVector.data());
+        glMaterialfv(GL_FRONT, GL_SPECULAR, enableVector.data());
+        glMaterialfv(GL_FRONT, GL_EMISSION, disableVector.data());
+        break;
+
+    case COLOR_RED:
+        glMaterialfv(GL_FRONT, GL_DIFFUSE,  redEmission.data());
+        glMaterialfv(GL_FRONT, GL_SPECULAR, redEmission.data());
+        glMaterialfv(GL_FRONT, GL_EMISSION, redEmission.data());
+        break;
+
+    case COLOR_GREEN:
+        glMaterialfv(GL_FRONT, GL_DIFFUSE,  greenEmission.data());
+        glMaterialfv(GL_FRONT, GL_SPECULAR, greenEmission.data());
+        glMaterialfv(GL_FRONT, GL_EMISSION, greenEmission.data());
+        break;
+    }
+}
+
+GLvoid LevelEditor::checkMousePosition(GLint x, GLint y)
+{
+    if (movingObject != -1)
+    {
+        Vector3f* P0 = new Vector3f(x, y, 0);
+        Vector3f* P1 = new Vector3f(x, y, 1);
+
+        Vector3f* M0 = getModelViewPos(P0, false);
+        Vector3f* M1 = getModelViewPos(P1, false);
+
+        // Calcolo del punto sul piano
+        GLfloat t = (levelOffset->y + (LEVEL_HEIGHT/2.0f) - M0->y)/(M1->y - M0->y);
+        Vector3f *newPos = getPointFromParametricLine(M0, M1, t);
+
+        // Se non e' sul piano uso l'altra parametrizzazione
+        if (  (newPos->x < (90.0f - (currentWidth * 0.4f)/2.0f))
+           || (newPos->x > (90.0f + (currentWidth * 0.4f)/2.0f))
+           || (newPos->z >  20.0f)
+           || (newPos->z > levelOffset->z + (currentLength * 0.4f)/2.0f)
+           || (newPos->z < levelOffset->z - (currentLength * 0.4f)/2.0f))
+        {
+            t = (lastCentre.z + deltaFromCentre.z - M0->z)/(M1->z - M0->z);
+            newPos = getPointFromParametricLine(M0, M1, t);
+            currentDelta = *newPos - lastCentre - deltaFromCentre;
+            currentDelta = currentDelta * 2.5f;
+            positionValid = false;
+        }
+        else
+        {
+            xCell = floor((((newPos->x - 90.f) / 0.4f) + currentWidth / 2.0f) / 3.0f);
+            zCell = floor((-(newPos->z - levelOffset->z) / 0.4f + currentLength / 2.0f) / 3.0f);
+
+            int x_cellMax = floor(currentWidth / 3.0f) - ((movingObject == 0) || (movingObject == 1) ? 1 : 2);
+            xCell = qMin(xCell, x_cellMax);
+
+            Vector3f *bounding = getObstacleBoundingBox(movingObject);
+
+            Vector3f *newCentre = new Vector3f();
+            newCentre->x = ((bounding->x / 2.0f) + (xCell * 3.0f) - (currentWidth / 2.0f)) * 0.4f + 90.0f;
+            newCentre->y = ((bounding->y / 2.0f) + (LEVEL_HEIGHT / 2.0f)) * 0.4f + levelOffset->y;
+            newCentre->z = -((bounding->z / 2.0f) + (zCell * 3.0f) - (currentLength / 2.0f)) * 0.4f + levelOffset->z;
+
+            currentDelta = *newCentre - lastCentre;
+            currentDelta = currentDelta * 2.5f;
+
+            positionValid = true;
+        }
+    }
+}
+
+GLvoid LevelEditor::moveIn()
+{
+    if (levelOffset->z <= ((currentLength * 0.4f) / 2.0f) + 10.0f)
+        levelOffset->z += 1.0f;
+}
+
+GLvoid LevelEditor::moveOut()
+{
+    if (levelOffset->z > -((currentLength * 0.4f) / 2.0f) + 10.0f)
+        levelOffset->z -= 1.0f;
+}
+
+GLvoid LevelEditor::saveLevel()
+{
+    bool newlyCreated = false;
+    level->save(&newlyCreated);
+
+    if (newlyCreated)
+        emit addLevelToLevelsList(level);
 }
 
 void LevelEditor::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
@@ -761,9 +872,9 @@ void LevelEditor::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
             deltaFromCentre = *pos - lastCentre;
             movingObject = 3;
             break;
+
         case BUTTON_SAVE:
-            level->save();
-            //levelsList.insert(level);
+            saveLevel();
             break;
 
         case BUTTON_CANCEL:
@@ -786,6 +897,7 @@ void LevelEditor::mouseReleased(QMouseEvent *event)
         if ((movingObject != -1) && (positionValid == true))
             level->addObstacle(new Obstacle(movingObject, new Vector3f(GLfloat(xCell), GLfloat(yCell), GLfloat(zCell))));
 
+        positionValid = false;
         currentDelta = new Vector3f();
         lastMouseX = 0;
         lastMouseY = 0;
@@ -849,6 +961,19 @@ void LevelEditor::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
     }
 }
 
+void LevelEditor::wheelScrolled(QWheelEvent *event)
+{
+    if (currentView == EDITING_LEVEL_VIEW)
+    {
+        if (event->delta() < 0)
+            moveIn();
+        else
+            moveOut();
+
+        checkMousePosition(lastMouseX, lastMouseY);
+    }
+}
+
 void LevelEditor::keyPressed(QKeyEvent *event)
 {
     if (isMoving)
@@ -883,7 +1008,7 @@ void LevelEditor::keyPressed(QKeyEvent *event)
         }
         else if (currentView == EDITING_LEVEL_VIEW)
         {
-            levelOffset->z += 1.0f;
+            moveIn();
             checkMousePosition(lastMouseX, lastMouseY);
         }
     }
@@ -895,7 +1020,7 @@ void LevelEditor::keyPressed(QKeyEvent *event)
         }
         else if (currentView == EDITING_LEVEL_VIEW)
         {
-            levelOffset->z -= 1.0f;
+            moveOut();
             checkMousePosition(lastMouseX, lastMouseY);
         }
     }
@@ -916,79 +1041,5 @@ void LevelEditor::keyPressed(QKeyEvent *event)
     else if ((key >= Qt::Key_A && key <= Qt::Key_Z) || (key >= Qt::Key_0 && key <= Qt::Key_9) || key == Qt::Key_Space)
     {
         letterTyped(key);
-    }
-}
-
-GLvoid LevelEditor::setColorEmissive(int color)
-{
-    switch (color)
-    {
-    case COLOR_DISABLED:
-        glMaterialfv(GL_FRONT, GL_DIFFUSE,  enableVector.data());
-        glMaterialfv(GL_FRONT, GL_SPECULAR, enableVector.data());
-        glMaterialfv(GL_FRONT, GL_EMISSION, disableVector.data());
-        break;
-
-    case COLOR_RED:
-        glMaterialfv(GL_FRONT, GL_DIFFUSE,  redEmission.data());
-        glMaterialfv(GL_FRONT, GL_SPECULAR, redEmission.data());
-        glMaterialfv(GL_FRONT, GL_EMISSION, redEmission.data());
-        break;
-
-    case COLOR_GREEN:
-        glMaterialfv(GL_FRONT, GL_DIFFUSE,  greenEmission.data());
-        glMaterialfv(GL_FRONT, GL_SPECULAR, greenEmission.data());
-        glMaterialfv(GL_FRONT, GL_EMISSION, greenEmission.data());
-        break;
-    }
-}
-
-GLvoid LevelEditor::checkMousePosition(GLint x, GLint y)
-{
-    if (movingObject != -1)
-    {
-        Vector3f* P0 = new Vector3f(x, y, 0);
-        Vector3f* P1 = new Vector3f(x, y, 1);
-
-        Vector3f* M0 = getModelViewPos(P0, false);
-        Vector3f* M1 = getModelViewPos(P1, false);
-
-        // Calcolo del punto sul piano
-        GLfloat t = (levelOffset->y + (LEVEL_HEIGHT/2.0f) - M0->y)/(M1->y - M0->y);
-        Vector3f *newPos = getPointFromParametricLine(M0, M1, t);
-
-        // Se non e' sul piano uso l'altra parametrizzazione
-        if (  (newPos->x < (90.0f - (currentWidth * 0.4f)/2.0f))
-           || (newPos->x > (90.0f + (currentWidth * 0.4f)/2.0f))
-           || (newPos->z >  20.0f)
-           || (newPos->z > levelOffset->z + (currentLength * 0.4f)/2.0f)
-           || (newPos->z < levelOffset->z - (currentLength * 0.4f)/2.0f))
-        {
-            t = (lastCentre.z + deltaFromCentre.z - M0->z)/(M1->z - M0->z);
-            newPos = getPointFromParametricLine(M0, M1, t);
-            currentDelta = *newPos - lastCentre - deltaFromCentre;
-            currentDelta = currentDelta * 2.5f;
-            positionValid = false;
-        }
-        else
-        {
-            xCell = floor((((newPos->x - 90.f) / 0.4f) + currentWidth / 2.0f) / 3.0f);
-            zCell = floor((-(newPos->z - levelOffset->z) / 0.4f + currentLength / 2.0f) / 3.0f);
-
-            int x_cellMax = floor(currentWidth / 3.0f) - ((movingObject == 0) || (movingObject == 1) ? 1 : 2);
-            xCell = qMin(xCell, x_cellMax);
-
-            Vector3f *bounding = getObstacleBoundingBox(movingObject);
-
-            Vector3f *newCentre = new Vector3f();
-            newCentre->x = ((bounding->x / 2.0f) + (xCell * 3.0f) - (currentWidth / 2.0f)) * 0.4f + 90.0f;
-            newCentre->y = ((bounding->y / 2.0f) + (LEVEL_HEIGHT / 2.0f)) * 0.4f + levelOffset->y;
-            newCentre->z = -((bounding->z / 2.0f) + (zCell * 3.0f) - (currentLength / 2.0f)) * 0.4f + levelOffset->z;
-
-            currentDelta = *newCentre - lastCentre;
-            currentDelta = currentDelta * 2.5f;
-
-            positionValid = true;
-        }
     }
 }

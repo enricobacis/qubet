@@ -40,6 +40,8 @@
 #define MIN_GRAVITY                 4
 #define MAX_GRAVITY                 20
 
+#define TYPE_OBSTACLE               1
+
 /**
  * @brief Enum used for Editor's actions
  */

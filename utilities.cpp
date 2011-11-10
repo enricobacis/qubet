@@ -258,7 +258,7 @@ Vector3f *getProjectionPos(Vector3f *vect)
     // c'e' da sistemare le coordinate per OpenGL se si vuole fare una funzione generale.
 }
 
-Vector3f *getPointFromParametricLine(Vector3f* p0, Vector3f* p1, GLfloat t)
+Vector3f *getPointFromParametricLine(Vector3f *p0, Vector3f *p1, GLfloat t)
 {
     GLfloat xr, yr, zr;
 

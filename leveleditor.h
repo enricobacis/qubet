@@ -176,6 +176,12 @@ private:
      */
     GLvoid checkMousePosition(GLint x, GLint y);
 
+    GLvoid moveIn();
+
+    GLvoid moveOut();
+
+    GLvoid saveLevel();
+
 private slots:
 
     /**
@@ -202,6 +208,13 @@ private slots:
     void mouseMoved(QMouseEvent *event, QList<GLuint> listNames);
 
     /**
+     * @brief Slot called when the user scrolls the wheel of the mouse button.
+     *
+     * @param event is the QWheelEvent*.
+     */
+    void wheelScrolled(QWheelEvent *event);
+
+    /**
      * @brief Slot called when the user presses a key on the keyboard.
      *
      * @param event is the QKeyEvent*.
@@ -216,6 +229,8 @@ signals:
      *
      */
     void levelEditorClosed();
+
+    void addLevelToLevelsList(Level *_level);
 
     /**
      * @brief This signal is emitted to set the Qubet's Mouse Move Tracking sensibility.

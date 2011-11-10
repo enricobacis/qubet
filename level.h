@@ -18,13 +18,6 @@ class Level : public QObject
 
 public:
     /**
-     * @brief Creates an empty Level. It is only used to test purposes.
-     *
-     * @param _parent is the parent of the Level.
-     */
-    explicit Level(QObject *_parent = 0);
-
-    /**
      * @brief Creates a level from an id, a name, a length and a width.
      *        It is used to create a new Level from the LevelEditor.
      *
@@ -49,13 +42,6 @@ public:
      * @brief Safely destroies a Level instance.
      */
     ~Level();
-
-    /**
-     * @brief Returns the id of the Level.
-     *
-     * @return the id of the Level.
-     */
-    GLint getId();
 
     /**
      * @brief Returns the filename of the Level.
@@ -92,6 +78,8 @@ public:
      */
     bool getIsInStory();
 
+    void setIsInStory(bool _isInStory);
+
     /**
      * @brief Returns the width of the Level.
      *
@@ -112,6 +100,13 @@ public:
      * @return the gravity of the Level.
      */
     GLfloat getGravity();
+
+    /**
+     * @brief Set the gravity of the Level.
+     *
+     * @param _gravity is the new gravity of the Level.
+     */
+    GLvoid setGravity(GLfloat _gravity);
 
     /**
      * @brief Returns the ambient Music Filename.
@@ -149,8 +144,12 @@ public:
 
     /**
      * @brief Saves the Level in a xml form using the filename as output.
+     *
+     * @param return variable that is true is the level has been newly created, else false.
+     *
+     * @return true if save is successful, else false.
      */
-    bool save();
+    bool save(bool *newlyCreated = 0);
 
     /**
      * @brief Draws the Level and its obstacles.
@@ -182,10 +181,8 @@ public:
 private:
 
     QObject *parent; /**< It is the parent of Level.  */
-    GLint id; /**< It is the Level id. */
     QString filename; /**< It is the Level xml description filename. */
     QString name; /**< It is the Level name. */
-    bool isLoaded; /**< Is is the variable that states if the Level is fully loaded. */
     bool isInStory; /**< It is the variable that states if the Level is in the story. */
     QMultiMap<GLint,Obstacle*> obstaclesList; /**< It is the Level multiMap of obstacles. */
     QMultiMap<GLint,Obstacle*> tempObstaclesList; /**< It is the Level multiMap of obstacles. */
@@ -193,6 +190,12 @@ private:
     GLint width; /**< It is the Level width. */
     GLfloat gravity; /**< It is the Level gravity. */
     QString ambientMusicFilename; /**< It is the Level ambient music filename. */
+    QString skyboxName; /**< It is the name of the skybox to use. */
+    GLint currentObstacleId;
+
+    Vector3f *obstacleCellToPosition(Vector3f *cells, GLuint obstacleModelId);
+
+    Vector3f *obstaclePositionToCell(Vector3f *position, GLuint obstacleModelId);
 };
 
 #endif // LEVEL_H

@@ -81,6 +81,11 @@ void Game::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
 
 }
 
+void Game::wheelScrolled(QWheelEvent *event)
+{
+
+}
+
 void Game::keyPressed(QKeyEvent *event)
 {
 
