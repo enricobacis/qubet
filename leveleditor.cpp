@@ -882,7 +882,6 @@ void LevelEditor::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
             break;
 
         case BUTTON_CLEAR:
-            level->clearTempObstaclesList();
             level->clearObstaclesList();
             break;
         }
