@@ -66,26 +66,25 @@ public:
 
 
 private:
-    Level *level; /**< TODO */
-    Skin *skin; /**< TODO */
-    QObject *parent; /**< TODO */
-    Vector3f *position; /**< TODO */
-    GLint state; /**< TODO */
-    GLuint sideLength;  /**< TODO */
-    GLfloat speed; /**< TODO */
-    GLfloat gravity; /**< It is the gravity variable */
-    GLfloat scaleFactor; /**< TODO */
-    GLfloat jumpStartTime; /**< TODO */
-    GLuint t;  /**< It is the parametric variable to put in the parametric functions */
-    QVector<QVector<QVector<Vector3f*> > > normsMatrix;  /**< It is the 3-dimensional matrix that contain the nomrs vector of each sub-cube in case of explosion */
+    Level *level; /**< It is the Level the Cube is in (to take parameters). */
+    Skin *skin; /**< It is the Skin of the Cube. */
+    QObject *parent; /**< It is the PArent of the Cube. */
+    Vector3f *position; /**< It is the Cube's current position. */
+    GLint state; /**< It is the state of the cube. */
+    GLuint sideLength;  /**< It is the side of the Cube. */
+    GLfloat speed; /**< It is the current speed of the Cube. */
+    GLfloat gravity; /**< It is the gravity variable. */
+    GLfloat scaleFactor; /**< It is the scale factor. */
+    GLfloat jumpStartTime; /**< It is the time the Cube has started the jump. */
+    GLuint t;  /**< It is the parametric variable to put in the parametric functions. */
+    QVector<QVector<QVector<Vector3f*> > > normsMatrix;  /**< It is the 3-dimensional matrix that contain the nomrs vector of each sub-cube in case of explosion. */
 
 
 
 private slots:
 
     /**
-     * @brief
-     *
+     * @brief It is the slot called when the Cube collides with an Obstacle.
      */
     void collided();
 
