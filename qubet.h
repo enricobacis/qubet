@@ -202,8 +202,10 @@ private:
 
     /**
      * @brief This function is used to tell the paintGL function to show the Menu.
+     *
+     * @param showIntro
      */
-    GLvoid showMenu();
+    GLvoid showMenu(bool showIntro = true);
 
     /**
      * @brief This function is called when the player chooses an option from the

@@ -35,7 +35,7 @@
 /**
  * @brief Enum used for currentView
  */
-enum { LOADING, MENU_VIEW, GAME_VIEW, LEVELEDITOR_VIEW };
+enum { LOADING, MENU_VIEW, GAME_VIEW, LEVELEDITOR_VIEW, NO_VIEW };
 
 /**
  * @brief Enum used for gameType

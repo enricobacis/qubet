@@ -33,7 +33,7 @@ public:
      * @param _audioEnabled is a variable to tell if the audio is enabled or not.
      * @param _skybox is the reference to the Skybox to use.
      */
-    explicit Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, bool _audioEnabled = true, Skybox *_skybox = NULL);
+    explicit Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, bool _audioEnabled = true, Skybox *_skybox = NULL, bool showIntro = true);
 
     /**
      * @brief Disconnect and Destroy a Menu object.

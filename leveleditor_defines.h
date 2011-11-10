@@ -24,8 +24,9 @@
 #define BUTTON_SAVE                 317
 #define BUTTON_CANCEL               318
 #define BUTTON_CLEAR                319
+#define BUTTON_EXIT                 320
 
-#define TOOLBAR                     320
+#define TOOLBAR                     325
 #define OBSTACLE_0                  330
 #define OBSTACLE_1                  331
 #define OBSTACLE_2                  332
@@ -52,6 +53,7 @@ enum { // Primary Actions
        GO_TO_SET_PARAM_VIEW,
        GO_TO_SET_GRAVITY_VIEW,
        GO_TO_EDITING_LEVEL_VIEW,
+       EXIT_TO_MENU,
 
       // Secondary Actions
       ROTATE_VOLUMECUBE, ROTATE_SKYBOX

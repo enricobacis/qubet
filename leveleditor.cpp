@@ -76,12 +76,13 @@ LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QO
     gravityString = new CubeString("gravity", 1.5f, alphabet, GRAVITY_STRING);
 
     back = new CubeString("back", 1.0f, alphabet, BUTTON_BACK);
-    menu = new CubeString("menu", 1.0f, alphabet, BUTTON_BACK);
+    menu = new CubeString("menu", 1.0f, alphabet, BUTTON_EXIT);
     create = new CubeString("create", 1.0f, alphabet, BUTTON_NEXT);
     next = new CubeString("next", 1.0f, alphabet, BUTTON_NEXT);
     save = new CubeString("save", 0.8f, alphabet, BUTTON_SAVE);
     cancel = new CubeString("cancel", 0.8f, alphabet, BUTTON_CANCEL);
     clear = new CubeString("clear", 0.8f, alphabet, BUTTON_CLEAR);
+    exit = new CubeString("exit", 0.8f, alphabet, BUTTON_EXIT);
 
     labelSetLevelName = new CubeString("set level name", 1.3f, alphabet, LABEL_SET_LEVEL_NAME);
 
@@ -98,17 +99,26 @@ LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QO
 
 LevelEditor::~LevelEditor()
 {
+    this->disconnect(parent);
+    parent->disconnect(this);
+
     if (lengthLabel != NULL)
         lengthLabel->~CubeString();
 
     if (widthLabel != NULL)
         widthLabel->~CubeString();
 
+    if (gravityLabel != NULL)
+        gravityLabel->~CubeString();
+
     if (lengthString != NULL)
         lengthString->~CubeString();
 
     if (widthString != NULL)
         widthString->~CubeString();
+
+    if (gravityString != NULL)
+        gravityString->~CubeString();
 
     if (labelSetLevelName != NULL)
         labelSetLevelName->~CubeString();
@@ -125,12 +135,33 @@ LevelEditor::~LevelEditor()
     if (menu != NULL)
         menu->~CubeString();
 
-    this->disconnect(parent);
-    parent->disconnect(this);
-}
+    if (create != NULL)
+        create->~CubeString();
 
-void LevelEditor::quitEditor()
-{
+    if (save != NULL)
+        save->~CubeString();
+
+    if (cancel != NULL)
+        cancel->~CubeString();
+
+    if (clear != NULL)
+        clear->~CubeString();
+
+    if (exit != NULL)
+        exit->~CubeString();
+
+    toolbarObstacleCentres.~QList();
+
+    if (level != NULL)
+        level->~Level();
+
+    if (currentActions != NULL)
+        currentActions->~ActionList();
+
+    disableVector.~QVector();
+    enableVector.~QVector();
+    redEmission.~QVector();
+    greenEmission.~QVector();
 }
 
 void LevelEditor::draw(GLboolean simplifyForPicking)
@@ -237,6 +268,19 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
 
                 break;
 
+            case EXIT_TO_MENU:
+                cameraOffset->x += (currentView == EDITING_LEVEL_VIEW) ? 2.0f : 5.0f;
+
+                if (cameraOffset->x == 150.0f)
+                {
+                    currentActions->setPrimaryAction(DO_NOTHING);
+                    isMoving = false;
+                    emit levelEditorClosed();
+                    return;
+                }
+
+                break;
+
             // Secondary Actions
 
             case ROTATE_VOLUMECUBE:
@@ -299,6 +343,8 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
                     cancel->draw(simplifyForPicking);
                     glTranslatef(0.0f, -1.5f, 0.0f);
                     clear->draw(simplifyForPicking);
+                    glTranslatef(0.0f, -1.5f, 0.0f);
+                    exit->draw(simplifyForPicking);
                 glPopMatrix();
 
                 glPushMatrix();
@@ -785,8 +831,18 @@ GLvoid LevelEditor::saveLevel()
     bool newlyCreated = false;
     level->save(&newlyCreated);
 
+    emit playEffect(EFFECT_COIN);
+
     if (newlyCreated)
         emit addLevelToLevelsList(level);
+}
+
+GLvoid LevelEditor::quitEditor()
+{
+    isMoving = true;
+    emit stopAmbientMusic();
+    emit playEffect(EFFECT_STOMP);
+    currentActions->setPrimaryAction(EXIT_TO_MENU);
 }
 
 void LevelEditor::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
@@ -883,6 +939,10 @@ void LevelEditor::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
 
         case BUTTON_CLEAR:
             level->clearObstaclesList();
+            break;
+
+        case BUTTON_EXIT:
+            quitEditor();
             break;
         }
     }

@@ -98,5 +98,5 @@ void Game::collided()
 
 void Game::levelCompleted()
 {
-
+    playEffect(EFFECT_STAGECLEAR);
 }

@@ -4,6 +4,7 @@
 
 Qubet::Qubet(QWidget *parent) :
     QGLWidget(QGLFormat(QGL::DoubleBuffer), parent),
+    currentView(NO_VIEW),
     drawTimer(NULL),
     menu(NULL),
     game(NULL),
@@ -258,7 +259,7 @@ QList<GLuint> Qubet::getPickedName(GLint mouseX, GLint mouseY)
 GLvoid Qubet::loadingCompleted()
 {
     currentText.clear();
-    showMenu();
+    showMenu(true);
 }
 
 GLvoid Qubet::errorLoading()
@@ -304,10 +305,10 @@ GLvoid Qubet::connectGame()
     connectAudio(game);
 }
 
-GLvoid Qubet::showMenu()
+GLvoid Qubet::showMenu(bool showIntro)
 {
     setMouseMovementTracking(MOUSE_MOVED_NONE);
-    menu = new Menu(skinsList, levelsList, iconsList, alphabet, this, audioManager->isAudioEnabled(), skyboxesList.value("galaxy"));
+    menu = new Menu(skinsList, levelsList, iconsList, alphabet, this, audioManager->isAudioEnabled(), skyboxesList.value("galaxy"), showIntro);
     connectMenu();
     emit playAmbientMusic("resources/music/menu.mp3");
     currentView = MENU_VIEW;
@@ -604,13 +605,13 @@ void Qubet::playArcade(GLint skinId, GLint levelId)
 
 void Qubet::gameClosed()
 {
+    showMenu(false);
+
     if (game != NULL)
     {
         game->~Game();
         game = NULL;
     }
-
-    showMenu();
 }
 
 void Qubet::showLevelEditor(GLint _levelId)
@@ -641,10 +642,15 @@ void Qubet::addLevelToLevelsList(Level *_level)
 
 void Qubet::levelEditorClosed()
 {
-    levelEditor->~LevelEditor();
-    levelEditor = NULL;
+    currentView = NO_VIEW;
 
-    showMenu();
+    showMenu(false);
+
+    if (levelEditor != NULL)
+    {
+        levelEditor->~LevelEditor();
+        levelEditor = NULL;
+    }
 }
 
 void Qubet::setMouseMovementTracking(int mode)

@@ -80,6 +80,7 @@ private:
     CubeString *save;  /**< It is the save CubeString. */
     CubeString *cancel; /**< It is the cancel CubeString. */
     CubeString *clear; /**< It is the clear CubeString. */
+    CubeString *exit; /**< It is the exit CubeString. */
     CubeStringList *formSetLevelName;  /**< It is the formSetLevelName cubeStringList.  */
     GLboolean visible; /**< It is the boolean value that if the type block is visible. */
     GLint visibleTime;  /**< It is the visible time counter of the type block. */
@@ -99,12 +100,6 @@ private:
     GLint zCell; /**< TODO */
     GLint lastMouseX; /**< TODO */
     GLint lastMouseY; /**< TODO */
-
-    /**
-     * @brief
-     *
-     */
-    void quitEditor();
 
     /**
      * @brief
@@ -181,6 +176,12 @@ private:
     GLvoid moveOut();
 
     GLvoid saveLevel();
+
+    /**
+     * @brief
+     *
+     */
+    GLvoid quitEditor();
 
 private slots:
 
