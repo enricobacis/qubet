@@ -43,6 +43,8 @@ enum { LOADING, MENU_VIEW, GAME_VIEW, LEVELEDITOR_VIEW, NO_VIEW };
 enum { STORY_MODE, ARCADE_MODE, EDITOR_MODE };
 
 // Re-define for compatibility purposes
-#define GL_CLAMP_TO_EDGE        0x812F
+#ifndef GL_CLAMP_TO_EDGE
+    #define GL_CLAMP_TO_EDGE      0x812F
+#endif
 
 #endif // DEFINES_H
