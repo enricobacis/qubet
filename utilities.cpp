@@ -289,4 +289,5 @@ Vector3f *getObstacleBoundingBox(GLuint id)
         return new Vector3f(6.0f, 6.0f, 3.0f);
         break;
     }
+    return NULL;
 }

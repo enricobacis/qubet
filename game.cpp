@@ -100,7 +100,6 @@ void Game::draw(GLboolean simplifyForPicking)
         }
     }
 
-    // Disegno l' editor
 
     glPushName(BUTTON_VOLUME);
     glPushMatrix();

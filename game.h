@@ -42,13 +42,13 @@ public:
     explicit Game(QMap<GLint,GLuint> &_iconsList, QMap<QString,Skybox*> &_skyboxesList, Alphabet *_alphabet, Skin *_skin, Level *_level, QObject *_parent = 0, bool _audioEnabled = true);
 
     /**
-     * @brief
+     * @brief Destroyer of Game Object.
      *
      */
     ~Game();
 
     /**
-     * @brief
+     * @brief Function to get called when the game start.
      *
      */
     void startGame();
