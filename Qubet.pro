@@ -60,10 +60,12 @@ HEADERS  += \
     actionlist.h \
     cubestringlist.h \
     effects_defines.h \
-    skybox.h
+    skybox.h \
+    cube_defines.h
 
 OTHER_FILES += \
     resources/skins/skins.xml \
     resources/sound/music/menu.wav \
     resources/levels/levels.xml \
     resources/icons/icons.xml
+

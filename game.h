@@ -82,6 +82,8 @@ private:
     ActionList *currentActions; /**< It is the list of the current menu steps. */
     GLfloat angleRotVolumeCube;  /**< It is the current rotation angle of the volume icon. */
     Skin *volumeSkin; /**< It is the skin of the volume button */
+    Vector3f *cameraOffset; /**< It is the camera offset for the editor. */
+    Vector3f *levelOffset; /**< It is the offset of the Level */
 
     /**
      * @brief
@@ -90,17 +92,13 @@ private:
 
     /**
      * @brief
-     *
-     * @param levelId
      */
-    void playLevel(GLint levelId);
+    void playLevel();
 
     /**
      * @brief
-     *
-     * @param currentLevelId
      */
-    void nextLevel(GLint currentLevelId);
+    void nextLevel();
 
     /**
      * @brief
@@ -205,6 +203,8 @@ signals:
      * @param mode It is the selected mode.
      */
     void setMouseMovementTracking(int mode);
+
+    void keyPressedSignal(QKeyEvent *event);
 
     /**
      * @brief Signal emitted to enable or disable the audio.

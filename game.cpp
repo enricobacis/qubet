@@ -33,30 +33,17 @@ Game::~Game()
 {
     this->disconnect(parent);
     parent->disconnect(this);
+
+    if (positionController != NULL)
+        positionController->~PositionController();
+
+    if (cube != NULL)
+        cube->~Cube();
 }
 
 void Game::startGame()
 {
-    emit setMouseMovementTracking(MOUSE_MOVED_NONE);
-
-    switch (gameType)
-    {
-    case STORY_MODE:
-        if (!levelsList.isEmpty())
-        {
-            currentLevel = levelsList.begin().key();
-            level = static_cast<Level*>(levelsList.begin().value());
-        }
-        break;
-
-    case ARCADE_MODE:
-        break;
-    }
-
-    qDebug() << level->getSkyboxName();
-
-    skybox = skyboxesList.value(level->getSkyboxName());
-    emit playAmbientMusic("resources/music/" + level->getAmbientMusicFilename());
+    playLevel();
 }
 
 void Game::draw(GLboolean simplifyForPicking)
@@ -100,7 +87,6 @@ void Game::draw(GLboolean simplifyForPicking)
         }
     }
 
-
     glPushName(BUTTON_VOLUME);
     glPushMatrix();
         glTranslatef(9.5f, 6.0f, 3.0f);
@@ -117,12 +103,17 @@ void Game::draw(GLboolean simplifyForPicking)
         glPopMatrix();
     }
 
-    //    glTranslatef(-cameraOffset->x, -cameraOffset->y, -cameraOffset->z);
-    //    glRotatef(cameraAngle, 0.0f, 0.0f, 1.0f);
+    glPushMatrix();
+        glTranslatef(-cameraOffset->x, -cameraOffset->y, -cameraOffset->z);
 
-    //    glPushMatrix();
+        glPushMatrix();
 
-    //    glPopMatrix();
+            glTranslatef(levelOffset->x, levelOffset->y, levelOffset->z);
+            level->draw(simplifyForPicking);
+
+        glPopMatrix();
+
+    glPopMatrix();
 }
 
 void Game::initGame()
@@ -136,14 +127,39 @@ void Game::initGame()
     GLuint volume_on = iconsList.value(VOLUME_ON);
     GLuint volume_off = iconsList.value(VOLUME_OFF);
     volumeSkin = new Skin(0, 0, volume_off, volume_off, volume_on, volume_on);
+
+    emit setMouseMovementTracking(MOUSE_MOVED_NONE);
+
+    switch (gameType)
+    {
+    case STORY_MODE:
+        if (!levelsList.isEmpty())
+        {
+            currentLevel = levelsList.begin().key();
+            level = static_cast<Level*>(levelsList.begin().value());
+        }
+        break;
+
+    case ARCADE_MODE:
+        break;
+    }
+
+    cameraOffset = new Vector3f(0.0,   0.0f, 0.0f);
+    levelOffset  = new Vector3f(0.0f, -4.0f, -(level->getLength() / 2.0f) + 10.0f);
 }
 
-void Game::playLevel(GLint levelId)
+void Game::playLevel()
 {
+    level->load();
 
+    skybox = skyboxesList.value(level->getSkyboxName());
+    emit playAmbientMusic("resources/music/" + level->getAmbientMusicFilename());
+
+    cube = new Cube(level, skin, this);
+    positionController = new PositionController(cube, level, this);
 }
 
-void Game::nextLevel(GLint currentLevelId)
+void Game::nextLevel()
 {
 
 }
@@ -160,11 +176,14 @@ void Game::continueGame()
 
 void Game::quitGame()
 {
-
+    emit gameClosedSignal();
+    return;
 }
 
 void Game::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
 {
+    Q_UNUSED(event);
+
     if (!listNames.isEmpty())
     {
         switch (listNames.at(0))
@@ -182,21 +201,24 @@ void Game::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
 }
 
 void Game::mouseReleased(QMouseEvent *event)
-{ }
+{
+    Q_UNUSED(event);
+}
 
 void Game::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
 {
-
+    Q_UNUSED(event);
+    Q_UNUSED(listNames);
 }
 
 void Game::wheelScrolled(QWheelEvent *event)
 {
-
+    Q_UNUSED(event);
 }
 
 void Game::keyPressed(QKeyEvent *event)
 {
-
+    emit keyPressedSignal(event);
 }
 
 void Game::collided()
@@ -206,5 +228,16 @@ void Game::collided()
 
 void Game::levelCompleted()
 {
-    playEffect(EFFECT_STAGECLEAR);
+    positionController->~PositionController();
+    cube->~Cube();
+
+    if (gameType == ARCADE_MODE)
+    {
+        playEffect(EFFECT_STAGECLEAR);
+        quitGame();
+    }
+    else
+    {
+        nextLevel();
+    }
 }

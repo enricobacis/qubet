@@ -741,7 +741,7 @@ void Menu::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
 
 void Menu::wheelScrolled(QWheelEvent *event)
 {
-
+    Q_UNUSED(event);
 }
 
 void Menu::keyPressed(QKeyEvent *event)
@@ -749,56 +749,48 @@ void Menu::keyPressed(QKeyEvent *event)
     if (isMoving)
         return;
 
-    int key = event->key();
-
-    if ((key == Qt::Key_Escape) || (key == Qt::Key_Backspace))
+    switch(event->key())
     {
+    case Qt::Key_Escape:
+    case Qt::Key_Backspace:
         buttonBackTriggered();
-    }
-    else if ((key == Qt::Key_Enter) || (key == Qt::Key_Return))
-    {
+        break;
+
+    case Qt::Key_Enter:
+    case Qt::Key_Return:
         if (currentView == MAIN_VIEW)
             buttonPlayStoryTriggered();
         else
             buttonNextTriggered();
-    }
-    else if (key == Qt::Key_Left)
-    {
+        break;
+
+    case Qt::Key_Left:
         if (currentView == SKINS_VIEW)
             buttonPreviousSkinTriggered();
         else if (currentView == LEVELS_VIEW)
             previousLevel();
-    }
-    else if (key == Qt::Key_Right)
-    {
+        break;
+
+    case Qt::Key_Right:
         if (currentView == SKINS_VIEW)
             buttonNextSkinTriggered();
         else if (currentView == LEVELS_VIEW)
             nextLevel();
-    }
-    else if (key == Qt::Key_S)
-    {
+        break;
+
+    case Qt::Key_S:
         if (currentView == MAIN_VIEW)
             buttonPlayStoryTriggered();
-    }
-    else if (key == Qt::Key_A)
-    {
+        break;
+
+    case Qt::Key_A:
         if (currentView == MAIN_VIEW )
             buttonPlayArcadeTriggered();
-    }
-    else if (key == Qt::Key_E)
-    {
+        break;
+
+    case Qt::Key_E:
         if (currentView == MAIN_VIEW)
             buttonEditorTriggered();
-    }
-    else if (key == Qt::Key_Shift && key == Qt::Key_Enter)
-    {
-        if (currentView == MAIN_VIEW )
-            buttonPlayArcadeTriggered();
-    }
-    else if (key == Qt::Key_Shift && key == Qt::Key_Enter && key == Qt::Key_Control)
-    {
-        if (currentView == MAIN_VIEW )
-            buttonEditorTriggered();
+        break;
     }
 }

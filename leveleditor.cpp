@@ -1028,9 +1028,14 @@ void LevelEditor::keyPressed(QKeyEvent *event)
 
     int key = event->key();
 
-    if ((key == Qt::Key_Escape) || (key == Qt::Key_Backspace))
+    switch (key)
     {
-        if (key == Qt::Key_Backspace && currentView == SET_NAME_VIEW)
+    case Qt::Key_Escape:
+        buttonBackTriggered();
+        break;
+
+    case Qt::Key_Backspace:
+        if (currentView == SET_NAME_VIEW)
         {
             emit playEffect(EFFECT_JUMP);
             currentName = currentName.left(currentName.length() - 1);
@@ -1042,13 +1047,15 @@ void LevelEditor::keyPressed(QKeyEvent *event)
         {
             buttonBackTriggered();
         }
-    }
-    else if ((key == Qt::Key_Enter) || (key == Qt::Key_Return))
-    {
+
+        break;
+
+    case Qt::Key_Enter:
+    case Qt::Key_Return:
         buttonNextTriggered();
-    }
-    else if (key == Qt::Key_Up)
-    {
+        break;
+
+    case Qt::Key_Up:
         if (currentView == SET_PARAM_VIEW)
         {
             lengthen();
@@ -1058,9 +1065,10 @@ void LevelEditor::keyPressed(QKeyEvent *event)
             moveIn();
             checkMousePosition(lastMouseX, lastMouseY);
         }
-    }
-    else if (key == Qt::Key_Down)
-    {
+
+        break;
+
+    case Qt::Key_Down:
         if (currentView == SET_PARAM_VIEW)
         {
             shorten();
@@ -1070,23 +1078,29 @@ void LevelEditor::keyPressed(QKeyEvent *event)
             moveOut();
             checkMousePosition(lastMouseX, lastMouseY);
         }
-    }
-    else if (key == Qt::Key_Left)
-    {
+
+        break;
+
+    case Qt::Key_Left:
+
         if (currentView == SET_PARAM_VIEW)
             reduce();
         else if (currentView == SET_GRAVITY_VIEW)
             gravityMinus();
-    }
-    else if (key == Qt::Key_Right)
-    {
+        break;
+
+    case Qt::Key_Right:
+
+
         if (currentView == SET_PARAM_VIEW)
             enlarge();
         else if (currentView == SET_GRAVITY_VIEW)
             gravityPlus();
-    }
-    else if ((key >= Qt::Key_A && key <= Qt::Key_Z) || (key >= Qt::Key_0 && key <= Qt::Key_9) || key == Qt::Key_Space)
-    {
-        letterTyped(key);
+        break;
+
+    default:
+        if ((key >= Qt::Key_A && key <= Qt::Key_Z) || (key >= Qt::Key_0 && key <= Qt::Key_9) || key == Qt::Key_Space)
+            letterTyped(key);
+        break;
     }
 }

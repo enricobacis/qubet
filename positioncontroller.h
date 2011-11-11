@@ -30,9 +30,11 @@ public:
     ~PositionController();
 
 private:
+    QObject *parent; /**< TODO */
     Cube *cube; /**< It is the pointer to the Cube Object. */
     Level *level; /**< Is the pointer to the Level Object. */
-    QTimer checkPositionTimer; /**< QTimer controlling the checkCollision() calls. */
+    QTimer *checkPositionTimer; /**< QTimer controlling the checkCollision() calls. */
+    QVector<QVector<QVector<bool> > > obstacleCells;
 
     /**
      * @brief Check if the cube has a collision with an obstacle.
@@ -40,12 +42,16 @@ private:
      */
     GLvoid checkCollision();
 
+    GLvoid createObstacleCells();
+
     /**
      * @brief Reimplementation of the run() function of the QThread class.
      *
      *
      */
     void run();
+
+
 
 signals:
     /**

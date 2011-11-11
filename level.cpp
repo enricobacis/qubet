@@ -155,7 +155,6 @@ bool Level::load()
     gravity = levelElement.attribute("gravity", QString::number(LEVEL_GRAVITY_DEFAULT)).toInt();
     ambientMusicFilename = levelElement.attribute("music", "menu.mp3");
     skyboxName = levelElement.attribute("skybox", "nebula");
-    qDebug() << this->getSkyboxName();
 
     QDomElement obstacleElement = levelElement.firstChildElement("obstacle");
 

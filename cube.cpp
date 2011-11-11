@@ -1,42 +1,26 @@
 #include "cube.h"
+#include "cube_defines.h"
 
-Cube::Cube(Level *_level, Skin *_skin, QObject *_parent):
-    sideLength(),
-    normsMatrix(),
+Cube::Cube(Level *level, Skin *_skin, QObject *_parent):
+    skin(_skin),
+    parent(_parent),
+    state(0),
+    sideLength(3),
     t(0)
 {
-    createNormsMatrix();
-}
+    connect(parent, SIGNAL(keyPressedSignal(QKeyEvent*)), this, SLOT(keyPressed(QKeyEvent*)));
 
-void Cube::createNormsMatrix()
-{
-    GLfloat gap = sideLength/8.0f;
-    Vector3f *tempNorm = new Vector3f(0.0f, 0.0f, -3.0f*gap);
-    for(int k = 0; k < 8; k++)
-        {
-            tempNorm->y -= 3.0f*gap;
+    createNormalsMatrix();
 
-            for(int j = 0; j < 8; j++)
-            {
-                tempNorm->x -= 3.0f*gap;
-
-                for(int i = 0; i < 8; i++)
-                {
-                    normsMatrix[i][j][k] = tempNorm;
-                    tempNorm->x += gap;
-                }
-                tempNorm->x -= 3.0f*gap;
-                tempNorm->y += gap;
-            }
-            tempNorm->x -= 3.0f*gap;
-            tempNorm->y -= 3.0f*gap;
-            tempNorm->z += gap;
-        }
+    gravity = level->getGravity();
+    levelCellsLength = level->getLength() / 3;
+    levelCellsWidth = level->getWidth() / 3;
 }
 
 Cube::~Cube()
 {
-
+    this->disconnect(parent);
+    parent->disconnect(this);
 }
 
 Vector3f *Cube::getPosition()
@@ -51,7 +35,17 @@ void Cube::setPosition(Vector3f *_position)
 
 void Cube::jump()
 {
+    state = state & CUBESTATE_JUMPING;
+}
 
+void Cube::moveLeft()
+{
+    state = state & CUBESTATE_MOVING_LEFT;
+}
+
+void Cube::moveRight()
+{
+    state = state & CUBESTATE_MOVING_RIGHT;
 }
 
 void Cube::draw()
@@ -86,12 +80,60 @@ void Cube::updatePosition()
 
 }
 
-void Cube::collided()
+void Cube::createNormalsMatrix()
+{
+    GLfloat gap = sideLength / 4.0f;
+    Vector3f *tempNorm = new Vector3f(0.0f, 0.0f, -3.0f * gap);
+    for (int k = 0; k < 4; k++)
+    {
+        tempNorm->y -= 3.0f * gap;
+
+        for (int j = 0; j < 4; j++)
+        {
+            tempNorm->x -= 3.0f * gap;
+
+            for (int i = 0; i < 4; i++)
+            {
+                normalsMatrix[i][j][k] = tempNorm;
+                tempNorm->x += gap;
+            }
+
+            tempNorm->x -= 3.0f * gap;
+            tempNorm->y += gap;
+        }
+
+        tempNorm->x -= 3.0f * gap;
+        tempNorm->y -= 3.0f * gap;
+        tempNorm->z += gap;
+    }
+}
+
+void Cube::explode()
 {
 
 }
 
-void Cube::keyPressed(QKeyEvent *e)
+void Cube::collided()
 {
+    explode();
+}
 
+void Cube::keyPressed(QKeyEvent *event)
+{
+    int key = event->key();
+
+    switch(key)
+    {
+    case Qt::Key_Space:
+        jump();
+        break;
+
+    case Qt::Key_Left:
+        moveLeft();
+        break;
+
+    case Qt::Key_Right:
+        moveRight();
+        break;
+    }
 }
