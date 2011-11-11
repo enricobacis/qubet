@@ -598,7 +598,7 @@ void Qubet::draw()
 
 void Qubet::playStory(GLint skinId)
 {
-    game = new Game(skyboxesList, skinsList.value(skinId), levelsList, this, audioManager->isAudioEnabled());
+    game = new Game(iconsList, skyboxesList, alphabet, skinsList.value(skinId), levelsList, this, audioManager->isAudioEnabled());
 
     connectGame();
 
@@ -613,7 +613,7 @@ void Qubet::playStory(GLint skinId)
 
 void Qubet::playArcade(GLint skinId, GLint levelId)
 {
-    game = new Game(skyboxesList, skinsList.value(skinId), levelsList.value(levelId), this);
+    game = new Game(iconsList, skyboxesList, alphabet, skinsList.value(skinId), levelsList.value(levelId), this, audioManager->isAudioEnabled());
 
     connectGame();
 

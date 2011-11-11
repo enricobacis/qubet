@@ -89,6 +89,11 @@ QString Level::getAmbientMusicFilename()
     return ambientMusicFilename;
 }
 
+QString Level::getSkyboxName()
+{
+    return skyboxName;
+}
+
 void Level::addObstacle(Obstacle *_obstacle)
 {
     Vector3f *cells = _obstacle->getPosition();
@@ -150,6 +155,7 @@ bool Level::load()
     gravity = levelElement.attribute("gravity", QString::number(LEVEL_GRAVITY_DEFAULT)).toInt();
     ambientMusicFilename = levelElement.attribute("music", "menu.mp3");
     skyboxName = levelElement.attribute("skybox", "nebula");
+    qDebug() << this->getSkyboxName();
 
     QDomElement obstacleElement = levelElement.firstChildElement("obstacle");
 

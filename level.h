@@ -116,6 +116,13 @@ public:
     QString getAmbientMusicFilename();
 
     /**
+     * @brief Returns the Skybox Name.
+     *
+     * @return the skyboxName.
+     */
+    QString getSkyboxName();
+
+    /**
      * @brief Adds an obstacle to the Level.
      *
      * @param _obstacle is the obstacle to add.

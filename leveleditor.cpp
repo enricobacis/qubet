@@ -161,11 +161,11 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
 
         while (!actions.isEmpty())
         {
-            // Primary Actions
-
             GLint step = actions.takeFirst();
             switch (step)
             {
+            // Primary Actions
+
             case INITIAL_MOVEMENT:
                 if (cameraOffset->y < 0.0f)
                 {

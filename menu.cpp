@@ -80,7 +80,7 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<
     levelsButton = new CubeString("levels", 1.0f, alphabet, BUTTON_NEXT);
     editButton = new CubeString("edit", 1.0f, alphabet, BUTTON_NEXT);
 
-    skinName = new CubeString((skinsList.count() > 0) ? skinsList.value(currentSkin)->getName() : "no skin", 2.0f, alphabet, SKIN_NAME);
+    skinName = new CubeString((skinsList.isEmpty()) ? "no skin" : skinsList.value(currentSkin)->getName(), 2.0f, alphabet, SKIN_NAME);
     levelName = new CubeStringList("new level", 12.0f, 7.0f, alphabet, 2.0f, LEVEL_NAME);
 
     GLuint volume_on = iconsList.value(VOLUME_ON);
@@ -137,11 +137,11 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
 
         while (!actions.isEmpty())
         {
-            // Primary Actions
-
             GLint step = actions.takeFirst();
             switch (step)
             {
+            // Primary Actions
+
             case CUBE_STUDIO_DISTRIBUTION:
                 cameraOffset->z -= 1.0f;
 
@@ -398,7 +398,7 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                     glTranslatef(30.0f, 4.0f, 0.0f);
 
                     skinName->draw(simplifyForPicking);
-                    QString comment = (skinsList.count() > 0) ? skinsList.value(currentSkin)->getComment() : "";
+                    QString comment = (skinsList.isEmpty()) ? "" : skinsList.value(currentSkin)->getComment();
                     dynamic_cast<QGLWidget*>(parent)->renderText(-comment.length()*0.1225f, -2.5f, 0.0f, comment);
 
                     glTranslatef(0.0f, -6.0f, 0.0f);
