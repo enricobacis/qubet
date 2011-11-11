@@ -64,7 +64,13 @@ GLfloat Skybox::getCubeSide()
 
 GLvoid Skybox::draw()
 {
+    glDisable(GL_DEPTH_TEST);
+    glDepthMask(false);
+
     glMaterialfv(GL_FRONT, GL_EMISSION, emissionVector.data());
     drawPrism(cubeSide, cubeSide, cubeSide, skin);
     glMaterialfv(GL_FRONT, GL_EMISSION, disabledVector.data());
+
+    glDepthMask(true);
+    glEnable(GL_DEPTH_TEST);
 }

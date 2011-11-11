@@ -117,7 +117,9 @@ private:
     Game *game; /**< It is the Game pointer. */
     LevelEditor *levelEditor; /**< It is the LevelEditor pointer. */
     AudioManager *audioManager; /**< It is the AudioManager pointer. */
-    Alphabet *alphabet; /**< It is the current Alphabet */
+    Alphabet *alphabet; /**< It is the current Alphabet. */
+    Skybox *skybox; /**< It is the current Skybox. */
+    GLfloat skyboxAngle; /**< It is the Skybox rotation angle. */
 
     GLint width; /**< It is the current widget width. */
     GLint height; /**< It is the current widget height. */
@@ -334,6 +336,13 @@ private slots:
      * @param mode It is the selected mode.
      */
     void setMouseMovementTracking(int mode);
+
+    /**
+     * @brief This slot is called to set the Skybox.
+     *
+     * @param skyboxName is the name of the Skybox to apply.
+     */
+    void setSkybox(QString skyboxName);
 
 
 signals:

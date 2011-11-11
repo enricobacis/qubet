@@ -3,11 +3,9 @@
 #include "leveleditor_defines.h"
 #include "effects_defines.h"
 
-LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, Level *_level, bool _audioEnabled, Skybox *_skybox):
+LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, Level *_level, bool _audioEnabled):
     parent(_parent),
     iconsList(_iconsList),
-    skybox(_skybox),
-    skyboxAngle(0.0f),
     audioEnabled(_audioEnabled),
     isMoving(false),
     level(_level),
@@ -32,8 +30,14 @@ LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QO
     lastMouseX(0),
     lastMouseY(0)
 {
+    connect(this, SIGNAL(playAmbientMusic(QString)), parent, SIGNAL(playAmbientMusic(QString)));
+    connect(this, SIGNAL(setMouseMovementTracking(int)), parent, SLOT(setMouseMovementTracking(int)));
+    connect(this, SIGNAL(setSkybox(QString)), parent, SLOT(setSkybox(QString)));
+
+    emit playAmbientMusic("resources/music/editor.mp3");
+    emit setSkybox("stars");
+
     currentActions = new ActionList(INITIAL_MOVEMENT);
-    currentActions->appendSecondaryAction(ROTATE_SKYBOX);
 
     cameraOffset = new Vector3f(-30.0f, -30.0f, 0.0f);
     levelOffset  = new Vector3f(0.0f, -3.0f, 0.0f);
@@ -280,14 +284,6 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
                     currentActions->removeSecondaryAction(ROTATE_VOLUMECUBE);
 
                 break;
-
-            case ROTATE_SKYBOX:
-                skyboxAngle += 0.1f;
-
-                if (skyboxAngle >= 360.0f)
-                    skyboxAngle -= 360.0f;
-
-                break;
             }
         }
     }
@@ -303,14 +299,6 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
             drawPrism(0.8f, 0.8f, 0.8f, volumeSkin, true);
         glPopMatrix();
         glPopName();
-
-        if (!simplifyForPicking && (skybox != NULL))
-        {
-            glPushMatrix();
-                glRotatef(skyboxAngle, 0.0f, 1.0f, 0.0f);
-                skybox->draw();
-            glPopMatrix();
-        }
 
         glTranslatef(-cameraOffset->x, -cameraOffset->y, -cameraOffset->z);
         glRotatef(cameraAngle, 0.0f, 0.0f, 1.0f);
@@ -922,10 +910,12 @@ void LevelEditor::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
 
         case BUTTON_CANCEL:
             level->clearTempObstaclesList();
+            emit playEffect(EFFECT_JUMP);
             break;
 
         case BUTTON_CLEAR:
             level->clearObstaclesList();
+            emit playEffect(EFFECT_JUMP);
             break;
 
         case BUTTON_EXIT:
@@ -942,7 +932,10 @@ void LevelEditor::mouseReleased(QMouseEvent *event)
     if(currentView == EDITING_LEVEL_VIEW)
     {
         if ((movingObject != -1) && (positionValid == true))
+        {
             level->addObstacle(new Obstacle(movingObject, new Vector3f(GLfloat(xCell), GLfloat(yCell), GLfloat(zCell))));
+            emit playEffect(EFFECT_JUMP);
+        }
 
         positionValid = false;
         currentDelta = new Vector3f();

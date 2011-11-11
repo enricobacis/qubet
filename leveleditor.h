@@ -4,8 +4,6 @@
 #include "level.h"
 #include "cubestringlist.h"
 #include "actionlist.h"
-#include "skybox.h"
-
 /**
  * @brief
  *
@@ -23,9 +21,8 @@ public:
      *
      * @param _parent
      * @param _audioEnabled
-     * @param _skybox
      */
-    explicit LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, Level *_level = NULL, bool _audioEnabled = true, Skybox *_skybox = NULL);
+    explicit LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, Level *_level = NULL, bool _audioEnabled = true);
 
     /**
      * @brief
@@ -50,8 +47,6 @@ private:
 
     QObject *parent;  /**<  It is a callback variable to the parent of the widget. */
     QMap<GLint,GLuint> iconsList;  /**< It is the iconsList provided by Qubet object. */
-    Skybox *skybox; /**< It is the Skybox to use in the LevelEditor. */
-    GLfloat skyboxAngle; /**< It is the Skybox rotation angle. */
     GLboolean audioEnabled;  /**< It is the state of the audio. */
     GLboolean isMoving; /**< It is the variable that states if the menu is moving or not. */
     Level *level; /**< It is the current editing Level. */
@@ -271,6 +266,13 @@ signals:
      * @param effectName is the name of the effect to play.
      */
     void playEffect(QString effectName);
+
+    /**
+     * @brief Signal emitted to set the Skybox.
+     *
+     * @param skyboxName is the name of the Skybox to apply.
+     */
+    void setSkybox(QString skyboxName);
 
 };
 

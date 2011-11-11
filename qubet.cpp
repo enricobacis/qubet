@@ -195,7 +195,6 @@ GLvoid Qubet::connectInputEvents(const QObject *receiver)
     connect(this, SIGNAL(mouseMoved(QMouseEvent*, QList<GLuint>)), receiver, SLOT(mouseMoved(QMouseEvent*, QList<GLuint>)));
     connect(this, SIGNAL(mouseReleased(QMouseEvent*)), receiver, SLOT(mouseReleased(QMouseEvent*)));
     connect(this, SIGNAL(wheelScrolled(QWheelEvent*)), receiver, SLOT(wheelScrolled(QWheelEvent*)));
-    connect(receiver, SIGNAL(setMouseMovementTracking(int)), this, SLOT(setMouseMovementTracking(int)));
 }
 
 QList<GLuint> Qubet::getPickedName(GLint mouseX, GLint mouseY)
@@ -322,9 +321,8 @@ GLvoid Qubet::connectGame()
 GLvoid Qubet::showMenu(bool showIntro)
 {
     setMouseMovementTracking(MOUSE_MOVED_NONE);
-    menu = new Menu(skinsList, levelsList, iconsList, alphabet, this, audioManager->isAudioEnabled(), skyboxesList.value("galaxy"), showIntro);
+    menu = new Menu(skinsList, levelsList, iconsList, alphabet, this, audioManager->isAudioEnabled(), showIntro);
     connectMenu();
-    emit playAmbientMusic("resources/music/menu.mp3");
 
     glEnable(GL_LIGHT0);
     glDisable(GL_LIGHT1);
@@ -350,8 +348,23 @@ GLvoid Qubet::drawScene(GLboolean simplifyForPicking)
                0.0,  0.0,  0.0,
                0.0,  1.0,  0.0);
 
-    if (!currentText.isEmpty() && !simplifyForPicking)
-        renderText(width/2 - currentText.length()*2.5 , height - 50, currentText);
+    if (!simplifyForPicking)
+    {
+        skyboxAngle += 0.1f;
+        if (skyboxAngle >= 360.0f)
+            skyboxAngle -= 360.0f;
+
+        if (skybox != NULL)
+        {
+            glPushMatrix();
+                glRotatef(skyboxAngle, 0.0f, 1.0f, 0.0f);
+                skybox->draw();
+            glPopMatrix();
+        }
+
+        if (!currentText.isEmpty())
+            renderText(width/2 - currentText.length()*2.5 , height - 50, currentText);
+    }
 
     switch(currentView)
     {
@@ -598,7 +611,7 @@ void Qubet::draw()
 
 void Qubet::playStory(GLint skinId)
 {
-    game = new Game(iconsList, skyboxesList, alphabet, skinsList.value(skinId), levelsList, this, audioManager->isAudioEnabled());
+    game = new Game(iconsList, alphabet, skinsList.value(skinId), levelsList, this, audioManager->isAudioEnabled());
 
     connectGame();
 
@@ -613,7 +626,7 @@ void Qubet::playStory(GLint skinId)
 
 void Qubet::playArcade(GLint skinId, GLint levelId)
 {
-    game = new Game(iconsList, skyboxesList, alphabet, skinsList.value(skinId), levelsList.value(levelId), this, audioManager->isAudioEnabled());
+    game = new Game(iconsList, alphabet, skinsList.value(skinId), levelsList.value(levelId), this, audioManager->isAudioEnabled());
 
     connectGame();
 
@@ -648,14 +661,12 @@ void Qubet::showLevelEditor(GLint _levelId)
     else
         level = levelsList.value(_levelId);
 
-    levelEditor = new LevelEditor(iconsList, alphabet, this, level, audioManager->isAudioEnabled(), skyboxesList.value("stars"));
+    levelEditor = new LevelEditor(iconsList, alphabet, this, level, audioManager->isAudioEnabled());
     connectLevelEditor();
 
     glEnable(GL_LIGHT0);
     glEnable(GL_LIGHT1);
     currentView = LEVELEDITOR_VIEW;
-
-    emit playAmbientMusic("resources/music/editor.mp3");
 
     closeMenu();
 }
@@ -693,4 +704,9 @@ void Qubet::setMouseMovementTracking(int mode)
         setMouseTracking(true);
         break;
     }
+}
+
+void Qubet::setSkybox(QString skyboxName)
+{
+    skybox = skyboxesList.value(skyboxName);
 }

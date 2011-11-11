@@ -3,10 +3,9 @@
 #include "game_defines.h"
 #include "effects_defines.h"
 
-Game::Game(QMap<GLint,GLuint> &_iconsList, QMap<QString,Skybox*> &_skyboxesList, Alphabet *_alphabet, Skin *_skin, QMap<GLint,Level*> &_levelsList, QObject *_parent, bool _audioEnabled) :
+Game::Game(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, Skin *_skin, QMap<GLint,Level*> &_levelsList, QObject *_parent, bool _audioEnabled) :
     parent(_parent),
     iconsList(_iconsList),
-    skyboxesList(_skyboxesList),
     alphabet(_alphabet),
     skin(_skin),
     levelsList(_levelsList),
@@ -16,10 +15,9 @@ Game::Game(QMap<GLint,GLuint> &_iconsList, QMap<QString,Skybox*> &_skyboxesList,
     initGame();
 }
 
-Game::Game(QMap<GLint,GLuint> &_iconsList, QMap<QString,Skybox*> &_skyboxesList, Alphabet *_alphabet, Skin *_skin, Level *_level, QObject *_parent, bool _audioEnabled) :
+Game::Game(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, Skin *_skin, Level *_level, QObject *_parent, bool _audioEnabled) :
     parent(_parent),
     iconsList(_iconsList),
-    skyboxesList(_skyboxesList),
     alphabet(_alphabet),
     skin(_skin),
     level(_level),
@@ -75,14 +73,6 @@ void Game::draw(GLboolean simplifyForPicking)
                     currentActions->removeSecondaryAction(ROTATE_VOLUMECUBE);
 
                 break;
-
-            case ROTATE_SKYBOX:
-                skyboxAngle += 0.1f;
-
-                if (skyboxAngle >= 360.0f)
-                    skyboxAngle -= 360.0f;
-
-                break;
             }
         }
     }
@@ -94,14 +84,6 @@ void Game::draw(GLboolean simplifyForPicking)
         drawPrism(0.8f, 0.8f, 0.8f, volumeSkin, true);
     glPopMatrix();
     glPopName();
-
-    if (!simplifyForPicking && (skybox != NULL))
-    {
-        glPushMatrix();
-            glRotatef(skyboxAngle, 0.0f, 1.0f, 0.0f);
-            skybox->draw();
-        glPopMatrix();
-    }
 
     glPushMatrix();
         glTranslatef(-cameraOffset->x, -cameraOffset->y, -cameraOffset->z);
@@ -118,10 +100,11 @@ void Game::draw(GLboolean simplifyForPicking)
 
 void Game::initGame()
 {
-    currentActions = new ActionList(DO_NOTHING);
-    currentActions->appendSecondaryAction(ROTATE_SKYBOX);
+    connect(this, SIGNAL(setMouseMovementTracking(int)), parent, SLOT(setMouseMovementTracking(int)));
+    connect(this, SIGNAL(setSkybox(QString)), parent, SLOT(setSkybox(QString)));
 
-    skyboxAngle = 0.0f;
+    currentActions = new ActionList(DO_NOTHING);
+
     angleRotVolumeCube = (audioEnabled ? 0.0f : 90.0f);
 
     GLuint volume_on = iconsList.value(VOLUME_ON);
@@ -143,20 +126,20 @@ void Game::initGame()
     case ARCADE_MODE:
         break;
     }
-
-    cameraOffset = new Vector3f(0.0,   0.0f, 0.0f);
-    levelOffset  = new Vector3f(0.0f, -4.0f, -(level->getLength() / 2.0f) + 10.0f);
 }
 
 void Game::playLevel()
 {
     level->load();
 
-    skybox = skyboxesList.value(level->getSkyboxName());
+    emit setSkybox(level->getSkyboxName());
     emit playAmbientMusic("resources/music/" + level->getAmbientMusicFilename());
 
     cube = new Cube(level, skin, this);
     positionController = new PositionController(cube, level, this);
+
+    cameraOffset = new Vector3f(0.0,   0.0f, 0.0f);
+    levelOffset  = new Vector3f(0.0f, -4.0f, -(level->getLength() / 2.0f) + 4.0f);
 }
 
 void Game::nextLevel()

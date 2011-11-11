@@ -5,7 +5,6 @@
 #include "level.h"
 #include "actionlist.h"
 #include "cubestringlist.h"
-#include "skybox.h"
 
 /**
  * @brief Menu class used to show and manage the game menu.
@@ -31,9 +30,8 @@ public:
      * @param _alphabet is the reference to Qubet's alphabet.
      * @param _parent is a callback variable to the parent of the parent.
      * @param _audioEnabled is a variable to tell if the audio is enabled or not.
-     * @param _skybox is the reference to the Skybox to use.
      */
-    explicit Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, bool _audioEnabled = true, Skybox *_skybox = NULL, bool showIntro = true);
+    explicit Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, bool _audioEnabled = true, bool showIntro = true);
 
     /**
      * @brief Disconnect and Destroy a Menu object.
@@ -57,8 +55,6 @@ private:
     QMap<GLint,Skin*> skinsList; /**< It is the skinsList provided by Qubet object. */
     QMap<GLint,Level*> levelsList; /**< It is the levelsList provided by Qubet object. */
     QMap<GLint,GLuint> iconsList;  /**< It is the iconsList provided by Qubet object. */
-    Skybox *skybox; /**< It is the Skybox to use in the Menu. */
-    GLfloat skyboxAngle; /**< It is the Skybox rotation angle. */
     Alphabet *alphabet; /**< It is the alphabet provided by Qubet. */
     GLint itemSelected; /**< It is the id of the current menu action selected. */
     GLboolean isMoving; /**< It is the variable that states if the menu is moving or not. */
@@ -252,6 +248,13 @@ signals:
      * @param effectName is the name of the effect to play.
      */
     void playEffect(QString effectName);
+
+    /**
+     * @brief Signal emitted to set the Skybox.
+     *
+     * @param skyboxName is the name of the Skybox to apply.
+     */
+    void setSkybox(QString skyboxName);
 
 };
 

@@ -3,15 +3,13 @@
 #include "menu_defines.h"
 #include "effects_defines.h"
 
-Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, bool _audioEnabled, Skybox *_skybox, bool showIntro) :
+Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, bool _audioEnabled, bool showIntro) :
     parent(_parent),
     currentSkin(1),
     currentLevel(0),
     skinsList(_skinsList),
     levelsList(_levelsList),
     iconsList(_iconsList),
-    skybox(_skybox),
-    skyboxAngle(0.0f),
     alphabet(_alphabet),
     isMoving(false),
     gameType(0),
@@ -28,9 +26,15 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<
     team34Label(NULL),
     qubetLabel(NULL)
 {
+    connect(this, SIGNAL(playAmbientMusic(QString)), parent, SIGNAL(playAmbientMusic(QString)));
+    connect(this, SIGNAL(setMouseMovementTracking(int)), parent, SLOT(setMouseMovementTracking(int)));
+    connect(this, SIGNAL(setSkybox(QString)), parent, SLOT(setSkybox(QString)));
+
+    emit playAmbientMusic("resources/music/menu.mp3");
+    emit setSkybox("galaxy");
+
     currentView = INTRODUCTION;
     currentSection = INTRO_SECTION;
-
 
     if (showIntro)
     {
@@ -44,8 +48,6 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<
         cameraOffset->y = 0.0f;
         currentActions = new ActionList(GO_TO_MAIN_VIEW);
     }
-
-    currentActions->appendSecondaryAction(ROTATE_SKYBOX);
 
     angleRotVolumeCube = (audioEnabled ? 0.0f : 90.0f);
 
@@ -340,14 +342,6 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
                     currentActions->removeSecondaryAction(ROTATE_VOLUMECUBE);
 
                 break;
-
-            case ROTATE_SKYBOX:
-                skyboxAngle += 0.1f;
-
-                if (skyboxAngle >= 360.0f)
-                    skyboxAngle -= 360.0f;
-
-                break;
             }
         }
     }
@@ -363,14 +357,6 @@ GLvoid Menu::draw(GLboolean simplifyForPicking)
             drawPrism(0.8f, 0.8f, 0.8f, volumeSkin, true);
         glPopMatrix();
         glPopName();
-
-        if (!simplifyForPicking && (skybox != NULL))
-        {
-            glPushMatrix();
-                glRotatef(skyboxAngle, 0.0f, 1.0f, 0.0f);
-                skybox->draw();
-            glPopMatrix();
-        }
 
         glPushMatrix();
 

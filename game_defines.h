@@ -10,7 +10,7 @@ enum { // Primary Actions
        DO_NOTHING,
 
       // Secondary Actions
-      ROTATE_VOLUMECUBE, ROTATE_SKYBOX
+      ROTATE_VOLUMECUBE
      };
 
 #endif // GAME_DEFINES_H

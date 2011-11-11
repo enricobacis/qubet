@@ -3,7 +3,6 @@
 
 #include "positioncontroller.h"
 #include "actionlist.h"
-#include "skybox.h"
 
 /**
  * @brief
@@ -20,26 +19,22 @@ public:
     /**
      * @brief Cunstructor fot the Story Mode.
      *
-     * @param _skyboxesList
      * @param _skin
      * @param _levelsList
      * @param _parent
      * @param _audioEnabled
-     * @param _skybox
      */
-    explicit Game(QMap<GLint,GLuint> &_iconsList, QMap<QString,Skybox*> &_skyboxesList, Alphabet *_alphabet, Skin *_skin, QMap<GLint,Level*> &_levelsList, QObject *_parent = 0, bool _audioEnabled = true);
+    explicit Game(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, Skin *_skin, QMap<GLint,Level*> &_levelsList, QObject *_parent = 0, bool _audioEnabled = true);
 
     /**
      * @brief
      *
-     * @param _skyboxesList
      * @param _skin
      * @param _level
      * @param _parent
      * @param _audioEnabled
-     * @param _skybox
      */
-    explicit Game(QMap<GLint,GLuint> &_iconsList, QMap<QString,Skybox*> &_skyboxesList, Alphabet *_alphabet, Skin *_skin, Level *_level, QObject *_parent = 0, bool _audioEnabled = true);
+    explicit Game(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, Skin *_skin, Level *_level, QObject *_parent = 0, bool _audioEnabled = true);
 
     /**
      * @brief Destroyer of Game Object.
@@ -65,14 +60,11 @@ public:
 private:
     QObject *parent; /**< TODO */
     QMap<GLint,GLuint> iconsList;  /**< It is the iconsList provided by Qubet object. */
-    QMap<QString,Skybox*> skyboxesList; /**< TODO */
     Alphabet *alphabet; /**< It is the alphabet provided by Qubet. */
     Skin *skin; /**< TODO */
     Level *level; /**< TODO */
     QMap<GLint,Level*> levelsList; /**< TODO */
     bool audioEnabled; /**< TODO */
-    Skybox *skybox; /**< TODO */
-    GLfloat skyboxAngle; /**< It is the Skybox rotation angle. */
     Cube *cube; /**< TODO */
     PositionController *positionController; /**< TODO */
     GLint state; /**< TODO */
@@ -231,6 +223,13 @@ signals:
      * @param effectName is the name of the effect to play.
      */
     void playEffect(QString effectName);
+
+    /**
+     * @brief Signal emitted to set the Skybox.
+     *
+     * @param skyboxName is the name of the Skybox to apply.
+     */
+    void setSkybox(QString skyboxName);
 
 };
 

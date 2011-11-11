@@ -1,5 +1,6 @@
 #include "cube.h"
 #include "cube_defines.h"
+#include "effects_defines.h"
 
 Cube::Cube(Level *level, Skin *_skin, QObject *_parent):
     skin(_skin),
@@ -9,12 +10,13 @@ Cube::Cube(Level *level, Skin *_skin, QObject *_parent):
     t(0)
 {
     connect(parent, SIGNAL(keyPressedSignal(QKeyEvent*)), this, SLOT(keyPressed(QKeyEvent*)));
+    connect(this, SIGNAL(playEffect(QString)), parent, SIGNAL(playEffect(QString)));
 
     createNormalsMatrix();
 
     gravity = level->getGravity();
-    levelCellsLength = level->getLength() / 3;
-    levelCellsWidth = level->getWidth() / 3;
+    levelCellsLength = (int)(level->getLength() / 3.0f);
+    levelCellsWidth = (int)(level->getWidth() / 3.0f);
 }
 
 Cube::~Cube()
@@ -35,17 +37,29 @@ void Cube::setPosition(Vector3f *_position)
 
 void Cube::jump()
 {
-    state = state & CUBESTATE_JUMPING;
+    if (!(state & CUBESTATE_JUMPING))
+    {
+        state = state | CUBESTATE_JUMPING;
+        playEffect(EFFECT_JUMPSMALL);
+    }
 }
 
 void Cube::moveLeft()
 {
-    state = state & CUBESTATE_MOVING_LEFT;
+    if (!(state & CUBESTATE_MOVING_LEFT))
+    {
+        state = state | CUBESTATE_MOVING_LEFT;
+        playEffect(EFFECT_JUMP);
+    }
 }
 
 void Cube::moveRight()
 {
-    state = state & CUBESTATE_MOVING_RIGHT;
+    if (!(state & CUBESTATE_MOVING_RIGHT))
+    {
+        state = state | CUBESTATE_MOVING_RIGHT;
+        playEffect(EFFECT_JUMP);
+    }
 }
 
 void Cube::draw()

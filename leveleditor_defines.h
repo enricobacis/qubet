@@ -56,7 +56,7 @@ enum { // Primary Actions
        EXIT_TO_MENU,
 
       // Secondary Actions
-      ROTATE_VOLUMECUBE, ROTATE_SKYBOX
+      ROTATE_VOLUMECUBE
      };
 
 /**

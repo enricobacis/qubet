@@ -31,7 +31,7 @@ enum { // Primary Actions
        EXIT_FROM_LEVELS, EXIT_FROM_SKINS,
 
        // Secondary Actions
-       ROTATE_VOLUMECUBE, ROTATE_SKYBOX
+       ROTATE_VOLUMECUBE
      };
 
 /**
