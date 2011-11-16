@@ -19,32 +19,30 @@ public:
     /**
      * @brief Cunstructor fot the Story Mode.
      *
-     * @param _skin
-     * @param _levelsList
-     * @param _parent
-     * @param _audioEnabled
+     * @param _skin is the Skin.
+     * @param _levelsList is the levelList.
+     * @param _parent is the Game parent.
+     * @param _audioEnabled is the audioEnabled boolean value.
      */
     explicit Game(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, Skin *_skin, QMap<GLint,Level*> &_levelsList, QObject *_parent = 0, bool _audioEnabled = true);
 
     /**
      * @brief Cunstructor fot the Arcade Mode.
      *
-     * @param _skin
-     * @param _level
-     * @param _parent
-     * @param _audioEnabled
+     * @param _skin is the Skin.
+     * @param _level is the "going to play" Level.
+     * @param _parent is the Game parent.
+     * @param _audioEnabled is the audioEnabled boolean value.
      */
     explicit Game(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, Skin *_skin, Level *_level, QObject *_parent = 0, bool _audioEnabled = true);
 
     /**
      * @brief Destroyer of Game Object.
-     *
      */
     ~Game();
 
     /**
      * @brief Function to get invoked when the game start.
-     *
      */
     void startGame();
 
@@ -94,19 +92,16 @@ private:
 
     /**
      * @brief go to pause mode.
-     *
      */
     void pauseGame();
 
     /**
      * @brief continue the game from pause mode.
-     *
      */
     void continueGame();
 
     /**
      * @brief quit the game and returns to menu.
-     *
      */
     void quitGame();
 
@@ -152,13 +147,11 @@ private slots:
 
     /**
      * @brief slot invoked when the cube has a collision with an obstacle.
-     *
      */
     void collided();
 
     /**
      * @brief slot invoked when level is completed.
-     *
      */
     void levelCompleted();
 
@@ -167,19 +160,16 @@ signals:
 
     /**
      * @brief signal emitted to pause the game.
-     *
      */
     void pauseGameSignal();
 
     /**
      * @brief signal emitted to continue the game.
-     *
      */
     void continueGameSignal();
 
     /**
      * @brief signal emitted to close the game.
-     *
      */
     void gameClosedSignal();
 
