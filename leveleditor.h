@@ -17,16 +17,18 @@ class LevelEditor : public QObject
 public:
 
     /**
-     * @brief This is the LevelEditor Constructor.
+     * @brief Create a LevelEditor.
      *
-     * @param _parent
-     * @param _audioEnabled
+     * @param _iconsList is the reference to Qubet's iconsList.
+     * @param _alphabet is the reference to Qubet's alphabet.
+     * @param _level is the level to load in the LevelEditor (NULL to create a new Level).
+     * @param _parent is a callback variable to the parent of the parent.
+     * @param _audioEnabled is a variable to tell if the audio is enabled or not.
      */
     explicit LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, Level *_level = NULL, bool _audioEnabled = true);
 
     /**
-     * @brief This is the LevelEditor Destructor
-     *
+     * @brief This is the LevelEditor Destructor.
      */
     ~LevelEditor();
 
@@ -98,83 +100,83 @@ private:
 
     /**
      * @brief This function lengthen the level.
-     *
     */
     GLvoid lengthen();
 
     /**
      * @brief This function shorten the level.
-     *
     */
     GLvoid shorten();
 
     /**
      * @brief This function enlarge the level.
-     *
     */
     GLvoid enlarge();
 
     /**
      * @brief This function reduce the level.
-     *
     */
     GLvoid reduce();
 
     /**
      * @brief This function decraese the gravity value.
-     *
      */
     GLvoid gravityMinus();
 
     /**
      * @brief This function increase the gravity value.
-     *
      */
     GLvoid gravityPlus();
 
     /**
-     * @brief This function is called when back button is pressed.
-     *
+     * @brief This function is invoked when back button is pressed.
     */
     GLvoid buttonBackTriggered();
 
     /**
-     * @brief This function is called when next button is pressed.
-     *
+     * @brief This function is invoked when next button is pressed.
     */
     GLvoid buttonNextTriggered();
 
     /**
-     * @brief This function is called when a letter is typed.
+     * @brief This function is invoked when a letter is typed.
      *
-     * @param key
+     * @param key is the key pressed.
     */
     GLvoid letterTyped(int key);
 
     /**
-     * @brief This function set cthe colorEmissive value
+     * @brief This function set the colorEmissive value.
      *
-     * @param color
+     * @param color is the color to set.
      */
     GLvoid setColorEmissive(int color);
 
     /**
      * @brief This function check the position of the mouse.
      *
-     * @param x
-     * @param y
+     * @param x is the x coordinate.
+     * @param y is the y coordinate.
      */
     GLvoid checkMousePosition(GLint x, GLint y);
 
+    /**
+     * @brief Move the view in.
+     */
     GLvoid moveIn();
 
+    /**
+     * @brief Move the view out.
+     */
     GLvoid moveOut();
 
+    /**
+     * @brief Save the Level.
+     */
     GLvoid saveLevel();
 
     /**
      * @brief This function quit the level editor.
-     *
      */
     GLvoid quitEditor();
 
@@ -222,7 +224,6 @@ signals:
 
     /**
      * @brief signal emitted when the level editor is being closed.
-     *
      */
     void levelEditorClosed();
 

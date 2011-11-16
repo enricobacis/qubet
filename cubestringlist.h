@@ -201,7 +201,7 @@ private:
     /**
      * @brief Return a pointer to the CubeString having the parameter label.
      *
-     * @param _labelis the label you want the CubeString.
+     * @param _label is the label you want the CubeString.
      * @returns a pointer to the CubeString having the parameter OpenGL label.
      */
     CubeString *getCubeStringFromLabel(QString _label);

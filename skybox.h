@@ -6,6 +6,8 @@
 /**
  * @brief It is the Skybox Class.
  *
+ * @version 1.0
+ * @author \#34
  */
 class Skybox
 {
@@ -13,74 +15,72 @@ class Skybox
 public:
 
     /**
-     * @brief constructor of skybox object.
+     * @brief Create a Skybox object.
      *
-     * @param _skin
-     * @param _emissionFactor
-     * @param _cubeSide
+     * @param _skin is the skin to use for the Skybox.
+     * @param _emissionFactor is the emission factor of the Skybox.
+     * @param _cubeSide is the side of the Skybox cube.
      */
     explicit Skybox(Skin *_skin, GLfloat _emissionFactor = 0.6f, GLfloat _cubeSide = 40.0f);
 
     /**
-     * @brief safely destroy skybox object.
-     *
+     * @brief Safely destroy skybox object.
      */
     ~Skybox();
 
     /**
-     * @brief set the skybox skin.
+     * @brief Set the Skybox Skin.
      *
-     * @param _skin
+     * @param _skin is the skin to use for the Skybox.
      */
     GLvoid setSkin(Skin *_skin);
 
     /**
-     * @brief returns the skybox skin.
+     * @brief Returns the Skybox Skin.
      *
-     * @returns the skybox skin.
+     * @returns the Skybox Skin.
      */
     Skin *getSkin();
 
     /**
-     * @brief set the skybox emission factor.
+     * @brief Set the emission factor of the Skybox.
      *
-     * @param _emissionFactor
+     * @param _emissionFactor is the emission factor of the Skybox.
      */
     GLvoid setEmissionFactor(GLfloat _emissionFactor);
 
     /**
-     * @brief returns the emissionFactor value.
+     * @brief Returns the emission factor of the Skybox.
      *
-     * @returns the emissionFactor value.
+     * @returns the emission factor of the Skybox.
      */
     GLfloat getEmssionFactor();
 
     /**
-     * @brief set the side of the skybox cube.
+     * @brief Set the side of the Skybox cube.
      *
-     * @param _side
+     * @param _cubeSide is the side of the Skybox cube.
      */
     GLvoid setCubeSide(GLfloat _cubeSide);
 
     /**
-     * @brief returns the side length of the skybox cube.
+     * @brief Returns the side of the Skybox cube.
      *
-     * @returns the side length of the skybox cube.
+     * @returns the side of the Skybox cube.
      */
     GLfloat getCubeSide();
 
     /**
-     * @brief the draw function of the skybox.
-     *
+     * @brief Draw the Skybox.
      */
     GLvoid draw();
 
 private:
 
-    Skin *skin; /**< It is the skybox skin.  */
-    QVector<GLfloat> emissionVector; /**< It is the skybox emissionVector. */
+    Skin *skin; /**< It is the Skybox Skin. */
+    QVector<GLfloat> emissionVector; /**< It is the Skybox emission vector. */
     QVector<GLfloat> disabledVector; /**< It is the vector used to disable components in OGL. */
-    GLfloat cubeSide; /**< It is the skybox cube side length. */
+    GLfloat cubeSide; /**< It is the Skybox cube side length. */
 };
 
 #endif // SKYBOX_H

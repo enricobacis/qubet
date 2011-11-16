@@ -15,167 +15,166 @@ class Skin
 public:
 
     /**
-     * @brief contructor for Skin object.
-     *
+     * @brief Create a Skin object.
      */
     explicit Skin();
 
     /**
-     * @brief contructor for Skin object.
-     *
+     * @brief Create a Skin object with a name.
      */
     explicit Skin(QString _name);
 
     /**
-     * @brief contructor for Skin object.
+     * @brief Create a Skin object giving the faces.
      *
-     * @param _x_plus
-     * @param _x_minus
-     * @param _y_plus
-     * @param _y_minus
-     * @param _z_plus
-     * @param _z_minus
+     * @param _x_plus is the x+ texture ID.
+     * @param _x_minus is the x- texture ID.
+     * @param _y_plus is the y+ texture ID.
+     * @param _y_minus is the y- texture ID.
+     * @param _z_plus is the z+ texture ID.
+     * @param _z_minus is the z- texture ID.
      */
     explicit Skin(GLuint _x_plus, GLuint _x_minus, GLuint _y_plus, GLuint _y_minus, GLuint _z_plus, GLuint _z_minus);
 
     /**
-     * @brief safely destruct the Skin.
-     *
+     * @brief Safely destroy the Skin.
      */
     ~Skin();
 
     /**
-     * @brief set the name of the skin.
+     * @brief Set the name of the Skin.
      *
-     * @param _name
+     * @param _name is the name to set.
      */
     void setName(QString _name);
 
     /**
-     * @brief returns the skin name.
+     * @brief Returns the name of the Skin.
      *
-     * @returns the skin name.
+     * @returns the name of the Skin.
      */
     QString getName();
 
     /**
-     * @brief set the skin comment.
+     * @brief Set the comment of the Skin.
      *
-     * @param _comment
+     * @param _comment is the comment to set.
      */
     void setComment(QString _comment);
 
     /**
-     * @brief returns the skin comment.
+     * @brief Returns the comment of the Skin.
      *
-     * @returns the skin comment.
+     * @returns the comment of the Skin.
      */
     QString getComment();
 
     /**
-     * @brief set the texture of the skin.
+     * @brief Set one texture of the Skin.
      *
-     * @param face
-     * @param textureID
+     * @param face is the face to set the texture.
+     * @param textureID is the texture ID to set.
      */
     void setTexture(GLuint face, GLuint textureID);
 
     /**
-     * @brief returns the texture for the specified face.
+     * @brief Returns the texture for the specified face.
      *
-     * @param face
+     * @param face is the face to get the texture.
      *
      * @returns the texture for the specified face.
      */
     GLuint getTexture(GLuint face);
 
     /**
-     * @brief set the texture for x+ face.
+     * @brief Set the texture for x+ face.
      *
-     * @param _x_plus
+     * @param _x_plus is the texture to set.
      */
     void setTextureXPlus(GLuint _x_plus);
 
     /**
-     * @brief
+     * @brief Returns the texture for x+ face.
+     *
+     * @returns the texture for x+ face.
      *
      */
     GLuint getTextureXPlus();
 
     /**
-     * @brief set the texture for x- face.
+     * @brief Set the texture for x- face.
      *
-     * @param _x_minus
+     * @param _x_minus is the texture to set.
      */
     void setTextureXMinus(GLuint _x_minus);
 
     /**
-     * @brief returns the texture for x- face.
+     * @brief Returns the texture for x- face.
      *
      * @returns the texture for x- face.
      */
     GLuint getTextureXMinus();
 
     /**
-     * @brief set the texture for y+ face.
+     * @brief Set the texture for y+ face.
      *
-     * @param _y_plus
+     * @param _y_plus is the texture to set.
      */
     void setTextureYPlus(GLuint _y_plus);
 
     /**
-     * @brief returns the texture for y+ face.
+     * @brief Returns the texture for y+ face.
      *
      * @returns the texture for y+ face.
      */
     GLuint getTextureYPlus();
 
     /**
-     * @brief set the texture for y- face.
+     * @brief Set the texture for y- face.
      *
-     * @param _y_minus
+     * @param _y_minus is the texture to set.
      */
     void setTextureYMinus(GLuint _y_minus);
 
     /**
-     * @brief returns the texture for y- face.
+     * @brief Returns the texture for y- face.
      *
      * @returns the texture for y- face.
      */
     GLuint getTextureYMinus();
 
     /**
-     * @brief set the texture for z+ face.
+     * @brief Set the texture for z+ face.
      *
-     * @param _z_plus
+     * @param _z_plus is the texture to set.
      */
     void setTextureZPlus(GLuint _z_plus);
 
     /**
-     * @brief returns the texture for z+ face.
+     * @brief Returns the texture for z+ face.
      *
      * @returns the texture for z+ face.
      */
     GLuint getTextureZPlus();
 
     /**
-     * @brief set the texture for z- face.
+     * @brief Set the texture for z- face.
      *
-     * @param _z_minus
+     * @param _z_minus is the texture to set.
      */
     void setTextureZMinus(GLuint _z_minus);
 
     /**
-     * @brief returns the texture for z- face.
+     * @brief Returns the texture for z- face.
      *
      * @returns the texture for z- face.
      */
     GLuint getTextureZMinus();
 
     /**
-     * @brief set all the textures.
+     * @brief Set the same texture for all the faces.
      *
-     * @param all
+     * @param all is the texture to set.
      */
     void setTextureForAllFaces(GLuint all);
 
@@ -185,6 +184,7 @@ public:
      * @returns a string containing the GLuint textureIDs.
      */
     QString toString();
+
 
 private:
 

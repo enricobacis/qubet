@@ -21,7 +21,6 @@ public:
      * @brief Creates a level from an id, a name, a length and a width.
      *        It is used to create a new Level from the LevelEditor.
      *
-     * @param _id is the id of the Level.
      * @param _name is the name of the Level.
      * @param _length is the length of the Level.
      * @param _width is the width of the Level.
@@ -151,13 +150,16 @@ public:
 
     /**
      * @brief Loads the Level from xml form using the filename as input.
+     *
+     * @returns true if the load is successful, else false.
      */
     bool load();
 
     /**
      * @brief Saves the Level in a xml form using the filename as output.
      *
-     * @param return variable that is true is the level has been newly created, else false.
+     * @param newlyCreated is the return variable that is true is the level has been
+     *        newly created, else false.
      *
      * @returns true if save is successful, else false.
      */

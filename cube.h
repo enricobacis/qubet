@@ -5,7 +5,7 @@
 #include "skin.h"
 
 /**
- * @brief
+ * @brief This class rapresents the player's Cube.
  *
  * @version 1.0
  * @author \#34
@@ -17,54 +17,62 @@ class Cube : public QObject
 public:
 
     /**
-     * @brief
+     * @brief Create a Cube.
      *
-     * @param _level
-     * @param _skin
-     * @param parent
+     * @param _level is the Level in which the Cube lives.
+     * @param _skin is the skin of the Cube.
+     * @param _parent is the parent of the Cube.
      */
     explicit Cube(Level *_level, Skin *_skin, QObject *_parent = 0);
 
     /**
-     * @brief
-     *
+     * @brief Safely destroy a Cube object.
      */
     ~Cube();
 
     /**
-     * @brief
+     * @brief Returns the position of the Cube.
      *
+     * @returns the position of the Cube.
      */
     Vector3f *getPosition();
 
-    GLint getSideLength();
-
     /**
-     * @brief
+     * @brief Set the position of the Cube.
      *
-     * @param _position
+     * @param _position is the position to set.
      */
     void setPosition(Vector3f *_position);
 
     /**
-     * @brief
+     * @brief Returns the side of the Cube.
      *
+     * @returns the side of the Cube.
+     */
+    GLint getSideLength();
+
+    /**
+     * @brief Make the Cube jump.
      */
     void jump();
 
+    /**
+     * @brief Make the Cube move to the Left.
+     */
     void moveLeft();
 
+    /**
+     * @brief Make the Cube move to the right.
+     */
     void moveRight();
 
     /**
-     * @brief
-     *
+     * @brief Draw the Cube.
      */
     void draw();
 
     /**
-     * @brief
-     *
+     * @brief Update the position of the Cube.
      */
     void updatePosition();
 
@@ -77,15 +85,21 @@ private:
     GLuint sideLength;  /**< It is the side of the Cube. */
     GLfloat speed; /**< It is the current speed of the Cube. */
     GLfloat gravity; /**< It is the gravity variable. */
-    GLint levelCellsLength;
-    GLint levelCellsWidth;
+    GLint levelCellsLength; /**< It is the number of cells of the Level's length. */
+    GLint levelCellsWidth; /**< It is the number of cells of the Level's width. */
     GLfloat scaleFactor; /**< It is the scale factor. */
     GLfloat jumpStartTime; /**< It is the time the Cube has started the jump. */
     GLuint t;  /**< It is the parametric variable to put in the parametric functions. */
-    Vector3f* normalsMatrix[4][4][4];  /**< It is the 3-dimensional matrix that contain the nomrs vector of each sub-cube in case of explosion. */
+    Vector3f* normalsMatrix[4][4][4]; /**< It is the 3-dimensional matrix that contain the nomrs vector of each sub-cube in case of explosion. */
 
+    /**
+     * @brief Generate the normalsMatrix Matrix.
+     */
     void createNormalsMatrix();
 
+    /**
+     * @brief Make the Cube explode.
+     */
     void explode();
 
 
@@ -97,9 +111,9 @@ private slots:
     void collided();
 
     /**
-     * @brief
+     * @brief Slot invoked when the user presses a key on the keyboard.
      *
-     * @param e
+     * @param event is the QKeyEvent*.
      */
     void keyPressed(QKeyEvent *event);
 
@@ -107,8 +121,7 @@ private slots:
 signals:
 
     /**
-     * @brief
-     *
+     * @brief Signal emitted when the level is completed.
      */
     void levelCompleted();
 

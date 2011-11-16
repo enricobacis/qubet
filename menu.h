@@ -30,6 +30,7 @@ public:
      * @param _alphabet is the reference to Qubet's alphabet.
      * @param _parent is a callback variable to the parent of the parent.
      * @param _audioEnabled is a variable to tell if the audio is enabled or not.
+     * @param showIntro states if you want to show the intro. [default = true]
      */
     explicit Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, bool _audioEnabled = true, bool showIntro = true);
 
@@ -95,55 +96,46 @@ private:
 
     /**
      * @brief Select the previous level.
-     *
      */
     GLvoid previousLevel();
 
     /**
      * @brief Select the next level.
-     *
      */
     GLvoid nextLevel();
 
     /**
-     * @brief This function is called when playStoryButton is triggered.
-     *
+     * @brief This function is invoked when playStoryButton is triggered.
     */
     GLvoid buttonPlayStoryTriggered();
 
     /**
-     * @brief This function is called when playArcadeButton is triggered.
-     *
+     * @brief This function is invoked when playArcadeButton is triggered.
     */
     GLvoid buttonPlayArcadeTriggered();
 
     /**
-     * @brief This function is called when editorButton is triggered.
-     *
+     * @brief This function is invoked when editorButton is triggered.
     */
     GLvoid buttonEditorTriggered();
 
     /**
-     * @brief This function is called when backButton is triggered.
-     *
+     * @brief This function is invoked when backButton is triggered.
      */
     GLvoid buttonBackTriggered();
 
     /**
-     * @brief This function is called when nextButton is triggered.
-     *
+     * @brief This function is invoked when nextButton is triggered.
      */
     GLvoid buttonNextTriggered();
 
     /**
-     * @brief This function is called when previousSkinButton is triggered.
-     *
+     * @brief This function is invoked when previousSkinButton is triggered.
      */
     GLvoid buttonPreviousSkinTriggered();
 
     /**
-     * @brief This function is called when nextSkinButton is triggered.
-     *
+     * @brief This function is invoked when nextSkinButton is triggered.
      */
     GLvoid buttonNextSkinTriggered();
 

@@ -316,6 +316,11 @@ private slots:
      */
     void showLevelEditor(GLint _levelId);
 
+    /**
+     * @brief Slot invoked to add a level to the levelList.
+     *
+     * @param _level is the Level to add.
+     */
     void addLevelToLevelsList(Level *_level);
 
     /**
@@ -353,7 +358,7 @@ signals:
      * @param event is the QMouseEvent.
      * @param listNames is the QList<GLuint> of item's names.
      */
-    void itemClicked(QMouseEvent*, QList<GLuint> listNames);
+    void itemClicked(QMouseEvent *event, QList<GLuint> listNames);
 
     /**
      * @brief Signal emitted when the user releases the mouse button.

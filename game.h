@@ -17,18 +17,22 @@ class Game : public QObject
 public:
 
     /**
-     * @brief Cunstructor fot the Story Mode.
+     * @brief Creator for the Story Mode.
      *
+     * @param _iconsList is the reference to Qubet's iconsList.
+     * @param _alphabet is the reference to Qubet's alphabet.
      * @param _skin is the Skin.
      * @param _levelsList is the levelList.
-     * @param _parent is the Game parent.
-     * @param _audioEnabled is the audioEnabled boolean value.
+     * @param _parent is a callback variable to the parent of the parent.
+     * @param _audioEnabled is a variable to tell if the audio is enabled or not.
      */
     explicit Game(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, Skin *_skin, QMap<GLint,Level*> &_levelsList, QObject *_parent = 0, bool _audioEnabled = true);
 
     /**
-     * @brief Cunstructor fot the Arcade Mode.
+     * @brief Cunstructor for the Arcade Mode.
      *
+     * @param _iconsList is the reference to Qubet's iconsList.
+     * @param _alphabet is the reference to Qubet's alphabet.
      * @param _skin is the Skin.
      * @param _level is the "going to play" Level.
      * @param _parent is the Game parent.
@@ -37,12 +41,12 @@ public:
     explicit Game(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, Skin *_skin, Level *_level, QObject *_parent = 0, bool _audioEnabled = true);
 
     /**
-     * @brief Destroyer of Game Object.
+     * @brief Safely destroy a Game Object.
      */
     ~Game();
 
     /**
-     * @brief Function to get invoked when the game start.
+     * @brief Function to start the game.
      */
     void startGame();
 
@@ -76,32 +80,32 @@ private:
     Vector3f *levelOffset; /**< It is the offset of the Level */
 
     /**
-     * @brief initialize the game.
+     * @brief Initialize the game.
      */
     void initGame();
 
     /**
-     * @brief start playing game.
+     * @brief Start the current Level.
      */
     void playLevel();
 
     /**
-     * @brief go to the next level.
+     * @brief Go to the next level.
      */
     void nextLevel();
 
     /**
-     * @brief go to pause mode.
+     * @brief Pause the Game.
      */
     void pauseGame();
 
     /**
-     * @brief continue the game from pause mode.
+     * @brief Continue the Game from Pause mode.
      */
     void continueGame();
 
     /**
-     * @brief quit the game and returns to menu.
+     * @brief Quit the game and returns to Menu.
      */
     void quitGame();
 
@@ -146,30 +150,29 @@ private slots:
     void keyPressed(QKeyEvent *event);
 
     /**
-     * @brief slot invoked when the cube has a collision with an obstacle.
+     * @brief Slot invoked when the cube has a collision with an obstacle.
      */
     void collided();
 
     /**
-     * @brief slot invoked when level is completed.
+     * @brief Slot invoked when level is completed.
      */
     void levelCompleted();
-
 
 signals:
 
     /**
-     * @brief signal emitted to pause the game.
+     * @brief Signal emitted to pause the game.
      */
     void pauseGameSignal();
 
     /**
-     * @brief signal emitted to continue the game.
+     * @brief Signal emitted to continue the game.
      */
     void continueGameSignal();
 
     /**
-     * @brief signal emitted to close the game.
+     * @brief Signal emitted to close the game.
      */
     void gameClosedSignal();
 
@@ -186,6 +189,11 @@ signals:
      */
     void setMouseMovementTracking(int mode);
 
+    /**
+     * @brief Signal relaunched from Qubet when the user presses a key on the keyboard.
+     *
+     * @param event is the QKeyEvent*.
+     */
     void keyPressedSignal(QKeyEvent *event);
 
     /**

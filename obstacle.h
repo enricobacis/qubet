@@ -17,8 +17,8 @@ public:
     /**
      * @brief Constructor of Obstacle.
      *
-     * @param _modeld
-     * @param _position
+     * @param _modelId is the modelId of the Obstacle.
+     * @param _position is the position of the Obstacle.
      */
     explicit Obstacle(GLint _modelId, Vector3f *_position);
 
@@ -43,70 +43,71 @@ public:
 
 
     /**
-     * @brief set the obstacleId
+     * @brief Set the obstacleId.
      *
-     * @param _id
-     *
+     * @param _id is the id to set.
     */
     GLvoid setId(GLint _id);
 
     /**
-     * @brief set the obstaclePosition
+     * @brief Set the obstacle position.
      *
-     * @param _position
+     * @param _position is the position to set.
      */
     GLvoid setPosition(Vector3f *_position);
 
     /**
-     * @brief returns the obstaclePosition
+     * @brief Returns the obstacle position.
      *
-     * @returns the obstaclePosition
+     * @returns the obstacle position.
      */
     Vector3f *getPosition();
 
     /**
-     * @brief set the obstacleColor
+     * @brief Set the obstacle color.
      *
-     * @param _color
+     * @param _color is the color to set.
      */
     GLvoid setColor(QColor _color);
 
     /**
-     * @brief returns the obstacleColor
+     * @brief Returns the obstacle color.
      *
-     * @returns the obstacleColor.
+     * @returns the obstacle color.
      */
     QColor getColor();
 
     /**
-     * @brief set the obstacleModelId
+     * @brief Set the obstacle modelId.
      *
-     * @param _modelId
+     * @param _modelId is the modelId to set.
      */
     GLvoid setModelId(GLint _modelId);
 
     /**
-     * @brief returns the obstacle modelId.
+     * @brief Returns the obstacle modelId.
      *
      * @returns the obstacle modelId.
      */
     GLint getModelId();
 
     /**
-     * @brief set the obstacle type.
+     * @brief Set the obstacle type.
      *
-     * @param _type
+     * @param _type is the type to set.
      */
     GLvoid setType(GLint _type);
 
     /**
-     * @brief returns the obstacle type value.
+     * @brief Returns the obstacle type.
      *
-     * @returns the obstacle type value.
+     * @returns the obstacle type.
      */
     GLint getType();
 
+
 private:
+
     GLint id; /**< It is the obstacle id. */
     Vector3f *position; /**< It is the obstacle position. */
     QColor color; /**< It is the obstacle color. */

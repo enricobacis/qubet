@@ -34,41 +34,41 @@ GLvoid setTextureClampToEdge();
 GLvoid drawObstacle(GLuint id);
 
 /**
- * @brief returns the modelView coordinates from projectionView coordinates.
+ * @brief returns the modelView coordinates from Projection coordinates.
  *
- * @param vect
- * @param computeZDepth
+ * @param vect is the vector of Projection coordinates.
+ * @param computeZDepth is set to true if you want to compute the foreground object z, else false.
  *
- * @returns the modelView coordinates from projection coordinates.
+ * @returns the ModelView coordinates from projection coordinates.
  */
 Vector3f *getModelViewPos(Vector3f *vect, bool computeZDepth = false);
 
 /**
  * @brief returns the Projection coordinates from modelView coordinates.
  *
- * @param vect
+ * @param vect is the vector of ModelView coordinates.
  *
- * @returns the Projection coordinates from modelView coordinates.
+ * @returns the Projection coordinates from ModelView coordinates.
  */
 Vector3f *getProjectionPos(Vector3f *vect);
 
 /**
- * @brief the specified by t coordinates of a parametric line.
+ * @brief Returns the specified by t coordinates of a parametric line.
  *
- * @param p0
- * @param p1
- * @param t
+ * @param p0 is the first point of a line.
+ * @param p1 is the second point of a line.
+ * @param t is the parametric variable.
  *
  * @returns the specified by t coordinates of a parametric line.
  */
 Vector3f *getPointFromParametricLine(Vector3f *p0, Vector3f *p1, GLfloat t);
 
 /**
- * @brief returns the obstaccle boundingBox lenghts.
+ * @brief returns the Obstacle boundingBox lenghts.
  *
- * @param id
+ * @param id is the id of the Obstacle.
  *
- * @returns the obstaccle boundingBox lenghts.
+ * @returns the Obstacle boundingBox lenghts.
 */
 Vector3f *getObstacleBoundingBox(GLuint id);
 

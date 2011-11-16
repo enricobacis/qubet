@@ -32,32 +32,38 @@ private:
     QObject *parent; /**< It is the parent of the PositionController. */
     Cube *cube; /**< It is the pointer to the Cube Object. */
     Level *level; /**< Is the pointer to the Level Object. */
-    GLint levelLength;
-    GLint levelWidth;
+    GLint levelLength; /**< It is the length of the Level. */
+    GLint levelWidth; /**< It is the width of the Level. */
     QTimer *checkPositionTimer; /**< QTimer controlling the checkCollision() calls. */
     QVector<QVector<QVector<bool> > > obstacleCells; /**< It is the 3d matrix rappresent obstacle cells */
 
     /**
      * @brief Check if the cube has a collision with an obstacle.
-     *
      */
     GLvoid checkCollision();
 
+    /**
+     * @brief Returns the cell coordinates from absolute position.
+     *
+     * @param position is the vector of absolute coordinates.
+     *
+     * @returns the cell coordinates from absolute position.
+     */
     Vector3f *positionToCell(Vector3f *position);
 
+    /**
+     * @brief Create the 3D Matrix of ObstacleCells.
+     */
     GLvoid createObstacleCells();
 
     /**
      * @brief Reimplementation of the run() function of the QThread class.
-     *
-     *
      */
     void run();
 
 signals:
     /**
      * @brief Signal emitted when the cube has a collision with an obstacle.
-     *
      */
     void collision();
 
