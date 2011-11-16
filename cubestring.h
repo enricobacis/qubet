@@ -74,14 +74,14 @@ public:
     /**
      * @brief Returns the text of the CubeString.
      *
-     * @return the text of the CubeString.
+     * @returns the text of the CubeString.
      */
     QString getLabel();
 
     /**
      * @brief Returns the name given to the entire string (for picking purposes). [default = 0]
      *
-     * @return the name given to the entire string (for picking purposes). [default = 0]
+     * @returns the name given to the entire string (for picking purposes). [default = 0]
      */
     GLuint getName();
 
@@ -131,7 +131,7 @@ public:
      * @param _letterName is the name of the letter (it is the second name (after the entire string name) in the nameList of the picking function.
      *        You don't have to know which is, let the picking function and the CubeString code work for you.
      *
-     * @return true if the letter is already rotating, else false.
+     * @returns true if the letter is already rotating, else false.
      */
     GLboolean isRotating(GLuint _letterName);
 
@@ -142,7 +142,7 @@ public:
      * @param _nextLetterDelta is the delta you want to apply from the previous and
      *        the next letter's angle. [default = 0]
      *
-     * @return the angle the next letter after this CubeString should have.
+     * @returns the angle the next letter after this CubeString should have.
      */
     GLfloat setCurrentAngle(GLfloat _firstLetterAngle, GLfloat _nextLetterDelta = 0);
 
@@ -173,7 +173,7 @@ private:
      *
      * @param _letter is the QChar letter you want to create a displayList for.
      *
-     * @return the displayList ID.
+     * @returns the displayList ID.
      */
     GLuint createLetterDisplayList(QChar _letter);
 
@@ -182,7 +182,7 @@ private:
      *
      * @param _skin is the skin you want to create a displayList for.
      *
-     * @return the displayList ID.
+     * @returns the displayList ID.
      */
     GLuint createLetterDisplayList(Skin *_skin);
 

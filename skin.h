@@ -182,7 +182,7 @@ public:
     /**
      * @brief Print a string containing the GLuint textureIDs.
      *
-     * @return a string containing the GLuint textureIDs.
+     * @returns a string containing the GLuint textureIDs.
      */
     QString toString();
 

@@ -69,7 +69,7 @@ public:
     /**
      * @brief Returns the current primaryAction.
      *
-     * @return The current primaryAction.
+     * @returns The current primaryAction.
      */
     int getPrimaryAction();
 
@@ -90,7 +90,7 @@ public:
     /**
      * @brief Returns the secondaryActions list.
      *
-     * @return the secondaryActions list.
+     * @returns the secondaryActions list.
      */
     QList<int> getSecondaryActions();
 
@@ -99,7 +99,7 @@ public:
      *
      *        It is the current secondaryActions list, prepending the primaryAction.
      *
-     * @return a list of primary and secondary actions.
+     * @returns a list of primary and secondary actions.
      */
     QList<int> getAllActions();
 

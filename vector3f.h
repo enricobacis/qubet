@@ -117,7 +117,7 @@ struct Vector3f
      * @brief Operator [] overloading function.
      *
      * @param i is the index [1, 3].
-     * @return GLfloat coordinate.
+     * @returns GLfloat coordinate.
      */
     inline GLfloat &operator[](GLint i)
     {
@@ -139,7 +139,7 @@ struct Vector3f
      * @brief Operator [] overloading function.
      *
      * @param i is the index [1, 3].
-     * @return const GLfloat coordinate
+     * @returns const GLfloat coordinate
      */
     inline const GLfloat &operator[](GLint i) const
     {
@@ -162,7 +162,7 @@ struct Vector3f
      * The length^2 is less resource expensive then length().
      * You can use it for check which vector is longer.
      *
-     * @return GLfloat length^2 of vector.
+     * @returns GLfloat length^2 of vector.
      */
     inline GLfloat lengthSq()
     {
@@ -176,7 +176,7 @@ struct Vector3f
      * is longer you can use the lengthSq() function that
      * is less resource expensive.
      *
-     * @return GLfloat length of the vector.
+     * @returns GLfloat length of the vector.
      */
     inline GLfloat length()
     {
@@ -208,7 +208,7 @@ struct Vector3f
     /**
      * @brief Check if the vector is (0, 0, 0).
      *
-     * @return GLboolean true if it is (0, 0, 0), else false.
+     * @returns GLboolean true if it is (0, 0, 0), else false.
      */
     inline GLboolean isZero()
     {
@@ -238,7 +238,7 @@ struct Vector3f
      * @brief Compute the dot product of the vector with the vector v.
      *
      * @param v the other vector to compute the dot product.
-     * @return GLfloat the dot product.
+     * @returns GLfloat the dot product.
      */
     inline GLfloat dot(const Vector3f &v)
     {
@@ -249,7 +249,7 @@ struct Vector3f
      * @brief Compute the cross product of the vector with the vector v.
      *
      * @param v the other vector to compute the cross product.
-     * @return Vector3f* the cross product.
+     * @returns Vector3f* the cross product.
      */
     inline Vector3f *cross(const Vector3f &v)
     {
@@ -382,7 +382,7 @@ struct Vector3f
     /**
      * @brief Compute one of the orthogonal vectors of the vector.
      *
-     * @return Vector3f* an orthogonal vector.
+     * @returns Vector3f* an orthogonal vector.
      */
     inline Vector3f* getOneOrthogonal()
     {
@@ -403,7 +403,7 @@ struct Vector3f
     /**
      * @brief Return the QString of coordinates.
      *
-     * @return QString are the coordinates.
+     * @returns QString are the coordinates.
      */
     inline QString toString()
     {
@@ -419,7 +419,7 @@ struct Vector3f
  *
  * @param v1 the first vector.
  * @param v2 the second vector.
- * @return GLboolean true if v1 and v2 are equal, else false.
+ * @returns GLboolean true if v1 and v2 are equal, else false.
  */
 inline GLboolean operator==(const Vector3f &v1, const Vector3f &v2)
 {
@@ -435,7 +435,7 @@ inline GLboolean operator==(const Vector3f &v1, const Vector3f &v2)
  *
  * @param v1 the first vector.
  * @param v2 the second vector.
- * @return Vector3f is the sum of v1 and v2.
+ * @returns Vector3f is the sum of v1 and v2.
  */
 inline Vector3f operator+(const Vector3f &v1, const Vector3f &v2)
 {
@@ -448,7 +448,7 @@ inline Vector3f operator+(const Vector3f &v1, const Vector3f &v2)
  *
  * @param v1 the first vector.
  * @param v2 the second vector.
- * @return Vector3f is the difference of v1 and v2.
+ * @returns Vector3f is the difference of v1 and v2.
  */
 inline Vector3f operator-(const Vector3f &v1, const Vector3f &v2)
 {
@@ -461,7 +461,7 @@ inline Vector3f operator-(const Vector3f &v1, const Vector3f &v2)
  *
  * @param v is the vector.
  * @param a is the scalar.
- * @return Vector3f is the scalar product a*v.
+ * @returns Vector3f is the scalar product a*v.
  */
 inline Vector3f operator*(const Vector3f &v, const GLfloat &a)
 {
@@ -474,7 +474,7 @@ inline Vector3f operator*(const Vector3f &v, const GLfloat &a)
  *
  * @param a is the scalar.
  * @param v is the vector.
- * @return Vector3f is the scalar product a*v.
+ * @returns Vector3f is the scalar product a*v.
  */
 inline Vector3f operator*(const GLfloat &a, const Vector3f &v)
 {
@@ -486,7 +486,7 @@ inline Vector3f operator*(const GLfloat &a, const Vector3f &v)
  *        Multiply for -1 all vector components.
  *
  * @param v is the vector.
- * @return Vector3f is the negated vector.
+ * @returns Vector3f is the negated vector.
  */
 inline Vector3f operator-(const Vector3f &v)
 {

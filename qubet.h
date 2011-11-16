@@ -182,7 +182,7 @@ private:
      * @param mouseX is the mouse coordinate of x.
      * @param mouseY is the mouse coordinate of y.
      *
-     * @return a list of the names of the item on (mouseX, mouseY).
+     * @returns a list of the names of the item on (mouseX, mouseY).
      */
     QList<GLuint> getPickedName(GLint mouseX, GLint mouseY);
 
@@ -243,35 +243,35 @@ private:
     /**
      * @brief Load the skins from the resource file.
      *
-     * @return true if load is successful, else false.
+     * @returns true if load is successful, else false.
      */
     GLboolean loadSkins();
 
     /**
      * @brief Load the levels from the resource file.
      *
-     * @return true if load is successful, else false.
+     * @returns true if load is successful, else false.
      */
     GLboolean loadLevels();
 
     /**
      * @brief Load the alphabet.
      *
-     * @return true if load is successful, else false.
+     * @returns true if load is successful, else false.
      */
     GLboolean loadAlphabet();
 
     /**
      * @brief Load the icons.
      *
-     * @return true if load is successful, else false.
+     * @returns true if load is successful, else false.
      */
     GLboolean loadIcons();
 
     /**
      * @brief Load the skyboxes.
      *
-     * @return true if load is successful, else false.
+     * @returns true if load is successful, else false.
      */
     GLboolean loadSkyboxes();
 

@@ -89,7 +89,7 @@ public:
     /**
      * @brief Returns the number of labels in the CubeStringList.
      *
-     * @return the number of labels in the CubeStringList.
+     * @returns the number of labels in the CubeStringList.
      */
     GLint getLabelCount();
 
@@ -98,7 +98,7 @@ public:
      *
      * @param _stringName is the name of the string you want the label.
      *
-     * @return the label which name is _stringName.
+     * @returns the label which name is _stringName.
      */
     QString getLabel(GLuint _stringName);
 
@@ -170,7 +170,7 @@ public:
      * @param _nextLetterDelta is the delta you want to apply from the previous and
      *        the next letter's angle. [default = 0]
      *
-     * @return the angle the next letter after this CubeString should have.
+     * @returns the angle the next letter after this CubeString should have.
      */
     GLfloat setCurrentAngle(GLfloat _firstLetterAngle, GLfloat _nextLetterDelta = 0.0f);
 
@@ -194,7 +194,7 @@ private:
      * @brief Return a pointer to the CubeString having the parameter OpenGL name.
      *
      * @param _name is the OpenGL name you want the CubeString.
-     * @return a pointer to the CubeString having the parameter OpenGL name.
+     * @returns a pointer to the CubeString having the parameter OpenGL name.
      */
     CubeString *getCubeStringFromName(GLuint _name);
 
@@ -202,7 +202,7 @@ private:
      * @brief Return a pointer to the CubeString having the parameter label.
      *
      * @param _labelis the label you want the CubeString.
-     * @return a pointer to the CubeString having the parameter OpenGL label.
+     * @returns a pointer to the CubeString having the parameter OpenGL label.
      */
     CubeString *getCubeStringFromLabel(QString _label);
 
@@ -211,7 +211,7 @@ private:
      *
      * @param _labels is the QString to split.
      *
-     * @return the splitted QList of QPair.
+     * @returns the splitted QList of QPair.
      */
     QList< QPair<QString,GLuint> > splitLabels(QString _labels);
 

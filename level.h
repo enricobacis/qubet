@@ -46,7 +46,7 @@ public:
     /**
      * @brief Returns the filename of the Level.
      *
-     * @return the filename of the Level.
+     * @returns the filename of the Level.
      */
     QString getFilename();
 
@@ -60,7 +60,7 @@ public:
     /**
      * @brief Returns the name of the Level.
      *
-     * @return the name of the Level.
+     * @returns the name of the Level.
      */
     QString getName();
 
@@ -74,7 +74,7 @@ public:
     /**
      * @brief Returns the a variable that states if the Level is in the story.
      *
-     * @return true if the Level is in the story, else false.
+     * @returns true if the Level is in the story, else false.
      */
     bool getIsInStory();
 
@@ -88,21 +88,21 @@ public:
     /**
      * @brief Returns the width of the Level.
      *
-     * @return the width of the Level.
+     * @returns the width of the Level.
      */
     GLfloat getWidth();
 
     /**
      * @brief Returns the length of the Level.
      *
-     * @return the length of the Level.
+     * @returns the length of the Level.
      */
     GLfloat getLength();
 
     /**
      * @brief Returns the gravity of the Level.
      *
-     * @return the gravity of the Level.
+     * @returns the gravity of the Level.
      */
     GLfloat getGravity();
 
@@ -116,14 +116,14 @@ public:
     /**
      * @brief Returns the ambient Music Filename.
      *
-     * @return the ambientMusicFilename.
+     * @returns the ambientMusicFilename.
      */
     QString getAmbientMusicFilename();
 
     /**
      * @brief Returns the Skybox Name.
      *
-     * @return the skyboxName.
+     * @returns the skyboxName.
      */
     QString getSkyboxName();
 
@@ -159,7 +159,7 @@ public:
      *
      * @param return variable that is true is the level has been newly created, else false.
      *
-     * @return true if save is successful, else false.
+     * @returns true if save is successful, else false.
      */
     bool save(bool *newlyCreated = 0);
 
@@ -173,7 +173,7 @@ public:
     /**
      * @brief Returns the number of obstacles in the level.
      *
-     * @return the number of obstacles in the level.
+     * @returns the number of obstacles in the level.
     */
     GLint getObstacleListCount();
 
@@ -208,7 +208,7 @@ private:
      *
      * @param cells is the Vector3f of cells coordinates.
      * @param obstacleModelId is the modelID of the obstacle.
-     * @return the absolute position of the obstacle.
+     * @returns the absolute position of the obstacle.
      */
     Vector3f *obstacleCellToPosition(Vector3f *cells, GLuint obstacleModelId);
 
@@ -217,7 +217,7 @@ private:
      *
      * @param position is the absolute position of the obstacle.
      * @param obstacleModelId is the modelID of the obstacle.
-     * @return the cell coordinates of the obstacle.
+     * @returns the cell coordinates of the obstacle.
      */
     Vector3f *obstaclePositionToCell(Vector3f *position, GLuint obstacleModelId);
 };

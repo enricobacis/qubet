@@ -39,7 +39,7 @@ public:
      *
      * @param letter is the QChar letter of the Alphabet you want to generate the skin.
      *
-     * @return a random skin of parameter letter textures.
+     * @returns a random skin of parameter letter textures.
      */
     Skin *getRandomLetterSkin(QChar letter);
 
@@ -51,7 +51,7 @@ public:
      *
      * @param letter is the letter you want a texture.
      *
-     * @return the random extracted texture ID.
+     * @returns the random extracted texture ID.
      */
     GLuint getRandomLetterTexture(QChar letter);
 
@@ -67,7 +67,7 @@ public:
      * @param letter is the QChar letter of the Alphabet you want to extract textures.
      * @param numberOfTextures is the number of textures you want to extract from the Letter.
      *
-     * @return the random extracted list of texture IDs.
+     * @returns the random extracted list of texture IDs.
      */
     QList<GLuint> getRandomLetterTextures(QChar letter, GLint numberOfTextures);
 
@@ -79,7 +79,7 @@ public:
      *
      * @param letter is the QChar letter of the Alphabet you want to extract textures.
      *
-     * @return the list of all letter's Texture IDs.
+     * @returns the list of all letter's Texture IDs.
      */
     QList<GLuint> getAllLetterTextures(QChar letter);
 
