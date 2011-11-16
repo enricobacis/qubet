@@ -22,7 +22,7 @@ class CubeString
 public:
 
     /**
-     * @brief Creates a CubeString od the text _label, using the Alphabet _alphabet and
+     * @brief Creates a CubeString of the text _label, using the Alphabet _alphabet and
      *        every cube letter of the string will be of dimension _cubeDimension.
      *
      *        You can define a name for the entire string setting the parameter _name
@@ -36,7 +36,7 @@ public:
     explicit CubeString(QString _label, GLfloat _cubeDimension, Alphabet *_alphabet, GLuint _name = 0);
 
     /**
-     * @brief Creates a CubeString od the text _label, using the Alphabet _alphabet and
+     * @brief Creates a CubeString of the text _label, using the Alphabet _alphabet and
      *        the entire CubeString can grow up to _maxWidth as width and _maxHeight
      *        as height.
      *
@@ -66,9 +66,8 @@ public:
      *        The CubeString will be drawn using the current point as the center of
      *        the drawn CubeString.
      *
-     * @param simplifyForPicking is the is used to draw a simplified scene
-     *        used for the picking function and does not compute the change to
-     *        angles. [default = false]
+     * @param simplifyForPicking is the is used to draw a simplified scene used for the picking function
+     *        and does not compute the change to angles. [default = false]
      */
     GLvoid draw(GLboolean simplifyForPicking = false);
 
@@ -99,10 +98,8 @@ public:
      *          will be accepted, a rotation is valid if:
      *          (_turns * 90) % _angleStep == 0
      *
-     * @param _letterName is the name of the Letter (it is the second name (after
-     *        the entire string name) in the nameList of the picking function.
-     *        You don't have to know which is, let the picking function and the
-     *        CubeString code work for you.
+     * @param _letterName is the name of the Letter (it is the second name (after the entire string name) in the nameList of the picking function.
+     *        You don't have to know which is, let the picking function and the CubeString code work for you.
      * @param _angleStep is the angle that will be summed to letter on each frame.
      * @param _turns is an integer that tells how many 90 degrees turns you
      *        want the letter to do.
@@ -131,12 +128,10 @@ public:
     /**
      * @brief Check if a letter of the CubeString is already rotating.
      *
-     * @param _letterName is the name of the Letter (it is the second name (after
-     *        the entire string name) in the nameList of the picking function.
-     *        You don't have to know which is, let the picking function and the
-     *        CubeString code work for you.
+     * @param _letterName is the name of the letter (it is the second name (after the entire string name) in the nameList of the picking function.
+     *        You don't have to know which is, let the picking function and the CubeString code work for you.
      *
-     * @return true if the letter is already rotating, false elsewhere.
+     * @return true if the letter is already rotating, else false.
      */
     GLboolean isRotating(GLuint _letterName);
 

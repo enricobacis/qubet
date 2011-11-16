@@ -24,15 +24,16 @@ public:
     explicit PositionController(Cube *_cube, Level *_level, QObject *_parent = 0);
 
     /**
-     * @brief Destroyer of PositionController Object.
-     *
+     * @brief Destroy a PositionController Object.
      */
     ~PositionController();
 
 private:
-    QObject *parent; /**< It is the parent of PositionController object. */
+    QObject *parent; /**< It is the parent of the PositionController. */
     Cube *cube; /**< It is the pointer to the Cube Object. */
     Level *level; /**< Is the pointer to the Level Object. */
+    GLint levelLength;
+    GLint levelWidth;
     QTimer *checkPositionTimer; /**< QTimer controlling the checkCollision() calls. */
     QVector<QVector<QVector<bool> > > obstacleCells; /**< It is the 3d matrix rappresent obstacle cells */
 
@@ -42,6 +43,8 @@ private:
      */
     GLvoid checkCollision();
 
+    Vector3f *positionToCell(Vector3f *position);
+
     GLvoid createObstacleCells();
 
     /**
@@ -50,8 +53,6 @@ private:
      *
      */
     void run();
-
-
 
 signals:
     /**

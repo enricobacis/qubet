@@ -437,7 +437,6 @@ GLboolean Qubet::loadSkins()
 
         if (skinElement.attribute("autofind", "false") == "true")
         {
-
             QString extension = skinElement.attribute("extension", "png");
             skin->setTextureXPlus (bindTexture(QImage(path + "x+." + extension)));
             skin->setTextureXMinus(bindTexture(QImage(path + "x-." + extension)));

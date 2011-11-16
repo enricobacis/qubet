@@ -37,6 +37,8 @@ public:
      */
     Vector3f *getPosition();
 
+    GLint getSideLength();
+
     /**
      * @brief
      *
@@ -90,7 +92,7 @@ private:
 private slots:
 
     /**
-     * @brief It is the slot called when the Cube collides with an Obstacle.
+     * @brief It is the slot invoked when the Cube collides with an Obstacle.
      */
     void collided();
 

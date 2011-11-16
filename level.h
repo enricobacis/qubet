@@ -74,10 +74,15 @@ public:
     /**
      * @brief Returns the a variable that states if the Level is in the story.
      *
-     * @return true if the Level is in the story, false elsewhere.
+     * @return true if the Level is in the story, else false.
      */
     bool getIsInStory();
 
+    /**
+     * @brief Set the a variable that states if the Level is in the story.
+     *
+     * @param _isInStory is the variable to set. (true if the Level is in the story, else false).
+     */
     void setIsInStory(bool _isInStory);
 
     /**
@@ -174,13 +179,11 @@ public:
 
     /**
      * @brief Returns the number of obstacles in the level.
-     *
     */
     GLvoid clearObstaclesList();
 
     /**
-     * @brief
-     *
+     * @brief Clears the not saves obstacles.
     */
     GLvoid clearTempObstaclesList();
 
@@ -198,10 +201,24 @@ private:
     GLfloat gravity; /**< It is the Level gravity. */
     QString ambientMusicFilename; /**< It is the Level ambient music filename. */
     QString skyboxName; /**< It is the name of the skybox to use. */
-    GLint currentObstacleId;
+    GLint currentObstacleId; /**< It is the current Obstacle Id (used to generate new IDs). */
 
+    /**
+     * @brief Convert the cell coordinates occupied by the obstacle to absolute position.
+     *
+     * @param cells is the Vector3f of cells coordinates.
+     * @param obstacleModelId is the modelID of the obstacle.
+     * @return the absolute position of the obstacle.
+     */
     Vector3f *obstacleCellToPosition(Vector3f *cells, GLuint obstacleModelId);
 
+    /**
+     * @brief Convert the absolute position of an obstacle to the cell coordinates.
+     *
+     * @param position is the absolute position of the obstacle.
+     * @param obstacleModelId is the modelID of the obstacle.
+     * @return the cell coordinates of the obstacle.
+     */
     Vector3f *obstaclePositionToCell(Vector3f *position, GLuint obstacleModelId);
 };
 

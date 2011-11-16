@@ -37,7 +37,7 @@ public:
     /**
      * @brief Returns the state of the audio.
      *
-     * @return true if audio is enabled, false elsewhere.
+     * @return true if audio is enabled, else false.
      */
     bool isAudioEnabled();
 

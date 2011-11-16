@@ -33,7 +33,7 @@ private:
     Qubet *qubetWidget; /**< This variable refers to the Qubet instance. */
 
     /**
-     * @brief This function is called when the user closes the Window.
+     * @brief This function is invoked when the user closes the Window.
      *        It is used to perform cleaning operations.
      *
      * @param event is the QCloseEvent*.

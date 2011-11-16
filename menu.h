@@ -151,7 +151,7 @@ private:
 private slots:
 
     /**
-     * @brief Slot called when the user clicks on a item.
+     * @brief Slot invoked when the user clicks on a item.
      *
      * @param event is the QMouseEvent.
      * @param listNames is the QList<GLuint> of item's names.
@@ -159,14 +159,14 @@ private slots:
     void itemClicked(QMouseEvent *event, QList<GLuint> listNames);
 
     /**
-     * @brief Slot called when the user releases the mouse button.
+     * @brief Slot invoked when the user releases the mouse button.
      *
      * @param event is the QMouseEvent*.
      */
     void mouseReleased(QMouseEvent *event);
 
     /**
-     * @brief Slot called when the user moves the mouse.
+     * @brief Slot invoked when the user moves the mouse.
      *
      * @param event is the QMouseEvent*.
      * @param listNames is the QList<GLuint> of item's names.
@@ -174,14 +174,14 @@ private slots:
     void mouseMoved(QMouseEvent *event, QList<GLuint> listNames);
 
     /**
-     * @brief Slot called when the user scrolls the wheel of the mouse button.
+     * @brief Slot invoked when the user scrolls the wheel of the mouse button.
      *
      * @param event is the QWheelEvent*.
      */
     void wheelScrolled(QWheelEvent *event);
 
     /**
-     * @brief Slot called when the user presses a key on the keyboard.
+     * @brief Slot invoked when the user presses a key on the keyboard.
      *
      * @param event is the QKeyEvent*.
      */

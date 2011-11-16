@@ -68,35 +68,35 @@ protected:
     GLvoid resizeGL(GLint _width, GLint _height);
 
     /**
-     * @brief This function is called when the player clicks inside the game window.
+     * @brief This function is invoked when the player clicks inside the game window.
      *
      * @param event is the QMouseEvent*.
      */
     GLvoid mousePressEvent(QMouseEvent *event);
 
     /**
-     * @brief This function is called when the player releases the mouse click.
+     * @brief This function is invoked when the player releases the mouse click.
      *
      * @param event is the QMouseEvent*.
      */
     GLvoid mouseReleaseEvent(QMouseEvent *event);
 
     /**
-     * @brief This function is called when the player moves the mouse inside the game window.
+     * @brief This function is invoked when the player moves the mouse inside the game window.
      *
      * @param event is the QMouseEvent*.
      */
     GLvoid mouseMoveEvent(QMouseEvent *event);
 
     /**
-     * @brief This function is called when the player scrolls the wheel of the mouse inside the game window.
+     * @brief This function is invoked when the player scrolls the wheel of the mouse inside the game window.
      *
      * @param event is the QWheelEvent*.
      */
     GLvoid wheelEvent(QWheelEvent *event);
 
     /**
-     * @brief This function is called when the player presses a key.
+     * @brief This function is invoked when the player presses a key.
      *
      * @param event is the QKeyEvent*.
      */
@@ -182,7 +182,7 @@ private:
      * @param mouseX is the mouse coordinate of x.
      * @param mouseY is the mouse coordinate of y.
      *
-     * @returns QList<GLuint> is a list of the names of the item on (mouseX, mouseY).
+     * @return a list of the names of the item on (mouseX, mouseY).
      */
     QList<GLuint> getPickedName(GLint mouseX, GLint mouseY);
 
@@ -190,14 +190,14 @@ private:
     // General Purpose Management
 
     /**
-     * @brief This function has to be called when the loading is finished.
+     * @brief This function has to be invoked when the loading is finished.
      *
      * @post It will show the menu.
      */
     GLvoid loadingCompleted();
 
     /**
-     * @brief This function has to be called when something in the loading
+     * @brief This function has to be invoked when something in the loading
      *        process goes wrong.
      */
     GLvoid errorLoading();
@@ -210,7 +210,7 @@ private:
     GLvoid showMenu(bool showIntro = true);
 
     /**
-     * @brief This function is called when the player chooses an option from the
+     * @brief This function is invoked when the player chooses an option from the
      *        Menu, so this is no more necessary and will be destroyed.
      *
      * @pre Keep in mind that you have to show something else to show on the screen
@@ -243,35 +243,35 @@ private:
     /**
      * @brief Load the skins from the resource file.
      *
-     * @returns true if load is successful, false elsewhere.
+     * @return true if load is successful, else false.
      */
     GLboolean loadSkins();
 
     /**
      * @brief Load the levels from the resource file.
      *
-     * @returns true if load is successful, false elsewhere.
+     * @return true if load is successful, else false.
      */
     GLboolean loadLevels();
 
     /**
      * @brief Load the alphabet.
      *
-     * @returns true if load is successful, false elsewhere.
+     * @return true if load is successful, else false.
      */
     GLboolean loadAlphabet();
 
     /**
      * @brief Load the icons.
      *
-     * @returns true if load is successful, false elsewhere.
+     * @return true if load is successful, else false.
      */
     GLboolean loadIcons();
 
     /**
      * @brief Load the skyboxes.
      *
-     * @returns true if load is successful, false elsewhere.
+     * @return true if load is successful, else false.
      */
     GLboolean loadSkyboxes();
 
@@ -286,7 +286,7 @@ private slots:
     void draw();
 
     /**
-     * @brief This function is a slot linked to the Menu and called when
+     * @brief This function is a slot linked to the Menu and invoked when
      *        the player chooses to play the Story Mode.
      *
      * @param skinId It is the id of the selected skin.
@@ -294,7 +294,7 @@ private slots:
     void playStory(GLint skinId);
 
     /**
-     * @brief This function is a slot linked to the Menu and called when
+     * @brief This function is a slot linked to the Menu and invoked when
      *        the player chooses to play the Arcade Mode.
      *
      * @param skinId It is the id of the selected skin.
@@ -303,13 +303,13 @@ private slots:
     void playArcade(GLint skinId, GLint levelId);
 
     /**
-     * @brief This function is a slot linked to the Game and called when
+     * @brief This function is a slot linked to the Game and invoked when
      *        the player chooses to close the current Game instance.
      */
     void gameClosed();
 
     /**
-     * @brief This function is a slot linked to the Menu and called when
+     * @brief This function is a slot linked to the Menu and invoked when
      *        the player chooses to enter the Level Editor.
      *
      * @param _levelId is the levelId you want to edit.
@@ -319,7 +319,7 @@ private slots:
     void addLevelToLevelsList(Level *_level);
 
     /**
-     * @brief This function is a slot linked to the LevelEditor and called when
+     * @brief This function is a slot linked to the LevelEditor and invoked when
      *        the player chooses to close the current LevelEditor instance.
      */
     void levelEditorClosed();
@@ -338,7 +338,7 @@ private slots:
     void setMouseMovementTracking(int mode);
 
     /**
-     * @brief This slot is called to set the Skybox.
+     * @brief This slot is invoked to set the Skybox.
      *
      * @param skyboxName is the name of the Skybox to apply.
      */
