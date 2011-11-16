@@ -4,7 +4,7 @@
 #include <QtOpenGL>
 
 /**
- * @brief
+ * @brief It is the Skin Class.
  *
  * @version 1.0
  * @author \#34
@@ -15,19 +15,19 @@ class Skin
 public:
 
     /**
-     * @brief
+     * @brief contructor for Skin object.
      *
      */
     explicit Skin();
 
     /**
-     * @brief
+     * @brief contructor for Skin object.
      *
      */
     explicit Skin(QString _name);
 
     /**
-     * @brief
+     * @brief contructor for Skin object.
      *
      * @param _x_plus
      * @param _x_minus
@@ -39,39 +39,41 @@ public:
     explicit Skin(GLuint _x_plus, GLuint _x_minus, GLuint _y_plus, GLuint _y_minus, GLuint _z_plus, GLuint _z_minus);
 
     /**
-     * @brief
+     * @brief safely destruct the Skin.
      *
      */
     ~Skin();
 
     /**
-     * @brief
+     * @brief set the name of the skin.
      *
      * @param _name
      */
     void setName(QString _name);
 
     /**
-     * @brief
+     * @brief returns the skin name.
      *
+     * @returns the skin name.
      */
     QString getName();
 
     /**
-     * @brief
+     * @brief set the skin comment.
      *
      * @param _comment
      */
     void setComment(QString _comment);
 
     /**
-     * @brief
+     * @brief returns the skin comment.
      *
+     * @returns the skin comment.
      */
     QString getComment();
 
     /**
-     * @brief
+     * @brief set the texture of the skin.
      *
      * @param face
      * @param textureID
@@ -79,14 +81,16 @@ public:
     void setTexture(GLuint face, GLuint textureID);
 
     /**
-     * @brief
+     * @brief returns the texture for the specified face.
      *
      * @param face
+     *
+     * @returns the texture for the specified face.
      */
     GLuint getTexture(GLuint face);
 
     /**
-     * @brief
+     * @brief set the texture for x+ face.
      *
      * @param _x_plus
      */
@@ -99,72 +103,77 @@ public:
     GLuint getTextureXPlus();
 
     /**
-     * @brief
+     * @brief set the texture for x- face.
      *
      * @param _x_minus
      */
     void setTextureXMinus(GLuint _x_minus);
 
     /**
-     * @brief
+     * @brief returns the texture for x- face.
      *
+     * @returns the texture for x- face.
      */
     GLuint getTextureXMinus();
 
     /**
-     * @brief
+     * @brief set the texture for y+ face.
      *
      * @param _y_plus
      */
     void setTextureYPlus(GLuint _y_plus);
 
     /**
-     * @brief
+     * @brief returns the texture for y+ face.
      *
+     * @returns the texture for y+ face.
      */
     GLuint getTextureYPlus();
 
     /**
-     * @brief
+     * @brief set the texture for y- face.
      *
      * @param _y_minus
      */
     void setTextureYMinus(GLuint _y_minus);
 
     /**
-     * @brief
+     * @brief returns the texture for y- face.
      *
+     * @returns the texture for y- face.
      */
     GLuint getTextureYMinus();
 
     /**
-     * @brief
+     * @brief set the texture for z+ face.
      *
      * @param _z_plus
      */
     void setTextureZPlus(GLuint _z_plus);
 
     /**
-     * @brief
+     * @brief returns the texture for z+ face.
      *
+     * @returns the texture for z+ face.
      */
     GLuint getTextureZPlus();
 
     /**
-     * @brief
+     * @brief set the texture for z- face.
      *
      * @param _z_minus
      */
     void setTextureZMinus(GLuint _z_minus);
 
     /**
-     * @brief
+     * @brief returns the texture for z- face.
      *
+     * @returns the texture for z- face.
      */
     GLuint getTextureZMinus();
 
     /**
-     * @brief
+     * @brief set all the textures.
      *
      * @param all
      */
@@ -179,14 +188,14 @@ public:
 
 private:
 
-    QString name; /**< TODO */
-    QString comment; /**< TODO */
-    GLuint x_plus; /**< TODO */
-    GLuint x_minus;  /**< TODO */
-    GLuint y_plus; /**< TODO */
-    GLuint y_minus;  /**< TODO */
-    GLuint z_plus; /**< TODO */
-    GLuint z_minus;  /**< TODO */
+    QString name; /**< It is the name of the skin */
+    QString comment; /**< It is the coment of the skin */
+    GLuint x_plus; /**< It is the x+ face texture of the skin */
+    GLuint x_minus;  /**< It is the x- face texture of the skin */
+    GLuint y_plus; /**< It is the y+ face texture of the skin */
+    GLuint y_minus;  /**< It is the y- face texture of the skin */
+    GLuint z_plus; /**< It is the z+ face texture of the skin */
+    GLuint z_minus;  /**< It is the z- face texture of the skin */
 
 };
 

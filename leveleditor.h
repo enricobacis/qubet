@@ -5,7 +5,7 @@
 #include "cubestringlist.h"
 #include "actionlist.h"
 /**
- * @brief
+ * @brief This the LevelEditor Class.
  *
  * @version 1.0
  * @author \#34
@@ -17,7 +17,7 @@ class LevelEditor : public QObject
 public:
 
     /**
-     * @brief
+     * @brief This is the LevelEditor Constructor.
      *
      * @param _parent
      * @param _audioEnabled
@@ -25,7 +25,7 @@ public:
     explicit LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, Level *_level = NULL, bool _audioEnabled = true);
 
     /**
-     * @brief
+     * @brief This is the LevelEditor Destructor
      *
      */
     ~LevelEditor();
@@ -86,80 +86,80 @@ private:
     Vector3f currentDelta; /**< It is the vector to manage the obstacle movement. */
     Vector3f deltaFromCentre; /**< It is the vector to manage the distance from the centre of the obstacle. */
     QList<Vector3f> toolbarObstacleCentres; /**< It is the list to keep the centre of the toolbar's obstacles. */
-    GLint movingObject; /**< TODO */
-    QVector<GLfloat> redEmission; /**< TODO */
-    QVector<GLfloat> greenEmission; /**< TODO */
-    bool positionValid; /**< TODO */
-    GLint xCell; /**< TODO */
-    GLint yCell; /**< TODO */
-    GLint zCell; /**< TODO */
-    GLint lastMouseX; /**< TODO */
-    GLint lastMouseY; /**< TODO */
+    GLint movingObject; /**< It is the number of the currently moving object. */
+    QVector<GLfloat> redEmission; /**< It is the vector that contain RGB value for the red color emission.*/
+    QVector<GLfloat> greenEmission; /**< It is the vector that contain RGB value for the green color emission.*/
+    bool positionValid; /**< It is the value that say if the obstacle position is valid or not. */
+    GLint xCell; /**< It is the xCell value. */
+    GLint yCell; /**< It is the yCell value. */
+    GLint zCell; /**< It is the zCell value. */
+    GLint lastMouseX; /**< It is the last mouse x value. */
+    GLint lastMouseY; /**< It is the last mouse y value. */
 
     /**
-     * @brief
+     * @brief This function lengthen the level.
      *
     */
     GLvoid lengthen();
 
     /**
-     * @brief
+     * @brief This function shorten the level.
      *
     */
     GLvoid shorten();
 
     /**
-     * @brief
+     * @brief This function enlarge the level.
      *
     */
     GLvoid enlarge();
 
     /**
-     * @brief
+     * @brief This function reduce the level.
      *
     */
     GLvoid reduce();
 
     /**
-     * @brief
+     * @brief This function decraese the gravity value.
      *
      */
     GLvoid gravityMinus();
 
     /**
-     * @brief
+     * @brief This function increase the gravity value.
      *
      */
     GLvoid gravityPlus();
 
     /**
-     * @brief
+     * @brief This function is called when back button is pressed.
      *
     */
     GLvoid buttonBackTriggered();
 
     /**
-     * @brief
+     * @brief This function is called when next button is pressed.
      *
     */
     GLvoid buttonNextTriggered();
 
     /**
-     * @brief
+     * @brief This function is called when a letter is typed.
      *
      * @param key
     */
     GLvoid letterTyped(int key);
 
     /**
-     * @brief
+     * @brief This function set cthe colorEmissive value
      *
      * @param color
      */
     GLvoid setColorEmissive(int color);
 
     /**
-     * @brief
+     * @brief This function check the position of the mouse.
      *
      * @param x
      * @param y
@@ -173,7 +173,7 @@ private:
     GLvoid saveLevel();
 
     /**
-     * @brief
+     * @brief This function quit the level editor.
      *
      */
     GLvoid quitEditor();
@@ -221,11 +221,16 @@ private slots:
 signals:
 
     /**
-     * @brief
+     * @brief signal emitted when the level editor is being closed.
      *
      */
     void levelEditorClosed();
 
+    /**
+     * @brief This function add the current level to the levelsList.
+     *
+     * @param _level
+    */
     void addLevelToLevelsList(Level *_level);
 
     /**

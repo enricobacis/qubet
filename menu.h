@@ -70,7 +70,7 @@ private:
     GLint currentSection; /**< It is used to tell the menu to draw the introduction or the menu.*/
     GLint waitCounter; /**< It is an incremental variable to wait from intro screens. */
 
-    CubeStringList *mainMenuButtons; /**< TODO */
+    CubeStringList *mainMenuButtons; /**< It is the main menu buttons stringList. */
     CubeString *skinName;  /**< It is the skinName CubeString. */
     CubeStringList *levelName; /**< It is the levelName CubeString. */
     CubeString *backButton;  /**< It is the backButton CubeString. */
@@ -94,55 +94,55 @@ private:
     GLvoid nextSkin();
 
     /**
-     * @brief
+     * @brief Select the previous level.
      *
      */
     GLvoid previousLevel();
 
     /**
-     * @brief
+     * @brief Select the next level.
      *
      */
     GLvoid nextLevel();
 
     /**
-     * @brief
+     * @brief This function is called when playStoryButton is triggered.
      *
     */
     GLvoid buttonPlayStoryTriggered();
 
     /**
-     * @brief
+     * @brief This function is called when playArcadeButton is triggered.
      *
     */
     GLvoid buttonPlayArcadeTriggered();
 
     /**
-     * @brief
+     * @brief This function is called when editorButton is triggered.
      *
     */
     GLvoid buttonEditorTriggered();
 
     /**
-     * @brief
+     * @brief This function is called when backButton is triggered.
      *
      */
     GLvoid buttonBackTriggered();
 
     /**
-     * @brief
+     * @brief This function is called when nextButton is triggered.
      *
      */
     GLvoid buttonNextTriggered();
 
     /**
-     * @brief
+     * @brief This function is called when previousSkinButton is triggered.
      *
      */
     GLvoid buttonPreviousSkinTriggered();
 
     /**
-     * @brief
+     * @brief This function is called when nextSkinButton is triggered.
      *
      */
     GLvoid buttonNextSkinTriggered();
@@ -190,14 +190,14 @@ private slots:
 
 signals:
     /**
-     * @brief
+     * @brief Signal emitted to show the gameView in story mode.
      *
      * @param skinId
      */
     void playStory(GLint skinId);
 
     /**
-     * @brief
+     * @brief Signal emitted to show the gameView in arcade mode.
      *
      * @param skinId
      * @param levelId
@@ -205,7 +205,7 @@ signals:
     void playArcade(GLint skinId, GLint levelId);
 
     /**
-     * @brief
+     * @brief Signal emitted to show the levelEditor
      *
      */
     void showLevelEditor(GLint levelId);

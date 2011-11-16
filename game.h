@@ -5,7 +5,7 @@
 #include "actionlist.h"
 
 /**
- * @brief
+ * @brief It is the Game Class.
  *
  * @version 1.0
  * @author \#34
@@ -27,7 +27,7 @@ public:
     explicit Game(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, Skin *_skin, QMap<GLint,Level*> &_levelsList, QObject *_parent = 0, bool _audioEnabled = true);
 
     /**
-     * @brief
+     * @brief Cunstructor fot the Arcade Mode.
      *
      * @param _skin
      * @param _level
@@ -58,19 +58,19 @@ public:
 
 
 private:
-    QObject *parent; /**< TODO */
+    QObject *parent; /**< It is the parent of a game Object. */
     QMap<GLint,GLuint> iconsList;  /**< It is the iconsList provided by Qubet object. */
     Alphabet *alphabet; /**< It is the alphabet provided by Qubet. */
-    Skin *skin; /**< TODO */
-    Level *level; /**< TODO */
-    QMap<GLint,Level*> levelsList; /**< TODO */
-    bool audioEnabled; /**< TODO */
-    Cube *cube; /**< TODO */
-    PositionController *positionController; /**< TODO */
-    GLint state; /**< TODO */
-    GLint gameType; /**< TODO */
-    GLint currentLevel; /**< TODO */
-    GLint deaths; /**< TODO */
+    Skin *skin; /**< it is the cube skin pointer. */
+    Level *level; /**< It is the current level pointer. */
+    QMap<GLint,Level*> levelsList; /**< It is the story levelList. */
+    bool audioEnabled; /**< It is the audioEnabled boolean value. */
+    Cube *cube; /**< It is the cube pointer. */
+    PositionController *positionController; /**< It is the positionController pointer. */
+    GLint state; /**< It is the current state value. */
+    GLint gameType; /**< It is the game type value. */
+    GLint currentLevel; /**< It is the current level value. */
+    GLint deaths; /**< It is the death counter value. */
     ActionList *currentActions; /**< It is the list of the current menu steps. */
     GLfloat angleRotVolumeCube;  /**< It is the current rotation angle of the volume icon. */
     Skin *volumeSkin; /**< It is the skin of the volume button */
@@ -78,34 +78,34 @@ private:
     Vector3f *levelOffset; /**< It is the offset of the Level */
 
     /**
-     * @brief
+     * @brief initialize the game.
      */
     void initGame();
 
     /**
-     * @brief
+     * @brief start playing game.
      */
     void playLevel();
 
     /**
-     * @brief
+     * @brief go to the next level.
      */
     void nextLevel();
 
     /**
-     * @brief
+     * @brief go to pause mode.
      *
      */
     void pauseGame();
 
     /**
-     * @brief
+     * @brief continue the game from pause mode.
      *
      */
     void continueGame();
 
     /**
-     * @brief
+     * @brief quit the game and returns to menu.
      *
      */
     void quitGame();
@@ -151,13 +151,13 @@ private slots:
     void keyPressed(QKeyEvent *event);
 
     /**
-     * @brief
+     * @brief slot invoked when the cube has a collision with an obstacle.
      *
      */
     void collided();
 
     /**
-     * @brief
+     * @brief slot invoked when level is completed.
      *
      */
     void levelCompleted();
@@ -166,19 +166,19 @@ private slots:
 signals:
 
     /**
-     * @brief
+     * @brief signal emitted to pause the game.
      *
      */
     void pauseGameSignal();
 
     /**
-     * @brief
+     * @brief signal emitted to continue the game.
      *
      */
     void continueGameSignal();
 
     /**
-     * @brief
+     * @brief signal emitted to close the game.
      *
      */
     void gameClosedSignal();

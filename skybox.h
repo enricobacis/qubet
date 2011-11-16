@@ -4,7 +4,7 @@
 #include "utilities.h"
 
 /**
- * @brief
+ * @brief It is the Skybox Class.
  *
  */
 class Skybox
@@ -13,7 +13,7 @@ class Skybox
 public:
 
     /**
-     * @brief
+     * @brief constructor of skybox object.
      *
      * @param _skin
      * @param _emissionFactor
@@ -22,62 +22,65 @@ public:
     explicit Skybox(Skin *_skin, GLfloat _emissionFactor = 0.6f, GLfloat _cubeSide = 40.0f);
 
     /**
-     * @brief
+     * @brief safely destroy skybox object.
      *
      */
     ~Skybox();
 
     /**
-     * @brief
+     * @brief set the skybox skin.
      *
      * @param _skin
      */
     GLvoid setSkin(Skin *_skin);
 
     /**
-     * @brief
+     * @brief returns the skybox skin.
      *
+     * @returns the skybox skin.
      */
     Skin *getSkin();
 
     /**
-     * @brief
+     * @brief set the skybox emission factor.
      *
      * @param _emissionFactor
      */
     GLvoid setEmissionFactor(GLfloat _emissionFactor);
 
     /**
-     * @brief
+     * @brief returns the emissionFactor value.
      *
+     * @returns the emissionFactor value.
      */
     GLfloat getEmssionFactor();
 
     /**
-     * @brief
+     * @brief set the side of the skybox cube.
      *
      * @param _side
      */
     GLvoid setCubeSide(GLfloat _cubeSide);
 
     /**
-     * @brief
+     * @brief returns the side length of the skybox cube.
      *
+     * @returns the side length of the skybox cube.
      */
     GLfloat getCubeSide();
 
     /**
-     * @brief
+     * @brief the draw function of the skybox.
      *
      */
     GLvoid draw();
 
 private:
 
-    Skin *skin; /**< TODO */
-    QVector<GLfloat> emissionVector; /**< TODO */
-    QVector<GLfloat> disabledVector; /**< TODO */
-    GLfloat cubeSide; /**< TODO */
+    Skin *skin; /**< It is the skybox skin.  */
+    QVector<GLfloat> emissionVector; /**< It is the skybox emissionVector. */
+    QVector<GLfloat> disabledVector; /**< It is the vector used to disable components in OGL. */
+    GLfloat cubeSide; /**< It is the skybox cube side length. */
 };
 
 #endif // SKYBOX_H

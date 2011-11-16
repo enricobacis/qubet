@@ -125,7 +125,7 @@ private:
     GLint height; /**< It is the current widget height. */
     GLint mouseMovedMode; /**< It is the variable that tells which mouse mode is enabled. See the documentation of setMouseMovementTracking(int mode) for the available modes.*/
     bool loadDone; /**< It is the variable that states if the load has already be done. */
-    GLint currentNewLevelNumber;
+    GLint currentNewLevelNumber; /**< It is the current level value. */
 
 
     // Initialization
@@ -182,7 +182,7 @@ private:
      * @param mouseX is the mouse coordinate of x.
      * @param mouseY is the mouse coordinate of y.
      *
-     * @return QList<GLuint> is a list of the names of the item on (mouseX, mouseY).
+     * @returns QList<GLuint> is a list of the names of the item on (mouseX, mouseY).
      */
     QList<GLuint> getPickedName(GLint mouseX, GLint mouseY);
 
@@ -236,42 +236,42 @@ private:
     /**
      * @brief Load skins, levels and obstacles in Qubet.
      *
-     * @return true if the load is successful, else false.
+     * @returns true if the load is successful, else false.
      */
     GLboolean load();
 
     /**
      * @brief Load the skins from the resource file.
      *
-     * @return true if load is successful, false elsewhere.
+     * @returns true if load is successful, false elsewhere.
      */
     GLboolean loadSkins();
 
     /**
      * @brief Load the levels from the resource file.
      *
-     * @return true if load is successful, false elsewhere.
+     * @returns true if load is successful, false elsewhere.
      */
     GLboolean loadLevels();
 
     /**
      * @brief Load the alphabet.
      *
-     * @return true if load is successful, false elsewhere.
+     * @returns true if load is successful, false elsewhere.
      */
     GLboolean loadAlphabet();
 
     /**
      * @brief Load the icons.
      *
-     * @return true if load is successful, false elsewhere.
+     * @returns true if load is successful, false elsewhere.
      */
     GLboolean loadIcons();
 
     /**
      * @brief Load the skyboxes.
      *
-     * @return true if load is successful, false elsewhere.
+     * @returns true if load is successful, false elsewhere.
      */
     GLboolean loadSkyboxes();
 

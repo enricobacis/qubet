@@ -30,11 +30,11 @@ public:
     ~PositionController();
 
 private:
-    QObject *parent; /**< TODO */
+    QObject *parent; /**< It is the parent of PositionController object. */
     Cube *cube; /**< It is the pointer to the Cube Object. */
     Level *level; /**< Is the pointer to the Level Object. */
     QTimer *checkPositionTimer; /**< QTimer controlling the checkCollision() calls. */
-    QVector<QVector<QVector<bool> > > obstacleCells;
+    QVector<QVector<QVector<bool> > > obstacleCells; /**< It is the 3d matrix rappresent obstacle cells */
 
     /**
      * @brief Check if the cube has a collision with an obstacle.
