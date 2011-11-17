@@ -96,6 +96,8 @@ void Game::draw(GLboolean simplifyForPicking)
         glPopMatrix();
 
     glPopMatrix();
+
+    cube->draw();
 }
 
 void Game::initGame()
@@ -126,6 +128,7 @@ void Game::initGame()
     case ARCADE_MODE:
         break;
     }
+    cube = new Cube(level, skin);
 }
 
 void Game::playLevel()

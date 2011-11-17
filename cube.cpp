@@ -5,7 +5,10 @@
 Cube::Cube(Level *level, Skin *_skin, QObject *_parent):
     skin(_skin),
     parent(_parent),
+    position(new Vector3f(0.0f, 0.0f, 0.0f)),
     state(0),
+    jumpParameter(0),
+    movingParameter(0),
     t(0)
 {
     connect(parent, SIGNAL(keyPressedSignal(QKeyEvent*)), this, SLOT(keyPressed(QKeyEvent*)));
@@ -16,6 +19,8 @@ Cube::Cube(Level *level, Skin *_skin, QObject *_parent):
     gravity = level->getGravity();
     levelCellsLength = (int)(level->getLength() / 3.0f);
     levelCellsWidth = (int)(level->getWidth() / 3.0f);
+
+    jumpVelocity = gravity/2;
 }
 
 Cube::~Cube()
@@ -38,8 +43,8 @@ void Cube::jump()
 {
     if (!(state & CUBESTATE_JUMPING))
     {
-        state = state | CUBESTATE_JUMPING;
         playEffect(EFFECT_JUMPSMALL);
+        state = state | CUBESTATE_JUMPING;
     }
 }
 
@@ -71,6 +76,7 @@ void Cube::moveRight()
 
 void Cube::draw()
 {
+
 //    if (collided)
 //    {
 //        for (int k = 0; k < 8; k++)
@@ -91,11 +97,51 @@ void Cube::draw()
 //        }
 //    } else {
 //    }
+    updatePosition();
+    glTranslatef(position->x, position->y, position->z);
+    drawPrism(3.0f, 3.0f, 3.0f);
 }
 
 void Cube::updatePosition()
 {
-
+    if(state & CUBESTATE_JUMPING)
+    {
+        if(jumpParameter > 100)
+        {
+            jumpParameter = 0;
+            position->y = 0;
+            state = (state ^ CUBESTATE_JUMPING);
+        }
+        else
+        {
+            position->y = 2 * (((-0.5f) * gravity * pow( (jumpParameter/100.0f), 2.0 )) + jumpVelocity * (jumpParameter / 100.0f ));
+            jumpParameter++;
+        }
+        qDebug()<<position->y;
+    }
+    if((state & CUBESTATE_MOVING_LEFT) || (state & CUBESTATE_MOVING_RIGHT))
+    {
+        if(movingParameter > 50)
+        {
+            movingParameter = 0;
+            if (state & CUBESTATE_MOVING_LEFT)
+                state = (state ^ CUBESTATE_MOVING_LEFT);
+            else
+                state = (state ^ CUBESTATE_MOVING_RIGHT);
+        }
+        else
+        {
+            if (state & CUBESTATE_MOVING_LEFT)
+            {
+                position->x -= 0.06;
+            }
+            else
+            {
+                position->x += 0.06;
+            }
+            movingParameter++;
+        }
+    }
 }
 
 void Cube::createNormalsMatrix()
