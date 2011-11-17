@@ -18,11 +18,7 @@ LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QO
     visible(true),
     visibleTime(0),
     currentName(""),
-    disableVector(QVector<GLfloat>(4)),
-    enableVector(QVector<GLfloat>(4)),
     movingObject(-1),
-    redEmission(QVector<GLfloat>(4)),
-    greenEmission(QVector<GLfloat>(4)),
     positionValid(false),
     xCell(0),
     yCell(0),
@@ -55,21 +51,6 @@ LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QO
     }
 
     angleRotVolumeCube = (audioEnabled ? 0.0f : 90.0f);
-
-    disableVector.fill(0.0f, 3);
-    disableVector.append(1.0f);
-
-    enableVector.fill(1.0f, 4);
-
-    redEmission[0] = 1.0f;
-    redEmission[1] = 0.0f;
-    redEmission[2] = 0.0f;
-    redEmission[3] = 1.0f;
-
-    greenEmission[0] = 0.0f;
-    greenEmission[1] = 1.0f;
-    greenEmission[2] = 0.0f;
-    greenEmission[3] = 1.0f;
 
     lengthLabel = new CubeString(QString::number(currentLength / 3), 3.0f, alphabet, LENGTH_LABEL);
     widthLabel = new CubeString(QString::number(currentWidth / 3), 3.0f, alphabet, WIDTH_LABEL);
@@ -715,30 +696,6 @@ GLvoid LevelEditor::letterTyped(int key)
     }
 }
 
-GLvoid LevelEditor::setColorEmissive(int color)
-{
-    switch (color)
-    {
-    case COLOR_DISABLED:
-        glMaterialfv(GL_FRONT, GL_DIFFUSE,  enableVector.data());
-        glMaterialfv(GL_FRONT, GL_SPECULAR, enableVector.data());
-        glMaterialfv(GL_FRONT, GL_EMISSION, disableVector.data());
-        break;
-
-    case COLOR_RED:
-        glMaterialfv(GL_FRONT, GL_DIFFUSE,  redEmission.data());
-        glMaterialfv(GL_FRONT, GL_SPECULAR, redEmission.data());
-        glMaterialfv(GL_FRONT, GL_EMISSION, redEmission.data());
-        break;
-
-    case COLOR_GREEN:
-        glMaterialfv(GL_FRONT, GL_DIFFUSE,  greenEmission.data());
-        glMaterialfv(GL_FRONT, GL_SPECULAR, greenEmission.data());
-        glMaterialfv(GL_FRONT, GL_EMISSION, greenEmission.data());
-        break;
-    }
-}
-
 GLvoid LevelEditor::checkMousePosition(GLint x, GLint y)
 {
     if (movingObject != -1)
@@ -933,7 +890,10 @@ void LevelEditor::mouseReleased(QMouseEvent *event)
     {
         if ((movingObject != -1) && (positionValid == true))
         {
-            level->addObstacle(new Obstacle(movingObject, new Vector3f(GLfloat(xCell), GLfloat(yCell), GLfloat(zCell))));
+            Obstacle *obstacle = new Obstacle(movingObject, new Vector3f(GLfloat(xCell), GLfloat(yCell), GLfloat(zCell)));
+            obstacle->setColor(QColor(0, 0, 255, 255));
+            level->addObstacle(obstacle);
+
             emit playEffect(EFFECT_JUMP);
         }
 

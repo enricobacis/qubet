@@ -6,7 +6,6 @@ Cube::Cube(Level *level, Skin *_skin, QObject *_parent):
     skin(_skin),
     parent(_parent),
     state(0),
-    sideLength(3),
     t(0)
 {
     connect(parent, SIGNAL(keyPressedSignal(QKeyEvent*)), this, SLOT(keyPressed(QKeyEvent*)));
@@ -44,6 +43,14 @@ void Cube::jump()
     }
 }
 
+bool Cube::isMoving()
+{
+    if (state & (CUBESTATE_MOVING_LEFT | CUBESTATE_MOVING_RIGHT))
+        return true;
+    else
+        return false;
+}
+
 void Cube::moveLeft()
 {
     if (!(state & CUBESTATE_MOVING_LEFT))
@@ -64,29 +71,26 @@ void Cube::moveRight()
 
 void Cube::draw()
 {
-    /*
-    if(collided)
-    {
-        for(int k = 0; k < 8; k++)
-        {
-            for(int j = 0; j < 8; j++)
-            {
-                for(int i = 0; i < 8; i++)
-                {
-                    glPushMatrix();
-                        glTranslatef(normsMatrices[i][j][k]->x, normsMatrices[i][j][k]->y, normsMatrices[i][j][k]->z);
-                        glTranslatef(normsMatrices[i][j][k]->x * cos(3.14f * t/100.0f));
-                        glTranslatef(normsMatrices[i][j][k]->z * cos(3.14f * t/100.0f));
-                        glTranslatef(normsMatrices[i][j][k]->y * sin(3.14f * t/100.0f) - (((t/100.0f) * (t/100.0f)) * gravity / 2.0f));
-                        drawPrism((1-(t/100.0f)) * sideLength / 8.0f, (1-(t/100.0f)) * sideLength / 8.0f, (1-(t/100.0f)) * sideLength / 8.0f);
-                    glPopMatrix();
-                }
-            }
-        }
-    }else{
-    **/
-
-    //}
+//    if (collided)
+//    {
+//        for (int k = 0; k < 8; k++)
+//        {
+//            for (int j = 0; j < 8; j++)
+//            {
+//                for (int i = 0; i < 8; i++)
+//                {
+//                    glPushMatrix();
+//                        glTranslatef(normsMatrices[i][j][k]->x, normsMatrices[i][j][k]->y, normsMatrices[i][j][k]->z);
+//                        glTranslatef(normsMatrices[i][j][k]->x * cos(3.14f * t/100.0f));
+//                        glTranslatef(normsMatrices[i][j][k]->z * cos(3.14f * t/100.0f));
+//                        glTranslatef(normsMatrices[i][j][k]->y * sin(3.14f * t/100.0f) - (((t/100.0f) * (t/100.0f)) * gravity / 2.0f));
+//                        drawPrism((1-(t/100.0f)) * 3.0f / 8.0f, (1-(t/100.0f)) * 3.0f / 8.0f, (1-(t/100.0f)) * 3.0f / 8.0f);
+//                    glPopMatrix();
+//                }
+//            }
+//        }
+//    } else {
+//    }
 }
 
 void Cube::updatePosition()
@@ -96,7 +100,7 @@ void Cube::updatePosition()
 
 void Cube::createNormalsMatrix()
 {
-    GLfloat gap = sideLength / 4.0f;
+    GLfloat gap = 3.0f / 4.0f;
     Vector3f *tempNorm = new Vector3f(0.0f, 0.0f, -3.0f * gap);
     for (int k = 0; k < 4; k++)
     {

@@ -82,15 +82,11 @@ private:
     GLboolean visible; /**< It is the boolean value that if the type block is visible. */
     GLint visibleTime;  /**< It is the visible time counter of the type block. */
     QString currentName;  /**< It is the current name for the level. */
-    QVector<GLfloat> disableVector; /**< It is the vector to disable materials. */
-    QVector<GLfloat> enableVector; /**< It is the vector to enable materials. */
     Vector3f lastCentre; /**< It is the previous position of the centre of the moving object. */
     Vector3f currentDelta; /**< It is the vector to manage the obstacle movement. */
     Vector3f deltaFromCentre; /**< It is the vector to manage the distance from the centre of the obstacle. */
     QList<Vector3f> toolbarObstacleCentres; /**< It is the list to keep the centre of the toolbar's obstacles. */
     GLint movingObject; /**< It is the number of the currently moving object. */
-    QVector<GLfloat> redEmission; /**< It is the vector that contain RGB value for the red color emission.*/
-    QVector<GLfloat> greenEmission; /**< It is the vector that contain RGB value for the green color emission.*/
     bool positionValid; /**< It is the value that say if the obstacle position is valid or not. */
     GLint xCell; /**< It is the xCell value. */
     GLint yCell; /**< It is the yCell value. */
@@ -144,13 +140,6 @@ private:
      * @param key is the key pressed.
     */
     GLvoid letterTyped(int key);
-
-    /**
-     * @brief This function set the colorEmissive value.
-     *
-     * @param color is the color to set.
-     */
-    GLvoid setColorEmissive(int color);
 
     /**
      * @brief This function check the position of the mouse.

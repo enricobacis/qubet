@@ -1,4 +1,5 @@
 #include "obstacle.h"
+#include "defines.h"
 
 Obstacle::Obstacle(GLint _modelId, Vector3f *_position) :
     modelId(_modelId)
@@ -11,11 +12,18 @@ Obstacle::~Obstacle()
 
 GLvoid Obstacle::draw(GLboolean simplifyForPicking)
 {
-    Q_UNUSED(simplifyForPicking);
-
     glPushMatrix();
         glTranslatef(position->x, position->y, position->z);
-        drawObstacle(modelId);
+        if (simplifyForPicking)
+        {
+            drawObstacle(modelId);
+        }
+        else
+        {
+            setColorEmissive(color);
+            drawObstacle(modelId);
+            setColorEmissive(COLOR_DISABLED);
+        }
     glPopMatrix();
 }
 

@@ -1,4 +1,5 @@
 #include "utilities.h"
+#include "defines.h"
 
 GLvoid drawRectangle(GLfloat x, GLfloat y, GLuint texture)
 {
@@ -309,5 +310,53 @@ Vector3f *getObstacleBoundingBox(GLuint id)
         return new Vector3f(6.0f, 6.0f, 3.0f);
         break;
     }
+
     return NULL;
+}
+
+GLvoid setColorEmissive(int color)
+{
+    QVector<GLfloat> mat_diffuse;
+    QVector<GLfloat> mat_specular;
+    QVector<GLfloat> mat_emission;
+
+    switch (color)
+    {
+    case COLOR_DISABLED:
+        mat_diffuse  << 1.0f << 1.0f << 1.0f << 1.0f;
+        mat_specular << 1.0f << 1.0f << 1.0f << 1.0f;
+        mat_emission << 0.0f << 0.0f << 0.0f << 1.0f;
+        break;
+
+    case COLOR_RED:
+        mat_diffuse  << 1.0f << 0.0f << 0.0f << 1.0f;
+        mat_specular << 1.0f << 0.0f << 0.0f << 1.0f;
+        mat_emission << 1.0f << 0.0f << 0.0f << 1.0f;
+        break;
+
+    case COLOR_GREEN:
+        mat_diffuse  << 0.0f << 1.0f << 0.0f << 1.0f;
+        mat_specular << 0.0f << 1.0f << 0.0f << 1.0f;
+        mat_emission << 0.0f << 1.0f << 0.0f << 1.0f;
+        break;
+
+    case COLOR_BLUE:
+        mat_diffuse  << 0.0f << 0.0f << 1.0f << 1.0f;
+        mat_specular << 0.0f << 0.0f << 1.0f << 1.0f;
+        mat_emission << 0.0f << 0.0f << 1.0f << 1.0f;
+        break;
+    }
+
+    glMaterialfv(GL_FRONT, GL_DIFFUSE,  mat_diffuse.data());
+    glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular.data());
+    glMaterialfv(GL_FRONT, GL_EMISSION, mat_emission.data());
+}
+
+GLvoid setColorEmissive(QColor color)
+{
+    GLfloat materialColor[] = {color.redF(), color.greenF(), color.blueF(), 1.0f};
+
+    glMaterialfv(GL_FRONT, GL_DIFFUSE,  materialColor);
+    glMaterialfv(GL_FRONT, GL_SPECULAR, materialColor);
+    //glMaterialfv(GL_FRONT, GL_EMISSION, materialColor);
 }

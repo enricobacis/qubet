@@ -72,4 +72,18 @@ Vector3f *getPointFromParametricLine(Vector3f *p0, Vector3f *p1, GLfloat t);
 */
 Vector3f *getObstacleBoundingBox(GLuint id);
 
+/**
+ * @brief This function set the colorEmissive value.
+ *
+ * @param color is the color to set.
+ */
+GLvoid setColorEmissive(int color);
+
+/**
+ * @brief This function set the colorEmissive value.
+ *
+ * @param color is the color to set.
+ */
+GLvoid setColorEmissive(QColor color);
+
 #endif // UTILITIES_H

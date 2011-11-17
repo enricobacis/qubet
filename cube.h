@@ -45,16 +45,16 @@ public:
     void setPosition(Vector3f *_position);
 
     /**
-     * @brief Returns the side of the Cube.
-     *
-     * @returns the side of the Cube.
-     */
-    GLint getSideLength();
-
-    /**
      * @brief Make the Cube jump.
      */
     void jump();
+
+    /**
+     * @brief Returns true if the Cube is moving, else false.
+     *
+     * @returns true if the Cube is moving, else false.
+     */
+    bool isMoving();
 
     /**
      * @brief Make the Cube move to the Left.
@@ -82,7 +82,6 @@ private:
     QObject *parent; /**< It is the Parent of the Cube. */
     Vector3f *position; /**< It is the Cube's current position. */
     unsigned char state; /**< It is the state of the cube. */
-    GLuint sideLength;  /**< It is the side of the Cube. */
     GLfloat speed; /**< It is the current speed of the Cube. */
     GLfloat gravity; /**< It is the gravity variable. */
     GLint levelCellsLength; /**< It is the number of cells of the Level's length. */
