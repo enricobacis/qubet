@@ -96,7 +96,7 @@ GLvoid Qubet::initializeGL()
     GLfloat ldir0[] = {0.0f, 0.0f, -1.0f};
     glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, ldir0);
 
-    GLfloat lposition1[] = {-8.0f, 8.0f, 8.0f, 1.0f};
+    GLfloat lposition1[] = {-8.0f, 5.0f, 6.0f, 1.0f};
     glLightfv(GL_LIGHT1, GL_POSITION, lposition1);
     GLfloat ldir1[] = {1.0f, -1.0f, -1.0f};
     glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, ldir1);
@@ -272,7 +272,7 @@ QList<GLuint> Qubet::getPickedName(GLint mouseX, GLint mouseY)
 GLvoid Qubet::loadingCompleted()
 {
     currentText.clear();
-    showMenu(true);
+    showMenu(false);
 }
 
 GLvoid Qubet::errorLoading()

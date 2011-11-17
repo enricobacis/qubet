@@ -3,8 +3,8 @@
 
 GLvoid drawRectangle(GLfloat x, GLfloat y, GLuint texture)
 {
-    x = x/2;
-    y = y/2;
+    x = x / 2;
+    y = y / 2;
 
     glEnable(GL_TEXTURE_2D);
 
@@ -27,9 +27,9 @@ GLvoid drawRectangle(GLfloat x, GLfloat y, GLuint texture)
 
 GLvoid drawPrism(GLfloat x, GLfloat y, GLfloat z, Skin *skin, GLboolean invertBackTexture)
 {
-    x = x/2;
-    y = y/2;
-    z = z/2;
+    x = x / 2;
+    y = y / 2;
+    z = z / 2;
 
     glEnable(GL_TEXTURE_2D);
 
@@ -314,8 +314,9 @@ Vector3f *getObstacleBoundingBox(GLuint id)
     return NULL;
 }
 
-GLvoid setColorEmissive(int color)
+GLvoid setMaterialColor(int color)
 {
+    QVector<GLfloat> mat_ambient;
     QVector<GLfloat> mat_diffuse;
     QVector<GLfloat> mat_specular;
     QVector<GLfloat> mat_emission;
@@ -323,40 +324,54 @@ GLvoid setColorEmissive(int color)
     switch (color)
     {
     case COLOR_DISABLED:
-        mat_diffuse  << 1.0f << 1.0f << 1.0f << 1.0f;
-        mat_specular << 1.0f << 1.0f << 1.0f << 1.0f;
+        mat_ambient  << 0.2f << 0.2f << 0.2f << 1.0f;
+        mat_diffuse  << 0.8f << 0.8f << 0.8f << 1.0f;
+        mat_specular << 0.0f << 0.0f << 0.0f << 1.0f;
         mat_emission << 0.0f << 0.0f << 0.0f << 1.0f;
         break;
 
     case COLOR_RED:
-        mat_diffuse  << 1.0f << 0.0f << 0.0f << 1.0f;
-        mat_specular << 1.0f << 0.0f << 0.0f << 1.0f;
-        mat_emission << 1.0f << 0.0f << 0.0f << 1.0f;
+        mat_ambient  << 0.2f << 0.0f << 0.0f << 1.0f;
+        mat_diffuse  << 0.8f << 0.0f << 0.0f << 1.0f;
+        mat_specular << 0.1f << 0.0f << 0.0f << 1.0f;
+        mat_emission << 0.1f << 0.0f << 0.0f << 1.0f;
         break;
 
     case COLOR_GREEN:
-        mat_diffuse  << 0.0f << 1.0f << 0.0f << 1.0f;
-        mat_specular << 0.0f << 1.0f << 0.0f << 1.0f;
-        mat_emission << 0.0f << 1.0f << 0.0f << 1.0f;
+        mat_ambient  << 0.0f << 0.2f << 0.0f << 1.0f;
+        mat_diffuse  << 0.0f << 0.8f << 0.0f << 1.0f;
+        mat_specular << 0.0f << 0.1f << 0.0f << 1.0f;
+        mat_emission << 0.0f << 0.1f << 0.0f << 1.0f;
         break;
 
     case COLOR_BLUE:
-        mat_diffuse  << 0.0f << 0.0f << 1.0f << 1.0f;
-        mat_specular << 0.0f << 0.0f << 1.0f << 1.0f;
-        mat_emission << 0.0f << 0.0f << 1.0f << 1.0f;
+        mat_ambient  << 0.0f << 0.0f << 0.2f << 1.0f;
+        mat_diffuse  << 0.0f << 0.0f << 0.8f << 1.0f;
+        mat_specular << 0.0f << 0.0f << 0.1f << 1.0f;
+        mat_emission << 0.0f << 0.0f << 0.1f << 1.0f;
         break;
     }
 
+    glMaterialfv(GL_FRONT, GL_AMBIENT,  mat_ambient.data());
     glMaterialfv(GL_FRONT, GL_DIFFUSE,  mat_diffuse.data());
     glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular.data());
     glMaterialfv(GL_FRONT, GL_EMISSION, mat_emission.data());
 }
 
-GLvoid setColorEmissive(QColor color)
+GLvoid setMaterialColor(QColor color)
 {
-    GLfloat materialColor[] = {color.redF(), color.greenF(), color.blueF(), 1.0f};
+    QVector<GLfloat> mat_ambient;
+    QVector<GLfloat> mat_diffuse;
+    QVector<GLfloat> mat_specular;
+    QVector<GLfloat> mat_emission;
 
-    glMaterialfv(GL_FRONT, GL_DIFFUSE,  materialColor);
-    glMaterialfv(GL_FRONT, GL_SPECULAR, materialColor);
-    //glMaterialfv(GL_FRONT, GL_EMISSION, materialColor);
+    mat_ambient  << color.redF() / 4.0f << color.greenF() / 4.0f << color.blueF() / 4.0f << 1.0f;
+    mat_diffuse  << color.redF() << color.greenF() << color.blueF() << 1.0f;
+    mat_specular << color.redF() / 8.0f << color.greenF() / 8.0f << color.blueF() / 8.0f << 1.0f;
+    mat_emission << color.redF() / 8.0f << color.greenF() / 8.0f << color.blueF() / 8.0f << 1.0f;
+
+    glMaterialfv(GL_FRONT, GL_DIFFUSE,  mat_ambient.data());
+    glMaterialfv(GL_FRONT, GL_SPECULAR, mat_diffuse.data());
+    glMaterialfv(GL_FRONT, GL_EMISSION, mat_specular.data());
+    glMaterialfv(GL_FRONT, GL_AMBIENT,  mat_emission.data());
 }

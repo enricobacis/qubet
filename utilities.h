@@ -77,13 +77,13 @@ Vector3f *getObstacleBoundingBox(GLuint id);
  *
  * @param color is the color to set.
  */
-GLvoid setColorEmissive(int color);
+GLvoid setMaterialColor(int color);
 
 /**
  * @brief This function set the colorEmissive value.
  *
  * @param color is the color to set.
  */
-GLvoid setColorEmissive(QColor color);
+GLvoid setMaterialColor(QColor color);
 
 #endif // UTILITIES_H

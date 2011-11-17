@@ -318,11 +318,11 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
                 if (movingObject == 0)
                 {
                     glTranslatef(currentDelta.x, currentDelta.y, currentDelta.z);
-                    setColorEmissive(positionValid ? COLOR_GREEN : COLOR_RED);
+                    setMaterialColor(positionValid ? COLOR_GREEN : COLOR_RED);
                 }
                 else
                 {
-                    setColorEmissive(COLOR_DISABLED);
+                    setMaterialColor(COLOR_DISABLED);
                 }
 
                 glPushName(OBSTACLE_0);
@@ -336,11 +336,11 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
                 if (movingObject == 1)
                 {
                     glTranslatef(currentDelta.x, currentDelta.y, currentDelta.z);
-                    setColorEmissive(positionValid ? COLOR_GREEN : COLOR_RED);
+                    setMaterialColor(positionValid ? COLOR_GREEN : COLOR_RED);
                 }
                 else
                 {
-                    setColorEmissive(COLOR_DISABLED);
+                    setMaterialColor(COLOR_DISABLED);
                 }
 
                 glPushName(OBSTACLE_1);
@@ -356,11 +356,11 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
                     if (movingObject == 2)
                     {
                         glTranslatef(currentDelta.x, currentDelta.y, currentDelta.z);
-                        setColorEmissive(positionValid ? COLOR_GREEN : COLOR_RED);
+                        setMaterialColor(positionValid ? COLOR_GREEN : COLOR_RED);
                     }
                     else
                     {
-                        setColorEmissive(COLOR_DISABLED);
+                        setMaterialColor(COLOR_DISABLED);
                     }
 
                     glPushName(OBSTACLE_2);
@@ -374,11 +374,11 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
                     if (movingObject == 3)
                     {
                         glTranslatef(currentDelta.x, currentDelta.y, currentDelta.z);
-                        setColorEmissive(positionValid ? COLOR_GREEN : COLOR_RED);
+                        setMaterialColor(positionValid ? COLOR_GREEN : COLOR_RED);
                     }
                     else
                     {
-                        setColorEmissive(COLOR_DISABLED);
+                        setMaterialColor(COLOR_DISABLED);
                     }
 
                     glPushName(OBSTACLE_3);
@@ -388,7 +388,7 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
                 }
 
             glPopMatrix();
-            setColorEmissive(COLOR_DISABLED);
+            setMaterialColor(COLOR_DISABLED);
         }
         else
         {

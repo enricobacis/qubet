@@ -20,9 +20,9 @@ GLvoid Obstacle::draw(GLboolean simplifyForPicking)
         }
         else
         {
-            setColorEmissive(color);
+            setMaterialColor(color);
             drawObstacle(modelId);
-            setColorEmissive(COLOR_DISABLED);
+            setMaterialColor(COLOR_DISABLED);
         }
     glPopMatrix();
 }
