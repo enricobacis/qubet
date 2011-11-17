@@ -143,6 +143,7 @@ void Cube::keyPressed(QKeyEvent *event)
     switch(key)
     {
     case Qt::Key_Space:
+    case Qt::Key_Up:
         jump();
         break;
 
