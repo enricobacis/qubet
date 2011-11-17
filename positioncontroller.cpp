@@ -100,4 +100,39 @@ void PositionController::createObstacleCells()
             }
         }
     }
+
+    QMap<GLint,Obstacle*> obstacles = level->getObstaclesList();
+
+    for (QMap<GLint,Obstacle*>::iterator i = obstacles.begin(); i != obstacles.end(); i++)
+    {
+        Obstacle *obstacle = dynamic_cast<Obstacle*>(i.value());
+        Vector3f *cell = obstacle->getCell();
+
+        obstacleCells[cell->x][cell->y][cell->z] = true;
+
+        switch (obstacle->getModelId())
+        {
+        case OBSTACLE_I:
+            obstacleCells[cell->x]    [cell->y + 1][cell->z]     = true;
+            break;
+
+        case OBSTACLE_L:
+            obstacleCells[cell->x + 1][cell->y]    [cell->z]     = true;
+            obstacleCells[cell->x + 1][cell->y + 1][cell->z]     = true;
+            break;
+
+        case OBSTACLE_CUBE_BIG:
+            obstacleCells[cell->x]    [cell->y + 1][cell->z]     = true;
+
+            obstacleCells[cell->x + 1][cell->y]    [cell->z]     = true;
+            obstacleCells[cell->x + 1][cell->y + 1][cell->z]     = true;
+
+            obstacleCells[cell->x]    [cell->y]    [cell->z + 1] = true;
+            obstacleCells[cell->x]    [cell->y + 1][cell->z + 1] = true;
+
+            obstacleCells[cell->x + 1][cell->y]    [cell->z + 1] = true;
+            obstacleCells[cell->x + 1][cell->y + 1][cell->z + 1] = true;
+            break;
+        }
+    }
 }

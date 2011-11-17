@@ -32,6 +32,11 @@
 #define LEVEL_LENGTH_DEFAULT    150
 #define LEVEL_GRAVITY_DEFAULT   10
 
+#define OBSTACLE_CUBE_SMALL     0
+#define OBSTACLE_I              1
+#define OBSTACLE_L              2
+#define OBSTACLE_CUBE_BIG       3
+
 /**
  * @brief Enum used for currentView
  */

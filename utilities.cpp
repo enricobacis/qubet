@@ -366,7 +366,7 @@ GLvoid setMaterialColor(QColor color)
     QVector<GLfloat> mat_emission;
 
     mat_ambient  << color.redF() / 4.0f << color.greenF() / 4.0f << color.blueF() / 4.0f << 1.0f;
-    mat_diffuse  << color.redF() << color.greenF() << color.blueF() << 1.0f;
+    mat_diffuse  << color.redF()        << color.greenF()        << color.blueF()        << 1.0f;
     mat_specular << color.redF() / 8.0f << color.greenF() / 8.0f << color.blueF() / 8.0f << 1.0f;
     mat_emission << color.redF() / 8.0f << color.greenF() / 8.0f << color.blueF() / 8.0f << 1.0f;
 
@@ -374,4 +374,28 @@ GLvoid setMaterialColor(QColor color)
     glMaterialfv(GL_FRONT, GL_SPECULAR, mat_diffuse.data());
     glMaterialfv(GL_FRONT, GL_EMISSION, mat_specular.data());
     glMaterialfv(GL_FRONT, GL_AMBIENT,  mat_emission.data());
+}
+
+Vector3f *obstacleCellToPosition(Vector3f *cell, GLuint obstacleModelId)
+{
+    Vector3f *bounding = getObstacleBoundingBox(obstacleModelId);
+    Vector3f *position = new Vector3f();
+
+    position->x =  (bounding->x / 2.0f) + (cell->x * 3.0f);
+    position->y =  (bounding->y / 2.0f) + (cell->y * 3.0f);
+    position->z = -(bounding->z / 2.0f) - (cell->z * 3.0f);
+
+    return position;
+}
+
+Vector3f *obstaclePositionToCell(Vector3f *position, GLuint obstacleModelId)
+{
+    Vector3f *bounding = getObstacleBoundingBox(obstacleModelId);
+    Vector3f *cell = new Vector3f();
+
+    cell->x = (int)(( position->x -(bounding->x / 2.0f)) / 3);
+    cell->y = (int)(( position->y -(bounding->y / 2.0f)) / 3);
+    cell->z = (int)((-position->z -(bounding->z / 2.0f)) / 3);
+
+    return cell;
 }

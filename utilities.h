@@ -24,6 +24,9 @@ GLvoid drawRectangle(GLfloat x, GLfloat y, GLuint texture = 0);
  */
 GLvoid drawPrism(GLfloat x, GLfloat y, GLfloat z, Skin *skin = NULL, GLboolean invertBackTexture = false);
 
+/**
+ * @brief Set the texture with GL_CLAMP_TO_EDGE.
+ */
 GLvoid setTextureClampToEdge();
 
 /**
@@ -85,5 +88,25 @@ GLvoid setMaterialColor(int color);
  * @param color is the color to set.
  */
 GLvoid setMaterialColor(QColor color);
+
+/**
+ * @brief Convert the cell coordinates occupied by the obstacle to absolute position.
+ *
+ * @param cell is the Vector3f of cells coordinates.
+ * @param obstacleModelId is the modelID of the obstacle.
+ *
+ * @returns the absolute position of the obstacle.
+ */
+Vector3f *obstacleCellToPosition(Vector3f *cell, GLuint obstacleModelId);
+
+/**
+ * @brief Convert the absolute position of an obstacle to the cell coordinates.
+ *
+ * @param position is the absolute position of the obstacle.
+ * @param obstacleModelId is the modelID of the obstacle.
+ *
+ * @returns the cell coordinates of the obstacle.
+ */
+Vector3f *obstaclePositionToCell(Vector3f *position, GLuint obstacleModelId);
 
 #endif // UTILITIES_H

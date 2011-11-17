@@ -1,10 +1,10 @@
 #include "obstacle.h"
 #include "defines.h"
 
-Obstacle::Obstacle(GLint _modelId, Vector3f *_position) :
+Obstacle::Obstacle(GLint _modelId, Vector3f *_cell) :
     modelId(_modelId)
 {
-    position = new Vector3f(*_position);
+    setCell(_cell);
 }
 
 Obstacle::~Obstacle()
@@ -13,6 +13,7 @@ Obstacle::~Obstacle()
 GLvoid Obstacle::draw(GLboolean simplifyForPicking)
 {
     glPushMatrix();
+
         glTranslatef(position->x, position->y, position->z);
         if (simplifyForPicking)
         {
@@ -24,6 +25,7 @@ GLvoid Obstacle::draw(GLboolean simplifyForPicking)
             drawObstacle(modelId);
             setMaterialColor(COLOR_DISABLED);
         }
+
     glPopMatrix();
 }
 
@@ -37,16 +39,21 @@ GLvoid Obstacle::setId(GLint _id)
     id = _id;
 }
 
-GLvoid Obstacle::setPosition(Vector3f *_position)
+GLvoid Obstacle::setCell(Vector3f *_cell)
 {
-    position = new Vector3f(*_position);
+    cell = new Vector3f(*_cell);
+    position = obstacleCellToPosition(cell, modelId);
+}
+
+Vector3f *Obstacle::getCell()
+{
+    return cell;
 }
 
 Vector3f *Obstacle::getPosition()
 {
     return position;
 }
-
 
 GLvoid Obstacle::setColor(QColor _color)
 {

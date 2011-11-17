@@ -18,9 +18,9 @@ public:
      * @brief Constructor of Obstacle.
      *
      * @param _modelId is the modelId of the Obstacle.
-     * @param _position is the position of the Obstacle.
+     * @param _cell is the cell of the Obstacle.
      */
-    explicit Obstacle(GLint _modelId, Vector3f *_position);
+    explicit Obstacle(GLint _modelId, Vector3f *_cell);
 
     /**
      * @brief Safely destroy an Obstacle object.
@@ -41,7 +41,6 @@ public:
      */
     GLint getId();
 
-
     /**
      * @brief Set the obstacleId.
      *
@@ -50,11 +49,18 @@ public:
     GLvoid setId(GLint _id);
 
     /**
-     * @brief Set the obstacle position.
+     * @brief Set the cell of the Obstacle.
      *
-     * @param _position is the position to set.
+     * @param _cell is the cel to set.
      */
-    GLvoid setPosition(Vector3f *_position);
+    GLvoid setCell(Vector3f *_cell);
+
+    /**
+     * @brief Returns the cell of the Obstacle.
+     *
+     * @returns the cell of the Obstacle.
+     */
+    Vector3f *getCell();
 
     /**
      * @brief Returns the obstacle position.
@@ -110,6 +116,7 @@ private:
 
     GLint id; /**< It is the obstacle id. */
     Vector3f *position; /**< It is the obstacle position. */
+    Vector3f *cell; /**< It is the obstacle cell position. */
     QColor color; /**< It is the obstacle color. */
     GLint modelId; /**< It is the obstacle modelId. */
     GLint type; /**< It is the obstacle type value. */

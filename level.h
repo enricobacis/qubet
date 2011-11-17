@@ -144,9 +144,16 @@ public:
      * @brief Moves an obstacle to a new position.
      *
      * @param _id is the id of the obstacle to move.
-     * @param newPosition is the new position.
+     * @param newCell is the new cell.
      */
-    void moveObstacle(GLint _id, Vector3f *newPosition);
+    void moveObstacle(GLint _id, Vector3f *newCell);
+
+    /**
+     * @brief Returns the Level's Obstacles List.
+     *
+     * @return the Level's Obstacles List.
+     */
+    QMap<GLint,Obstacle*> getObstaclesList();
 
     /**
      * @brief Loads the Level from xml form using the filename as input.
@@ -192,12 +199,12 @@ public:
 
 private:
 
-    QObject *parent; /**< It is the parent of Level.  */
+    QObject *parent; /**< It is the parent of Level. */
     QString filename; /**< It is the Level xml description filename. */
     QString name; /**< It is the Level name. */
     bool isInStory; /**< It is the variable that states if the Level is in the story. */
-    QMultiMap<GLint,Obstacle*> obstaclesList; /**< It is the Level multiMap of obstacles. */
-    QMultiMap<GLint,Obstacle*> tempObstaclesList; /**< It is the Level multiMap of obstacles. */
+    QMap<GLint,Obstacle*> obstaclesList; /**< It is the Level List of obstacles. */
+    QMap<GLint,Obstacle*> tempObstaclesList; /**< It is the Level List of obstacles. */
     GLint length; /**< It is the Level length. */
     GLint width; /**< It is the Level width. */
     GLfloat gravity; /**< It is the Level gravity. */
@@ -205,23 +212,6 @@ private:
     QString skyboxName; /**< It is the name of the skybox to use. */
     GLint currentObstacleId; /**< It is the current Obstacle Id (used to generate new IDs). */
 
-    /**
-     * @brief Convert the cell coordinates occupied by the obstacle to absolute position.
-     *
-     * @param cells is the Vector3f of cells coordinates.
-     * @param obstacleModelId is the modelID of the obstacle.
-     * @returns the absolute position of the obstacle.
-     */
-    Vector3f *obstacleCellToPosition(Vector3f *cells, GLuint obstacleModelId);
-
-    /**
-     * @brief Convert the absolute position of an obstacle to the cell coordinates.
-     *
-     * @param position is the absolute position of the obstacle.
-     * @param obstacleModelId is the modelID of the obstacle.
-     * @returns the cell coordinates of the obstacle.
-     */
-    Vector3f *obstaclePositionToCell(Vector3f *position, GLuint obstacleModelId);
 };
 
 #endif // LEVEL_H

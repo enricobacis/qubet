@@ -7,6 +7,7 @@ Letter::Letter(QChar _letter) :
 
 Letter::~Letter()
 {
+    textures.~QList();
 }
 
 GLuint Letter::getRandomTexture()

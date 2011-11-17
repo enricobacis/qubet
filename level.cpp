@@ -25,13 +25,13 @@ Level::Level(QString _name, GLfloat _length, GLfloat _width, QObject *_parent) :
 
 Level::~Level()
 {
-    for (QMultiMap<GLint,Obstacle*>::iterator i = obstaclesList.begin(); i != obstaclesList.end(); i++)
+    for (QMap<GLint,Obstacle*>::iterator i = obstaclesList.begin(); i != obstaclesList.end(); i++)
     {
         if (i.value() != NULL)
             dynamic_cast<Obstacle*>(i.value())->~Obstacle();
     }
 
-    obstaclesList.~QMultiMap();
+    obstaclesList.~QMap();
 }
 
 QString Level::getFilename()
@@ -96,41 +96,33 @@ QString Level::getSkyboxName()
 
 void Level::addObstacle(Obstacle *_obstacle)
 {
-    Vector3f *cells = _obstacle->getPosition();
-    Vector3f *position = obstacleCellToPosition(cells, _obstacle->getModelId());
-
-    _obstacle->setPosition(position);
-    _obstacle->setId(++currentObstacleId);
-    tempObstaclesList.insert(cells->z, _obstacle);
+    GLint id = ++currentObstacleId;
+    _obstacle->setId(id);
+    tempObstaclesList.insert(id, _obstacle);
 }
 
 void Level::deleteObstacle(GLint _id)
 {
-    Obstacle *obstacle;
-    for (QMultiMap<GLint,Obstacle*>::iterator i = obstaclesList.begin(); i != obstaclesList.end(); i++)
+    QMap<GLint,Obstacle*>::iterator i = obstaclesList.find(_id);
+
+    if (i != obstaclesList.end())
     {
-        obstacle = dynamic_cast<Obstacle*>(i.value());
-        if (obstacle->getId() == _id)
-        {
-            obstacle->~Obstacle();
-            obstaclesList.erase(i);
-            break;
-        }
+        dynamic_cast<Obstacle*>(i.value())->~Obstacle();
+        obstaclesList.remove(_id);
     }
 }
 
-void Level::moveObstacle(GLint _id, Vector3f *newPosition)
+void Level::moveObstacle(GLint _id, Vector3f *newCell)
 {
-    Obstacle *obstacle;
-    for (QMultiMap<GLint,Obstacle*>::iterator i = obstaclesList.begin(); i != obstaclesList.end(); i++)
-    {
-        obstacle = dynamic_cast<Obstacle*>(i.value());
-        if (obstacle->getId() == _id)
-        {
-            obstacle->setPosition(newPosition);
-            break;
-        }
-    }
+    QMap<GLint,Obstacle*>::iterator i = obstaclesList.find(_id);
+
+    if (i != obstaclesList.end())
+        dynamic_cast<Obstacle*>(i.value())->setCell(newCell);
+}
+
+QMap<GLint,Obstacle*> Level::getObstaclesList()
+{
+    return obstaclesList;
 }
 
 bool Level::load()
@@ -162,13 +154,21 @@ bool Level::load()
     {
         GLint modelId = obstacleElement.attribute("model", "1").toInt();
 
-        GLint zCell = obstacleElement.attribute("z", "0").toInt();
         Vector3f *cells = new Vector3f(obstacleElement.attribute("x", "0").toInt(),
                                        obstacleElement.attribute("y", "0").toInt(),
-                                       zCell);
+                                       obstacleElement.attribute("z", "0").toInt());
 
-        Vector3f *position = obstacleCellToPosition(cells, modelId);
-        Obstacle *obstacle = new Obstacle(modelId, position);
+        Obstacle *obstacle = new Obstacle(modelId, cells);
+
+        QColor color(qrand() % 256, qrand() % 256, qrand() % 256, 255);
+
+        if (color.lightness() < 100)
+            color = color.lighter();
+
+        if (color.lightness() > 150)
+            color = color.darker();
+
+        obstacle->setColor(color);
 
         GLint obstacleId = obstacleElement.attribute("id", "1").toInt();
         obstacle->setId(obstacleId);
@@ -178,7 +178,7 @@ bool Level::load()
 
         obstacle->setType(1);
 
-        obstaclesList.insert(zCell, obstacle);
+        obstaclesList.insert(obstacleId, obstacle);
         obstacleElement = obstacleElement.nextSiblingElement("obstacle");
     }
 
@@ -187,7 +187,7 @@ bool Level::load()
 
 bool Level::save(bool *newlyCreated)
 {
-    for (QMultiMap<GLint,Obstacle*>::iterator i = tempObstaclesList.begin(); i != tempObstaclesList.end(); i++)
+    for (QMap<GLint,Obstacle*>::iterator i = tempObstaclesList.begin(); i != tempObstaclesList.end(); i++)
         obstaclesList.insert(i.key(),i.value());
     tempObstaclesList.clear();
 
@@ -203,11 +203,11 @@ bool Level::save(bool *newlyCreated)
     Obstacle *obstacle = NULL;
     Vector3f *cells = NULL;
 
-    for (QMultiMap<GLint,Obstacle*>::iterator i = obstaclesList.begin(); i != obstaclesList.end(); i++)
+    for (QMap<GLint,Obstacle*>::iterator i = obstaclesList.begin(); i != obstaclesList.end(); i++)
     {
         obstacle = dynamic_cast<Obstacle*>(i.value());
         QDomElement obstacleElement = document.createElement("obstacle");
-        cells = obstaclePositionToCell(obstacle->getPosition(), obstacle->getModelId());
+        cells = obstacle->getCell();
         obstacleElement.setAttribute("id", obstacle->getId());
         obstacleElement.setAttribute("model", obstacle->getModelId());
         obstacleElement.setAttribute("x", cells->x);
@@ -291,15 +291,18 @@ GLvoid Level::draw(GLboolean simplifyForPicking)
     drawPrism(width, LEVEL_HEIGHT, length);
     glPopName();
 
-    glPushName(OBSTACLES);
+    glPushMatrix();
+        glTranslatef(-(width / 2.0f), (LEVEL_HEIGHT / 2.0f), (length / 2.0f));
+        glPushName(OBSTACLES);
 
-    for (QMultiMap<GLint,Obstacle*>::iterator i = obstaclesList.begin(); i != obstaclesList.end(); i++)
-        dynamic_cast<Obstacle*>(i.value())->draw(simplifyForPicking);
+        for (QMap<GLint,Obstacle*>::iterator i = obstaclesList.begin(); i != obstaclesList.end(); i++)
+            dynamic_cast<Obstacle*>(i.value())->draw(simplifyForPicking);
 
-    for (QMultiMap<GLint,Obstacle*>::iterator i = tempObstaclesList.begin(); i != tempObstaclesList.end(); i++)
-        dynamic_cast<Obstacle*>(i.value())->draw(simplifyForPicking);
+        for (QMap<GLint,Obstacle*>::iterator i = tempObstaclesList.begin(); i != tempObstaclesList.end(); i++)
+            dynamic_cast<Obstacle*>(i.value())->draw(simplifyForPicking);
 
-    glPopName();
+        glPopName();
+    glPopMatrix();
 }
 
 GLint Level::getObstacleListCount()
@@ -316,28 +319,4 @@ GLvoid Level::clearObstaclesList()
 GLvoid Level::clearTempObstaclesList()
 {
     tempObstaclesList.clear();
-}
-
-Vector3f *Level::obstacleCellToPosition(Vector3f *cells, GLuint obstacleModelId)
-{
-    Vector3f *bounding = getObstacleBoundingBox(obstacleModelId);
-    Vector3f *position = new Vector3f();
-
-    position->x =  (bounding->x / 2.0f) + (cells->x * 3.0f) - (width / 2.0f);
-    position->y =  (bounding->y / 2.0f) + (cells->y * 3.0f) + (LEVEL_HEIGHT / 2.0f);
-    position->z = -(bounding->z / 2.0f) - (cells->z * 3.0f) + (length / 2.0f);
-
-    return position;
-}
-
-Vector3f *Level::obstaclePositionToCell(Vector3f *position, GLuint obstacleModelId)
-{
-    Vector3f *bounding = getObstacleBoundingBox(obstacleModelId);
-    Vector3f *cells = new Vector3f();
-
-    cells->x = (int)(( position->x -(bounding->x / 2.0f) + (width / 2.0f)) / 3);
-    cells->y = (int)(( position->y -(bounding->y / 2.0f) - (LEVEL_HEIGHT / 2.0f)) / 3);
-    cells->z = (int)((-position->z -(bounding->z / 2.0f) + (length / 2.0f)) / 3);
-
-    return cells;
 }
