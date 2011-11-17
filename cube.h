@@ -89,12 +89,13 @@ private:
     GLint levelCellsWidth; /**< It is the number of cells of the Level's width. */
     GLfloat scaleFactor; /**< It is the scale factor. */
     GLfloat jumpStartTime; /**< It is the time the Cube has started the jump. */
-    GLint jumpParameter; /**< It is the parameter of the jump. */
+    GLint jumpStep; /**< It is the parameter of the jump. */
     GLfloat jumpVelocity;  /**< It is the velocity of the jump. */
     GLint movingStep;  /**< It is the current moving step for to left and right. */
     GLint explosionStep; /**< It is the current explosion step. */
     GLint xCell; /**< It is the x cell the Cube is on. */
     Vector3f* normalsMatrix[4][4][4]; /**< It is the 3-dimensional matrix that contain the nomrs vector of each sub-cube in case of explosion. */
+    Vector3f* anglesMatrix[4][4][4]; /**< It is the 3-dimensional matrix that contain the nomrs vector of each sub-cube in case of explosion. */
 
     /**
      * @brief Generate the normalsMatrix Matrix.

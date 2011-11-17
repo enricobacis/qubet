@@ -7,7 +7,7 @@ Cube::Cube(Level *level, Skin *_skin, QObject *_parent):
     parent(_parent),
     position(new Vector3f(0.0f, 0.0f, 0.0f)),
     state(0),
-    jumpParameter(0),
+    jumpStep(0),
     movingStep(0),
     explosionStep(0),
     xCell(0)
@@ -89,19 +89,26 @@ void Cube::draw()
                 for (int i = 0; i < 4; i++)
                 {
                     glPushMatrix();
+                    glTranslatef(normalsMatrix[i][j][k]->x,
+                                 normalsMatrix[i][j][k]->y ,normalsMatrix[i][j][k]->z);
+                    glTranslatef( 4.0f * normalsMatrix[i][j][k]->x * (explosionStep/100.0f),
+                                  4.0f * normalsMatrix[i][j][k]->y * (explosionStep/100.0f),
+                                  4.0f * normalsMatrix[i][j][k]->z * (explosionStep/100.0f));
 
-                        glTranslatef(normalsMatrix[i][j][k]->x, normalsMatrix[i][j][k]->y ,normalsMatrix[i][j][k]->z);
-                        glTranslatef((normalsMatrix[i][j][k]->x * cos(0.0f) *( explosionStep/100.0f)),(normalsMatrix[i][j][k]->y * sin(1.62f) * (explosionStep/100.0f) - (((explosionStep/100.0f) * (explosionStep/100.0f)) * gravity / 2.0f)), (normalsMatrix[i][j][k]->z * cos(0.0f) * (explosionStep/100.0f)));
-                        drawPrism(((1-(explosionStep/100.0f)) * 3.0f) / 4.0f, ((1-(explosionStep/100.0f)) * 3.0f) / 4.0f, ((1-(explosionStep/100.0f)) * 3.0f) / 4.0f);
+                    glRotatef(anglesMatrix[i][j][k]->x, 1.0f, 0.0f, 0.0f);
+                    glRotatef(anglesMatrix[i][j][k]->y, 0.0f, 1.0f, 0.0f);
+                    glRotatef(anglesMatrix[i][j][k]->x, 0.0f, 0.0f, 1.0f);
+
+                    drawPrism(((1-(explosionStep/100.0f)) * 3.0f) / 4.0f,
+                              ((1-(explosionStep/100.0f)) * 3.0f) / 4.0f,
+                              ((1-(explosionStep/100.0f)) * 3.0f) / 4.0f);
 
                     glPopMatrix();
                 }
             }
         }
-
-        explosionStep += 10;
-
-        if (explosionStep == 100)
+        explosionStep += 5;
+        if(explosionStep == 100)
         {
             explosionStep = 0;
             state = state & ~CUBESTATE_COLLIDED;
@@ -120,16 +127,16 @@ void Cube::updatePosition()
 {
     if (state & CUBESTATE_JUMPING)
     {
-        if (jumpParameter > 100)
+        if (jumpStep > 100)
         {
-            jumpParameter = 0;
+            jumpStep = 0;
             position->y = 0;
             state = state & ~CUBESTATE_JUMPING;
         }
         else
         {
-            position->y = 3 * (((-0.5f) * gravity * pow((jumpParameter/100.0f), 2.0 )) + jumpVelocity * (jumpParameter / 100.0f ));
-            jumpParameter += 4;
+            position->y = 3 * (((-0.5f) * gravity * pow((jumpStep/100.0f), 2.0 )) + jumpVelocity * (jumpStep / 100.0f ));
+            jumpStep += 4;
         }
     }
 
@@ -150,11 +157,17 @@ void Cube::updatePosition()
 
 void Cube::createNormalsMatrix()
 {
-    GLfloat gap = 0.75f;
+    GLfloat gap = 3.0f / 4.0f;
     for (int k = 0; k < 4; k++)
         for (int j = 0; j < 4; j++)
             for (int i = 0; i < 4; i++)
-                normalsMatrix[i][j][k] = new Vector3f((-1.125f + (gap*i)), (-1.125f + (gap*j)), (-1.125f + (gap*k)));
+            {
+                normalsMatrix[i][j][k] = new Vector3f((-1.125f + (gap*i)),
+                                                      (-1.125f + (gap*j)),
+                                                      (-1.125f + (gap*k)));
+                anglesMatrix[i][j][k] = new Vector3f(qrand(), qrand(), qrand());
+            }
+
 }
 
 void Cube::explode()
