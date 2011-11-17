@@ -78,6 +78,7 @@ public:
 
 
 private:
+
     Skin *skin; /**< It is the Skin of the Cube. */
     QObject *parent; /**< It is the Parent of the Cube. */
     Vector3f *position; /**< It is the Cube's current position. */
@@ -88,10 +89,11 @@ private:
     GLint levelCellsWidth; /**< It is the number of cells of the Level's width. */
     GLfloat scaleFactor; /**< It is the scale factor. */
     GLfloat jumpStartTime; /**< It is the time the Cube has started the jump. */
-    GLuint jumpParameter; /**< It is the parametric variable to put in the jump parametric functions. */
+    GLint jumpParameter; /**< It is the parameter of the jump. */
     GLfloat jumpVelocity;  /**< It is the velocity of the jump. */
-    GLuint movingParameter;  /**< It is the parametric variable to put in the moving parametric functions */
-    GLuint t; /**< TODO */
+    GLint movingStep;  /**< It is the current moving step for to left and right. */
+    GLint explosionStep; /**< It is the current explosion step. */
+    GLint xCell; /**< It is the x cell the Cube is on. */
     Vector3f* normalsMatrix[4][4][4]; /**< It is the 3-dimensional matrix that contain the nomrs vector of each sub-cube in case of explosion. */
 
     /**

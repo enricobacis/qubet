@@ -60,7 +60,6 @@ void Game::draw(GLboolean simplifyForPicking)
             // Primary Actions
 
 
-
             // Secondary Actions
 
             case ROTATE_VOLUMECUBE:
@@ -97,7 +96,10 @@ void Game::draw(GLboolean simplifyForPicking)
 
     glPopMatrix();
 
-    cube->draw();
+    glPushMatrix();
+        glTranslatef(0.0f, -2.5f, 1.5f);
+        cube->draw();
+    glPopMatrix();
 }
 
 void Game::initGame()
