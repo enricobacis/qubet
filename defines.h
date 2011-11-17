@@ -1,7 +1,7 @@
 #ifndef DEFINES_H
 #define DEFINES_H
 
-#define QUBET_VERSION "0.4-a"
+#define QUBET_VERSION "0.5-a"
 
 #define WIDTH                   600
 #define HEIGHT                  400
