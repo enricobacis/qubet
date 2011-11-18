@@ -96,11 +96,21 @@ private:
     GLint xCell; /**< It is the x cell the Cube is on. */
     Vector3f* normalsMatrix[4][4][4]; /**< It is the 3-dimensional matrix that contain the nomrs vector of each sub-cube in case of explosion. */
     Vector3f* anglesMatrix[4][4][4]; /**< It is the 3-dimensional matrix that contain the nomrs vector of each sub-cube in case of explosion. */
+    GLuint deaths;  /**< It is the number of the cube deaths. */
 
     /**
      * @brief Generate the normalsMatrix Matrix.
      */
     void createNormalsMatrix();
+
+    /**
+     * @brief this function is called in the draw function in case of explosion.
+     *
+     * @param i is the x counter.
+     * @param j is the y counter.
+     * @param k is the z counter.
+    */
+    void drawExplosion(int i, int j, int k);
 
     /**
      * @brief Make the Cube explode.

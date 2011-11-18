@@ -10,7 +10,8 @@ Cube::Cube(Level *level, Skin *_skin, QObject *_parent):
     jumpStep(0),
     movingStep(0),
     explosionStep(0),
-    xCell(0)
+    xCell(0),
+    deaths(0)
 {
     connect(parent, SIGNAL(keyPressedSignal(QKeyEvent*)), this, SLOT(keyPressed(QKeyEvent*)));
     connect(this, SIGNAL(playEffect(QString)), parent, SIGNAL(playEffect(QString)));
@@ -82,30 +83,10 @@ void Cube::draw()
     if (state & CUBESTATE_COLLIDED)
     {
         for (int k = 0; k < 4; k++)
-        {
             for (int j = 0; j < 4; j++)
-            {
                 for (int i = 0; i < 4; i++)
-                {
-                    glPushMatrix();
-                    glTranslatef(normalsMatrix[i][j][k]->x,
-                                 normalsMatrix[i][j][k]->y ,normalsMatrix[i][j][k]->z);
-                    glTranslatef( 4.0f * normalsMatrix[i][j][k]->x * (explosionStep/100.0f),
-                                  4.0f * normalsMatrix[i][j][k]->y * (explosionStep/100.0f),
-                                  4.0f * normalsMatrix[i][j][k]->z * (explosionStep/100.0f));
+                    drawExplosion(i, j, k);
 
-                    glRotatef(anglesMatrix[i][j][k]->x, 1.0f, 0.0f, 0.0f);
-                    glRotatef(anglesMatrix[i][j][k]->y, 0.0f, 1.0f, 0.0f);
-                    glRotatef(anglesMatrix[i][j][k]->x, 0.0f, 0.0f, 1.0f);
-
-                    drawPrism(((1-(explosionStep/100.0f)) * 3.0f) / 4.0f,
-                              ((1-(explosionStep/100.0f)) * 3.0f) / 4.0f,
-                              ((1-(explosionStep/100.0f)) * 3.0f) / 4.0f);
-
-                    glPopMatrix();
-                }
-            }
-        }
         explosionStep += 5;
         if(explosionStep == 100)
         {
@@ -134,7 +115,8 @@ void Cube::updatePosition()
         }
         else
         {
-            position->y = 3 * (((-0.5f) * gravity * pow((jumpStep/100.0f), 2.0 )) + jumpVelocity * (jumpStep / 100.0f ));
+            position->y = 3 * (((-0.5f) * gravity * pow((jumpStep/(10.0f * gravity)), 2.0 )) + (gravity / 2.0f) * (jumpStep / (10.0f*gravity) ));
+            //position->y = (jumpStep/20.0f) - (0.015f * pow(jumpStep, 2.0) / gravity) ;
             jumpStep += 4;
         }
     }
@@ -161,12 +143,33 @@ void Cube::createNormalsMatrix()
         for (int j = 0; j < 4; j++)
             for (int i = 0; i < 4; i++)
             {
-                normalsMatrix[i][j][k] = new Vector3f((-1.125f + (gap*i)),
-                                                      (-1.125f + (gap*j)),
-                                                      (-1.125f + (gap*k)));
+                normalsMatrix[i][j][k] = new Vector3f(((qrand() % 2)+1 )*(-1.125f + (gap*i)),
+                                                      ((qrand() % 2)+1 ) *(-1.125f + (gap*j)),
+                                                      ((qrand() % 2)+1 ) *(-1.125f + (gap*k)));
                 anglesMatrix[i][j][k] = new Vector3f(qrand(), qrand(), qrand());
             }
 
+}
+
+void Cube::drawExplosion(int i, int j, int k)
+{
+    glPushMatrix();
+    glTranslatef(normalsMatrix[i][j][k]->x,
+                 normalsMatrix[i][j][k]->y ,normalsMatrix[i][j][k]->z);
+
+    glTranslatef( 4.0f * normalsMatrix[i][j][k]->x * (explosionStep/100.0f),
+                  4.0f * normalsMatrix[i][j][k]->y * (explosionStep/100.0f),
+                  4.0f * normalsMatrix[i][j][k]->z * (explosionStep/100.0f));
+
+    glRotatef(anglesMatrix[i][j][k]->x, 1.0f, 0.0f, 0.0f);
+    glRotatef(anglesMatrix[i][j][k]->y, 0.0f, 1.0f, 0.0f);
+    glRotatef(anglesMatrix[i][j][k]->x, 0.0f, 0.0f, 1.0f);
+
+    drawPrism(((1-(explosionStep/100.0f)) * 3.0f) / 4.0f,
+              ((1-(explosionStep/100.0f)) * 3.0f) / 4.0f,
+              ((1-(explosionStep/100.0f)) * 3.0f) / 4.0f);
+
+    glPopMatrix();
 }
 
 void Cube::explode()
@@ -177,6 +180,8 @@ void Cube::explode()
 void Cube::collided()
 {
     explode();
+    createNormalsMatrix();
+    deaths++;
 }
 
 void Cube::keyPressed(QKeyEvent *event)
@@ -199,7 +204,7 @@ void Cube::keyPressed(QKeyEvent *event)
         break;
 
     case Qt::Key_C:
-        explode();
+        collided();
         break;
     }
 }
