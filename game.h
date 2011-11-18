@@ -88,6 +88,12 @@ private:
     void initGame();
 
     /**
+     * @brief make the animation for the initial countdown
+     *
+    */
+    void introduction();
+
+    /**
      * @brief Start the current Level.
      */
     void playLevel();

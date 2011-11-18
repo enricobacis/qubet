@@ -59,38 +59,8 @@ void Game::draw(GLboolean simplifyForPicking)
             {
             // Primary Actions
             case INTRODUCTION:
-                switch(introStep)
-                {
-                case 10:
-                    intro = new CubeString("3", 3.0f, alphabet );
-                    intro->startStringRotation(5, 1);
-                    break;
-                case 50:
-                    intro = new CubeString("2", 3.0f, alphabet );
-                    intro->startStringRotation(9, 2);
-                    break;
-                case 90:
-                    intro = new CubeString("1", 3.0f, alphabet );
-                    intro->startStringRotation(18, 4);
-                    break;
-                case 130:
-                    intro = new CubeString("go", 3.0f, alphabet );
-                    intro->startStringRotation(27, 6);
-                    break;
-                case 180:
-                    currentActions->setPrimaryAction(DO_NOTHING);
-                    break;
-                default:
-                    break;
-                }
-                introStep++;
-                glPushMatrix();
-                glTranslatef(0.0f, 6.0f, 0.0f);
-                intro->draw();
-                glPopMatrix();
-
-                break;
-
+                introduction();
+            break;
 
             // Secondary Actions
 
@@ -173,6 +143,38 @@ void Game::initGame()
         break;
     }
     cube = new Cube(level, skin);
+}
+
+void Game::introduction(){
+    switch(introStep)
+    {
+    case 10:
+        intro = new CubeString("3", 3.0f, alphabet );
+        intro->startStringRotation(5, 1);
+        break;
+    case 50:
+        intro = new CubeString("2", 3.0f, alphabet );
+        intro->startStringRotation(9, 2);
+        break;
+    case 90:
+        intro = new CubeString("1", 3.0f, alphabet );
+        intro->startStringRotation(18, 4);
+        break;
+    case 130:
+        intro = new CubeString("go", 3.0f, alphabet );
+        intro->startStringRotation(27, 6);
+        break;
+    case 180:
+        currentActions->setPrimaryAction(DO_NOTHING);
+        break;
+    default:
+        break;
+    }
+    introStep++;
+    glPushMatrix();
+    glTranslatef(0.0f, 6.0f, 0.0f);
+    intro->draw();
+    glPopMatrix();
 }
 
 void Game::playLevel()
