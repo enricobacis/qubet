@@ -109,7 +109,7 @@ void Cube::draw()
 
 void Cube::updatePosition()
 {
-    position->z += 0.5;
+    position->z += 1;
 
     if (position->z >= levelCellsLength * 3.0f)
     {
@@ -119,7 +119,7 @@ void Cube::updatePosition()
 
     if (state & CUBESTATE_JUMPING)
     {
-        if (jumpStep > 100)
+        if (jumpStep > 10.0f * gravity         )
         {
             jumpStep = 0;
             position->y = 0;
@@ -135,14 +135,14 @@ void Cube::updatePosition()
 
     if (state & (CUBESTATE_MOVING_LEFT | CUBESTATE_MOVING_RIGHT))
     {
-        if (movingStep >= 25)
+        if (movingStep >= 10)
         {
             movingStep = 0;
             state = state & ~CUBESTATE_MOVING_LEFT & ~CUBESTATE_MOVING_RIGHT;
         }
         else
         {
-            position->x += (state & CUBESTATE_MOVING_LEFT) ? -0.12f : 0.12f;
+            position->x += (state & CUBESTATE_MOVING_LEFT) ? -0.3f : 0.3f;
             movingStep++;
         }
     }

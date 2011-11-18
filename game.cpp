@@ -90,7 +90,7 @@ void Game::draw(GLboolean simplifyForPicking)
 
     glPushMatrix();
         glTranslatef(-cameraOffset->x, -cameraOffset->y, -cameraOffset->z);
-        glRotatef(10.0f, 1.0f, 0.0f, 0.0f);
+        glRotatef(15.0f, 1.0f, 0.0f, 0.0f);
         glPushMatrix();
             glTranslatef(-(level->getWidth() / 2.0f) + 1.5f, levelOffset->y + 1.5f, -1.5f);
             cube->draw();
