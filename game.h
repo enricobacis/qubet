@@ -82,6 +82,7 @@ private:
     CubeString *stateLabel;  /**< It is the state CubeString (used for Pause string, intro, ...). */
     GLuint introStep;  /**< It is the parameter for the introduction. */
     bool isPaused; /**< It says if the game is paused or not. */
+    bool isExploding; /**< It says if the cube is exploding. */
     CubeString *deathCounter; /** It is the Death Counter CubeString. */
 
     /**

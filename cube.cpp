@@ -141,8 +141,6 @@ void Cube::updatePosition()
     if (!canMove)
         return;
 
-    glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
-    drawPrism(3.0f, 3.0f, 3.0f, skin);
     position->z += 1;
 
     if (position->z >= levelCellsLength * 3.0f)

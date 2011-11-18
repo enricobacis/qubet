@@ -124,6 +124,7 @@ void Game::initGame()
     currentActions = new ActionList(INTRODUCTION);
     deaths = 0;
     isPaused = false;
+    isExploding = false;
     introStep = 0;
 
     angleRotVolumeCube = (audioEnabled ? 0.0f : 90.0f);
@@ -228,7 +229,9 @@ void Game::continueGame()
     isPaused = false;
 
     cube->startCube();
-    positionController->startChecking();
+
+    if (!isExploding)
+        positionController->startChecking();
 
     stateLabel->~CubeString();
     stateLabel = new CubeString("", 3.0f, alphabet);
@@ -299,14 +302,17 @@ void Game::keyPressed(QKeyEvent *event)
 
 void Game::collided()
 {
+    isExploding = true;
     emit collision();
     deaths++;
     deathCounter->~CubeString();
     deathCounter = new CubeString(QString::number(deaths), 2.0f, alphabet);
+    deathCounter->startStringRotation(10, 1);
 }
 
 void Game::explosionFinished()
 {
+    isExploding = false;
     positionController->startChecking();
 }
 
