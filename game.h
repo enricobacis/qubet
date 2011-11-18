@@ -71,7 +71,6 @@ private:
     bool audioEnabled; /**< It is the audioEnabled boolean value. */
     Cube *cube; /**< It is the cube pointer. */
     PositionController *positionController; /**< It is the positionController pointer. */
-    GLint state; /**< It is the current state value. */
     GLint gameType; /**< It is the game type value. */
     GLint currentLevel; /**< It is the current level value. */
     GLint deaths; /**< It is the death counter value. */
@@ -80,8 +79,10 @@ private:
     Skin *volumeSkin; /**< It is the skin of the volume button */
     Vector3f *cameraOffset; /**< It is the camera offset for the editor. */
     Vector3f *levelOffset; /**< It is the offset of the Level. */
-    CubeString *intro;  /**< It is the string for the game intro. */
+    CubeString *stateLabel;  /**< It is the state CubeString (used for Pause string, intro, ...). */
     GLuint introStep;  /**< It is the parameter for the introduction. */
+    bool isPaused; /**< It says if the game is paused or not. */
+    CubeString *deathCounter; /** It is the Death Counter CubeString. */
 
     /**
      * @brief Initialize the game.
@@ -181,16 +182,6 @@ signals:
      * @brief Signal emitted when the cube has a collision with an obstacle.
      */
     void collision();
-
-    /**
-     * @brief Signal emitted to pause the game.
-     */
-    void pauseGameSignal();
-
-    /**
-     * @brief Signal emitted to continue the game.
-     */
-    void continueGameSignal();
 
     /**
      * @brief Signal emitted to close the game.

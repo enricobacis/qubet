@@ -25,12 +25,17 @@ PositionController::~PositionController()
     parent->disconnect(this);
 
     if (checkPositionTimer != NULL)
-        checkPositionTimer->stop();
+        stopChecking();
 }
 
 void PositionController::startChecking()
 {
     checkPositionTimer->start(30);
+}
+
+void PositionController::stopChecking()
+{
+    checkPositionTimer->stop();
 }
 
 void PositionController::checkCollision()

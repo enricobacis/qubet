@@ -30,9 +30,14 @@ public:
     ~PositionController();
 
     /**
-     * @brief Start checking for collisions;
+     * @brief Start checking for collision.
      */
     void startChecking();
+
+    /**
+     * @brief Stop checking for collisions.
+     */
+    void stopChecking();
 
 
 private:

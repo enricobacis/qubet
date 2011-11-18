@@ -31,11 +31,28 @@ public:
     ~Cube();
 
     /**
+     * @brief Start the motion of the Cube;
+     */
+    void startCube();
+
+    /**
+     * @brief Stop the motion of the Cube.
+     */
+    void stopCube();
+
+    /**
      * @brief Returns the position of the Cube.
      *
      * @returns the position of the Cube.
      */
     Vector3f *getPosition();
+
+    /**
+     * @brief Returns the Z of the Cube.
+     *
+     * @return the Z of the Cube.
+     */
+    GLfloat getZ();
 
     /**
      * @brief Set the position of the Cube.
@@ -90,14 +107,14 @@ private:
     GLfloat scaleFactor; /**< It is the scale factor. */
     GLfloat jumpStartTime; /**< It is the time the Cube has started the jump. */
     GLint jumpStep; /**< It is the parameter of the jump. */
-    GLfloat jumpVelocity;  /**< It is the velocity of the jump. */
     GLint movingStep;  /**< It is the current moving step for to left and right. */
     GLint explosionStep; /**< It is the current explosion step. */
     GLint xCell; /**< It is the x cell the Cube is on. */
     Vector3f* normalsMatrix[4][4][4]; /**< It is the 3-dimensional matrix that contain the nomrs vector of each sub-cube in case of explosion. */
     Vector3f* anglesMatrix[4][4][4]; /**< It is the 3-dimensional matrix that contain the nomrs vector of each sub-cube in case of explosion. */
-    GLuint deaths;  /**< It is the number of the cube deaths. */
     GLint startXCell; /**< It is the starting x cell. */
+    bool canMove; /**< Tells if the cube can move or not. */
+    bool isPaused; /**< Tells if the game is paused or not. */
 
     /**
      * @brief Generate the normalsMatrix Matrix.
