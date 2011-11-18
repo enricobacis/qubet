@@ -3,6 +3,7 @@
 
 #include "positioncontroller.h"
 #include "actionlist.h"
+#include "cubestring.h"
 
 /**
  * @brief It is the Game Class.
@@ -77,7 +78,9 @@ private:
     GLfloat angleRotVolumeCube;  /**< It is the current rotation angle of the volume icon. */
     Skin *volumeSkin; /**< It is the skin of the volume button */
     Vector3f *cameraOffset; /**< It is the camera offset for the editor. */
-    Vector3f *levelOffset; /**< It is the offset of the Level */
+    Vector3f *levelOffset; /**< It is the offset of the Level. */
+    CubeString *intro;  /**< It is the string for the game intro. */
+    GLuint introStep;  /**< It is the parameter for the introduction. */
 
     /**
      * @brief Initialize the game.

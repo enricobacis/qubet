@@ -58,6 +58,38 @@ void Game::draw(GLboolean simplifyForPicking)
             switch (step)
             {
             // Primary Actions
+            case INTRODUCTION:
+                switch(introStep)
+                {
+                case 10:
+                    intro = new CubeString("3", 3.0f, alphabet );
+                    intro->startStringRotation(5, 1);
+                    break;
+                case 50:
+                    intro = new CubeString("2", 3.0f, alphabet );
+                    intro->startStringRotation(9, 2);
+                    break;
+                case 90:
+                    intro = new CubeString("1", 3.0f, alphabet );
+                    intro->startStringRotation(18, 4);
+                    break;
+                case 130:
+                    intro = new CubeString("go", 3.0f, alphabet );
+                    intro->startStringRotation(27, 6);
+                    break;
+                case 180:
+                    currentActions->setPrimaryAction(DO_NOTHING);
+                    break;
+                default:
+                    break;
+                }
+                introStep++;
+                glPushMatrix();
+                glTranslatef(0.0f, 6.0f, 0.0f);
+                intro->draw();
+                glPopMatrix();
+
+                break;
 
 
             // Secondary Actions
@@ -96,6 +128,12 @@ void Game::draw(GLboolean simplifyForPicking)
 
     glPopMatrix();
 
+    //inizio a scrivere l' intro
+    glPushMatrix();
+    //intro->draw(simplifyForPicking);
+    glPopMatrix();
+    //finito l intro
+
     glPushMatrix();
         glTranslatef(0.0f, -2.5f, 1.5f);
         cube->draw();
@@ -107,13 +145,17 @@ void Game::initGame()
     connect(this, SIGNAL(setMouseMovementTracking(int)), parent, SLOT(setMouseMovementTracking(int)));
     connect(this, SIGNAL(setSkybox(QString)), parent, SLOT(setSkybox(QString)));
 
-    currentActions = new ActionList(DO_NOTHING);
+    currentActions = new ActionList(INTRODUCTION);
+
+    introStep = 0;
 
     angleRotVolumeCube = (audioEnabled ? 0.0f : 90.0f);
 
     GLuint volume_on = iconsList.value(VOLUME_ON);
     GLuint volume_off = iconsList.value(VOLUME_OFF);
     volumeSkin = new Skin(0, 0, volume_off, volume_off, volume_on, volume_on);
+
+    intro = new CubeString("", 3.0f, alphabet);
 
     emit setMouseMovementTracking(MOUSE_MOVED_NONE);
 

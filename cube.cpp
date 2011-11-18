@@ -76,7 +76,6 @@ void Cube::moveRight()
 
 void Cube::draw()
 {
-    qDebug() << QString::number(state);
     glPushMatrix();
     glTranslatef(position->x, position->y, position->z);
 

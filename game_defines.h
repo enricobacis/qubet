@@ -8,6 +8,7 @@
 
 enum { // Primary Actions
        DO_NOTHING,
+       INTRODUCTION,
 
       // Secondary Actions
       ROTATE_VOLUMECUBE
