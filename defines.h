@@ -29,7 +29,7 @@
 
 #define LEVEL_HEIGHT            0.2f
 #define LEVEL_WIDTH_DEFAULT     9
-#define LEVEL_LENGTH_DEFAULT    150
+#define LEVEL_LENGTH_DEFAULT    300
 #define LEVEL_GRAVITY_DEFAULT   10
 
 #define OBSTACLE_CUBE_SMALL     0

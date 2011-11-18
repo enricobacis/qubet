@@ -10,5 +10,7 @@
 #define EFFECT_STAGECLEAR           "stageclear.wav"
 #define EFFECT_STOMP                "stomp.wav"
 #define EFFECT_WARNING              "warning.wav"
+#define EFFECT_HEREWEGO             "herewego.wav"
+#define EFFECT_HAHA                 "haha.wav"
 
 #endif // EFFECTS_DEFINES_H

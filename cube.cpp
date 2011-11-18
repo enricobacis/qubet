@@ -5,15 +5,16 @@
 Cube::Cube(Level *level, Skin *_skin, QObject *_parent):
     skin(_skin),
     parent(_parent),
-    position(new Vector3f(0.0f, 0.0f, 0.0f)),
-    state(0),
-    jumpStep(0),
-    movingStep(0),
-    explosionStep(0),
-    xCell(0)
+    position(new Vector3f())
 {
+    startXCell = (int)(((level->getWidth() / 3) - 1) / 2);
+    resetCube();
+
     connect(parent, SIGNAL(keyPressedSignal(QKeyEvent*)), this, SLOT(keyPressed(QKeyEvent*)));
+    connect(parent, SIGNAL(collision()), this, SLOT(collided()));
     connect(this, SIGNAL(playEffect(QString)), parent, SIGNAL(playEffect(QString)));
+    connect(this, SIGNAL(explosionFinished()), parent, SLOT(explosionFinished()));
+    connect(this, SIGNAL(levelCompleted()), parent, SLOT(levelCompleted()));
 
     createNormalsMatrix();
 
@@ -21,7 +22,7 @@ Cube::Cube(Level *level, Skin *_skin, QObject *_parent):
     levelCellsLength = (int)(level->getLength() / 3.0f);
     levelCellsWidth = (int)(level->getWidth() / 3.0f);
 
-    jumpVelocity = gravity/2;
+    jumpVelocity = gravity / 2;
 }
 
 Cube::~Cube()
@@ -32,7 +33,7 @@ Cube::~Cube()
 
 Vector3f *Cube::getPosition()
 {
-    return position;
+    return new Vector3f(position);
 }
 
 void Cube::setPosition(Vector3f *_position)
@@ -56,7 +57,7 @@ bool Cube::isMoving()
 
 void Cube::moveLeft()
 {
-    if (!isMoving() && -xCell < ((int)((levelCellsWidth - 1) / 2)))
+    if (!isMoving() && (xCell > 0))
     {
         state = state | CUBESTATE_MOVING_LEFT;
         xCell--;
@@ -66,7 +67,7 @@ void Cube::moveLeft()
 
 void Cube::moveRight()
 {
-    if (!isMoving() && xCell < ((int)((levelCellsWidth - 1) / 2)))
+    if (!isMoving() && (xCell < levelCellsWidth - 1))
     {
         state = state | CUBESTATE_MOVING_RIGHT;
         xCell++;
@@ -77,7 +78,7 @@ void Cube::moveRight()
 void Cube::draw()
 {
     glPushMatrix();
-    glTranslatef(position->x, position->y, position->z);
+    glTranslatef(position->x, position->y, 0.0f);
 
     if (state & CUBESTATE_COLLIDED)
     {
@@ -111,12 +112,15 @@ void Cube::draw()
         {
             explosionStep = 0;
             state = state & ~CUBESTATE_COLLIDED;
+            resetCube();
+            emit explosionFinished();
         }
     }
     else
     {
         updatePosition();
-        drawPrism(3.0f, 3.0f, 3.0f);
+        glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
+        drawPrism(3.0f, 3.0f, 3.0f, skin);
     }
 
     glPopMatrix();
@@ -124,6 +128,14 @@ void Cube::draw()
 
 void Cube::updatePosition()
 {
+    position->z += 0.5;
+
+    if (position->z >= levelCellsLength * 3.0f)
+    {
+        completed();
+        return;
+    }
+
     if (state & CUBESTATE_JUMPING)
     {
         if (jumpStep > 100)
@@ -141,7 +153,7 @@ void Cube::updatePosition()
 
     if (state & (CUBESTATE_MOVING_LEFT | CUBESTATE_MOVING_RIGHT))
     {
-        if (movingStep > 25)
+        if (movingStep >= 25)
         {
             movingStep = 0;
             state = state & ~CUBESTATE_MOVING_LEFT & ~CUBESTATE_MOVING_RIGHT;
@@ -174,8 +186,29 @@ void Cube::explode()
     state = state | CUBESTATE_COLLIDED;
 }
 
+void Cube::completed()
+{
+    playEffect(EFFECT_HEREWEGO);
+    // emit levelCompleted();
+    resetCube();
+}
+
+void Cube::resetCube()
+{
+    xCell = startXCell;
+    position->x = startXCell * 3.0f;
+    position->y = 0.0f;
+    position->z = 0.0f;
+    state = 0;
+    jumpStep = 0;
+    movingStep = 0;
+    explosionStep = 0;
+}
+
 void Cube::collided()
 {
+    playEffect(EFFECT_EXPLOSION);
+    playEffect(EFFECT_HAHA);
     explode();
 }
 

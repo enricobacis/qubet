@@ -6,6 +6,8 @@ PositionController::PositionController(Cube *_cube, Level *_level, QObject *_par
     cube(_cube),
     level(_level)
 {
+    connect(this, SIGNAL(collision()), parent, SLOT(collided()));
+
     levelLength = level->getLength();
     levelWidth = level->getWidth();
 
@@ -13,6 +15,7 @@ PositionController::PositionController(Cube *_cube, Level *_level, QObject *_par
 
     checkPositionTimer = new QTimer(this);
     connect(checkPositionTimer, SIGNAL(timeout()), this, SLOT(checkCollision()));
+    checkPositionTimer->setSingleShot(true);
     checkPositionTimer->start(30);
 }
 
@@ -25,10 +28,15 @@ PositionController::~PositionController()
         checkPositionTimer->stop();
 }
 
-GLvoid PositionController::checkCollision()
+void PositionController::startChecking()
+{
+    checkPositionTimer->start(30);
+}
+
+void PositionController::checkCollision()
 {
     Vector3f* position = cube->getPosition();
-    *position = *position - Vector3f(1.5f, 1.5f, 1.5f);
+    *position += new Vector3f(0.01f, 0.01f, 0.01f);
 
     QList<int> xCells;
     QList<int> yCells;
@@ -36,17 +44,17 @@ GLvoid PositionController::checkCollision()
 
     Vector3f *cell = positionToCell(position);
 
-    xCells.append(cell->x);
-    if (((int) position->x != position->x) || (((int) position->x % 3) == 0))
-        xCells.append(cell->x + 1);
+    xCells.append((int)(cell->x));
+    if (!(isInteger(position->x) && ((((int)(position->x)) % 3) == 0)))
+        xCells.append((int)(cell->x + 1));
 
-    yCells.append(cell->y);
-    if (((int) position->y != position->y) || (((int) position->y % 3) == 0))
-        yCells.append(cell->y + 1);
+    yCells.append((int)(cell->y));
+    if (!(isInteger(position->y) && ((((int)(position->y)) % 3) == 0)))
+        yCells.append((int)(cell->y + 1));
 
-    zCells.append(cell->z);
-    if (((int) position->z != position->z) || (((int) position->z % 3) == 0))
-        zCells.append(cell->z + 1);
+    zCells.append((int)(cell->z));
+    if (!(isInteger(position->z) && ((((int)(position->z)) % 3) == 0)))
+        zCells.append((int)(cell->z + 1));
 
     for (int x = 0; x < xCells.count(); x++)
     {
@@ -62,15 +70,17 @@ GLvoid PositionController::checkCollision()
             }
         }
     }
+
+    checkPositionTimer->start(30);
 }
 
 Vector3f *PositionController::positionToCell(Vector3f *position)
 {
     Vector3f *cells = new Vector3f();
 
-    cells->x = (int)((position->x + (levelWidth / 2.0f)) / 3);
-    cells->y = (int)( position->y / 3);
-    cells->z = (int)((position->z + (levelLength / 2.0f)) / 3);
+    cells->x = (int)(position->x / 3);
+    cells->y = (int)(position->y / 3);
+    cells->z = (int)(position->z / 3);
 
     return cells;
 }
@@ -78,11 +88,17 @@ Vector3f *PositionController::positionToCell(Vector3f *position)
 void PositionController::run()
 { }
 
+bool PositionController::isInteger(float f)
+{
+    int i = f;
+    return (f - static_cast<float>(i) < 0.02);
+}
+
 void PositionController::createObstacleCells()
 {
-    int xMax = (int)(level->getWidth() / 3);
+    int xMax = (int)(level->getWidth() / 3) + 1;
     int yMax = 10;
-    int zMax = (int)(level->getLength() / 3);
+    int zMax = (int)(level->getLength() / 3) + 1;
 
     obstacleCells.resize(xMax);
 
