@@ -5,7 +5,7 @@
 Cube::Cube(Level *level, Skin *_skin, QObject *_parent):
     skin(_skin),
     parent(_parent),
-    position(new Vector3f())
+    position(new Vector3f()),
     deaths(0)
 {
     startXCell = (int)(((level->getWidth() / 3) - 1) / 2);
