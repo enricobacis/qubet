@@ -97,6 +97,7 @@ private:
     Vector3f* normalsMatrix[4][4][4]; /**< It is the 3-dimensional matrix that contain the nomrs vector of each sub-cube in case of explosion. */
     Vector3f* anglesMatrix[4][4][4]; /**< It is the 3-dimensional matrix that contain the nomrs vector of each sub-cube in case of explosion. */
     GLuint deaths;  /**< It is the number of the cube deaths. */
+    GLint startXCell; /**< It is the starting x cell. */
 
     /**
      * @brief Generate the normalsMatrix Matrix.
@@ -116,6 +117,16 @@ private:
      * @brief Make the Cube explode.
      */
     void explode();
+
+    /**
+     * @brief Actions to perform when the level is completed.
+     */
+    void completed();
+
+    /**
+     * @brief Reset the Level.
+     */
+    void resetCube();
 
 
 private slots:
@@ -139,6 +150,11 @@ signals:
      * @brief Signal emitted when the level is completed.
      */
     void levelCompleted();
+
+    /**
+     * @brief Signal that inform that the explosion has finished.
+     */
+    void explosionFinished();
 
     /**
      * @brief Signal emitted to play an effect.

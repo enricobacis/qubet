@@ -80,34 +80,33 @@ void Game::draw(GLboolean simplifyForPicking)
 
     glPushName(BUTTON_VOLUME);
     glPushMatrix();
+
         glTranslatef(9.5f, 6.0f, 3.0f);
         glRotatef(angleRotVolumeCube, -1.0f, 0.0f, 0.0f);
         drawPrism(0.8f, 0.8f, 0.8f, volumeSkin, true);
+
     glPopMatrix();
     glPopName();
 
     glPushMatrix();
         glTranslatef(-cameraOffset->x, -cameraOffset->y, -cameraOffset->z);
-
+        glRotatef(10.0f, 1.0f, 0.0f, 0.0f);
         glPushMatrix();
-
-            glTranslatef(levelOffset->x, levelOffset->y, levelOffset->z);
-            level->draw(simplifyForPicking);
-
+            glTranslatef(-(level->getWidth() / 2.0f) + 1.5f, levelOffset->y + 1.5f, -1.5f);
+            cube->draw();
         glPopMatrix();
 
-    glPopMatrix();
+        glTranslatef(levelOffset->x, levelOffset->y, levelOffset->z + cube->getPosition()->z);
+        level->draw(simplifyForPicking);
 
+
+    glPopMatrix();
     //inizio a scrivere l' intro
     glPushMatrix();
     //intro->draw(simplifyForPicking);
     glPopMatrix();
     //finito l intro
 
-    glPushMatrix();
-        glTranslatef(0.0f, -2.5f, 1.5f);
-        cube->draw();
-    glPopMatrix();
 }
 
 void Game::initGame()
@@ -142,7 +141,6 @@ void Game::initGame()
     case ARCADE_MODE:
         break;
     }
-    cube = new Cube(level, skin);
 }
 
 void Game::introduction(){
@@ -187,8 +185,10 @@ void Game::playLevel()
     cube = new Cube(level, skin, this);
     positionController = new PositionController(cube, level, this);
 
-    cameraOffset = new Vector3f(0.0,   0.0f, 0.0f);
-    levelOffset  = new Vector3f(0.0f, -4.0f, -(level->getLength() / 2.0f) + 4.0f);
+    positionController->startChecking();
+
+    cameraOffset = new Vector3f(0.0,   0.0f, 4.0f);
+    levelOffset  = new Vector3f(0.0f, -4.0f, -(level->getLength() / 2.0f));
 }
 
 void Game::nextLevel()
@@ -255,7 +255,12 @@ void Game::keyPressed(QKeyEvent *event)
 
 void Game::collided()
 {
+    emit collision();
+}
 
+void Game::explosionFinished()
+{
+    positionController->startChecking();
 }
 
 void Game::levelCompleted()

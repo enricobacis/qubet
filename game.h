@@ -61,6 +61,7 @@ public:
 
 
 private:
+
     QObject *parent; /**< It is the parent of a game Object. */
     QMap<GLint,GLuint> iconsList;  /**< It is the iconsList provided by Qubet object. */
     Alphabet *alphabet; /**< It is the alphabet provided by Qubet. */
@@ -164,11 +165,22 @@ private slots:
     void collided();
 
     /**
+     * @brief Slot invoked when the explosion has finished.
+     */
+    void explosionFinished();
+
+    /**
      * @brief Slot invoked when level is completed.
      */
     void levelCompleted();
 
+
 signals:
+
+    /**
+     * @brief Signal emitted when the cube has a collision with an obstacle.
+     */
+    void collision();
 
     /**
      * @brief Signal emitted to pause the game.
