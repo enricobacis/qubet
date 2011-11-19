@@ -94,7 +94,7 @@ private:
      * @brief make the animation for the initial countdown
      *
     */
-    void introduction();
+    void countdown();
 
     /**
      * @brief Start the current Level.
@@ -165,6 +165,11 @@ private slots:
      * @brief Slot invoked when the cube has a collision with an obstacle.
      */
     void collided();
+
+    /**
+     * @brief Slot invoked when the cube has exploded (suicide or collided).
+     */
+    void exploded();
 
     /**
      * @brief Slot invoked when the explosion has finished.

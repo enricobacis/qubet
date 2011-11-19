@@ -85,8 +85,11 @@ public:
 
     /**
      * @brief Draw the Cube.
+     *
+     * @param simplifyForPicking [default = false] is used to draw a simplified scene
+     *        used for the picking function.
      */
-    void draw();
+    void draw(GLboolean simplifyForPicking = false);
 
     /**
      * @brief Update the position of the Cube.
@@ -113,8 +116,7 @@ private:
     Vector3f* normalsMatrix[4][4][4]; /**< It is the 3-dimensional matrix that contain the nomrs vector of each sub-cube in case of explosion. */
     Vector3f* anglesMatrix[4][4][4]; /**< It is the 3-dimensional matrix that contain the nomrs vector of each sub-cube in case of explosion. */
     GLint startXCell; /**< It is the starting x cell. */
-    bool canMove; /**< Tells if the cube can move or not. */
-    bool isPaused; /**< Tells if the game is paused or not. */
+    bool canMove; /**< States if the cube can move or not. */
 
     /**
      * @brief Generate the normalsMatrix Matrix.
@@ -167,6 +169,11 @@ signals:
      * @brief Signal emitted when the level is completed.
      */
     void levelCompleted();
+
+    /**
+     * @brief Signal emitted when the player "suicide" the Cube.
+     */
+    void suicide();
 
     /**
      * @brief Signal that inform that the explosion has finished.

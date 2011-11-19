@@ -8,20 +8,22 @@ Cube::Cube(Level *level, Skin *_skin, QObject *_parent):
     position(new Vector3f())
 {
     canMove = false;
-    isPaused = false;
 
     startXCell = (int)(((level->getWidth() / 3) - 1) / 2);
     resetCube();
 
-    connect(parent, SIGNAL(keyPressedSignal(QKeyEvent*)), this, SLOT(keyPressed(QKeyEvent*)));
-    connect(parent, SIGNAL(collision()), this, SLOT(collided()));
-    connect(this, SIGNAL(playEffect(QString)), parent, SIGNAL(playEffect(QString)));
-    connect(this, SIGNAL(explosionFinished()), parent, SLOT(explosionFinished()));
-    connect(this, SIGNAL(levelCompleted()), parent, SLOT(levelCompleted()));
+    connect(parent, SIGNAL(keyPressedSignal(QKeyEvent*)), this,   SLOT(keyPressed(QKeyEvent*)));
+    connect(parent, SIGNAL(collision()),                  this,   SLOT(collided()));
+    connect(this,   SIGNAL(playEffect(QString)),          parent, SIGNAL(playEffect(QString)));
+    connect(this,   SIGNAL(explosionFinished()),          parent, SLOT(explosionFinished()));
+    connect(this,   SIGNAL(levelCompleted()),             parent, SLOT(levelCompleted()));
+    connect(this,   SIGNAL(suicide()),                    parent, SLOT(exploded()));
 
     createNormalsMatrix();
 
     gravity = level->getGravity();
+    gravity = -gravity + 24;
+
     levelCellsLength = (int)(level->getLength() / 3.0f);
     levelCellsWidth = (int)(level->getWidth() / 3.0f);
 }
@@ -100,40 +102,43 @@ void Cube::moveRight()
     }
 }
 
-void Cube::draw()
+void Cube::draw(GLboolean simplifyForPicking)
 {
-    glPushMatrix();
-    glTranslatef(position->x, position->y, 0.0f);
-
-    if (state & CUBESTATE_COLLIDED)
+    if (!simplifyForPicking)
     {
-        for (int k = 0; k < 4; k++)
-            for (int j = 0; j < 4; j++)
-                for (int i = 0; i < 4; i++)
-                    drawExplosion(i, j, k);
+        glPushMatrix();
+        glTranslatef(position->x, position->y, 0.0f);
 
-        if (canMove)
+        if (state & CUBESTATE_COLLIDED)
         {
-            explosionStep += 5;
-            if(explosionStep == 100)
+            for (int k = 0; k < 4; k++)
+                for (int j = 0; j < 4; j++)
+                    for (int i = 0; i < 4; i++)
+                        drawExplosion(i, j, k);
+
+            if (canMove)
             {
-                explosionStep = 0;
-                state = state & ~CUBESTATE_COLLIDED;
-                resetCube();
-                emit explosionFinished();
+                explosionStep += 5;
+                if(explosionStep == 100)
+                {
+                    explosionStep = 0;
+                    state = state & ~CUBESTATE_COLLIDED;
+                    resetCube();
+                    emit explosionFinished();
+                }
             }
         }
-    }
-    else
-    {
-        if (canMove)
-            updatePosition();
+        else
+        {
+            if (canMove)
+                updatePosition();
 
-        glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
-        drawPrism(3.0f, 3.0f, 3.0f, skin);
-    }
+            glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
+            drawPrism(3.0f, 3.0f, 3.0f, skin);
+        }
 
-    glPopMatrix();
+        glPopMatrix();
+    }
 }
 
 void Cube::updatePosition()
@@ -183,6 +188,7 @@ void Cube::updatePosition()
 void Cube::createNormalsMatrix()
 {
     GLfloat gap = 3.0f / 4.0f;
+
     for (int k = 0; k < 4; k++)
     {
         for (int j = 0; j < 4; j++)
@@ -192,6 +198,7 @@ void Cube::createNormalsMatrix()
                 normalsMatrix[i][j][k] = new Vector3f(((qrand() % 2) + 1 )*(-1.125f + (gap*i)),
                                                       ((qrand() % 2) + 1 )*(-1.125f + (gap*j)),
                                                       ((qrand() % 2) + 1 )*(-1.125f + (gap*k)));
+
                 anglesMatrix[i][j][k] = new Vector3f(qrand(), qrand(), qrand());
             }
         }
@@ -254,6 +261,9 @@ void Cube::collided()
 
 void Cube::keyPressed(QKeyEvent *event)
 {
+    if (!canMove)
+        return;
+
     int key = event->key();
 
     switch(key)
@@ -272,6 +282,7 @@ void Cube::keyPressed(QKeyEvent *event)
         break;
 
     case Qt::Key_R:
+        emit suicide();
         collided();
         break;
     }

@@ -273,7 +273,7 @@ GLvoid Qubet::loadingCompleted()
 {
     currentText.clear();
     // TODO : Ricordarsi di rimettere l'introduzione successivamente
-    showMenu(true);
+    showMenu(false);
 }
 
 GLvoid Qubet::errorLoading()

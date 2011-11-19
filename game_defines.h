@@ -5,10 +5,13 @@
 // This name will be in the format 2xx
 
 #define BUTTON_VOLUME               200
+#define STATE_LABEL                 201
 
 enum { // Primary Actions
        DO_NOTHING,
-       INTRODUCTION,
+       MOVE_TO_LEVEL,
+       EXIT_FROM_LEVEL,
+       COUNTDOWN,
 
       // Secondary Actions
       ROTATE_VOLUMECUBE

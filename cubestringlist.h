@@ -119,7 +119,7 @@ public:
      * @param _letterName is the name of the Letter (it is the second name (after the entire string name) in the nameList of the picking function.
      *        You don't have to know which is, let the picking function and the CubeString code work for you.
      * @param _angleStep is the angle that will be summed to letter on each frame.
-     * @param _turns is an integer that tells how many 90 degrees turns you
+     * @param _turns is an integer that states how many 90 degrees turns you
      *        want the letter to do.
      */
     GLvoid startLetterRotation(GLuint _stringName, GLuint _letterName, GLint _angleStep, GLint _turns);
@@ -139,7 +139,7 @@ public:
      *
      * @param _stringName is the string you want to start the rotation.
      * @param _angleStep is the angle that will be summed to every letter on each frame.
-     * @param _turns is an integer that tells how many 90 degrees turns you
+     * @param _turns is an integer that states how many 90 degrees turns you
      *        want each letter to do.
      */
     GLvoid startStringRotation(GLuint _stringName, GLint _angleStep, GLint _turns);
@@ -148,7 +148,7 @@ public:
      * @brief Start the rotation of the whole CubeStringList (woo-woo-wao).
      *
      * @param _angleStep is the angle that will be summed to every letter on each frame.
-     * @param _turns is an integer that tells how many 90 degrees turns you
+     * @param _turns is an integer that states how many 90 degrees turns you
      *        want each letter to do.
      */
     GLvoid startStringListRotation(GLint _angleStep, GLint _turns);

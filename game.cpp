@@ -50,19 +50,26 @@ void Game::draw(GLboolean simplifyForPicking)
 
     if (!simplifyForPicking)
     {
-       QList<int> actions = currentActions->getAllActions();
+        QList<int> actions = currentActions->getAllActions();
 
         while (!actions.isEmpty())
         {
             GLint step = actions.takeFirst();
             switch (step)
             {
+
             // Primary Actions
-            case INTRODUCTION:
-                introduction();
+            case COUNTDOWN:
+                countdown();
                 break;
 
-            // Secondary Actions
+            case MOVE_TO_LEVEL:
+                break;
+
+            case EXIT_FROM_LEVEL:
+                break;
+
+                // Secondary Actions
 
             case ROTATE_VOLUMECUBE:
                 angleRotVolumeCube += 5.0f;
@@ -81,12 +88,12 @@ void Game::draw(GLboolean simplifyForPicking)
     glPushMatrix();
 
         glTranslatef(0.0f,  6.0f, 0.0f);
-        stateLabel->draw();
+        stateLabel->draw(simplifyForPicking);
 
-        glTranslatef(-10.0f, 0.0f, 0.0f);
-        deathCounter->draw();
+        glTranslatef(-9.0f, 0.0f, 0.0f);
+        deathCounter->draw(simplifyForPicking);
 
-        dynamic_cast<QGLWidget*>(parent)->renderText(-1.0f, -2.0f, 0.0f, "deaths");
+        dynamic_cast<QGLWidget*>(parent)->renderText(-1.0f, -1.5f, 0.0f, "deaths");
 
     glPopMatrix();
 
@@ -100,20 +107,23 @@ void Game::draw(GLboolean simplifyForPicking)
     glPopMatrix();
     glPopName();
 
-    glPushMatrix();
+    if (!simplifyForPicking)
+    {
+        glPushMatrix();
 
         glTranslatef(-cameraOffset->x, -cameraOffset->y, -cameraOffset->z);
         glRotatef(15.0f, 1.0f, 0.0f, 0.0f);
 
         glPushMatrix();
             glTranslatef(-(level->getWidth() / 2.0f) + 1.5f, levelOffset->y + 1.5f, -1.5f);
-            cube->draw();
+            cube->draw(simplifyForPicking);
         glPopMatrix();
 
         glTranslatef(levelOffset->x, levelOffset->y, levelOffset->z + cube->getZ());
         level->draw(simplifyForPicking);
 
-    glPopMatrix();
+        glPopMatrix();
+    }
 }
 
 void Game::initGame()
@@ -121,7 +131,7 @@ void Game::initGame()
     connect(this, SIGNAL(setMouseMovementTracking(int)), parent, SLOT(setMouseMovementTracking(int)));
     connect(this, SIGNAL(setSkybox(QString)), parent, SLOT(setSkybox(QString)));
 
-    currentActions = new ActionList(INTRODUCTION);
+    currentActions = new ActionList(COUNTDOWN);
     deaths = 0;
     isPaused = false;
     isExploding = false;
@@ -133,8 +143,8 @@ void Game::initGame()
     GLuint volume_off = iconsList.value(VOLUME_OFF);
     volumeSkin = new Skin(0, 0, volume_off, volume_off, volume_on, volume_on);
 
-    stateLabel = new CubeString("", 3.0f, alphabet);
-    deathCounter = new CubeString("0", 2.0f, alphabet);
+    stateLabel = new CubeString("", 2.0f, alphabet, STATE_LABEL);
+    deathCounter = new CubeString("0", 1.5f, alphabet);
 
     emit setMouseMovementTracking(MOUSE_MOVED_NONE);
 
@@ -153,38 +163,38 @@ void Game::initGame()
     }
 }
 
-void Game::introduction()
+void Game::countdown()
 {
     switch (introStep)
     {
     case 10:
         stateLabel->~CubeString();
-        stateLabel = new CubeString("3", 3.0f, alphabet);
+        stateLabel = new CubeString("3", 2.0f, alphabet, STATE_LABEL);
         stateLabel->startStringRotation(5, 1);
         break;
 
     case 50:
         stateLabel->~CubeString();
-        stateLabel = new CubeString("2", 3.0f, alphabet);
+        stateLabel = new CubeString("2", 2.0f, alphabet, STATE_LABEL);
         stateLabel->startStringRotation(9, 2);
         break;
 
     case 90:
         stateLabel->~CubeString();
-        stateLabel = new CubeString("1", 3.0f, alphabet);
+        stateLabel = new CubeString("1", 2.0f, alphabet, STATE_LABEL);
         stateLabel->startStringRotation(18, 4);
         break;
 
     case 130:
         stateLabel->~CubeString();
-        stateLabel = new CubeString("go", 3.0f, alphabet);
+        stateLabel = new CubeString("go", 2.0f, alphabet, STATE_LABEL);
         stateLabel->startStringRotation(27, 6);
         cube->startCube();
         break;
 
     case 180:
         stateLabel->~CubeString();
-        stateLabel = new CubeString("", 3.0f, alphabet);
+        stateLabel = new CubeString("", 2.0f, alphabet, STATE_LABEL);
         currentActions->setPrimaryAction(DO_NOTHING);
         break;
     }
@@ -220,8 +230,10 @@ void Game::pauseGame()
     cube->stopCube();
     positionController->stopChecking();
 
+    emit setMouseMovementTracking(MOUSE_MOVED_FULL);
+
     stateLabel->~CubeString();
-    stateLabel = new CubeString("paused", 2.0f, alphabet);
+    stateLabel = new CubeString("paused", 1.5f, alphabet, STATE_LABEL);
 }
 
 void Game::continueGame()
@@ -233,8 +245,10 @@ void Game::continueGame()
     if (!isExploding)
         positionController->startChecking();
 
+    emit setMouseMovementTracking(MOUSE_MOVED_NONE);
+
     stateLabel->~CubeString();
-    stateLabel = new CubeString("", 3.0f, alphabet);
+    stateLabel = new CubeString("", 2.0f, alphabet, STATE_LABEL);
 }
 
 void Game::quitGame()
@@ -271,7 +285,20 @@ void Game::mouseReleased(QMouseEvent *event)
 void Game::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
 {
     Q_UNUSED(event);
-    Q_UNUSED(listNames);
+
+    if (!isPaused)
+        return;
+
+    if (!listNames.isEmpty())
+    {
+        switch (listNames.at(0))
+        {
+        case STATE_LABEL:
+            if (!stateLabel->isRotating(listNames.at(1)))
+                stateLabel->startLetterRotation(listNames.at(1), 6, 1);
+            break;
+        }
+    }
 }
 
 void Game::wheelScrolled(QWheelEvent *event)
@@ -284,7 +311,7 @@ void Game::keyPressed(QKeyEvent *event)
     switch (event->key())
     {
     case Qt::Key_P:
-        if (currentActions->getPrimaryAction() != INTRODUCTION)
+        if (currentActions->getPrimaryAction() != COUNTDOWN)
         {
             if (isPaused)
                 continueGame();
@@ -302,11 +329,16 @@ void Game::keyPressed(QKeyEvent *event)
 
 void Game::collided()
 {
-    isExploding = true;
     emit collision();
+    exploded();
+}
+
+void Game::exploded()
+{
+    isExploding = true;
     deaths++;
     deathCounter->~CubeString();
-    deathCounter = new CubeString(QString::number(deaths), 2.0f, alphabet);
+    deathCounter = new CubeString(QString::number(deaths), 1.5f, alphabet);
     deathCounter->startStringRotation(10, 1);
 }
 

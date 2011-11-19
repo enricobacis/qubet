@@ -104,6 +104,7 @@ protected:
 
 
 private:
+
     // Variables
 
     GLint currentView; /**< It is used to keep track of the current view (menu, game, leveleditor). */
@@ -123,7 +124,7 @@ private:
 
     GLint width; /**< It is the current widget width. */
     GLint height; /**< It is the current widget height. */
-    GLint mouseMovedMode; /**< It is the variable that tells which mouse mode is enabled. See the documentation of setMouseMovementTracking(int mode) for the available modes.*/
+    GLint mouseMovedMode; /**< It is the variable that states which mouse mode is enabled. See the documentation of setMouseMovementTracking(int mode) for the available modes.*/
     bool loadDone; /**< It is the variable that states if the load has already be done. */
     GLint currentNewLevelNumber; /**< It is the current level value. */
 
