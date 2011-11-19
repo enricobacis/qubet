@@ -1,4 +1,4 @@
-<level width="12" gravity="20" length="900" name="first">
+<level width="12" gravity="4" length="900" name="first">
     <obstacle x="0" y="0" model="0" z="7" id="1"/>
     <obstacle x="3" y="0" model="0" z="15" id="2"/>
     <obstacle x="2" y="0" model="0" z="33" id="3"/>
