@@ -122,7 +122,7 @@ private:
     Skybox *skybox; /**< It is the current Skybox. */
     GLfloat skyboxAngle; /**< It is the Skybox rotation angle. */
     QGLShaderProgram *shader; /**< It is the current Shader. */
-    GLint shaderToLoad;  /**< It is the shader name. */
+    GLint shaderToLoad; /**< It is the shader name. */
 
     GLint width; /**< It is the current widget width. */
     GLint height; /**< It is the current widget height. */
