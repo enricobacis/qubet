@@ -23,7 +23,7 @@ public:
      * @param _alphabet is the reference to Qubet's alphabet.
      * @param _level is the level to load in the LevelEditor (NULL to create a new Level).
      * @param _parent is a callback variable to the parent of the parent.
-     * @param _audioEnabled is a variable to tell if the audio is enabled or not.
+     * @param _audioEnabled is a variable to states if the audio is enabled or not.
      */
     explicit LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, Level *_level = NULL, bool _audioEnabled = true);
 

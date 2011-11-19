@@ -60,7 +60,7 @@ private slots:
      * @brief Sets the variable audioEnabled and pause or continue the ambientMusic.
      *        If enabled is false and there are currently playing effects they will be stopped.
      *
-     * @param enabled is the variable to tell the AudioManager to enable or disable the audio.
+     * @param enabled is the variable to states the AudioManager to enable or disable the audio.
      */
     void enableAudio(bool enabled);
 

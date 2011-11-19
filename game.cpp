@@ -3,26 +3,28 @@
 #include "game_defines.h"
 #include "effects_defines.h"
 
-Game::Game(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, Skin *_skin, QMap<GLint,Level*> &_levelsList, QObject *_parent, bool _audioEnabled) :
+Game::Game(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, Skin *_skin, QMap<GLint,Level*> &_levelsList, QObject *_parent, bool _audioEnabled, QGLShaderProgram *_explosionShader) :
     parent(_parent),
     iconsList(_iconsList),
     alphabet(_alphabet),
     skin(_skin),
     levelsList(_levelsList),
     audioEnabled(_audioEnabled),
-    gameType(STORY_MODE)
+    gameType(STORY_MODE),
+    explosionShader(_explosionShader)
 {
     initGame();
 }
 
-Game::Game(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, Skin *_skin, Level *_level, QObject *_parent, bool _audioEnabled) :
+Game::Game(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, Skin *_skin, Level *_level, QObject *_parent, bool _audioEnabled, QGLShaderProgram *_explosionShader) :
     parent(_parent),
     iconsList(_iconsList),
     alphabet(_alphabet),
     skin(_skin),
     level(_level),
     audioEnabled(_audioEnabled),
-    gameType(ARCADE_MODE)
+    gameType(ARCADE_MODE),
+    explosionShader(_explosionShader)
 {
     initGame();
 }
@@ -111,16 +113,16 @@ void Game::draw(GLboolean simplifyForPicking)
     {
         glPushMatrix();
 
-        glTranslatef(-cameraOffset->x, -cameraOffset->y, -cameraOffset->z);
-        glRotatef(15.0f, 1.0f, 0.0f, 0.0f);
+            glTranslatef(-cameraOffset->x, -cameraOffset->y, -cameraOffset->z);
+            glRotatef(15.0f, 1.0f, 0.0f, 0.0f);
 
-        glPushMatrix();
-            glTranslatef(-(level->getWidth() / 2.0f) + 1.5f, levelOffset->y + 1.5f, -1.5f);
-            cube->draw(simplifyForPicking);
-        glPopMatrix();
+            glPushMatrix();
+                glTranslatef(-(level->getWidth() / 2.0f) + 1.5f, levelOffset->y + 1.5f, -1.5f);
+                cube->draw(simplifyForPicking);
+            glPopMatrix();
 
-        glTranslatef(levelOffset->x, levelOffset->y, levelOffset->z + cube->getZ());
-        level->draw(simplifyForPicking);
+            glTranslatef(levelOffset->x, levelOffset->y, levelOffset->z + cube->getZ());
+            level->draw(simplifyForPicking);
 
         glPopMatrix();
     }
@@ -209,7 +211,7 @@ void Game::playLevel()
     emit setSkybox(level->getSkyboxName());
     emit playAmbientMusic("resources/music/" + level->getAmbientMusicFilename());
 
-    cube = new Cube(level, skin, this);
+    cube = new Cube(level, skin, this, explosionShader);
     positionController = new PositionController(cube, level, this);
 
     positionController->startChecking();

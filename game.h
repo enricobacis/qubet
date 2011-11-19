@@ -25,9 +25,10 @@ public:
      * @param _skin is the Skin.
      * @param _levelsList is the levelList.
      * @param _parent is a callback variable to the parent of the parent.
-     * @param _audioEnabled is a variable to tell if the audio is enabled or not.
+     * @param _audioEnabled is a variable to states if the audio is enabled or not.
+     * @param _explosionShader is the shader for the explosion.
      */
-    explicit Game(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, Skin *_skin, QMap<GLint,Level*> &_levelsList, QObject *_parent = 0, bool _audioEnabled = true);
+    explicit Game(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, Skin *_skin, QMap<GLint,Level*> &_levelsList, QObject *_parent = 0, bool _audioEnabled = true, QGLShaderProgram *_explosionShader = NULL);
 
     /**
      * @brief Cunstructor for the Arcade Mode.
@@ -38,8 +39,9 @@ public:
      * @param _level is the "going to play" Level.
      * @param _parent is the Game parent.
      * @param _audioEnabled is the audioEnabled boolean value.
+     * @param _explosionShader is the shader for the explosion.
      */
-    explicit Game(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, Skin *_skin, Level *_level, QObject *_parent = 0, bool _audioEnabled = true);
+    explicit Game(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, Skin *_skin, Level *_level, QObject *_parent = 0, bool _audioEnabled = true, QGLShaderProgram *_explosionShader = NULL);
 
     /**
      * @brief Safely destroy a Game Object.
@@ -84,6 +86,7 @@ private:
     bool isPaused; /**< It says if the game is paused or not. */
     bool isExploding; /**< It says if the cube is exploding. */
     CubeString *deathCounter; /** It is the Death Counter CubeString. */
+    QGLShaderProgram *explosionShader; /**< It is the explosion Shader. */
 
     /**
      * @brief Initialize the game.

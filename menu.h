@@ -29,7 +29,7 @@ public:
      * @param _iconsList is the reference to Qubet's iconsList.
      * @param _alphabet is the reference to Qubet's alphabet.
      * @param _parent is a callback variable to the parent of the parent.
-     * @param _audioEnabled is a variable to tell if the audio is enabled or not.
+     * @param _audioEnabled is a variable to states if the audio is enabled or not.
      * @param showIntro states if you want to show the intro. [default = true]
      */
     explicit Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, bool _audioEnabled = true, bool showIntro = true);
@@ -68,7 +68,7 @@ private:
     GLboolean audioEnabled;  /**< It is the state of the audio. */
     Skin *volumeSkin; /**< It is the skin of the volume button */
     GLint currentView;  /**< It is the value of the current view */
-    GLint currentSection; /**< It is used to tell the menu to draw the introduction or the menu.*/
+    GLint currentSection; /**< It is used to states the menu to draw the introduction or the menu.*/
     GLint waitCounter; /**< It is an incremental variable to wait from intro screens. */
 
     CubeStringList *mainMenuButtons; /**< It is the main menu buttons stringList. */

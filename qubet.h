@@ -121,6 +121,8 @@ private:
     Alphabet *alphabet; /**< It is the current Alphabet. */
     Skybox *skybox; /**< It is the current Skybox. */
     GLfloat skyboxAngle; /**< It is the Skybox rotation angle. */
+    QGLShaderProgram *shader; /**< It is the current Shader. */
+    GLint shaderToLoad;  /**< It is the shader name. */
 
     GLint width; /**< It is the current widget width. */
     GLint height; /**< It is the current widget height. */
@@ -204,9 +206,9 @@ private:
     GLvoid errorLoading();
 
     /**
-     * @brief This function is used to tell the paintGL function to show the Menu.
+     * @brief This function is used to states the paintGL function to show the Menu.
      *
-     * @param showIntro
+     * @param showIntro is the variable that states if thw intro has to been showed. [default = true]
      */
     GLvoid showMenu(bool showIntro = true);
 
@@ -275,6 +277,13 @@ private:
      * @returns true if load is successful, else false.
      */
     GLboolean loadSkyboxes();
+
+    /**
+     * @brief Load the Shader.
+     *
+     * @returns true if load is successful, else false.
+     */
+    GLboolean loadShader();
 
 
 private slots:

@@ -22,8 +22,9 @@ public:
      * @param _level is the Level in which the Cube lives.
      * @param _skin is the skin of the Cube.
      * @param _parent is the parent of the Cube.
+     * @param _explosionShader is the shader for the explosion.
      */
-    explicit Cube(Level *_level, Skin *_skin, QObject *_parent = 0);
+    explicit Cube(Level *_level, Skin *_skin, QObject *_parent = 0, QGLShaderProgram *_explosionShader = NULL);
 
     /**
      * @brief Safely destroy a Cube object.
@@ -117,6 +118,7 @@ private:
     Vector3f* anglesMatrix[4][4][4]; /**< It is the 3-dimensional matrix that contain the nomrs vector of each sub-cube in case of explosion. */
     GLint startXCell; /**< It is the starting x cell. */
     bool canMove; /**< States if the cube can move or not. */
+    QGLShaderProgram *explosionShader; /**< It is the explosion Shader. */
 
     /**
      * @brief Generate the normalsMatrix Matrix.
@@ -125,12 +127,8 @@ private:
 
     /**
      * @brief this function is called in the draw function in case of explosion.
-     *
-     * @param i is the x counter.
-     * @param j is the y counter.
-     * @param k is the z counter.
     */
-    void drawExplosion(int i, int j, int k);
+    void drawExplosion();
 
     /**
      * @brief Make the Cube explode.

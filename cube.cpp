@@ -2,10 +2,11 @@
 #include "cube_defines.h"
 #include "effects_defines.h"
 
-Cube::Cube(Level *level, Skin *_skin, QObject *_parent):
+Cube::Cube(Level *level, Skin *_skin, QObject *_parent, QGLShaderProgram *_explosionShader):
     skin(_skin),
     parent(_parent),
-    position(new Vector3f())
+    position(new Vector3f()),
+    explosionShader(_explosionShader)
 {
     canMove = false;
 
@@ -111,10 +112,22 @@ void Cube::draw(GLboolean simplifyForPicking)
 
         if (state & CUBESTATE_COLLIDED)
         {
-            for (int k = 0; k < 4; k++)
-                for (int j = 0; j < 4; j++)
-                    for (int i = 0; i < 4; i++)
-                        drawExplosion(i, j, k);
+            if (explosionShader != NULL)
+            {
+                explosionShader->bind();
+                explosionShader->setUniformValue("BrickColor",    1.0,  0.3,  0.2);
+                explosionShader->setUniformValue("MortarColor",   0.85, 0.86, 0.84);
+                explosionShader->setUniformValue("BrickSize",     0.30, 0.15);
+                explosionShader->setUniformValue("BrickPct",      0.90, 0.85);
+                explosionShader->setUniformValue("LightPosition", 0.0,  0.0,  4.0);
+            }
+
+            drawExplosion();
+
+            if (explosionShader != NULL)
+            {
+                explosionShader->release();
+            }
 
             if (canMove)
             {
@@ -199,31 +212,43 @@ void Cube::createNormalsMatrix()
                                                       ((qrand() % 2) + 1 )*(-1.125f + (gap*j)),
                                                       ((qrand() % 2) + 1 )*(-1.125f + (gap*k)));
 
-                anglesMatrix[i][j][k] = new Vector3f(qrand(), qrand(), qrand());
+                anglesMatrix[i][j][k] = new Vector3f(qrand() % 180,
+                                                     qrand() % 180,
+                                                     qrand() % 180);
             }
         }
     }
 }
 
-void Cube::drawExplosion(int i, int j, int k)
+void Cube::drawExplosion()
 {
-    glPushMatrix();
-    glTranslatef(normalsMatrix[i][j][k]->x,
-                 normalsMatrix[i][j][k]->y ,normalsMatrix[i][j][k]->z);
+    for (int k = 0; k < 4; k++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            for (int i = 0; i < 4; i++)
+            {
 
-    glTranslatef( 4.0f * normalsMatrix[i][j][k]->x * (explosionStep/100.0f),
-                  4.0f * normalsMatrix[i][j][k]->y * (explosionStep/100.0f),
-                  4.0f * normalsMatrix[i][j][k]->z * (explosionStep/100.0f));
+                glPushMatrix();
+                glTranslatef(normalsMatrix[i][j][k]->x,
+                             normalsMatrix[i][j][k]->y ,normalsMatrix[i][j][k]->z);
 
-    glRotatef(anglesMatrix[i][j][k]->x, 1.0f, 0.0f, 0.0f);
-    glRotatef(anglesMatrix[i][j][k]->y, 0.0f, 1.0f, 0.0f);
-    glRotatef(anglesMatrix[i][j][k]->x, 0.0f, 0.0f, 1.0f);
+                glTranslatef( 4.0f * normalsMatrix[i][j][k]->x * (explosionStep/100.0f),
+                              4.0f * normalsMatrix[i][j][k]->y * (explosionStep/100.0f),
+                              4.0f * normalsMatrix[i][j][k]->z * (explosionStep/100.0f));
 
-    drawPrism(((1-(explosionStep/100.0f)) * 3.0f) / 4.0f,
-              ((1-(explosionStep/100.0f)) * 3.0f) / 4.0f,
-              ((1-(explosionStep/100.0f)) * 3.0f) / 4.0f);
+                glRotatef(anglesMatrix[i][j][k]->x * (explosionStep / 100.0f), 1.0f, 0.0f, 0.0f);
+                glRotatef(anglesMatrix[i][j][k]->y * (explosionStep / 100.0f), 0.0f, 1.0f, 0.0f);
+                glRotatef(anglesMatrix[i][j][k]->x * (explosionStep / 100.0f), 0.0f, 0.0f, 1.0f);
 
-    glPopMatrix();
+                drawPrism(((1-(explosionStep/100.0f)) * 3.0f) / 4.0f,
+                          ((1-(explosionStep/100.0f)) * 3.0f) / 4.0f,
+                          ((1-(explosionStep/100.0f)) * 3.0f) / 4.0f);
+
+                glPopMatrix();
+            }
+        }
+    }
 }
 
 void Cube::explode()

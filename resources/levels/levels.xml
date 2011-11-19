@@ -1,3 +1,4 @@
 <levels>
     <level story_number="1" name="first" filename="first.xml"/>
+    <level name="elsa" filename="elsa.xml"/>
 </levels>

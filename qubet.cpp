@@ -11,6 +11,8 @@ Qubet::Qubet(QWidget *parent) :
     levelEditor(NULL),
     audioManager(NULL),
     alphabet(NULL),
+    skybox(NULL),
+    shader(NULL),
     width(WIDTH),
     height(HEIGHT),
     mouseMovedMode(MOUSE_MOVED_DOWN),
@@ -18,6 +20,9 @@ Qubet::Qubet(QWidget *parent) :
     currentNewLevelNumber(0)
 {
     alphabet = new Alphabet();
+
+    shaderToLoad = SHADER_TOON;
+    shader = new QGLShaderProgram(this);
 
     // Inizialization is done in the initializeGL() and paintGL() functions.
 }
@@ -402,6 +407,9 @@ GLboolean Qubet::load()
     if (!loadSkyboxes())
         return false;
 
+    if (!loadShader())
+        return false;
+
 #endif
 
     return true;
@@ -604,6 +612,23 @@ GLboolean Qubet::loadSkyboxes()
     return true;
 }
 
+GLboolean Qubet::loadShader()
+{
+    QString shaderName;
+
+    switch (shaderToLoad)
+    {
+    case SHADER_TOON:
+        shaderName = "toon";
+        break;
+    }
+
+    bool successVert = shader->addShaderFromSourceFile(QGLShader::Vertex,   "resources/shaders/" + shaderName + "/" + shaderName + ".vert");
+    bool successFrag = shader->addShaderFromSourceFile(QGLShader::Fragment, "resources/shaders/" + shaderName + "/" + shaderName + ".frag");
+
+    return (successVert && successFrag);
+}
+
 void Qubet::draw()
 {
     paintGL();
@@ -611,7 +636,7 @@ void Qubet::draw()
 
 void Qubet::playStory(GLint skinId)
 {
-    game = new Game(iconsList, alphabet, skinsList.value(skinId), levelsList, this, audioManager->isAudioEnabled());
+    game = new Game(iconsList, alphabet, skinsList.value(skinId), levelsList, this, audioManager->isAudioEnabled(), shader);
 
     connectGame();
 
@@ -626,7 +651,7 @@ void Qubet::playStory(GLint skinId)
 
 void Qubet::playArcade(GLint skinId, GLint levelId)
 {
-    game = new Game(iconsList, alphabet, skinsList.value(skinId), levelsList.value(levelId), this, audioManager->isAudioEnabled());
+    game = new Game(iconsList, alphabet, skinsList.value(skinId), levelsList.value(levelId), this, audioManager->isAudioEnabled(), shader);
 
     connectGame();
 
