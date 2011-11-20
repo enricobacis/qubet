@@ -95,6 +95,12 @@ void Game::draw(GLboolean simplifyForPicking)
         glTranslatef(-9.0f, 0.0f, 0.0f);
         deathCounter->draw(simplifyForPicking);
 
+        if(isPaused)
+        {
+            glTranslatef(0.0f,  -12.0f, 0.0f);
+            quitLabel->draw(simplifyForPicking);
+        }
+
         dynamic_cast<QGLWidget*>(parent)->renderText(-1.0f, -1.5f, 0.0f, "deaths");
 
     glPopMatrix();
@@ -146,6 +152,7 @@ void Game::initGame()
     volumeSkin = new Skin(0, 0, volume_off, volume_off, volume_on, volume_on);
 
     stateLabel = new CubeString("", 2.0f, alphabet, STATE_LABEL);
+    quitLabel = new CubeString("quit", 1.5f, alphabet, QUIT_LABEL);
     deathCounter = new CubeString("0", 1.5f, alphabet);
 
     emit setMouseMovementTracking(MOUSE_MOVED_NONE);
@@ -274,6 +281,9 @@ void Game::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
                 emit enableAudio(audioEnabled);
                 currentActions->appendSecondaryAction(ROTATE_VOLUMECUBE);
             }
+            break;
+        case QUIT_LABEL:
+            quitGame();
             break;
         }
     }

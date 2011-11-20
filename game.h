@@ -82,6 +82,7 @@ private:
     Vector3f *cameraOffset; /**< It is the camera offset for the editor. */
     Vector3f *levelOffset; /**< It is the offset of the Level. */
     CubeString *stateLabel;  /**< It is the state CubeString (used for Pause string, intro, ...). */
+    CubeString *quitLabel;  /**< It is the CubeString used in pause mode to back to the menu. */
     GLuint introStep;  /**< It is the parameter for the introduction. */
     bool isPaused; /**< It says if the game is paused or not. */
     bool isExploding; /**< It says if the cube is exploding. */

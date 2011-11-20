@@ -6,6 +6,7 @@
 
 #define BUTTON_VOLUME               200
 #define STATE_LABEL                 201
+#define QUIT_LABEL                  202
 
 enum { // Primary Actions
        DO_NOTHING,
