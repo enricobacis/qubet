@@ -296,10 +296,18 @@ GLvoid Level::draw(GLboolean simplifyForPicking)
         glPushName(OBSTACLES);
 
         for (QMap<GLint,Obstacle*>::iterator i = obstaclesList.begin(); i != obstaclesList.end(); i++)
+        {
+            glPushName(OBSTACLES + i.key());
             dynamic_cast<Obstacle*>(i.value())->draw(simplifyForPicking);
+            glPopName();
+        }
 
         for (QMap<GLint,Obstacle*>::iterator i = tempObstaclesList.begin(); i != tempObstaclesList.end(); i++)
+        {
+            glPushName(OBSTACLES + i.key());
             dynamic_cast<Obstacle*>(i.value())->draw(simplifyForPicking);
+            glPopName();
+        }
 
         glPopName();
     glPopMatrix();

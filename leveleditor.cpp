@@ -786,6 +786,7 @@ void LevelEditor::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
 
     if (!listNames.isEmpty())
     {
+        qDebug()<<listNames.at(1);
         switch (listNames.at(0))
         {
         case BUTTON_VOLUME:
@@ -877,6 +878,9 @@ void LevelEditor::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
 
         case BUTTON_EXIT:
             quitEditor();
+            break;
+        case OBSTACLES:
+            level->deleteObstacle(listNames.at(1) - OBSTACLES);
             break;
         }
     }
