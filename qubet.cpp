@@ -654,6 +654,8 @@ void Qubet::playArcade(GLint skinId, GLint levelId)
 
 void Qubet::gameClosed()
 {
+    currentView = NO_VIEW;
+
     showMenu(false);
 
     if (game != NULL)

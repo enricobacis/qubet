@@ -68,7 +68,19 @@ void Game::draw(GLboolean simplifyForPicking)
             case MOVE_TO_LEVEL:
                 break;
 
-            case EXIT_FROM_LEVEL:
+            case MOVE_TO_NEXT_LEVEL:
+                break;
+
+            case EXIT_TO_MENU:
+                if (cameraOffset->x <= 30)
+                {
+                    cameraOffset->x++;
+                }
+                else
+                {
+                    emit gameClosedSignal();
+                    return;
+                }
                 break;
 
                 // Secondary Actions
@@ -92,16 +104,18 @@ void Game::draw(GLboolean simplifyForPicking)
         glTranslatef(0.0f,  6.0f, 0.0f);
         stateLabel->draw(simplifyForPicking);
 
-        if(isPaused)
-        {
-            glTranslatef(0.0f,  -8.0f, 0.0f);
-            quitLabel->draw(simplifyForPicking);
-        }
-
-        glTranslatef(-9.0f, 8.0f, 0.0f);
+        glTranslatef(-9.0f, 0.0f, 0.0f);
         deathCounter->draw(simplifyForPicking);
 
         dynamic_cast<QGLWidget*>(parent)->renderText(-1.0f, -1.5f, 0.0f, "deaths");
+
+        if (isPaused)
+        {
+            glTranslatef(9.0f, -8.0f, 0.0f);
+            quitLabel->draw(simplifyForPicking);
+        }
+
+
 
     glPopMatrix();
 
@@ -180,24 +194,28 @@ void Game::countdown()
         stateLabel->~CubeString();
         stateLabel = new CubeString("3", 2.0f, alphabet, STATE_LABEL);
         stateLabel->startStringRotation(5, 1);
+        playEffect(EFFECT_BOP);
         break;
 
     case 50:
         stateLabel->~CubeString();
         stateLabel = new CubeString("2", 2.0f, alphabet, STATE_LABEL);
         stateLabel->startStringRotation(9, 2);
+        playEffect(EFFECT_BOP);
         break;
 
     case 90:
         stateLabel->~CubeString();
         stateLabel = new CubeString("1", 2.0f, alphabet, STATE_LABEL);
         stateLabel->startStringRotation(18, 4);
+        playEffect(EFFECT_BOP);
         break;
 
     case 130:
         stateLabel->~CubeString();
         stateLabel = new CubeString("go", 2.0f, alphabet, STATE_LABEL);
         stateLabel->startStringRotation(27, 6);
+        playEffect(EFFECT_BEEP);
         cube->startCube();
         break;
 
@@ -229,7 +247,8 @@ void Game::playLevel()
 
 void Game::nextLevel()
 {
-
+    // TODO: da cambiare
+    currentActions->setPrimaryAction(EXIT_TO_MENU);
 }
 
 void Game::pauseGame()
@@ -262,8 +281,7 @@ void Game::continueGame()
 
 void Game::quitGame()
 {
-    emit gameClosedSignal();
-    return;
+    currentActions->setPrimaryAction(EXIT_TO_MENU);
 }
 
 void Game::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
@@ -308,6 +326,11 @@ void Game::mouseMoved(QMouseEvent *event, QList<GLuint> listNames)
         case STATE_LABEL:
             if (!stateLabel->isRotating(listNames.at(1)))
                 stateLabel->startLetterRotation(listNames.at(1), 6, 1);
+            break;
+
+        case QUIT_LABEL:
+            if (!quitLabel->isRotating(listNames.at(1)))
+                quitLabel->startLetterRotation(listNames.at(1), 6, 1);
             break;
         }
     }
@@ -363,7 +386,7 @@ void Game::explosionFinished()
 void Game::levelCompleted()
 {
     positionController->~PositionController();
-    cube->~Cube();
+    positionController = NULL;
 
     if (gameType == ARCADE_MODE)
     {
@@ -372,6 +395,7 @@ void Game::levelCompleted()
     }
     else
     {
+        playEffect(EFFECT_HEREWEGO);
         nextLevel();
     }
 }

@@ -12,5 +12,7 @@
 #define EFFECT_WARNING              "warning.wav"
 #define EFFECT_HEREWEGO             "herewego.wav"
 #define EFFECT_HAHA                 "haha.wav"
+#define EFFECT_BOP                  "bop.wav"
+#define EFFECT_BEEP                 "beep.wav"
 
 #endif // EFFECTS_DEFINES_H

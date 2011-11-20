@@ -11,7 +11,8 @@
 enum { // Primary Actions
        DO_NOTHING,
        MOVE_TO_LEVEL,
-       EXIT_FROM_LEVEL,
+       MOVE_TO_NEXT_LEVEL,
+       EXIT_TO_MENU,
        COUNTDOWN,
 
       // Secondary Actions

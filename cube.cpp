@@ -249,9 +249,8 @@ void Cube::explode()
 
 void Cube::completed()
 {
-    playEffect(EFFECT_HEREWEGO);
-    // emit levelCompleted();
-    resetCube();
+    canMove = false;
+    emit levelCompleted();
 }
 
 void Cube::resetCube()
