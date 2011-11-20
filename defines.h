@@ -38,11 +38,6 @@
 #define OBSTACLE_CUBE_BIG       3
 
 /**
- * @brief Enum for Shaders.
- */
-enum { SHADER_TOON };
-
-/**
  * @brief Enum used for currentView
  */
 enum { LOADING, MENU_VIEW, GAME_VIEW, LEVELEDITOR_VIEW, NO_VIEW };

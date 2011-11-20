@@ -113,21 +113,12 @@ void Cube::draw(GLboolean simplifyForPicking)
         if (state & CUBESTATE_COLLIDED)
         {
             if (explosionShader != NULL)
-            {
                 explosionShader->bind();
-                explosionShader->setUniformValue("BrickColor",    1.0,  0.3,  0.2);
-                explosionShader->setUniformValue("MortarColor",   0.85, 0.86, 0.84);
-                explosionShader->setUniformValue("BrickSize",     0.30, 0.15);
-                explosionShader->setUniformValue("BrickPct",      0.90, 0.85);
-                explosionShader->setUniformValue("LightPosition", 0.0,  0.0,  4.0);
-            }
 
             drawExplosion();
 
             if (explosionShader != NULL)
-            {
                 explosionShader->release();
-            }
 
             if (canMove)
             {

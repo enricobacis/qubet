@@ -121,8 +121,7 @@ private:
     Alphabet *alphabet; /**< It is the current Alphabet. */
     Skybox *skybox; /**< It is the current Skybox. */
     GLfloat skyboxAngle; /**< It is the Skybox rotation angle. */
-    QGLShaderProgram *shader; /**< It is the current Shader. */
-    GLint shaderToLoad; /**< It is the shader name. */
+    QGLShaderProgram *explosionShader; /**< It is the current explosion Shader. */
 
     GLint width; /**< It is the current widget width. */
     GLint height; /**< It is the current widget height. */

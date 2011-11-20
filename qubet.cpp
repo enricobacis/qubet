@@ -12,7 +12,7 @@ Qubet::Qubet(QWidget *parent) :
     audioManager(NULL),
     alphabet(NULL),
     skybox(NULL),
-    shader(NULL),
+    explosionShader(NULL),
     width(WIDTH),
     height(HEIGHT),
     mouseMovedMode(MOUSE_MOVED_DOWN),
@@ -20,9 +20,7 @@ Qubet::Qubet(QWidget *parent) :
     currentNewLevelNumber(0)
 {
     alphabet = new Alphabet();
-
-    shaderToLoad = SHADER_TOON;
-    shader = new QGLShaderProgram(this);
+    explosionShader = new QGLShaderProgram(this);
 
     // Inizialization is done in the initializeGL() and paintGL() functions.
 }
@@ -407,8 +405,7 @@ GLboolean Qubet::load()
     if (!loadSkyboxes())
         return false;
 
-    if (!loadShader())
-        return false;
+    loadShader();
 
 #endif
 
@@ -614,17 +611,8 @@ GLboolean Qubet::loadSkyboxes()
 
 GLboolean Qubet::loadShader()
 {
-    QString shaderName;
-
-    switch (shaderToLoad)
-    {
-    case SHADER_TOON:
-        shaderName = "toon";
-        break;
-    }
-
-    bool successVert = shader->addShaderFromSourceFile(QGLShader::Vertex,   "resources/shaders/" + shaderName + "/" + shaderName + ".vert");
-    bool successFrag = shader->addShaderFromSourceFile(QGLShader::Fragment, "resources/shaders/" + shaderName + "/" + shaderName + ".frag");
+    bool successVert = explosionShader->addShaderFromSourceFile(QGLShader::Vertex,   "resources/shaders/toon/toon.vert");
+    bool successFrag = explosionShader->addShaderFromSourceFile(QGLShader::Fragment, "resources/shaders/toon/toon.frag");
 
     return (successVert && successFrag);
 }
@@ -636,7 +624,7 @@ void Qubet::draw()
 
 void Qubet::playStory(GLint skinId)
 {
-    game = new Game(iconsList, alphabet, skinsList.value(skinId), levelsList, this, audioManager->isAudioEnabled(), shader);
+    game = new Game(iconsList, alphabet, skinsList.value(skinId), levelsList, this, audioManager->isAudioEnabled(), explosionShader);
 
     connectGame();
 
@@ -651,7 +639,7 @@ void Qubet::playStory(GLint skinId)
 
 void Qubet::playArcade(GLint skinId, GLint levelId)
 {
-    game = new Game(iconsList, alphabet, skinsList.value(skinId), levelsList.value(levelId), this, audioManager->isAudioEnabled(), shader);
+    game = new Game(iconsList, alphabet, skinsList.value(skinId), levelsList.value(levelId), this, audioManager->isAudioEnabled(), explosionShader);
 
     connectGame();
 
