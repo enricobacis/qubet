@@ -92,14 +92,14 @@ void Game::draw(GLboolean simplifyForPicking)
         glTranslatef(0.0f,  6.0f, 0.0f);
         stateLabel->draw(simplifyForPicking);
 
-        glTranslatef(-9.0f, 0.0f, 0.0f);
-        deathCounter->draw(simplifyForPicking);
-
         if(isPaused)
         {
-            glTranslatef(0.0f,  -12.0f, 0.0f);
+            glTranslatef(0.0f,  -8.0f, 0.0f);
             quitLabel->draw(simplifyForPicking);
         }
+
+        glTranslatef(-9.0f, 8.0f, 0.0f);
+        deathCounter->draw(simplifyForPicking);
 
         dynamic_cast<QGLWidget*>(parent)->renderText(-1.0f, -1.5f, 0.0f, "deaths");
 
