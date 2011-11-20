@@ -66,15 +66,19 @@ void Game::draw(GLboolean simplifyForPicking)
                 break;
 
             case MOVE_TO_LEVEL:
+                if (cameraOffset->x < 0.0f)
+                    cameraOffset->x += 2.0f;
+                else
+                    currentActions->setPrimaryAction(COUNTDOWN);
                 break;
 
             case MOVE_TO_NEXT_LEVEL:
                 break;
 
             case EXIT_TO_MENU:
-                if (cameraOffset->x <= 30)
+                if (cameraOffset->x < 60.0f)
                 {
-                    cameraOffset->x++;
+                    cameraOffset->x += 2.0f;
                 }
                 else
                 {
@@ -99,25 +103,26 @@ void Game::draw(GLboolean simplifyForPicking)
         }
     }
 
-    glPushMatrix();
+    if (!isQuitting)
+    {
+        glPushMatrix();
 
-        glTranslatef(0.0f,  6.0f, 0.0f);
-        stateLabel->draw(simplifyForPicking);
+            glTranslatef(-9.0f, 6.0f, 0.0f);
+            deathCounter->draw(simplifyForPicking);
 
-        glTranslatef(-9.0f, 0.0f, 0.0f);
-        deathCounter->draw(simplifyForPicking);
+            dynamic_cast<QGLWidget*>(parent)->renderText(-1.0f, -1.5f, 0.0f, "deaths");
 
-        dynamic_cast<QGLWidget*>(parent)->renderText(-1.0f, -1.5f, 0.0f, "deaths");
+            glTranslatef(9.0f,  0.0f, 0.0f);
+            stateLabel->draw(simplifyForPicking);
 
-        if (isPaused)
-        {
-            glTranslatef(9.0f, -8.0f, 0.0f);
-            quitLabel->draw(simplifyForPicking);
-        }
+            if (isPaused)
+            {
+                glTranslatef(0.0f, -8.0f, 0.0f);
+                quitLabel->draw(simplifyForPicking);
+            }
 
-
-
-    glPopMatrix();
+        glPopMatrix();
+    }
 
     glPushName(BUTTON_VOLUME);
     glPushMatrix();
@@ -153,9 +158,10 @@ void Game::initGame()
     connect(this, SIGNAL(setMouseMovementTracking(int)), parent, SLOT(setMouseMovementTracking(int)));
     connect(this, SIGNAL(setSkybox(QString)), parent, SLOT(setSkybox(QString)));
 
-    currentActions = new ActionList(COUNTDOWN);
+    currentActions = new ActionList(MOVE_TO_LEVEL);
     deaths = 0;
     isPaused = false;
+    isQuitting = false;
     isExploding = false;
     introStep = 0;
 
@@ -241,7 +247,7 @@ void Game::playLevel()
 
     positionController->startChecking();
 
-    cameraOffset = new Vector3f(0.0,   0.0f, 4.0f);
+    cameraOffset = new Vector3f(-60.0, 0.0f, 4.0f);
     levelOffset  = new Vector3f(0.0f, -4.0f, -(level->getLength() / 2.0f));
 }
 
@@ -281,6 +287,7 @@ void Game::continueGame()
 
 void Game::quitGame()
 {
+    isQuitting = true;
     currentActions->setPrimaryAction(EXIT_TO_MENU);
 }
 
@@ -345,6 +352,7 @@ void Game::keyPressed(QKeyEvent *event)
 {
     switch (event->key())
     {
+    case Qt::Key_Escape:
     case Qt::Key_P:
         if (currentActions->getPrimaryAction() != COUNTDOWN)
         {
@@ -390,6 +398,7 @@ void Game::levelCompleted()
 
     if (gameType == ARCADE_MODE)
     {
+        emit stopAmbientMusic();
         playEffect(EFFECT_STAGECLEAR);
         quitGame();
     }

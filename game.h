@@ -88,6 +88,7 @@ private:
     bool isExploding; /**< It says if the cube is exploding. */
     CubeString *deathCounter; /** It is the Death Counter CubeString. */
     QGLShaderProgram *explosionShader; /**< It is the explosion Shader. */
+    bool isQuitting; /**< It is the variable that states if the game is quitting. */
 
     /**
      * @brief Initialize the game.
