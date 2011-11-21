@@ -522,6 +522,7 @@ void Game::createResultStrings()
     else if(deaths < 150) adjective = "goat";
     else if(deaths < 200) adjective = "change game";
     else if(deaths < 250) adjective = "worst ever";
+    else adjective = "no way";
 
     adjectiveCubeString = new CubeString(adjective, 18.0f, 3.0f , alphabet);
 

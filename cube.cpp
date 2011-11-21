@@ -288,12 +288,21 @@ void Cube::keyPressed(QKeyEvent *event)
     case Qt::Key_Up:
         jump();
         break;
+    case Qt::Key_W:
+        jump();
+        break;
 
     case Qt::Key_Left:
         moveLeft();
         break;
+    case Qt::Key_A:
+        moveLeft();
+        break;
 
     case Qt::Key_Right:
+        moveRight();
+        break;
+    case Qt::Key_D:
         moveRight();
         break;
 
