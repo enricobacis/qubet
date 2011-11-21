@@ -302,7 +302,7 @@ void Game::pauseGame()
     cube->stopCube();
     positionController->stopChecking();
 
-    emit enableAudio(true);
+    emit enableAudio(false);
     emit setMouseMovementTracking(MOUSE_MOVED_FULL);
 
     stateLabel->~CubeString();
