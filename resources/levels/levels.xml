@@ -1,4 +1,6 @@
 <levels>
-    <level story_number="1" name="first" filename="first.xml"/>
-    <level name="elsa" filename="elsa.xml"/>
+    <level story_number="1" name="gian" filename="gian.xml"/>
+    <level story_number="2" name="elsa" filename="elsa.xml"/>
+    <level story_number="3" name="enrico" filename="enrico.xml"/>
+    <level story_number="4" name="marco" filename="marco.xml"/>
 </levels>
