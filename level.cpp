@@ -113,7 +113,7 @@ void Level::deleteObstacle(GLint _id)
         obstaclesList.remove(_id);
     }
 
-    QMap<GLint,Obstacle*>::iterator i = tempObstaclesList.find(_id);
+    i = tempObstaclesList.find(_id);
 
     if (i != tempObstaclesList.end())
     {
