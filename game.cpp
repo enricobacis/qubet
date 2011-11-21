@@ -390,14 +390,11 @@ void Game::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
         switch (listNames.at(0))
         {
         case BUTTON_VOLUME:
-            if (!isPaused)
+            if ((GLint(angleRotVolumeCube) % 90) == 0)
             {
-                if ((GLint(angleRotVolumeCube) % 90) == 0)
-                {
-                    audioEnabled = !audioEnabled;
-                    emit enableAudio(audioEnabled);
-                    currentActions->appendSecondaryAction(ROTATE_VOLUMECUBE);
-                }
+                audioEnabled = !audioEnabled;
+                emit enableAudio(audioEnabled);
+                currentActions->appendSecondaryAction(ROTATE_VOLUMECUBE);
             }
             break;
 
