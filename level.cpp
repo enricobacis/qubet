@@ -146,7 +146,6 @@ bool Level::load()
     file.close();
 
     QDomElement levelElement = document.documentElement();
-    name = levelElement.attribute("name", "no name");
     width = levelElement.attribute("width", QString::number(LEVEL_WIDTH_DEFAULT)).toInt();
     length = levelElement.attribute("length", QString::number(LEVEL_LENGTH_DEFAULT)).toInt();
     gravity = levelElement.attribute("gravity", QString::number(LEVEL_GRAVITY_DEFAULT)).toInt();
@@ -200,7 +199,6 @@ bool Level::save(bool *newlyCreated)
     QDomDocument document;
 
     QDomElement levelElement = document.createElement("level");
-    levelElement.setAttribute("name", name);
     levelElement.setAttribute("width", width);
     levelElement.setAttribute("length", length);
     levelElement.setAttribute("gravity", gravity);

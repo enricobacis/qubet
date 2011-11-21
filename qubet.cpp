@@ -489,11 +489,19 @@ GLboolean Qubet::loadLevels()
 
     QDomElement rootElement = document.documentElement();
     QDomElement levelElement = rootElement.firstChildElement("level");
+    QString name;
+    QString filename;
 
     while(!levelElement.isNull())
     {
-        Level *level = new Level(levelElement.attribute("filename", ""), this);
-        level->setName(levelElement.attribute("name", "no name"));
+        filename = levelElement.attribute("filename", "");
+        Level *level = new Level(filename, this);
+
+        QString name = levelElement.attribute("name", "");
+        if (name.isEmpty())
+            name = filename.left(filename.lastIndexOf("."));
+
+        level->setName(name);
 
         ++currentNewLevelNumber;
         GLint levelNumber = levelElement.attribute("story_number", "-1").toInt();
