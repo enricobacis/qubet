@@ -41,7 +41,9 @@ void PositionController::stopChecking()
 void PositionController::checkCollision()
 {
     Vector3f* position = cube->getPosition();
-    *position += new Vector3f(0.01f, 0.01f, 0.01f);
+    *position += new Vector3f(0.01f, 0.01f, 0.01f - 12.0f);
+
+    qDebug() << position->z;
 
     QList<int> xCells;
     QList<int> yCells;
@@ -49,31 +51,31 @@ void PositionController::checkCollision()
 
     Vector3f *cell = positionToCell(position);
 
-    if ((cell->x < 0) || (cell->y < 0) || (cell->z < 0))
-        return;
-
-    xCells.append((int)(cell->x));
-    if (!(isInteger(position->x) && ((((int)(position->x)) % 3) == 0)))
-        xCells.append((int)(cell->x + 1));
-
-    yCells.append((int)(cell->y));
-    if (!(isInteger(position->y) && ((((int)(position->y)) % 3) == 0)))
-        yCells.append((int)(cell->y + 1));
-
-    zCells.append((int)(cell->z));
-    if (!(isInteger(position->z) && ((((int)(position->z)) % 3) == 0)))
-        zCells.append((int)(cell->z + 1));
-
-    for (int x = 0; x < xCells.count(); x++)
+    if (cell->z >= 0)
     {
-        for (int y = 0; y < yCells.count(); y++)
+        xCells.append((int)(cell->x));
+        if (!(isInteger(position->x) && ((((int)(position->x)) % 3) == 0)))
+            xCells.append((int)(cell->x + 1));
+
+        yCells.append((int)(cell->y));
+        if (!(isInteger(position->y) && ((((int)(position->y)) % 3) == 0)))
+            yCells.append((int)(cell->y + 1));
+
+        zCells.append((int)(cell->z));
+        if (!(isInteger(position->z) && ((((int)(position->z)) % 3) == 0)))
+            zCells.append((int)(cell->z + 1));
+
+        for (int x = 0; x < xCells.count(); x++)
         {
-            for (int z = 0; z < zCells.count(); z++)
+            for (int y = 0; y < yCells.count(); y++)
             {
-                if (obstacleCells[xCells.at(x)][yCells.at(y)][zCells.at(z)])
+                for (int z = 0; z < zCells.count(); z++)
                 {
-                    emit collision();
-                    return;
+                    if (obstacleCells[xCells.at(x)][yCells.at(y)][zCells.at(z)])
+                    {
+                        emit collision();
+                        return;
+                    }
                 }
             }
         }

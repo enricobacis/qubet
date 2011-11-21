@@ -12,14 +12,14 @@ void main()
 	n = normalize(normal);
 	intensity = max(dot(lightDir,n),0.0); 
 
-	if (intensity > 0.98)
-		color = vec4(0.8,0.8,0.8,1.0);
+	if (intensity > 0.85)
+		color = vec4(1.0, 1.0, 0.0, 1.0);
 	else if (intensity > 0.5)
-		color = vec4(0.4,0.4,0.8,1.0);	
+		color = vec4(1.0, 0.5, 0.0, 1.0);	
 	else if (intensity > 0.25)
-		color = vec4(0.2,0.2,0.4,1.0);
+		color = vec4(1.0, 0.0, 0.0, 1.0);
 	else
-		color = vec4(0.1,0.1,0.1,1.0);		
+		color = vec4(0.3, 0.0, 0.0, 1.0);		
 		
 	gl_FragColor = color;
 }
