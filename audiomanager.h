@@ -41,7 +41,9 @@ public:
      */
     bool isAudioEnabled();
 
+
 private:
+
     QObject *parent; /**< It is a callback variable to the parent of AudioManager. */
     QString currentFileName; /**< It is the current ambientMusic filename. */
     bool audioEnabled; /**< It is the variable that states if the audio is currently enabled or not. */
@@ -56,6 +58,7 @@ private:
 
 
 private slots:
+
     /**
      * @brief Sets the variable audioEnabled and pause or continue the ambientMusic.
      *        If enabled is false and there are currently playing effects they will be stopped.

@@ -302,6 +302,7 @@ void Game::pauseGame()
     cube->stopCube();
     positionController->stopChecking();
 
+    emit enableAudio(true);
     emit setMouseMovementTracking(MOUSE_MOVED_FULL);
 
     stateLabel->~CubeString();
@@ -317,6 +318,7 @@ void Game::continueGame()
     if (!isExploding)
         positionController->startChecking();
 
+    emit enableAudio(true);
     emit setMouseMovementTracking(MOUSE_MOVED_NONE);
 
     stateLabel->~CubeString();
