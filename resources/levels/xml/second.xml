@@ -1,0 +1,25 @@
+<level width="6" gravity="10" length="450" name="second">
+    <obstacle x="0" y="0" model="0" z="146" id="32"/>
+    <obstacle x="1" y="0" model="0" z="146" id="33"/>
+    <obstacle x="0" y="0" model="2" z="133" id="34"/>
+    <obstacle x="0" y="0" model="1" z="120" id="35"/>
+    <obstacle x="1" y="0" model="0" z="127" id="36"/>
+    <obstacle x="1" y="0" model="0" z="126" id="37"/>
+    <obstacle x="1" y="0" model="1" z="107" id="38"/>
+    <obstacle x="0" y="0" model="0" z="94" id="39"/>
+    <obstacle x="1" y="0" model="0" z="94" id="40"/>
+    <obstacle x="0" y="0" model="0" z="91" id="41"/>
+    <obstacle x="0" y="0" model="0" z="84" id="42"/>
+    <obstacle x="0" y="0" model="2" z="78" id="43"/>
+    <obstacle x="0" y="0" model="1" z="67" id="44"/>
+    <obstacle x="1" y="0" model="0" z="67" id="45"/>
+    <obstacle x="1" y="0" model="0" z="50" id="46"/>
+    <obstacle x="1" y="0" model="0" z="52" id="47"/>
+    <obstacle x="0" y="0" model="0" z="51" id="48"/>
+    <obstacle x="1" y="0" model="1" z="38" id="49"/>
+    <obstacle x="0" y="0" model="0" z="36" id="50"/>
+    <obstacle x="1" y="0" model="0" z="35" id="51"/>
+    <obstacle x="0" y="0" model="1" z="15" id="52"/>
+    <obstacle x="1" y="0" model="0" z="12" id="53"/>
+    <obstacle x="0" y="0" model="0" z="11" id="54"/>
+</level>

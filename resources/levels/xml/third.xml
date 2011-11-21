@@ -1,0 +1,33 @@
+<level width="9" gravity="7" length="465" name="third">
+    <obstacle x="1" y="0" model="1" z="152" id="1"/>
+    <obstacle x="2" y="0" model="0" z="149" id="2"/>
+    <obstacle x="0" y="0" model="0" z="148" id="3"/>
+    <obstacle x="1" y="0" model="0" z="144" id="4"/>
+    <obstacle x="2" y="0" model="0" z="136" id="5"/>
+    <obstacle x="1" y="0" model="1" z="134" id="6"/>
+    <obstacle x="0" y="0" model="0" z="136" id="7"/>
+    <obstacle x="1" y="0" model="2" z="123" id="8"/>
+    <obstacle x="0" y="0" model="1" z="124" id="9"/>
+    <obstacle x="0" y="0" model="1" z="123" id="10"/>
+    <obstacle x="1" y="0" model="0" z="113" id="11"/>
+    <obstacle x="0" y="0" model="0" z="109" id="12"/>
+    <obstacle x="2" y="0" model="0" z="109" id="13"/>
+    <obstacle x="1" y="0" model="1" z="97" id="14"/>
+    <obstacle x="1" y="0" model="2" z="91" id="15"/>
+    <obstacle x="0" y="0" model="1" z="90" id="16"/>
+    <obstacle x="1" y="0" model="1" z="75" id="17"/>
+    <obstacle x="1" y="0" model="0" z="63" id="20"/>
+    <obstacle x="2" y="0" model="0" z="63" id="21"/>
+    <obstacle x="0" y="0" model="0" z="63" id="22"/>
+    <obstacle x="0" y="0" model="2" z="51" id="23"/>
+    <obstacle x="2" y="0" model="0" z="52" id="24"/>
+    <obstacle x="2" y="0" model="1" z="33" id="25"/>
+    <obstacle x="0" y="0" model="1" z="39" id="26"/>
+    <obstacle x="1" y="0" model="1" z="44" id="27"/>
+    <obstacle x="0" y="0" model="2" z="20" id="28"/>
+    <obstacle x="2" y="0" model="0" z="20" id="29"/>
+    <obstacle x="1" y="0" model="2" z="13" id="30"/>
+    <obstacle x="0" y="0" model="0" z="70" id="31"/>
+    <obstacle x="2" y="0" model="0" z="70" id="32"/>
+    <obstacle x="1" y="0" model="1" z="70" id="33"/>
+</level>

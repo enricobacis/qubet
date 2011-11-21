@@ -5,4 +5,8 @@
     <level story_number="4" name="marco" filename="marco.xml"/>
     <level story_number="5" name="warning" filename="warning.xml"/>
     <level story_number="6" name="not so easy" filename="not_so_easy.xml"/>
+	<level name="barbara" filename="barbara.xml"/>
+    <level name="tunnel" filename="tunnel.xml"/>
+    <level name="second" filename="second.xml"/>
+    <level name="third" filename="third.xml"/>
 </levels>
