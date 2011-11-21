@@ -122,6 +122,7 @@ private:
     Skybox *skybox; /**< It is the current Skybox. */
     GLfloat skyboxAngle; /**< It is the Skybox rotation angle. */
     QGLShaderProgram *explosionShader; /**< It is the current explosion Shader. */
+    Skin *asphaltSkin; /**< It is the asphalt Skin. */
 
     GLint width; /**< It is the current widget width. */
     GLint height; /**< It is the current widget height. */

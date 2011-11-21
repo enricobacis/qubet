@@ -3,23 +3,25 @@
 
 #include <QDomElement>
 
-Level::Level(QString _filename, QObject *_parent) :
+Level::Level(QString _filename, QObject *_parent, Skin *_asphaltSkin) :
     parent(_parent),
     filename(_filename),
     currentObstacleId(0),
-    isLoaded(false)
+    isLoaded(false),
+    asphaltSkin(_asphaltSkin)
 {
     name = "not yet loaded";
 }
 
-Level::Level(QString _name, GLfloat _length, GLfloat _width, QObject *_parent) :
+Level::Level(QString _name, GLfloat _length, GLfloat _width, QObject *_parent, Skin *_asphaltSkin) :
     parent(_parent),
     name(_name),
     isInStory(false),
     length(_length),
     width(_width),
     currentObstacleId(0),
-    isLoaded(false)
+    isLoaded(false),
+    asphaltSkin(_asphaltSkin)
 {
     filename = name + ".xml";
     filename.replace(" ", "_");
@@ -158,7 +160,6 @@ bool Level::load()
     length = levelElement.attribute("length", QString::number(LEVEL_LENGTH_DEFAULT)).toInt();
     gravity = levelElement.attribute("gravity", QString::number(LEVEL_GRAVITY_DEFAULT)).toInt();
     ambientMusicFilename = levelElement.attribute("music", "game_" + QString::number((qrand() % 5) + 1) + ".mp3");
-    qDebug()<<ambientMusicFilename;
     skyboxName = levelElement.attribute("skybox", "nebula");
 
     QDomElement obstacleElement = levelElement.firstChildElement("obstacle");
@@ -301,7 +302,7 @@ bool Level::save(bool *newlyCreated)
 GLvoid Level::draw(GLboolean simplifyForPicking)
 {
     glPushName(LEVEL);
-    drawPrism(width, LEVEL_HEIGHT, length);
+    drawPrism(width, LEVEL_HEIGHT, length, asphaltSkin, false, true);
     glPopName();
 
     glPushMatrix();

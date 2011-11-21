@@ -24,8 +24,9 @@ public:
      * @param _level is the level to load in the LevelEditor (NULL to create a new Level).
      * @param _parent is a callback variable to the parent of the parent.
      * @param _audioEnabled is a variable to states if the audio is enabled or not.
+     * @param _asphaltSkin is the asphalt Skin for the Level.
      */
-    explicit LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, Level *_level = NULL, bool _audioEnabled = true);
+    explicit LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, Level *_level = NULL, bool _audioEnabled = true, Skin *_asphaltSkin = NULL);
 
     /**
      * @brief This is the LevelEditor Destructor.
@@ -59,9 +60,10 @@ private:
     Alphabet *alphabet; /**< It is the alphabet provided by Qubet. */
     ActionList *currentActions; /**< It is the list of the current menu steps. */
     Vector3f *cameraOffset; /**< It is the camera offset for the editor. */
-    GLfloat cameraAngle; /**< It is the camera angle for the editor */
-    Vector3f *levelOffset; /**< It is the offset of the Level */
-    Skin *volumeSkin; /**< It is the skin of the volume button */
+    GLfloat cameraAngle; /**< It is the camera angle for the editor. */
+    Vector3f *levelOffset; /**< It is the offset of the Level. */
+    Skin *volumeSkin; /**< It is the skin of the volume button. */
+    Skin *asphaltSkin; /**< It is the skin of the Asphalt. */
     GLfloat angleRotVolumeCube;  /**< It is the current rotation angle of the volume icon. */
     CubeString *lengthLabel; /**< It is the "length" CubeString. */
     CubeString *widthLabel; /**< It is the "width" CubeString. */

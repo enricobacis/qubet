@@ -3,7 +3,7 @@
 #include "leveleditor_defines.h"
 #include "effects_defines.h"
 
-LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, Level *_level, bool _audioEnabled):
+LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QObject *_parent, Level *_level, bool _audioEnabled, Skin *_asphaltSkin):
     parent(_parent),
     iconsList(_iconsList),
     audioEnabled(_audioEnabled),
@@ -15,6 +15,7 @@ LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QO
     currentGravity(LEVEL_GRAVITY_DEFAULT),
     alphabet(_alphabet),
     volumeSkin(NULL),
+    asphaltSkin(_asphaltSkin),
     visible(true),
     visibleTime(0),
     currentName(""),
@@ -660,7 +661,7 @@ GLvoid LevelEditor::buttonNextTriggered()
         isMoving = true;
 
         if (level == NULL)
-            level = new Level(currentName, currentLength, currentWidth, this);
+            level = new Level(currentName, currentLength, currentWidth, this, asphaltSkin);
 
         level->setGravity(currentGravity);
 

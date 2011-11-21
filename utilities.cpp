@@ -14,10 +14,10 @@ GLvoid drawRectangle(GLfloat x, GLfloat y, GLuint texture, bool repeat)
     glBegin(GL_QUADS);
 
         glNormal3f(0.0f, 0.0f, 1.0f);
-        glTexCoord2f(0.0f, 0.0f); glVertex3f(-x, -y,  0.0f);
-        glTexCoord2f(1.0f, 0.0f); glVertex3f( x, -y,  0.0f);
-        glTexCoord2f(1.0f, 1.0f); glVertex3f( x,  y,  0.0f);
-        glTexCoord2f(0.0f, 1.0f); glVertex3f(-x,  y,  0.0f);
+        glTexCoord2f(0.0f, 0.0f);                   glVertex3f(-x, -y,  0.0f);
+        glTexCoord2f(1.0f, 0.0f);                   glVertex3f( x, -y,  0.0f);
+        glTexCoord2f(1.0f, repeat ? y/x : 1.0f);    glVertex3f( x,  y,  0.0f);
+        glTexCoord2f(0.0f, repeat ? y/x : 1.0f);    glVertex3f(-x,  y,  0.0f);
 
     glEnd();
 
@@ -79,10 +79,10 @@ GLvoid drawPrism(GLfloat x, GLfloat y, GLfloat z, Skin *skin, bool invertBackTex
     glBegin(GL_QUADS);
 
         glNormal3f( 0.0f, 1.0f, 0.0f);
-        glTexCoord2f(0.0f, 1.0f); glVertex3f(-x,  y, -z);
-        glTexCoord2f(0.0f, 0.0f); glVertex3f(-x,  y,  z);
-        glTexCoord2f(1.0f, 0.0f); glVertex3f( x,  y,  z);
-        glTexCoord2f(1.0f, 1.0f); glVertex3f( x,  y, -z);
+        glTexCoord2f(0.0f, repeat ? z/x : 1.0f);    glVertex3f(-x,  y, -z);
+        glTexCoord2f(0.0f, 0.0f);                   glVertex3f(-x,  y,  z);
+        glTexCoord2f(1.0f, 0.0f);                   glVertex3f( x,  y,  z);
+        glTexCoord2f(1.0f, repeat ? z/x : 1.0f);    glVertex3f( x,  y, -z);
 
     glEnd();
 
@@ -96,10 +96,10 @@ GLvoid drawPrism(GLfloat x, GLfloat y, GLfloat z, Skin *skin, bool invertBackTex
 
         if (invertBackTexture)
         {
-            glTexCoord2f(0.0f, 0.0f); glVertex3f(-x, -y, -z);
-            glTexCoord2f(1.0f, 0.0f); glVertex3f( x, -y, -z);
-            glTexCoord2f(1.0f, 1.0f); glVertex3f( x, -y,  z);
-            glTexCoord2f(0.0f, 1.0f); glVertex3f(-x, -y,  z);
+            glTexCoord2f(0.0f, 0.0f);                   glVertex3f(-x, -y, -z);
+            glTexCoord2f(1.0f, 0.0f);                   glVertex3f( x, -y, -z);
+            glTexCoord2f(1.0f, repeat ? z/x : 1.0f);    glVertex3f( x, -y,  z);
+            glTexCoord2f(0.0f, repeat ? z/x : 1.0f);    glVertex3f(-x, -y,  z);
         }
         else
         {
@@ -118,10 +118,10 @@ GLvoid drawPrism(GLfloat x, GLfloat y, GLfloat z, Skin *skin, bool invertBackTex
     glBegin(GL_QUADS);
 
         glNormal3f( 1.0f, 0.0f, 0.0f);
-        glTexCoord2f(1.0f, 0.0f); glVertex3f( x, -y, -z);
-        glTexCoord2f(1.0f, 1.0f); glVertex3f( x,  y, -z);
-        glTexCoord2f(0.0f, 1.0f); glVertex3f( x,  y,  z);
-        glTexCoord2f(0.0f, 0.0f); glVertex3f( x, -y,  z);
+        glTexCoord2f(repeat ? z/y : 1.0f, 0.0f);    glVertex3f( x, -y, -z);
+        glTexCoord2f(repeat ? z/y : 1.0f, 1.0f);    glVertex3f( x,  y, -z);
+        glTexCoord2f(0.0f, 1.0f);                   glVertex3f( x,  y,  z);
+        glTexCoord2f(0.0f, 0.0f);                   glVertex3f( x, -y,  z);
 
     glEnd();
 
@@ -132,10 +132,10 @@ GLvoid drawPrism(GLfloat x, GLfloat y, GLfloat z, Skin *skin, bool invertBackTex
     glBegin(GL_QUADS);
 
         glNormal3f(-1.0f, 0.0f, 0.0f);
-        glTexCoord2f(0.0f, 0.0f); glVertex3f(-x, -y, -z);
-        glTexCoord2f(1.0f, 0.0f); glVertex3f(-x, -y,  z);
-        glTexCoord2f(1.0f, 1.0f); glVertex3f(-x,  y,  z);
-        glTexCoord2f(0.0f, 1.0f); glVertex3f(-x,  y, -z);
+        glTexCoord2f(0.0f, 0.0f);                   glVertex3f(-x, -y, -z);
+        glTexCoord2f(repeat ? z/y : 1.0f, 0.0f);    glVertex3f(-x, -y,  z);
+        glTexCoord2f(repeat ? z/y : 1.0f, 1.0f);    glVertex3f(-x,  y,  z);
+        glTexCoord2f(0.0f, 1.0f);                   glVertex3f(-x,  y, -z);
 
     glEnd();
 

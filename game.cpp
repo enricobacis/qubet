@@ -145,7 +145,7 @@ void Game::draw(GLboolean simplifyForPicking)
             if (isPaused)
             {
                 glPushMatrix();
-                    glTranslatef(7.0f, 2.0f, 0.0f);
+                    glTranslatef(16.0f, -4.0f, 0.0f);
                     quitLabel->draw(simplifyForPicking);
                 glPopMatrix();
             }
@@ -223,8 +223,6 @@ void Game::initGame()
     GLuint volume_on  = iconsList.value(VOLUME_ON);
     GLuint volume_off = iconsList.value(VOLUME_OFF);
     volumeSkin   = new Skin(0, 0, volume_off, volume_off, volume_on, volume_on);
-
-    asphaltSkin  = new Skin(iconsList.value(ASPHALT));
     gridSkin     = new Skin(iconsList.value(GRID));
 
     stateLabel   = new CubeString("", 2.0f, alphabet, STATE_LABEL);
@@ -376,6 +374,8 @@ void Game::quitGame()
 {
     isQuitting = true;
     currentActions->setPrimaryAction(EXIT_TO_MENU);
+
+    emit stopAmbientMusic();
 
     if (audioEnabled)
         emit enableAudio(true);

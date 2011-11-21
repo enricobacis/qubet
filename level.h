@@ -25,8 +25,9 @@ public:
      * @param _length is the length of the Level.
      * @param _width is the width of the Level.
      * @param _parent is the parent of the Level.
+     * @param _asphaltSkin is the asphalt Skin for the Level.
     */
-    explicit Level(QString _name, GLfloat _length, GLfloat _width, QObject *_parent = 0);
+    explicit Level(QString _name, GLfloat _length, GLfloat _width, QObject *_parent = 0, Skin *_asphaltSkin = NULL);
 
     /**
      * @brief Creates a Level from a filename.
@@ -34,8 +35,9 @@ public:
      *
      * @param _filename is the filename to load.
      * @param _parent is the parent of the Level.
+     * @param _asphaltSkin is the asphalt Skin for the Level.
      */
-    explicit Level(QString _filename, QObject *_parent = 0);
+    explicit Level(QString _filename, QObject *_parent = 0, Skin *_asphaltSkin = NULL);
 
     /**
      * @brief Safely destroies a Level instance.
@@ -212,6 +214,7 @@ private:
     QString skyboxName; /**< It is the name of the skybox to use. */
     GLint currentObstacleId; /**< It is the current Obstacle Id (used to generate new IDs). */
     bool isLoaded; /** It is the variable that states if the level has already been fully loaded. */
+    Skin *asphaltSkin; /**< It is the asphalt Skin. */
 
 };
 

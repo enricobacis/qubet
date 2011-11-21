@@ -13,6 +13,7 @@ Qubet::Qubet(QWidget *parent) :
     alphabet(NULL),
     skybox(NULL),
     explosionShader(NULL),
+    asphaltSkin(NULL),
     width(WIDTH),
     height(HEIGHT),
     mouseMovedMode(MOUSE_MOVED_DOWN),
@@ -388,8 +389,6 @@ GLvoid Qubet::drawScene(GLboolean simplifyForPicking)
 
 GLboolean Qubet::load()
 {
-    if (!loadLevels())
-        return false;
 
 #ifndef _DEBUG
 
@@ -408,6 +407,9 @@ GLboolean Qubet::load()
     loadShader();
 
 #endif
+
+    if (!loadLevels())
+        return false;
 
     return true;
 }
@@ -495,7 +497,7 @@ GLboolean Qubet::loadLevels()
     while(!levelElement.isNull())
     {
         filename = levelElement.attribute("filename", "");
-        Level *level = new Level(filename, this);
+        Level *level = new Level(filename, this, asphaltSkin);
 
         name = levelElement.attribute("name", "");
         if (name.isEmpty())
@@ -578,6 +580,7 @@ GLboolean Qubet::loadIcons()
         iconElement = iconElement.nextSiblingElement("icon");
     }
 
+    asphaltSkin = new Skin(iconsList.value(ASPHALT2));
     return true;
 }
 
@@ -684,7 +687,7 @@ void Qubet::showLevelEditor(GLint _levelId)
     else
         level = levelsList.value(_levelId);
 
-    levelEditor = new LevelEditor(iconsList, alphabet, this, level, audioManager->isAudioEnabled());
+    levelEditor = new LevelEditor(iconsList, alphabet, this, level, audioManager->isAudioEnabled(), asphaltSkin);
     connectLevelEditor();
 
     glEnable(GL_LIGHT0);
