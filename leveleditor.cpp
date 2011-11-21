@@ -630,6 +630,9 @@ GLvoid LevelEditor::buttonNextTriggered()
         if (currentName.endsWith(' '))
             currentName.chop(1);
 
+        if (currentName.startsWith(' '))
+            currentName.remove(0, 1);
+
         if (currentName != "")
         {
             currentName = currentName.toLower();

@@ -499,7 +499,7 @@ GLboolean Qubet::loadLevels()
 
         name = levelElement.attribute("name", "");
         if (name.isEmpty())
-            name = filename.left(filename.lastIndexOf("."));
+            name = filename.left(filename.indexOf("."));
 
         level->setName(name);
 
