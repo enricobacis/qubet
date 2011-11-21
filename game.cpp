@@ -166,7 +166,10 @@ void Game::draw(GLboolean simplifyForPicking)
             level->draw(simplifyForPicking);
 
             glTranslatef(0.0f, 0.0f, -levelOffset->z - 6.0f);
-            drawPrism(level->getWidth(), LEVEL_HEIGHT, 12.0f, gridSkin, false, true);
+            drawPrism(level->getWidth(), LEVEL_HEIGHT, 12.0f, gridSkin);
+
+            glTranslatef(0.0f, 0.0f, -level->getLength() - 12.0f);
+            drawPrism(level->getWidth(), LEVEL_HEIGHT, 12.0f, gridSkin);
 
         glPopMatrix();
     }

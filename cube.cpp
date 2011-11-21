@@ -153,7 +153,7 @@ void Cube::updatePosition()
 
     position->z += 1;
 
-    if (position->z >= levelCellsLength * 3.0f)
+    if (position->z >= levelCellsLength * 3.0f + 18.0f)
     {
         completed();
         return;
