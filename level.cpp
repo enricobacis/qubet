@@ -301,14 +301,14 @@ GLvoid Level::draw(GLboolean simplifyForPicking)
 
         for (QMap<GLint,Obstacle*>::iterator i = obstaclesList.begin(); i != obstaclesList.end(); i++)
         {
-            glPushName(OBSTACLES + i.key());
+            glPushName(i.key());
             dynamic_cast<Obstacle*>(i.value())->draw(simplifyForPicking);
             glPopName();
         }
 
         for (QMap<GLint,Obstacle*>::iterator i = tempObstaclesList.begin(); i != tempObstaclesList.end(); i++)
         {
-            glPushName(OBSTACLES + i.key());
+            glPushName(i.key());
             dynamic_cast<Obstacle*>(i.value())->draw(simplifyForPicking);
             glPopName();
         }
