@@ -93,6 +93,9 @@ private:
     QGLShaderProgram *explosionShader; /**< It is the explosion Shader. */
     bool isQuitting; /**< It is the variable that states if the game is quitting. */
     CubeString *levelName; /**< It is the level name CubeString. */
+    CubeString *resultsCubeString; /**< It is the CubeString for the final results. */
+    CubeString *adjectiveCubeString; /**< It is the adjective CubeStinr. */
+    GLuint waitCounter; /**< It is the variable that sign the waiting time. */
 
     /**
      * @brief Initialize the game.
@@ -129,6 +132,12 @@ private:
      * @brief Quit the game and returns to Menu.
      */
     void quitGame();
+
+    /**
+     * @brief set the resultsCubeString
+     *
+    */
+    void setResultsStringList();
 
 
 private slots:

@@ -13,7 +13,8 @@ enum { // Primary Actions
        COUNTDOWN,
        MOVE_TO_LEVEL,
        MOVE_TO_NEXT_LEVEL,
-       GO_TO_RESULT_SCREEN,
+       GO_TO_RESULTS_SCREEN,
+       EXIT_FROM_RESULTS_SCREEN,
        EXIT_TO_MENU,
 
       // Secondary Actions

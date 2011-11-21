@@ -87,8 +87,15 @@ void Game::draw(GLboolean simplifyForPicking)
                 }
                 break;
 
-            case GO_TO_RESULT_SCREEN:
+            case GO_TO_RESULTS_SCREEN:
                 if (cameraOffset->x < 60.0f)
+                    cameraOffset->x += 2.0f;
+                else
+                    if(waitCounter++ > 100)
+                        currentActions->setPrimaryAction(EXIT_FROM_RESULTS_SCREEN);
+                break;
+            case EXIT_FROM_RESULTS_SCREEN:
+                if (cameraOffset->x < 120.0f)
                 {
                     cameraOffset->x += 2.0f;
                 }
@@ -155,6 +162,19 @@ void Game::draw(GLboolean simplifyForPicking)
         glPushMatrix();
 
             glTranslatef(-cameraOffset->x, -cameraOffset->y, -cameraOffset->z);
+
+            if(currentActions->getPrimaryAction() == GO_TO_RESULTS_SCREEN ||
+                    currentActions->getPrimaryAction() == EXIT_FROM_RESULTS_SCREEN)
+            {
+                glPushMatrix();
+                glTranslated(60.0f, 5.0f, 0.0f);
+                resultsCubeString->draw(simplifyForPicking);
+                glTranslated(0.0f, -5.0f, 15.0f);
+                deathCounter->draw(simplifyForPicking);
+                glTranslated(0.0f, -5.0f, -15.0f);
+                adjectiveCubeString->draw(simplifyForPicking);
+                glPopMatrix();
+            }
             glRotatef(15.0f, 1.0f, 0.0f, 0.0f);
 
             glPushMatrix();
@@ -182,6 +202,7 @@ void Game::initGame()
 
     currentActions = new ActionList(MOVE_TO_LEVEL);
     deaths = 0;
+    waitCounter = 0;
     isPaused = false;
     isQuitting = false;
     isExploding = false;
@@ -202,6 +223,8 @@ void Game::initGame()
     quitLabel    = new CubeString("quit", 1.5f, alphabet, QUIT_LABEL);
     deathCounter = new CubeString("0", 1.5f, alphabet);
     levelName    = new CubeString("", 10.0f, 2.0f, alphabet, STATE_LABEL);
+    resultsCubeString = new CubeString("Deaths", 1.5f, alphabet);
+    adjectiveCubeString = NULL;
 
     emit setMouseMovementTracking(MOUSE_MOVED_NONE);
 
@@ -302,7 +325,7 @@ void Game::nextLevel()
         }
     }
 
-    currentActions->setPrimaryAction(GO_TO_RESULT_SCREEN);
+    setResultsStringList();
     emit stopAmbientMusic();
     playEffect(EFFECT_STAGECLEAR);
 }
@@ -340,7 +363,7 @@ void Game::continueGame()
 void Game::quitGame()
 {
     isQuitting = true;
-    currentActions->setPrimaryAction(GO_TO_RESULT_SCREEN);
+    currentActions->setPrimaryAction(GO_TO_RESULTS_SCREEN);
 }
 
 void Game::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
@@ -452,6 +475,7 @@ void Game::levelCompleted()
     {
         emit stopAmbientMusic();
         playEffect(EFFECT_STAGECLEAR);
+        setResultsStringList();
         quitGame();
     }
     else
@@ -463,4 +487,21 @@ void Game::levelCompleted()
 void Game::hideLevelName()
 {
     levelName = new CubeString("", 10.0f, 2.0f, alphabet, STATE_LABEL);
+}
+
+void Game::setResultsStringList(){
+    currentActions->setPrimaryAction(GO_TO_RESULTS_SCREEN);
+
+    QString adjective = "";
+    if (deaths == 0) adjective = "veteran";
+    else if(deaths < 10) adjective = "master";
+    else if(deaths < 30) adjective = "pro";
+    else if(deaths < 50) adjective = "respectable";
+    else if(deaths < 70) adjective = "good";
+    else if(deaths < 110) adjective = "noob";
+    else if(deaths < 150) adjective = "goat";
+    else if(deaths < 200) adjective = "change game";
+    else if(deaths < 250) adjective = "worst ever";
+
+    adjectiveCubeString = new CubeString(adjective, 3.0f , alphabet);
 }
