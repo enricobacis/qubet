@@ -497,7 +497,7 @@ GLboolean Qubet::loadLevels()
         filename = levelElement.attribute("filename", "");
         Level *level = new Level(filename, this);
 
-        QString name = levelElement.attribute("name", "");
+        name = levelElement.attribute("name", "");
         if (name.isEmpty())
             name = filename.left(filename.lastIndexOf("."));
 

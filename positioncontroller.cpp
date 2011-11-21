@@ -43,8 +43,6 @@ void PositionController::checkCollision()
     Vector3f* position = cube->getPosition();
     *position += new Vector3f(0.01f, 0.01f, 0.01f - 12.0f);
 
-    qDebug() << position->z;
-
     QList<int> xCells;
     QList<int> yCells;
     QList<int> zCells;
