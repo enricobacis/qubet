@@ -6,7 +6,8 @@
 Level::Level(QString _filename, QObject *_parent) :
     parent(_parent),
     filename(_filename),
-    currentObstacleId(0)
+    currentObstacleId(0),
+    isLoaded(false)
 {
     name = "not yet loaded";
 }
@@ -17,7 +18,8 @@ Level::Level(QString _name, GLfloat _length, GLfloat _width, QObject *_parent) :
     isInStory(false),
     length(_length),
     width(_width),
-    currentObstacleId(0)
+    currentObstacleId(0),
+    isLoaded(false)
 {
     filename = name + ".xml";
     filename.replace(" ", "_");
@@ -127,6 +129,9 @@ QMap<GLint,Obstacle*> Level::getObstaclesList()
 
 bool Level::load()
 {
+    if (isLoaded)
+        return true;
+
     QDomDocument document(filename);
     QFile file("resources/levels/xml/" + filename);
     if (!file.open(QIODevice::ReadOnly))
@@ -182,6 +187,7 @@ bool Level::load()
         obstacleElement = obstacleElement.nextSiblingElement("obstacle");
     }
 
+    isLoaded = true;
     return true;
 }
 

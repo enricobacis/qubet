@@ -10,10 +10,11 @@
 
 enum { // Primary Actions
        DO_NOTHING,
+       COUNTDOWN,
        MOVE_TO_LEVEL,
        MOVE_TO_NEXT_LEVEL,
+       GO_TO_RESULT_SCREEN,
        EXIT_TO_MENU,
-       COUNTDOWN,
 
       // Secondary Actions
       ROTATE_VOLUMECUBE

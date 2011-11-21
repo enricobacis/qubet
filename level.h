@@ -211,6 +211,7 @@ private:
     QString ambientMusicFilename; /**< It is the Level ambient music filename. */
     QString skyboxName; /**< It is the name of the skybox to use. */
     GLint currentObstacleId; /**< It is the current Obstacle Id (used to generate new IDs). */
+    bool isLoaded; /** It is the variable that states if the level has already been fully loaded. */
 
 };
 

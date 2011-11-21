@@ -74,10 +74,14 @@ void AudioManager::enableAudio(bool enabled)
 
 void AudioManager::playAmbientMusic(QString filename)
 {
+    if (filename == currentFileName)
+        return;
+
+    currentFileName = filename;
+
     if (ambientMusic != NULL)
         ambientMusic->clear();
 
-    currentFileName = filename;
     ambientMusic = Phonon::createPlayer(Phonon::MusicCategory, Phonon::MediaSource(currentFileName));
     connect (ambientMusic, SIGNAL(aboutToFinish()), this, SLOT(enqueueMediaObject()));
     if(audioEnabled)

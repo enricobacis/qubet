@@ -174,9 +174,14 @@ signals:
     void suicide();
 
     /**
-     * @brief Signal that inform that the explosion has finished.
+     * @brief Signal to inform that the explosion has finished.
      */
     void explosionFinished();
+
+    /**
+     * @brief Signal to inform to hide the level name.
+     */
+    void hideLevelName();
 
     /**
      * @brief Signal emitted to play an effect.

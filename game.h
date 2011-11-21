@@ -69,6 +69,7 @@ private:
     Alphabet *alphabet; /**< It is the alphabet provided by Qubet. */
     Skin *skin; /**< it is the cube skin pointer. */
     Level *level; /**< It is the current level pointer. */
+    Level *next; /** It is a pointer to the next Level. */
     QMap<GLint,Level*> levelsList; /**< It is the story levelList. */
     bool audioEnabled; /**< It is the audioEnabled boolean value. */
     Cube *cube; /**< It is the cube pointer. */
@@ -89,6 +90,7 @@ private:
     CubeString *deathCounter; /** It is the Death Counter CubeString. */
     QGLShaderProgram *explosionShader; /**< It is the explosion Shader. */
     bool isQuitting; /**< It is the variable that states if the game is quitting. */
+    CubeString *levelName; /**< It is the level name CubeString. */
 
     /**
      * @brief Initialize the game.
@@ -185,6 +187,11 @@ private slots:
      * @brief Slot invoked when level is completed.
      */
     void levelCompleted();
+
+    /**
+     * @brief Slot invoked to hide the Level Name.
+     */
+    void hideLevelName();
 
 
 signals:

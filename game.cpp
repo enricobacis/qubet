@@ -61,6 +61,7 @@ void Game::draw(GLboolean simplifyForPicking)
             {
 
             // Primary Actions
+
             case COUNTDOWN:
                 countdown();
                 break;
@@ -73,9 +74,20 @@ void Game::draw(GLboolean simplifyForPicking)
                 break;
 
             case MOVE_TO_NEXT_LEVEL:
+                if (cameraOffset->x < 60.0f)
+                {
+                    cameraOffset->x += 2.0f;
+                }
+                else
+                {
+                    level = next;
+                    currentLevel = levelsList.key(next);
+                    currentActions->setPrimaryAction(MOVE_TO_LEVEL);
+                    playLevel();
+                }
                 break;
 
-            case EXIT_TO_MENU:
+            case GO_TO_RESULT_SCREEN:
                 if (cameraOffset->x < 60.0f)
                 {
                     cameraOffset->x += 2.0f;
@@ -86,6 +98,7 @@ void Game::draw(GLboolean simplifyForPicking)
                     return;
                 }
                 break;
+
 
                 // Secondary Actions
 
@@ -107,17 +120,20 @@ void Game::draw(GLboolean simplifyForPicking)
     {
         glPushMatrix();
 
-            glTranslatef(-9.0f, 6.0f, 0.0f);
+            glTranslatef(0.0, -6.0f, 0.0f);
+            levelName->draw(simplifyForPicking);
+
+            glTranslatef(0.0f,  12.0f, 0.0f);
+            stateLabel->draw(simplifyForPicking);
+
+            glTranslatef(-9.0f, 0.0f, 0.0f);
             deathCounter->draw(simplifyForPicking);
 
             dynamic_cast<QGLWidget*>(parent)->renderText(-1.0f, -1.5f, 0.0f, "deaths");
 
-            glTranslatef(9.0f,  0.0f, 0.0f);
-            stateLabel->draw(simplifyForPicking);
-
             if (isPaused)
             {
-                glTranslatef(0.0f, -8.0f, 0.0f);
+                glTranslatef(9.0f, -8.0f, 0.0f);
                 quitLabel->draw(simplifyForPicking);
             }
 
@@ -163,7 +179,6 @@ void Game::initGame()
     isPaused = false;
     isQuitting = false;
     isExploding = false;
-    introStep = 0;
 
     angleRotVolumeCube = (audioEnabled ? 0.0f : 90.0f);
 
@@ -174,21 +189,17 @@ void Game::initGame()
     stateLabel = new CubeString("", 2.0f, alphabet, STATE_LABEL);
     quitLabel = new CubeString("quit", 1.5f, alphabet, QUIT_LABEL);
     deathCounter = new CubeString("0", 1.5f, alphabet);
+    levelName = new CubeString("", 10.0f, 2.0f, alphabet, STATE_LABEL);
 
     emit setMouseMovementTracking(MOUSE_MOVED_NONE);
 
-    switch (gameType)
+    if (gameType == STORY_MODE)
     {
-    case STORY_MODE:
         if (!levelsList.isEmpty())
         {
             currentLevel = levelsList.begin().key();
             level = static_cast<Level*>(levelsList.begin().value());
         }
-        break;
-
-    case ARCADE_MODE:
-        break;
     }
 }
 
@@ -222,6 +233,8 @@ void Game::countdown()
         stateLabel = new CubeString("go", 2.0f, alphabet, STATE_LABEL);
         stateLabel->startStringRotation(27, 6);
         playEffect(EFFECT_BEEP);
+
+        emit hideLevelName();
         cube->startCube();
         break;
 
@@ -238,14 +251,23 @@ void Game::countdown()
 void Game::playLevel()
 {
     level->load();
+    levelName = new CubeString(level->getName(), 15.0f, 2.0f, alphabet, STATE_LABEL);
 
     emit setSkybox(level->getSkyboxName());
     emit playAmbientMusic("resources/music/" + level->getAmbientMusicFilename());
 
-    cube = new Cube(level, skin, this, explosionShader);
-    positionController = new PositionController(cube, level, this);
+    if (cube != NULL)
+        cube->~Cube();
 
+    cube = new Cube(level, skin, this, explosionShader);
+
+    if (positionController != NULL)
+        positionController->~PositionController();
+
+    positionController = new PositionController(cube, level, this);
     positionController->startChecking();
+
+    introStep = 0;
 
     cameraOffset = new Vector3f(-60.0, 0.0f, 4.0f);
     levelOffset  = new Vector3f(0.0f, -4.0f, -(level->getLength() / 2.0f));
@@ -253,8 +275,24 @@ void Game::playLevel()
 
 void Game::nextLevel()
 {
-    // TODO: da cambiare
-    currentActions->setPrimaryAction(EXIT_TO_MENU);
+    QMap<GLint,Level*>::iterator i = levelsList.find(currentLevel);
+    i++;
+    next = static_cast<Level*>(i.value());
+
+    if (i != levelsList.end())
+    {
+        next = static_cast<Level*>(i.value());
+        if (next->getIsInStory())
+        {
+            currentActions->setPrimaryAction(MOVE_TO_NEXT_LEVEL);
+            playEffect(EFFECT_HEREWEGO);
+            return;
+        }
+    }
+
+    currentActions->setPrimaryAction(GO_TO_RESULT_SCREEN);
+    emit stopAmbientMusic();
+    playEffect(EFFECT_STAGECLEAR);
 }
 
 void Game::pauseGame()
@@ -288,7 +326,7 @@ void Game::continueGame()
 void Game::quitGame()
 {
     isQuitting = true;
-    currentActions->setPrimaryAction(EXIT_TO_MENU);
+    currentActions->setPrimaryAction(GO_TO_RESULT_SCREEN);
 }
 
 void Game::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
@@ -404,7 +442,11 @@ void Game::levelCompleted()
     }
     else
     {
-        playEffect(EFFECT_HEREWEGO);
         nextLevel();
     }
+}
+
+void Game::hideLevelName()
+{
+    levelName = new CubeString("", 10.0f, 2.0f, alphabet, STATE_LABEL);
 }

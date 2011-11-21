@@ -69,7 +69,7 @@ LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QO
     clear = new CubeString("clear", 0.8f, alphabet, BUTTON_CLEAR);
     exit = new CubeString("exit", 0.8f, alphabet, BUTTON_EXIT);
 
-    labelSetLevelName = new CubeString("set level name", 1.3f, alphabet, LABEL_SET_LEVEL_NAME);
+    labelSetLevelName = new CubeString("level name", 1.3f, alphabet, LABEL_SET_LEVEL_NAME);
 
     formSetLevelName = new CubeStringList("", 14.0f, 6.0f, alphabet, 2.0f, FORM_SET_LEVEL_NAME);
     GLuint volume_on = iconsList.value(VOLUME_ON);

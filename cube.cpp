@@ -19,6 +19,7 @@ Cube::Cube(Level *level, Skin *_skin, QObject *_parent, QGLShaderProgram *_explo
     connect(this,   SIGNAL(explosionFinished()),          parent, SLOT(explosionFinished()));
     connect(this,   SIGNAL(levelCompleted()),             parent, SLOT(levelCompleted()));
     connect(this,   SIGNAL(suicide()),                    parent, SLOT(exploded()));
+    connect(this,   SIGNAL(hideLevelName()),              parent, SLOT(hideLevelName()));
 
     createNormalsMatrix();
 
