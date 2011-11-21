@@ -1,4 +1,4 @@
-<level width="6" gravity="10" length="450" name="second">
+<level width="6" gravity="10" length="450">
     <obstacle x="0" y="0" model="0" z="146" id="32"/>
     <obstacle x="1" y="0" model="0" z="146" id="33"/>
     <obstacle x="0" y="0" model="2" z="133" id="34"/>

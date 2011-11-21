@@ -3,10 +3,10 @@
     <level story_number="2" name="elsa" filename="elsa.xml"/>
     <level story_number="3" name="enrico" filename="enrico.xml"/>
     <level story_number="4" name="marco" filename="marco.xml"/>
-    <level story_number="5" name="warning" filename="warning.xml"/>
-    <level story_number="6" name="not so easy" filename="not_so_easy.xml"/>
-	<level name="barbara" filename="barbara.xml"/>
-    <level name="tunnel" filename="tunnel.xml"/>
-    <level name="second" filename="second.xml"/>
-    <level name="third" filename="third.xml"/>
+	<level story_number="5" name="easy man" filename="second.xml"/>
+	<level story_number="6" name="barbara" filename="barbara.xml"/>
+	<level story_number="7" name="tunnel" filename="tunnel.xml"/>
+    <level story_number="8" name="warning" filename="warning.xml"/>
+    <level story_number="9" name="not so easy" filename="not_so_easy.xml"/>
+    <level name="three lanes" filename="3lanes.xml"/>
 </levels>
