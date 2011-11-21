@@ -92,6 +92,7 @@ private:
     CubeString *deathCounter; /** It is the Death Counter CubeString. */
     QGLShaderProgram *explosionShader; /**< It is the explosion Shader. */
     bool isQuitting; /**< It is the variable that states if the game is quitting. */
+    bool showingResult;  /**< It is the variable that states if the game is showing results. */
     CubeString *levelName; /**< It is the level name CubeString. */
     CubeString *resultsCubeString; /**< It is the CubeString for the final results. */
     CubeString *adjectiveCubeString; /**< It is the adjective CubeStinr. */
@@ -134,10 +135,9 @@ private:
     void quitGame();
 
     /**
-     * @brief set the resultsCubeString
-     *
+     * @brief Creates the resultsCubeString.
     */
-    void setResultsStringList();
+    void createResultStrings();
 
 
 private slots:

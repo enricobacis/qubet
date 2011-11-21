@@ -82,6 +82,7 @@ private:
     GLboolean visible; /**< It is the boolean value that if the type block is visible. */
     GLint visibleTime;  /**< It is the visible time counter of the type block. */
     QString currentName;  /**< It is the current name for the level. */
+    QString currentError; /**< It is the current Error. */
     Vector3f lastCentre; /**< It is the previous position of the centre of the moving object. */
     Vector3f currentDelta; /**< It is the vector to manage the obstacle movement. */
     Vector3f deltaFromCentre; /**< It is the vector to manage the distance from the centre of the obstacle. */

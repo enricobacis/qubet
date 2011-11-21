@@ -543,9 +543,15 @@ GLvoid Menu::buttonEditorTriggered()
 {
     if (currentView == MAIN_VIEW)
     {
+
         currentLevel = 0;
         gameType = EDITOR_MODE;
         isMoving = true;
+        currentLevel = 0;
+
+        levelName->~CubeStringList();
+        levelName = new CubeStringList("new level", 12.0f, 7.0f, alphabet, 2.0f, LEVEL_NAME);
+
         emit playEffect(EFFECT_JUMP);
         currentActions->setPrimaryAction(GO_TO_LEVELS_VIEW);
     }

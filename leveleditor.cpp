@@ -18,6 +18,7 @@ LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QO
     visible(true),
     visibleTime(0),
     currentName(""),
+    currentError(""),
     movingObject(-1),
     positionValid(false),
     xCell(0),
@@ -273,6 +274,8 @@ void LevelEditor::draw(GLboolean simplifyForPicking)
 
     if (!(isMoving && simplifyForPicking))
     {
+        dynamic_cast<QGLWidget*>(parent)->renderText(-currentError.length()*0.1225f, -6.0f, 0.0, currentError);
+
         glPushName(BUTTON_VOLUME);
         glPushMatrix();
             glTranslatef(9.5f, 6.0f, 3.0f);
@@ -624,12 +627,18 @@ GLvoid LevelEditor::buttonNextTriggered()
 {
     if (currentView == SET_NAME_VIEW)
     {
+        if (currentName.endsWith(' '))
+            currentName.chop(1);
+
         if (currentName != "")
         {
-            if (currentName.endsWith(' '))
-                currentName.chop(1);
-
             currentName = currentName.toLower();
+
+            if (QFile::exists("resources/levels/xml/" + currentName + ".xml"))
+            {
+                currentError = "Name already taken.";
+                return;
+            }
 
             isMoving = true;
             emit playEffect(EFFECT_JUMPSMALL);
@@ -983,6 +992,7 @@ void LevelEditor::keyPressed(QKeyEvent *event)
     if (isMoving)
         return;
 
+    currentError.clear();
     int key = event->key();
 
     switch (key)

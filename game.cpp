@@ -91,11 +91,12 @@ void Game::draw(GLboolean simplifyForPicking)
                 if (cameraOffset->x < 60.0f)
                     cameraOffset->x += 2.0f;
                 else
-                    if(waitCounter++ > 100)
-                        currentActions->setPrimaryAction(EXIT_FROM_RESULTS_SCREEN);
+                    if (waitCounter++ > 150)
+                        currentActions->setPrimaryAction(EXIT_TO_MENU);
                 break;
-            case EXIT_FROM_RESULTS_SCREEN:
-                if (cameraOffset->x < 120.0f)
+
+            case EXIT_TO_MENU:
+                if (cameraOffset->x < (isQuitting ? 60.0f : 120.0f))
                 {
                     cameraOffset->x += 2.0f;
                 }
@@ -133,15 +134,20 @@ void Game::draw(GLboolean simplifyForPicking)
             glTranslatef(0.0f,  12.0f, 0.0f);
             stateLabel->draw(simplifyForPicking);
 
-            glTranslatef(-9.0f, 0.0f, 0.0f);
-            deathCounter->draw(simplifyForPicking);
+            if (!showingResult)
+            {
+                glTranslatef(-9.0f, 0.0f, 0.0f);
+                deathCounter->draw(simplifyForPicking);
 
-            dynamic_cast<QGLWidget*>(parent)->renderText(-1.0f, -1.5f, 0.0f, "deaths");
+                dynamic_cast<QGLWidget*>(parent)->renderText(-1.0f, -1.5f, 0.0f, "deaths");
+            }
 
             if (isPaused)
             {
-                glTranslatef(9.0f, -8.0f, 0.0f);
-                quitLabel->draw(simplifyForPicking);
+                glPushMatrix();
+                    glTranslatef(7.0f, 2.0f, 0.0f);
+                    quitLabel->draw(simplifyForPicking);
+                glPopMatrix();
             }
 
         glPopMatrix();
@@ -163,18 +169,19 @@ void Game::draw(GLboolean simplifyForPicking)
 
             glTranslatef(-cameraOffset->x, -cameraOffset->y, -cameraOffset->z);
 
-            if(currentActions->getPrimaryAction() == GO_TO_RESULTS_SCREEN ||
-                    currentActions->getPrimaryAction() == EXIT_FROM_RESULTS_SCREEN)
+            if ((currentActions->getPrimaryAction() == GO_TO_RESULTS_SCREEN) ||
+                    ((currentActions->getPrimaryAction() == EXIT_TO_MENU) && !isQuitting))
             {
                 glPushMatrix();
-                glTranslated(60.0f, 5.0f, 0.0f);
-                resultsCubeString->draw(simplifyForPicking);
-                glTranslated(0.0f, -5.0f, 15.0f);
-                deathCounter->draw(simplifyForPicking);
-                glTranslated(0.0f, -5.0f, -15.0f);
-                adjectiveCubeString->draw(simplifyForPicking);
+                    glTranslated(60.0f, 5.0f, 0.0f);
+                    resultsCubeString->draw(simplifyForPicking);
+                    glTranslated(0.0f, -5.0f, 15.0f);
+                    deathCounter->draw(simplifyForPicking);
+                    glTranslated(0.0f, -5.0f, -15.0f);
+                    adjectiveCubeString->draw(simplifyForPicking);
                 glPopMatrix();
             }
+
             glRotatef(15.0f, 1.0f, 0.0f, 0.0f);
 
             glPushMatrix();
@@ -206,6 +213,7 @@ void Game::initGame()
     isPaused = false;
     isQuitting = false;
     isExploding = false;
+    showingResult = false;
 
     cube = NULL;
     positionController = NULL;
@@ -325,7 +333,7 @@ void Game::nextLevel()
         }
     }
 
-    setResultsStringList();
+    createResultStrings();
     emit stopAmbientMusic();
     playEffect(EFFECT_STAGECLEAR);
 }
@@ -337,7 +345,9 @@ void Game::pauseGame()
     cube->stopCube();
     positionController->stopChecking();
 
-    emit enableAudio(false);
+    if (audioEnabled)
+        emit enableAudio(false);
+
     emit setMouseMovementTracking(MOUSE_MOVED_FULL);
 
     stateLabel->~CubeString();
@@ -353,7 +363,9 @@ void Game::continueGame()
     if (!isExploding)
         positionController->startChecking();
 
-    emit enableAudio(true);
+    if (audioEnabled)
+        emit enableAudio(true);
+
     emit setMouseMovementTracking(MOUSE_MOVED_NONE);
 
     stateLabel->~CubeString();
@@ -363,7 +375,10 @@ void Game::continueGame()
 void Game::quitGame()
 {
     isQuitting = true;
-    currentActions->setPrimaryAction(GO_TO_RESULTS_SCREEN);
+    currentActions->setPrimaryAction(EXIT_TO_MENU);
+
+    if (audioEnabled)
+        emit enableAudio(true);
 }
 
 void Game::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
@@ -375,13 +390,17 @@ void Game::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
         switch (listNames.at(0))
         {
         case BUTTON_VOLUME:
-            if ((GLint(angleRotVolumeCube) % 90) == 0)
+            if (!isPaused)
             {
-                audioEnabled = !audioEnabled;
-                emit enableAudio(audioEnabled);
-                currentActions->appendSecondaryAction(ROTATE_VOLUMECUBE);
+                if ((GLint(angleRotVolumeCube) % 90) == 0)
+                {
+                    audioEnabled = !audioEnabled;
+                    emit enableAudio(audioEnabled);
+                    currentActions->appendSecondaryAction(ROTATE_VOLUMECUBE);
+                }
             }
             break;
+
         case QUIT_LABEL:
             quitGame();
             break;
@@ -475,8 +494,7 @@ void Game::levelCompleted()
     {
         emit stopAmbientMusic();
         playEffect(EFFECT_STAGECLEAR);
-        setResultsStringList();
-        quitGame();
+        createResultStrings();
     }
     else
     {
@@ -489,10 +507,12 @@ void Game::hideLevelName()
     levelName = new CubeString("", 10.0f, 2.0f, alphabet, STATE_LABEL);
 }
 
-void Game::setResultsStringList(){
+void Game::createResultStrings()
+{
+    showingResult = true;
     currentActions->setPrimaryAction(GO_TO_RESULTS_SCREEN);
 
-    QString adjective = "";
+    QString adjective;
     if (deaths == 0) adjective = "veteran";
     else if(deaths < 10) adjective = "master";
     else if(deaths < 30) adjective = "pro";
@@ -503,5 +523,8 @@ void Game::setResultsStringList(){
     else if(deaths < 200) adjective = "change game";
     else if(deaths < 250) adjective = "worst ever";
 
-    adjectiveCubeString = new CubeString(adjective, 3.0f , alphabet);
+    adjectiveCubeString = new CubeString(adjective, 18.0f, 3.0f , alphabet);
+
+    adjectiveCubeString->setCurrentAngle(0.0f, -40.0f);
+    adjectiveCubeString->startStringRotation(10, 8);
 }
