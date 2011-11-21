@@ -1,7 +1,7 @@
 #include "utilities.h"
 #include "defines.h"
 
-GLvoid drawRectangle(GLfloat x, GLfloat y, GLuint texture)
+GLvoid drawRectangle(GLfloat x, GLfloat y, GLuint texture, bool repeat)
 {
     x = x / 2;
     y = y / 2;
@@ -9,7 +9,7 @@ GLvoid drawRectangle(GLfloat x, GLfloat y, GLuint texture)
     glEnable(GL_TEXTURE_2D);
 
     glBindTexture(GL_TEXTURE_2D, texture);
-    setTextureClampToEdge();
+    setTextureRepeat(repeat);
 
     glBegin(GL_QUADS);
 
@@ -25,7 +25,7 @@ GLvoid drawRectangle(GLfloat x, GLfloat y, GLuint texture)
     glDisable(GL_TEXTURE_2D);
 }
 
-GLvoid drawPrism(GLfloat x, GLfloat y, GLfloat z, Skin *skin, GLboolean invertBackTexture)
+GLvoid drawPrism(GLfloat x, GLfloat y, GLfloat z, Skin *skin, bool invertBackTexture, bool repeat)
 {
     x = x / 2;
     y = y / 2;
@@ -35,7 +35,7 @@ GLvoid drawPrism(GLfloat x, GLfloat y, GLfloat z, Skin *skin, GLboolean invertBa
 
     // Front Face (Z+)
     glBindTexture(GL_TEXTURE_2D, (skin == NULL ? 0 : skin->getTextureZPlus()));
-    setTextureClampToEdge();
+    setTextureRepeat(repeat);
 
     glBegin(GL_QUADS);
 
@@ -49,7 +49,7 @@ GLvoid drawPrism(GLfloat x, GLfloat y, GLfloat z, Skin *skin, GLboolean invertBa
 
     // Back Face (Z-)
     glBindTexture(GL_TEXTURE_2D, (skin == NULL ? 0 : skin->getTextureZMinus()));
-    setTextureClampToEdge();
+    setTextureRepeat(repeat);
 
     glBegin(GL_QUADS);
 
@@ -74,7 +74,7 @@ GLvoid drawPrism(GLfloat x, GLfloat y, GLfloat z, Skin *skin, GLboolean invertBa
 
     // Top Face (Y+)
     glBindTexture(GL_TEXTURE_2D, (skin == NULL ? 0 : skin->getTextureYPlus()));
-    setTextureClampToEdge();
+    setTextureRepeat(repeat);
 
     glBegin(GL_QUADS);
 
@@ -88,7 +88,7 @@ GLvoid drawPrism(GLfloat x, GLfloat y, GLfloat z, Skin *skin, GLboolean invertBa
 
     // Bottom Face (Y-)
     glBindTexture(GL_TEXTURE_2D, (skin == NULL ? 0 : skin->getTextureYMinus()));
-    setTextureClampToEdge();
+    setTextureRepeat(repeat);
 
     glBegin(GL_QUADS);
 
@@ -113,7 +113,7 @@ GLvoid drawPrism(GLfloat x, GLfloat y, GLfloat z, Skin *skin, GLboolean invertBa
 
     // Right face (X+)
     glBindTexture(GL_TEXTURE_2D, (skin == NULL ? 0 : skin->getTextureXPlus()));
-    setTextureClampToEdge();
+    setTextureRepeat(repeat);
 
     glBegin(GL_QUADS);
 
@@ -127,7 +127,7 @@ GLvoid drawPrism(GLfloat x, GLfloat y, GLfloat z, Skin *skin, GLboolean invertBa
 
     // Left Face (X-)
     glBindTexture(GL_TEXTURE_2D, (skin == NULL ? 0 : skin->getTextureXMinus()));
-    setTextureClampToEdge();
+    setTextureRepeat(repeat);
 
     glBegin(GL_QUADS);
 
@@ -143,10 +143,10 @@ GLvoid drawPrism(GLfloat x, GLfloat y, GLfloat z, Skin *skin, GLboolean invertBa
     glDisable(GL_TEXTURE_2D);
 }
 
-GLvoid setTextureClampToEdge()
+GLvoid setTextureRepeat(bool repeat)
 {
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, repeat ? GL_REPEAT : GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, repeat ? GL_REPEAT : GL_CLAMP_TO_EDGE);
 }
 
 GLvoid drawObstacle(GLuint id)

@@ -165,6 +165,9 @@ void Game::draw(GLboolean simplifyForPicking)
             glTranslatef(levelOffset->x, levelOffset->y, levelOffset->z + cube->getZ());
             level->draw(simplifyForPicking);
 
+            glTranslatef(0.0f, 0.0f, -levelOffset->z - 6.0f);
+            drawPrism(level->getWidth(), LEVEL_HEIGHT, 12.0f, gridSkin, false, true);
+
         glPopMatrix();
     }
 }
@@ -180,16 +183,22 @@ void Game::initGame()
     isQuitting = false;
     isExploding = false;
 
+    cube = NULL;
+    positionController = NULL;
+
     angleRotVolumeCube = (audioEnabled ? 0.0f : 90.0f);
 
-    GLuint volume_on = iconsList.value(VOLUME_ON);
+    GLuint volume_on  = iconsList.value(VOLUME_ON);
     GLuint volume_off = iconsList.value(VOLUME_OFF);
-    volumeSkin = new Skin(0, 0, volume_off, volume_off, volume_on, volume_on);
+    volumeSkin   = new Skin(0, 0, volume_off, volume_off, volume_on, volume_on);
 
-    stateLabel = new CubeString("", 2.0f, alphabet, STATE_LABEL);
-    quitLabel = new CubeString("quit", 1.5f, alphabet, QUIT_LABEL);
+    asphaltSkin  = new Skin(iconsList.value(ASPHALT));
+    gridSkin     = new Skin(iconsList.value(GRID));
+
+    stateLabel   = new CubeString("", 2.0f, alphabet, STATE_LABEL);
+    quitLabel    = new CubeString("quit", 1.5f, alphabet, QUIT_LABEL);
     deathCounter = new CubeString("0", 1.5f, alphabet);
-    levelName = new CubeString("", 10.0f, 2.0f, alphabet, STATE_LABEL);
+    levelName    = new CubeString("", 10.0f, 2.0f, alphabet, STATE_LABEL);
 
     emit setMouseMovementTracking(MOUSE_MOVED_NONE);
 
@@ -270,7 +279,7 @@ void Game::playLevel()
     introStep = 0;
 
     cameraOffset = new Vector3f(-60.0, 0.0f, 4.0f);
-    levelOffset  = new Vector3f(0.0f, -4.0f, -(level->getLength() / 2.0f));
+    levelOffset  = new Vector3f(0.0f, -4.0f, -(level->getLength() / 2.0f) - 12.0f);
 }
 
 void Game::nextLevel()

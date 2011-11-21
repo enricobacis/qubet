@@ -3,4 +3,7 @@
 <icons>
     <icon filename="volume/volumeon.png"  name="400" />
     <icon filename="volume/volumeoff.png"  name="401" />
+    <icon filename="track/asphalt.jpg"  name="410" />
+    <icon filename="track/asphalt2.png"  name="411" />
+    <icon filename="track/grid.png"  name="412" />
 </icons>

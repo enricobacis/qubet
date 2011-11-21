@@ -49,6 +49,9 @@ void PositionController::checkCollision()
 
     Vector3f *cell = positionToCell(position);
 
+    if ((cell->x < 0) || (cell->y < 0) || (cell->z < 0))
+        return;
+
     xCells.append((int)(cell->x));
     if (!(isInteger(position->x) && ((((int)(position->x)) % 3) == 0)))
         xCells.append((int)(cell->x + 1));
@@ -102,7 +105,7 @@ bool PositionController::isInteger(float f)
 void PositionController::createObstacleCells()
 {
     int xMax = (int)(level->getWidth() / 3) + 1;
-    int yMax = 10;
+    int yMax = 5;
     int zMax = (int)(level->getLength() / 3) + 1;
 
     obstacleCells.resize(xMax);

@@ -82,9 +82,10 @@ public:
     /**
      * @brief Draws the CubeStringList at the current position.
      *
-     * @param simplifyForPicking
+     * @param simplifyForPicking is the is used to draw a simplified scene used for the picking function
+     *        and does not compute the change to angles. [default = false]
      */
-    GLvoid draw(GLboolean simplifyForPicking);
+    GLvoid draw(GLboolean simplifyForPicking = false);
 
     /**
      * @brief Returns the number of labels in the CubeStringList.

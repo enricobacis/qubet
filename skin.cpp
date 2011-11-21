@@ -29,6 +29,15 @@ Skin::Skin(GLuint _x_plus, GLuint _x_minus, GLuint _y_plus, GLuint _y_minus, GLu
     z_minus(_z_minus)
 { }
 
+Skin::Skin(GLuint texture) :
+    x_plus (texture),
+    x_minus(texture),
+    y_plus (texture),
+    y_minus(texture),
+    z_plus (texture),
+    z_minus(texture)
+{ }
+
 Skin::~Skin()
 {
     x_plus = 0;

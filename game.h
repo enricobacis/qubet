@@ -79,7 +79,9 @@ private:
     GLint deaths; /**< It is the death counter value. */
     ActionList *currentActions; /**< It is the list of the current menu steps. */
     GLfloat angleRotVolumeCube;  /**< It is the current rotation angle of the volume icon. */
-    Skin *volumeSkin; /**< It is the skin of the volume button */
+    Skin *volumeSkin; /**< It is the skin of the volume button. */
+    Skin *asphaltSkin; /**< It is the asphalt Skin. */
+    Skin *gridSkin; /**< It is the starting grid Skin. */
     Vector3f *cameraOffset; /**< It is the camera offset for the editor. */
     Vector3f *levelOffset; /**< It is the offset of the Level. */
     CubeString *stateLabel;  /**< It is the state CubeString (used for Pause string, intro, ...). */

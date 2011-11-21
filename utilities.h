@@ -10,8 +10,9 @@
  * @param x is the length of the x side.
  * @param y is the length of the y side.
  * @param texture is the GLuint textureID.
+ * @param repeat is to repeat the texture. [default = false]
  */
-GLvoid drawRectangle(GLfloat x, GLfloat y, GLuint texture = 0);
+GLvoid drawRectangle(GLfloat x, GLfloat y, GLuint texture = 0, bool repeat = false);
 
 /**
  * @brief Draw a XYZ Prism using vertex and texture coordinates, using a skin.
@@ -21,13 +22,16 @@ GLvoid drawRectangle(GLfloat x, GLfloat y, GLuint texture = 0);
  * @param z is the length of the z side.
  * @param skin is the Skin* of textures [default NULL].
  * @param it is used for the Letter cubes [default false].
+ * @param repeat is to repeat the texture. [default = false]
  */
-GLvoid drawPrism(GLfloat x, GLfloat y, GLfloat z, Skin *skin = NULL, GLboolean invertBackTexture = false);
+GLvoid drawPrism(GLfloat x, GLfloat y, GLfloat z, Skin *skin = NULL, bool invertBackTexture = false, bool repeat = false);
 
 /**
- * @brief Set the texture with GL_CLAMP_TO_EDGE.
+ * @brief Set the repetition of the texture.
+ *
+ * @param repeat true to repeat, false to clamp
  */
-GLvoid setTextureClampToEdge();
+GLvoid setTextureRepeat(bool repeat);
 
 /**
  * @brief draw in (0,0,0) an obstacle with id id.

@@ -37,6 +37,13 @@ public:
     explicit Skin(GLuint _x_plus, GLuint _x_minus, GLuint _y_plus, GLuint _y_minus, GLuint _z_plus, GLuint _z_minus);
 
     /**
+     * @brief Create a Skin object giving a texture for all the faces.
+     *
+     * @param texture is the texture to apply to all the faces.
+     */
+    explicit Skin(GLuint texture);
+
+    /**
      * @brief Safely destroy the Skin.
      */
     ~Skin();
