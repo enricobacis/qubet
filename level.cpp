@@ -112,6 +112,15 @@ void Level::deleteObstacle(GLint _id)
         dynamic_cast<Obstacle*>(i.value())->~Obstacle();
         obstaclesList.remove(_id);
     }
+
+    QMap<GLint,Obstacle*>::iterator i = tempObstaclesList.find(_id);
+
+    if (i != tempObstaclesList.end())
+    {
+        dynamic_cast<Obstacle*>(i.value())->~Obstacle();
+        tempObstaclesList.remove(_id);
+    }
+}
 }
 
 void Level::moveObstacle(GLint _id, Vector3f *newCell)

@@ -106,7 +106,7 @@ bool PositionController::isInteger(float f)
 
 void PositionController::createObstacleCells()
 {
-    int xMax = (int)(level->getWidth() / 3) + 5;
+    int xMax = (int)(level->getWidth()  / 3) + 5;
     int yMax = 5;
     int zMax = (int)(level->getLength() / 3) + 5;
 
