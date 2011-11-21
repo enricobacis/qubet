@@ -121,7 +121,6 @@ void Level::deleteObstacle(GLint _id)
         tempObstaclesList.remove(_id);
     }
 }
-}
 
 void Level::moveObstacle(GLint _id, Vector3f *newCell)
 {
