@@ -411,7 +411,10 @@ void Game::itemClicked(QMouseEvent *event, QList<GLuint> listNames)
             if ((GLint(angleRotVolumeCube) % 90) == 0)
             {
                 audioEnabled = !audioEnabled;
-                emit enableAudio(audioEnabled);
+
+                if (!isPaused)
+                    emit enableAudio(audioEnabled);
+
                 currentActions->appendSecondaryAction(ROTATE_VOLUMECUBE);
             }
             break;

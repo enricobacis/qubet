@@ -294,8 +294,7 @@ QList<GLuint> Qubet::getPickedName(GLint mouseX, GLint mouseY)
 GLvoid Qubet::loadingCompleted()
 {
     currentText.clear();
-    // TODO : Ricordarsi di rimettere l'introduzione successivamente
-    showMenu(false);
+    showMenu(true);
 }
 
 GLvoid Qubet::errorLoading()
