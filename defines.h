@@ -39,8 +39,7 @@
 #define VOLUME_OFF              401
 
 #define ASPHALT                 410
-#define ASPHALT2                411
-#define GRID                    412
+#define GRID                    411
 
 #define MOUSE_MOVED_NONE        0
 #define MOUSE_MOVED_DOWN        1

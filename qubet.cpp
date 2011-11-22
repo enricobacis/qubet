@@ -597,7 +597,7 @@ GLboolean Qubet::loadIcons()
         iconElement = iconElement.nextSiblingElement("icon");
     }
 
-    asphaltSkin = new Skin(iconsList.value(ASPHALT2));
+    asphaltSkin = new Skin(iconsList.value(ASPHALT));
     return true;
 }
 
