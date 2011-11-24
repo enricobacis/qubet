@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$class_q_object.html" title="{QObject\n||}" alt="" coords="5,723,67,805"/>
+<area shape="rect" id="node14" href="$struct_vector3f.html" title="Structure that rapresents a Vector of float in a 3&#45;D space." alt="" coords="91,475,219,1053"/>
+<area shape="rect" id="node31" href="$class_cube_string.html" title="This class is used to draw, a string composed the horizontal justapposition of Different cubes on whi..." alt="" coords="787,571,936,957"/>
+<area shape="rect" id="node44" href="$class_cube_string_list.html" title="This class is used to draw a vertical list of CubeString. Look at CubeString to have a better specifi..." alt="" coords="428,547,588,981"/>
+<area shape="rect" id="node17" href="$class_action_list.html" title="This class is used to keep track of actions to do. For example it can keep track of current view scro..." alt="" coords="1532,643,1689,885"/>
+<area shape="rect" id="node25" href="$class_skin.html" title="It is the Skin Class." alt="" coords="613,475,763,1053"/>
+<area shape="rect" id="node39" href="$class_alphabet.html" title="This class is used to keep a list of Letter (from this the name Alphabet) It provide access to Letter..." alt="" coords="1047,153,1212,330"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$class_q_object.html" title="{QObject\n||}" alt="" coords="1265,481,1327,562"/>
+<area shape="rect" id="node53" href="$class_level.html" title="This class rapresents a Level of Qubet, with its obstacle. It is able to draw itself simply using the..." alt="" coords="1292,907,1457,1581"/>
+<area shape="rect" id="node12" href="$struct_vector3f.html" title="Structure that rapresents a Vector of float in a 3&#45;D space." alt="" coords="461,955,589,1533"/>
+<area shape="rect" id="node30" href="$class_cube_string.html" title="This class is used to draw, a string composed the horizontal justapposition of Different cubes on whi..." alt="" coords="613,1051,763,1437"/>
+<area shape="rect" id="node43" href="$class_cube_string_list.html" title="This class is used to draw a vertical list of CubeString. Look at CubeString to have a better specifi..." alt="" coords="112,1027,272,1461"/>
+<area shape="rect" id="node25" href="$class_skin.html" title="It is the Skin Class." alt="" coords="1041,233,1191,810"/>
+<area shape="rect" id="node15" href="$class_action_list.html" title="This class is used to keep track of actions to do. For example it can keep track of current view scro..." alt="" coords="2083,1123,2240,1365"/>
+<area shape="rect" id="node38" href="$class_alphabet.html" title="This class is used to keep a list of Letter (from this the name Alphabet) It provide access to Letter..." alt="" coords="852,433,1017,610"/>
+</map>

@@ -82,6 +82,13 @@ Inheritance diagram for PositionController:</div>
 <map name="_position_controller_inherit__map" id="_position_controller_inherit__map">
 <area shape="rect" id="node2" href="class_q_thread.html" title="{QThread\n||}" alt="" coords="40,6,107,87"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for PositionController:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_position_controller__coll__graph.png" border="0" usemap="#_position_controller_coll__map" alt="Collaboration graph"/></div>
+<map name="_position_controller_coll__map" id="_position_controller_coll__map">
+<area shape="rect" id="node2" href="class_q_thread.html" title="{QThread\n||}" alt="" coords="63,1267,129,1349"/><area shape="rect" id="node4" href="class_cube.html" title="This class rapresents the player&#39;s Cube." alt="" coords="483,971,621,1645"/><area shape="rect" id="node6" href="class_q_object.html" title="{QObject\n||}" alt="" coords="804,481,865,562"/><area shape="rect" id="node35" href="class_level.html" title="This class rapresents a Level of Qubet, with its obstacle. It is able to draw itself simply using the..." alt="" coords="1056,971,1221,1645"/><area shape="rect" id="node16" href="struct_vector3f.html" title="Structure that rapresents a Vector of float in a 3&#45;D space." alt="" coords="388,233,516,810"/><area shape="rect" id="node23" href="class_skin.html" title="It is the Skin Class." alt="" coords="1069,233,1219,810"/></map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="class_position_controller-members.html">List of all members.</a></p>
 <table class="memberdecls">
@@ -177,8 +184,6 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>References <a class="el" href="class_position_controller.html#a6267df12f30b856e2481845437ce675c">checkCollision()</a>, <a class="el" href="class_position_controller.html#a1c39bfe3fd88f0427f03efc280056155">checkPositionTimer</a>, <a class="el" href="class_position_controller.html#a19bd8a68c276fa11553084714da38ebe">collision()</a>, <a class="el" href="class_position_controller.html#ad85a3a72d2631b1c168de9aaa9162663">createObstacleCells()</a>, <a class="el" href="class_level.html#a6581a51667bae2360949e84533311c69">Level::getLength()</a>, <a class="el" href="class_level.html#a57d5a20855ed872e0ecf87a1bc5c150d">Level::getWidth()</a>, <a class="el" href="class_position_controller.html#ab447ad484b3f7c963e41d6f8702d9e2f">level</a>, <a class="el" href="class_position_controller.html#a13574443f9264eeeb9fa467d6192dc79">levelLength</a>, <a class="el" href="class_position_controller.html#a9b729169a3c9c496e4ed733ce50030d2">levelWidth</a>, and <a class="el" href="class_position_controller.html#a6da0387793aefa1eadf94d0ef0b3b281">parent</a>.</p>
-
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -215,8 +220,6 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>true if is an integer. </dd></dl>
 
-<p>Referenced by <a class="el" href="class_position_controller.html#a6267df12f30b856e2481845437ce675c">checkCollision()</a>.</p>
-
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -252,10 +255,6 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>the cell coordinates from absolute position. </dd></dl>
 
-<p>References <a class="el" href="struct_vector3f.html#a34a0a72b4d5166426d3da21c8be96f47">Vector3f::x</a>, <a class="el" href="struct_vector3f.html#a31b937135e5586b6084cc124e1e88ad7">Vector3f::y</a>, and <a class="el" href="struct_vector3f.html#a86c40e13d1e95140aacc8731bc96b1b8">Vector3f::z</a>.</p>
-
-<p>Referenced by <a class="el" href="class_position_controller.html#a6267df12f30b856e2481845437ce675c">checkCollision()</a>.</p>
-
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -280,8 +279,6 @@ Here is the caller graph for this function:</div>
 <div class="memdoc">
 <p>QTimer controlling the <a class="el" href="class_position_controller.html#a6267df12f30b856e2481845437ce675c" title="Check if the cube has a collision with an obstacle.">checkCollision()</a> calls. </p>
 
-<p>Referenced by <a class="el" href="class_position_controller.html#a6267df12f30b856e2481845437ce675c">checkCollision()</a>, <a class="el" href="class_position_controller.html#a6d7a4488805603e198b550100ceec899">PositionController()</a>, <a class="el" href="class_position_controller.html#a49efd67ac42f916d309bd663ef592096">startChecking()</a>, <a class="el" href="class_position_controller.html#a081bc31c5eee92459231157811fcd30c">stopChecking()</a>, and <a class="el" href="class_position_controller.html#adfe5b270ce9d376ee1d0b88a9e3f60d5">~PositionController()</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="aff3bc8d55851cad1f8bab8d8f4cc8bf1"></a><!-- doxytag: member="PositionController::cube" ref="aff3bc8d55851cad1f8bab8d8f4cc8bf1" args="" -->
@@ -295,8 +292,6 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 <p>It is the pointer to the <a class="el" href="class_cube.html" title="This class rapresents the player&#39;s Cube.">Cube</a> Object. </p>
-
-<p>Referenced by <a class="el" href="class_position_controller.html#a6267df12f30b856e2481845437ce675c">checkCollision()</a>.</p>
 
 </div>
 </div>
@@ -312,8 +307,6 @@ Here is the caller graph for this function:</div>
 <div class="memdoc">
 <p>Is the pointer to the <a class="el" href="class_level.html" title="This class rapresents a Level of Qubet, with its obstacle. It is able to draw itself simply using the...">Level</a> Object. </p>
 
-<p>Referenced by <a class="el" href="class_position_controller.html#ad85a3a72d2631b1c168de9aaa9162663">createObstacleCells()</a>, and <a class="el" href="class_position_controller.html#a6d7a4488805603e198b550100ceec899">PositionController()</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="a13574443f9264eeeb9fa467d6192dc79"></a><!-- doxytag: member="PositionController::levelLength" ref="a13574443f9264eeeb9fa467d6192dc79" args="" -->
@@ -327,8 +320,6 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 <p>It is the length of the <a class="el" href="class_level.html" title="This class rapresents a Level of Qubet, with its obstacle. It is able to draw itself simply using the...">Level</a>. </p>
-
-<p>Referenced by <a class="el" href="class_position_controller.html#a6d7a4488805603e198b550100ceec899">PositionController()</a>.</p>
 
 </div>
 </div>
@@ -344,8 +335,6 @@ Here is the caller graph for this function:</div>
 <div class="memdoc">
 <p>It is the width of the <a class="el" href="class_level.html" title="This class rapresents a Level of Qubet, with its obstacle. It is able to draw itself simply using the...">Level</a>. </p>
 
-<p>Referenced by <a class="el" href="class_position_controller.html#a6d7a4488805603e198b550100ceec899">PositionController()</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="aedd6cb04554be30cb3e6a269278ab6b8"></a><!-- doxytag: member="PositionController::obstacleCells" ref="aedd6cb04554be30cb3e6a269278ab6b8" args="" -->
@@ -360,8 +349,6 @@ Here is the caller graph for this function:</div>
 <div class="memdoc">
 <p>It is the 3d matrix rappresent obstacle cells </p>
 
-<p>Referenced by <a class="el" href="class_position_controller.html#a6267df12f30b856e2481845437ce675c">checkCollision()</a>, and <a class="el" href="class_position_controller.html#ad85a3a72d2631b1c168de9aaa9162663">createObstacleCells()</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="a6da0387793aefa1eadf94d0ef0b3b281"></a><!-- doxytag: member="PositionController::parent" ref="a6da0387793aefa1eadf94d0ef0b3b281" args="" -->
@@ -375,8 +362,6 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 <p>It is the parent of the <a class="el" href="class_position_controller.html" title="PositionController Class check if the cube has a collision with obstacles.">PositionController</a>. </p>
-
-<p>Referenced by <a class="el" href="class_position_controller.html#a6d7a4488805603e198b550100ceec899">PositionController()</a>, and <a class="el" href="class_position_controller.html#adfe5b270ce9d376ee1d0b88a9e3f60d5">~PositionController()</a>.</p>
 
 </div>
 </div>
@@ -399,7 +384,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Nov 24 2011 09:50:33 for Qubet by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Nov 24 2011 21:11:58 for Qubet by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

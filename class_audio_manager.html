@@ -81,6 +81,13 @@ Inheritance diagram for AudioManager:</div>
 <map name="_audio_manager_inherit__map" id="_audio_manager_inherit__map">
 <area shape="rect" id="node2" href="class_q_thread.html" title="{QThread\n||}" alt="" coords="41,6,108,87"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for AudioManager:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_audio_manager__coll__graph.png" border="0" usemap="#_audio_manager_coll__map" alt="Collaboration graph"/></div>
+<map name="_audio_manager_coll__map" id="_audio_manager_coll__map">
+<area shape="rect" id="node2" href="class_q_thread.html" title="{QThread\n||}" alt="" coords="5,6,72,87"/></map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="class_audio_manager-members.html">List of all members.</a></p>
 <table class="memberdecls">
@@ -150,8 +157,6 @@ Phonon::MediaObject * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a
   </dd>
 </dl>
 
-<p>References <a class="el" href="class_audio_manager.html#a5383ce3c114c3f1ca0e5a69595ffb2af">effectsList</a>.</p>
-
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
@@ -178,8 +183,6 @@ Phonon::MediaObject * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a
   </dd>
 </dl>
 
-<p>References <a class="el" href="class_audio_manager.html#a546dbd164076d62b921f49f31abc73f4">ambientMusic</a>, <a class="el" href="class_audio_manager.html#a0d5f12dd3b194b7666343a27742ea9f1">audioEnabled</a>, and <a class="el" href="class_audio_manager.html#a5383ce3c114c3f1ca0e5a69595ffb2af">effectsList</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="a9c6add09cc6d63097115bc0a8847989e"></a><!-- doxytag: member="AudioManager::isAudioEnabled" ref="a9c6add09cc6d63097115bc0a8847989e" args="()" -->
@@ -198,10 +201,6 @@ Phonon::MediaObject * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a
 
 <p>Returns the state of the audio. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>true if audio is enabled, else false. </dd></dl>
-
-<p>References <a class="el" href="class_audio_manager.html#a0d5f12dd3b194b7666343a27742ea9f1">audioEnabled</a>.</p>
-
-<p>Referenced by <a class="el" href="class_qubet.html#a7c40361774ca7a14b36889e0623e70ce">Qubet::playArcade()</a>, <a class="el" href="class_qubet.html#ad2b71bd2808a4b15de077e33f9e3fd0c">Qubet::playStory()</a>, <a class="el" href="class_qubet.html#a2776a39a78fcd2f61bedeccd9a9d70c6">Qubet::showLevelEditor()</a>, and <a class="el" href="class_qubet.html#a9623b1e29dc1420b50cceae5901ba75e">Qubet::showMenu()</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -237,8 +236,6 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
-
-<p>References <a class="el" href="class_audio_manager.html#a546dbd164076d62b921f49f31abc73f4">ambientMusic</a>, <a class="el" href="class_audio_manager.html#a0d5f12dd3b194b7666343a27742ea9f1">audioEnabled</a>, <a class="el" href="class_audio_manager.html#aac4d44b5f3ed7854716fdc73f498ba57">currentFileName</a>, and <a class="el" href="class_audio_manager.html#a3e622defa1ca0dc0cf0f2e24d54804fd">enqueueMediaObject()</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -276,8 +273,6 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p>References <a class="el" href="class_audio_manager.html#a0d5f12dd3b194b7666343a27742ea9f1">audioEnabled</a>, and <a class="el" href="class_audio_manager.html#a5383ce3c114c3f1ca0e5a69595ffb2af">effectsList</a>.</p>
-
 </div>
 </div>
 <hr/><h2>Member Data Documentation</h2>
@@ -293,8 +288,6 @@ Here is the call graph for this function:</div>
 <div class="memdoc">
 <p>It is the Phonon::MediaObject of the current ambient music. </p>
 
-<p>Referenced by <a class="el" href="class_audio_manager.html#acf664a164dbc595685a2adc3d610985d">enableAudio()</a>, <a class="el" href="class_audio_manager.html#a3e622defa1ca0dc0cf0f2e24d54804fd">enqueueMediaObject()</a>, <a class="el" href="class_audio_manager.html#ab54035b024b30f4a4354b2f39ee050c1">playAmbientMusic()</a>, <a class="el" href="class_audio_manager.html#a6033ed546d3c91a872958b23d20f2604">stopAmbientMusic()</a>, and <a class="el" href="class_audio_manager.html#ad94dc46723c6d7cf8c81fc3772a842aa">~AudioManager()</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="a0d5f12dd3b194b7666343a27742ea9f1"></a><!-- doxytag: member="AudioManager::audioEnabled" ref="a0d5f12dd3b194b7666343a27742ea9f1" args="" -->
@@ -308,8 +301,6 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 <p>It is the variable that states if the audio is currently enabled or not. </p>
-
-<p>Referenced by <a class="el" href="class_audio_manager.html#acf664a164dbc595685a2adc3d610985d">enableAudio()</a>, <a class="el" href="class_audio_manager.html#a9c6add09cc6d63097115bc0a8847989e">isAudioEnabled()</a>, <a class="el" href="class_audio_manager.html#ab54035b024b30f4a4354b2f39ee050c1">playAmbientMusic()</a>, and <a class="el" href="class_audio_manager.html#aa26a619a47e55a8899d4d77e8d0a2afc">playEffect()</a>.</p>
 
 </div>
 </div>
@@ -325,8 +316,6 @@ Here is the call graph for this function:</div>
 <div class="memdoc">
 <p>It is the current ambientMusic filename. </p>
 
-<p>Referenced by <a class="el" href="class_audio_manager.html#a3e622defa1ca0dc0cf0f2e24d54804fd">enqueueMediaObject()</a>, and <a class="el" href="class_audio_manager.html#ab54035b024b30f4a4354b2f39ee050c1">playAmbientMusic()</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="a5383ce3c114c3f1ca0e5a69595ffb2af"></a><!-- doxytag: member="AudioManager::effectsList" ref="a5383ce3c114c3f1ca0e5a69595ffb2af" args="" -->
@@ -341,8 +330,6 @@ Here is the call graph for this function:</div>
 <div class="memdoc">
 <p>It is the QMap of effects and their filename. </p>
 
-<p>Referenced by <a class="el" href="class_audio_manager.html#ae12d92f34f24d80bf882cbf5ed967263">AudioManager()</a>, <a class="el" href="class_audio_manager.html#acf664a164dbc595685a2adc3d610985d">enableAudio()</a>, <a class="el" href="class_audio_manager.html#aa26a619a47e55a8899d4d77e8d0a2afc">playEffect()</a>, and <a class="el" href="class_audio_manager.html#ad94dc46723c6d7cf8c81fc3772a842aa">~AudioManager()</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="a032114aba75f3d87138797eccd9aff65"></a><!-- doxytag: member="AudioManager::parent" ref="a032114aba75f3d87138797eccd9aff65" args="" -->
@@ -356,8 +343,6 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 <p>It is a callback variable to the parent of <a class="el" href="class_audio_manager.html" title="It is a semi-thread class to manage the audio of Qubet. It can manage an ambientMusic and different e...">AudioManager</a>. </p>
-
-<p>Referenced by <a class="el" href="class_audio_manager.html#ad94dc46723c6d7cf8c81fc3772a842aa">~AudioManager()</a>.</p>
 
 </div>
 </div>
@@ -380,7 +365,7 @@ Here is the call graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Nov 24 2011 09:50:31 for Qubet by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Nov 24 2011 21:11:57 for Qubet by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

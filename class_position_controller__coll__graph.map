@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$class_q_thread.html" title="{QThread\n||}" alt="" coords="63,1267,129,1349"/>
+<area shape="rect" id="node4" href="$class_cube.html" title="This class rapresents the player&#39;s Cube." alt="" coords="483,971,621,1645"/>
+<area shape="rect" id="node6" href="$class_q_object.html" title="{QObject\n||}" alt="" coords="804,481,865,562"/>
+<area shape="rect" id="node35" href="$class_level.html" title="This class rapresents a Level of Qubet, with its obstacle. It is able to draw itself simply using the..." alt="" coords="1056,971,1221,1645"/>
+<area shape="rect" id="node16" href="$struct_vector3f.html" title="Structure that rapresents a Vector of float in a 3&#45;D space." alt="" coords="388,233,516,810"/>
+<area shape="rect" id="node23" href="$class_skin.html" title="It is the Skin Class." alt="" coords="1069,233,1219,810"/>
+</map>
