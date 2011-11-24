@@ -87,7 +87,7 @@ private:
     Alphabet *alphabet; /**< It is the alphabet provided by Qubet. */
     Skin *skin; /**< it is the cube skin pointer. */
     Level *level; /**< It is the current level pointer. */
-    Level *next; /** It is a pointer to the next Level. */
+    Level *next; /**< It is a pointer to the next Level. */
     QMap<GLint,Level*> levelsList; /**< It is the story levelList. */
     bool audioEnabled; /**< It is the audioEnabled boolean value. */
     Cube *cube; /**< It is the cube pointer. */
@@ -107,7 +107,7 @@ private:
     GLuint introStep;  /**< It is the parameter for the introduction. */
     bool isPaused; /**< It says if the game is paused or not. */
     bool isExploding; /**< It says if the cube is exploding. */
-    CubeString *deathCounter; /** It is the Death Counter CubeString. */
+    CubeString *deathCounter; /**< It is the Death Counter CubeString. */
     QGLShaderProgram *explosionShader; /**< It is the explosion Shader. */
     bool isQuitting; /**< It is the variable that states if the game is quitting. */
     bool showingResult;  /**< It is the variable that states if the game is showing results. */

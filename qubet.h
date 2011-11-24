@@ -15,6 +15,51 @@
 //    You should have received a copy of the GNU General Public License
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * @mainpage Qubet
+ *
+ * @section intro_section Introduction
+ *
+ * Qubet is a universitary project made by Enrico Bacis and Daniele Ciriello for the Graphical Informatics course at University of Bergamo.
+ *
+ * Qubet is a simple game developed using OpenGL and Qt where a Cube have to reach the end of different levels avoiding obstacles.
+ *
+ * It is distributed under GNU GPLv3 license.
+ *
+ * It uses Doxygen to manage the documentation.
+ *
+ * @section download_section Download
+ *
+ * You can download this project in either <a href="https://github.com/enricobacis/qubet/zipball/master">zip</a> or <a href="https://github.com/enricobacis/qubet/tarball/master">tar</a> formats.
+ *
+ * You can also clone the project with <a href="http://git-scm.com">Git</a> by running:
+ * @code $ git clone git://github.com/enricobacis/qubet @endcode
+ *
+ * Get the source code on <a href="https://github.com/enricobacis/qubet">GitHub</a>.
+ *
+ * @section install_section Installation
+ *
+ * 1. Compile the code using Qt Creator.
+ *
+ * 2. Copy the resources folder where the binary has been compiled.
+ *
+ * 3. Enjoy.
+ *
+ * @section authors_section Authors
+ *
+ * Enrico Bacis
+ *
+ * Daniele Ciriello
+ *
+ * Musics by <a href="http://binaerpilot.no">Binarpilot</a>
+ *
+ * Sound FX by SoundBible and Super Mario
+ *
+ * @section contacts_section Contacts
+ *
+ * You can contact us on <a href="https://github.com/enricobacis/qubet">GitHub</a>.
+ */
+
 
 #ifndef QUBET_H
 #define QUBET_H
