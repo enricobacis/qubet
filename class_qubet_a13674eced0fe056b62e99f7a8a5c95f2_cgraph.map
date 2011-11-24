@@ -1,0 +1,109 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_qubet.html#ad108e6c05cda81b75b5f8600002c62f9" title="This function is used to draw the scene on the QGLWidget. It is used by PaintGL that calls this and t..." alt="" coords="1119,739,1231,767"/>
+<area shape="rect" id="node131" href="$class_qubet.html#a1452c8e7bec024adb53ba216316c593d" title="It is used after the first show of the qubet window to initialize Qubet." alt="" coords="149,1949,251,1977"/>
+<area shape="rect" id="node5" href="$class_level_editor.html#a9b5268e5052ebdae3ded4edc11fbfb60" title="Method to draw the levelEditor." alt="" coords="1352,739,1459,767"/>
+<area shape="rect" id="node32" href="$class_game.html#aa5a6a37a0385d779fbf2e5b0a1fda742" title="Method to draw the game." alt="" coords="1364,385,1447,413"/>
+<area shape="rect" id="node101" href="$class_menu.html#acb0e21e08f2e1496aa424b07c9b1ec9a" title="Method to draw the menu." alt="" coords="1367,1094,1444,1122"/>
+<area shape="rect" id="node129" href="$class_skybox.html#af1b9c594d95614721a91e8205d4c719b" title="Draw the Skybox." alt="" coords="1361,689,1449,717"/>
+<area shape="rect" id="node7" href="$class_cube_string_list.html#a731b7c1deedab9e85ccd2797a132a7b3" title="Draws the CubeStringList at the current position." alt="" coords="1587,967,1709,995"/>
+<area shape="rect" id="node9" href="$class_cube_string.html#a5fb421520a5c4406dfeef35f498222fc" title="Draws the CubeString in the current selected point of the scene." alt="" coords="1867,942,1973,970"/>
+<area shape="rect" id="node11" href="$class_level.html#ae9441672b924f61edd65b81e23e4dabe" title="Draws the Level and its obstacles." alt="" coords="1609,511,1687,539"/>
+<area shape="rect" id="node14" href="$class_action_list.html#af0c5c2d39c3282a45d7bb913060aeee0" title="Returns a list of primary and secondary actions." alt="" coords="1580,613,1716,641"/>
+<area shape="rect" id="node16" href="$class_cube_string_list.html#ab0a6f4e9cb679bf813638216d5943167" title="Returns the label which name is _stringName." alt="" coords="1579,663,1717,691"/>
+<area shape="rect" id="node24" href="$class_level_editor.html#a86da2716a5fe23d90f72b84fa89cd864" title="signal emitted when the level editor is being closed." alt="" coords="1565,815,1731,843"/>
+<area shape="rect" id="node26" href="$class_action_list.html#a151b9b311e9a0a7b7caa031b79b20d83" title="Removes a secondary action to secondaryActions list." alt="" coords="1551,714,1745,742"/>
+<area shape="rect" id="node28" href="$class_level_editor.html#ac4be5f96873b1ec214dcc18d7ffca6a5" title="This signal is emitted to set the Qubet&#39;s Mouse Move Tracking sensibility. The modes are: 0 &#45; no sign..." alt="" coords="1536,765,1760,793"/>
+<area shape="rect" id="node30" href="$class_action_list.html#a3a582129fc401579b6ae2bb730015511" title="Set the given parameter as the new primaryAction, overriding the old one." alt="" coords="1841,525,1999,553"/>
+<area shape="rect" id="node18" href="$class_cube_string_list.html#af32055662992ac4a314bcabef7f4bf27" title="Return a pointer to the CubeString having the parameter OpenGL name." alt="" coords="1809,638,2031,666"/>
+<area shape="rect" id="node22" href="$class_cube_string.html#afbc1d4f6f0f8dd3b153150eb05b1b66c" title="Returns the text of the CubeString." alt="" coords="1859,689,1981,717"/>
+<area shape="rect" id="node20" href="$class_cube_string.html#abcf861a2ddfd2cd2c466be269acf91db" title="Returns the name given to the entire string (for picking purposes). [default = 0]." alt="" coords="2108,638,2233,666"/>
+<area shape="rect" id="node34" href="$class_game.html#a8c6849c5f36faed777969fd29bef0e5f" title="make the animation for the initial countdown" alt="" coords="1593,207,1703,235"/>
+<area shape="rect" id="node50" href="$class_cube.html#a0e268d9f4a179fe8cdaed84c6b0167d0" title="Draw the Cube." alt="" coords="1609,106,1687,134"/>
+<area shape="rect" id="node65" href="$class_game.html#adb6933b134d884eba53c4c28ba6ea258" title="Signal emitted to close the game." alt="" coords="1575,157,1721,185"/>
+<area shape="rect" id="node68" href="$class_level.html#a6581a51667bae2360949e84533311c69" title="Returns the length of the Level." alt="" coords="1869,1347,1971,1375"/>
+<area shape="rect" id="node70" href="$class_action_list.html#aff2f46a0425d0bfcfe7bdb81c8ca5589" title="Returns the current primaryAction." alt="" coords="1569,309,1727,337"/>
+<area shape="rect" id="node72" href="$class_level.html#a57d5a20855ed872e0ecf87a1bc5c150d" title="Returns the width of the Level." alt="" coords="1600,359,1696,387"/>
+<area shape="rect" id="node74" href="$class_cube.html#a18858a1d1d409d2e6b764a6fbb7f3d95" title="Returns the Z of the Cube." alt="" coords="1611,55,1685,83"/>
+<area shape="rect" id="node76" href="$class_game.html#addb89f93a722ee74b6e31f56faffac6b" title="Start the current Level." alt="" coords="1596,1550,1700,1578"/>
+<area shape="rect" id="node36" href="$class_game.html#a1af7ddc3e74f33e0e60fa992bd37118c" title="Slot invoked to hide the Level Name." alt="" coords="1853,207,1987,235"/>
+<area shape="rect" id="node38" href="$class_game.html#a3d934db19ccff58ea7825c6010062254" title="Signal emitted to play an effect." alt="" coords="1868,258,1972,286"/>
+<area shape="rect" id="node41" href="$class_cube.html#ad26eb8dddfe8e898b6a511a030740af4" title="Start the motion of the Cube;." alt="" coords="1869,309,1971,337"/>
+<area shape="rect" id="node43" href="$class_cube_string.html#a206954e5430aba460cf679c4fe95e79d" title="Start the rotation of the entire CubeString." alt="" coords="1835,1069,2005,1097"/>
+<area shape="rect" id="node47" href="$class_cube_string.html#a1896aba854d2f34fb8e23208f1ff16a2" title="Safely destroys a CubeString." alt="" coords="2100,1347,2241,1375"/>
+<area shape="rect" id="node45" href="$class_cube_string.html#a0347d9c16c99827d38ca6225d2300bad" title="Start the rotation of a letter in the CubeString." alt="" coords="2085,1069,2256,1097"/>
+<area shape="rect" id="node52" href="$class_cube.html#a4cd305a333de20b17b0b7be53b605507" title="this function is called in the draw function in case of explosion." alt="" coords="1857,157,1983,185"/>
+<area shape="rect" id="node54" href="$class_cube.html#a7565e63cf5251350f8c5d0d04ee52dbc" title="Signal to inform that the explosion has finished." alt="" coords="1849,5,1991,33"/>
+<area shape="rect" id="node56" href="$class_cube.html#a5f56bb5176ff421210b33a9f22b95275" title="Reset the Level." alt="" coords="1868,106,1972,134"/>
+<area shape="rect" id="node58" href="$class_cube.html#a2626924acbf8e254d72a3dd475cd1fee" title="Update the position of the Cube." alt="" coords="1857,55,1983,83"/>
+<area shape="rect" id="node60" href="$class_cube.html#aee4026693a488cd8dd37fceadd2b8859" title="Actions to perform when the level is completed." alt="" coords="2119,55,2223,83"/>
+<area shape="rect" id="node62" href="$class_cube.html#a0409a6dc9f4a04e3d3a8faaedd21ef8b" title="Signal emitted when the level is completed." alt="" coords="2309,55,2437,83"/>
+<area shape="rect" id="node78" href="$class_level.html#afadeb8bc8a9274cd515df504f14d2d20" title="Returns the ambient Music Filename." alt="" coords="1829,1651,2011,1679"/>
+<area shape="rect" id="node81" href="$class_level.html#a77e5744c1c467164915ad532cf8707a6" title="Returns the name of the Level." alt="" coords="1871,1702,1969,1730"/>
+<area shape="rect" id="node83" href="$class_level.html#a24b587c29713ba86dae4100397f6af1d" title="Returns the Skybox Name." alt="" coords="1853,1753,1987,1781"/>
+<area shape="rect" id="node85" href="$class_level.html#a930da7d3e469c0e4216b210e5a337116" title="Loads the Level from xml form using the filename as input." alt="" coords="1883,1803,1957,1831"/>
+<area shape="rect" id="node87" href="$class_game.html#a9f1219a9f2824681329e14d3c8296d21" title="Signal emitted to play the ambient music." alt="" coords="1847,1449,1993,1477"/>
+<area shape="rect" id="node89" href="$class_game.html#a3357bd0e7e3e6d6e14e5736b8a76773f" title="Signal emitted to set the Skybox." alt="" coords="1865,1499,1975,1527"/>
+<area shape="rect" id="node91" href="$class_position_controller.html#a49efd67ac42f916d309bd663ef592096" title="Start checking for collision." alt="" coords="1829,1550,2011,1578"/>
+<area shape="rect" id="node93" href="$class_cube.html#aa814e979cecb8c451fdb332ded2cea1e" title="Safely destroy a Cube object." alt="" coords="1877,1955,1963,1983"/>
+<area shape="rect" id="node95" href="$class_position_controller.html#adfe5b270ce9d376ee1d0b88a9e3f60d5" title="Destroy a PositionController Object." alt="" coords="1819,1905,2021,1933"/>
+<area shape="rect" id="node97" href="$class_position_controller.html#a081bc31c5eee92459231157811fcd30c" title="Stop checking for collisions." alt="" coords="2081,1905,2260,1933"/>
+<area shape="rect" id="node106" href="$class_menu.html#a57fbca80f5ddf14922e2663820de1dfa" title="Change the current skin and select the next one." alt="" coords="1600,1271,1696,1299"/>
+<area shape="rect" id="node111" href="$class_menu.html#a4d889f82741860b2982896c454c4463b" title="Signal emitted to show the gameView in arcade mode." alt="" coords="1593,1373,1703,1401"/>
+<area shape="rect" id="node113" href="$class_menu.html#ac556697ac4895037164c28803bbb9a83" title="Signal emitted to show the gameView in story mode." alt="" coords="1597,1423,1699,1451"/>
+<area shape="rect" id="node115" href="$class_menu.html#a65908e8f129cd95b798ff3ff3da41c9b" title="Change the current skin and select the previous one." alt="" coords="1589,1322,1707,1350"/>
+<area shape="rect" id="node120" href="$class_menu.html#a2ce3fdadd82b9a5c63c128674bccf2f5" title="This signal is emitted to set the Qubet&#39;s Mouse Move Tracking sensibility. The modes are: 0 &#45; no sign..." alt="" coords="1549,1170,1747,1198"/>
+<area shape="rect" id="node123" href="$class_menu.html#a9422fc883a0e8303c485c2bd39515f64" title="Signal emitted to show the levelEditor." alt="" coords="1581,1221,1715,1249"/>
+<area shape="rect" id="node125" href="$class_cube_string_list.html#a7a8ea672d7cf9f30e676bb3b3cb0765a" title="Start the rotation of the whole CubeStringList (woo&#45;woo&#45;wao)." alt="" coords="1545,1119,1751,1147"/>
+<area shape="rect" id="node108" href="$class_menu.html#a9fedb4739af4036621544d87eee0dacb" title="Signal emitted to play an effect." alt="" coords="1869,1246,1971,1274"/>
+<area shape="rect" id="node133" href="$class_qubet.html#a514a965c1010debe93f51c2d4486a6f1" title="This method connects audio signals of the sender to their slots in AudioManager." alt="" coords="1344,1677,1467,1705"/>
+<area shape="rect" id="node143" href="$class_qubet.html#acaa67d9bbdf3d12601d4b71ed62f2fc0" title="This is a duplicated function to call paintGL, but this can be used as a slot." alt="" coords="329,2133,412,2161"/>
+<area shape="rect" id="node146" href="$class_qubet.html#a29c91eb3d704b2e113caa91e099397b9" title="This function has to be invoked when something in the loading process goes wrong." alt="" coords="311,1949,431,1977"/>
+<area shape="rect" id="node148" href="$class_qubet.html#a63cdccdb1cdb60306a5a12e50f1c6c6e" title="Load skins, levels and obstacles in Qubet." alt="" coords="332,2082,409,2110"/>
+<area shape="rect" id="node191" href="$class_qubet.html#ad8d8814eb7d969d1153f051070bb9099" title="This function has to be invoked when the loading is finished." alt="" coords="299,1841,443,1869"/>
+<area shape="rect" id="node135" href="$class_qubet.html#a78b1a9f39dfd41e6ec91b9d9f7e11551" title="Signal emitted to enable or disable the audio." alt="" coords="1589,1651,1707,1679"/>
+<area shape="rect" id="node137" href="$class_qubet.html#ac1954aa3b4f9a7e0755e91c073aef583" title="Signal emitted to play the ambient music." alt="" coords="1575,1702,1721,1730"/>
+<area shape="rect" id="node139" href="$class_qubet.html#a3f3553c3a5466aff8d33ad550b604137" title="Signal emitted to play an effect." alt="" coords="1596,1753,1700,1781"/>
+<area shape="rect" id="node141" href="$class_qubet.html#a74efd02f8ab57dec741690d4becbadd5" title="Signal emitted to stop the current ambient music." alt="" coords="1575,1601,1721,1629"/>
+<area shape="rect" id="node150" href="$class_qubet.html#a908257b883ebcea76119f410617b6f7a" title="Load the alphabet." alt="" coords="495,2259,615,2287"/>
+<area shape="rect" id="node154" href="$class_qubet.html#ae518078dfe5b52513eeb3f506218fc0d" title="Load the icons." alt="" coords="503,2310,607,2338"/>
+<area shape="rect" id="node156" href="$class_qubet.html#ab7d996f564ea9db5f3f103088f4332a8" title="Load the levels from the resource file." alt="" coords="500,2006,609,2034"/>
+<area shape="rect" id="node162" href="$class_qubet.html#a22f5f57cd2f23c5ac7d4fe4cff6e5744" title="Load the Shader." alt="" coords="499,2082,611,2110"/>
+<area shape="rect" id="node164" href="$class_qubet.html#a35a8e55f37d0e0e8f59326f6764abfaa" title="Load the skins from the resource file." alt="" coords="503,2209,607,2237"/>
+<area shape="rect" id="node182" href="$class_qubet.html#a2facd4bd3fa82b03cd9e1386ea5c8f6c" title="Load the skyboxes." alt="" coords="492,2158,617,2186"/>
+<area shape="rect" id="node152" href="$class_alphabet.html#ab66f40008f693fdb651477e0a1a6a876" title="Appends the textureID given as parameter to the Letter&#39;s textures of the letter given as parameter..." alt="" coords="668,2462,839,2490"/>
+<area shape="rect" id="node158" href="$class_level.html#a3b45cc65d15a2da9128ffe83c702291d" title="Set the a variable that states if the Level is in the story." alt="" coords="697,1955,809,1983"/>
+<area shape="rect" id="node160" href="$class_level.html#af11bb94bf0c9f4e8b6bcb595480172b7" title="Set the name of the Level." alt="" coords="704,2006,803,2034"/>
+<area shape="rect" id="node166" href="$class_skin.html#a9310dfec55eca4000c97fa19a5d27e56" title="Set the comment of the Skin." alt="" coords="699,2259,808,2287"/>
+<area shape="rect" id="node168" href="$class_skin.html#a24392d0b7e2548a45f8e1e2b9bddfcf7" title="Set the same texture for all the faces." alt="" coords="673,2411,833,2439"/>
+<area shape="rect" id="node170" href="$class_skin.html#a5aefa13a9df97e8e920922f321600bb9" title="Set the texture for x&#45; face." alt="" coords="684,2310,823,2338"/>
+<area shape="rect" id="node172" href="$class_skin.html#a709acd8e6603f373a2fd77145dcea273" title="Set the texture for x+ face." alt="" coords="688,2361,819,2389"/>
+<area shape="rect" id="node174" href="$class_skin.html#a4cc122a67b6860a5bfa05ab592d43ba9" title="Set the texture for y&#45; face." alt="" coords="684,2057,823,2085"/>
+<area shape="rect" id="node176" href="$class_skin.html#a438522f36120175d4743e6afbdb0ff63" title="Set the texture for y+ face." alt="" coords="688,2107,819,2135"/>
+<area shape="rect" id="node178" href="$class_skin.html#a3f752c8e0e1a2520eb6f8d31080aa6f5" title="Set the texture for z&#45; face." alt="" coords="684,2158,823,2186"/>
+<area shape="rect" id="node180" href="$class_skin.html#a569a6cb803ee1c2c5d0e8e28d804a544" title="Set the texture for z+ face." alt="" coords="688,2209,819,2237"/>
+<area shape="rect" id="node193" href="$class_qubet.html#a9623b1e29dc1420b50cceae5901ba75e" title="This function is used to states the paintGL function to show the Menu." alt="" coords="500,1677,609,1705"/>
+<area shape="rect" id="node195" href="$class_qubet.html#a6752c1f3f5d21c8ce4d53e4cc432c7ea" title="This function is used to connect all the menu slots to their signals." alt="" coords="692,1753,815,1781"/>
+<area shape="rect" id="node233" href="$class_audio_manager.html#a9c6add09cc6d63097115bc0a8847989e" title="Returns the state of the audio." alt="" coords="1089,1727,1260,1755"/>
+<area shape="rect" id="node261" href="$class_qubet.html#aea4cf8ea7aa5abec73d47e3af67e5186" title="This slot is to set the Mouse Move Tracking sensibility. The modes are: 0 &#45; no signal emitted..." alt="" coords="1075,1575,1275,1603"/>
+<area shape="rect" id="node198" href="$class_qubet.html#a9b0d2898d33e4be64186ccb1b8365072" title="This methos connects mouse and keyboard events to the receiver object to forward user&#39;s input to the ..." alt="" coords="1328,1930,1483,1958"/>
+<area shape="rect" id="node210" href="$class_qubet.html#a7c40361774ca7a14b36889e0623e70ce" title="This function is a slot linked to the Menu and invoked when the player chooses to play the Arcade Mod..." alt="" coords="901,1829,1013,1857"/>
+<area shape="rect" id="node238" href="$class_qubet.html#ad2b71bd2808a4b15de077e33f9e3fd0c" title="This function is a slot linked to the Menu and invoked when the player chooses to play the Story Mode..." alt="" coords="905,1778,1009,1806"/>
+<area shape="rect" id="node244" href="$class_qubet.html#a2776a39a78fcd2f61bedeccd9a9d70c6" title="This function is a slot linked to the Menu and invoked when the player chooses to enter the Level Edi..." alt="" coords="888,1727,1027,1755"/>
+<area shape="rect" id="node200" href="$class_qubet.html#a86b991100db3db4ce19028a5b29c168b" title="Signal emitted when the user clicks on a item." alt="" coords="1591,2057,1705,2085"/>
+<area shape="rect" id="node202" href="$class_qubet.html#a88d67b4fffe8fb1b28ca15c27639a28c" title="Signal emitted when the user presses a key on the keyboard." alt="" coords="1589,1854,1707,1882"/>
+<area shape="rect" id="node204" href="$class_qubet.html#a56fa044ae2c3bd878fe1c7a5e2afcd9c" title="Signal emitted when the user moves the mouse." alt="" coords="1587,1905,1709,1933"/>
+<area shape="rect" id="node206" href="$class_qubet.html#a7260bd086f7074fcfc5ca48af4e96fdf" title="Signal emitted when the user releases the mouse button." alt="" coords="1580,1955,1716,1983"/>
+<area shape="rect" id="node208" href="$class_qubet.html#a9fa9e692e5d878226bceb4d6b4b75c44" title="Signal emitted when the user scrolls the wheel of the mouse." alt="" coords="1585,2006,1711,2034"/>
+<area shape="rect" id="node212" href="$class_qubet.html#a7f59549a30d39109cf4eada72a6e1f60" title="This function is invoked when the player chooses an option from the Menu, so this is no more necessar..." alt="" coords="1120,1778,1229,1806"/>
+<area shape="rect" id="node222" href="$class_qubet.html#ac4be613be0dec97d4456a853d9fe23da" title="This function is used to connect all the game slots to their signals." alt="" coords="1112,1879,1237,1907"/>
+<area shape="rect" id="node235" href="$class_game.html#ae8638ccdb0ef3bf39a6affa30aa1258f" title="Function to start the game." alt="" coords="1120,1829,1229,1857"/>
+<area shape="rect" id="node214" href="$class_menu.html#a831387f51358cfb88cd018e1777bc980" title="Disconnect and Destroy a Menu object." alt="" coords="1604,1803,1692,1831"/>
+<area shape="rect" id="node217" href="$class_cube_string_list.html#a3c9f2621ef98046dc87870c95730127b" title="Safely destroy a CubeStringList." alt="" coords="1832,1601,2008,1629"/>
+<area shape="rect" id="node220" href="$class_skin.html#a002cee43b3cacd1669d01e8f7e522494" title="Safely destroy the Skin." alt="" coords="1883,2006,1957,2034"/>
+<area shape="rect" id="node226" href="$class_qubet.html#aec7dc759fd4912e4c7b7e71014366dbe" title="This function is a slot linked to the Game and invoked when the player chooses to close the current G..." alt="" coords="1347,1981,1464,2009"/>
+<area shape="rect" id="node229" href="$class_game.html#ae3d112ca6e0e55150d2fdbc704474530" title="Safely destroy a Game Object." alt="" coords="1601,2107,1695,2135"/>
+<area shape="rect" id="node247" href="$class_qubet.html#af93555e97eb548a0c3ccee6aa071e028" title="This function is used to connect all the levelEditor slots to their signals." alt="" coords="1100,1626,1249,1654"/>
+<area shape="rect" id="node249" href="$class_qubet.html#a82a85442bb3d588989397003caaa3cc0" title="Slot invoked to add a level to the levelList." alt="" coords="1324,1575,1487,1603"/>
+<area shape="rect" id="node253" href="$class_qubet.html#a5de33bce5dd898e05a19f6e713dddbcd" title="This function is a slot linked to the LevelEditor and invoked when the player chooses to close the cu..." alt="" coords="1335,1525,1476,1553"/>
+<area shape="rect" id="node256" href="$class_level_editor.html#a2fdfaad257e235e2f392b08fabee79ec" title="This is the LevelEditor Destructor." alt="" coords="1577,1499,1719,1527"/>
+</map>

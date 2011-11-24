@@ -1,0 +1,16 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_level_editor.html#a043df349dfcbb3fc1965aab314f031fc" title="This function is invoked when back button is pressed." alt="" coords="395,461,579,489"/>
+<area shape="rect" id="node5" href="$class_level_editor.html#a3bc59bcfad1ea901b5ec4bcd2b332b00" title="Slot invoked when the user clicks on a item." alt="" coords="628,258,767,286"/>
+<area shape="rect" id="node7" href="$class_level_editor.html#a2f741b13837f6467e0452df50f2e51dd" title="Slot invoked when the user presses a key on the keyboard." alt="" coords="627,385,768,413"/>
+<area shape="rect" id="node9" href="$class_level_editor.html#a28990264a514b22a14140ce9dcc8fdb7" title="This function is invoked when next button is pressed." alt="" coords="396,157,577,185"/>
+<area shape="rect" id="node13" href="$class_level_editor.html#a9f79beb562400f1296cc3c9c96b41a13" title="This function enlarge the level." alt="" coords="428,208,545,236"/>
+<area shape="rect" id="node17" href="$class_level_editor.html#a7e183b7bd341487ad23e0ff99af8eee5" title="This function decraese the gravity value." alt="" coords="415,410,559,438"/>
+<area shape="rect" id="node21" href="$class_level_editor.html#ab24619f5b5d2abe6d876bcc798f13f59" title="This function increase the gravity value." alt="" coords="419,258,555,286"/>
+<area shape="rect" id="node27" href="$class_level_editor.html#a6776dd013a33806460de6895b66faf80" title="This function lengthen the level." alt="" coords="425,309,548,337"/>
+<area shape="rect" id="node31" href="$class_level_editor.html#abcfebacb7d5d1bedd7c7d7a86f7d7584" title="This function is invoked when a letter is typed." alt="" coords="197,562,333,590"/>
+<area shape="rect" id="node34" href="$class_level_editor.html#aa351d4622321b1176d7878cb03c370d6" title="Slot invoked when the user releases the mouse button." alt="" coords="185,664,345,692"/>
+<area shape="rect" id="node36" href="$class_level_editor.html#a9540db1ca25f037d016f61ceed879716" title="This function quit the level editor." alt="" coords="203,5,328,33"/>
+<area shape="rect" id="node39" href="$class_level_editor.html#a4d73535317c6538323770388fe159884" title="This function reduce the level." alt="" coords="429,512,544,540"/>
+<area shape="rect" id="node43" href="$class_level_editor.html#aaaa81998d648c61c425011fd73c8a087" title="Save the Level." alt="" coords="200,106,331,134"/>
+<area shape="rect" id="node47" href="$class_level_editor.html#a8fdf78dcf474c3bcfa9154a764288cca" title="This function shorten the level." alt="" coords="428,360,545,388"/>
+</map>

@@ -1,0 +1,37 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_game.html#a8c6849c5f36faed777969fd29bef0e5f" title="make the animation for the initial countdown" alt="" coords="179,157,288,185"/>
+<area shape="rect" id="node9" href="$class_action_list.html#a3a582129fc401579b6ae2bb730015511" title="Set the given parameter as the new primaryAction, overriding the old one." alt="" coords="403,5,560,33"/>
+<area shape="rect" id="node19" href="$class_level.html#ae9441672b924f61edd65b81e23e4dabe" title="Draws the Level and its obstacles." alt="" coords="195,283,272,311"/>
+<area shape="rect" id="node21" href="$class_cube.html#a0e268d9f4a179fe8cdaed84c6b0167d0" title="Draw the Cube." alt="" coords="195,334,272,362"/>
+<area shape="rect" id="node35" href="$class_cube_string.html#a5fb421520a5c4406dfeef35f498222fc" title="Draws the CubeString in the current selected point of the scene." alt="" coords="180,385,287,413"/>
+<area shape="rect" id="node37" href="$class_game.html#adb6933b134d884eba53c4c28ba6ea258" title="Signal emitted to close the game." alt="" coords="160,435,307,463"/>
+<area shape="rect" id="node39" href="$class_action_list.html#af0c5c2d39c3282a45d7bb913060aeee0" title="Returns a list of primary and secondary actions." alt="" coords="165,486,301,514"/>
+<area shape="rect" id="node41" href="$class_level.html#a6581a51667bae2360949e84533311c69" title="Returns the length of the Level." alt="" coords="431,537,532,565"/>
+<area shape="rect" id="node43" href="$class_action_list.html#aff2f46a0425d0bfcfe7bdb81c8ca5589" title="Returns the current primaryAction." alt="" coords="155,587,312,615"/>
+<area shape="rect" id="node45" href="$class_level.html#a57d5a20855ed872e0ecf87a1bc5c150d" title="Returns the width of the Level." alt="" coords="185,638,281,666"/>
+<area shape="rect" id="node47" href="$class_cube.html#a18858a1d1d409d2e6b764a6fbb7f3d95" title="Returns the Z of the Cube." alt="" coords="196,689,271,717"/>
+<area shape="rect" id="node49" href="$class_game.html#addb89f93a722ee74b6e31f56faffac6b" title="Start the current Level." alt="" coords="181,739,285,767"/>
+<area shape="rect" id="node72" href="$class_action_list.html#a151b9b311e9a0a7b7caa031b79b20d83" title="Removes a secondary action to secondaryActions list." alt="" coords="136,790,331,818"/>
+<area shape="rect" id="node5" href="$class_game.html#a1af7ddc3e74f33e0e60fa992bd37118c" title="Slot invoked to hide the Level Name." alt="" coords="415,55,548,83"/>
+<area shape="rect" id="node7" href="$class_game.html#a3d934db19ccff58ea7825c6010062254" title="Signal emitted to play an effect." alt="" coords="429,106,533,134"/>
+<area shape="rect" id="node11" href="$class_cube.html#ad26eb8dddfe8e898b6a511a030740af4" title="Start the motion of the Cube;." alt="" coords="431,157,532,185"/>
+<area shape="rect" id="node13" href="$class_cube_string.html#a206954e5430aba460cf679c4fe95e79d" title="Start the rotation of the entire CubeString." alt="" coords="396,207,567,235"/>
+<area shape="rect" id="node17" href="$class_cube_string.html#a1896aba854d2f34fb8e23208f1ff16a2" title="Safely destroys a CubeString." alt="" coords="411,258,552,286"/>
+<area shape="rect" id="node15" href="$class_cube_string.html#a0347d9c16c99827d38ca6225d2300bad" title="Start the rotation of a letter in the CubeString." alt="" coords="637,207,808,235"/>
+<area shape="rect" id="node23" href="$class_cube.html#a4cd305a333de20b17b0b7be53b605507" title="this function is called in the draw function in case of explosion." alt="" coords="419,309,544,337"/>
+<area shape="rect" id="node25" href="$class_cube.html#a7565e63cf5251350f8c5d0d04ee52dbc" title="Signal to inform that the explosion has finished." alt="" coords="411,359,552,387"/>
+<area shape="rect" id="node27" href="$class_cube.html#a5f56bb5176ff421210b33a9f22b95275" title="Reset the Level." alt="" coords="429,410,533,438"/>
+<area shape="rect" id="node29" href="$class_cube.html#a2626924acbf8e254d72a3dd475cd1fee" title="Update the position of the Cube." alt="" coords="419,461,544,489"/>
+<area shape="rect" id="node31" href="$class_cube.html#aee4026693a488cd8dd37fceadd2b8859" title="Actions to perform when the level is completed." alt="" coords="671,461,775,489"/>
+<area shape="rect" id="node33" href="$class_cube.html#a0409a6dc9f4a04e3d3a8faaedd21ef8b" title="Signal emitted when the level is completed." alt="" coords="861,461,989,489"/>
+<area shape="rect" id="node51" href="$class_level.html#afadeb8bc8a9274cd515df504f14d2d20" title="Returns the ambient Music Filename." alt="" coords="391,587,572,615"/>
+<area shape="rect" id="node54" href="$class_level.html#a77e5744c1c467164915ad532cf8707a6" title="Returns the name of the Level." alt="" coords="432,638,531,666"/>
+<area shape="rect" id="node56" href="$class_level.html#a24b587c29713ba86dae4100397f6af1d" title="Returns the Skybox Name." alt="" coords="415,689,548,717"/>
+<area shape="rect" id="node58" href="$class_level.html#a930da7d3e469c0e4216b210e5a337116" title="Loads the Level from xml form using the filename as input." alt="" coords="444,739,519,767"/>
+<area shape="rect" id="node60" href="$class_game.html#a9f1219a9f2824681329e14d3c8296d21" title="Signal emitted to play the ambient music." alt="" coords="408,790,555,818"/>
+<area shape="rect" id="node62" href="$class_game.html#a3357bd0e7e3e6d6e14e5736b8a76773f" title="Signal emitted to set the Skybox." alt="" coords="427,841,536,869"/>
+<area shape="rect" id="node64" href="$class_position_controller.html#a49efd67ac42f916d309bd663ef592096" title="Start checking for collision." alt="" coords="391,891,572,919"/>
+<area shape="rect" id="node66" href="$class_cube.html#aa814e979cecb8c451fdb332ded2cea1e" title="Safely destroy a Cube object." alt="" coords="439,942,524,970"/>
+<area shape="rect" id="node68" href="$class_position_controller.html#adfe5b270ce9d376ee1d0b88a9e3f60d5" title="Destroy a PositionController Object." alt="" coords="380,993,583,1021"/>
+<area shape="rect" id="node70" href="$class_position_controller.html#a081bc31c5eee92459231157811fcd30c" title="Stop checking for collisions." alt="" coords="633,993,812,1021"/>
+</map>

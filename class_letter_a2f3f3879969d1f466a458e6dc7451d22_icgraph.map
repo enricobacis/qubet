@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_letter.html#a7a10e634f823dcfa39e8cc9074e1bfb5" title="Returns a QList of numberOfTextures random selected texture from the list of texture IDs of the Lette..." alt="" coords="249,5,404,33"/>
+<area shape="rect" id="node5" href="$class_letter.html#acb0f19cda339f96e3be02785faa86543" title="Returns a random selected texture from the list of texture IDs of the Letter." alt="" coords="455,5,604,33"/>
+</map>

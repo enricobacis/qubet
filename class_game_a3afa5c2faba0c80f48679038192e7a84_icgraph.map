@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_game.html#a918339ba114794f7ad593ee99e2952fd" title="Continue the Game from Pause mode." alt="" coords="255,5,383,33"/>
+<area shape="rect" id="node7" href="$class_game.html#ab684b380c7d3f3577e2fb80006415297" title="Initialize the game." alt="" coords="268,106,369,134"/>
+<area shape="rect" id="node11" href="$class_game.html#a9d9a79a0f7df3c7e55a3103c04ecbc87" title="Pause the Game." alt="" coords="260,55,377,83"/>
+<area shape="rect" id="node5" href="$class_game.html#a4445badbb765781a753a1b5761321163" title="Slot invoked when the user presses a key on the keyboard." alt="" coords="432,30,549,58"/>
+<area shape="rect" id="node9" href="$class_game.html#a86723a41ffb9d324493d2326c0aed3ea" title="Creator for the Story Mode." alt="" coords="447,106,535,134"/>
+</map>

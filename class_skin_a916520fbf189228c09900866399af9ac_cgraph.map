@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_skin.html#a5aefa13a9df97e8e920922f321600bb9" title="Set the texture for x&#45; face." alt="" coords="157,5,296,33"/>
+<area shape="rect" id="node5" href="$class_skin.html#a709acd8e6603f373a2fd77145dcea273" title="Set the texture for x+ face." alt="" coords="161,55,292,83"/>
+<area shape="rect" id="node7" href="$class_skin.html#a4cc122a67b6860a5bfa05ab592d43ba9" title="Set the texture for y&#45; face." alt="" coords="157,106,296,134"/>
+<area shape="rect" id="node9" href="$class_skin.html#a438522f36120175d4743e6afbdb0ff63" title="Set the texture for y+ face." alt="" coords="161,157,292,185"/>
+<area shape="rect" id="node11" href="$class_skin.html#a3f752c8e0e1a2520eb6f8d31080aa6f5" title="Set the texture for z&#45; face." alt="" coords="157,207,296,235"/>
+<area shape="rect" id="node13" href="$class_skin.html#a569a6cb803ee1c2c5d0e8e28d804a544" title="Set the texture for z+ face." alt="" coords="161,258,292,286"/>
+</map>

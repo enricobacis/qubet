@@ -1,0 +1,13 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_game.html#a918339ba114794f7ad593ee99e2952fd" title="Continue the Game from Pause mode." alt="" coords="187,195,315,223"/>
+<area shape="rect" id="node15" href="$class_action_list.html#aff2f46a0425d0bfcfe7bdb81c8ca5589" title="Returns the current primaryAction." alt="" coords="172,246,329,274"/>
+<area shape="rect" id="node17" href="$class_game.html#ad2ffcf06ffe9c27975645441f7a31d12" title="Signal relaunched from Qubet when the user presses a key on the keyboard." alt="" coords="177,297,324,325"/>
+<area shape="rect" id="node19" href="$class_game.html#a9d9a79a0f7df3c7e55a3103c04ecbc87" title="Pause the Game." alt="" coords="192,119,309,147"/>
+<area shape="rect" id="node5" href="$class_game.html#ad1fffc70125a20b475919a6d08f401ba" title="Signal emitted to enable or disable the audio." alt="" coords="420,106,537,134"/>
+<area shape="rect" id="node7" href="$class_game.html#a3afa5c2faba0c80f48679038192e7a84" title="This signal is emitted to set the Qubet&#39;s Mouse Move Tracking sensibility. The modes are: 0 &#45; no sign..." alt="" coords="379,157,579,185"/>
+<area shape="rect" id="node9" href="$class_position_controller.html#a49efd67ac42f916d309bd663ef592096" title="Start checking for collision." alt="" coords="388,309,569,337"/>
+<area shape="rect" id="node11" href="$class_cube.html#ad26eb8dddfe8e898b6a511a030740af4" title="Start the motion of the Cube;." alt="" coords="428,258,529,286"/>
+<area shape="rect" id="node13" href="$class_cube_string.html#a1896aba854d2f34fb8e23208f1ff16a2" title="Safely destroys a CubeString." alt="" coords="408,207,549,235"/>
+<area shape="rect" id="node23" href="$class_position_controller.html#a081bc31c5eee92459231157811fcd30c" title="Stop checking for collisions." alt="" coords="389,55,568,83"/>
+<area shape="rect" id="node25" href="$class_cube.html#aa5edae441424eaeccfe99898efa1f0a9" title="Stop the motion of the Cube." alt="" coords="428,5,529,33"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_qubet.html#a78b1a9f39dfd41e6ec91b9d9f7e11551" title="Signal emitted to enable or disable the audio." alt="" coords="193,5,311,33"/>
+<area shape="rect" id="node5" href="$class_qubet.html#ac1954aa3b4f9a7e0755e91c073aef583" title="Signal emitted to play the ambient music." alt="" coords="179,55,325,83"/>
+<area shape="rect" id="node7" href="$class_qubet.html#a3f3553c3a5466aff8d33ad550b604137" title="Signal emitted to play an effect." alt="" coords="200,106,304,134"/>
+<area shape="rect" id="node9" href="$class_qubet.html#a74efd02f8ab57dec741690d4becbadd5" title="Signal emitted to stop the current ambient music." alt="" coords="179,157,325,185"/>
+</map>

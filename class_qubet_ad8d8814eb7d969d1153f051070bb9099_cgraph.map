@@ -1,0 +1,45 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_qubet.html#a9623b1e29dc1420b50cceae5901ba75e" title="This function is used to states the paintGL function to show the Menu." alt="" coords="199,442,308,470"/>
+<area shape="rect" id="node5" href="$class_qubet.html#a6752c1f3f5d21c8ce4d53e4cc432c7ea" title="This function is used to connect all the menu slots to their signals." alt="" coords="359,442,481,470"/>
+<area shape="rect" id="node57" href="$class_audio_manager.html#a9c6add09cc6d63097115bc0a8847989e" title="Returns the state of the audio." alt="" coords="732,391,903,419"/>
+<area shape="rect" id="node104" href="$class_qubet.html#aea4cf8ea7aa5abec73d47e3af67e5186" title="This slot is to set the Mouse Move Tracking sensibility. The modes are: 0 &#45; no signal emitted..." alt="" coords="717,619,917,647"/>
+<area shape="rect" id="node7" href="$class_qubet.html#a514a965c1010debe93f51c2d4486a6f1" title="This method connects audio signals of the sender to their slots in AudioManager." alt="" coords="987,435,1109,463"/>
+<area shape="rect" id="node17" href="$class_qubet.html#a9b0d2898d33e4be64186ccb1b8365072" title="This methos connects mouse and keyboard events to the receiver object to forward user&#39;s input to the ..." alt="" coords="971,581,1125,609"/>
+<area shape="rect" id="node29" href="$class_qubet.html#a7c40361774ca7a14b36889e0623e70ce" title="This function is a slot linked to the Menu and invoked when the player chooses to play the Arcade Mod..." alt="" coords="544,341,656,369"/>
+<area shape="rect" id="node81" href="$class_qubet.html#ad2b71bd2808a4b15de077e33f9e3fd0c" title="This function is a slot linked to the Menu and invoked when the player chooses to play the Story Mode..." alt="" coords="548,290,652,318"/>
+<area shape="rect" id="node87" href="$class_qubet.html#a2776a39a78fcd2f61bedeccd9a9d70c6" title="This function is a slot linked to the Menu and invoked when the player chooses to enter the Level Edi..." alt="" coords="531,442,669,470"/>
+<area shape="rect" id="node9" href="$class_qubet.html#a78b1a9f39dfd41e6ec91b9d9f7e11551" title="Signal emitted to enable or disable the audio." alt="" coords="1193,486,1311,514"/>
+<area shape="rect" id="node11" href="$class_qubet.html#ac1954aa3b4f9a7e0755e91c073aef583" title="Signal emitted to play the ambient music." alt="" coords="1179,334,1325,362"/>
+<area shape="rect" id="node13" href="$class_qubet.html#a3f3553c3a5466aff8d33ad550b604137" title="Signal emitted to play an effect." alt="" coords="1200,385,1304,413"/>
+<area shape="rect" id="node15" href="$class_qubet.html#a74efd02f8ab57dec741690d4becbadd5" title="Signal emitted to stop the current ambient music." alt="" coords="1179,435,1325,463"/>
+<area shape="rect" id="node19" href="$class_qubet.html#a86b991100db3db4ce19028a5b29c168b" title="Signal emitted when the user clicks on a item." alt="" coords="1195,537,1309,565"/>
+<area shape="rect" id="node21" href="$class_qubet.html#a88d67b4fffe8fb1b28ca15c27639a28c" title="Signal emitted when the user presses a key on the keyboard." alt="" coords="1193,587,1311,615"/>
+<area shape="rect" id="node23" href="$class_qubet.html#a56fa044ae2c3bd878fe1c7a5e2afcd9c" title="Signal emitted when the user moves the mouse." alt="" coords="1191,638,1313,666"/>
+<area shape="rect" id="node25" href="$class_qubet.html#a7260bd086f7074fcfc5ca48af4e96fdf" title="Signal emitted when the user releases the mouse button." alt="" coords="1184,689,1320,717"/>
+<area shape="rect" id="node27" href="$class_qubet.html#a9fa9e692e5d878226bceb4d6b4b75c44" title="Signal emitted when the user scrolls the wheel of the mouse." alt="" coords="1189,739,1315,767"/>
+<area shape="rect" id="node31" href="$class_qubet.html#a7f59549a30d39109cf4eada72a6e1f60" title="This function is invoked when the player chooses an option from the Menu, so this is no more necessar..." alt="" coords="763,341,872,369"/>
+<area shape="rect" id="node42" href="$class_qubet.html#ac4be613be0dec97d4456a853d9fe23da" title="This function is used to connect all the game slots to their signals." alt="" coords="755,290,880,318"/>
+<area shape="rect" id="node59" href="$class_game.html#ae8638ccdb0ef3bf39a6affa30aa1258f" title="Function to start the game." alt="" coords="763,239,872,267"/>
+<area shape="rect" id="node33" href="$class_menu.html#a831387f51358cfb88cd018e1777bc980" title="Disconnect and Destroy a Menu object." alt="" coords="1208,283,1296,311"/>
+<area shape="rect" id="node35" href="$class_cube_string.html#a1896aba854d2f34fb8e23208f1ff16a2" title="Safely destroys a CubeString." alt="" coords="1647,689,1788,717"/>
+<area shape="rect" id="node37" href="$class_cube_string_list.html#a3c9f2621ef98046dc87870c95730127b" title="Safely destroy a CubeStringList." alt="" coords="1388,689,1564,717"/>
+<area shape="rect" id="node40" href="$class_skin.html#a002cee43b3cacd1669d01e8f7e522494" title="Safely destroy the Skin." alt="" coords="1439,511,1513,539"/>
+<area shape="rect" id="node46" href="$class_qubet.html#aec7dc759fd4912e4c7b7e71014366dbe" title="This function is a slot linked to the Game and invoked when the player chooses to close the current G..." alt="" coords="989,189,1107,217"/>
+<area shape="rect" id="node49" href="$class_game.html#ae3d112ca6e0e55150d2fdbc704474530" title="Safely destroy a Game Object." alt="" coords="1205,55,1299,83"/>
+<area shape="rect" id="node51" href="$class_cube.html#aa814e979cecb8c451fdb332ded2cea1e" title="Safely destroy a Cube object." alt="" coords="1433,55,1519,83"/>
+<area shape="rect" id="node53" href="$class_position_controller.html#adfe5b270ce9d376ee1d0b88a9e3f60d5" title="Destroy a PositionController Object." alt="" coords="1375,5,1577,33"/>
+<area shape="rect" id="node55" href="$class_position_controller.html#a081bc31c5eee92459231157811fcd30c" title="Stop checking for collisions." alt="" coords="1628,5,1807,33"/>
+<area shape="rect" id="node61" href="$class_game.html#addb89f93a722ee74b6e31f56faffac6b" title="Start the current Level." alt="" coords="1200,233,1304,261"/>
+<area shape="rect" id="node63" href="$class_level.html#afadeb8bc8a9274cd515df504f14d2d20" title="Returns the ambient Music Filename." alt="" coords="1385,207,1567,235"/>
+<area shape="rect" id="node65" href="$class_level.html#a6581a51667bae2360949e84533311c69" title="Returns the length of the Level." alt="" coords="1425,258,1527,286"/>
+<area shape="rect" id="node67" href="$class_level.html#a77e5744c1c467164915ad532cf8707a6" title="Returns the name of the Level." alt="" coords="1427,309,1525,337"/>
+<area shape="rect" id="node69" href="$class_level.html#a24b587c29713ba86dae4100397f6af1d" title="Returns the Skybox Name." alt="" coords="1409,359,1543,387"/>
+<area shape="rect" id="node71" href="$class_level.html#a930da7d3e469c0e4216b210e5a337116" title="Loads the Level from xml form using the filename as input." alt="" coords="1439,410,1513,438"/>
+<area shape="rect" id="node73" href="$class_game.html#a9f1219a9f2824681329e14d3c8296d21" title="Signal emitted to play the ambient music." alt="" coords="1403,461,1549,489"/>
+<area shape="rect" id="node75" href="$class_game.html#a3357bd0e7e3e6d6e14e5736b8a76773f" title="Signal emitted to set the Skybox." alt="" coords="1421,106,1531,134"/>
+<area shape="rect" id="node77" href="$class_position_controller.html#a49efd67ac42f916d309bd663ef592096" title="Start checking for collision." alt="" coords="1385,157,1567,185"/>
+<area shape="rect" id="node90" href="$class_qubet.html#af93555e97eb548a0c3ccee6aa071e028" title="This function is used to connect all the levelEditor slots to their signals." alt="" coords="743,518,892,546"/>
+<area shape="rect" id="node92" href="$class_qubet.html#a82a85442bb3d588989397003caaa3cc0" title="Slot invoked to add a level to the levelList." alt="" coords="967,518,1129,546"/>
+<area shape="rect" id="node96" href="$class_qubet.html#a5de33bce5dd898e05a19f6e713dddbcd" title="This function is a slot linked to the LevelEditor and invoked when the player chooses to close the cu..." alt="" coords="977,670,1119,698"/>
+<area shape="rect" id="node99" href="$class_level_editor.html#a2fdfaad257e235e2f392b08fabee79ec" title="This is the LevelEditor Destructor." alt="" coords="1181,790,1323,818"/>
+</map>

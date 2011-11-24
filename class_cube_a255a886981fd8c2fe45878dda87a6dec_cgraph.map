@@ -1,0 +1,11 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_cube.html#ad0974041b0a720270ad48a418c3e8f4b" title="It is the slot invoked when the Cube collides with an Obstacle." alt="" coords="176,42,267,70"/>
+<area shape="rect" id="node11" href="$class_cube.html#a4989309f7e6c63f4a2ae7a9814f1b9f0" title="Make the Cube jump." alt="" coords="183,93,260,121"/>
+<area shape="rect" id="node14" href="$class_cube.html#ac448eee673759f52f9d8b00e84c3a8c1" title="Make the Cube move to the Left." alt="" coords="172,194,271,222"/>
+<area shape="rect" id="node19" href="$class_cube.html#aa949631a04e069aa0357286f13bae6f9" title="Make the Cube move to the right." alt="" coords="168,143,275,171"/>
+<area shape="rect" id="node23" href="$class_cube.html#ae6efe5f4f6ae7cf232d08598fd0ab226" title="Signal emitted when the player &quot;suicide&quot; the Cube." alt="" coords="177,245,265,273"/>
+<area shape="rect" id="node5" href="$class_cube.html#a831ab62b5ccacee1ae848fa36b5bd91d" title="Generate the normalsMatrix Matrix." alt="" coords="324,5,479,33"/>
+<area shape="rect" id="node7" href="$class_cube.html#ae6de3fa944d070a7d5ed0e620c6f8e35" title="Make the Cube explode." alt="" coords="356,55,447,83"/>
+<area shape="rect" id="node9" href="$class_cube.html#a26c735c21499d622891d33f0d8bae8cd" title="Signal emitted to play an effect." alt="" coords="351,131,452,159"/>
+<area shape="rect" id="node16" href="$class_cube.html#a5db8ff806595c71bed4727e0518256ce" title="Returns true if the Cube is moving, else false." alt="" coords="353,189,449,217"/>
+</map>

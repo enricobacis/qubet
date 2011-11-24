@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_qubet.html#ab7d996f564ea9db5f3f103088f4332a8" title="Load the levels from the resource file." alt="" coords="153,30,263,58"/>
+<area shape="rect" id="node5" href="$class_qubet.html#a63cdccdb1cdb60306a5a12e50f1c6c6e" title="Load skins, levels and obstacles in Qubet." alt="" coords="313,30,391,58"/>
+<area shape="rect" id="node7" href="$class_qubet.html#a1452c8e7bec024adb53ba216316c593d" title="It is used after the first show of the qubet window to initialize Qubet." alt="" coords="440,30,541,58"/>
+<area shape="rect" id="node9" href="$class_qubet.html#a13674eced0fe056b62e99f7a8a5c95f2" title="Paint the OpenGL scene." alt="" coords="589,5,685,33"/>
+<area shape="rect" id="node11" href="$class_qubet.html#acaa67d9bbdf3d12601d4b71ed62f2fc0" title="This is a duplicated function to call paintGL, but this can be used as a slot." alt="" coords="733,30,816,58"/>
+</map>

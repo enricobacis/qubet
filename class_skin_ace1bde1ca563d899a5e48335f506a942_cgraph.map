@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_skin.html#a7c690aa85f2d812771955b6b8593dc2e" title="Returns the texture for x&#45; face." alt="" coords="157,5,296,33"/>
+<area shape="rect" id="node5" href="$class_skin.html#aedceb1836c9911b904021e86aaa8dfd0" title="Returns the texture for x+ face." alt="" coords="161,55,292,83"/>
+<area shape="rect" id="node7" href="$class_skin.html#af01a6453a9c7c87d35b3f5e1cd4f764e" title="Returns the texture for y&#45; face." alt="" coords="157,106,296,134"/>
+<area shape="rect" id="node9" href="$class_skin.html#a19e9dc2acb4b1c10c601fe15523829ee" title="Returns the texture for y+ face." alt="" coords="161,157,292,185"/>
+<area shape="rect" id="node11" href="$class_skin.html#a4a53ca3d732e32958dfd23faae30e369" title="Returns the texture for z&#45; face." alt="" coords="157,207,296,235"/>
+<area shape="rect" id="node13" href="$class_skin.html#a5cda501b1b4be23d33cf0442c22eae01" title="Returns the texture for z+ face." alt="" coords="161,258,292,286"/>
+</map>

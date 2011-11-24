@@ -1,0 +1,50 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_game.html#a918339ba114794f7ad593ee99e2952fd" title="Continue the Game from Pause mode." alt="" coords="221,143,349,171"/>
+<area shape="rect" id="node7" href="$class_game.html#a8c6849c5f36faed777969fd29bef0e5f" title="make the animation for the initial countdown" alt="" coords="231,194,340,222"/>
+<area shape="rect" id="node26" href="$class_level_editor.html#a9f79beb562400f1296cc3c9c96b41a13" title="This function enlarge the level." alt="" coords="227,599,344,627"/>
+<area shape="rect" id="node32" href="$class_game.html#a152deaf16f4427aaddc8ebf6d99e9de5" title="Slot invoked when the cube has exploded (suicide or collided)." alt="" coords="235,929,336,957"/>
+<area shape="rect" id="node36" href="$class_level_editor.html#a7e183b7bd341487ad23e0ff99af8eee5" title="This function decraese the gravity value." alt="" coords="213,650,357,678"/>
+<area shape="rect" id="node40" href="$class_level_editor.html#ab24619f5b5d2abe6d876bcc798f13f59" title="This function increase the gravity value." alt="" coords="217,701,353,729"/>
+<area shape="rect" id="node44" href="$class_level_editor.html#a6776dd013a33806460de6895b66faf80" title="This function lengthen the level." alt="" coords="224,751,347,779"/>
+<area shape="rect" id="node48" href="$class_menu.html#a57fbca80f5ddf14922e2663820de1dfa" title="Change the current skin and select the next one." alt="" coords="237,295,333,323"/>
+<area shape="rect" id="node53" href="$class_game.html#a9d9a79a0f7df3c7e55a3103c04ecbc87" title="Pause the Game." alt="" coords="227,93,344,121"/>
+<area shape="rect" id="node56" href="$class_menu.html#a65908e8f129cd95b798ff3ff3da41c9b" title="Change the current skin and select the previous one." alt="" coords="227,245,344,273"/>
+<area shape="rect" id="node59" href="$class_level_editor.html#a4d73535317c6538323770388fe159884" title="This function reduce the level." alt="" coords="228,802,343,830"/>
+<area shape="rect" id="node63" href="$class_level_editor.html#a8fdf78dcf474c3bcfa9154a764288cca" title="This function shorten the level." alt="" coords="227,853,344,881"/>
+<area shape="rect" id="node67" href="$class_cube_string_list.html#a3c9f2621ef98046dc87870c95730127b" title="Safely destroy a CubeStringList." alt="" coords="197,447,373,475"/>
+<area shape="rect" id="node91" href="$class_level_editor.html#a2fdfaad257e235e2f392b08fabee79ec" title="This is the LevelEditor Destructor." alt="" coords="423,245,564,273"/>
+<area shape="rect" id="node121" href="$class_menu.html#a831387f51358cfb88cd018e1777bc980" title="Disconnect and Destroy a Menu object." alt="" coords="449,295,537,323"/>
+<area shape="rect" id="node5" href="$class_game.html#a4445badbb765781a753a1b5761321163" title="Slot invoked when the user presses a key on the keyboard." alt="" coords="435,93,552,121"/>
+<area shape="rect" id="node9" href="$class_game.html#aa5a6a37a0385d779fbf2e5b0a1fda742" title="Method to draw the game." alt="" coords="452,143,535,171"/>
+<area shape="rect" id="node11" href="$class_qubet.html#ad108e6c05cda81b75b5f8600002c62f9" title="This function is used to draw the scene on the QGLWidget. It is used by PaintGL that calls this and t..." alt="" coords="637,118,749,146"/>
+<area shape="rect" id="node13" href="$class_qubet.html#a3e2ddd9bf27cecf96936d18e20542170" title="This method returns a list of the names of the foreground item at mouse coordinates (mouseX..." alt="" coords="831,55,964,83"/>
+<area shape="rect" id="node19" href="$class_qubet.html#a13674eced0fe056b62e99f7a8a5c95f2" title="Paint the OpenGL scene." alt="" coords="1400,55,1496,83"/>
+<area shape="rect" id="node15" href="$class_qubet.html#a8597e6658271cb65cd1fd04e22e43ceb" title="This function is invoked when the player moves the mouse inside the game window." alt="" coords="1023,55,1169,83"/>
+<area shape="rect" id="node17" href="$class_qubet.html#acd54b249e3977132de7dd0153e61a99c" title="This function is invoked when the player clicks inside the game window." alt="" coords="1023,5,1169,33"/>
+<area shape="rect" id="node21" href="$class_qubet.html#acaa67d9bbdf3d12601d4b71ed62f2fc0" title="This is a duplicated function to call paintGL, but this can be used as a slot." alt="" coords="1583,55,1665,83"/>
+<area shape="rect" id="node23" href="$class_qubet.html#a1452c8e7bec024adb53ba216316c593d" title="It is used after the first show of the qubet window to initialize Qubet." alt="" coords="1757,55,1859,83"/>
+<area shape="rect" id="node28" href="$class_level_editor.html#a3bc59bcfad1ea901b5ec4bcd2b332b00" title="Slot invoked when the user clicks on a item." alt="" coords="424,751,563,779"/>
+<area shape="rect" id="node30" href="$class_level_editor.html#a2f741b13837f6467e0452df50f2e51dd" title="Slot invoked when the user presses a key on the keyboard." alt="" coords="623,675,764,703"/>
+<area shape="rect" id="node34" href="$class_game.html#a4b24c3f6f4be317b607531aab8e094c9" title="Slot invoked when the cube has a collision with an obstacle." alt="" coords="447,954,540,982"/>
+<area shape="rect" id="node50" href="$class_menu.html#acb0e21e08f2e1496aa424b07c9b1ec9a" title="Method to draw the menu." alt="" coords="455,194,532,222"/>
+<area shape="rect" id="node69" href="$class_menu.html#a1f063d8ee814499b251757f2dbde70f9" title="This function is invoked when editorButton is triggered." alt="" coords="613,346,773,374"/>
+<area shape="rect" id="node76" href="$class_level_editor.html#abcfebacb7d5d1bedd7c7d7a86f7d7584" title="This function is invoked when a letter is typed." alt="" coords="425,549,561,577"/>
+<area shape="rect" id="node79" href="$class_menu.html#a8e7069c16b9f18fb50fd7e5c2c58f26d" title="Select the next level." alt="" coords="443,447,544,475"/>
+<area shape="rect" id="node87" href="$class_menu.html#adf6a7ac7e65fa794d68baee063dcfa64" title="Select the previous level." alt="" coords="632,397,755,425"/>
+<area shape="rect" id="node71" href="$class_menu.html#ace81823bb7f424a01c9c35546386d390" title="Slot invoked when the user clicks on a item." alt="" coords="843,422,952,450"/>
+<area shape="rect" id="node73" href="$class_menu.html#af366828c1900d26947608997a0906b89" title="Slot invoked when the user presses a key on the keyboard." alt="" coords="840,486,955,514"/>
+<area shape="rect" id="node81" href="$class_menu.html#ae33729ba0f7f2bf8d7ed69a3f16b75b9" title="This function is invoked when nextButton is triggered." alt="" coords="616,498,771,526"/>
+<area shape="rect" id="node93" href="$class_qubet.html#a5de33bce5dd898e05a19f6e713dddbcd" title="This function is a slot linked to the LevelEditor and invoked when the player chooses to close the cu..." alt="" coords="623,194,764,222"/>
+<area shape="rect" id="node117" href="$class_qubet.html#a0df041d667467697dadedfa57503c514" title="Destroy a Qubet object." alt="" coords="647,245,740,273"/>
+<area shape="rect" id="node95" href="$class_qubet.html#af93555e97eb548a0c3ccee6aa071e028" title="This function is used to connect all the levelEditor slots to their signals." alt="" coords="823,207,972,235"/>
+<area shape="rect" id="node97" href="$class_qubet.html#a2776a39a78fcd2f61bedeccd9a9d70c6" title="This function is a slot linked to the Menu and invoked when the player chooses to enter the Level Edi..." alt="" coords="1027,207,1165,235"/>
+<area shape="rect" id="node99" href="$class_qubet.html#a6752c1f3f5d21c8ce4d53e4cc432c7ea" title="This function is used to connect all the menu slots to their signals." alt="" coords="1220,207,1343,235"/>
+<area shape="rect" id="node101" href="$class_qubet.html#a9623b1e29dc1420b50cceae5901ba75e" title="This function is used to states the paintGL function to show the Menu." alt="" coords="1393,157,1503,185"/>
+<area shape="rect" id="node103" href="$class_qubet.html#aec7dc759fd4912e4c7b7e71014366dbe" title="This function is a slot linked to the Game and invoked when the player chooses to close the current G..." alt="" coords="1565,157,1683,185"/>
+<area shape="rect" id="node114" href="$class_qubet.html#ad8d8814eb7d969d1153f051070bb9099" title="This function has to be invoked when the loading is finished." alt="" coords="1552,106,1696,134"/>
+<area shape="rect" id="node105" href="$class_qubet.html#ac4be613be0dec97d4456a853d9fe23da" title="This function is used to connect all the game slots to their signals." alt="" coords="1745,258,1871,286"/>
+<area shape="rect" id="node107" href="$class_qubet.html#a7c40361774ca7a14b36889e0623e70ce" title="This function is a slot linked to the Menu and invoked when the player chooses to play the Arcade Mod..." alt="" coords="1921,258,2033,286"/>
+<area shape="rect" id="node110" href="$class_qubet.html#ad2b71bd2808a4b15de077e33f9e3fd0c" title="This function is a slot linked to the Menu and invoked when the player chooses to play the Story Mode..." alt="" coords="1925,359,2029,387"/>
+<area shape="rect" id="node119" href="$class_window.html#a45ee5a1dc49aa1847cc190fa99f618ae" title="This function is invoked when the user closes the Window. It is used to perform cleaning operations..." alt="" coords="837,258,957,286"/>
+<area shape="rect" id="node123" href="$class_qubet.html#a7f59549a30d39109cf4eada72a6e1f60" title="This function is invoked when the player chooses an option from the Menu, so this is no more necessar..." alt="" coords="843,309,952,337"/>
+</map>

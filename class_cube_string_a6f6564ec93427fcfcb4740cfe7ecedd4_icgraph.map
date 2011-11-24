@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_cube_string_list.html#a1ef30dd5a66d3be81592b74a6f309926" title="Check if a letter of the CubeString is already rotating." alt="" coords="185,5,332,33"/>
+<area shape="rect" id="node9" href="$class_menu.html#a4417084ae3a2e18f4bc1726ffe3908d4" title="Slot invoked when the user moves the mouse." alt="" coords="391,55,511,83"/>
+<area shape="rect" id="node12" href="$class_level_editor.html#ac2410987e8dfc6dc296be2ca9ae9d12b" title="Slot invoked when the user moves the mouse." alt="" coords="185,106,332,134"/>
+<area shape="rect" id="node14" href="$class_game.html#a3424ecb7e910acecb019dde65a8f7942" title="Slot invoked when the user moves the mouse." alt="" coords="197,157,320,185"/>
+<area shape="rect" id="node5" href="$class_level_editor.html#abcfebacb7d5d1bedd7c7d7a86f7d7584" title="This function is invoked when a letter is typed." alt="" coords="383,5,519,33"/>
+<area shape="rect" id="node7" href="$class_level_editor.html#a2f741b13837f6467e0452df50f2e51dd" title="Slot invoked when the user presses a key on the keyboard." alt="" coords="568,5,709,33"/>
+</map>

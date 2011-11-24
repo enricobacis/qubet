@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$struct_vector3f.html#a1c48fd0ab34bf22cbcd7dea08f1e324e" title="Compute the length of the vector." alt="" coords="167,5,263,33"/>
+<area shape="rect" id="node5" href="$struct_vector3f.html#a5bff54ba45c9953f3505807306739399" title="Normalize a vector." alt="" coords="312,5,427,33"/>
+<area shape="rect" id="node7" href="$struct_vector3f.html#a728a16b77ab8cfd4b2f99551197d42b3" title="Compute one of the orthogonal vectors of the vector." alt="" coords="476,5,633,33"/>
+</map>

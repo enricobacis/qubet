@@ -1,0 +1,13 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_alphabet.html#a8a1da1bd7fdf2fd06a9768f9597a0b44" title="Safely destroy an Alphabet (and all the Letter in its list)." alt="" coords="179,5,296,33"/>
+<area shape="rect" id="node5" href="$class_audio_manager.html#ad94dc46723c6d7cf8c81fc3772a842aa" title="Safely stops and destroys the AudioManager (including the ambientMusic and all the effects in the eff..." alt="" coords="151,55,324,83"/>
+<area shape="rect" id="node7" href="$class_game.html#ae3d112ca6e0e55150d2fdbc704474530" title="Safely destroy a Game Object." alt="" coords="191,106,284,134"/>
+<area shape="rect" id="node15" href="$class_level_editor.html#a2fdfaad257e235e2f392b08fabee79ec" title="This is the LevelEditor Destructor." alt="" coords="167,157,308,185"/>
+<area shape="rect" id="node22" href="$class_menu.html#a831387f51358cfb88cd018e1777bc980" title="Disconnect and Destroy a Menu object." alt="" coords="193,233,281,261"/>
+<area shape="rect" id="node9" href="$class_cube.html#aa814e979cecb8c451fdb332ded2cea1e" title="Safely destroy a Cube object." alt="" coords="433,55,519,83"/>
+<area shape="rect" id="node11" href="$class_position_controller.html#adfe5b270ce9d376ee1d0b88a9e3f60d5" title="Destroy a PositionController Object." alt="" coords="375,106,577,134"/>
+<area shape="rect" id="node13" href="$class_position_controller.html#a081bc31c5eee92459231157811fcd30c" title="Stop checking for collisions." alt="" coords="628,106,807,134"/>
+<area shape="rect" id="node17" href="$class_cube_string.html#a1896aba854d2f34fb8e23208f1ff16a2" title="Safely destroys a CubeString." alt="" coords="647,207,788,235"/>
+<area shape="rect" id="node19" href="$class_cube_string_list.html#a3c9f2621ef98046dc87870c95730127b" title="Safely destroy a CubeStringList." alt="" coords="388,207,564,235"/>
+<area shape="rect" id="node26" href="$class_skin.html#a002cee43b3cacd1669d01e8f7e522494" title="Safely destroy the Skin." alt="" coords="439,309,513,337"/>
+</map>

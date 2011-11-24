@@ -1,0 +1,27 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_action_list.html#ad5b062a15111b3d89a70607405bb3205" title="Appends a secondary action to secondaryActions list." alt="" coords="192,55,387,83"/>
+<area shape="rect" id="node5" href="$class_level_editor.html#a043df349dfcbb3fc1965aab314f031fc" title="This function is invoked when back button is pressed." alt="" coords="197,233,381,261"/>
+<area shape="rect" id="node7" href="$class_level_editor.html#a583ad1e4fb51a28c22cccdb05caeeb5d" title="Signal emitted to play an effect." alt="" coords="687,435,815,463"/>
+<area shape="rect" id="node11" href="$class_level_editor.html#a28990264a514b22a14140ce9dcc8fdb7" title="This function is invoked when next button is pressed." alt="" coords="199,157,380,185"/>
+<area shape="rect" id="node14" href="$class_level_editor.html#aaaa81998d648c61c425011fd73c8a087" title="Save the Level." alt="" coords="456,30,587,58"/>
+<area shape="rect" id="node30" href="$class_level.html#ae9f78bac36390abe2f42b028c09ec54c" title="Returns the number of obstacles in the level." alt="" coords="217,790,361,818"/>
+<area shape="rect" id="node32" href="$class_level.html#a1a7760d0a08027092dd992e8fa5473bf" title="Clears the not saves obstacles." alt="" coords="435,790,608,818"/>
+<area shape="rect" id="node35" href="$class_level.html#a37f0412fc29a1e3d6f523c50592f9034" title="Deletes an obstacle." alt="" coords="227,841,352,869"/>
+<area shape="rect" id="node37" href="$class_level_editor.html#a57689eb12497afb6e3bd91d3eec8e1de" title="Signal emitted to enable or disable the audio." alt="" coords="219,891,360,919"/>
+<area shape="rect" id="node39" href="$class_level_editor.html#a9f79beb562400f1296cc3c9c96b41a13" title="This function enlarge the level." alt="" coords="231,385,348,413"/>
+<area shape="rect" id="node44" href="$class_level_editor.html#a7e183b7bd341487ad23e0ff99af8eee5" title="This function decraese the gravity value." alt="" coords="217,435,361,463"/>
+<area shape="rect" id="node48" href="$class_level_editor.html#ab24619f5b5d2abe6d876bcc798f13f59" title="This function increase the gravity value." alt="" coords="221,486,357,514"/>
+<area shape="rect" id="node52" href="$class_level_editor.html#a6776dd013a33806460de6895b66faf80" title="This function lengthen the level." alt="" coords="228,537,351,565"/>
+<area shape="rect" id="node57" href="$class_level_editor.html#a9540db1ca25f037d016f61ceed879716" title="This function quit the level editor." alt="" coords="227,309,352,337"/>
+<area shape="rect" id="node63" href="$class_level_editor.html#a4d73535317c6538323770388fe159884" title="This function reduce the level." alt="" coords="232,587,347,615"/>
+<area shape="rect" id="node68" href="$class_level_editor.html#a8fdf78dcf474c3bcfa9154a764288cca" title="This function shorten the level." alt="" coords="231,638,348,666"/>
+<area shape="rect" id="node9" href="$class_action_list.html#a3a582129fc401579b6ae2bb730015511" title="Set the given parameter as the new primaryAction, overriding the old one." alt="" coords="443,182,600,210"/>
+<area shape="rect" id="node27" href="$class_level.html#ad314a641646dda38be5effab70e094f7" title="Set the gravity of the Level." alt="" coords="469,81,573,109"/>
+<area shape="rect" id="node16" href="$class_level_editor.html#a707b51479b7028ef61a4cb70972df076" title="This function add the current level to the levelsList." alt="" coords="657,5,844,33"/>
+<area shape="rect" id="node19" href="$class_level.html#ad21a1eaf6e4473e5960f74e12ba1ee9b" title="Saves the Level in a xml form using the filename as output." alt="" coords="712,55,789,83"/>
+<area shape="rect" id="node21" href="$class_obstacle.html#a0210e3ca68f2e5d8e3d57cd418fb1611" title="Returns the cell of the Obstacle." alt="" coords="904,5,1008,33"/>
+<area shape="rect" id="node23" href="$class_obstacle.html#ac344f136338e372e67830fcb0f459770" title="This method return the obstacleId." alt="" coords="908,55,1004,83"/>
+<area shape="rect" id="node25" href="$class_obstacle.html#a137f51bc3c6adade850ea9714e89cf6e" title="Returns the obstacle modelId." alt="" coords="893,106,1019,134"/>
+<area shape="rect" id="node42" href="$class_cube_string.html#a1896aba854d2f34fb8e23208f1ff16a2" title="Safely destroys a CubeString." alt="" coords="451,537,592,565"/>
+<area shape="rect" id="node61" href="$class_level_editor.html#a7820b05ab8a4ae7058b973db89401911" title="Signal emitted to stop the current ambient music." alt="" coords="436,283,607,311"/>
+</map>

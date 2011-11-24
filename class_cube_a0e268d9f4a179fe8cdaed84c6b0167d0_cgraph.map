@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_cube.html#a4cd305a333de20b17b0b7be53b605507" title="this function is called in the draw function in case of explosion." alt="" coords="141,5,267,33"/>
+<area shape="rect" id="node5" href="$class_cube.html#a7565e63cf5251350f8c5d0d04ee52dbc" title="Signal to inform that the explosion has finished." alt="" coords="133,55,275,83"/>
+<area shape="rect" id="node7" href="$class_cube.html#a5f56bb5176ff421210b33a9f22b95275" title="Reset the Level." alt="" coords="152,106,256,134"/>
+<area shape="rect" id="node9" href="$class_cube.html#a2626924acbf8e254d72a3dd475cd1fee" title="Update the position of the Cube." alt="" coords="141,157,267,185"/>
+<area shape="rect" id="node11" href="$class_cube.html#aee4026693a488cd8dd37fceadd2b8859" title="Actions to perform when the level is completed." alt="" coords="323,157,427,185"/>
+<area shape="rect" id="node13" href="$class_cube.html#a0409a6dc9f4a04e3d3a8faaedd21ef8b" title="Signal emitted when the level is completed." alt="" coords="475,157,603,185"/>
+</map>

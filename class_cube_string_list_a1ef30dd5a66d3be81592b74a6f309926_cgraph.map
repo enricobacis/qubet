@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_cube_string_list.html#af32055662992ac4a314bcabef7f4bf27" title="Return a pointer to the CubeString having the parameter OpenGL name." alt="" coords="201,5,423,33"/>
+<area shape="rect" id="node7" href="$class_cube_string.html#a6f6564ec93427fcfcb4740cfe7ecedd4" title="Check if a letter of the CubeString is already rotating." alt="" coords="247,55,377,83"/>
+<area shape="rect" id="node5" href="$class_cube_string.html#abcf861a2ddfd2cd2c466be269acf91db" title="Returns the name given to the entire string (for picking purposes). [default = 0]." alt="" coords="473,5,599,33"/>
+</map>

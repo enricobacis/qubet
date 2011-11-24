@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_level_editor.html#a2f741b13837f6467e0452df50f2e51dd" title="Slot invoked when the user presses a key on the keyboard." alt="" coords="241,5,383,33"/>
+<area shape="rect" id="node5" href="$class_level_editor.html#ac2410987e8dfc6dc296be2ca9ae9d12b" title="Slot invoked when the user moves the mouse." alt="" coords="239,55,385,83"/>
+<area shape="rect" id="node7" href="$class_level_editor.html#abe6aaf45397876078f624d53b486da47" title="Slot invoked when the user scrolls the wheel of the mouse button." alt="" coords="237,106,387,134"/>
+</map>

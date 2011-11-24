@@ -1,0 +1,17 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_cube_string_list.html#ab0a6f4e9cb679bf813638216d5943167" title="Returns the label which name is _stringName." alt="" coords="303,81,441,109"/>
+<area shape="rect" id="node26" href="$class_cube_string_list.html#a1ef30dd5a66d3be81592b74a6f309926" title="Check if a letter of the CubeString is already rotating." alt="" coords="299,131,445,159"/>
+<area shape="rect" id="node31" href="$class_cube_string_list.html#a6ffb91a8f967ea2c8da949e57fde8c54" title="Start the rotation of a single letter in a single CubeString contained in the CubeStrigList." alt="" coords="277,182,467,210"/>
+<area shape="rect" id="node35" href="$class_cube_string_list.html#af29cd4e66d6f883400b13385ce5f9b27" title="Start the rotation of a whole CubeString contained in the CubeStringList." alt="" coords="277,233,467,261"/>
+<area shape="rect" id="node5" href="$class_level_editor.html#a9b5268e5052ebdae3ded4edc11fbfb60" title="Method to draw the levelEditor." alt="" coords="531,81,637,109"/>
+<area shape="rect" id="node22" href="$class_level_editor.html#abcfebacb7d5d1bedd7c7d7a86f7d7584" title="This function is invoked when a letter is typed." alt="" coords="516,131,652,159"/>
+<area shape="rect" id="node7" href="$class_qubet.html#ad108e6c05cda81b75b5f8600002c62f9" title="This function is used to draw the scene on the QGLWidget. It is used by PaintGL that calls this and t..." alt="" coords="716,81,828,109"/>
+<area shape="rect" id="node9" href="$class_qubet.html#a3e2ddd9bf27cecf96936d18e20542170" title="This method returns a list of the names of the foreground item at mouse coordinates (mouseX..." alt="" coords="892,55,1025,83"/>
+<area shape="rect" id="node15" href="$class_qubet.html#a13674eced0fe056b62e99f7a8a5c95f2" title="Paint the OpenGL scene." alt="" coords="911,106,1007,134"/>
+<area shape="rect" id="node11" href="$class_qubet.html#a8597e6658271cb65cd1fd04e22e43ceb" title="This function is invoked when the player moves the mouse inside the game window." alt="" coords="1076,5,1223,33"/>
+<area shape="rect" id="node13" href="$class_qubet.html#acd54b249e3977132de7dd0153e61a99c" title="This function is invoked when the player clicks inside the game window." alt="" coords="1076,55,1223,83"/>
+<area shape="rect" id="node17" href="$class_qubet.html#acaa67d9bbdf3d12601d4b71ed62f2fc0" title="This is a duplicated function to call paintGL, but this can be used as a slot." alt="" coords="1108,106,1191,134"/>
+<area shape="rect" id="node19" href="$class_qubet.html#a1452c8e7bec024adb53ba216316c593d" title="It is used after the first show of the qubet window to initialize Qubet." alt="" coords="1272,131,1373,159"/>
+<area shape="rect" id="node24" href="$class_level_editor.html#a2f741b13837f6467e0452df50f2e51dd" title="Slot invoked when the user presses a key on the keyboard." alt="" coords="701,131,843,159"/>
+<area shape="rect" id="node29" href="$class_menu.html#a4417084ae3a2e18f4bc1726ffe3908d4" title="Slot invoked when the user moves the mouse." alt="" coords="524,182,644,210"/>
+</map>

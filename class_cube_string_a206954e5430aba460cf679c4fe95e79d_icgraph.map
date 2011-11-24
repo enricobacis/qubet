@@ -1,0 +1,20 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_game.html#a8c6849c5f36faed777969fd29bef0e5f" title="make the animation for the initial countdown" alt="" coords="276,55,385,83"/>
+<area shape="rect" id="node22" href="$class_game.html#a231c523921753fb84add02679cddba8c" title="Creates the resultsCubeString." alt="" coords="253,207,408,235"/>
+<area shape="rect" id="node29" href="$class_menu.html#acb0e21e08f2e1496aa424b07c9b1ec9a" title="Method to draw the menu." alt="" coords="497,106,575,134"/>
+<area shape="rect" id="node32" href="$class_game.html#a152deaf16f4427aaddc8ebf6d99e9de5" title="Slot invoked when the cube has exploded (suicide or collided)." alt="" coords="280,258,381,286"/>
+<area shape="rect" id="node36" href="$class_cube_string_list.html#a7a8ea672d7cf9f30e676bb3b3cb0765a" title="Start the rotation of the whole CubeStringList (woo&#45;woo&#45;wao)." alt="" coords="228,157,433,185"/>
+<area shape="rect" id="node41" href="$class_cube_string_list.html#af29cd4e66d6f883400b13385ce5f9b27" title="Start the rotation of a whole CubeString contained in the CubeStringList." alt="" coords="236,309,425,337"/>
+<area shape="rect" id="node5" href="$class_game.html#aa5a6a37a0385d779fbf2e5b0a1fda742" title="Method to draw the game." alt="" coords="495,55,577,83"/>
+<area shape="rect" id="node7" href="$class_qubet.html#ad108e6c05cda81b75b5f8600002c62f9" title="This function is used to draw the scene on the QGLWidget. It is used by PaintGL that calls this and t..." alt="" coords="648,81,760,109"/>
+<area shape="rect" id="node9" href="$class_qubet.html#a3e2ddd9bf27cecf96936d18e20542170" title="This method returns a list of the names of the foreground item at mouse coordinates (mouseX..." alt="" coords="820,55,953,83"/>
+<area shape="rect" id="node15" href="$class_qubet.html#a13674eced0fe056b62e99f7a8a5c95f2" title="Paint the OpenGL scene." alt="" coords="839,106,935,134"/>
+<area shape="rect" id="node11" href="$class_qubet.html#a8597e6658271cb65cd1fd04e22e43ceb" title="This function is invoked when the player moves the mouse inside the game window." alt="" coords="1004,5,1151,33"/>
+<area shape="rect" id="node13" href="$class_qubet.html#acd54b249e3977132de7dd0153e61a99c" title="This function is invoked when the player clicks inside the game window." alt="" coords="1004,55,1151,83"/>
+<area shape="rect" id="node17" href="$class_qubet.html#acaa67d9bbdf3d12601d4b71ed62f2fc0" title="This is a duplicated function to call paintGL, but this can be used as a slot." alt="" coords="1036,106,1119,134"/>
+<area shape="rect" id="node19" href="$class_qubet.html#a1452c8e7bec024adb53ba216316c593d" title="It is used after the first show of the qubet window to initialize Qubet." alt="" coords="1200,131,1301,159"/>
+<area shape="rect" id="node24" href="$class_game.html#a213dc64a3069147c040a65884dd53111" title="Slot invoked when level is completed." alt="" coords="639,233,769,261"/>
+<area shape="rect" id="node26" href="$class_game.html#a7cc08ab27db0c7bc67117ebd25fd34b0" title="Go to the next level." alt="" coords="484,207,588,235"/>
+<area shape="rect" id="node34" href="$class_game.html#a4b24c3f6f4be317b607531aab8e094c9" title="Slot invoked when the cube has a collision with an obstacle." alt="" coords="489,309,583,337"/>
+<area shape="rect" id="node39" href="$class_menu.html#a4ac501a612c8c2fecbcf8cbca9209a72" title="Create a Menu object used to show and manage the game menu." alt="" coords="495,157,577,185"/>
+</map>

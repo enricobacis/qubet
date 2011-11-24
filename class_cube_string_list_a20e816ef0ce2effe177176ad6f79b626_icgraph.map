@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_cube_string_list.html#a6077e69bec248b78fb2f34fecd75ea97" title="Creates a CubeStringList from a QList of QPair, the first item of each pair is the string to draw..." alt="" coords="165,5,336,33"/>
+<area shape="rect" id="node5" href="$class_cube_string_list.html#a6292696939768273a380d9bbb344dca7" title="Common part to the constructors that uses the maxWidth and maxHeight." alt="" coords="195,55,307,83"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_qubet.html#a86b991100db3db4ce19028a5b29c168b" title="Signal emitted when the user clicks on a item." alt="" coords="220,5,335,33"/>
+<area shape="rect" id="node5" href="$class_qubet.html#a88d67b4fffe8fb1b28ca15c27639a28c" title="Signal emitted when the user presses a key on the keyboard." alt="" coords="219,55,336,83"/>
+<area shape="rect" id="node7" href="$class_qubet.html#a56fa044ae2c3bd878fe1c7a5e2afcd9c" title="Signal emitted when the user moves the mouse." alt="" coords="216,106,339,134"/>
+<area shape="rect" id="node9" href="$class_qubet.html#a7260bd086f7074fcfc5ca48af4e96fdf" title="Signal emitted when the user releases the mouse button." alt="" coords="209,157,345,185"/>
+<area shape="rect" id="node11" href="$class_qubet.html#a9fa9e692e5d878226bceb4d6b4b75c44" title="Signal emitted when the user scrolls the wheel of the mouse." alt="" coords="215,207,340,235"/>
+</map>

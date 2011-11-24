@@ -1,0 +1,18 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_cube_string.html#a5fb421520a5c4406dfeef35f498222fc" title="Draws the CubeString in the current selected point of the scene." alt="" coords="423,30,529,58"/>
+<area shape="rect" id="node5" href="$class_cube_string_list.html#a731b7c1deedab9e85ccd2797a132a7b3" title="Draws the CubeStringList at the current position." alt="" coords="176,5,299,33"/>
+<area shape="rect" id="node8" href="$class_action_list.html#af0c5c2d39c3282a45d7bb913060aeee0" title="Returns a list of primary and secondary actions." alt="" coords="169,106,305,134"/>
+<area shape="rect" id="node10" href="$class_menu.html#a57fbca80f5ddf14922e2663820de1dfa" title="Change the current skin and select the next one." alt="" coords="189,207,285,235"/>
+<area shape="rect" id="node16" href="$class_menu.html#a4d889f82741860b2982896c454c4463b" title="Signal emitted to show the gameView in arcade mode." alt="" coords="183,258,292,286"/>
+<area shape="rect" id="node18" href="$class_menu.html#ac556697ac4895037164c28803bbb9a83" title="Signal emitted to show the gameView in story mode." alt="" coords="187,309,288,337"/>
+<area shape="rect" id="node20" href="$class_menu.html#a65908e8f129cd95b798ff3ff3da41c9b" title="Change the current skin and select the previous one." alt="" coords="179,157,296,185"/>
+<area shape="rect" id="node24" href="$class_action_list.html#a151b9b311e9a0a7b7caa031b79b20d83" title="Removes a secondary action to secondaryActions list." alt="" coords="140,359,335,387"/>
+<area shape="rect" id="node26" href="$class_menu.html#a2ce3fdadd82b9a5c63c128674bccf2f5" title="This signal is emitted to set the Qubet&#39;s Mouse Move Tracking sensibility. The modes are: 0 &#45; no sign..." alt="" coords="139,410,336,438"/>
+<area shape="rect" id="node28" href="$class_action_list.html#a3a582129fc401579b6ae2bb730015511" title="Set the given parameter as the new primaryAction, overriding the old one." alt="" coords="159,461,316,489"/>
+<area shape="rect" id="node30" href="$class_menu.html#a9422fc883a0e8303c485c2bd39515f64" title="Signal emitted to show the levelEditor." alt="" coords="171,511,304,539"/>
+<area shape="rect" id="node32" href="$class_cube_string_list.html#a7a8ea672d7cf9f30e676bb3b3cb0765a" title="Start the rotation of the whole CubeStringList (woo&#45;woo&#45;wao)." alt="" coords="135,562,340,590"/>
+<area shape="rect" id="node34" href="$class_cube_string.html#a206954e5430aba460cf679c4fe95e79d" title="Start the rotation of the entire CubeString." alt="" coords="391,587,561,615"/>
+<area shape="rect" id="node12" href="$class_menu.html#a9fedb4739af4036621544d87eee0dacb" title="Signal emitted to play an effect." alt="" coords="425,157,527,185"/>
+<area shape="rect" id="node14" href="$class_cube_string.html#a1896aba854d2f34fb8e23208f1ff16a2" title="Safely destroys a CubeString." alt="" coords="405,207,547,235"/>
+<area shape="rect" id="node36" href="$class_cube_string.html#a0347d9c16c99827d38ca6225d2300bad" title="Start the rotation of a letter in the CubeString." alt="" coords="612,587,783,615"/>
+</map>

@@ -1,0 +1,13 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_qubet.html#a35a8e55f37d0e0e8f59326f6764abfaa" title="Load the skins from the resource file." alt="" coords="196,5,300,33"/>
+<area shape="rect" id="node14" href="$class_qubet.html#a2facd4bd3fa82b03cd9e1386ea5c8f6c" title="Load the skyboxes." alt="" coords="185,55,311,83"/>
+<area shape="rect" id="node17" href="$class_skin.html#a916520fbf189228c09900866399af9ac" title="Set one texture of the Skin." alt="" coords="197,106,299,134"/>
+<area shape="rect" id="node5" href="$class_qubet.html#a63cdccdb1cdb60306a5a12e50f1c6c6e" title="Load skins, levels and obstacles in Qubet." alt="" coords="409,18,487,46"/>
+<area shape="rect" id="node7" href="$class_qubet.html#a1452c8e7bec024adb53ba216316c593d" title="It is used after the first show of the qubet window to initialize Qubet." alt="" coords="631,18,732,46"/>
+<area shape="rect" id="node9" href="$class_qubet.html#a13674eced0fe056b62e99f7a8a5c95f2" title="Paint the OpenGL scene." alt="" coords="827,6,923,34"/>
+<area shape="rect" id="node11" href="$class_qubet.html#acaa67d9bbdf3d12601d4b71ed62f2fc0" title="This is a duplicated function to call paintGL, but this can be used as a slot." alt="" coords="997,31,1080,59"/>
+<area shape="rect" id="node19" href="$class_alphabet.html#aeac4cf9482a933f1616cb596ef0ec618" title="Returns a random generated Skin of the letter given as parameter." alt="" coords="361,106,535,134"/>
+<area shape="rect" id="node21" href="$class_cube_string.html#a0c44f3aa0cbbcd9e40b077eb2093ec0d" title="It is an internal function to create the OpenGL displayList of a letter." alt="" coords="584,94,779,122"/>
+<area shape="rect" id="node23" href="$class_cube_string.html#a43f5b34d06ec84b7d3cc55dc65f42853" title="It is an internal function used to initialize CubeString&#39;s values." alt="" coords="828,126,921,154"/>
+<area shape="rect" id="node25" href="$class_cube_string.html#a64dbe311437ae7ff6365035f936eeab8" title="Creates a CubeString of the text _label, using the Alphabet _alphabet and every cube letter of the st..." alt="" coords="971,126,1107,154"/>
+</map>

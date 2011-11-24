@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_cube_string.html#a43f5b34d06ec84b7d3cc55dc65f42853" title="It is an internal function used to initialize CubeString&#39;s values." alt="" coords="191,131,284,159"/>
+<area shape="rect" id="node5" href="$class_cube_string.html#a0c44f3aa0cbbcd9e40b077eb2093ec0d" title="It is an internal function to create the OpenGL displayList of a letter." alt="" coords="333,106,528,134"/>
+<area shape="rect" id="node7" href="$class_alphabet.html#aeac4cf9482a933f1616cb596ef0ec618" title="Returns a random generated Skin of the letter given as parameter." alt="" coords="577,131,751,159"/>
+<area shape="rect" id="node9" href="$class_skin.html#a916520fbf189228c09900866399af9ac" title="Set one texture of the Skin." alt="" coords="801,131,903,159"/>
+<area shape="rect" id="node11" href="$class_skin.html#a5aefa13a9df97e8e920922f321600bb9" title="Set the texture for x&#45; face." alt="" coords="952,5,1091,33"/>
+<area shape="rect" id="node13" href="$class_skin.html#a709acd8e6603f373a2fd77145dcea273" title="Set the texture for x+ face." alt="" coords="956,55,1087,83"/>
+<area shape="rect" id="node15" href="$class_skin.html#a4cc122a67b6860a5bfa05ab592d43ba9" title="Set the texture for y&#45; face." alt="" coords="952,106,1091,134"/>
+<area shape="rect" id="node17" href="$class_skin.html#a438522f36120175d4743e6afbdb0ff63" title="Set the texture for y+ face." alt="" coords="956,157,1087,185"/>
+<area shape="rect" id="node19" href="$class_skin.html#a3f752c8e0e1a2520eb6f8d31080aa6f5" title="Set the texture for z&#45; face." alt="" coords="952,207,1091,235"/>
+<area shape="rect" id="node21" href="$class_skin.html#a569a6cb803ee1c2c5d0e8e28d804a544" title="Set the texture for z+ face." alt="" coords="956,258,1087,286"/>
+</map>

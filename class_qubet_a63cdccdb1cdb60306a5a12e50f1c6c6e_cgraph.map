@@ -1,0 +1,19 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_qubet.html#a908257b883ebcea76119f410617b6f7a" title="Load the alphabet." alt="" coords="137,5,257,33"/>
+<area shape="rect" id="node7" href="$class_qubet.html#ae518078dfe5b52513eeb3f506218fc0d" title="Load the icons." alt="" coords="145,55,249,83"/>
+<area shape="rect" id="node9" href="$class_qubet.html#ab7d996f564ea9db5f3f103088f4332a8" title="Load the levels from the resource file." alt="" coords="143,106,252,134"/>
+<area shape="rect" id="node15" href="$class_qubet.html#a22f5f57cd2f23c5ac7d4fe4cff6e5744" title="Load the Shader." alt="" coords="141,157,253,185"/>
+<area shape="rect" id="node17" href="$class_qubet.html#a35a8e55f37d0e0e8f59326f6764abfaa" title="Load the skins from the resource file." alt="" coords="145,309,249,337"/>
+<area shape="rect" id="node35" href="$class_qubet.html#a2facd4bd3fa82b03cd9e1386ea5c8f6c" title="Load the skyboxes." alt="" coords="135,258,260,286"/>
+<area shape="rect" id="node5" href="$class_alphabet.html#ab66f40008f693fdb651477e0a1a6a876" title="Appends the textureID given as parameter to the Letter&#39;s textures of the letter given as parameter..." alt="" coords="311,5,481,33"/>
+<area shape="rect" id="node11" href="$class_level.html#a3b45cc65d15a2da9128ffe83c702291d" title="Set the a variable that states if the Level is in the story." alt="" coords="340,106,452,134"/>
+<area shape="rect" id="node13" href="$class_level.html#af11bb94bf0c9f4e8b6bcb595480172b7" title="Set the name of the Level." alt="" coords="347,55,445,83"/>
+<area shape="rect" id="node19" href="$class_skin.html#a9310dfec55eca4000c97fa19a5d27e56" title="Set the comment of the Skin." alt="" coords="341,359,451,387"/>
+<area shape="rect" id="node21" href="$class_skin.html#a24392d0b7e2548a45f8e1e2b9bddfcf7" title="Set the same texture for all the faces." alt="" coords="316,511,476,539"/>
+<area shape="rect" id="node23" href="$class_skin.html#a5aefa13a9df97e8e920922f321600bb9" title="Set the texture for x&#45; face." alt="" coords="327,410,465,438"/>
+<area shape="rect" id="node25" href="$class_skin.html#a709acd8e6603f373a2fd77145dcea273" title="Set the texture for x+ face." alt="" coords="331,461,461,489"/>
+<area shape="rect" id="node27" href="$class_skin.html#a4cc122a67b6860a5bfa05ab592d43ba9" title="Set the texture for y&#45; face." alt="" coords="327,157,465,185"/>
+<area shape="rect" id="node29" href="$class_skin.html#a438522f36120175d4743e6afbdb0ff63" title="Set the texture for y+ face." alt="" coords="331,207,461,235"/>
+<area shape="rect" id="node31" href="$class_skin.html#a3f752c8e0e1a2520eb6f8d31080aa6f5" title="Set the texture for z&#45; face." alt="" coords="327,258,465,286"/>
+<area shape="rect" id="node33" href="$class_skin.html#a569a6cb803ee1c2c5d0e8e28d804a544" title="Set the texture for z+ face." alt="" coords="331,309,461,337"/>
+</map>

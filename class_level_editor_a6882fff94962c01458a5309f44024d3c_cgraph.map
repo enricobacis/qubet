@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_level.html#a233bf5e13c08d0ca54e204da69e70d90" title="Returns the gravity of the Level." alt="" coords="249,5,353,33"/>
+<area shape="rect" id="node5" href="$class_level.html#a6581a51667bae2360949e84533311c69" title="Returns the length of the Level." alt="" coords="251,55,352,83"/>
+<area shape="rect" id="node7" href="$class_level.html#a57d5a20855ed872e0ecf87a1bc5c150d" title="Returns the width of the Level." alt="" coords="253,106,349,134"/>
+<area shape="rect" id="node9" href="$class_level.html#a930da7d3e469c0e4216b210e5a337116" title="Loads the Level from xml form using the filename as input." alt="" coords="264,157,339,185"/>
+<area shape="rect" id="node11" href="$class_level_editor.html#a6178da36b59dd4b681718fcd3f92e98a" title="Signal emitted to play the ambient music." alt="" coords="216,207,387,235"/>
+<area shape="rect" id="node13" href="$class_level_editor.html#ac4be5f96873b1ec214dcc18d7ffca6a5" title="This signal is emitted to set the Qubet&#39;s Mouse Move Tracking sensibility. The modes are: 0 &#45; no sign..." alt="" coords="189,258,413,286"/>
+<area shape="rect" id="node15" href="$class_level_editor.html#a4d5cac888d89f2aace4899769f46fb4e" title="Signal emitted to set the Skybox." alt="" coords="235,309,368,337"/>
+</map>

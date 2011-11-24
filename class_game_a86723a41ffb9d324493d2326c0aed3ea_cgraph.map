@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_game.html#ab684b380c7d3f3577e2fb80006415297" title="Initialize the game." alt="" coords="141,30,243,58"/>
+<area shape="rect" id="node5" href="$class_game.html#a3afa5c2faba0c80f48679038192e7a84" title="This signal is emitted to set the Qubet&#39;s Mouse Move Tracking sensibility. The modes are: 0 &#45; no sign..." alt="" coords="291,5,491,33"/>
+<area shape="rect" id="node7" href="$class_game.html#a3357bd0e7e3e6d6e14e5736b8a76773f" title="Signal emitted to set the Skybox." alt="" coords="336,55,445,83"/>
+</map>

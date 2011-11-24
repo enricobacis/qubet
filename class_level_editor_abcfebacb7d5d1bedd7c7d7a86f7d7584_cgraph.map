@@ -1,0 +1,14 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_cube_string_list.html#ab0a6f4e9cb679bf813638216d5943167" title="Returns the label which name is _stringName." alt="" coords="217,81,356,109"/>
+<area shape="rect" id="node11" href="$class_cube_string_list.html#a90e4bfa731aabfa4ffca53efaa4b785c" title="Returns the number of labels in the CubeStringList." alt="" coords="203,182,371,210"/>
+<area shape="rect" id="node13" href="$class_cube_string_list.html#a1ef30dd5a66d3be81592b74a6f309926" title="Check if a letter of the CubeString is already rotating." alt="" coords="213,30,360,58"/>
+<area shape="rect" id="node18" href="$class_level_editor.html#a583ad1e4fb51a28c22cccdb05caeeb5d" title="Signal emitted to play an effect." alt="" coords="223,233,351,261"/>
+<area shape="rect" id="node20" href="$class_cube_string_list.html#a6ffb91a8f967ea2c8da949e57fde8c54" title="Start the rotation of a single letter in a single CubeString contained in the CubeStrigList." alt="" coords="192,131,381,159"/>
+<area shape="rect" id="node25" href="$class_cube_string_list.html#a3c9f2621ef98046dc87870c95730127b" title="Safely destroy a CubeStringList." alt="" coords="199,283,375,311"/>
+<area shape="rect" id="node5" href="$class_cube_string_list.html#af32055662992ac4a314bcabef7f4bf27" title="Return a pointer to the CubeString having the parameter OpenGL name." alt="" coords="431,106,652,134"/>
+<area shape="rect" id="node9" href="$class_cube_string.html#afbc1d4f6f0f8dd3b153150eb05b1b66c" title="Returns the text of the CubeString." alt="" coords="480,55,603,83"/>
+<area shape="rect" id="node7" href="$class_cube_string.html#abcf861a2ddfd2cd2c466be269acf91db" title="Returns the name given to the entire string (for picking purposes). [default = 0]." alt="" coords="703,106,828,134"/>
+<area shape="rect" id="node16" href="$class_cube_string.html#a6f6564ec93427fcfcb4740cfe7ecedd4" title="Check if a letter of the CubeString is already rotating." alt="" coords="476,5,607,33"/>
+<area shape="rect" id="node23" href="$class_cube_string.html#a0347d9c16c99827d38ca6225d2300bad" title="Start the rotation of a letter in the CubeString." alt="" coords="456,157,627,185"/>
+<area shape="rect" id="node27" href="$class_cube_string.html#a1896aba854d2f34fb8e23208f1ff16a2" title="Safely destroys a CubeString." alt="" coords="471,283,612,311"/>
+</map>
