@@ -20,12 +20,13 @@
 #define AUDIOMANAGER_H
 
 #include <QThread>
-
-#include <phonon/MediaObject>
+#include <QMediaPlayer>
+#include <QSoundEffect>
+#include <QMediaPlaylist>
 
 /**
  * @brief It is a semi-thread class to manage the audio of Qubet.
- *        It can manage an ambientMusic and different effects using the Phonon framework.
+ *        It can manage an ambientMusic and different effects.
  *
  *        It provides slots to connect the entity that are able to request an ambientMusic
  *        change, an effect to play or to enable and disable the music.
@@ -63,10 +64,10 @@ public:
 private:
 
     QObject *parent; /**< It is a callback variable to the parent of AudioManager. */
-    QString currentFileName; /**< It is the current ambientMusic filename. */
     bool audioEnabled; /**< It is the variable that states if the audio is currently enabled or not. */
-    Phonon::MediaObject *ambientMusic; /**< It is the Phonon::MediaObject of the current ambient music. */
-    QMap<QString,Phonon::MediaObject*> effectsList; /**< It is the QMap of effects and their filename. */
+    QMediaPlayer *ambientMusic; /**< It is the QMediaPlayer of the current ambient music. */
+    QMediaPlaylist *playlist; /**< It is the playlist to be played as ambient music. */
+    QMap<QString,QSoundEffect*> effectsList; /**< It is the QMap of effects and their filename. */
 
     /**
      * @brief It is the reimplementation of QThread's run() method. It is empty because
@@ -98,11 +99,6 @@ private slots:
      * @brief Stops the current ambient music.
      */
     void stopAmbientMusic();
-
-    /**
-     * @brief It is a slot used privately to permit the loop of the ambientMusic with Phonon.
-    */
-    void enqueueMediaObject();
 
     /**
      * @brief Plays the effect that has got the parameter effectName filename.

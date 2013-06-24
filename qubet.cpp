@@ -76,28 +76,24 @@ Qubet::~Qubet()
             }
         }
     }
-    skinsList.~QMap();
 
     for (QMap<GLint,Level*>::iterator i = levelsList.begin(); i != levelsList.end(); i++)
     {
         if (i.value() != NULL)
             dynamic_cast<Level*>(i.value())->~Level();
     }
-    levelsList.~QMap();
 
     for (QMap<GLint,GLuint>::iterator i = iconsList.begin(); i != iconsList.end(); i++)
     {
         if (i.value() != 0)
             glDeleteTextures(1, &i.value());
     }
-    iconsList.~QMap();
 
     for (QMap<QString,Skybox*>::iterator i = skyboxesList.begin(); i != skyboxesList.end(); i++)
     {
         if (i.value() != NULL)
             dynamic_cast<Skybox*>(i.value())->~Skybox();
     }
-    skyboxesList.~QMap();
 }
 
 GLvoid Qubet::initializeGL()

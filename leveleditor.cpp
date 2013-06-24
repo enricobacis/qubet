@@ -50,7 +50,7 @@ LevelEditor::LevelEditor(QMap<GLint,GLuint> &_iconsList, Alphabet *_alphabet, QO
     connect(this, SIGNAL(setMouseMovementTracking(int)), parent, SLOT(setMouseMovementTracking(int)));
     connect(this, SIGNAL(setSkybox(QString)), parent, SLOT(setSkybox(QString)));
 
-    emit playAmbientMusic("resources/music/editor.mp3");
+    emit playAmbientMusic("editor.mp3");
     emit setSkybox("stars");
 
     currentActions = new ActionList(INITIAL_MOVEMENT);

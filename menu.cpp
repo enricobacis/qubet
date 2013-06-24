@@ -48,7 +48,7 @@ Menu::Menu(QMap<GLint,Skin*> &_skinsList, QMap<GLint,Level*> &_levelsList, QMap<
     connect(this, SIGNAL(setMouseMovementTracking(int)), parent, SLOT(setMouseMovementTracking(int)));
     connect(this, SIGNAL(setSkybox(QString)), parent, SLOT(setSkybox(QString)));
 
-    emit playAmbientMusic("resources/music/menu.mp3");
+    emit playAmbientMusic("menu.mp3");
     emit setSkybox("galaxy");
 
     currentView = INTRODUCTION;

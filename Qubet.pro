@@ -30,7 +30,11 @@
 QT += core gui
 QT += opengl
 QT += xml
-QT += phonon
+QT += multimedia
+
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+LIBS += -lGLU
 
 TARGET = Qubet
 TEMPLATE = app

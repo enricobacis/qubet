@@ -51,8 +51,8 @@ CubeString::~CubeString()
 #ifdef USE_DISPLAY_LISTS_FOR_LETTERS
 
     for (int i = 0; i < letterDisplayLists.count(); i++)
-        if (letterDisplayLists.at(i) != 0)
-            glDeleteLists(letterDisplayLists.at(i), 1);
+        if (letterDisplayLists[i] != 0)
+            glDeleteLists(letterDisplayLists[i], 1);
 
 #else
 

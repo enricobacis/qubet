@@ -52,8 +52,6 @@ Level::~Level()
         if (i.value() != NULL)
             dynamic_cast<Obstacle*>(i.value())->~Obstacle();
     }
-
-    obstaclesList.~QMap();
 }
 
 QString Level::getFilename()

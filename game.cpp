@@ -313,7 +313,7 @@ void Game::playLevel()
     levelName = new CubeString(level->getName(), 15.0f, 2.0f, alphabet, STATE_LABEL);
 
     emit setSkybox(level->getSkyboxName());
-    emit playAmbientMusic("resources/music/" + level->getAmbientMusicFilename());
+    emit playAmbientMusic(level->getAmbientMusicFilename());
 
     if (cube != NULL)
         cube->~Cube();

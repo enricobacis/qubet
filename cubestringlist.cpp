@@ -53,7 +53,6 @@ CubeStringList::CubeStringList(QString _labels, GLfloat _maxWidth, GLfloat _maxH
 CubeStringList::~CubeStringList()
 {
     CubeString *cubeString = NULL;
-
     while (!cubeStrings.isEmpty())
     {
         cubeString = cubeStrings.takeFirst();

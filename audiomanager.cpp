@@ -18,48 +18,52 @@
 
 #include "audiomanager.h"
 #include <QDir>
+#include <QMediaPlaylist>
 
 AudioManager::AudioManager(QObject *_parent) :
     parent(_parent),
-    currentFileName(""),
     audioEnabled(true),
     ambientMusic(NULL)
 {
     //Inizialize the effectsList
 
-    QString path = "resources/effects";
-    QDir dir = QDir(path);
-    Phonon::MediaObject *effect;
+    QDir dir = QDir("resources/effects");
+    QSoundEffect *effect;
 
     for (uint i = 0; i < dir.count(); i++)
     {
-        effect = Phonon::createPlayer(Phonon::MusicCategory, Phonon::MediaSource(path + "/" + dir[i]));
-        connect(effect, SIGNAL(finished()), effect, SLOT(stop()));
-        effectsList.insert(dir[i], effect);
+        if (!dir[i].startsWith('.'))
+        {
+            effect = new QSoundEffect();
+            effect->setSource(QUrl::fromLocalFile(dir.absoluteFilePath(dir[i])));
+            effectsList.insert(dir[i], effect);
+        }
     }
+
+    ambientMusic = new QMediaPlayer();
+
+    playlist = new QMediaPlaylist();
+    playlist->setPlaybackMode(QMediaPlaylist::Loop);
 }
 
 AudioManager::~AudioManager()
 {
-    if (ambientMusic != NULL)
-    {
-        ambientMusic->clear();
-        ambientMusic->~MediaObject();
-    }
+    ambientMusic->stop();
+    ambientMusic->~QMediaPlayer();
 
-    Phonon::MediaObject *effect;
+    playlist->~QMediaPlaylist();
 
-    for (QMap<QString,Phonon::MediaObject*>::iterator i = effectsList.begin(); i != effectsList.end(); i++)
+    QSoundEffect *effect;
+
+    for (QMap<QString,QSoundEffect*>::iterator i = effectsList.begin(); i != effectsList.end(); ++i)
     {
         if (i.value() != NULL)
         {
-            effect = dynamic_cast<Phonon::MediaObject*>(i.value());
-            effect->clear();
-            effect->~MediaObject();
+            effect = dynamic_cast<QSoundEffect*>(i.value());
+            effect->stop();
+            effect->~QSoundEffect();
         }
     }
-
-    effectsList.~QMap();
 
     this->disconnect(parent);
     parent->disconnect(this);
@@ -77,10 +81,10 @@ void AudioManager::enableAudio(bool enabled)
         audioEnabled = false;
         ambientMusic->pause();
 
-        for (QMap<QString,Phonon::MediaObject*>::iterator i = effectsList.begin(); i != effectsList.end(); i++)
+        for (QMap<QString,QSoundEffect*>::iterator i = effectsList.begin(); i != effectsList.end(); ++i)
         {
             if (i.value() != NULL)
-                dynamic_cast<Phonon::MediaObject*>(i.value())->stop();
+                dynamic_cast<QSoundEffect*>(i.value())->stop();
         }
     }
     else if (!audioEnabled && enabled)
@@ -92,43 +96,32 @@ void AudioManager::enableAudio(bool enabled)
 
 void AudioManager::playAmbientMusic(QString filename)
 {
-    if (filename == currentFileName)
-        return;
+    QDir dir = QDir("resources/music");
 
-    currentFileName = filename;
+    ambientMusic->stop();
+    playlist->clear();
+    playlist->addMedia(QUrl::fromLocalFile(dir.absoluteFilePath(filename)));
+    ambientMusic->setPlaylist(playlist);
 
-    if (ambientMusic != NULL)
-        ambientMusic->clear();
-
-    ambientMusic = Phonon::createPlayer(Phonon::MusicCategory, Phonon::MediaSource(currentFileName));
-    connect (ambientMusic, SIGNAL(aboutToFinish()), this, SLOT(enqueueMediaObject()));
     if(audioEnabled)
         ambientMusic->play();
 }
 
 void AudioManager::stopAmbientMusic()
 {
-    if (ambientMusic != NULL)
-        ambientMusic->clear();
-}
-
-void AudioManager::enqueueMediaObject()
-{
-    ambientMusic->enqueue(currentFileName);
+    ambientMusic->stop();
 }
 
 void AudioManager::playEffect(QString effectName)
 {
     if(audioEnabled)
     {
-        Phonon::MediaObject *effect = effectsList.value(effectName, NULL);
+        QSoundEffect *effect = effectsList.value(effectName, NULL);
 
         if (effect != NULL)
         {
-            if (effect->state() == Phonon::PlayingState)
-                effect->seek(0);
-            else
-                effect->play();
+            effect->stop();
+            effect->play();
         }
     }
 }

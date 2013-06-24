@@ -21,6 +21,7 @@
 
 #include "alphabet.h"
 #include "vector3f.h"
+#include <GL/glu.h>
 
 /**
  * @brief Draw a XY Square using vertex and texture coordinates.
