@@ -1,4 +1,0 @@
-glob:*.user*
-glob:*.orig
-glob:*~
-glob:*.autosave
