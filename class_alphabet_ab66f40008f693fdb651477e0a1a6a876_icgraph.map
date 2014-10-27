@@ -1,7 +1,7 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_qubet.html#a908257b883ebcea76119f410617b6f7a" title="Load the alphabet." alt="" coords="227,30,347,58"/>
-<area shape="rect" id="node5" href="$class_qubet.html#a63cdccdb1cdb60306a5a12e50f1c6c6e" title="Load skins, levels and obstacles in Qubet." alt="" coords="396,30,473,58"/>
-<area shape="rect" id="node7" href="$class_qubet.html#a1452c8e7bec024adb53ba216316c593d" title="It is used after the first show of the qubet window to initialize Qubet." alt="" coords="523,30,624,58"/>
-<area shape="rect" id="node9" href="$class_qubet.html#a13674eced0fe056b62e99f7a8a5c95f2" title="Paint the OpenGL scene." alt="" coords="672,5,768,33"/>
-<area shape="rect" id="node11" href="$class_qubet.html#acaa67d9bbdf3d12601d4b71ed62f2fc0" title="This is a duplicated function to call paintGL, but this can be used as a slot." alt="" coords="816,30,899,58"/>
+<map id="Alphabet::appendLetterTexture" name="Alphabet::appendLetterTexture">
+<area shape="rect" id="node2" href="$class_qubet.html#a908257b883ebcea76119f410617b6f7a" title="Load the alphabet. " alt="" coords="224,31,344,55"/>
+<area shape="rect" id="node3" href="$class_qubet.html#a63cdccdb1cdb60306a5a12e50f1c6c6e" title="Load skins, levels and obstacles in Qubet. " alt="" coords="393,31,471,55"/>
+<area shape="rect" id="node4" href="$class_qubet.html#a1452c8e7bec024adb53ba216316c593d" title="It is used after the first show of the qubet window to initialize Qubet. " alt="" coords="520,31,621,55"/>
+<area shape="rect" id="node5" href="$class_qubet.html#a13674eced0fe056b62e99f7a8a5c95f2" title="Paint the OpenGL scene. " alt="" coords="670,5,765,29"/>
+<area shape="rect" id="node6" href="$class_qubet.html#acaa67d9bbdf3d12601d4b71ed62f2fc0" title="This is a duplicated function to call paintGL, but this can be used as a slot. " alt="" coords="813,31,896,55"/>
 </map>

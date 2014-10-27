@@ -1,9 +1,9 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_position_controller.html#ad85a3a72d2631b1c168de9aaa9162663" title="Create the 3D Matrix of ObstacleCells." alt="" coords="180,5,391,33"/>
-<area shape="rect" id="node7" href="$class_level.html#ad21a1eaf6e4473e5960f74e12ba1ee9b" title="Saves the Level in a xml form using the filename as output." alt="" coords="247,55,324,83"/>
-<area shape="rect" id="node5" href="$class_position_controller.html#a6d7a4488805603e198b550100ceec899" title="Create a PositionController Objects." alt="" coords="441,5,639,33"/>
-<area shape="rect" id="node9" href="$class_level_editor.html#aaaa81998d648c61c425011fd73c8a087" title="Save the Level." alt="" coords="475,55,605,83"/>
-<area shape="rect" id="node11" href="$class_level_editor.html#a28990264a514b22a14140ce9dcc8fdb7" title="This function is invoked when next button is pressed." alt="" coords="689,81,871,109"/>
-<area shape="rect" id="node13" href="$class_level_editor.html#a3bc59bcfad1ea901b5ec4bcd2b332b00" title="Slot invoked when the user clicks on a item." alt="" coords="921,30,1060,58"/>
-<area shape="rect" id="node15" href="$class_level_editor.html#a2f741b13837f6467e0452df50f2e51dd" title="Slot invoked when the user presses a key on the keyboard." alt="" coords="920,81,1061,109"/>
+<map id="Obstacle::getModelId" name="Obstacle::getModelId">
+<area shape="rect" id="node2" href="$class_level.html#ad21a1eaf6e4473e5960f74e12ba1ee9b" title="Saves the Level in a xml form using the filename as output. " alt="" coords="204,29,279,53"/>
+<area shape="rect" id="node7" href="$class_position_controller.html#ad85a3a72d2631b1c168de9aaa9162663" title="Create the 3D Matrix of ObstacleCells. " alt="" coords="179,78,304,114"/>
+<area shape="rect" id="node3" href="$class_level_editor.html#aaaa81998d648c61c425011fd73c8a087" title="Save the Level. " alt="" coords="352,29,480,53"/>
+<area shape="rect" id="node4" href="$class_level_editor.html#a28990264a514b22a14140ce9dcc8fdb7" title="This function is invoked when next button is pressed. " alt="" coords="529,53,709,77"/>
+<area shape="rect" id="node5" href="$class_level_editor.html#a3bc59bcfad1ea901b5ec4bcd2b332b00" title="Slot invoked when the user clicks on a item. " alt="" coords="758,5,895,29"/>
+<area shape="rect" id="node6" href="$class_level_editor.html#a2f741b13837f6467e0452df50f2e51dd" title="Slot invoked when the user presses a key on the keyboard. " alt="" coords="758,53,895,77"/>
+<area shape="rect" id="node8" href="$class_position_controller.html#a6d7a4488805603e198b550100ceec899" title="Create a PositionController Objects. " alt="" coords="360,78,472,114"/>
 </map>

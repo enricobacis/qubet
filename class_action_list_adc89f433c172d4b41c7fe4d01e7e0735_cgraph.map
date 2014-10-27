@@ -1,4 +1,4 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_action_list.html#aff2f46a0425d0bfcfe7bdb81c8ca5589" title="Returns the current primaryAction." alt="" coords="187,5,344,33"/>
-<area shape="rect" id="node5" href="$class_action_list.html#ab57fc07e7e396a3f4b3df162a07f2732" title="Returns the secondaryActions list." alt="" coords="176,55,355,83"/>
+<map id="ActionList::ActionList" name="ActionList::ActionList">
+<area shape="rect" id="node2" href="$class_action_list.html#aff2f46a0425d0bfcfe7bdb81c8ca5589" title="Returns the current primaryAction. " alt="" coords="174,5,330,29"/>
+<area shape="rect" id="node3" href="$class_action_list.html#ab57fc07e7e396a3f4b3df162a07f2732" title="Returns the secondaryActions list. " alt="" coords="181,54,323,90"/>
 </map>

@@ -1,4 +1,4 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_qubet.html#acaa67d9bbdf3d12601d4b71ed62f2fc0" title="This is a duplicated function to call paintGL, but this can be used as a slot." alt="" coords="149,5,232,33"/>
-<area shape="rect" id="node5" href="$class_qubet.html#a1452c8e7bec024adb53ba216316c593d" title="It is used after the first show of the qubet window to initialize Qubet." alt="" coords="280,30,381,58"/>
+<map id="Qubet::paintGL" name="Qubet::paintGL">
+<area shape="rect" id="node2" href="$class_qubet.html#acaa67d9bbdf3d12601d4b71ed62f2fc0" title="This is a duplicated function to call paintGL, but this can be used as a slot. " alt="" coords="149,5,232,29"/>
+<area shape="rect" id="node3" href="$class_qubet.html#a1452c8e7bec024adb53ba216316c593d" title="It is used after the first show of the qubet window to initialize Qubet. " alt="" coords="280,31,381,55"/>
 </map>

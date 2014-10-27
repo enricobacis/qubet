@@ -1,12 +1,12 @@
-<map id="G" name="G">
-<area shape="rect" id="node2" href="$class_q_object.html" title="{QObject\n||}" alt="" coords="737,723,799,805"/>
-<area shape="rect" id="node8" href="$class_cube.html" title="This class rapresents the player&#39;s Cube." alt="" coords="488,1214,627,1887"/>
-<area shape="rect" id="node41" href="$class_level.html" title="This class rapresents a Level of Qubet, with its obstacle. It is able to draw itself simply using the..." alt="" coords="1203,1214,1368,1887"/>
-<area shape="rect" id="node17" href="$struct_vector3f.html" title="Structure that rapresents a Vector of float in a 3&#45;D space." alt="" coords="237,475,365,1053"/>
-<area shape="rect" id="node65" href="$class_cube_string.html" title="This class is used to draw, a string composed the horizontal justapposition of Different cubes on whi..." alt="" coords="1783,571,1932,957"/>
-<area shape="rect" id="node30" href="$class_position_controller.html" title="PositionController Class check if the cube has a collision with obstacles." alt="" coords="879,2033,1015,2338"/>
-<area shape="rect" id="node24" href="$class_skin.html" title="It is the Skin Class." alt="" coords="1316,475,1465,1053"/>
-<area shape="rect" id="node32" href="$class_q_thread.html" title="{QThread\n||}" alt="" coords="1061,1510,1128,1591"/>
-<area shape="rect" id="node56" href="$class_action_list.html" title="This class is used to keep track of actions to do. For example it can keep track of current view scro..." alt="" coords="1891,2065,2048,2306"/>
-<area shape="rect" id="node73" href="$class_alphabet.html" title="This class is used to keep a list of Letter (from this the name Alphabet) It provide access to Letter..." alt="" coords="2049,153,2215,330"/>
+<map id="Game" name="Game">
+<area shape="rect" id="node2" href="$class_q_object.html" title="{QObject\n||}" alt="" coords="775,469,839,539"/>
+<area shape="rect" id="node5" href="$class_cube.html" title="This class rapresents the player&#39;s Cube. " alt="" coords="523,745,660,1042"/>
+<area shape="rect" id="node18" href="$class_level.html" title="This class rapresents a Level of Qubet, with its obstacle. It is able to draw itself simply using the..." alt="" coords="1225,799,1324,988"/>
+<area shape="rect" id="node8" href="$struct_vector3f.html" title="Structure that rapresents a Vector of float in a 3&#45;D space. " alt="" coords="293,409,384,599"/>
+<area shape="rect" id="node24" href="$class_cube_string.html" title="This class is used to draw, a string composed the horizontal justapposition of Different cubes on whi..." alt="" coords="1859,397,2005,611"/>
+<area shape="rect" id="node14" href="$class_position_controller.html" title="PositionController Class check if the cube has a collision with obstacles. " alt="" coords="862,1169,996,1335"/>
+<area shape="rect" id="node11" href="$class_skin.html" title="It is the Skin Class. " alt="" coords="1440,409,1541,599"/>
+<area shape="rect" id="node15" href="$class_q_thread.html" title="{QThread\n||}" alt="" coords="1049,859,1116,928"/>
+<area shape="rect" id="node21" href="$class_action_list.html" title="This class is used to keep track of actions to do. For example it can keep track of current view scro..." alt="" coords="1973,1163,2131,1341"/>
+<area shape="rect" id="node27" href="$class_alphabet.html" title="This class is used to keep a list of Letter (from this the name Alphabet) It provide access to Letter..." alt="" coords="2128,136,2292,277"/>
 </map>

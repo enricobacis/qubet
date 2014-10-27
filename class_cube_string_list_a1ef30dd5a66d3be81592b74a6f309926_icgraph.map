@@ -1,5 +1,5 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_level_editor.html#abcfebacb7d5d1bedd7c7d7a86f7d7584" title="This function is invoked when a letter is typed." alt="" coords="201,5,337,33"/>
-<area shape="rect" id="node7" href="$class_menu.html#a4417084ae3a2e18f4bc1726ffe3908d4" title="Slot invoked when the user moves the mouse." alt="" coords="209,55,329,83"/>
-<area shape="rect" id="node5" href="$class_level_editor.html#a2f741b13837f6467e0452df50f2e51dd" title="Slot invoked when the user presses a key on the keyboard." alt="" coords="387,5,528,33"/>
+<map id="CubeStringList::isRotating" name="CubeStringList::isRotating">
+<area shape="rect" id="node2" href="$class_level_editor.html#abcfebacb7d5d1bedd7c7d7a86f7d7584" title="This function is invoked when a letter is typed. " alt="" coords="201,5,335,29"/>
+<area shape="rect" id="node4" href="$class_menu.html#a4417084ae3a2e18f4bc1726ffe3908d4" title="Slot invoked when the user moves the mouse. " alt="" coords="209,53,327,77"/>
+<area shape="rect" id="node3" href="$class_level_editor.html#a2f741b13837f6467e0452df50f2e51dd" title="Slot invoked when the user presses a key on the keyboard. " alt="" coords="385,5,522,29"/>
 </map>

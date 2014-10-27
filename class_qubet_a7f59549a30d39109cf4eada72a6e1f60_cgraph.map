@@ -1,6 +1,6 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_menu.html#a831387f51358cfb88cd018e1777bc980" title="Disconnect and Destroy a Menu object." alt="" coords="165,30,253,58"/>
-<area shape="rect" id="node5" href="$class_cube_string.html#a1896aba854d2f34fb8e23208f1ff16a2" title="Safely destroys a CubeString." alt="" coords="527,5,668,33"/>
-<area shape="rect" id="node7" href="$class_cube_string_list.html#a3c9f2621ef98046dc87870c95730127b" title="Safely destroy a CubeStringList." alt="" coords="301,30,477,58"/>
-<area shape="rect" id="node10" href="$class_skin.html#a002cee43b3cacd1669d01e8f7e522494" title="Safely destroy the Skin." alt="" coords="352,81,427,109"/>
+<map id="Qubet::closeMenu" name="Qubet::closeMenu">
+<area shape="rect" id="node2" href="$class_menu.html#a831387f51358cfb88cd018e1777bc980" title="Disconnect and Destroy a Menu object. " alt="" coords="166,55,253,79"/>
+<area shape="rect" id="node3" href="$class_cube_string_list.html#a3c9f2621ef98046dc87870c95730127b" title="Safely destroy a CubeStringList. " alt="" coords="301,5,475,29"/>
+<area shape="rect" id="node4" href="$class_cube_string.html#a1896aba854d2f34fb8e23208f1ff16a2" title="Safely destroys a CubeString. " alt="" coords="523,31,664,55"/>
+<area shape="rect" id="node5" href="$class_skin.html#a002cee43b3cacd1669d01e8f7e522494" title="Safely destroy the Skin. " alt="" coords="351,104,425,128"/>
 </map>

@@ -1,3 +1,3 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_cube_string.html#a9aeafff77684bb1bf34692dd63f550a1" title="Set the current angle for the letters in the CubeString." alt="" coords="233,5,393,33"/>
+<map id="CubeStringList::setCurrentAngle" name="CubeStringList::setCurrentAngle">
+<area shape="rect" id="node2" href="$class_cube_string.html#a9aeafff77684bb1bf34692dd63f550a1" title="Set the current angle for the letters in the CubeString. " alt="" coords="203,11,363,35"/>
 </map>

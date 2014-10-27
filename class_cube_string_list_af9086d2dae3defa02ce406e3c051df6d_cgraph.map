@@ -1,5 +1,5 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_cube_string_list.html#a20e816ef0ce2effe177176ad6f79b626" title="Common part to the constructors that uses the cubeDimension." alt="" coords="244,5,356,33"/>
-<area shape="rect" id="node7" href="$class_cube_string_list.html#a0faadd9380f32013a63bb62784161bc7" title="Split the QString in a QList of QPair." alt="" coords="225,55,375,83"/>
-<area shape="rect" id="node5" href="$class_cube_string_list.html#ada31a0ad7582609510012ba7d5f34981" title="It compute the heights (firstStringHeight and stringsHeightDelta) basing on constructor parameters..." alt="" coords="424,5,603,33"/>
+<map id="CubeStringList::CubeStringList" name="CubeStringList::CubeStringList">
+<area shape="rect" id="node2" href="$class_cube_string_list.html#a20e816ef0ce2effe177176ad6f79b626" title="Common part to the constructors that uses the cubeDimension. " alt="" coords="239,5,350,29"/>
+<area shape="rect" id="node4" href="$class_cube_string_list.html#a0faadd9380f32013a63bb62784161bc7" title="Split the QString in a QList of QPair. " alt="" coords="221,53,368,77"/>
+<area shape="rect" id="node3" href="$class_cube_string_list.html#ada31a0ad7582609510012ba7d5f34981" title="It compute the heights (firstStringHeight and stringsHeightDelta) basing on constructor parameters..." alt="" coords="416,5,592,29"/>
 </map>

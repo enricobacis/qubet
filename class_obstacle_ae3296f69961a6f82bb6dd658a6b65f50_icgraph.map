@@ -1,4 +1,4 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_level.html#a32863851ea18be5dd07e0012ae77158c" title="Adds an obstacle to the Level." alt="" coords="151,5,265,33"/>
-<area shape="rect" id="node5" href="$class_level_editor.html#aa351d4622321b1176d7878cb03c370d6" title="Slot invoked when the user releases the mouse button." alt="" coords="316,5,476,33"/>
+<map id="Obstacle::setId" name="Obstacle::setId">
+<area shape="rect" id="node2" href="$class_level.html#a32863851ea18be5dd07e0012ae77158c" title="Adds an obstacle to the Level. " alt="" coords="149,5,264,29"/>
+<area shape="rect" id="node3" href="$class_level_editor.html#aa351d4622321b1176d7878cb03c370d6" title="Slot invoked when the user releases the mouse button. " alt="" coords="313,5,471,29"/>
 </map>

@@ -1,4 +1,4 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_cube_string.html#a206954e5430aba460cf679c4fe95e79d" title="Start the rotation of the entire CubeString." alt="" coords="263,5,433,33"/>
-<area shape="rect" id="node5" href="$class_cube_string.html#a0347d9c16c99827d38ca6225d2300bad" title="Start the rotation of a letter in the CubeString." alt="" coords="484,5,655,33"/>
+<map id="CubeStringList::startStringListRotation" name="CubeStringList::startStringListRotation">
+<area shape="rect" id="node2" href="$class_cube_string.html#a206954e5430aba460cf679c4fe95e79d" title="Start the rotation of the entire CubeString. " alt="" coords="200,11,371,35"/>
+<area shape="rect" id="node3" href="$class_cube_string.html#a0347d9c16c99827d38ca6225d2300bad" title="Start the rotation of a letter in the CubeString. " alt="" coords="419,11,589,35"/>
 </map>

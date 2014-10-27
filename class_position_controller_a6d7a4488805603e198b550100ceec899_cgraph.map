@@ -1,13 +1,12 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_position_controller.html#a6267df12f30b856e2481845437ce675c" title="Check if the cube has a collision with an obstacle." alt="" coords="269,106,451,134"/>
-<area shape="rect" id="node5" href="$class_position_controller.html#a19bd8a68c276fa11553084714da38ebe" title="Signal emitted when the cube has a collision with an obstacle." alt="" coords="531,5,680,33"/>
-<area shape="rect" id="node14" href="$class_position_controller.html#ad85a3a72d2631b1c168de9aaa9162663" title="Create the 3D Matrix of ObstacleCells." alt="" coords="255,283,465,311"/>
-<area shape="rect" id="node18" href="$class_level.html#a6581a51667bae2360949e84533311c69" title="Returns the length of the Level." alt="" coords="555,207,656,235"/>
-<area shape="rect" id="node24" href="$class_level.html#a57d5a20855ed872e0ecf87a1bc5c150d" title="Returns the width of the Level." alt="" coords="557,410,653,438"/>
-<area shape="rect" id="node7" href="$class_cube.html#a9ce039adb1469210dc9cebfd286381b7" title="Returns the position of the Cube." alt="" coords="552,55,659,83"/>
-<area shape="rect" id="node9" href="$class_position_controller.html#a99730957ea11f8b610e9684766b510a0" title="Check if a float is an integer." alt="" coords="528,106,683,134"/>
-<area shape="rect" id="node11" href="$class_position_controller.html#a3a180ffb9f317cb0221f441951af76bf" title="Returns the cell coordinates from absolute position." alt="" coords="515,157,696,185"/>
-<area shape="rect" id="node16" href="$class_obstacle.html#a0210e3ca68f2e5d8e3d57cd418fb1611" title="Returns the cell of the Obstacle." alt="" coords="553,258,657,286"/>
-<area shape="rect" id="node20" href="$class_obstacle.html#a137f51bc3c6adade850ea9714e89cf6e" title="Returns the obstacle modelId." alt="" coords="543,309,668,337"/>
-<area shape="rect" id="node22" href="$class_level.html#ae0739494b446f4ea78ff78e7087708dc" title="Returns the Level&#39;s Obstacles List." alt="" coords="537,359,673,387"/>
+<map id="PositionController::PositionController" name="PositionController::PositionController">
+<area shape="rect" id="node2" href="$class_level.html#a6581a51667bae2360949e84533311c69" title="Returns the length of the Level. " alt="" coords="355,5,456,29"/>
+<area shape="rect" id="node3" href="$class_level.html#a57d5a20855ed872e0ecf87a1bc5c150d" title="Returns the width of the Level. " alt="" coords="358,53,453,77"/>
+<area shape="rect" id="node4" href="$class_position_controller.html#ad85a3a72d2631b1c168de9aaa9162663" title="Create the 3D Matrix of ObstacleCells. " alt="" coords="165,105,291,141"/>
+<area shape="rect" id="node8" href="$class_position_controller.html#a6267df12f30b856e2481845437ce675c" title="Check if the cube has a collision with an obstacle. " alt="" coords="175,266,281,302"/>
+<area shape="rect" id="node5" href="$class_level.html#ae0739494b446f4ea78ff78e7087708dc" title="Returns the Level&#39;s Obstacles List. " alt="" coords="339,101,471,125"/>
+<area shape="rect" id="node6" href="$class_obstacle.html#a0210e3ca68f2e5d8e3d57cd418fb1611" title="Returns the cell of the Obstacle. " alt="" coords="353,149,457,173"/>
+<area shape="rect" id="node7" href="$class_obstacle.html#a137f51bc3c6adade850ea9714e89cf6e" title="Returns the obstacle modelId. " alt="" coords="343,197,467,221"/>
+<area shape="rect" id="node9" href="$class_cube.html#a9ce039adb1469210dc9cebfd286381b7" title="Returns the position of the Cube. " alt="" coords="352,245,459,269"/>
+<area shape="rect" id="node10" href="$class_position_controller.html#a3a180ffb9f317cb0221f441951af76bf" title="Returns the cell coordinates from absolute position. " alt="" coords="352,294,459,330"/>
+<area shape="rect" id="node11" href="$class_position_controller.html#a99730957ea11f8b610e9684766b510a0" title="Check if a float is an integer. " alt="" coords="352,354,459,390"/>
 </map>

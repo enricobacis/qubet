@@ -1,4 +1,4 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_qubet.html#a8597e6658271cb65cd1fd04e22e43ceb" title="This function is invoked when the player moves the mouse inside the game window." alt="" coords="191,5,337,33"/>
-<area shape="rect" id="node5" href="$class_qubet.html#acd54b249e3977132de7dd0153e61a99c" title="This function is invoked when the player clicks inside the game window." alt="" coords="191,55,337,83"/>
+<map id="Qubet::getPickedName" name="Qubet::getPickedName">
+<area shape="rect" id="node2" href="$class_qubet.html#acd54b249e3977132de7dd0153e61a99c" title="This function is invoked when the player clicks inside the game window. " alt="" coords="189,5,333,29"/>
+<area shape="rect" id="node3" href="$class_qubet.html#a8597e6658271cb65cd1fd04e22e43ceb" title="This function is invoked when the player moves the mouse inside the game window. " alt="" coords="190,53,333,77"/>
 </map>

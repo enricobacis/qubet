@@ -1,34 +1,32 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_level_editor.html#a043df349dfcbb3fc1965aab314f031fc" title="This function is invoked when back button is pressed." alt="" coords="195,233,379,261"/>
-<area shape="rect" id="node5" href="$class_level_editor.html#a583ad1e4fb51a28c22cccdb05caeeb5d" title="Signal emitted to play an effect." alt="" coords="712,385,840,413"/>
-<area shape="rect" id="node9" href="$class_level_editor.html#a28990264a514b22a14140ce9dcc8fdb7" title="This function is invoked when next button is pressed." alt="" coords="196,131,377,159"/>
-<area shape="rect" id="node28" href="$class_level_editor.html#aa348f91af6e6aa522e7e8c843bb95209" title="This function check the position of the mouse." alt="" coords="196,739,377,767"/>
-<area shape="rect" id="node30" href="$class_level_editor.html#a9f79beb562400f1296cc3c9c96b41a13" title="This function enlarge the level." alt="" coords="463,587,580,615"/>
-<area shape="rect" id="node35" href="$class_level_editor.html#a7e183b7bd341487ad23e0ff99af8eee5" title="This function decraese the gravity value." alt="" coords="449,334,593,362"/>
-<area shape="rect" id="node39" href="$class_level_editor.html#ab24619f5b5d2abe6d876bcc798f13f59" title="This function increase the gravity value." alt="" coords="453,385,589,413"/>
-<area shape="rect" id="node43" href="$class_level_editor.html#a6776dd013a33806460de6895b66faf80" title="This function lengthen the level." alt="" coords="460,435,583,463"/>
-<area shape="rect" id="node47" href="$class_level_editor.html#abcfebacb7d5d1bedd7c7d7a86f7d7584" title="This function is invoked when a letter is typed." alt="" coords="219,689,355,717"/>
-<area shape="rect" id="node70" href="$class_cube_string_list.html#a3c9f2621ef98046dc87870c95730127b" title="Safely destroy a CubeStringList." alt="" coords="433,638,609,666"/>
-<area shape="rect" id="node73" href="$class_level_editor.html#a60e714a3f8ba57e01f80bc1956a18916" title="Move the view in." alt="" coords="228,790,345,818"/>
-<area shape="rect" id="node75" href="$class_level_editor.html#a1f2e22eabb531574a0d503a8c5142134" title="Move the view out." alt="" coords="224,841,349,869"/>
-<area shape="rect" id="node78" href="$class_level_editor.html#a4d73535317c6538323770388fe159884" title="This function reduce the level." alt="" coords="464,486,579,514"/>
-<area shape="rect" id="node82" href="$class_level_editor.html#a8fdf78dcf474c3bcfa9154a764288cca" title="This function shorten the level." alt="" coords="463,537,580,565"/>
-<area shape="rect" id="node7" href="$class_action_list.html#a3a582129fc401579b6ae2bb730015511" title="Set the given parameter as the new primaryAction, overriding the old one." alt="" coords="443,182,600,210"/>
-<area shape="rect" id="node12" href="$class_level_editor.html#aaaa81998d648c61c425011fd73c8a087" title="Save the Level." alt="" coords="456,30,587,58"/>
-<area shape="rect" id="node25" href="$class_level.html#ad314a641646dda38be5effab70e094f7" title="Set the gravity of the Level." alt="" coords="469,131,573,159"/>
-<area shape="rect" id="node14" href="$class_level_editor.html#a707b51479b7028ef61a4cb70972df076" title="This function add the current level to the levelsList." alt="" coords="683,5,869,33"/>
-<area shape="rect" id="node17" href="$class_level.html#ad21a1eaf6e4473e5960f74e12ba1ee9b" title="Saves the Level in a xml form using the filename as output." alt="" coords="737,55,815,83"/>
-<area shape="rect" id="node19" href="$class_obstacle.html#a0210e3ca68f2e5d8e3d57cd418fb1611" title="Returns the cell of the Obstacle." alt="" coords="948,106,1052,134"/>
-<area shape="rect" id="node21" href="$class_obstacle.html#ac344f136338e372e67830fcb0f459770" title="This method return the obstacleId." alt="" coords="952,5,1048,33"/>
-<area shape="rect" id="node23" href="$class_obstacle.html#a137f51bc3c6adade850ea9714e89cf6e" title="Returns the obstacle modelId." alt="" coords="937,55,1063,83"/>
-<area shape="rect" id="node33" href="$class_cube_string.html#a1896aba854d2f34fb8e23208f1ff16a2" title="Safely destroys a CubeString." alt="" coords="705,486,847,514"/>
-<area shape="rect" id="node49" href="$class_cube_string_list.html#ab0a6f4e9cb679bf813638216d5943167" title="Returns the label which name is _stringName." alt="" coords="452,739,591,767"/>
-<area shape="rect" id="node57" href="$class_cube_string_list.html#a90e4bfa731aabfa4ffca53efaa4b785c" title="Returns the number of labels in the CubeStringList." alt="" coords="437,841,605,869"/>
-<area shape="rect" id="node59" href="$class_cube_string_list.html#a1ef30dd5a66d3be81592b74a6f309926" title="Check if a letter of the CubeString is already rotating." alt="" coords="448,891,595,919"/>
-<area shape="rect" id="node65" href="$class_cube_string_list.html#a6ffb91a8f967ea2c8da949e57fde8c54" title="Start the rotation of a single letter in a single CubeString contained in the CubeStrigList." alt="" coords="427,790,616,818"/>
-<area shape="rect" id="node51" href="$class_cube_string_list.html#af32055662992ac4a314bcabef7f4bf27" title="Return a pointer to the CubeString having the parameter OpenGL name." alt="" coords="665,841,887,869"/>
-<area shape="rect" id="node55" href="$class_cube_string.html#afbc1d4f6f0f8dd3b153150eb05b1b66c" title="Returns the text of the CubeString." alt="" coords="715,739,837,767"/>
-<area shape="rect" id="node53" href="$class_cube_string.html#abcf861a2ddfd2cd2c466be269acf91db" title="Returns the name given to the entire string (for picking purposes). [default = 0]." alt="" coords="937,841,1063,869"/>
-<area shape="rect" id="node62" href="$class_cube_string.html#a6f6564ec93427fcfcb4740cfe7ecedd4" title="Check if a letter of the CubeString is already rotating." alt="" coords="711,891,841,919"/>
-<area shape="rect" id="node68" href="$class_cube_string.html#a0347d9c16c99827d38ca6225d2300bad" title="Start the rotation of a letter in the CubeString." alt="" coords="691,790,861,818"/>
+<map id="LevelEditor::keyPressed" name="LevelEditor::keyPressed">
+<area shape="rect" id="node2" href="$class_level_editor.html#a043df349dfcbb3fc1965aab314f031fc" title="This function is invoked when back button is pressed. " alt="" coords="193,17,375,41"/>
+<area shape="rect" id="node4" href="$class_cube_string_list.html#a3c9f2621ef98046dc87870c95730127b" title="Safely destroy a CubeStringList. " alt="" coords="424,448,597,472"/>
+<area shape="rect" id="node6" href="$class_level_editor.html#a28990264a514b22a14140ce9dcc8fdb7" title="This function is invoked when next button is pressed. " alt="" coords="194,88,374,112"/>
+<area shape="rect" id="node13" href="$class_level_editor.html#a6776dd013a33806460de6895b66faf80" title="This function lengthen the level. " alt="" coords="449,149,572,173"/>
+<area shape="rect" id="node14" href="$class_level_editor.html#a60e714a3f8ba57e01f80bc1956a18916" title="Move the view in. " alt="" coords="226,541,342,565"/>
+<area shape="rect" id="node15" href="$class_level_editor.html#aa348f91af6e6aa522e7e8c843bb95209" title="This function check the position of the mouse. " alt="" coords="194,589,374,613"/>
+<area shape="rect" id="node16" href="$class_level_editor.html#a8fdf78dcf474c3bcfa9154a764288cca" title="This function shorten the level. " alt="" coords="452,197,569,221"/>
+<area shape="rect" id="node17" href="$class_level_editor.html#a1f2e22eabb531574a0d503a8c5142134" title="Move the view out. " alt="" coords="221,637,347,661"/>
+<area shape="rect" id="node18" href="$class_level_editor.html#a4d73535317c6538323770388fe159884" title="This function reduce the level. " alt="" coords="227,251,341,275"/>
+<area shape="rect" id="node19" href="$class_level_editor.html#a7e183b7bd341487ad23e0ff99af8eee5" title="This function decraese the gravity value. " alt="" coords="214,299,354,323"/>
+<area shape="rect" id="node20" href="$class_level_editor.html#a9f79beb562400f1296cc3c9c96b41a13" title="This function enlarge the level. " alt="" coords="225,347,343,371"/>
+<area shape="rect" id="node21" href="$class_level_editor.html#ab24619f5b5d2abe6d876bcc798f13f59" title="This function increase the gravity value. " alt="" coords="218,395,350,419"/>
+<area shape="rect" id="node22" href="$class_level_editor.html#abcfebacb7d5d1bedd7c7d7a86f7d7584" title="This function is invoked when a letter is typed. " alt="" coords="217,493,351,517"/>
+<area shape="rect" id="node3" href="$class_action_list.html#a3a582129fc401579b6ae2bb730015511" title="Set the given parameter as the new primaryAction, overriding the old one. " alt="" coords="433,5,588,29"/>
+<area shape="rect" id="node5" href="$class_cube_string.html#a1896aba854d2f34fb8e23208f1ff16a2" title="Safely destroys a CubeString. " alt="" coords="660,297,801,321"/>
+<area shape="rect" id="node7" href="$class_level.html#ad314a641646dda38be5effab70e094f7" title="Set the gravity of the Level. " alt="" coords="461,53,561,77"/>
+<area shape="rect" id="node8" href="$class_level_editor.html#aaaa81998d648c61c425011fd73c8a087" title="Save the Level. " alt="" coords="447,101,575,125"/>
+<area shape="rect" id="node9" href="$class_level.html#ad21a1eaf6e4473e5960f74e12ba1ee9b" title="Saves the Level in a xml form using the filename as output. " alt="" coords="693,101,768,125"/>
+<area shape="rect" id="node10" href="$class_obstacle.html#a0210e3ca68f2e5d8e3d57cd418fb1611" title="Returns the cell of the Obstacle. " alt="" coords="876,53,980,77"/>
+<area shape="rect" id="node11" href="$class_obstacle.html#ac344f136338e372e67830fcb0f459770" title="This method return the obstacleId. " alt="" coords="881,101,975,125"/>
+<area shape="rect" id="node12" href="$class_obstacle.html#a137f51bc3c6adade850ea9714e89cf6e" title="Returns the obstacle modelId. " alt="" coords="866,149,990,173"/>
+<area shape="rect" id="node23" href="$class_cube_string_list.html#a90e4bfa731aabfa4ffca53efaa4b785c" title="Returns the number of labels in the CubeStringList. " alt="" coords="441,605,580,641"/>
+<area shape="rect" id="node24" href="$class_cube_string_list.html#ab0a6f4e9cb679bf813638216d5943167" title="Returns the label which name is _stringName. " alt="" coords="441,496,580,520"/>
+<area shape="rect" id="node28" href="$class_cube_string_list.html#a1ef30dd5a66d3be81592b74a6f309926" title="Check if a letter of the CubeString is already rotating. " alt="" coords="438,665,583,689"/>
+<area shape="rect" id="node30" href="$class_cube_string_list.html#a6ffb91a8f967ea2c8da949e57fde8c54" title="Start the rotation of a single letter in a single CubeString contained in the CubeStrigList. " alt="" coords="437,545,584,581"/>
+<area shape="rect" id="node25" href="$class_cube_string_list.html#af32055662992ac4a314bcabef7f4bf27" title="Return a pointer to the CubeString having the parameter OpenGL name. " alt="" coords="647,595,814,631"/>
+<area shape="rect" id="node27" href="$class_cube_string.html#afbc1d4f6f0f8dd3b153150eb05b1b66c" title="Returns the text of the CubeString. " alt="" coords="669,496,792,520"/>
+<area shape="rect" id="node26" href="$class_cube_string.html#abcf861a2ddfd2cd2c466be269acf91db" title="Returns the name given to the entire string (for picking purposes). [default = 0]. " alt="" coords="865,601,991,625"/>
+<area shape="rect" id="node29" href="$class_cube_string.html#a6f6564ec93427fcfcb4740cfe7ecedd4" title="Check if a letter of the CubeString is already rotating. " alt="" coords="666,665,795,689"/>
+<area shape="rect" id="node31" href="$class_cube_string.html#a0347d9c16c99827d38ca6225d2300bad" title="Start the rotation of a letter in the CubeString. " alt="" coords="645,547,816,571"/>
 </map>

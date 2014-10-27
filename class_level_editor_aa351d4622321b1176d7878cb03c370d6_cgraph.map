@@ -1,6 +1,5 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_level.html#a32863851ea18be5dd07e0012ae77158c" title="Adds an obstacle to the Level." alt="" coords="224,5,339,33"/>
-<area shape="rect" id="node7" href="$class_level_editor.html#a583ad1e4fb51a28c22cccdb05caeeb5d" title="Signal emitted to play an effect." alt="" coords="217,55,345,83"/>
-<area shape="rect" id="node9" href="$class_obstacle.html#a4575634174f36439af7bea0b77c6e729" title="Set the obstacle color." alt="" coords="225,106,337,134"/>
-<area shape="rect" id="node5" href="$class_obstacle.html#ae3296f69961a6f82bb6dd658a6b65f50" title="Set the obstacleId." alt="" coords="395,5,491,33"/>
+<map id="LevelEditor::mouseReleased" name="LevelEditor::mouseReleased">
+<area shape="rect" id="node2" href="$class_obstacle.html#a4575634174f36439af7bea0b77c6e729" title="Set the obstacle color. " alt="" coords="215,5,326,29"/>
+<area shape="rect" id="node3" href="$class_level.html#a32863851ea18be5dd07e0012ae77158c" title="Adds an obstacle to the Level. " alt="" coords="213,53,328,77"/>
+<area shape="rect" id="node4" href="$class_obstacle.html#ae3296f69961a6f82bb6dd658a6b65f50" title="Set the obstacleId. " alt="" coords="377,53,471,77"/>
 </map>

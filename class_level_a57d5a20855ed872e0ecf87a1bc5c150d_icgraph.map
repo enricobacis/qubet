@@ -1,14 +1,14 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_position_controller.html#ad85a3a72d2631b1c168de9aaa9162663" title="Create the 3D Matrix of ObstacleCells." alt="" coords="151,5,361,33"/>
-<area shape="rect" id="node5" href="$class_position_controller.html#a6d7a4488805603e198b550100ceec899" title="Create a PositionController Objects." alt="" coords="412,30,609,58"/>
-<area shape="rect" id="node7" href="$class_cube.html#afb0a4f5c97ec80147f201c4e9444817a" title="Create a Cube." alt="" coords="216,106,296,134"/>
-<area shape="rect" id="node9" href="$class_game.html#aa5a6a37a0385d779fbf2e5b0a1fda742" title="Method to draw the game." alt="" coords="215,157,297,185"/>
-<area shape="rect" id="node26" href="$class_level_editor.html#a6882fff94962c01458a5309f44024d3c" title="Create a LevelEditor." alt="" coords="188,207,324,235"/>
-<area shape="rect" id="node11" href="$class_qubet.html#ad108e6c05cda81b75b5f8600002c62f9" title="This function is used to draw the scene on the QGLWidget. It is used by PaintGL that calls this and t..." alt="" coords="455,157,567,185"/>
-<area shape="rect" id="node13" href="$class_qubet.html#a3e2ddd9bf27cecf96936d18e20542170" title="This method returns a list of the names of the foreground item at mouse coordinates (mouseX..." alt="" coords="660,131,793,159"/>
-<area shape="rect" id="node19" href="$class_qubet.html#a13674eced0fe056b62e99f7a8a5c95f2" title="Paint the OpenGL scene." alt="" coords="679,182,775,210"/>
-<area shape="rect" id="node15" href="$class_qubet.html#a8597e6658271cb65cd1fd04e22e43ceb" title="This function is invoked when the player moves the mouse inside the game window." alt="" coords="844,81,991,109"/>
-<area shape="rect" id="node17" href="$class_qubet.html#acd54b249e3977132de7dd0153e61a99c" title="This function is invoked when the player clicks inside the game window." alt="" coords="844,131,991,159"/>
-<area shape="rect" id="node21" href="$class_qubet.html#acaa67d9bbdf3d12601d4b71ed62f2fc0" title="This is a duplicated function to call paintGL, but this can be used as a slot." alt="" coords="876,182,959,210"/>
-<area shape="rect" id="node23" href="$class_qubet.html#a1452c8e7bec024adb53ba216316c593d" title="It is used after the first show of the qubet window to initialize Qubet." alt="" coords="1040,207,1141,235"/>
+<map id="Level::getWidth" name="Level::getWidth">
+<area shape="rect" id="node2" href="$class_cube.html#afb0a4f5c97ec80147f201c4e9444817a" title="Create a Cube. " alt="" coords="177,32,257,56"/>
+<area shape="rect" id="node3" href="$class_game.html#aa5a6a37a0385d779fbf2e5b0a1fda742" title="Method to draw the game. " alt="" coords="177,80,258,104"/>
+<area shape="rect" id="node11" href="$class_level_editor.html#a6882fff94962c01458a5309f44024d3c" title="Create a LevelEditor. " alt="" coords="150,128,285,152"/>
+<area shape="rect" id="node12" href="$class_position_controller.html#a6d7a4488805603e198b550100ceec899" title="Create a PositionController Objects. " alt="" coords="335,199,447,235"/>
+<area shape="rect" id="node13" href="$class_position_controller.html#ad85a3a72d2631b1c168de9aaa9162663" title="Create the 3D Matrix of ObstacleCells. " alt="" coords="155,227,280,263"/>
+<area shape="rect" id="node4" href="$class_qubet.html#ad108e6c05cda81b75b5f8600002c62f9" title="This function is used to draw the scene on the QGLWidget. It is used by PaintGL that calls this and t..." alt="" coords="334,80,447,104"/>
+<area shape="rect" id="node5" href="$class_qubet.html#a13674eced0fe056b62e99f7a8a5c95f2" title="Paint the OpenGL scene. " alt="" coords="517,55,611,79"/>
+<area shape="rect" id="node8" href="$class_qubet.html#a3e2ddd9bf27cecf96936d18e20542170" title="This method returns a list of the names of the foreground item at mouse coordinates (mouseX..." alt="" coords="497,104,631,128"/>
+<area shape="rect" id="node6" href="$class_qubet.html#acaa67d9bbdf3d12601d4b71ed62f2fc0" title="This is a duplicated function to call paintGL, but this can be used as a slot. " alt="" coords="711,5,793,29"/>
+<area shape="rect" id="node7" href="$class_qubet.html#a1452c8e7bec024adb53ba216316c593d" title="It is used after the first show of the qubet window to initialize Qubet. " alt="" coords="872,31,973,55"/>
+<area shape="rect" id="node9" href="$class_qubet.html#acd54b249e3977132de7dd0153e61a99c" title="This function is invoked when the player clicks inside the game window. " alt="" coords="680,104,824,128"/>
+<area shape="rect" id="node10" href="$class_qubet.html#a8597e6658271cb65cd1fd04e22e43ceb" title="This function is invoked when the player moves the mouse inside the game window. " alt="" coords="681,152,823,176"/>
 </map>

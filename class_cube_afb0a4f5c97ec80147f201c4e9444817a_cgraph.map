@@ -1,19 +1,14 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_cube.html#ad0974041b0a720270ad48a418c3e8f4b" title="It is the slot invoked when the Cube collides with an Obstacle." alt="" coords="331,64,421,92"/>
-<area shape="rect" id="node5" href="$class_cube.html#a831ab62b5ccacee1ae848fa36b5bd91d" title="Generate the normalsMatrix Matrix." alt="" coords="479,14,633,42"/>
-<area shape="rect" id="node9" href="$class_cube.html#a26c735c21499d622891d33f0d8bae8cd" title="Signal emitted to play an effect." alt="" coords="505,166,607,194"/>
-<area shape="rect" id="node12" href="$class_cube.html#a7565e63cf5251350f8c5d0d04ee52dbc" title="Signal to inform that the explosion has finished." alt="" coords="133,267,275,295"/>
-<area shape="rect" id="node14" href="$class_level.html#a233bf5e13c08d0ca54e204da69e70d90" title="Returns the gravity of the Level." alt="" coords="152,318,256,346"/>
-<area shape="rect" id="node16" href="$class_level.html#a6581a51667bae2360949e84533311c69" title="Returns the length of the Level." alt="" coords="153,368,255,396"/>
-<area shape="rect" id="node18" href="$class_level.html#a57d5a20855ed872e0ecf87a1bc5c150d" title="Returns the width of the Level." alt="" coords="156,419,252,447"/>
-<area shape="rect" id="node20" href="$class_cube.html#aa9698790bb727f97e6554c3ba641f6cc" title="Signal to inform to hide the level name." alt="" coords="140,470,268,498"/>
-<area shape="rect" id="node22" href="$class_cube.html#a255a886981fd8c2fe45878dda87a6dec" title="Slot invoked when the user presses a key on the keyboard." alt="" coords="148,166,260,194"/>
-<area shape="rect" id="node37" href="$class_cube.html#ae6efe5f4f6ae7cf232d08598fd0ab226" title="Signal emitted when the player &quot;suicide&quot; the Cube." alt="" coords="332,318,420,346"/>
-<area shape="rect" id="node39" href="$class_cube.html#a0409a6dc9f4a04e3d3a8faaedd21ef8b" title="Signal emitted when the level is completed." alt="" coords="140,520,268,548"/>
-<area shape="rect" id="node42" href="$class_cube.html#a5f56bb5176ff421210b33a9f22b95275" title="Reset the Level." alt="" coords="152,571,256,599"/>
-<area shape="rect" id="node7" href="$class_cube.html#ae6de3fa944d070a7d5ed0e620c6f8e35" title="Make the Cube explode." alt="" coords="511,64,601,92"/>
-<area shape="rect" id="node25" href="$class_cube.html#a4989309f7e6c63f4a2ae7a9814f1b9f0" title="Make the Cube jump." alt="" coords="337,166,415,194"/>
-<area shape="rect" id="node28" href="$class_cube.html#ac448eee673759f52f9d8b00e84c3a8c1" title="Make the Cube move to the Left." alt="" coords="327,216,425,244"/>
-<area shape="rect" id="node33" href="$class_cube.html#aa949631a04e069aa0357286f13bae6f9" title="Make the Cube move to the right." alt="" coords="323,267,429,295"/>
-<area shape="rect" id="node30" href="$class_cube.html#a5db8ff806595c71bed4727e0518256ce" title="Returns true if the Cube is moving, else false." alt="" coords="508,242,604,270"/>
+<map id="Cube::Cube" name="Cube::Cube">
+<area shape="rect" id="node2" href="$class_level.html#a57d5a20855ed872e0ecf87a1bc5c150d" title="Returns the width of the Level. " alt="" coords="142,5,237,29"/>
+<area shape="rect" id="node3" href="$class_cube.html#a5f56bb5176ff421210b33a9f22b95275" title="Reset the Level. " alt="" coords="137,53,241,77"/>
+<area shape="rect" id="node4" href="$class_cube.html#a255a886981fd8c2fe45878dda87a6dec" title="Slot invoked when the user presses a key on the keyboard. " alt="" coords="134,101,245,125"/>
+<area shape="rect" id="node9" href="$class_cube.html#ad0974041b0a720270ad48a418c3e8f4b" title="It is the slot invoked when the Cube collides with an Obstacle. " alt="" coords="301,152,392,176"/>
+<area shape="rect" id="node11" href="$class_cube.html#a831ab62b5ccacee1ae848fa36b5bd91d" title="Generate the normalsMatrix Matrix. " alt="" coords="448,200,603,224"/>
+<area shape="rect" id="node12" href="$class_level.html#a233bf5e13c08d0ca54e204da69e70d90" title="Returns the gravity of the Level. " alt="" coords="139,251,240,275"/>
+<area shape="rect" id="node13" href="$class_level.html#a6581a51667bae2360949e84533311c69" title="Returns the length of the Level. " alt="" coords="139,299,240,323"/>
+<area shape="rect" id="node5" href="$class_cube.html#a4989309f7e6c63f4a2ae7a9814f1b9f0" title="Make the Cube jump. " alt="" coords="307,8,386,32"/>
+<area shape="rect" id="node6" href="$class_cube.html#ac448eee673759f52f9d8b00e84c3a8c1" title="Make the Cube move to the Left. " alt="" coords="297,56,396,80"/>
+<area shape="rect" id="node8" href="$class_cube.html#aa949631a04e069aa0357286f13bae6f9" title="Make the Cube move to the right. " alt="" coords="294,104,399,128"/>
+<area shape="rect" id="node7" href="$class_cube.html#a5db8ff806595c71bed4727e0518256ce" title="Returns true if the Cube is moving, else false. " alt="" coords="478,80,573,104"/>
+<area shape="rect" id="node10" href="$class_cube.html#ae6de3fa944d070a7d5ed0e620c6f8e35" title="Make the Cube explode. " alt="" coords="480,152,571,176"/>
 </map>

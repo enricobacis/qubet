@@ -1,4 +1,4 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_position_controller.html#a6267df12f30b856e2481845437ce675c" title="Check if the cube has a collision with an obstacle." alt="" coords="209,5,391,33"/>
-<area shape="rect" id="node5" href="$class_position_controller.html#a6d7a4488805603e198b550100ceec899" title="Create a PositionController Objects." alt="" coords="441,5,639,33"/>
+<map id="PositionController::isInteger" name="PositionController::isInteger">
+<area shape="rect" id="node2" href="$class_position_controller.html#a6267df12f30b856e2481845437ce675c" title="Check if the cube has a collision with an obstacle. " alt="" coords="160,5,267,41"/>
+<area shape="rect" id="node3" href="$class_position_controller.html#a6d7a4488805603e198b550100ceec899" title="Create a PositionController Objects. " alt="" coords="315,5,427,41"/>
 </map>

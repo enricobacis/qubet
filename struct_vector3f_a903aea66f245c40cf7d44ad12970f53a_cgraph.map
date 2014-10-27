@@ -1,6 +1,6 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$struct_vector3f.html#a6ec22320d9151b1c79f9487e14847193" title="Compute the XY plan projection." alt="" coords="149,5,280,33"/>
-<area shape="rect" id="node5" href="$struct_vector3f.html#af2a2a52ec2327906d73225aa6d4d2169" title="Rotate on the x axis." alt="" coords="164,55,265,83"/>
-<area shape="rect" id="node7" href="$struct_vector3f.html#a9ab0b1be61517b2eab70d9067f258030" title="Rotate on the z axis." alt="" coords="164,106,265,134"/>
-<area shape="rect" id="node9" href="$struct_vector3f.html#a1b14b77d2503c1b1ca1363163ff55432" title="Create a new Vector3f in coordinates (0, 0, 0)." alt="" coords="161,157,268,185"/>
+<map id="Vector3f::rotate" name="Vector3f::rotate">
+<area shape="rect" id="node2" href="$struct_vector3f.html#a1b14b77d2503c1b1ca1363163ff55432" title="Create a new Vector3f in coordinates (0, 0, 0). " alt="" coords="163,5,274,29"/>
+<area shape="rect" id="node3" href="$struct_vector3f.html#a6ec22320d9151b1c79f9487e14847193" title="Compute the XY plan projection. " alt="" coords="153,53,285,77"/>
+<area shape="rect" id="node4" href="$struct_vector3f.html#a9ab0b1be61517b2eab70d9067f258030" title="Rotate on the z axis. " alt="" coords="167,101,271,125"/>
+<area shape="rect" id="node5" href="$struct_vector3f.html#af2a2a52ec2327906d73225aa6d4d2169" title="Rotate on the x axis. " alt="" coords="167,149,271,173"/>
 </map>

@@ -1,16 +1,14 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_menu.html#aba086b81a7f1bfee58c7155bae49fa25" title="This function is invoked when backButton is triggered." alt="" coords="188,258,345,286"/>
-<area shape="rect" id="node9" href="$class_menu.html#a1f063d8ee814499b251757f2dbde70f9" title="This function is invoked when editorButton is triggered." alt="" coords="187,207,347,235"/>
-<area shape="rect" id="node17" href="$class_menu.html#aa3a9848765e77b26854795f0feedd82f" title="This function is invoked when nextSkinButton is triggered." alt="" coords="179,359,355,387"/>
-<area shape="rect" id="node20" href="$class_menu.html#ae33729ba0f7f2bf8d7ed69a3f16b75b9" title="This function is invoked when nextButton is triggered." alt="" coords="189,157,344,185"/>
-<area shape="rect" id="node22" href="$class_menu.html#a8e7069c16b9f18fb50fd7e5c2c58f26d" title="Select the next level." alt="" coords="443,55,544,83"/>
-<area shape="rect" id="node30" href="$class_menu.html#a9364802460f2b3d452d137c1a4c75dd8" title="This function is invoked when playArcadeButton is triggered." alt="" coords="173,410,360,438"/>
-<area shape="rect" id="node34" href="$class_menu.html#aa75a88e857e41e33b2306e5de3bdb06d" title="This function is invoked when playStoryButton is triggered." alt="" coords="177,461,356,489"/>
-<area shape="rect" id="node38" href="$class_menu.html#a896b2d4902ddce860c6f389d08d6c43f" title="This function is invoked when previousSkinButton is triggered." alt="" coords="169,309,364,337"/>
-<area shape="rect" id="node42" href="$class_menu.html#adf6a7ac7e65fa794d68baee063dcfa64" title="Select the previous level." alt="" coords="432,5,555,33"/>
-<area shape="rect" id="node5" href="$class_menu.html#a9fedb4739af4036621544d87eee0dacb" title="Signal emitted to play an effect." alt="" coords="659,258,760,286"/>
-<area shape="rect" id="node7" href="$class_action_list.html#a3a582129fc401579b6ae2bb730015511" title="Set the given parameter as the new primaryAction, overriding the old one." alt="" coords="415,359,572,387"/>
-<area shape="rect" id="node13" href="$class_cube_string_list.html#a3c9f2621ef98046dc87870c95730127b" title="Safely destroy a CubeStringList." alt="" coords="621,55,797,83"/>
-<area shape="rect" id="node15" href="$class_cube_string.html#a1896aba854d2f34fb8e23208f1ff16a2" title="Safely destroys a CubeString." alt="" coords="847,55,988,83"/>
-<area shape="rect" id="node28" href="$class_menu.html#a2ac6afb188daf46fab031cf7265d9e0d" title="Signal emitted to stop the current ambient music." alt="" coords="421,106,565,134"/>
+<map id="Menu::keyPressed" name="Menu::keyPressed">
+<area shape="rect" id="node2" href="$class_menu.html#aba086b81a7f1bfee58c7155bae49fa25" title="This function is invoked when backButton is triggered. " alt="" coords="180,101,337,125"/>
+<area shape="rect" id="node4" href="$class_menu.html#aa75a88e857e41e33b2306e5de3bdb06d" title="This function is invoked when playStoryButton is triggered. " alt="" coords="170,149,347,173"/>
+<area shape="rect" id="node5" href="$class_menu.html#ae33729ba0f7f2bf8d7ed69a3f16b75b9" title="This function is invoked when nextButton is triggered. " alt="" coords="181,307,336,331"/>
+<area shape="rect" id="node6" href="$class_menu.html#a8e7069c16b9f18fb50fd7e5c2c58f26d" title="Select the next level. " alt="" coords="427,344,527,368"/>
+<area shape="rect" id="node9" href="$class_menu.html#a896b2d4902ddce860c6f389d08d6c43f" title="This function is invoked when previousSkinButton is triggered. " alt="" coords="185,198,332,234"/>
+<area shape="rect" id="node10" href="$class_menu.html#adf6a7ac7e65fa794d68baee063dcfa64" title="Select the previous level. " alt="" coords="417,393,537,417"/>
+<area shape="rect" id="node11" href="$class_menu.html#aa3a9848765e77b26854795f0feedd82f" title="This function is invoked when nextSkinButton is triggered. " alt="" coords="171,5,346,29"/>
+<area shape="rect" id="node12" href="$class_menu.html#a9364802460f2b3d452d137c1a4c75dd8" title="This function is invoked when playArcadeButton is triggered. " alt="" coords="165,53,352,77"/>
+<area shape="rect" id="node13" href="$class_menu.html#a1f063d8ee814499b251757f2dbde70f9" title="This function is invoked when editorButton is triggered. " alt="" coords="179,259,339,283"/>
+<area shape="rect" id="node3" href="$class_action_list.html#a3a582129fc401579b6ae2bb730015511" title="Set the given parameter as the new primaryAction, overriding the old one. " alt="" coords="400,149,555,173"/>
+<area shape="rect" id="node7" href="$class_cube_string_list.html#a3c9f2621ef98046dc87870c95730127b" title="Safely destroy a CubeStringList. " alt="" coords="603,344,776,368"/>
+<area shape="rect" id="node8" href="$class_cube_string.html#a1896aba854d2f34fb8e23208f1ff16a2" title="Safely destroys a CubeString. " alt="" coords="824,344,965,368"/>
 </map>

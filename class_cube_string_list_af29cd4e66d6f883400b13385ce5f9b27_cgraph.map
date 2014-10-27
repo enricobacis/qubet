@@ -1,6 +1,6 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_cube_string_list.html#af32055662992ac4a314bcabef7f4bf27" title="Return a pointer to the CubeString having the parameter OpenGL name." alt="" coords="244,5,465,33"/>
-<area shape="rect" id="node7" href="$class_cube_string.html#a206954e5430aba460cf679c4fe95e79d" title="Start the rotation of the entire CubeString." alt="" coords="269,55,440,83"/>
-<area shape="rect" id="node5" href="$class_cube_string.html#abcf861a2ddfd2cd2c466be269acf91db" title="Returns the name given to the entire string (for picking purposes). [default = 0]." alt="" coords="539,5,664,33"/>
-<area shape="rect" id="node9" href="$class_cube_string.html#a0347d9c16c99827d38ca6225d2300bad" title="Start the rotation of a letter in the CubeString." alt="" coords="516,55,687,83"/>
+<map id="CubeStringList::startStringRotation" name="CubeStringList::startStringRotation">
+<area shape="rect" id="node2" href="$class_cube_string_list.html#af32055662992ac4a314bcabef7f4bf27" title="Return a pointer to the CubeString having the parameter OpenGL name. " alt="" coords="202,5,369,41"/>
+<area shape="rect" id="node4" href="$class_cube_string.html#a206954e5430aba460cf679c4fe95e79d" title="Start the rotation of the entire CubeString. " alt="" coords="200,65,371,89"/>
+<area shape="rect" id="node3" href="$class_cube_string.html#abcf861a2ddfd2cd2c466be269acf91db" title="Returns the name given to the entire string (for picking purposes). [default = 0]. " alt="" coords="441,11,567,35"/>
+<area shape="rect" id="node5" href="$class_cube_string.html#a0347d9c16c99827d38ca6225d2300bad" title="Start the rotation of a letter in the CubeString. " alt="" coords="419,65,589,89"/>
 </map>

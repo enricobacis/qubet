@@ -1,6 +1,6 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_cube.html#ac448eee673759f52f9d8b00e84c3a8c1" title="Make the Cube move to the Left." alt="" coords="156,5,255,33"/>
-<area shape="rect" id="node9" href="$class_cube.html#aa949631a04e069aa0357286f13bae6f9" title="Make the Cube move to the right." alt="" coords="152,55,259,83"/>
-<area shape="rect" id="node5" href="$class_cube.html#a255a886981fd8c2fe45878dda87a6dec" title="Slot invoked when the user presses a key on the keyboard." alt="" coords="308,30,420,58"/>
-<area shape="rect" id="node7" href="$class_cube.html#afb0a4f5c97ec80147f201c4e9444817a" title="Create a Cube." alt="" coords="469,30,549,58"/>
+<map id="Cube::isMoving" name="Cube::isMoving">
+<area shape="rect" id="node2" href="$class_cube.html#ac448eee673759f52f9d8b00e84c3a8c1" title="Make the Cube move to the Left. " alt="" coords="153,5,252,29"/>
+<area shape="rect" id="node5" href="$class_cube.html#aa949631a04e069aa0357286f13bae6f9" title="Make the Cube move to the right. " alt="" coords="150,53,255,77"/>
+<area shape="rect" id="node3" href="$class_cube.html#a255a886981fd8c2fe45878dda87a6dec" title="Slot invoked when the user presses a key on the keyboard. " alt="" coords="305,29,415,53"/>
+<area shape="rect" id="node4" href="$class_cube.html#afb0a4f5c97ec80147f201c4e9444817a" title="Create a Cube. " alt="" coords="464,29,544,53"/>
 </map>

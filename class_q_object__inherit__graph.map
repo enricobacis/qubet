@@ -1,7 +1,7 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_cube.html" title="This class rapresents the player&#39;s Cube." alt="" coords="5,393,144,1066"/>
-<area shape="rect" id="node5" href="$class_game.html" title="It is the Game Class." alt="" coords="168,257,301,1202"/>
-<area shape="rect" id="node7" href="$class_level.html" title="This class rapresents a Level of Qubet, with its obstacle. It is able to draw itself simply using the..." alt="" coords="325,393,491,1066"/>
-<area shape="rect" id="node9" href="$class_level_editor.html" title="This the LevelEditor Class." alt="" coords="515,137,659,1322"/>
-<area shape="rect" id="node11" href="$class_menu.html" title="Menu class used to show and manage the game menu." alt="" coords="683,313,861,1146"/>
+<map id="QObject" name="QObject">
+<area shape="rect" id="node2" href="$class_cube.html" title="This class rapresents the player&#39;s Cube. " alt="" coords="5,141,141,558"/>
+<area shape="rect" id="node3" href="$class_game.html" title="It is the Game Class. " alt="" coords="167,123,296,576"/>
+<area shape="rect" id="node4" href="$class_level.html" title="This class rapresents a Level of Qubet, with its obstacle. It is able to draw itself simply using the..." alt="" coords="321,177,460,522"/>
+<area shape="rect" id="node5" href="$class_level_editor.html" title="This the LevelEditor Class. " alt="" coords="484,123,623,576"/>
+<area shape="rect" id="node6" href="$class_menu.html" title="Menu class used to show and manage the game menu. " alt="" coords="647,147,823,552"/>
 </map>

@@ -1,4 +1,4 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_level.html#a3b45cc65d15a2da9128ffe83c702291d" title="Set the a variable that states if the Level is in the story." alt="" coords="167,5,279,33"/>
-<area shape="rect" id="node5" href="$class_level.html#af11bb94bf0c9f4e8b6bcb595480172b7" title="Set the name of the Level." alt="" coords="173,55,272,83"/>
+<map id="Qubet::loadLevels" name="Qubet::loadLevels">
+<area shape="rect" id="node2" href="$class_level.html#af11bb94bf0c9f4e8b6bcb595480172b7" title="Set the name of the Level. " alt="" coords="169,5,265,29"/>
+<area shape="rect" id="node3" href="$class_level.html#a3b45cc65d15a2da9128ffe83c702291d" title="Set the a variable that states if the Level is in the story. " alt="" coords="163,53,272,77"/>
 </map>

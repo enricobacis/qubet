@@ -1,21 +1,21 @@
-<map id="G" name="G">
-<area shape="rect" id="node2" href="$class_q_main_window.html" title="{QMainWindow\n||}" alt="" coords="2401,4587,2492,4669"/>
-<area shape="rect" id="node4" href="$class_qubet.html" title="This class rapresents an instance of the QGLWidget Qubet. It is the game." alt="" coords="2516,4131,2695,5125"/>
-<area shape="rect" id="node6" href="$class_q_g_l_widget.html" title="{QGLWidget\n||}" alt="" coords="5,3553,83,3634"/>
-<area shape="rect" id="node24" href="$class_game.html" title="It is the Game Class." alt="" coords="2375,3121,2508,4066"/>
-<area shape="rect" id="node31" href="$class_cube.html" title="This class rapresents the player&#39;s Cube." alt="" coords="1867,971,2005,1645"/>
-<area shape="rect" id="node40" href="$struct_vector3f.html" title="Structure that rapresents a Vector of float in a 3&#45;D space." alt="" coords="3061,233,3189,810"/>
-<area shape="rect" id="node60" href="$class_level.html" title="This class rapresents a Level of Qubet, with its obstacle. It is able to draw itself simply using the..." alt="" coords="1627,971,1792,1645"/>
-<area shape="rect" id="node84" href="$class_cube_string.html" title="This class is used to draw, a string composed the horizontal justapposition of Different cubes on whi..." alt="" coords="4080,1115,4229,1501"/>
-<area shape="rect" id="node110" href="$class_skybox.html" title="It is the Skybox Class." alt="" coords="4541,1179,4672,1437"/>
-<area shape="rect" id="node119" href="$class_menu.html" title="Menu class used to show and manage the game menu." alt="" coords="3945,2046,4124,2879"/>
-<area shape="rect" id="node133" href="$class_cube_string_list.html" title="This class is used to draw a vertical list of CubeString. Look at CubeString to have a better specifi..." alt="" coords="4727,305,4887,738"/>
-<area shape="rect" id="node143" href="$class_level_editor.html" title="This the LevelEditor Class." alt="" coords="3055,1870,3199,3055"/>
-<area shape="rect" id="node10" href="$class_audio_manager.html" title="It is a semi&#45;thread class to manage the audio of Qubet. It can manage an ambientMusic and different e..." alt="" coords="428,1171,567,1445"/>
-<area shape="rect" id="node12" href="$class_q_thread.html" title="{QThread\n||}" alt="" coords="649,481,716,562"/>
-<area shape="rect" id="node50" href="$class_position_controller.html" title="PositionController Class check if the cube has a collision with obstacles." alt="" coords="1332,2310,1468,2615"/>
-<area shape="rect" id="node45" href="$class_skin.html" title="It is the Skin Class." alt="" coords="3276,233,3425,810"/>
-<area shape="rect" id="node26" href="$class_q_object.html" title="{QObject\n||}" alt="" coords="2531,481,2592,562"/>
-<area shape="rect" id="node75" href="$class_action_list.html" title="This class is used to keep track of actions to do. For example it can keep track of current view scro..." alt="" coords="4360,1187,4517,1429"/>
-<area shape="rect" id="node92" href="$class_alphabet.html" title="This class is used to keep a list of Letter (from this the name Alphabet) It provide access to Letter..." alt="" coords="5055,433,5220,610"/>
+<map id="Window" name="Window">
+<area shape="rect" id="node2" href="$class_q_main_window.html" title="{QMainWindow\n||}" alt="" coords="2537,2105,2628,2175"/>
+<area shape="rect" id="node3" href="$class_qubet.html" title="This class rapresents an instance of the QGLWidget Qubet. It is the game. " alt="" coords="2653,1931,2829,2349"/>
+<area shape="rect" id="node4" href="$class_q_g_l_widget.html" title="{QGLWidget\n||}" alt="" coords="259,1668,337,1737"/>
+<area shape="rect" id="node13" href="$class_game.html" title="It is the Game Class. " alt="" coords="2175,1536,2304,1869"/>
+<area shape="rect" id="node16" href="$class_cube.html" title="This class rapresents the player&#39;s Cube. " alt="" coords="1654,614,1791,911"/>
+<area shape="rect" id="node19" href="$struct_vector3f.html" title="Structure that rapresents a Vector of float in a 3&#45;D space. " alt="" coords="1298,243,1389,432"/>
+<area shape="rect" id="node26" href="$class_level.html" title="This class rapresents a Level of Qubet, with its obstacle. It is able to draw itself simply using the..." alt="" coords="2907,668,3005,857"/>
+<area shape="rect" id="node32" href="$class_cube_string.html" title="This class is used to draw, a string composed the horizontal justapposition of Different cubes on whi..." alt="" coords="3969,656,4116,869"/>
+<area shape="rect" id="node39" href="$class_skybox.html" title="It is the Skybox Class. " alt="" coords="4890,680,5016,845"/>
+<area shape="rect" id="node42" href="$class_menu.html" title="Menu class used to show and manage the game menu. " alt="" coords="3053,1141,3229,1427"/>
+<area shape="rect" id="node44" href="$class_cube_string_list.html" title="This class is used to draw a vertical list of CubeString. Look at CubeString to have a better specifi..." alt="" coords="4305,195,4465,480"/>
+<area shape="rect" id="node46" href="$class_level_editor.html" title="This the LevelEditor Class. " alt="" coords="3704,1093,3843,1475"/>
+<area shape="rect" id="node6" href="$class_audio_manager.html" title="It is a semi&#45;thread class to manage the audio of Qubet. It can manage an ambientMusic and different e..." alt="" coords="314,686,437,839"/>
+<area shape="rect" id="node7" href="$class_q_thread.html" title="{QThread\n||}" alt="" coords="660,303,727,372"/>
+<area shape="rect" id="node23" href="$class_position_controller.html" title="PositionController Class check if the cube has a collision with obstacles. " alt="" coords="1599,1201,1733,1367"/>
+<area shape="rect" id="node14" href="$class_q_object.html" title="{QObject\n||}" alt="" coords="3085,303,3149,372"/>
+<area shape="rect" id="node20" href="$class_skin.html" title="It is the Skin Class. " alt="" coords="4781,243,4883,432"/>
+<area shape="rect" id="node29" href="$class_action_list.html" title="This class is used to keep track of actions to do. For example it can keep track of current view scro..." alt="" coords="3387,674,3544,851"/>
+<area shape="rect" id="node35" href="$class_alphabet.html" title="This class is used to keep a list of Letter (from this the name Alphabet) It provide access to Letter..." alt="" coords="5045,267,5209,408"/>
 </map>

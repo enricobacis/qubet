@@ -1,14 +1,14 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_qubet.html#a0df041d667467697dadedfa57503c514" title="Destroy a Qubet object." alt="" coords="175,106,268,134"/>
-<area shape="rect" id="node5" href="$class_alphabet.html#a8a1da1bd7fdf2fd06a9768f9597a0b44" title="Safely destroy an Alphabet (and all the Letter in its list)." alt="" coords="347,5,464,33"/>
-<area shape="rect" id="node7" href="$class_audio_manager.html#ad94dc46723c6d7cf8c81fc3772a842aa" title="Safely stops and destroys the AudioManager (including the ambientMusic and all the effects in the eff..." alt="" coords="319,55,492,83"/>
-<area shape="rect" id="node9" href="$class_game.html#ae3d112ca6e0e55150d2fdbc704474530" title="Safely destroy a Game Object." alt="" coords="359,106,452,134"/>
-<area shape="rect" id="node17" href="$class_level_editor.html#a2fdfaad257e235e2f392b08fabee79ec" title="This is the LevelEditor Destructor." alt="" coords="335,157,476,185"/>
-<area shape="rect" id="node24" href="$class_menu.html#a831387f51358cfb88cd018e1777bc980" title="Disconnect and Destroy a Menu object." alt="" coords="361,233,449,261"/>
-<area shape="rect" id="node11" href="$class_cube.html#aa814e979cecb8c451fdb332ded2cea1e" title="Safely destroy a Cube object." alt="" coords="601,55,687,83"/>
-<area shape="rect" id="node13" href="$class_position_controller.html#adfe5b270ce9d376ee1d0b88a9e3f60d5" title="Destroy a PositionController Object." alt="" coords="543,106,745,134"/>
-<area shape="rect" id="node15" href="$class_position_controller.html#a081bc31c5eee92459231157811fcd30c" title="Stop checking for collisions." alt="" coords="796,106,975,134"/>
-<area shape="rect" id="node19" href="$class_cube_string.html#a1896aba854d2f34fb8e23208f1ff16a2" title="Safely destroys a CubeString." alt="" coords="815,207,956,235"/>
-<area shape="rect" id="node21" href="$class_cube_string_list.html#a3c9f2621ef98046dc87870c95730127b" title="Safely destroy a CubeStringList." alt="" coords="556,207,732,235"/>
-<area shape="rect" id="node28" href="$class_skin.html#a002cee43b3cacd1669d01e8f7e522494" title="Safely destroy the Skin." alt="" coords="607,309,681,337"/>
+<map id="Window::closeEvent" name="Window::closeEvent">
+<area shape="rect" id="node2" href="$class_qubet.html#a0df041d667467697dadedfa57503c514" title="Destroy a Qubet object. " alt="" coords="173,116,267,140"/>
+<area shape="rect" id="node3" href="$class_audio_manager.html#ad94dc46723c6d7cf8c81fc3772a842aa" title="Safely stops and destroys the AudioManager (including the ambientMusic and all the effects in the eff..." alt="" coords="315,19,488,43"/>
+<area shape="rect" id="node4" href="$class_game.html#ae3d112ca6e0e55150d2fdbc704474530" title="Safely destroy a Game Object. " alt="" coords="356,67,447,91"/>
+<area shape="rect" id="node8" href="$class_level_editor.html#a2fdfaad257e235e2f392b08fabee79ec" title="This is the LevelEditor Destructor. " alt="" coords="332,116,471,140"/>
+<area shape="rect" id="node11" href="$class_menu.html#a831387f51358cfb88cd018e1777bc980" title="Disconnect and Destroy a Menu object. " alt="" coords="358,164,445,188"/>
+<area shape="rect" id="node13" href="$class_alphabet.html#a8a1da1bd7fdf2fd06a9768f9597a0b44" title="Safely destroy an Alphabet (and all the Letter in its list). " alt="" coords="343,212,460,236"/>
+<area shape="rect" id="node5" href="$class_position_controller.html#adfe5b270ce9d376ee1d0b88a9e3f60d5" title="Destroy a PositionController Object. " alt="" coords="564,5,681,41"/>
+<area shape="rect" id="node7" href="$class_cube.html#aa814e979cecb8c451fdb332ded2cea1e" title="Safely destroy a Cube object. " alt="" coords="580,65,665,89"/>
+<area shape="rect" id="node6" href="$class_position_controller.html#a081bc31c5eee92459231157811fcd30c" title="Stop checking for collisions. " alt="" coords="775,5,881,41"/>
+<area shape="rect" id="node9" href="$class_cube_string.html#a1896aba854d2f34fb8e23208f1ff16a2" title="Safely destroys a CubeString. " alt="" coords="757,164,899,188"/>
+<area shape="rect" id="node10" href="$class_cube_string_list.html#a3c9f2621ef98046dc87870c95730127b" title="Safely destroy a CubeStringList. " alt="" coords="536,164,709,188"/>
+<area shape="rect" id="node12" href="$class_skin.html#a002cee43b3cacd1669d01e8f7e522494" title="Safely destroy the Skin. " alt="" coords="585,263,660,287"/>
 </map>

@@ -1,4 +1,4 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_audio_manager.html" title="It is a semi&#45;thread class to manage the audio of Qubet. It can manage an ambientMusic and different e..." alt="" coords="5,153,144,426"/>
-<area shape="rect" id="node5" href="$class_position_controller.html" title="PositionController Class check if the cube has a collision with obstacles." alt="" coords="168,137,304,442"/>
+<map id="QThread" name="QThread">
+<area shape="rect" id="node2" href="$class_audio_manager.html" title="It is a semi&#45;thread class to manage the audio of Qubet. It can manage an ambientMusic and different e..." alt="" coords="5,141,128,342"/>
+<area shape="rect" id="node3" href="$class_position_controller.html" title="PositionController Class check if the cube has a collision with obstacles. " alt="" coords="153,123,287,360"/>
 </map>

@@ -1,6 +1,6 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_level_editor.html#aaaa81998d648c61c425011fd73c8a087" title="Save the Level." alt="" coords="244,30,375,58"/>
-<area shape="rect" id="node5" href="$class_level_editor.html#a28990264a514b22a14140ce9dcc8fdb7" title="This function is invoked when next button is pressed." alt="" coords="425,55,607,83"/>
-<area shape="rect" id="node7" href="$class_level_editor.html#a3bc59bcfad1ea901b5ec4bcd2b332b00" title="Slot invoked when the user clicks on a item." alt="" coords="657,5,796,33"/>
-<area shape="rect" id="node9" href="$class_level_editor.html#a2f741b13837f6467e0452df50f2e51dd" title="Slot invoked when the user presses a key on the keyboard." alt="" coords="656,55,797,83"/>
+<map id="LevelEditor::addLevelToLevelsList" name="LevelEditor::addLevelToLevelsList">
+<area shape="rect" id="node2" href="$class_level_editor.html#aaaa81998d648c61c425011fd73c8a087" title="Save the Level. " alt="" coords="237,29,365,53"/>
+<area shape="rect" id="node3" href="$class_level_editor.html#a28990264a514b22a14140ce9dcc8fdb7" title="This function is invoked when next button is pressed. " alt="" coords="414,53,594,77"/>
+<area shape="rect" id="node4" href="$class_level_editor.html#a3bc59bcfad1ea901b5ec4bcd2b332b00" title="Slot invoked when the user clicks on a item. " alt="" coords="643,5,781,29"/>
+<area shape="rect" id="node5" href="$class_level_editor.html#a2f741b13837f6467e0452df50f2e51dd" title="Slot invoked when the user presses a key on the keyboard. " alt="" coords="643,53,781,77"/>
 </map>

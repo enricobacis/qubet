@@ -1,5 +1,5 @@
-<map id="G" name="G">
-<area shape="rect" id="node1" href="$class_q_thread.html" title="QThread" alt="" coords="5,30,72,58"/>
-<area shape="rect" id="node3" href="$class_audio_manager.html" title="It is a semi&#45;thread class to manage the audio of Qubet. It can manage an ambientMusic and different e..." alt="" coords="128,5,219,33"/>
-<area shape="rect" id="node5" href="$class_position_controller.html" title="PositionController Class check if the cube has a collision with obstacles." alt="" coords="120,55,227,83"/>
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$class_q_thread.html" title="QThread" alt="" coords="5,29,72,53"/>
+<area shape="rect" id="node2" href="$class_audio_manager.html" title="It is a semi&#45;thread class to manage the audio of Qubet. It can manage an ambientMusic and different e..." alt="" coords="127,5,219,29"/>
+<area shape="rect" id="node3" href="$class_position_controller.html" title="PositionController Class check if the cube has a collision with obstacles. " alt="" coords="120,53,227,77"/>
 </map>

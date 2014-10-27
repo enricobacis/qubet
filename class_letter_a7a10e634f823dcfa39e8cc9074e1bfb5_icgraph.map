@@ -1,3 +1,3 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_letter.html#acb0f19cda339f96e3be02785faa86543" title="Returns a random selected texture from the list of texture IDs of the Letter." alt="" coords="212,5,361,33"/>
+<map id="Letter::getRandomTextures" name="Letter::getRandomTextures">
+<area shape="rect" id="node2" href="$class_letter.html#acb0f19cda339f96e3be02785faa86543" title="Returns a random selected texture from the list of texture IDs of the Letter. " alt="" coords="208,5,357,29"/>
 </map>

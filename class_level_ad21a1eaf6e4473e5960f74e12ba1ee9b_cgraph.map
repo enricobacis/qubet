@@ -1,5 +1,5 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_obstacle.html#a0210e3ca68f2e5d8e3d57cd418fb1611" title="Returns the cell of the Obstacle." alt="" coords="144,5,248,33"/>
-<area shape="rect" id="node5" href="$class_obstacle.html#ac344f136338e372e67830fcb0f459770" title="This method return the obstacleId." alt="" coords="148,55,244,83"/>
-<area shape="rect" id="node7" href="$class_obstacle.html#a137f51bc3c6adade850ea9714e89cf6e" title="Returns the obstacle modelId." alt="" coords="133,106,259,134"/>
+<map id="Level::save" name="Level::save">
+<area shape="rect" id="node2" href="$class_obstacle.html#a0210e3ca68f2e5d8e3d57cd418fb1611" title="Returns the cell of the Obstacle. " alt="" coords="139,5,243,29"/>
+<area shape="rect" id="node3" href="$class_obstacle.html#ac344f136338e372e67830fcb0f459770" title="This method return the obstacleId. " alt="" coords="143,53,238,77"/>
+<area shape="rect" id="node4" href="$class_obstacle.html#a137f51bc3c6adade850ea9714e89cf6e" title="Returns the obstacle modelId. " alt="" coords="129,101,253,125"/>
 </map>

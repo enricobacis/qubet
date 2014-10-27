@@ -1,8 +1,8 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_cube.html#ad0974041b0a720270ad48a418c3e8f4b" title="It is the slot invoked when the Cube collides with an Obstacle." alt="" coords="163,5,253,33"/>
-<area shape="rect" id="node5" href="$class_cube.html#afb0a4f5c97ec80147f201c4e9444817a" title="Create a Cube." alt="" coords="472,94,552,122"/>
-<area shape="rect" id="node11" href="$class_cube.html#a4989309f7e6c63f4a2ae7a9814f1b9f0" title="Make the Cube jump." alt="" coords="169,55,247,83"/>
-<area shape="rect" id="node14" href="$class_cube.html#ac448eee673759f52f9d8b00e84c3a8c1" title="Make the Cube move to the Left." alt="" coords="159,106,257,134"/>
-<area shape="rect" id="node17" href="$class_cube.html#aa949631a04e069aa0357286f13bae6f9" title="Make the Cube move to the right." alt="" coords="155,157,261,185"/>
-<area shape="rect" id="node7" href="$class_cube.html#a255a886981fd8c2fe45878dda87a6dec" title="Slot invoked when the user presses a key on the keyboard." alt="" coords="311,94,423,122"/>
+<map id="Cube::playEffect" name="Cube::playEffect">
+<area shape="rect" id="node2" href="$class_cube.html#afb0a4f5c97ec80147f201c4e9444817a" title="Create a Cube. " alt="" coords="469,89,549,113"/>
+<area shape="rect" id="node3" href="$class_cube.html#a4989309f7e6c63f4a2ae7a9814f1b9f0" title="Make the Cube jump. " alt="" coords="169,29,247,53"/>
+<area shape="rect" id="node5" href="$class_cube.html#ac448eee673759f52f9d8b00e84c3a8c1" title="Make the Cube move to the Left. " alt="" coords="159,77,257,101"/>
+<area shape="rect" id="node6" href="$class_cube.html#aa949631a04e069aa0357286f13bae6f9" title="Make the Cube move to the right. " alt="" coords="155,125,261,149"/>
+<area shape="rect" id="node7" href="$class_cube.html#ad0974041b0a720270ad48a418c3e8f4b" title="It is the slot invoked when the Cube collides with an Obstacle. " alt="" coords="163,173,253,197"/>
+<area shape="rect" id="node4" href="$class_cube.html#a255a886981fd8c2fe45878dda87a6dec" title="Slot invoked when the user presses a key on the keyboard. " alt="" coords="310,89,421,113"/>
 </map>

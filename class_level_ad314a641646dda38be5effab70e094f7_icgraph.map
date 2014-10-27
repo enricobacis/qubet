@@ -1,5 +1,5 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_level_editor.html#a28990264a514b22a14140ce9dcc8fdb7" title="This function is invoked when next button is pressed." alt="" coords="161,30,343,58"/>
-<area shape="rect" id="node5" href="$class_level_editor.html#a3bc59bcfad1ea901b5ec4bcd2b332b00" title="Slot invoked when the user clicks on a item." alt="" coords="393,5,532,33"/>
-<area shape="rect" id="node7" href="$class_level_editor.html#a2f741b13837f6467e0452df50f2e51dd" title="Slot invoked when the user presses a key on the keyboard." alt="" coords="392,55,533,83"/>
+<map id="Level::setGravity" name="Level::setGravity">
+<area shape="rect" id="node2" href="$class_level_editor.html#a28990264a514b22a14140ce9dcc8fdb7" title="This function is invoked when next button is pressed. " alt="" coords="155,29,335,53"/>
+<area shape="rect" id="node3" href="$class_level_editor.html#a3bc59bcfad1ea901b5ec4bcd2b332b00" title="Slot invoked when the user clicks on a item. " alt="" coords="385,5,522,29"/>
+<area shape="rect" id="node4" href="$class_level_editor.html#a2f741b13837f6467e0452df50f2e51dd" title="Slot invoked when the user presses a key on the keyboard. " alt="" coords="385,53,522,77"/>
 </map>

@@ -1,4 +1,4 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_game.html#a7cc08ab27db0c7bc67117ebd25fd34b0" title="Go to the next level." alt="" coords="169,5,273,33"/>
-<area shape="rect" id="node5" href="$class_game.html#a213dc64a3069147c040a65884dd53111" title="Slot invoked when level is completed." alt="" coords="324,5,455,33"/>
+<map id="Level::getIsInStory" name="Level::getIsInStory">
+<area shape="rect" id="node2" href="$class_game.html#a7cc08ab27db0c7bc67117ebd25fd34b0" title="Go to the next level. " alt="" coords="166,5,269,29"/>
+<area shape="rect" id="node3" href="$class_game.html#a213dc64a3069147c040a65884dd53111" title="Slot invoked when level is completed. " alt="" coords="317,5,448,29"/>
 </map>

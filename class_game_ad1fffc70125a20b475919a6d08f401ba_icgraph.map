@@ -1,7 +1,7 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_game.html#a918339ba114794f7ad593ee99e2952fd" title="Continue the Game from Pause mode." alt="" coords="172,5,300,33"/>
-<area shape="rect" id="node7" href="$class_game.html#a7da64b6f6ce46076da1290527529a504" title="Slot invoked when the user clicks on a item." alt="" coords="351,119,465,147"/>
-<area shape="rect" id="node9" href="$class_game.html#a9d9a79a0f7df3c7e55a3103c04ecbc87" title="Pause the Game." alt="" coords="177,55,295,83"/>
-<area shape="rect" id="node12" href="$class_game.html#a674eaf55addb57e7d5eaa078f2e13f3d" title="Quit the game and returns to Menu." alt="" coords="184,157,288,185"/>
-<area shape="rect" id="node5" href="$class_game.html#a4445badbb765781a753a1b5761321163" title="Slot invoked when the user presses a key on the keyboard." alt="" coords="349,43,467,71"/>
+<map id="Game::enableAudio" name="Game::enableAudio">
+<area shape="rect" id="node2" href="$class_game.html#a9d9a79a0f7df3c7e55a3103c04ecbc87" title="Pause the Game. " alt="" coords="177,5,292,29"/>
+<area shape="rect" id="node4" href="$class_game.html#a918339ba114794f7ad593ee99e2952fd" title="Continue the Game from Pause mode. " alt="" coords="171,53,298,77"/>
+<area shape="rect" id="node5" href="$class_game.html#a674eaf55addb57e7d5eaa078f2e13f3d" title="Quit the game and returns to Menu. " alt="" coords="183,101,286,125"/>
+<area shape="rect" id="node6" href="$class_game.html#a7da64b6f6ce46076da1290527529a504" title="Slot invoked when the user clicks on a item. " alt="" coords="347,113,461,137"/>
+<area shape="rect" id="node3" href="$class_game.html#a4445badbb765781a753a1b5761321163" title="Slot invoked when the user presses a key on the keyboard. " alt="" coords="347,41,461,65"/>
 </map>

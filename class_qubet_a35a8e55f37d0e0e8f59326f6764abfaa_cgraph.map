@@ -1,10 +1,10 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_skin.html#a9310dfec55eca4000c97fa19a5d27e56" title="Set the comment of the Skin." alt="" coords="187,5,296,33"/>
-<area shape="rect" id="node5" href="$class_skin.html#a24392d0b7e2548a45f8e1e2b9bddfcf7" title="Set the same texture for all the faces." alt="" coords="161,55,321,83"/>
-<area shape="rect" id="node7" href="$class_skin.html#a5aefa13a9df97e8e920922f321600bb9" title="Set the texture for x&#45; face." alt="" coords="172,106,311,134"/>
-<area shape="rect" id="node9" href="$class_skin.html#a709acd8e6603f373a2fd77145dcea273" title="Set the texture for x+ face." alt="" coords="176,157,307,185"/>
-<area shape="rect" id="node11" href="$class_skin.html#a4cc122a67b6860a5bfa05ab592d43ba9" title="Set the texture for y&#45; face." alt="" coords="172,207,311,235"/>
-<area shape="rect" id="node13" href="$class_skin.html#a438522f36120175d4743e6afbdb0ff63" title="Set the texture for y+ face." alt="" coords="176,258,307,286"/>
-<area shape="rect" id="node15" href="$class_skin.html#a3f752c8e0e1a2520eb6f8d31080aa6f5" title="Set the texture for z&#45; face." alt="" coords="172,309,311,337"/>
-<area shape="rect" id="node17" href="$class_skin.html#a569a6cb803ee1c2c5d0e8e28d804a544" title="Set the texture for z+ face." alt="" coords="176,359,307,387"/>
+<map id="Qubet::loadSkins" name="Qubet::loadSkins">
+<area shape="rect" id="node2" href="$class_skin.html#a9310dfec55eca4000c97fa19a5d27e56" title="Set the comment of the Skin. " alt="" coords="182,5,293,29"/>
+<area shape="rect" id="node3" href="$class_skin.html#a709acd8e6603f373a2fd77145dcea273" title="Set the texture for x+ face. " alt="" coords="174,53,301,77"/>
+<area shape="rect" id="node4" href="$class_skin.html#a5aefa13a9df97e8e920922f321600bb9" title="Set the texture for x&#45; face. " alt="" coords="170,101,305,125"/>
+<area shape="rect" id="node5" href="$class_skin.html#a438522f36120175d4743e6afbdb0ff63" title="Set the texture for y+ face. " alt="" coords="174,149,301,173"/>
+<area shape="rect" id="node6" href="$class_skin.html#a4cc122a67b6860a5bfa05ab592d43ba9" title="Set the texture for y&#45; face. " alt="" coords="170,197,305,221"/>
+<area shape="rect" id="node7" href="$class_skin.html#a569a6cb803ee1c2c5d0e8e28d804a544" title="Set the texture for z+ face. " alt="" coords="174,245,301,269"/>
+<area shape="rect" id="node8" href="$class_skin.html#a3f752c8e0e1a2520eb6f8d31080aa6f5" title="Set the texture for z&#45; face. " alt="" coords="170,293,305,317"/>
+<area shape="rect" id="node9" href="$class_skin.html#a24392d0b7e2548a45f8e1e2b9bddfcf7" title="Set the same texture for all the faces. " alt="" coords="158,341,317,365"/>
 </map>

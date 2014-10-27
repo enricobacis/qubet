@@ -1,4 +1,4 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_cube_string_list.html#a20e816ef0ce2effe177176ad6f79b626" title="Common part to the constructors that uses the cubeDimension." alt="" coords="165,5,277,33"/>
-<area shape="rect" id="node5" href="$class_cube_string_list.html#ada31a0ad7582609510012ba7d5f34981" title="It compute the heights (firstStringHeight and stringsHeightDelta) basing on constructor parameters..." alt="" coords="325,5,504,33"/>
+<map id="CubeStringList::init" name="CubeStringList::init">
+<area shape="rect" id="node2" href="$class_cube_string_list.html#a20e816ef0ce2effe177176ad6f79b626" title="Common part to the constructors that uses the cubeDimension. " alt="" coords="166,5,277,29"/>
+<area shape="rect" id="node3" href="$class_cube_string_list.html#ada31a0ad7582609510012ba7d5f34981" title="It compute the heights (firstStringHeight and stringsHeightDelta) basing on constructor parameters..." alt="" coords="325,5,501,29"/>
 </map>

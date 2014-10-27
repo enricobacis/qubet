@@ -1,3 +1,3 @@
-<map id="G" name="G">
-<area shape="rect" id="node6" href="$struct_vector3f.html" title="Structure that rapresents a Vector of float in a 3&#45;D space." alt="" coords="157,185,285,762"/>
+<map id="Obstacle" name="Obstacle">
+<area shape="rect" id="node4" href="$struct_vector3f.html" title="Structure that rapresents a Vector of float in a 3&#45;D space. " alt="" coords="157,160,248,349"/>
 </map>

@@ -1,5 +1,5 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_level_editor.html#aa348f91af6e6aa522e7e8c843bb95209" title="This function check the position of the mouse." alt="" coords="204,5,385,33"/>
-<area shape="rect" id="node5" href="$class_cube_string.html#a6f6564ec93427fcfcb4740cfe7ecedd4" title="Check if a letter of the CubeString is already rotating." alt="" coords="229,55,360,83"/>
-<area shape="rect" id="node7" href="$class_cube_string.html#a0347d9c16c99827d38ca6225d2300bad" title="Start the rotation of a letter in the CubeString." alt="" coords="209,106,380,134"/>
+<map id="LevelEditor::mouseMoved" name="LevelEditor::mouseMoved">
+<area shape="rect" id="node2" href="$class_level_editor.html#aa348f91af6e6aa522e7e8c843bb95209" title="This function check the position of the mouse. " alt="" coords="201,5,381,29"/>
+<area shape="rect" id="node3" href="$class_cube_string.html#a6f6564ec93427fcfcb4740cfe7ecedd4" title="Check if a letter of the CubeString is already rotating. " alt="" coords="226,53,355,77"/>
+<area shape="rect" id="node4" href="$class_cube_string.html#a0347d9c16c99827d38ca6225d2300bad" title="Start the rotation of a letter in the CubeString. " alt="" coords="205,101,376,125"/>
 </map>

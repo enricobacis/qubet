@@ -1,6 +1,6 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$struct_vector3f.html#a5bff54ba45c9953f3505807306739399" title="Normalize a vector." alt="" coords="213,5,328,33"/>
-<area shape="rect" id="node9" href="$struct_vector3f.html#a1b14b77d2503c1b1ca1363163ff55432" title="Create a new Vector3f in coordinates (0, 0, 0)." alt="" coords="217,55,324,83"/>
-<area shape="rect" id="node5" href="$struct_vector3f.html#a1c48fd0ab34bf22cbcd7dea08f1e324e" title="Compute the length of the vector." alt="" coords="377,5,473,33"/>
-<area shape="rect" id="node7" href="$struct_vector3f.html#af3d3654cb9d17d1b0bba0099326b7983" title="Compute the length^2 of the vector." alt="" coords="524,5,633,33"/>
+<map id="Vector3f::getOneOrthogonal" name="Vector3f::getOneOrthogonal">
+<area shape="rect" id="node2" href="$struct_vector3f.html#a1b14b77d2503c1b1ca1363163ff55432" title="Create a new Vector3f in coordinates (0, 0, 0). " alt="" coords="215,5,326,29"/>
+<area shape="rect" id="node3" href="$struct_vector3f.html#a5bff54ba45c9953f3505807306739399" title="Normalize a vector. " alt="" coords="213,53,328,77"/>
+<area shape="rect" id="node4" href="$struct_vector3f.html#a1c48fd0ab34bf22cbcd7dea08f1e324e" title="Compute the length of the vector. " alt="" coords="376,53,475,77"/>
+<area shape="rect" id="node5" href="$struct_vector3f.html#af3d3654cb9d17d1b0bba0099326b7983" title="Compute the length^2 of the vector. " alt="" coords="523,53,634,77"/>
 </map>

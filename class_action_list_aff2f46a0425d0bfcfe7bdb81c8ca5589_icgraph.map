@@ -1,12 +1,12 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$class_action_list.html#adc89f433c172d4b41c7fe4d01e7e0735" title="Creates a new ActionList as a copy of another ActionList." alt="" coords="213,30,336,58"/>
-<area shape="rect" id="node5" href="$class_game.html#aa5a6a37a0385d779fbf2e5b0a1fda742" title="Method to draw the game." alt="" coords="233,81,316,109"/>
-<area shape="rect" id="node22" href="$class_game.html#a4445badbb765781a753a1b5761321163" title="Slot invoked when the user presses a key on the keyboard." alt="" coords="216,131,333,159"/>
-<area shape="rect" id="node7" href="$class_qubet.html#ad108e6c05cda81b75b5f8600002c62f9" title="This function is used to draw the scene on the QGLWidget. It is used by PaintGL that calls this and t..." alt="" coords="385,81,497,109"/>
-<area shape="rect" id="node9" href="$class_qubet.html#a3e2ddd9bf27cecf96936d18e20542170" title="This method returns a list of the names of the foreground item at mouse coordinates (mouseX..." alt="" coords="548,55,681,83"/>
-<area shape="rect" id="node15" href="$class_qubet.html#a13674eced0fe056b62e99f7a8a5c95f2" title="Paint the OpenGL scene." alt="" coords="567,106,663,134"/>
-<area shape="rect" id="node11" href="$class_qubet.html#a8597e6658271cb65cd1fd04e22e43ceb" title="This function is invoked when the player moves the mouse inside the game window." alt="" coords="732,5,879,33"/>
-<area shape="rect" id="node13" href="$class_qubet.html#acd54b249e3977132de7dd0153e61a99c" title="This function is invoked when the player clicks inside the game window." alt="" coords="732,55,879,83"/>
-<area shape="rect" id="node17" href="$class_qubet.html#acaa67d9bbdf3d12601d4b71ed62f2fc0" title="This is a duplicated function to call paintGL, but this can be used as a slot." alt="" coords="764,106,847,134"/>
-<area shape="rect" id="node19" href="$class_qubet.html#a1452c8e7bec024adb53ba216316c593d" title="It is used after the first show of the qubet window to initialize Qubet." alt="" coords="928,131,1029,159"/>
+<map id="ActionList::getPrimaryAction" name="ActionList::getPrimaryAction">
+<area shape="rect" id="node2" href="$class_action_list.html#adc89f433c172d4b41c7fe4d01e7e0735" title="Creates a new ActionList as a copy of another ActionList. " alt="" coords="211,32,331,56"/>
+<area shape="rect" id="node3" href="$class_game.html#aa5a6a37a0385d779fbf2e5b0a1fda742" title="Method to draw the game. " alt="" coords="230,80,311,104"/>
+<area shape="rect" id="node11" href="$class_game.html#a4445badbb765781a753a1b5761321163" title="Slot invoked when the user presses a key on the keyboard. " alt="" coords="214,128,327,152"/>
+<area shape="rect" id="node4" href="$class_qubet.html#ad108e6c05cda81b75b5f8600002c62f9" title="This function is used to draw the scene on the QGLWidget. It is used by PaintGL that calls this and t..." alt="" coords="379,80,493,104"/>
+<area shape="rect" id="node5" href="$class_qubet.html#a13674eced0fe056b62e99f7a8a5c95f2" title="Paint the OpenGL scene. " alt="" coords="562,55,657,79"/>
+<area shape="rect" id="node8" href="$class_qubet.html#a3e2ddd9bf27cecf96936d18e20542170" title="This method returns a list of the names of the foreground item at mouse coordinates (mouseX..." alt="" coords="542,104,677,128"/>
+<area shape="rect" id="node6" href="$class_qubet.html#acaa67d9bbdf3d12601d4b71ed62f2fc0" title="This is a duplicated function to call paintGL, but this can be used as a slot. " alt="" coords="756,5,839,29"/>
+<area shape="rect" id="node7" href="$class_qubet.html#a1452c8e7bec024adb53ba216316c593d" title="It is used after the first show of the qubet window to initialize Qubet. " alt="" coords="917,31,1019,55"/>
+<area shape="rect" id="node9" href="$class_qubet.html#acd54b249e3977132de7dd0153e61a99c" title="This function is invoked when the player clicks inside the game window. " alt="" coords="725,104,869,128"/>
+<area shape="rect" id="node10" href="$class_qubet.html#a8597e6658271cb65cd1fd04e22e43ceb" title="This function is invoked when the player moves the mouse inside the game window. " alt="" coords="726,152,869,176"/>
 </map>
