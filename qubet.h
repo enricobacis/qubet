@@ -20,7 +20,7 @@
  *
  * @section intro_section Introduction
  *
- * Qubet is a universitary project made by Enrico Bacis and Daniele Ciriello for the Graphical Informatics course at University of Bergamo.
+ * Qubet is a universitary project made by <a href="https://github.com/enricobacis">Enrico Bacis</a> and <a href="https://github.com/danieleciriello">Daniele Ciriello</a> for the Graphical Informatics course at University of Bergamo.
  *
  * Qubet is a simple game developed using OpenGL and Qt where a Cube have to reach the end of different levels avoiding obstacles.
  *
@@ -33,23 +33,26 @@
  * You can download this project in either <a href="https://github.com/enricobacis/qubet/zipball/master">zip</a> or <a href="https://github.com/enricobacis/qubet/tarball/master">tar</a> formats.
  *
  * You can also clone the project with <a href="http://git-scm.com">Git</a> by running:
- * @code $ git clone git://github.com/enricobacis/qubet @endcode
+ * @code git clone git@github.com:enricobacis/qubet.git @endcode
  *
  * Get the source code on <a href="https://github.com/enricobacis/qubet">GitHub</a>.
  *
  * @section install_section Installation
  *
- * 1. Compile the code using Qt Creator.
+ * 1. Open a terminal in your source folder and run:
+  @code sudo apt-get install libqt5multimedia5-plugins qtmultimedia5-dev
+   qmake
+   make @endcode
  *
- * 2. Copy the resources folder where the binary has been compiled.
+ * 2. Start the game with: @code ./Qubet @endcode
  *
  * 3. Enjoy.
  *
  * @section authors_section Authors
  *
- * Enrico Bacis
+ * <a href="https://github.com/enricobacis">Enrico Bacis</a>
  *
- * Daniele Ciriello
+ * <a href="https://github.com/danieleciriello">Daniele Ciriello</a>
  *
  * Musics by <a href="http://binaerpilot.no">Binarpilot</a>
  *
