@@ -14,7 +14,7 @@ You can also clone this project from Github:
 
     git clone git@github.com:enricobacis/qubet.git 
 
-## Installation
+## Compile and run
 
  1. Open a terminal in the source folder and run:
 
