@@ -18,7 +18,7 @@ You can also clone this project from Github:
 
  1. Open a terminal in the source folder and run:
 
-        sudo apt-get install libqt5multimedia5-plugins qtmultimedia5-dev
+        sudo apt-get install libqt5multimedia5-plugins qtmultimedia5-dev qt-sdk
         qmake
         make 
 
