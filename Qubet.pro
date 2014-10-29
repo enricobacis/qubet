@@ -39,6 +39,14 @@ LIBS += -lGLU
 TARGET = Qubet
 TEMPLATE = app
 
+data.path = /usr/share/qubet
+data.files = Qubet resources
+
+launcher.path = /usr/share/applications
+launcher.files = qubet.desktop
+
+INSTALLS += data launcher
+
 DEFINES += USE_DISPLAY_LISTS_FOR_LETTERS
 
 CONFIG(debug, debug|release) { DEFINES += _DEBUG }

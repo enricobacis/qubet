@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Qubet
+Comment=A cube's tales
+Categories=Game;
+Exec=bash -c "cd /usr/share/qubet && /usr/share/qubet/Qubet"
+Icon=/usr/share/qubet/resources/qubet.png
+Terminal=false
+Type=Application
