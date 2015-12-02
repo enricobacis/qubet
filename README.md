@@ -1,6 +1,6 @@
 # ![qubet-logo](https://raw.githubusercontent.com/enricobacis/qubet/master/resources/qubet%20small.png)    Qubet
 
-Qubet is a universitary project made by [Enrico Bacis](https://github.com/enricobacis) and [Daniele Ciriello](https://github.com/danieleciriello) for the Computer Graphics course at University of Bergamo. It is a simple game developed using OpenGL and Qt where a Cube has to reach the end of different levels avoiding obstacles.
+Qubet is a universitary project made by [Enrico Bacis](https://github.com/enricobacis) and [Daniele Ciriello](https://github.com/dnlcrl) for the Computer Graphics course at University of Bergamo. It is a simple game developed using OpenGL and Qt where a Cube has to reach the end of different levels avoiding obstacles.
 
 * It is distributed under GNU GPLv3 license.
 * It is developed in Qt.
@@ -33,6 +33,6 @@ You can also clone this project from Github:
 ## Authors
 
 * [Enrico Bacis](https://github.com/enricobacis)
-* [Daniele Ciriello](https://github.com/danieleciriello)
+* [Daniele Ciriello](https://github.com/dnlcrl)
 * Musics by [Binarpilot](http://binaerpilot.no/)
 * Sound FX by SoundBible and Super Mario
