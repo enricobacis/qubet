@@ -12,7 +12,7 @@ You can download this project in either [zip](https://github.com/enricobacis/qub
 
 You can also clone this project from Github:
 
-    git clone git@github.com:enricobacis/qubet.git 
+    git clone https://github.com/enricobacis/qubet.git
 
 ## Compile and run
 
