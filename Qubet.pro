@@ -56,6 +56,12 @@ launcher.files = qubet.desktop
 
 INSTALLS += data launcher
 
+copydata.commands = $(COPY_DIR) $$PWD/resources $$DESTDIR
+first.depends = $(first) copydata
+export(first.depends)
+export(copydata.commands)
+QMAKE_EXTRA_TARGETS += first copydata
+
 DEFINES += USE_DISPLAY_LISTS_FOR_LETTERS
 
 CONFIG(debug, debug|release) { DEFINES += _DEBUG }
