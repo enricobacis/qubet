@@ -6,6 +6,7 @@ targets:
 
 build_dependencies:
   - qt-sdk
+  - qtmultimedia5-dev
 
 default_dependencies: false
 
