@@ -1,0 +1,15 @@
+buildpack: https://github.com/enricobacis/packager-buildpack-qt
+
+targets:
+  ubuntu-12.04:
+  ubuntu-14.04:
+
+build_dependencies:
+  - qt-sdk
+
+default_dependencies: false
+
+dependencies:
+  - libqt5multimedia5-plugins
+
+cli: Qubet
