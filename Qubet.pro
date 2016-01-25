@@ -41,6 +41,9 @@ unix:!macx {
 }
 
 INCLUDEPATH += $$PWD/include
+DESTDIR      = bin
+OBJECTS_DIR  = objs
+MOC_DIR      = objs
 
 TARGET = Qubet
 TEMPLATE = app
