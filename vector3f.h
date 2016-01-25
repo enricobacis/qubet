@@ -147,10 +147,9 @@ struct Vector3f
         case 1:
             return y;
 
-        case 2:
+        default:
             return z;
         }
-
     }
 
     /**
@@ -169,7 +168,7 @@ struct Vector3f
         case 1:
             return y;
 
-        case 2:
+        default:
             return z;
         }
     }
