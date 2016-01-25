@@ -34,7 +34,11 @@ QT += multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-LIBS += -lGLU
+unix:!macx {
+    LIBS += -lGLU
+} macx {
+    LDFLAGS += -framework OpenGL
+}
 
 TARGET = Qubet
 TEMPLATE = app

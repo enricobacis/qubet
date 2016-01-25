@@ -67,11 +67,19 @@
 #ifndef QUBET_H
 #define QUBET_H
 
+#ifdef __APPLE__
+    #include "TargetConditionals.h"
+    #ifdef TARGET_OS_MAC
+        #include <OpenGL/glu.h>
+    #endif
+#else
+    #include <GL/glu.h>
+#endif
+
 #include "menu.h"
 #include "game.h"
 #include "audiomanager.h"
 #include "leveleditor.h"
-#include <GL/glu.h>
 
 /**
  * @brief This class rapresents an instance of the QGLWidget Qubet.

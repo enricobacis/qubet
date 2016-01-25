@@ -19,9 +19,17 @@
 #ifndef UTILITIES_H
 #define UTILITIES_H
 
+#ifdef __APPLE__
+    #include "TargetConditionals.h"
+    #ifdef TARGET_OS_MAC
+        #include <OpenGL/glu.h>
+    #endif
+#else
+    #include <GL/glu.h>
+#endif
+
 #include "alphabet.h"
 #include "vector3f.h"
-#include <GL/glu.h>
 
 /**
  * @brief Draw a XY Square using vertex and texture coordinates.
