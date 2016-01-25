@@ -24,3 +24,5 @@ Qubet
 Thumbs.db
 desktop.ini
 .DS_Store
+*.stash
+*.app
