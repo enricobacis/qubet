@@ -3,7 +3,7 @@
 #                                 Qubet Project                               #
 #                                      #34                                    #
 #                                                                             #
-#    Qubet  -  Copyright (C) 2011                                             #
+#    Qubet  -  Copyright (C) 2011 - 2016                                      #
 #                                                                             #
 #    Enrico Bacis                                                             #
 #    Daniele Ciriello                                                         #
@@ -40,6 +40,8 @@ unix:!macx {
     LDFLAGS += -framework OpenGL
 }
 
+INCLUDEPATH += $$PWD/include
+
 TARGET = Qubet
 TEMPLATE = app
 
@@ -56,52 +58,52 @@ DEFINES += USE_DISPLAY_LISTS_FOR_LETTERS
 CONFIG(debug, debug|release) { DEFINES += _DEBUG }
 
 SOURCES += \
-    main.cpp\
-    game.cpp \
-    cube.cpp \
-    positioncontroller.cpp \
-    obstacle.cpp \
-    level.cpp \
-    audiomanager.cpp \
-    menu.cpp \
-    leveleditor.cpp \
-    qubet.cpp \
-    window.cpp \
-    utilities.cpp \
-    skin.cpp \
-    alphabet.cpp \
-    letter.cpp \
-    cubestring.cpp \
-    actionlist.cpp \
-    cubestringlist.cpp \
-    skybox.cpp
+    src/main.cpp\
+    src/game.cpp \
+    src/cube.cpp \
+    src/positioncontroller.cpp \
+    src/obstacle.cpp \
+    src/level.cpp \
+    src/audiomanager.cpp \
+    src/menu.cpp \
+    src/leveleditor.cpp \
+    src/qubet.cpp \
+    src/window.cpp \
+    src/utilities.cpp \
+    src/skin.cpp \
+    src/alphabet.cpp \
+    src/letter.cpp \
+    src/cubestring.cpp \
+    src/actionlist.cpp \
+    src/cubestringlist.cpp \
+    src/skybox.cpp
 
 HEADERS  += \
-    vector3f.h \
-    game.h \
-    cube.h \
-    positioncontroller.h \
-    obstacle.h \
-    level.h \
-    audiomanager.h \
-    menu.h \
-    leveleditor.h \
-    defines.h \
-    qubet.h \
-    window.h \
-    utilities.h \
-    game_defines.h \
-    leveleditor_defines.h \
-    menu_defines.h \
-    skin.h \
-    alphabet.h \
-    letter.h \
-    cubestring.h \
-    actionlist.h \
-    cubestringlist.h \
-    effects_defines.h \
-    skybox.h \
-    cube_defines.h
+    include/vector3f.h \
+    include/game.h \
+    include/cube.h \
+    include/positioncontroller.h \
+    include/obstacle.h \
+    include/level.h \
+    include/audiomanager.h \
+    include/menu.h \
+    include/leveleditor.h \
+    include/defines.h \
+    include/qubet.h \
+    include/window.h \
+    include/utilities.h \
+    include/game_defines.h \
+    include/leveleditor_defines.h \
+    include/menu_defines.h \
+    include/skin.h \
+    include/alphabet.h \
+    include/letter.h \
+    include/cubestring.h \
+    include/actionlist.h \
+    include/cubestringlist.h \
+    include/effects_defines.h \
+    include/skybox.h \
+    include/cube_defines.h
 
 OTHER_FILES += \
     resources/skins/skins.xml \
